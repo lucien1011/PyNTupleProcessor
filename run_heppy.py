@@ -27,6 +27,7 @@ componentList           = cfg.componentList
 nEvents                 = cfg.nEvents
 disableProgressBar      = cfg.disableProgressBar
 sequence                = cfg.sequence
+outputInfo              = cfg.outputInfo
 
 progressBar = ProgressBar()
 
@@ -46,7 +47,7 @@ print "\nLoading samples:\n"
 heppyResult = HeppyResult(inputDir,componentList)
 eventLoopRunner = MPEventLoopRunner(communicationChannel)
 eventBuilder    = BEventBuilder(rootFileDir,rootFile,rootTree,nEvents)
-componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence)
+componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo)
 componentLoop   = ComponentLoop(componentReader)
 
 print "\nBegin Running\n"
