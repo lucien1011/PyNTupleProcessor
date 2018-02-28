@@ -49,5 +49,6 @@ print "\nBegin Running\n"
 componentLoop(componentList)
 
 print "\nEnd Running\n"
+print "\nOutput saved in "+outputInfo.outputDir+"\n"
 if not disableProgressBar: progressMonitor.end()
 communicationChannel.end()
