@@ -9,8 +9,10 @@ from Core.NanoAODResult.BEventBuilder import BEventBuilder
 from Core.HeppyResult import ComponentLoop
 from Core.HeppyResult.UFComponentReader import UFComponentReader
 
+from Utils.git import getGitDescribe,getGitDiff
+
 # Standard package
-import imp,sys
+import imp,sys,os
 
 cfgFileName             = sys.argv[1]
 file                    = open( cfgFileName,'r')
@@ -50,5 +52,14 @@ componentLoop(componentList)
 
 print "\nEnd Running\n"
 print "\nOutput saved in "+outputInfo.outputDir+"\n"
+
+gitFile        = os.path.join(outputInfo.outputDir,"gitDetails.txt")
+gitVerboseFile = os.path.join(outputInfo.outputDir,"gitVerboseDetails.txt")
+with open(gitFile,'w') as f:
+    f.write(getGitDescribe())
+
+with open(gitVerboseFile,'w') as f:
+    f.write(getGitDiff())
+
 if not disableProgressBar: progressMonitor.end()
 communicationChannel.end()
