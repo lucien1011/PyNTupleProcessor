@@ -13,17 +13,17 @@ eventBasedPlots = [
 muonPlots = [
         Plot("MedMuonPt",   ["TH1D","MedMuonPt","",20,0.,1000.],    LambdaFunc('x: [mu.pt for mu in x.MediumMuons]'), isCollection=True),
         Plot("MedMuonEta",  ["TH1D","MedMuonEta","",20,-3.,3.],     LambdaFunc('x: [mu.eta for mu in x.MediumMuons]'), isCollection=True),
-        Plot("MedMuonDxy",  ["TH1D","MedMuonDxy","",20,0.,0.1],     LambdaFunc('x: [mu.dxy for mu in x.MediumMuons]'), isCollection=True),
-        Plot("MedMuonDz",   ["TH1D","MedMuonDz","",20,0.,0.5],      LambdaFunc('x: [mu.dz for mu in x.MediumMuons]'), isCollection=True),
-        Plot("MedMuonSip",  ["TH1D","MedMuonSip","",20,0.,0.5],     LambdaFunc('x: [mu.sip3d for mu in x.MediumMuons]'), isCollection=True),
+        Plot("MedMuonDxy",  ["TH1D","MedMuonDxy","",20,0.,0.01],     LambdaFunc('x: [mu.dxy for mu in x.MediumMuons]'), isCollection=True),
+        Plot("MedMuonDz",   ["TH1D","MedMuonDz","",20,0.,0.1],      LambdaFunc('x: [mu.dz for mu in x.MediumMuons]'), isCollection=True),
+        Plot("MedMuonSip",  ["TH1D","MedMuonSip","",20,0.,8],     LambdaFunc('x: [mu.sip3d for mu in x.MediumMuons]'), isCollection=True),
         ]
 
 electronPlots = [
         Plot("MedElectronPt",   ["TH1D","MedElectronPt","",20,0.,1000.],    LambdaFunc('x: [ele.pt for ele in x.MediumElectrons]'), isCollection=True),
         Plot("MedElectronEta",  ["TH1D","MedElectronEta","",20,-3.,3.],     LambdaFunc('x: [ele.eta for ele in x.MediumElectrons]'), isCollection=True),
-        Plot("MedElectronDxy",  ["TH1D","MedElectronDxy","",20,0.,0.1],     LambdaFunc('x: [mu.dxy for mu in x.MediumElectrons]'), isCollection=True),
-        Plot("MedElectronDz",   ["TH1D","MedElectronDz","",20,0.,0.5],      LambdaFunc('x: [ele.dz for ele in x.MediumElectrons]'), isCollection=True),
-        Plot("MedElectronSip",  ["TH1D","MedElectronSip","",20,0.,0.5],     LambdaFunc('x: [ele.sip3d for ele in x.MediumElectrons]'), isCollection=True),
+        Plot("MedElectronDxy",  ["TH1D","MedElectronDxy","",20,0.,0.01],     LambdaFunc('x: [mu.dxy for mu in x.MediumElectrons]'), isCollection=True),
+        Plot("MedElectronDz",   ["TH1D","MedElectronDz","",20,0.,0.1],      LambdaFunc('x: [ele.dz for ele in x.MediumElectrons]'), isCollection=True),
+        Plot("MedElectronSip",  ["TH1D","MedElectronSip","",20,0.,8],     LambdaFunc('x: [ele.sip3d for ele in x.MediumElectrons]'), isCollection=True),
         ]
 
 allPlots = eventBasedPlots + muonPlots + electronPlots
