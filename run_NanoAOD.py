@@ -9,7 +9,7 @@ from Core.NanoAODResult.BEventBuilder import BEventBuilder
 from Core.HeppyResult import ComponentLoop
 from Core.HeppyResult.UFComponentReader import UFComponentReader
 
-from Utils.git import getGitDescribe,getGitDiff
+from Core.Utils.git import getGitDescribe,getGitDiff
 
 # Standard package
 import imp,sys,os

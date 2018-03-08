@@ -1,5 +1,5 @@
 from RPV.Analyzer.Plotter.Plot import Plot
-from Utils.LambdaFunc import LambdaFunc
+from Core.Utils.LambdaFunc import LambdaFunc
 
 eventBasedPlots = [
         Plot("nJet40",      ["TH1D","nJet40","",20,-0.5,19.5],      LambdaFunc('x: len([j for j in x.LooseJets if j.pt > 40])')),

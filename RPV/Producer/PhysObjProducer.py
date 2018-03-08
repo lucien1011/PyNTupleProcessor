@@ -5,7 +5,7 @@ from Core.Module import Module
 
 from RPV.Config.PhysObjDefinition import *
 
-from Utils.XCleaning import cleanJetsAndLeptons
+from Core.Utils.XCleaning import cleanJetsAndLeptons
 
 class PhysObjProducer(Module):
     def __init__(self,name,inCollName,outCollName,selection):
