@@ -12,7 +12,7 @@ from Core.HeppyResult.UFComponentReader import UFComponentReader
 from Core.Utils.git import getGitDescribe,getGitDiff
 
 # Standard package
-import imp,sys,os
+import imp,sys,os,time
 
 cfgFileName             = sys.argv[1]
 file                    = open( cfgFileName,'r')
@@ -26,40 +26,52 @@ nEvents                 = cfg.nEvents
 disableProgressBar      = cfg.disableProgressBar
 sequence                = cfg.sequence
 outputInfo              = cfg.outputInfo
+endSequence             = cfg.endSequence
+justEndSequence         = cfg.justEndSequence if hasattr(cfg,"justEndSequence") else False
 
-progressBar = ProgressBar()
+start_time = time.time()
 
-if nCores != 1:
-    progressMonitor      = BProgressMonitor(progressBar)
-    communicationChannel = CommunicationChannel(nCores,progressMonitor)
-else:
-    progressMonitor      = ProgressMonitor(progressBar)
-    communicationChannel = CommunicationChannel0(progressMonitor)
-    pass
+if not justEndSequence:
+    progressBar = ProgressBar()
     
-if not disableProgressBar: progressMonitor.begin()
-communicationChannel.begin()
+    if nCores != 1:
+        progressMonitor      = BProgressMonitor(progressBar)
+        communicationChannel = CommunicationChannel(nCores,progressMonitor)
+    else:
+        progressMonitor      = ProgressMonitor(progressBar)
+        communicationChannel = CommunicationChannel0(progressMonitor)
+        pass
+        
+    if not disableProgressBar: progressMonitor.begin()
+    communicationChannel.begin()
+    
+    print "\nLoading samples:\n"
+    
+    eventLoopRunner = MPEventLoopRunner(communicationChannel)
+    eventBuilder    = BEventBuilder()
+    componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo)
+    componentLoop   = ComponentLoop(componentReader)
+    
+    print "\nBegin Running\n"
+    componentLoop(componentList)
+    
+    print "\nEnd Running\n"
+    print "\nOutput saved in "+outputInfo.outputDir+"\n"
+    
+    gitFile        = os.path.join(outputInfo.outputDir,"gitDetails.txt")
+    gitVerboseFile = os.path.join(outputInfo.outputDir,"gitVerboseDetails.txt")
+    with open(gitFile,'w') as f:
+        f.write(getGitDescribe())
+    
+    with open(gitVerboseFile,'w') as f:
+        f.write(getGitDiff())
+    
+    if not disableProgressBar: progressMonitor.end()
+    communicationChannel.end()
+if endSequence:
+    print "\nBegin Summarising\n"
+    print "\nInput used: "+outputInfo.outputDir+"\n"
+    endSequence.run(outputInfo)
 
-print "\nLoading samples:\n"
-
-eventLoopRunner = MPEventLoopRunner(communicationChannel)
-eventBuilder    = BEventBuilder()
-componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo)
-componentLoop   = ComponentLoop(componentReader)
-
-print "\nBegin Running\n"
-componentLoop(componentList)
-
-print "\nEnd Running\n"
-print "\nOutput saved in "+outputInfo.outputDir+"\n"
-
-gitFile        = os.path.join(outputInfo.outputDir,"gitDetails.txt")
-gitVerboseFile = os.path.join(outputInfo.outputDir,"gitVerboseDetails.txt")
-with open(gitFile,'w') as f:
-    f.write(getGitDescribe())
-
-with open(gitVerboseFile,'w') as f:
-    f.write(getGitDiff())
-
-if not disableProgressBar: progressMonitor.end()
-communicationChannel.end()
+elapsed_time = time.time() - start_time
+print "Time used: "+str(elapsed_time)+"s"
