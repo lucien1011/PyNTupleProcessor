@@ -16,7 +16,7 @@ import imp,sys,os,time
 
 cfgFileName             = sys.argv[1]
 file                    = open( cfgFileName,'r')
-cfg                     = imp.load_source( 'UFNanoAOD.__cfg_to_run__', cfgFileName, file)
+cfg                     = imp.load_source( 'UFEDM.__cfg_to_run__', cfgFileName, file)
 
 #rootTree                = "Events"
 
