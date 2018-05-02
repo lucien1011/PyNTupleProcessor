@@ -45,7 +45,7 @@ rootTree                = "passedEvents"
 justEndSequence         = False
 
 sequence                = Sequence()
-eventWeightProducer     = EventWeightProducer('EventWeightProducer')
+eventWeightProducer     = EventWeightProducer('EventWeightProducer',35.9)
 sequence.add(eventWeightProducer)
 plotter                 = Plotter("Plotter",plots)
 sequence.add(plotter)
