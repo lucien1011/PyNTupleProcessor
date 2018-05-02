@@ -12,6 +12,6 @@ class EventWeightProducer(Module):
             event.weight *= event.dataMCWeight[0]
             event.weight *= event.pileupWeight[0]
             event.weight *= event.genWeight[0]
-            xs = event.crossSection[0] if "ggHZZd" not in self.dataset.name else self.dataset.xs
-            event.weight *= xs*self.lumi*1000/self.dataset.sumw
+            xs = event.crossSection[0] if not self.dataset.xs else self.dataset.xs
+            event.weight *= xs*self.lumi*self.fb_to_pb_factor/self.dataset.sumw
         return True
