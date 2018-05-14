@@ -18,3 +18,4 @@ WZTo3LNu = Dataset(
         cmpList,
         xs                  = 4.4297, #pb
         )
+WZTo3LNu.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/WZTo3LNu/EventWeight.root")

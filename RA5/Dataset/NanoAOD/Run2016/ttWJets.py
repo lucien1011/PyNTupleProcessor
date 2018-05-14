@@ -18,3 +18,4 @@ ttWJets = Dataset(
         cmpList,
         xs                  = 0.6105, #pb
         )
+ttWJets.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/ttWJets/EventWeight.root")

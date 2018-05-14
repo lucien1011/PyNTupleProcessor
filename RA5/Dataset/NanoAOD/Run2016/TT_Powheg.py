@@ -14,7 +14,8 @@ cmpList = ComponentList(
         )
 
 TT_Powheg = Dataset(
-        "TT_powheg",
+        "TT_Powheg",
         cmpList,
         xs                  = 831.762, #pb
         )
+TT_Powheg.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/TT_Powheg/EventWeight.root")

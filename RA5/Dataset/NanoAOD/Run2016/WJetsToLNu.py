@@ -18,3 +18,4 @@ WJetsToLNu = Dataset(
         cmpList,
         xs                  = 61334.9, #pb
         )
+WJetsToLNu.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/WJetsToLNu/EventWeight.root")

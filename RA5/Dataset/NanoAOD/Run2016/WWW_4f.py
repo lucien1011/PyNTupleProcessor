@@ -18,3 +18,4 @@ WWW_4f = Dataset(
         cmpList,
         xs                  = 0.2086, #pb
         )
+WWW_4f.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/WWW_4f/EventWeight.root")

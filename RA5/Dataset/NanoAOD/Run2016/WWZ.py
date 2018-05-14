@@ -18,3 +18,4 @@ WWZ = Dataset(
         cmpList,
         xs                  = 0.1651, #pb
         )
+WWZ.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/WWZ/EventWeight.root")

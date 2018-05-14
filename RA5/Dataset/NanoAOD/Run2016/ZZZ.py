@@ -18,3 +18,4 @@ ZZZ = Dataset(
         cmpList,
         xs                  = 0.01398, #pb
         )
+ZZZ.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/ZZZ/EventWeight.root")

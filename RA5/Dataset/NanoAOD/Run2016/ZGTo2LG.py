@@ -18,3 +18,4 @@ ZGTo2LG = Dataset(
         cmpList,
         xs                  = 123.9, #pb
         )
+ZGTo2LG.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/ZGTo2LG/EventWeight.root")

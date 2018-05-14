@@ -18,3 +18,4 @@ DYJetsToLL_M50 = Dataset(
         cmpList,
         xs                  = 18610. #pb,
         )
+DYJetsToLL_M50.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/DYJetsToLL_M50/EventWeight.root")
