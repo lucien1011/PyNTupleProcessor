@@ -4,10 +4,10 @@ from Core.EventReader import EventLoopRunner, MPEventLoopRunner, EventLoop
 from Core.ProgressBar import ProgressBar,ProgressReport,ProgressMonitor,BProgressMonitor
 from Core.Concurrently import CommunicationChannel,CommunicationChannel0
 
-from Core.NanoAODResult.BEventBuilder import BEventBuilder
+from Core.BEventBuilder import BEventBuilder
 
-from Core.HeppyResult import ComponentLoop
-from Core.HeppyResult.UFComponentReader import UFComponentReader
+from Core.ComponentLoop import ComponentLoop
+from Core.UFComponentReader import UFComponentReader
 
 from Core.Utils.git import getGitDescribe,getGitDiff
 

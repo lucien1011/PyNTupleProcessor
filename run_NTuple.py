@@ -4,10 +4,10 @@ from Core.EventReader import EventLoopRunner, MPEventLoopRunner, EventLoop
 from Core.ProgressBar import ProgressBar,ProgressReport,ProgressMonitor,BProgressMonitor
 from Core.Concurrently import CommunicationChannel,CommunicationChannel0
 
-from Core.NanoAODResult.BEventBuilder import BEventBuilder
+from Core.BEventBuilder import BEventBuilder
 
-from Core.HeppyResult import ComponentLoop
-from Core.HeppyResult.UFComponentReader import UFComponentReader
+from Core.ComponentLoop import ComponentLoop
+from Core.UFComponentReader import UFComponentReader
 
 from Core.Utils.git import getGitDescribe,getGitDiff
 
@@ -17,8 +17,6 @@ import imp,sys,os,time
 cfgFileName             = sys.argv[1]
 file                    = open( cfgFileName,'r')
 cfg                     = imp.load_source( 'UFNTuple.__cfg_to_run__', cfgFileName, file)
-
-rootTree                = cfg.rootTree if hasattr(cfg,"rootTree") else "Events"
 
 nCores                  = cfg.nCores
 componentList           = cfg.componentList
@@ -48,7 +46,7 @@ if not justEndSequence:
     print "\nLoading samples:\n"
     
     eventLoopRunner = MPEventLoopRunner(communicationChannel)
-    eventBuilder    = BEventBuilder(rootTree,nEvents)
+    eventBuilder    = BEventBuilder()
     componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo)
     componentLoop   = ComponentLoop(componentReader)
     
