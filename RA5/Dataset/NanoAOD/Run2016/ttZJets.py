@@ -1,5 +1,4 @@
-from Core.ComponentList import *
-from Core.Dataset import Dataset
+from RA5.Dataset.NanoAOD.Run2016.common import * 
 
 sampleName  = "ttZJets"
 dir_path    = common_path+"ttZJets_13TeV_madgraphMLM-pythia8/InclusiveSelection_v1/180509_143510/0000/"

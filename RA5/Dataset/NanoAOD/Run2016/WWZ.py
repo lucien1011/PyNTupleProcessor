@@ -4,7 +4,7 @@ sampleName  = "WWZ"
 dir_path    = common_path+"WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/InclusiveSelection_v1/180509_150942/0000/"
 inUFTier2   = True
 #dir_path    = "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/WWZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/InclusiveSelection_v1/180509_150942/0000/"
-#inUFTier2=False,
+#inUFTier2  =False 
 
 cmp = makeComponents(sampleName,dir_path,"Events",inUFTier2)
 

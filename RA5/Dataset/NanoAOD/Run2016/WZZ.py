@@ -1,7 +1,6 @@
 from RA5.Dataset.NanoAOD.Run2016.common import * 
 
-cmp = Component(
-sampleName  = "WZZ",
+sampleName  = "WZZ"
 dir_path    = common_path+"WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/InclusiveSelection_v1/180509_151015/0000/"
 inUFTier2   = True        
 #dir_path    = "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/WZZ_TuneCUETP8M1_13TeV-amcatnlo-pythia8/InclusiveSelection_v1/180509_151015/0000/"
