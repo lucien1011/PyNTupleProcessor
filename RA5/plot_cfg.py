@@ -17,7 +17,7 @@ nCores = 4
 outputDir = "/raid/raid7/lucien/SUSY/RA5/Log/MCDistributions/2018-05-14/AllMCSamples_v1/"
 nEvents = -1
 disableProgressBar = False 
-justEndSequence = False 
+justEndSequence = True 
 componentList = [WZTo3LNu] 
 #componentList = allMCSamples
 for dataset in componentList:
