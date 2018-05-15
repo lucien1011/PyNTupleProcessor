@@ -1,18 +1,15 @@
-from Core.ComponentList import *
-from Core.Dataset import Dataset
+from RA5.Dataset.NanoAOD.Run2016.common import * 
 
-cmp = Component(
-        "WJetsToLNu",
-        #"/cms/data/store/user/klo/RA5/NTuples/2016/NanoAOD/MC/WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/InclusiveSelection_v1/180509_132731/0000/",
-        "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/InclusiveSelection_v1/180509_132731/0000/",
-        "Events",
-        keyword="tree",
-        #inUFTier2=True,
-        inUFTier2=False,
-        )
+sampleName  = "WJetsToLNu"
+dir_path    = common_path+"WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/InclusiveSelection_v1/180509_132731/0000/"
+inUFTier2   = True
+#dir_path    = "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/InclusiveSelection_v1/180509_132731/0000/"
+#inUFTier2   = False
+
+cmp = makeComponents(sampleName,dir_path,"Events",inUFTier2)
 
 cmpList = ComponentList(
-        [cmp,],
+        cmp,
         )
 
 WJetsToLNu = Dataset(

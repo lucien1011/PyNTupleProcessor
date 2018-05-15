@@ -1,30 +1,19 @@
-from Core.ComponentList import *
-from Core.Dataset import Dataset
+from RA5.Dataset.NanoAOD.Run2016.common import * 
 
 sampleName  = "WZTo3LNu"
-dir_path    = "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/WZTo3LNu_TuneCUETP8M1_13TeV-powheg-pythia8/InclusiveSelection_v1/180509_145452/0000/"
+dir_path    = common_path+"WZTo3LNu_TuneCUETP8M1_13TeV-powheg-pythia8/InclusiveSelection_v1/180509_145452/0000/"
+inUFTier2   = True
+#dir_path    = "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/WZTo3LNu_TuneCUETP8M1_13TeV-powheg-pythia8/InclusiveSelection_v1/180509_145452/0000/"
+#inUFTier2   = False 
 
-cmp = [ Component(sampleName,dir_path+"tree_"+str(i)+".root","Events",inUFTier2=False) 
-        for i in range(1,6) 
-        ]
-
-#cmp = Component(
-#        "WZTo3LNu",
-#        #"/cms/data/store/user/klo/RA5/NTuples/2016/NanoAOD/MC/WZTo3LNu_TuneCUETP8M1_13TeV-powheg-pythia8/InclusiveSelection_v1/180509_145452/0000/",
-#        ,
-#        "Events",
-#        keyword="tree",
-#        #inUFTier2=True,
-#        inUFTier2=False,
-#        ).makeComponentFromEachFile(prefix="WZTo3LNu")
+cmp = makeComponents(sampleName,dir_path,"Events",inUFTier2)
 
 cmpList = ComponentList(
-        #[cmp,],
         cmp,
         )
 
 WZTo3LNu = Dataset(
-        "WZTo3LNu",
+        sampleName,
         cmpList,
         xs                  = 4.4297, #pb
         )

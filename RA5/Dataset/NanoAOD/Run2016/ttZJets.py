@@ -1,18 +1,16 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-cmp = Component(
-        "ttZJets",
-        #"/cms/data/store/user/klo/RA5/NTuples/2016/NanoAOD/MC/ttZJets_13TeV_madgraphMLM-pythia8/InclusiveSelection_v1/180509_143510/0000/",
-        "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/ttZJets_13TeV_madgraphMLM-pythia8/InclusiveSelection_v1/180509_143510/0000/",
-        "Events",
-        keyword="tree",
-        #inUFTier2=True,
-        inUFTier2=False,
-        )
+sampleName  = "ttZJets"
+dir_path    = common_path+"ttZJets_13TeV_madgraphMLM-pythia8/InclusiveSelection_v1/180509_143510/0000/"
+inUFTier2   = True
+#dir_path    = "/raid/raid7/lucien/SUSY/RA5/NanoAOD/2016/MC/InclusiveSelection_v1/ttZJets_13TeV_madgraphMLM-pythia8/InclusiveSelection_v1/180509_143510/0000/"
+#inUFTier2   = False
+
+cmp = makeComponents(sampleName,dir_path,"Events",inUFTier2)
 
 cmpList = ComponentList(
-        [cmp,],
+        cmp,
         )
 
 ttZJets = Dataset(

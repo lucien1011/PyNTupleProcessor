@@ -1,6 +1,6 @@
 #from DYJetsToLL_M10to50 import DYJetsToLL_M10to50
 #from DYJetsToLL_M50 import DYJetsToLL_M50
-#from TGJets import TGJets
+##from TGJets import TGJets
 #from TT_Powheg import TT_Powheg
 #from ttWJets import ttWJets
 #from ttZJets import ttZJets
@@ -15,7 +15,7 @@ from WZTo3LNu import WZTo3LNu
 allMCSamples = [
     #DYJetsToLL_M10to50,
     #DYJetsToLL_M50,
-    #TGJets,
+    ##TGJets,
     #TT_Powheg,
     #ttWJets,
     #ttZJets,
