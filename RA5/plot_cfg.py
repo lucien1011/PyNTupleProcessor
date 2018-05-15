@@ -14,12 +14,11 @@ from Plotter.PlotEndModule import PlotEndModule
 from RA5.Config.Plotter.PlotDefinition import allPlots
 
 nCores = 4 
-outputDir = "/raid/raid7/lucien/SUSY/RA5/Log/MCDistributions/2018-05-14/AllMCSamples_v1/"
+outputDir = "/raid/raid7/lucien/SUSY/RA5/Log/MCDistributions/2018-05-15/test/"
 nEvents = -1
 disableProgressBar = False 
-justEndSequence = True 
-componentList = [WZTo3LNu] 
-#componentList = allMCSamples
+justEndSequence = False 
+componentList = allMCSamples 
 for dataset in componentList:
     dataset.lumi = 35.9
 
@@ -34,7 +33,7 @@ sequence.add(jetProducer)
 sequence.add(Plotter("Plotter",allPlots))
 
 endSequence = EndSequence()
-endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/Log/MCDistributions/2018-05-14/AllMCSamples_v1/"
+endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/Log/MCDistributions/2018-05-15/AllMCSamples_v1/"
 endSequence.add(PlotEndModule(endModuleOutputDir,allPlots))
 
 outputInfo = OutputInfo("OutputInfo")
