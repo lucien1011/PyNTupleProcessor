@@ -13,8 +13,8 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from RA5.Config.Plotter.PlotDefinition import allPlots
 
-nCores = 4 
-outputDir = "/raid/raid7/lucien/SUSY/RA5/Log/MCDistributions/2018-05-15/test/"
+nCores = 8 
+outputDir = "/raid/raid7/lucien/SUSY/RA5/Log/MCDistributions/2018-05-15/AllMCSamples_v1/"
 nEvents = -1
 disableProgressBar = False 
 justEndSequence = False 
