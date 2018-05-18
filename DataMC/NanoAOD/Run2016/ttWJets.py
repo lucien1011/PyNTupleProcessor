@@ -1,4 +1,4 @@
-from RA5.Dataset.NanoAOD.Run2016.common import * 
+from DataMC.NanoAOD.Run2016.common import * 
 
 sampleName  = "ttWJets"
 dir_path    = common_path+"ttWJets_13TeV_madgraphMLM/InclusiveSelection_v1/180509_142516/0000/"

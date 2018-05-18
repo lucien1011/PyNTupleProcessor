@@ -1,4 +1,4 @@
-from RA5.Dataset.NanoAOD.Run2016.common import * 
+from DataMC.NanoAOD.Run2016.common import * 
 
 sampleName  = "DYJetsToLL_M10to50"
 dir_path    = common_path+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/InclusiveSelection_v1/180509_132404/0000/"

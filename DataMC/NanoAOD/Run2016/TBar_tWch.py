@@ -1,4 +1,4 @@
-from RA5.Dataset.NanoAOD.Run2016.common import * 
+from DataMC.NanoAOD.Run2016.common import * 
 
 sampleName  = "TBar_tWch"
 dir_path    = common_path+"ST_tW_antitop_5f_inclusiveDecays_13TeV-powheg-pythia8_TuneCUETP8M1/InclusiveSelection_v1/180517_135514/0000/"
@@ -15,3 +15,4 @@ TBar_tWch = Dataset(
         cmpList,
         xs                  = 38.09 #pb,
         )
+TBar_tWch.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/"+sampleName+"/EventWeight.root")

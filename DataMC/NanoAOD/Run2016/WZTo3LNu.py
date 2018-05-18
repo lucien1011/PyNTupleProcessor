@@ -1,4 +1,4 @@
-from RA5.Dataset.NanoAOD.Run2016.common import * 
+from DataMC.NanoAOD.Run2016.common import * 
 
 sampleName  = "WZTo3LNu"
 dir_path    = common_path+"WZTo3LNu_TuneCUETP8M1_13TeV-powheg-pythia8/InclusiveSelection_v1/180509_145452/0000/"

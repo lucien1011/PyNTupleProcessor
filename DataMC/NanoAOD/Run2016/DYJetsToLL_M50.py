@@ -1,4 +1,4 @@
-from RA5.Dataset.NanoAOD.Run2016.common import * 
+from DataMC.NanoAOD.Run2016.common import * 
 
 sampleName  = "DYJetsToLL_M50"
 dir_path    = common_path+"CRAB_UserFiles/InclusiveSelection_v1/180509_134315/0000/"

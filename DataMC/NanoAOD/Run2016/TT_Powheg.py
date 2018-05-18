@@ -1,4 +1,4 @@
-from RA5.Dataset.NanoAOD.Run2016.common import * 
+from DataMC.NanoAOD.Run2016.common import * 
 
 sampleName  = "TT_Powheg",
 dir_path    = common_path+"CRAB_UserFiles/InclusiveSelection_v1/180509_144936/0000/"

@@ -3,7 +3,7 @@ from Core.Sequence import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
-from RA5.Dataset.NanoAOD.Run2016 import * 
+from DataMC.NanoAOD.Run2016 import * 
 
 from RA5.Weighter.XSWeighter import XSWeighter
 
