@@ -67,10 +67,9 @@ if not justEndSequence:
     if not disableProgressBar: progressMonitor.end()
     communicationChannel.end()
 
-if endSequence:
-    print "\nBegin Summarising\n"
-    print "\nInput used: "+outputInfo.outputDir+"\n"
-    endSequence.run(outputInfo)
+print "\nBegin Summarising\n"
+print "\nInput used: "+outputInfo.outputDir+"\n"
+endSequence.run(outputInfo,componentList)
 
 elapsed_time = time.time() - start_time
 print "Time used: "+str(elapsed_time)+"s"
