@@ -5,7 +5,7 @@ from Core.EndSequence import EndSequence
 
 from DataMC.NanoAOD.Run2016 import * 
 
-from RA5.Weighter.XSWeighter import XSWeighter
+from NanoAOD.Weighter.XSWeighter import XSWeighter
 
 from RA5.Producer.PhysObjProducer import mediumMuonProducer,looseMuonProducer,mediumElectronProducer,looseElectronProducer,jetProducer
 

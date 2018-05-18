@@ -1,9 +1,7 @@
 import ROOT
 
-from Core.NanoAODResult.Collection import Collection
+from Core.Collection import Collection
 from Core.Module import Module
-
-from RPV.Config.PhysObjDefinition import *
 
 from Core.Utils.XCleaning import cleanJetsAndLeptons
 

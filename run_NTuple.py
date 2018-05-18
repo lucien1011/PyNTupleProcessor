@@ -44,6 +44,8 @@ if not justEndSequence:
     communicationChannel.begin()
     
     print "\nLoading samples:\n"
+    for cmp in componentList:
+        print cmp.name
     
     eventLoopRunner = MPEventLoopRunner(communicationChannel)
     eventBuilder    = BEventBuilder()
