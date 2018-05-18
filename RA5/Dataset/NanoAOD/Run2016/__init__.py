@@ -12,7 +12,7 @@ from WZZ import WZZ
 from ZGTo2LG import ZGTo2LG
 from ZZZ import ZZZ
 from TToLeptons_sch import TToLeptons_sch
-from T_tch import t_tch
+from T_tch import T_tch
 from T_tWch import T_tWch
 from TBar_tWch import TBar_tWch
 
