@@ -11,6 +11,10 @@ from WZTo3LNu import WZTo3LNu
 from WZZ import WZZ
 from ZGTo2LG import ZGTo2LG
 from ZZZ import ZZZ
+from TToLeptons_sch import TToLeptons_sch
+from T_tch import t_tch
+from T_tWch import T_tWch
+from TBar_tWch import TBar_tWch
 
 allMCSamples = [
     DYJetsToLL_M10to50,
@@ -26,4 +30,8 @@ allMCSamples = [
     WZZ,
     ZGTo2LG,
     ZZZ,
+    TToLeptons_sch,
+    T_tch,
+    T_tWch,
+    TBar_tWch,
     ]
