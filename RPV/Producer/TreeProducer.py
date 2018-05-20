@@ -31,15 +31,15 @@ class TreeProducer(Module):
         return str
 
 
-    def begin(self) :
-        tree     = self.dataset.events.tree
-        branches = [ br.GetName() for br in tree.GetListOfBranches() ]
-        self.branches = odict()
-        for branch in branches :
-            try :
-                self.branches[branch] = getattr(self.dataset.events,branch)
-            except :
-                print "Problem accessing branch '{:s}'".format(branch)
+    def beginEvents(self,events) :
+        tree     = events.tree
+        #branches = [ br.GetName() for br in tree.GetListOfBranches() ]
+        #self.branches = odict()
+        #for branch in branches :
+        #    try :
+        #        self.branches[branch] = getattr(self.dataset.events,branch)
+        #    except :
+        #        print "Problem accessing branch '{:s}'".format(branch)
 
         self.clone      = tree.CloneTree(0)
 
@@ -55,11 +55,11 @@ class TreeProducer(Module):
 
     def analyze(self,event) :
 
-        if self.verbose :
-            for name,branch in self.branches.items() :
-                print name,[x for x in branch]
-                pass
-            pass
+        #if self.verbose :
+        #    for name,branch in self.branches.items() :
+        #        print name,[x for x in branch]
+        #        pass
+        #    pass
 
         # ----------------------------------------
         # Store additional data
@@ -70,7 +70,7 @@ class TreeProducer(Module):
         #    self.nWTagged[0]            = getattr(event, 'nWTagged', 0.)[0]
         #else:
         #    self.nWTagged[0]            = 0.
-
+        
         self.clone.Fill()
 
         return True

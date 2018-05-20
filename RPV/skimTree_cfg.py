@@ -10,10 +10,10 @@ from RPV.Producer.TreeProducer import TreeProducer
 from RPV.Producer.AnalysisProducer import AnalysisProducer 
 from RPV.Skimmer.EventSkimmer import EventSkimmer
 
-nCores = 4 
+nCores = 8 
 outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/StopToBLep/2018-05-18/BkgMC_BaselineSelection_v1/"
 nEvents = -1
-disableProgressBar = True
+disableProgressBar = False
 justEndSequence = False 
 componentList = allMCSamples 
 for dataset in componentList:
