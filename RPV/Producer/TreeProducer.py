@@ -1,9 +1,5 @@
 from Core.Module import Module
 from collections import OrderedDict as odict
-import ROOT as r
-import os
-import glob
-import shutil
 from array import array
 
 class TreeProducer(Module):
@@ -33,13 +29,13 @@ class TreeProducer(Module):
 
     def beginEvents(self,events) :
         tree     = events.tree
-        #branches = [ br.GetName() for br in tree.GetListOfBranches() ]
-        #self.branches = odict()
-        #for branch in branches :
-        #    try :
-        #        self.branches[branch] = getattr(self.dataset.events,branch)
-        #    except :
-        #        print "Problem accessing branch '{:s}'".format(branch)
+        branches = [ br.GetName() for br in tree.GetListOfBranches() ]
+        self.branches = odict()
+        for branch in branches :
+            try :
+                self.branches[branch] = getattr(events,branch)
+            except :
+                print "Problem accessing branch '{:s}'".format(branch)
 
         self.clone      = tree.CloneTree(0)
 
@@ -55,11 +51,9 @@ class TreeProducer(Module):
 
     def analyze(self,event) :
 
-        #if self.verbose :
-        #    for name,branch in self.branches.items() :
-        #        print name,[x for x in branch]
-        #        pass
-        #    pass
+        if self.verbose :
+            for name,branch in self.branches.items() :
+                print name,[x for x in branch]
 
         # ----------------------------------------
         # Store additional data
