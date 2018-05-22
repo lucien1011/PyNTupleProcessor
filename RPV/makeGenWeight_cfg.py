@@ -9,10 +9,10 @@ if useSkimTree:
 else:
     from DataMC.NanoAOD.Run2016 import * 
 
-from RA5.Producer.GenWeightCounter import *
+from NanoAOD.Producer.GenWeightCounter import *
 
 nCores = 8 
-outputDir = "/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_BaselineSelection_v1/Run2016/"
+outputDir = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_BaselineSelection_v1/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False

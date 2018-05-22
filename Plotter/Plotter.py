@@ -1,4 +1,5 @@
 from Core.Module import Module
+import copy
 
 class Plotter(Module):
     def __init__(self,name,plotList):
@@ -8,12 +9,13 @@ class Plotter(Module):
     def begin(self):
         for plot in self.plotList:
             self.writer.book(*plot.getWriterSetting())
+        self.plotList = [copy.deepcopy(plot) for plot in self.plotList]
         
     def analyze(self,event):
         for plot in self.plotList:
             if plot.selFunc and not plot.selFunc(event): continue
             for value in plot.getValues(event):
-                self.writer.objs[plot.key].Fill(value,event.weight) 
+                self.writer.objs[plot.key].Fill(value,event.weight)
         return True
 
     def end(self):
