@@ -30,6 +30,7 @@ disableProgressBar = False
 justEndSequence = False
 componentList = allMCSamples 
 for dataset in componentList:
+    dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -62,7 +63,7 @@ sequence.add(xsWeighter)
 sequence.add(anaProducer)
 sequence.add(plotter)
 
-endSequence = EndSequence()
+endSequence = EndSequence(skipHadd=False)
 endModuleOutputDir = "/home/lucien/public_html/SUSY/RPV/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
