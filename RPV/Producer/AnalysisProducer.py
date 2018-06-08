@@ -26,5 +26,20 @@ class AnalysisProducer(Module):
             event.mll = vecSum.M()
         else:
             event.mll = None
+
+
+        k1 = sqrt((Et(b1)+Et(l1))^2 - (pT(b1)-pT(l1))^2)
+	k2 = sqrt((Et(b1)+Et(l2))^2 - (pT(b1)-pT(l2))^2)
+        if k1 >= k2:
+           event.m0_bl = k1
+           event.m1_bl = k2
+        else:
+	    event.m0_bl = k2
+	    event.m1_bl = k1
+
+
+
+        event.m_asym_bl = (event.m0_bl - event.m1_bl)/(event.m0_bl + event.m1_bl)
+
         
         return True

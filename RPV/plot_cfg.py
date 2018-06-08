@@ -1,5 +1,5 @@
-# UF Framework specifics
-from Core.Sequence import Sequence
+#UF Framework specifics
+from Core import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
@@ -47,7 +47,14 @@ plots = [
         Plot("muonPt2",     ["TH1D","muonPt2","",10,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else -1')),
         Plot("elePt1",      ["TH1D","elePt1","",10,0., 500.],       LambdaFunc('x: x.eles[0].pt if len(x.eles) > 0 else -1')),
         Plot("elePt2",      ["TH1D","elePt2","",10,0., 500.],       LambdaFunc('x: x.eles[1].pt if len(x.eles) > 1 else -1')),
+        
+
+        Plot("m0_bl",       ["TH1D","m0_bl","",50,0., 2000.],       LambdaFunc('x: x.m0_bl')),
+	Plot("m1_bl",       ["TH1D","m1_bl","",50,0., 2000.],       LambdaFunc('x: x.m1_bl')),
+	Plot("m_asym_bl",       ["TH1D","m_asym_bl","",50,0., 2000.],       LambdaFunc('x: x.m_asym_bl')),
         ]
+
+
 xsWeighter              = XSWeighter("XSWeighter")
 mediumMuonProducer      = PhysObjProducer("MediumMuonProducer","Muon","MediumMuons","Moriond17MediumMuon")
 mediumElectronProducer  = PhysObjProducer("MediumElectronProducer","Electron","MediumElectrons","Moriond17MediumElectron")
