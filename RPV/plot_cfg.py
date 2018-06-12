@@ -1,5 +1,5 @@
-# UF Framework specifics
-from Core.Sequence import Sequence
+#UF Framework specifics
+from Core import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
@@ -33,6 +33,7 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 plots = [
+<<<<<<< HEAD
         #Plot("nJet40",      ["TH1D","nJet40","",10,-0.5,9.5],       LambdaFunc('x: x.nJet40')),
         #Plot("nBJet25",     ["TH1D","nBJet25","",10,-0.5,9.5],      LambdaFunc('x: len([j for j in x.LooseJets if j.btagCSVV2 > 0.8484])')),
         #Plot("nLep40",      ["TH1D","nLep40","",10,-0.5,9.5],       LambdaFunc('x: x.nLep40')),
@@ -51,6 +52,28 @@ plots = [
         Plot("m_asym_bl",   ["TH1D","m_asym_bl","",50,0., 2000.],   LambdaFunc('x: x.m_asym_bl')),
         ]
 
+=======
+        Plot("nJet40",      ["TH1D","nJet40","",10,-0.5,9.5],       LambdaFunc('x: x.nJet40')),
+        Plot("nBJet25",     ["TH1D","nBJet25","",10,-0.5,9.5],      LambdaFunc('x: len([j for j in x.LooseJets if j.btagCSVV2 > 0.8484])')),
+        Plot("nLep40",      ["TH1D","nLep40","",10,-0.5,9.5],       LambdaFunc('x: x.nLep40')),
+        Plot("met",         ["TH1D","met","",10,0., 500.],          LambdaFunc('x: x.MET_pt[0]')),
+        Plot("ht40",        ["TH1D","ht40","",10,0.,1000.],         LambdaFunc('x: x.ht40')),
+        Plot("mll",         ["TH1D","mll","",10,0.,500.],           LambdaFunc('x: x.mll if x.mll else -1.')),
+        Plot("jetPt1",      ["TH1D","jetPt1","",10,0., 500.],       LambdaFunc('x: x.jets[0].pt if len(x.jets) > 0 else -1')),
+        Plot("jetPt2",      ["TH1D","jetPt2","",10,0., 500.],       LambdaFunc('x: x.jets[1].pt if len(x.jets) > 1 else -1')),
+        Plot("muonPt1",     ["TH1D","muonPt1","",10,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else -1')),
+        Plot("muonPt2",     ["TH1D","muonPt2","",10,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else -1')),
+        Plot("elePt1",      ["TH1D","elePt1","",10,0., 500.],       LambdaFunc('x: x.eles[0].pt if len(x.eles) > 0 else -1')),
+        Plot("elePt2",      ["TH1D","elePt2","",10,0., 500.],       LambdaFunc('x: x.eles[1].pt if len(x.eles) > 1 else -1')),
+        
+
+        Plot("m0_bl",       ["TH1D","m0_bl","",50,0., 2000.],       LambdaFunc('x: x.m0_bl')),
+	Plot("m1_bl",       ["TH1D","m1_bl","",50,0., 2000.],       LambdaFunc('x: x.m1_bl')),
+	Plot("m_asym_bl",       ["TH1D","m_asym_bl","",50,0., 2000.],       LambdaFunc('x: x.m_asym_bl')),
+        ]
+
+
+>>>>>>> 8d6c024cc9ee99d524ac692f0e875910228a00f7
 xsWeighter              = XSWeighter("XSWeighter")
 mediumMuonProducer      = PhysObjProducer("MediumMuonProducer","Muon","MediumMuons","Moriond17MediumMuon")
 mediumElectronProducer  = PhysObjProducer("MediumElectronProducer","Electron","MediumElectrons","Moriond17MediumElectron")

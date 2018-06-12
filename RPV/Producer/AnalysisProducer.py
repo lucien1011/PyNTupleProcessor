@@ -27,11 +27,29 @@ class AnalysisProducer(Module):
             event.mll = vecSum.M()
         else:
             event.mll = None
+<<<<<<< HEAD
  
         k1 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.leps[0].pt)+numpy.square(event.leps[0].mass))) - numpy.square(event.jets[0].pt-event.leps[0].pt))
         k2 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))+numpy.sqrt(numpy.square(event.leps[1].pt)+numpy.square(event.leps[1].mass))) - numpy.square(event.jets[1].pt-event.leps[1].pt))
         k3 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.leps[1].pt)+numpy.square(event.leps[1].mass))) - numpy.square(event.jets[0].pt-event.leps[1].pt))
         k4 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))+numpy.sqrt(numpy.square(event.leps[0].pt)+numpy.square(event.leps[0].mass))) - numpy.square(event.jets[1].pt-event.leps[0].pt))
+=======
+
+
+        k1 = sqrt((Et(b1)+Et(l1))^2 - (pT(b1)-pT(l1))^2)
+	k2 = sqrt((Et(b1)+Et(l2))^2 - (pT(b1)-pT(l2))^2)
+        if k1 >= k2:
+           event.m0_bl = k1
+           event.m1_bl = k2
+        else:
+	    event.m0_bl = k2
+	    event.m1_bl = k1
+
+
+
+        event.m_asym_bl = (event.m0_bl - event.m1_bl)/(event.m0_bl + event.m1_bl)
+
+>>>>>>> 8d6c024cc9ee99d524ac692f0e875910228a00f7
         
         if k1 >= k2:
            event.m0_bl[0] = k1
