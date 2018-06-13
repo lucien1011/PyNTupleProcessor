@@ -2,7 +2,7 @@ from Core.Module import Module
 import numpy
 
 class AnalysisProducer(Module):
-    def analyze(self,event):
+    def analyze(self,event):#, mo_bl, m1_bl, m_asym_bl):
         event.muons = [p for p in event.MediumMuons if p.pt > 40]
         event.muons.sort(key=lambda x: x.pt,reverse=True)
 
@@ -27,54 +27,45 @@ class AnalysisProducer(Module):
             event.mll = vecSum.M()
         else:
             event.mll = None
-<<<<<<< HEAD
+
  
         k1 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.leps[0].pt)+numpy.square(event.leps[0].mass))) - numpy.square(event.jets[0].pt-event.leps[0].pt))
         k2 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))+numpy.sqrt(numpy.square(event.leps[1].pt)+numpy.square(event.leps[1].mass))) - numpy.square(event.jets[1].pt-event.leps[1].pt))
         k3 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.leps[1].pt)+numpy.square(event.leps[1].mass))) - numpy.square(event.jets[0].pt-event.leps[1].pt))
         k4 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))+numpy.sqrt(numpy.square(event.leps[0].pt)+numpy.square(event.leps[0].mass))) - numpy.square(event.jets[1].pt-event.leps[0].pt))
-=======
 
-
-        k1 = sqrt((Et(b1)+Et(l1))^2 - (pT(b1)-pT(l1))^2)
-	k2 = sqrt((Et(b1)+Et(l2))^2 - (pT(b1)-pT(l2))^2)
-        if k1 >= k2:
-           event.m0_bl = k1
-           event.m1_bl = k2
-        else:
-	    event.m0_bl = k2
-	    event.m1_bl = k1
-
-
-
-        event.m_asym_bl = (event.m0_bl - event.m1_bl)/(event.m0_bl + event.m1_bl)
-
->>>>>>> 8d6c024cc9ee99d524ac692f0e875910228a00f7
         
-        if k1 >= k2:
-           event.m0_bl[0] = k1
-           event.m1_bl[0] = k2
-        else:
-            event.m0_bl[0] = k2
-            event.m1_bl[0] = k1
+        if k1 >= k2 and k3 >= k4:
+           event.m0_bl = [k1,k3]
+           event.m1_bl = [k2,k4]
+        elif k1 >= k2 and k3 < k4:
+            event.m0_bl = [k1,k4]
+            event.m1_bl = [k2,k3]
+        elif k1 < k2 and k3 >= k4:
+            event.m0_bl = [k2,k3]
+            event.m1_bl = [k1,k4]
+        elif k1 < k2 and k3 < k4:
+            event.m0_bl = [k2,k4]
+            event.m1_bl = [k1,k3]
 
-        if k3 >= k4:
-           event.m0_bl[1] = k3
-           event.m1_bl[1] = k4
-        else:
-            event.m0_bl[1] = k4
-            event.m1_bl[1] = k3
+       # if k3 >= k4:
+        #   self.m0_bl[1] = k3
+         #  self.m1_bl[1] = k4
+#        else:
+ #           self.m0_bl[1] = k4
+  #          self.m1_bl[1] = k3
 
         temp1 = (event.m0_bl[0] - event.m1_bl[0])/(event.m0_bl[0] + event.m1_bl[0])
         temp2 = (event.m0_bl[1] - event.m1_bl[1])/(event.m0_bl[1] + event.m1_bl[1])
 
         if temp1 < temp2:
-           event.m_asym_bl = temp1
+           event.m_asym_bl = [temp1]
         else:
-            event.m_asym_bl = temp2
+            event.m_asym_bl = [temp2]
 
-
-
+        #event.m_asym_bl = 100*event.m_asym_bl
+        #temp1 = abs(k1-k2)/(k1+k2)
+        #temp2 = abs(k3-k4)/(k3+k4)
 
 
 
