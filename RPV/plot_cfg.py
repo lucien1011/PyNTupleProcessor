@@ -51,7 +51,8 @@ plots = [
 	Plot("m0_bl2",       ["TH1D","m0_bl2","",50,0., 2000.],       LambdaFunc('x: x.m0_bl[1]')),
         Plot("m1_bl1",       ["TH1D","m1_bl1","",50,0., 2000.],       LambdaFunc('x: x.m1_bl[0]')),
 	Plot("m1_bl2",       ["TH1D","m1_bl2","",50,0., 2000.],       LambdaFunc('x: x.m1_bl[1]')),
-        Plot("m_asym_bl",       ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
+        Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
+        Plot("m_ct",         ["TH1D","m_ct","",50,0., 2000.],         LambdaFunc('x: x.m_ct[0]')),
         ]
 
 

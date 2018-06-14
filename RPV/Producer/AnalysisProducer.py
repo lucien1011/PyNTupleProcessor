@@ -29,31 +29,29 @@ class AnalysisProducer(Module):
             event.mll = None
 
  
-        k1 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.leps[0].pt)+numpy.square(event.leps[0].mass))) - numpy.square(event.jets[0].pt-event.leps[0].pt))
-        k2 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))+numpy.sqrt(numpy.square(event.leps[1].pt)+numpy.square(event.leps[1].mass))) - numpy.square(event.jets[1].pt-event.leps[1].pt))
-        k3 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.leps[1].pt)+numpy.square(event.leps[1].mass))) - numpy.square(event.jets[0].pt-event.leps[1].pt))
-        k4 = numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))+numpy.sqrt(numpy.square(event.leps[0].pt)+numpy.square(event.leps[0].mass))) - numpy.square(event.jets[1].pt-event.leps[0].pt))
-
+        event.m_ct = [numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))) - numpy.square(event.jets[0].pt-event.jets[1].pt))]
         
-        if k1 >= k2 and k3 >= k4:
-           event.m0_bl = [k1,k3]
-           event.m1_bl = [k2,k4]
-        elif k1 >= k2 and k3 < k4:
-            event.m0_bl = [k1,k4]
-            event.m1_bl = [k2,k3]
-        elif k1 < k2 and k3 >= k4:
-            event.m0_bl = [k2,k3]
-            event.m1_bl = [k1,k4]
-        elif k1 < k2 and k3 < k4:
-            event.m0_bl = [k2,k4]
-            event.m1_bl = [k1,k3]
+        vecsum1 = event.leps[0].p4() + event.jets[0].p4()
+        l1 = vecsum1.M()
+        vecsum2 = event.leps[1].p4() + event.jets[1].p4()
+        l2 = vecsum2.M()
+        vecsum3 = event.leps[1].p4() + event.jets[0].p4()
+        l3 = vecsum3.M()
+        vecsum4 = event.leps[0].p4() + event.jets[1].p4()
+        l4 = vecsum4.M()
 
-       # if k3 >= k4:
-        #   self.m0_bl[1] = k3
-         #  self.m1_bl[1] = k4
-#        else:
- #           self.m0_bl[1] = k4
-  #          self.m1_bl[1] = k3
+        if l1 >= l2 and l3 >= l4:
+           event.m0_bl = [l1,l3]
+           event.m1_bl = [l2,l4]
+        elif l1 >= l2 and l3 < l4:
+            event.m0_bl = [l1,l4]
+            event.m1_bl = [l2,l3]
+        elif l1 < l2 and l3 >= l4:
+            event.m0_bl = [l2,l3]
+            event.m1_bl = [l1,l4]
+        elif l1 < l2 and l3 < l4:
+            event.m0_bl = [l2,l4]
+            event.m1_bl = [l1,l3]
 
         temp1 = (event.m0_bl[0] - event.m1_bl[0])/(event.m0_bl[0] + event.m1_bl[0])
         temp2 = (event.m0_bl[1] - event.m1_bl[1])/(event.m0_bl[1] + event.m1_bl[1])
@@ -62,13 +60,7 @@ class AnalysisProducer(Module):
            event.m_asym_bl = [temp1]
         else:
             event.m_asym_bl = [temp2]
-
         #event.m_asym_bl = 100*event.m_asym_bl
-        #temp1 = abs(k1-k2)/(k1+k2)
-        #temp2 = abs(k3-k4)/(k3+k4)
-
-
-
 
 
 
