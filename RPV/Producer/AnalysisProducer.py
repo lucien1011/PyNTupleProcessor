@@ -58,8 +58,12 @@ class AnalysisProducer(Module):
 
         if temp1 < temp2:
            event.m_asym_bl = [temp1]
+           event.m0_bl = [event.m0_bl[0]]
+           event.m1_bl = [event.m1_bl[0]]
         else:
             event.m_asym_bl = [temp2]
+            event.m0_bl = [event.m0_bl[1]]
+	    event.m1_bl = [event.m1_bl[1]]
         #event.m_asym_bl = 100*event.m_asym_bl
 
 
