@@ -138,12 +138,11 @@ class PlotEndModule(EndModule):
         c.SetLogy(0)
         stack.SetMaximum(stack.GetMaximum()*1.5)
         stack.SetMinimum(0.)
-        #stack.Draw('hist')
+        stack.Draw('hist')
         leg.Draw('same')
         # Draw CMS, lumi and preliminary if specified
         #self.drawLabels(pSetPair[0].lumi)
         bkdgErr.Draw("samee2")
-	#print total, histList, stack, smCount, bkdgErr
         c.SaveAs(outputDir+"/"+plot.key+".png")
         c.SaveAs(outputDir+"/"+plot.key+".pdf")
 
