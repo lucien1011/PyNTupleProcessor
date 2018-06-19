@@ -6,7 +6,7 @@ from SampleColor import sampleColorDict
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
-class PlotEndModule1(EndModule):
+class PlotEndModule(EndModule):
     def __init__(self,outputDir,plots,ratio_switch):
         self.outputDir = outputDir
         self.plots = plots

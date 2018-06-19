@@ -10,7 +10,6 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
-from Plotter.PlotEndModule1 import PlotEndModule1
 from Plotter.Plot import Plot
 
 from Core.Utils.LambdaFunc import LambdaFunc
@@ -60,6 +59,9 @@ mc_plots = [
         ]
 
 ratio_plots = [
+	 Plot("m0_bl_prop",       ["TH1D","m0_bl1_prop","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
+	 Plot("m1_bl_prop",       ["TH1D","m1_bl1_prop","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
+	 Plot("m_asym_bl_prop",    ["TH1D","m_asym_bl_prop","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
          Plot("m_ct_prop",         ["TH1D","m_ct_prop","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
          ]
 
