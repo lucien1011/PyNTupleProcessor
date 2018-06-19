@@ -84,7 +84,7 @@ class PlotEndModule(EndModule):
         # if not self._normToData and data:
             # if not self._normToData: leg.AddEntry(data, "Data: {0}".format(int(data.Integral(0,data.GetNbinsX()+1))), "p")
         legLabel = "SM total"
-        if switch == True:
+        if switch:
 	   legLabel += ": 100%"
 	else:
             legLabel += ": "+str(math.ceil(smCount*10)/10)
@@ -92,12 +92,12 @@ class PlotEndModule(EndModule):
         
         for hCount in reversed(histList):
             legLabel = hCount[1]
-            if switch == True:
+            if switch:
 	       legLabel += ": "+str(math.ceil(math.ceil(hCount[2]*10)/math.ceil(smCount*10)*100000)/1000)+"%"
             else:         
                 legLabel += ": "+str(math.ceil(hCount[2]*10)/10)
-            
             leg.AddEntry(hCount[0], legLabel, "f")
+	
         return leg
 
     def getAxisTitle(self,plot):
@@ -138,11 +138,12 @@ class PlotEndModule(EndModule):
         c.SetLogy(0)
         stack.SetMaximum(stack.GetMaximum()*1.5)
         stack.SetMinimum(0.)
-        stack.Draw('hist')
+        #stack.Draw('hist')
         leg.Draw('same')
         # Draw CMS, lumi and preliminary if specified
         #self.drawLabels(pSetPair[0].lumi)
         bkdgErr.Draw("samee2")
+	#print total, histList, stack, smCount, bkdgErr
         c.SaveAs(outputDir+"/"+plot.key+".png")
         c.SaveAs(outputDir+"/"+plot.key+".pdf")
 

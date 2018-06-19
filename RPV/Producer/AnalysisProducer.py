@@ -2,7 +2,7 @@ from Core.Module import Module
 import numpy
 
 class AnalysisProducer(Module):
-    def analyze(self,event):
+    def analyze(self,event):#, mo_bl, m1_bl, m_asym_bl):
         event.muons = [p for p in event.MediumMuons if p.pt > 40]
         event.muons.sort(key=lambda x: x.pt,reverse=True)
 
@@ -30,7 +30,7 @@ class AnalysisProducer(Module):
 
  
         event.m_ct = [numpy.sqrt(numpy.square(numpy.sqrt(numpy.square(event.jets[0].pt)+numpy.square(event.jets[0].mass))+numpy.sqrt(numpy.square(event.jets[1].pt)+numpy.square(event.jets[1].mass))) - numpy.square(event.jets[0].pt-event.jets[1].pt))]
-         		         
+        
         vecsum1 = event.leps[0].p4() + event.jets[0].p4()
         l1 = vecsum1.M()
         vecsum2 = event.leps[1].p4() + event.jets[1].p4()
