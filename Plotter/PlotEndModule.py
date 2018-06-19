@@ -29,6 +29,24 @@ class PlotEndModule(EndModule):
     def sortHistList(self,histList):
         histList.sort(key=lambda l: l[2], reverse=False)
 
+    def stackData(self,collector,plot):
+
+        for isample,sample in enumerate(collector.dataSamples):
+            h = collector.getObj(sample,plot.rootSetting[1])
+            if not isample: 
+                data = h.Clone("data")
+            else: 
+                data.Add(h)
+
+        self.shiftLastBin(data)
+
+        data.SetLineWidth(2)
+        data.SetLineColor(1)
+        data.SetMarkerStyle(8)
+        data.SetTitle("")
+
+        return data
+
     def stackMC(self,collector,plot):
         stack = ROOT.THStack(plot.key+'_stack',plot.key+'_stack')
 
@@ -91,53 +109,64 @@ class PlotEndModule(EndModule):
             return plot.key 
 
     def draw1DPlot(self,collector,plot,outputDir):
-        #c = ROOT.TCanvas("c", "c",0,0, 650, 750)
         c = ROOT.TCanvas()
-        histList,stack,smCount,smCountErrSq = self.stackMC(collector,plot)
-        
-        total = stack.GetStack().Last().Clone("total")
-        total.SetFillColor(ROOT.kYellow)
-        total.SetLineColor(ROOT.kRed)
-        bkdgErr = stack.GetStack().Last().Clone("total")
-        bkdgErr.SetMarkerStyle(1)
-        bkdgErr.SetLineColor(1)
-        bkdgErr.SetLineWidth(3)
-        bkdgErr.SetFillColor(13)
-        bkdgErr.SetFillStyle(3001)
-
-        leg = self.makeLegend(histList,bkdgErr,smCount)
-
         axisLabel = self.getAxisTitle(plot)
 
-        stack.SetTitle("")
-        stack.Draw('hist')
-        # stack.GetYaxis().SetTitleSize(0.05)
-        stack.GetXaxis().SetTitle(axisLabel)
-        title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
-        stack.GetYaxis().SetTitle(title)
-        # stack.GetXaxis().SetTitleOffset(0.55)
-        
-        c.SetLogy(0)
-        stack.SetMaximum(stack.GetMaximum()*1.5)
-        stack.SetMinimum(0.)
-        stack.Draw('hist')
-        leg.Draw('same')
-        # Draw CMS, lumi and preliminary if specified
-        #self.drawLabels(pSetPair[0].lumi)
-        bkdgErr.Draw("samee2")
-        c.SaveAs(outputDir+"/"+plot.key+".png")
-        c.SaveAs(outputDir+"/"+plot.key+".pdf")
+        if not collector.mcSamples and not collector.dataSamples:
+            raise RuntimeError, "Nothing to be drown"
 
-        c.SetLogy(1)
-        stack.SetMaximum(stack.GetMaximum()*5)
-        stack.SetMinimum(0.1)
-        stack.Draw('hist')
-        leg.Draw('same')
-        # Draw CMS, lumi and preliminary if specified
-        #self.drawLabels(pSetPair[0].lumi)
-        bkdgErr.Draw("samee2")
-        c.SaveAs(outputDir+"/"+plot.key+"_log.png")
-        c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
+        if collector.dataSamples:
+            dataHist = self.stackData(collector,plot)
+
+        if collector.mcSamples:
+            histList,stack,smCount,smCountErrSq = self.stackMC(collector,plot)
+
+            total = stack.GetStack().Last().Clone("total")
+            total.SetFillColor(ROOT.kYellow)
+            total.SetLineColor(ROOT.kRed)
+            bkdgErr = stack.GetStack().Last().Clone("total")
+            bkdgErr.SetMarkerStyle(1)
+            bkdgErr.SetLineColor(1)
+            bkdgErr.SetLineWidth(3)
+            bkdgErr.SetFillColor(13)
+            bkdgErr.SetFillStyle(3001)
+
+            leg = self.makeLegend(histList,bkdgErr,smCount)
+
+            stack.SetTitle("")
+            stack.Draw('hist')
+            # stack.GetYaxis().SetTitleSize(0.05)
+            stack.GetXaxis().SetTitle(axisLabel)
+            title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
+            stack.GetYaxis().SetTitle(title)
+            # stack.GetXaxis().SetTitleOffset(0.55)
+        
+            c.SetLogy(0)
+            stack.SetMaximum(stack.GetMaximum()*1.5)
+            stack.SetMinimum(0.)
+            stack.Draw('hist')
+            if collector.dataSamples:
+                dataHist.Draw("samep")
+            leg.Draw('same')
+            # Draw CMS, lumi and preliminary if specified
+            #self.drawLabels(pSetPair[0].lumi)
+            bkdgErr.Draw("samee2")
+            c.SaveAs(outputDir+"/"+plot.key+".png")
+            c.SaveAs(outputDir+"/"+plot.key+".pdf")
+
+            c.SetLogy(1)
+            stack.SetMaximum(stack.GetMaximum()*5)
+            stack.SetMinimum(0.1)
+            stack.Draw('hist')
+            if collector.dataSamples:
+                dataHist.Draw("samep")
+            leg.Draw('same')
+            # Draw CMS, lumi and preliminary if specified
+            #self.drawLabels(pSetPair[0].lumi)
+            bkdgErr.Draw("samee2")
+
+            c.SaveAs(outputDir+"/"+plot.key+"_log.png")
+            c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
 
     def shiftLastBin(self,h):
         # FirstBin = h.GetXaxis().GetFirst()
