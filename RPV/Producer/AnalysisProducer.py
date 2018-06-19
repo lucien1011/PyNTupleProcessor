@@ -2,7 +2,7 @@ from Core.Module import Module
 import numpy
 
 class AnalysisProducer(Module):
-    def analyze(self,event):#, mo_bl, m1_bl, m_asym_bl):
+    def analyze(self,event):
         event.muons = [p for p in event.MediumMuons if p.pt > 40]
         event.muons.sort(key=lambda x: x.pt,reverse=True)
 
