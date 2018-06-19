@@ -11,11 +11,12 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
 from RPV.Skimmer.EventSkimmer import EventSkimmer
 
 nCores = 8 
-outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/StopToBLep/2018-05-21/BkgMC_BaselineSelection_v1/"
+outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/StopToBLep/2018-06-18/SingleMuon2016B_BaselineSelection_v1/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False 
-componentList = allMCSamples 
+#componentList = allMCSamples 
+componentList = allDataSamples 
 for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
