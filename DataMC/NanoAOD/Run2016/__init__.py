@@ -17,6 +17,12 @@ from T_tWch import T_tWch
 from TBar_tWch import TBar_tWch
 
 from SingleMuon2016B import SingleMuon2016B
+from SingleMuon2016C import SingleMuon2016C
+from SingleMuon2016D import SingleMuon2016D
+from SingleMuon2016E import SingleMuon2016E
+from SingleMuon2016F import SingleMuon2016F
+from SingleMuon2016G import SingleMuon2016G
+from SingleMuon2016H import SingleMuon2016H
 
 allMCSamples = [
     DYJetsToLL_M10to50,
@@ -40,4 +46,10 @@ allMCSamples = [
 
 allDataSamples = [
     SingleMuon2016B,
-        ]
+    SingleMuon2016C,
+    SingleMuon2016D,
+    SingleMuon2016E,
+    SingleMuon2016F,
+    SingleMuon2016G,
+    SingleMuon2016H,
+    ]
