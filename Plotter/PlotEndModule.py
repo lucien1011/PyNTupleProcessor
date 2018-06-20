@@ -18,6 +18,7 @@ class PlotEndModule(EndModule):
 
     def drawPlot(self,collector,plot,outputDir,switch):
         if plot.dim == 1:
+            self.makedirs(outputDir)
             self.draw1DPlot(collector,plot,outputDir,switch)
         else:
             print "Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment"
@@ -161,9 +162,14 @@ class PlotEndModule(EndModule):
             title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
             stack.GetYaxis().SetTitle(title)
             # stack.GetXaxis().SetTitleOffset(0.55)
-        
+            
+            if collector.dataSamples:
+                maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
+            else:
+                maximum = stack.GetMaximum()
+
             c.SetLogy(0)
-            stack.SetMaximum(stack.GetMaximum()*1.5)
+            stack.SetMaximum(maximum*1.5)
             stack.SetMinimum(0.)
             stack.Draw('hist')
             if collector.dataSamples:
@@ -177,7 +183,7 @@ class PlotEndModule(EndModule):
 
             if not switch:
                 c.SetLogy(1)
-                stack.SetMaximum(stack.GetMaximum()*5)
+                stack.SetMaximum(maximum*5)
                 stack.SetMinimum(0.1)
                 stack.Draw('hist')
                 if collector.dataSamples:

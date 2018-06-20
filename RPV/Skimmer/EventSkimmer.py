@@ -6,6 +6,7 @@ class EventSkimmer(Module):
         self.cutflow = cutflow
 
     def analyze(self,event):
+        if self.dataset.isData and not self.makeDataQualityCut(event): return False
         if self.cutflow == "LooseSignal":
             return self.makeCommonSelection(event)
         elif self.cutflow == "htCR":
@@ -19,5 +20,9 @@ class EventSkimmer(Module):
         if event.jets[0].btagCSVV2 < self.csvCut and event.jets[1].btagCSVV2 < self.csvCut: return False
         if event.leps[0].charge == event.leps[1].charge: return False
         if event.mll and event.mll < 300: return False
+        return True
+
+    def makeDataQualityCut(self,event):
+        if not event.Flag_METFilters[0]: return False
         return True
 
