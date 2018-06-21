@@ -3,7 +3,7 @@ from Core.Sequence import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
-useSkimTree = True
+useSkimTree = False
 if useSkimTree:
     from RPV.SkimTree.NanoAOD.Run2016.MC import *
 else:
@@ -11,8 +11,8 @@ else:
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-nCores = 8 
-outputDir = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_BaselineSelection_v1/"
+nCores = 8
+outputDir = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_InclusiveSelection_v2/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
