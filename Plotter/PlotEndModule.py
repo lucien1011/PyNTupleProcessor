@@ -232,8 +232,8 @@ class PlotEndModule(EndModule):
             ratio.Draw()
             bkdgErrRatio.Draw("samee2")
 
-            ratio.GetYaxis().SetRangeUser(0.5,1.5)
-            ratio.GetYaxis().SetRangeUser(0.0,2)
+            #ratio.GetYaxis().SetRangeUser(0.5,1.5)
+            ratio.GetYaxis().SetRangeUser(0.0,3.0)
             ratio.GetYaxis().SetLabelSize(0.075)
             ratio.GetXaxis().SetLabelSize(0.075)
             ratio.GetYaxis().SetTitle("Data/MC")
@@ -241,6 +241,7 @@ class PlotEndModule(EndModule):
             ratio.GetXaxis().SetTitleSize(0.10)
             ratio.GetXaxis().SetTitleOffset(0.90)
             ratio.GetYaxis().SetTitleOffset(0.50)
+            ratio.GetXaxis().SetTitle(axisLabel)
 
             bkdgErrRatio.SetMarkerStyle(1)
             bkdgErrRatio.SetLineColor(1)
