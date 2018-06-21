@@ -6,4 +6,5 @@ def Moriond17LooseJet(obj):
     if obj.chHEF < 0.: return False
     if obj.nConstituents <= 1: return False
     if obj.jetId == 0: return False
+    if not bool(obj.puId & (1 << 2)): return False
     return True
