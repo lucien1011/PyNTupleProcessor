@@ -2,6 +2,7 @@ from Core.Module import Module
 
 class HLTSkimmer(Module):
     def __init__(self,name,cutflow="LooseSignal"):
+        super(HLTSkimmer,self).__init__(name)
         self.cutflow = cutflow
 
     def analyze(self,event):

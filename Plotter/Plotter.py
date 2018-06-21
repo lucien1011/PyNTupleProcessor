@@ -16,7 +16,7 @@ class Plotter(Module):
             if plot.selFunc and not plot.selFunc(event): continue
             values = plot.getValues(event)
             if not values: continue
-            if not plot.isCollection and not values[0]: continue
+            if not plot.isCollection and values[0] == None: continue
             for value in values:
                 self.writer.objs[plot.key].Fill(value,event.weight)
         return True
