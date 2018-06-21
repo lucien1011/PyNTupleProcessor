@@ -14,7 +14,10 @@ class Plotter(Module):
     def analyze(self,event):
         for plot in self.plotList:
             if plot.selFunc and not plot.selFunc(event): continue
-            for value in plot.getValues(event):
+            values = plot.getValues(event)
+            if not values: continue
+            if not plot.isCollection and not values[0]: continue
+            for value in values:
                 self.writer.objs[plot.key].Fill(value,event.weight)
         return True
 
