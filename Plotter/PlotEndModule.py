@@ -88,7 +88,17 @@ class PlotEndModule(EndModule):
             if switch: h.Divide(totalsum)
             stack.Add(h) 
 
-        return histList,stack,smCount,smCountErrSq
+       total = stack.GetStack().Last().Clone("total")
+       total.SetFillColor(ROOT.kYellow)
+       total.SetLineColor(ROOT.kRed)
+       bkdgErr = stack.GetStack().Last().Clone("total")
+       bkdgErr.SetMarkerStyle(1)
+       bkdgErr.SetLineColor(1)
+       bkdgErr.SetLineWidth(3)
+       bkdgErr.SetFillColor(13)
+       bkdgErr.SetFillStyle(3001)
+
+        return histList,stack,smCount,smCountErrSq,total,bkdgErr
 
     def makeLegend(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None):
         leg = ROOT.TLegend(0.63,0.58,0.89,0.87)
@@ -141,39 +151,30 @@ class PlotEndModule(EndModule):
             dataHist = self.stackData(collector,plot)
 
         if collector.mcSamples:
-            histList,stack,smCount,smCountErrSq = self.stackMC(collector,plot,switch)
-
-            total = stack.GetStack().Last().Clone("total")
-            total.SetFillColor(ROOT.kYellow)
-            total.SetLineColor(ROOT.kRed)
-            bkdgErr = stack.GetStack().Last().Clone("total")
-            bkdgErr.SetMarkerStyle(1)
-            bkdgErr.SetLineColor(1)
-            bkdgErr.SetLineWidth(3)
-            bkdgErr.SetFillColor(13)
-            bkdgErr.SetFillStyle(3001)
-
+            histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch)
+            title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
+            stack.GetXaxis().SetTitle(axisLabel)
+            stack.GetYaxis().SetTitle(title)
+            stack.SetTitle("")
+            # stack.GetYaxis().SetTitleSize(0.05)
             leg = self.makeLegend(histList,bkdgErr,smCount,switch)
 
-            stack.SetTitle("")
-            stack.Draw('hist')
-            # stack.GetYaxis().SetTitleSize(0.05)
-            stack.GetXaxis().SetTitle(axisLabel)
-            title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
-            stack.GetYaxis().SetTitle(title)
-            # stack.GetXaxis().SetTitleOffset(0.55)
-            
-            if collector.dataSamples:
-                maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
-            else:
-                maximum = stack.GetMaximum()
+        if collector.dataSamples and collector.mcSamples:
+            maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
+        elif collector.mcSamples:
+            maximum = stack.GetMaximum()
+        elif collector.dataSamples:
+            maximum = dataHist.GetMaximum()
 
+        if collector.mcSamples and not collector.dataSamples:
+            stack.Draw('hist')
+            
             c.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
             stack.SetMinimum(0.)
             stack.Draw('hist')
-            if collector.dataSamples:
-                dataHist.Draw("samep")
+            #if collector.dataSamples:
+            #    dataHist.Draw("samep")
             leg.Draw('same')
             # Draw CMS, lumi and preliminary if specified
             #self.drawLabels(pSetPair[0].lumi)
@@ -195,6 +196,39 @@ class PlotEndModule(EndModule):
 
                 c.SaveAs(outputDir+"/"+plot.key+"_log.png")
                 c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
+        elif collector.mcSamples and collector.dataSamples:
+            c.SetBottomMargin(0.0)
+            upperPad = r.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
+            lowerPad = r.TPad("lowerPad", "lowerPad", .001, .001, .995, .325)
+            upperPad.Draw()
+            lowerPad.Draw()
+            upperPad.cd()
+            
+            stack.GetXaxis().SetTitleOffset(0.55)
+            stack.SetMaximum(maximum*1.5)
+            dataHist.SetMaximum(maximum*1.5)
+
+            stack.Draw('hist')
+            leg.draw('same')
+            
+            #if self._drawScaleFactor:
+            #    n1 = r.TLatex()
+            #    n1.SetNDC();
+            #    n1.SetTextFont(42);
+            #    n1.SetTextSize(0.05);
+            #    n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+
+            data.DrawCopy('samep')
+            bkdgErr.Draw("samee2")
+
+            c.cd()
+
+            lowerPad.cd()
+            lowerPad.SetGridy(1)
+            r.gPad.SetBottomMargin(0.24)
+        
+            ratio,bkdgErrRatio,line = self.makeRatioPlot(data,total,bkdgErr)
+
 
     def shiftLastBin(self,h):
         # FirstBin = h.GetXaxis().GetFirst()
