@@ -1,5 +1,6 @@
 from Core.Module import Module
 import numpy
+import math
 
 class AnalysisProducer(Module):
     def analyze(self,event):
@@ -72,5 +73,27 @@ class AnalysisProducer(Module):
         for j in event.jets:
             muEnergy = event.Muon_pt[j.muonIdx1] + event.Muon_pt[j.muonIdx2]
             j.muEF = muEnergy/(j.pt*(1-j.rawFactor))
+       
+        if len(event.jets) >= 2 and len(event.leps) >= 2:
+           dphi = [abs(event.jets[0].phi- event.leps[0].phi), abs(event.jets[0].phi- event.leps[1].phi), abs(event.jets[1].phi- event.leps[0].phi), abs(event.jets[1].phi- event.leps[1].phi)]
+           
+           for i in range(0,3):
+	       if dphi[i] > 180:
+	          dphi[i] = 360 - dphi[i]
+               dphi[i] = math.pi*dphi[i]/180
+
+           deta = [abs(event.jets[0].eta- event.leps[0].eta), abs(event.jets[0].eta- event.leps[1].eta), abs(event.jets[1].eta- event.leps[0].eta), abs(event.jets[1].eta- event.leps[1].eta)]
+
+           dR = [0,0,0,0]    
+ 
+           for i in range(0,3):
+               dR[i] = numpy.sqrt(numpy.square(dphi[i]) + numpy.square(deta[i]))
+
+           event.dR_jets_leps = 0
+
+           for i in range(0,3):
+	       temp = dR[i]
+	       if event.dR_jets_leps == 0 or event.dR_jets_leps > temp:
+	          event.dR_jets_leps = temp
 
         return True
