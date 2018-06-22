@@ -233,6 +233,7 @@ class PlotEndModule(EndModule):
             
             leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist)
             
+            upperPad.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
             dataHist.SetMaximum(maximum*1.5)
 
@@ -242,12 +243,18 @@ class PlotEndModule(EndModule):
             stack.Draw('hist')
             leg.Draw()
             
-            #if self._drawScaleFactor:
-            #    n1 = r.TLatex()
-            #    n1.SetNDC();
-            #    n1.SetTextFont(42);
-            #    n1.SetTextSize(0.05);
-            #    n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+            if smCount > 0.0:
+                scaleFactor = dataHist.GetEntries()*1.0/smCount
+                scaleFactorErr = scaleFactor*math.sqrt(1/dataHist.GetEntries() + smCountErrSq/smCount**2)
+            else:
+                scaleFactor    = 0.0
+                scaleFactorErr = 0.0
+
+            n1 = ROOT.TLatex()
+            n1.SetNDC()
+            n1.SetTextFont(42)
+            n1.SetTextSize(0.05);
+            n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
 
             dataHist.DrawCopy('samep')
             bkdgErr.Draw("samee2")
@@ -257,8 +264,8 @@ class PlotEndModule(EndModule):
             c.SaveAs(outputDir+"/"+plot.key+".png")
             c.SaveAs(outputDir+"/"+plot.key+".pdf")
 
-            c.SetLogy(1)
-            stack.SetMaximum(maximum*2)
+            upperPad.SetLogy(1)
+            stack.SetMaximum(maximum*5)
             stack.SetMinimum(0.1)
             stack.Draw('hist')
             dataHist.Draw("samep")
@@ -266,6 +273,7 @@ class PlotEndModule(EndModule):
             # Draw CMS, lumi and preliminary if specified
             #self.drawLabels(pSetPair[0].lumi)
             bkdgErr.Draw("samee2")
+            n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
 
             c.SaveAs(outputDir+"/"+plot.key+"_log.png")
             c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
