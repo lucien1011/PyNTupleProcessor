@@ -194,13 +194,44 @@ class PlotEndModule(EndModule):
                 c.SaveAs(outputDir+"/"+plot.key+"_log.png")
                 c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
         elif collector.mcSamples and collector.dataSamples:
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist)
             c.SetBottomMargin(0.0)
             upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
             lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .325)
             upperPad.Draw()
             lowerPad.Draw()
+            
+            lowerPad.cd()
+            lowerPad.SetGridy(1)
+            ROOT.gPad.SetBottomMargin(0.24)
+        
+            ratio,bkdgErrRatio,line = self.makeRatioPlot(dataHist,total,bkdgErr)
+            ratio.SetStats(0)
+            ratio.Draw()
+            bkdgErrRatio.Draw("samee2")
+
+            ratio.GetYaxis().SetRangeUser(0.5,1.5)
+            #ratio.GetYaxis().SetRangeUser(0.0,2.0)
+            ratio.GetYaxis().SetLabelSize(0.075)
+            ratio.GetXaxis().SetLabelSize(0.075)
+            ratio.GetYaxis().SetTitle("Data/MC")
+            ratio.GetYaxis().SetTitleSize(0.10)
+            ratio.GetXaxis().SetTitleSize(0.10)
+            ratio.GetXaxis().SetTitleOffset(0.90)
+            ratio.GetYaxis().SetTitleOffset(0.50)
+            ratio.GetXaxis().SetTitle(axisLabel)
+
+            bkdgErrRatio.SetMarkerStyle(1)
+            bkdgErrRatio.SetLineColor(1)
+            bkdgErrRatio.SetFillColor(13)
+            bkdgErrRatio.SetFillStyle(3001)
+
+            ratio.DrawCopy()
+            bkdgErrRatio.DrawCopy("samee2") 
+            line.Draw()
+
             upperPad.cd()
+            
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist)
             
             stack.SetMaximum(maximum*1.5)
             dataHist.SetMaximum(maximum*1.5)
@@ -222,38 +253,22 @@ class PlotEndModule(EndModule):
             bkdgErr.Draw("samee2")
 
             # c.cd()
-
-            lowerPad.cd()
-            lowerPad.SetGridy(1)
-            ROOT.gPad.SetBottomMargin(0.24)
-        
-            ratio,bkdgErrRatio,line = self.makeRatioPlot(dataHist,total,bkdgErr)
-            ratio.SetStats(0)
-            ratio.Draw()
-            bkdgErrRatio.Draw("samee2")
-
-            #ratio.GetYaxis().SetRangeUser(0.5,1.5)
-            ratio.GetYaxis().SetRangeUser(0.0,3.0)
-            ratio.GetYaxis().SetLabelSize(0.075)
-            ratio.GetXaxis().SetLabelSize(0.075)
-            ratio.GetYaxis().SetTitle("Data/MC")
-            ratio.GetYaxis().SetTitleSize(0.10)
-            ratio.GetXaxis().SetTitleSize(0.10)
-            ratio.GetXaxis().SetTitleOffset(0.90)
-            ratio.GetYaxis().SetTitleOffset(0.50)
-            ratio.GetXaxis().SetTitle(axisLabel)
-
-            bkdgErrRatio.SetMarkerStyle(1)
-            bkdgErrRatio.SetLineColor(1)
-            bkdgErrRatio.SetFillColor(13)
-            bkdgErrRatio.SetFillStyle(3001)
-
-            ratio.DrawCopy()
-            bkdgErrRatio.DrawCopy("samee2") 
-            line.Draw()
             
             c.SaveAs(outputDir+"/"+plot.key+".png")
             c.SaveAs(outputDir+"/"+plot.key+".pdf")
+
+            c.SetLogy(1)
+            stack.SetMaximum(maximum*2)
+            stack.SetMinimum(0.1)
+            stack.Draw('hist')
+            dataHist.Draw("samep")
+            leg.Draw('same')
+            # Draw CMS, lumi and preliminary if specified
+            #self.drawLabels(pSetPair[0].lumi)
+            bkdgErr.Draw("samee2")
+
+            c.SaveAs(outputDir+"/"+plot.key+"_log.png")
+            c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
 
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
