@@ -9,5 +9,5 @@ class GenWeightCounter(Module):
         
     def analyze(self,event):
         self.writer.objs["SumWeight"].Fill(0.,event.genWeight[0])
-        self.writer.objs["SumWeight"].Fill(0.)
+        self.writer.objs["EventCount"].Fill(0.)
         return True

@@ -3,12 +3,15 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.SkimTree import bkg_cmps,sig_cmps 
-from DarkZ.Producer.EventWeightProducer import EventWeightProducer
+from DarkZ.Dataset.SkimTree import bkgSamples,sigSamples 
+
+from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
+
+out_path = "MCDistributions/MC_BaselineSelection_v1/2018-06-21/"
 
 muon_plots = [
         Plot("Muon1_Pt", ["TH1D","Muon1_pt","",20,0.,200.], LambdaFunc('x: [x.pTL1[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
@@ -37,23 +40,29 @@ jet_plots = [
 plots = muon_plots + general_plots + jet_plots
 
 nCores                  = 3 
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ-Ana/Log/MC_distribution/2018-04-26/Plots_v1/"
+outputDir               = "/raid/raid7/lucien/Higgs/DarkZ-Ana/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkg_cmps + sig_cmps
-rootTree                = "passedEvents"
+componentList           = bkgSamples + sigSamples
 justEndSequence         = False
 
+for dataset in componentList:
+    if dataset.isMC:
+        dataset.lumi = 35.9
+    for component in dataset.componentList:
+        component.maxEvents = nEvents
+
 sequence                = Sequence()
-eventWeightProducer     = EventWeightProducer('EventWeightProducer',35.9)
-sequence.add(eventWeightProducer)
+xsWeighter              = XSWeighter("XSWeighter")
 plotter                 = Plotter("Plotter",plots)
+
+sequence.add(xsWeighter)
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
-outputInfo.TFileName    = "Plotter.root"
+outputInfo.TFileName    = "MCDistribution.root"
 
-endSequence = EndSequence()
-endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ-Ana/Log/MC_distribution/2018-04-26/Plots_v1/"
+endSequence = EndSequence(skipHadd=justEndSequence)
+endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ-Ana/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))

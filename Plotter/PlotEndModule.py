@@ -55,21 +55,19 @@ class PlotEndModule(EndModule):
         smCount      = 0.0
         smCountErrSq = 0.0
         histList     = []
-        totalsum = ROOT.TH1D()
+        #totalsum = ROOT.TH1D()
 
         for isample,sample in enumerate(collector.mcSamples):
             h = collector.getObj(sample,plot.rootSetting[1])
             h.SetFillColor(sampleColorDict[sample])
             self.shiftLastBin(h)
-	    if isample == 0 and switch:
-	       totalsum = h.Clone("totalsum")
             smCountErrTmp = ROOT.Double(0.)
             smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             smCountErrSq += smCountErrTmp**2
             histList.append([h,sample,h.Integral(0,h.GetNbinsX()+1)])
             if switch:
                 if not isample:
-                    totalsum = h.Clone("totalsum")
+                    totalsum = h.Clone("totalsum_"+plot.key)
                 else:
                     totalsum.Add(h)
 
@@ -88,15 +86,15 @@ class PlotEndModule(EndModule):
             if switch: h.Divide(totalsum)
             stack.Add(h) 
 
-       total = stack.GetStack().Last().Clone("total")
-       total.SetFillColor(ROOT.kYellow)
-       total.SetLineColor(ROOT.kRed)
-       bkdgErr = stack.GetStack().Last().Clone("total")
-       bkdgErr.SetMarkerStyle(1)
-       bkdgErr.SetLineColor(1)
-       bkdgErr.SetLineWidth(3)
-       bkdgErr.SetFillColor(13)
-       bkdgErr.SetFillStyle(3001)
+        total = stack.GetStack().Last().Clone("total_"+plot.key)
+        total.SetFillColor(ROOT.kYellow)
+        total.SetLineColor(ROOT.kRed)
+        bkdgErr = stack.GetStack().Last().Clone("totalErr_"+plot.key)
+        bkdgErr.SetMarkerStyle(1)
+        bkdgErr.SetLineColor(1)
+        bkdgErr.SetLineWidth(3)
+        bkdgErr.SetFillColor(13)
+        bkdgErr.SetFillStyle(3001)
 
         return histList,stack,smCount,smCountErrSq,total,bkdgErr
 
@@ -107,14 +105,14 @@ class PlotEndModule(EndModule):
         leg.SetTextSize(0.02)
         if data:
             legLabel = "Data"
-            if self.addYields: legLabel += ": {0}".format(int(data.Integral(0,data.GetNbinsX()+1)))
+            legLabel += ": {0}".format(int(data.Integral(0,data.GetNbinsX()+1)))
             leg.AddEntry(data, legLabel , "p")
         # if not self._normToData and data:
             # if not self._normToData: leg.AddEntry(data, "Data: {0}".format(int(data.Integral(0,data.GetNbinsX()+1))), "p")
         legLabel = "SM total"
         if switch:
-	   legLabel += ": 100%"
-	else:
+            legLabel += ": 100%"
+        else:
             legLabel += ": "+str(math.ceil(smCount*10)/10)
         leg.AddEntry(bkdgErr, legLabel, "fl") 
         
@@ -137,7 +135,7 @@ class PlotEndModule(EndModule):
             return plot.key 
 
     def draw1DPlot(self,collector,plot,outputDir,switch):
-        c = ROOT.TCanvas()
+        c = ROOT.TCanvas("c_"+plot.key, "c_"+plot.key,0,0, 650, 750)
 
         axisLabel = self.getAxisTitle(plot)
 
@@ -152,13 +150,9 @@ class PlotEndModule(EndModule):
 
         if collector.mcSamples:
             histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch)
-            title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
-            stack.GetXaxis().SetTitle(axisLabel)
-            stack.GetYaxis().SetTitle(title)
             stack.SetTitle("")
             # stack.GetYaxis().SetTitleSize(0.05)
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch)
-
+        
         if collector.dataSamples and collector.mcSamples:
             maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
         elif collector.mcSamples:
@@ -168,6 +162,9 @@ class PlotEndModule(EndModule):
 
         if collector.mcSamples and not collector.dataSamples:
             stack.Draw('hist')
+            self.setStackAxisTitle(stack,axisLabel,plot)
+
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch)
             
             c.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
@@ -198,37 +195,114 @@ class PlotEndModule(EndModule):
                 c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
         elif collector.mcSamples and collector.dataSamples:
             c.SetBottomMargin(0.0)
-            upperPad = r.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
-            lowerPad = r.TPad("lowerPad", "lowerPad", .001, .001, .995, .325)
+            upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
+            lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .325)
             upperPad.Draw()
             lowerPad.Draw()
+            
+            lowerPad.cd()
+            lowerPad.SetGridy(1)
+            ROOT.gPad.SetBottomMargin(0.24)
+        
+            ratio,bkdgErrRatio,line = self.makeRatioPlot(dataHist,total,bkdgErr)
+            ratio.SetStats(0)
+            ratio.Draw()
+            bkdgErrRatio.Draw("samee2")
+
+            ratio.GetYaxis().SetRangeUser(0.5,1.5)
+            #ratio.GetYaxis().SetRangeUser(0.0,2.0)
+            ratio.GetYaxis().SetLabelSize(0.075)
+            ratio.GetXaxis().SetLabelSize(0.075)
+            ratio.GetYaxis().SetTitle("Data/MC")
+            ratio.GetYaxis().SetTitleSize(0.10)
+            ratio.GetXaxis().SetTitleSize(0.10)
+            ratio.GetXaxis().SetTitleOffset(0.90)
+            ratio.GetYaxis().SetTitleOffset(0.50)
+            ratio.GetXaxis().SetTitle(axisLabel)
+
+            bkdgErrRatio.SetMarkerStyle(1)
+            bkdgErrRatio.SetLineColor(1)
+            bkdgErrRatio.SetFillColor(13)
+            bkdgErrRatio.SetFillStyle(3001)
+
+            ratio.DrawCopy()
+            bkdgErrRatio.DrawCopy("samee2") 
+            line.Draw()
+
             upperPad.cd()
             
-            stack.GetXaxis().SetTitleOffset(0.55)
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist)
+            
+            upperPad.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
             dataHist.SetMaximum(maximum*1.5)
 
             stack.Draw('hist')
-            leg.draw('same')
+            stack.GetXaxis().SetTitleOffset(0.55)
+            self.setStackAxisTitle(stack,axisLabel,plot)
+            stack.Draw('hist')
+            leg.Draw()
             
-            #if self._drawScaleFactor:
-            #    n1 = r.TLatex()
-            #    n1.SetNDC();
-            #    n1.SetTextFont(42);
-            #    n1.SetTextSize(0.05);
-            #    n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+            if smCount > 0.0:
+                scaleFactor = dataHist.GetEntries()*1.0/smCount
+                scaleFactorErr = scaleFactor*math.sqrt(1/dataHist.GetEntries() + smCountErrSq/smCount**2)
+            else:
+                scaleFactor    = 0.0
+                scaleFactorErr = 0.0
 
-            data.DrawCopy('samep')
+            n1 = ROOT.TLatex()
+            n1.SetNDC()
+            n1.SetTextFont(42)
+            n1.SetTextSize(0.05);
+            n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+
+            dataHist.DrawCopy('samep')
             bkdgErr.Draw("samee2")
 
-            c.cd()
+            # c.cd()
+            
+            c.SaveAs(outputDir+"/"+plot.key+".png")
+            c.SaveAs(outputDir+"/"+plot.key+".pdf")
 
-            lowerPad.cd()
-            lowerPad.SetGridy(1)
-            r.gPad.SetBottomMargin(0.24)
-        
-            ratio,bkdgErrRatio,line = self.makeRatioPlot(data,total,bkdgErr)
+            upperPad.SetLogy(1)
+            stack.SetMaximum(maximum*5)
+            stack.SetMinimum(0.1)
+            stack.Draw('hist')
+            dataHist.Draw("samep")
+            leg.Draw('same')
+            # Draw CMS, lumi and preliminary if specified
+            #self.drawLabels(pSetPair[0].lumi)
+            bkdgErr.Draw("samee2")
+            n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
 
+            c.SaveAs(outputDir+"/"+plot.key+"_log.png")
+            c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
+
+
+    def setStackAxisTitle(self,stack,axisLabel,plot):
+        stack.GetXaxis().SetTitle(axisLabel)
+        title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
+        stack.GetYaxis().SetTitle(title)
+
+    def makeRatioPlot(self,data,total,bkdgErr):
+
+        ratio = data.Clone("ratio")
+        ratio.Divide(total)
+
+        bkdgErrRatio = ratio.Clone("ratioerr")
+        for i in range(1, bkdgErrRatio.GetNbinsX()+1): 
+            binC = bkdgErr.GetBinContent(i)
+            binE = bkdgErr.GetBinError(i)
+            bkdgErrRatio.SetBinContent(i,1)
+            if binC>0.: bkdgErrRatio.SetBinError(i,1*binE/binC)
+            else      : bkdgErrRatio.SetBinError(i,0.)
+
+        line = ROOT.TLine(60,1,400,1)
+        line = ROOT.TLine(ratio.GetXaxis().GetBinLowEdge(1) ,1,ratio.GetXaxis().GetBinUpEdge(ratio.GetXaxis().GetNbins()),1)
+        line.SetLineColor(2)
+        line.SetLineWidth(2)
+
+        return ratio,bkdgErrRatio,line
 
     def shiftLastBin(self,h):
         # FirstBin = h.GetXaxis().GetFirst()
