@@ -7,11 +7,12 @@ from DataMC.NanoAOD.Run2016 import *
 
 from RPV.Producer.PhysObjProducer import PhysObjProducer,JetProducer 
 from RPV.Producer.TreeProducer import TreeProducer
-from RPV.Producer.AnalysisProducer import AnalysisProducer 
+#from RPV.Producer.AnalysisProducer import AnalysisProducer 
 from RPV.Skimmer.ZMuMuSkimmer import ZMuMuSkimmer
 
 nCores = 8 
-outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/Data_ZMuMuSelection_v1/"
+#outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/Data_ZMuMuSelection_v1/"
+outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/ZToMuMu/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False 

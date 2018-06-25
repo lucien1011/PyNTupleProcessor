@@ -46,10 +46,10 @@ allMCSamples = [
 
 allDataSamples = [
     SingleMuon2016B,
-    SingleMuon2016C,
-    SingleMuon2016D,
-    SingleMuon2016E,
-    SingleMuon2016F,
-    SingleMuon2016G,
-    SingleMuon2016H,
+#    SingleMuon2016C,
+#    SingleMuon2016D,
+#    SingleMuon2016E,
+#    SingleMuon2016F,
+#    SingleMuon2016G,
+#    SingleMuon2016H,
     ]
