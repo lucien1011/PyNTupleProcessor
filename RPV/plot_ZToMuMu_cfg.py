@@ -50,7 +50,7 @@ plots = [
         Plot("nMuon40",     ["TH1D","nMuon40","",10,-0.5,9.5],      LambdaFunc('x: x.nMuon40')),
         Plot("met",         ["TH1D","met","",10,0., 500.],          LambdaFunc('x: x.MET_pt[0]')),
         Plot("ht40",        ["TH1D","ht40","",10,0.,1000.],         LambdaFunc('x: x.ht40')),
-        Plot("mll",         ["TH1D","mll","",10,50.,140.],           LambdaFunc('x: x.mll if x.mll else None')),
+        Plot("mll",         ["TH1D","mll","",90,50.,140.],           LambdaFunc('x: x.mll if x.mll else None')),
         Plot("jetPt1",      ["TH1D","jetPt1","",10,0., 500.],       LambdaFunc('x: x.jets[0].pt if len(x.jets) > 0 else None')),
         Plot("jetEta1",     ["TH1D","jetEta1","",10,-3.,3.],        LambdaFunc('x: x.jets[0].eta if len(x.jets) > 0 else None')),
         Plot("jetPhi1",     ["TH1D","jetPhi1","",10,-4.,4.],        LambdaFunc('x: x.jets[0].phi if len(x.jets) > 0 else None')),

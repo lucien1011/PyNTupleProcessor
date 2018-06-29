@@ -3,7 +3,7 @@ from Core.Module import Module
 class ZMuMuSkimmer(Module):
     def analyze(self,event):
 
-        event.jets = [p for p in event.LooseJets if p.pt > 40]
+        event.jets = [p for p in event.LooseJets if p.pt > 30]
         event.jets.sort(key=lambda x: x.pt,reverse=True)
         event.nJet40 = len(event.jets)
 
@@ -12,7 +12,7 @@ class ZMuMuSkimmer(Module):
             for p in ps:
                 event.ht40 += p.pt
 
-        event.muons = [p for p in event.MediumMuons if p.pt > 40]
+        event.muons = [p for p in event.MediumMuons if p.pt > 30]
         event.muons.sort(key=lambda x: x.pt,reverse=True)
 
         if len(event.muons) < 2: return False

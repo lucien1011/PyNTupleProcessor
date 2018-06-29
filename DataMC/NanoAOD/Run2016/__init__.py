@@ -23,6 +23,7 @@ from SingleMuon2016E import SingleMuon2016E
 from SingleMuon2016F import SingleMuon2016F
 from SingleMuon2016G import SingleMuon2016G
 from SingleMuon2016H import SingleMuon2016H
+from SingleMuon2016H2 import SingleMuon2016H2
 
 allMCSamples = [
     DYJetsToLL_M10to50,
@@ -46,10 +47,11 @@ allMCSamples = [
 
 allDataSamples = [
     SingleMuon2016B,
-#    SingleMuon2016C,
-#    SingleMuon2016D,
-#    SingleMuon2016E,
-#    SingleMuon2016F,
-#    SingleMuon2016G,
-#    SingleMuon2016H,
+    SingleMuon2016C,
+    SingleMuon2016D,
+    SingleMuon2016E,
+    SingleMuon2016F,
+    SingleMuon2016G,
+    SingleMuon2016H,
+    SingleMuon2016H2,
     ]
