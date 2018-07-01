@@ -57,9 +57,12 @@ class PlotEndModule(EndModule):
         histList     = []
         #totalsum = ROOT.TH1D()
 
-        for isample,sample in enumerate(collector.mcSamples):
+        for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             h = collector.getObj(sample,plot.rootSetting[1])
-            h.SetFillColor(sampleColorDict[sample])
+            if sample in sampleColorDict:
+                h.SetFillColor(sampleColorDict[sample])
+            else:
+                h.SetFillColor(ROOT.kViolet)
             self.shiftLastBin(h)
             smCountErrTmp = ROOT.Double(0.)
             smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
