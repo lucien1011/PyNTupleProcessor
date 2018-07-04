@@ -2,7 +2,7 @@ import ROOT
 
 # Sample colours 
 sampleColorDict = { 
-
+                # SUSY 
                 "T_tch":ROOT.kAzure-2,
                 "TBar_tWch":ROOT.kAzure-2,
                 "TToLeptons_sch":ROOT.kAzure-2,
@@ -19,7 +19,17 @@ sampleColorDict = {
                 "WZZ":ROOT.kBlue,
                 "ZZZ":ROOT.kBlue,
                 "WWW_4f":ROOT.kBlue,
+                # Dark Z
+                "ggH": ROOT.kAzure-2,
+                "VBF": ROOT.kSpring+2,
+                "ZH": ROOT.kSpring+2,
+                "WHplus": ROOT.kSpring+4,
+                "WHminus": ROOT.kSpring+4,
                 "ggZZTo4L": ROOT.kBlue,
-                "qqZZTo4L": ROOT.kViolet,
-                "ggHZZd_M30": ROOT.kRed,
+                "qqZZTo4L": ROOT.kBlue+2,
+                "ggHZZd_M15": ROOT.kRed,
+                "ggHZZd_M20": ROOT.kRed+1,
+                "ggHZZd_M25": ROOT.kRed+2,
+                "ggHZZd_M30": ROOT.kRed+3,
+                "ggHZZd_M35": ROOT.kRed+4,
 }
