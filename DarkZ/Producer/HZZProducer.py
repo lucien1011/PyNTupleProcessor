@@ -1,25 +1,5 @@
 from Core.Module import Module
 
-import ROOT
-
-class Lepton(object):
-    def __init__(self,index,vec,vecnofsr):
-        self.index = index
-        self.vec = vec
-        self.vecnofsr = vecnofsr
-
-class ZCandidate(object):
-    def __init__(self,vec,lep1,lep2):
-        self.vec = vec
-        self.lep1 = lep1
-        self.lep2 = lep2
-
-class HCandidate(object):
-    def __init__(self,vec,Z1,Z2):
-        self.vec = vec
-        self.Z1 = Z1
-        self.Z2 = Z2
-
 class HZZProducer(Module):
     def __init__(self,name):
         super(HZZProducer,self).__init__(name)
@@ -130,9 +110,3 @@ class HZZProducer(Module):
                 HCandidates.append(HCandidate(Hvec,Z1,Z2))
 
         return HCandidates
-            
-    @staticmethod
-    def make4Vector(pts,etas,phis,masses,index):
-        vec = ROOT.TLorentzVector()
-        vec.SetPtEtaPhiM(pts[index],etas[index],phis[index],masses[index])
-        return vec

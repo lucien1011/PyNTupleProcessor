@@ -3,7 +3,8 @@ from Core.Sequence import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
-from DarkZ.Dataset.Run2017.MC import * 
+from DarkZ.Dataset.Run2016.MC import * 
+#from DarkZ.Dataset.Run2017.MC import * 
 #from DarkZ.Dataset.Run2017.SkimTree import * 
 
 from DarkZ.Skimmer.Preskimmer import Preskimmer
@@ -13,13 +14,13 @@ from NanoAOD.Producer.GenWeightCounter import *
 from NanoAOD.EndModule.CutflowEndModule import CutflowEndModule
 
 #out_path = "Higgs/DarkZ/SignalEfficiency/EventSelection_v1/Log/20180630/"
-out_path = "Higgs/DarkZ/CutflowEfficiency/test/Log/20180703/"
+out_path = "Higgs/DarkZ/CutflowEfficiency/test2016/Log/20180703/"
 
 nCores = 1
 outputDir = "/raid/raid7/lucien/"+out_path
 nEvents = -1
 disableProgressBar = True
-justEndSequence = True
+justEndSequence = False
 componentList = [ggH]
 
 for dataset in componentList:
@@ -29,15 +30,18 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 preskimmer              = Preskimmer("Preskimmer")
+preskimCounter          = GenWeightCounter("GenWeightCounter",postfix="Preskim")
 OSSFskimmer             = OSSFLeptonSkimmer("OSSFLeptonSkimmer")
 OSSFCounter             = GenWeightCounter("GenWeightCounter",postfix="OSSF")
 
 sequence = Sequence()
 sequence.add(preskimmer)
+sequence.add(preskimCounter)
 sequence.add(OSSFskimmer)
 sequence.add(OSSFCounter)
 
 cutflows = [
+        "Preskim",
         "OSSF",
         ]
 
