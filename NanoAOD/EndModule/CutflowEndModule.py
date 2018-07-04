@@ -8,17 +8,22 @@ from Utils.TableMaker import TableMaker
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 class CutflowEndModule(EndModule):
-    def __init__(self,outputDir,plotFileName="CutflowEfficiency.tex",cutflows=[],histName="SumWeight"):
+    def __init__(self,outputDir,plotFileName="CutflowEfficiency.tex",cutflows=[],histName="SumWeight",ignoreSumw=False):
         self.outputDir = outputDir
         self.plotFileName = plotFileName
         self.histName = histName
         self.cutflows = cutflows
         self.tableMaker = TableMaker()
+        self.ignoreSumw = ignoreSumw
 
     def __call__(self,collector):
         self.makedirs(self.outputDir)
         for sample in collector.mcSamples:
-            totalsum = collector.sampleDict[sample].sumw
+            if not self.ignoreSumw:
+                totalsum = collector.sampleDict[sample].sumw
+            else:
+                h = collector.getObj(sample,self.histName+self.cutflows[0])
+                totalsum = h.GetBinContent(1)
             tableDict = {}
             tableDict["nColumn"] = 2
             tableDict["tab"] = sample+"_cutflow"
