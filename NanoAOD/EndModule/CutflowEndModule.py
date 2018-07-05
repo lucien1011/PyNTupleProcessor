@@ -18,19 +18,26 @@ class CutflowEndModule(EndModule):
 
     def __call__(self,collector):
         self.makedirs(self.outputDir)
-        for sample in collector.mcSamples:
-            if not self.ignoreSumw:
-                totalsum = collector.sampleDict[sample].sumw
-            else:
-                h = collector.getObj(sample,self.histName+self.cutflows[0])
+        tableDict = {}
+        tableDict["nColumn"] = len(collector.mcSamples+collector.mergeSamples)+1
+        tableDict["tab"] = "cutflow"
+        tableDict["caption"] = "Cutflow Efficiency" 
+        tableDict["tableList"] = []
+        headerList = ["Cutflow",]
+        for sample in collector.mcSamples+collector.mergeSamples:
+            headerList.append(sample)
+        tableDict["tableList"].append(headerList)
+
+        for cutflow in self.cutflows:
+            cutflowList = [cutflow,]
+            for sample in collector.mcSamples+collector.mergeSamples:
+                if not self.ignoreSumw:
+                    totalsum = collector.sampleDict[sample].sumw
+                else:
+                    h = collector.getObj(sample,self.histName+self.cutflows[0])
                 totalsum = h.GetBinContent(1)
-            tableDict = {}
-            tableDict["nColumn"] = 2
-            tableDict["tab"] = sample+"_cutflow"
-            tableDict["caption"] = sample+" cutflow efficiency" 
-            tableDict["tableList"] = []
-            for cutflow in self.cutflows:
                 h = collector.getObj(sample,self.histName+cutflow)
                 genWeight = h.GetBinContent(1)
-                tableDict["tableList"].append([cutflow,"%4.2f"%(genWeight/totalsum)])
-            self.tableMaker.makeTexFile(self.outputDir+sample+"_"+self.plotFileName,tableDict)
+                cutflowList.append("%4.2f"%(genWeight/totalsum if totalsum else -1))
+            tableDict["tableList"].append(cutflowList)
+        self.tableMaker.makeTexFile(self.outputDir+self.plotFileName,tableDict)
