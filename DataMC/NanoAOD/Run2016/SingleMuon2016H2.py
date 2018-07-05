@@ -2,8 +2,9 @@ import os
 from DataMC.NanoAOD.Run2016.common import *
 
 sampleName  = "SingleMuon2016H2"
-dir_path    = common_path_data+"SingleMuon/InclusiveSelection_v1/180626_140110/0000/"
-inUFTier2   = True
+#dir_path    = common_path_data+"SingleMuon/InclusiveSelection_v1/180626_140110/0000/"
+dir_path    = "/raid/raid7/kshi/SUSY/RPV/UnSkimTree/data/SingleMuonH2/"
+inUFTier2   = False
 
 cmp = makeComponents(sampleName,dir_path,"Events",inUFTier2)
 
