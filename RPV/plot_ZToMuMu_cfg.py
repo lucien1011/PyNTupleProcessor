@@ -31,7 +31,7 @@ else:
 
 #out_path = "StopToBLep/DataMCDistributions/DataMC_ZToMuMuSelection_v1/2018-06-19/"
 
-nCores = 16 
+nCores = 4 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
 outputDir = "./testPlot_v3/"
 nEvents = -1
@@ -61,10 +61,10 @@ plots = [
         Plot("muonPt1",     ["TH1D","muonPt1","",20,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else None')),
         Plot("muonPt2",     ["TH1D","muonPt2","",20,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else None')),
         Plot("nGoodPV",     ["TH1D","nGoodPV","",30,0.0,60.0],      LambdaFunc('x: x.PV_npvsGood[0]')),
-	#Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
-	#Plot("m1_bl",       ["TH1D","m1_bl1","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
-	#Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
-	#Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
+	   #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
+	   #Plot("m1_bl",       ["TH1D","m1_bl1","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
+	   #Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
+	   #Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
         ]
 puWeighter              = PUWeighter("PUWeighter",os.environ["BASE_PATH"]+"/DataMC/Pileup/puWeightsRun2016_NTrueInt_FullDataset--Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.txt",doNTrueInt=True,applySystVariation=True)
 xsWeighter              = XSWeighter("XSWeighter")
