@@ -7,4 +7,9 @@ class Preskimmer(Module):
 
 class GENPreskimmer(Module):
     def analyze(self,event):
-        return (event.GENZ_DaughtersId[0] == 11 or event.GENZ_DaughtersId[0] == 13) and (event.GENZ_DaughtersId[1] == 11 or event.GENZ_DaughtersId[1] == 13)
+        if self.dataset.isMC and not self.dataset.isSignal:
+            return (event.GENZ_DaughtersId[0] == 11 or event.GENZ_DaughtersId[0] == 13) and (event.GENZ_DaughtersId[1] == 11 or event.GENZ_DaughtersId[1] == 13)
+        elif self.dataset.isSignal:
+            return True
+        else:
+            return True
