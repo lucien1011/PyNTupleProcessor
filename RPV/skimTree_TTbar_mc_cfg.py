@@ -7,16 +7,16 @@ from DataMC.NanoAOD.Run2016 import *
 
 from RPV.Producer.PhysObjProducer import PhysObjProducer,JetProducer 
 from RPV.Producer.TreeProducer import TreeProducer
-#from RPV.Producer.AnalysisProducer import AnalysisProducer 
+from RPV.Producer.AnalysisProducer import AnalysisProducer 
 from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
 
-nCores = 6 
-#outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/Data_ZMuMuSelection_v1/"
-outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/TTbar/"
+nCores = 8 
+#outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
+outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False 
-componentList = allDataSamples
+componentList = allMCSamples 
 for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
