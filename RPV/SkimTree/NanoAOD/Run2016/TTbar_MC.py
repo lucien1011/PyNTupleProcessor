@@ -13,7 +13,6 @@ sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/TTbar/%s/EventWeight.roo
 sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n))]
 allMCSamples = []
 for sampleName in sampleNames:
-    print(sampleName)
     tmpList = ComponentList([Component(sampleName,"/".join([common_path,sampleName,fileName]),"Events",inUFTier2,maxEvents=-1)],)
     tmpDataset = Dataset(sampleName,tmpList,xs=xs_dict[sampleName])
     tmpDataset.setSumWeight(sumw_path%sampleName)
