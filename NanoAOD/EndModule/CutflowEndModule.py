@@ -25,7 +25,7 @@ class CutflowEndModule(EndModule):
         tableDict["tableList"] = []
         headerList = ["Cutflow",]
         for sample in collector.mcSamples+collector.mergeSamples:
-            headerList.append(sample)
+            headerList.append(collector.sampleDict[sample].plotLabel)
         tableDict["tableList"].append(headerList)
 
         for cutflow in self.cutflows:
@@ -40,4 +40,4 @@ class CutflowEndModule(EndModule):
                 genWeight = h.GetBinContent(1)
                 cutflowList.append("%4.2f"%(genWeight/totalsum if totalsum else -1))
             tableDict["tableList"].append(cutflowList)
-        self.tableMaker.makeTexFile(self.outputDir+self.plotFileName,tableDict)
+        self.tableMaker.makeTexFile(self.outputDir+self.plotFileName,tableDict,landscape=True)

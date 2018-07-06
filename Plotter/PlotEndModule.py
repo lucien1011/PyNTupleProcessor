@@ -147,7 +147,8 @@ class PlotEndModule(EndModule):
             legLabel += ": 100%"
         else:
             legLabel += ": "+str(math.ceil(smCount*10)/10)
-        leg.AddEntry(bkdgErr, legLabel, "fl") 
+        if bkdgErr:
+            leg.AddEntry(bkdgErr, legLabel, "fl") 
         
         for hCount in reversed(histList):
             legLabel = hCount[1]
@@ -186,19 +187,19 @@ class PlotEndModule(EndModule):
         if collector.dataSamples:
             dataHist = self.stackData(collector,plot)
 
-        if collector.mcSamples:
+        if collector.bkgSamples:
             histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch)
             stack.SetTitle("")
             # stack.GetYaxis().SetTitleSize(0.05)
         
-        if collector.dataSamples and collector.mcSamples:
+        if collector.dataSamples and collector.bkgSamples:
             maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
-        elif collector.mcSamples:
+        elif collector.bkgSamples:
             maximum = stack.GetMaximum()
         elif collector.dataSamples:
             maximum = dataHist.GetMaximum()
 
-        if collector.mcSamples and not collector.dataSamples:
+        if collector.bkgSamples and not collector.dataSamples:
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
 
@@ -237,7 +238,7 @@ class PlotEndModule(EndModule):
 
                 c.SaveAs(outputDir+"/"+plot.key+"_log.png")
                 c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
-        elif collector.mcSamples and collector.dataSamples:
+        elif collector.bkgSamples and collector.dataSamples:
             c.SetBottomMargin(0.0)
             upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
             lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .325)
@@ -322,6 +323,22 @@ class PlotEndModule(EndModule):
             c.SaveAs(outputDir+"/"+plot.key+"_log.png")
             c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
 
+        elif collector.signalSamples and not collector.bkgSamples:
+
+            sigHistList = self.makeSignalHist(collector,plot)
+
+            leg = self.makeLegend([],None,0.,False,histListSignal=sigHistList)
+ 
+            c.SetLogy(0)
+            for hist,sample,sigCount in sigHistList:
+                hist.Draw('samehist')
+            #if collector.dataSamples:
+            #    dataHist.Draw("samep")
+            leg.Draw('same')
+            # Draw CMS, lumi and preliminary if specified
+            #self.drawLabels(pSetPair[0].lumi)
+            c.SaveAs(outputDir+"/"+plot.key+".png")
+            c.SaveAs(outputDir+"/"+plot.key+".pdf")
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)
