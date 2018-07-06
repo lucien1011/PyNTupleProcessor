@@ -4,8 +4,8 @@ from Core.OutputInfo import OutputInfo
 from Core.EndSequence import EndSequence
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.Run2016.MC import * 
-#from DarkZ.Dataset.Run2017.MC import * 
+#from DarkZ.Dataset.Run2016.MC import * 
+from DarkZ.Dataset.Run2017.SignalMC import * 
 #from DarkZ.Dataset.Run2017.SkimTree import * 
 
 from DarkZ.Skimmer.Preskimmer import GENPreskimmer
@@ -29,14 +29,16 @@ validation_plots = [
         ]
 
 #out_path = "Higgs/DarkZ/SignalEfficiency/EventSelection_v1/Log/20180630/"
-out_path = "Higgs/DarkZ/CutflowEfficiency/test2016/Log/20180703/"
+out_path = "Higgs/DarkZ/Acceptance/Run2017/Log/20180706/ZD_Upto0j_Eps1e-2/"
 
-nCores = 1
+nCores = 4
 outputDir = "/raid/raid7/lucien/"+out_path
 nEvents = -1
-disableProgressBar = True
+disableProgressBar = False
 justEndSequence = False
-componentList = [ggH]
+#componentList = bkgSamples + sigSamples
+#componentList = bkgSamples
+componentList = sigSamples
 
 for dataset in componentList:
     if dataset.isMC:
