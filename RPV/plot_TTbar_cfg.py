@@ -11,7 +11,7 @@ from NanoAOD.Skimmer.METFilter import METFilter
 from RPV.Producer.PhysObjProducer import PhysObjProducer,JetProducer 
 from RPV.Producer.AnalysisProducer import AnalysisProducer 
 
-from RPV.Skimmer.ZMuMuSkimmer import ZMuMuSkimmer
+from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
 from RPV.Skimmer.HLTSkimmer import HLTSkimmer
 
 from Plotter.Plotter import Plotter
@@ -24,16 +24,16 @@ import os
 
 useSkimTree = True
 if useSkimTree:
-    from RPV.SkimTree.NanoAOD.Run2016.ZToMuMu_MC import allMCSamples
-    from RPV.SkimTree.NanoAOD.Run2016.ZToMuMu_Data import allDataSamples
+    from RPV.SkimTree.NanoAOD.Run2016.TTbar_MC import allMCSamples
+    from RPV.SkimTree.NanoAOD.Run2016.TTbar_Data import allDataSamples
 else:
     from DataMC.NanoAOD.Run2016 import * 
 
 #out_path = "StopToBLep/DataMCDistributions/DataMC_ZToMuMuSelection_v1/2018-06-19/"
 
-nCores = 4 
+nCores = 6 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
-outputDir = "./testPlot_v3/"
+outputDir = "./testPlot_v4/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
@@ -73,7 +73,7 @@ mediumElectronProducer  = PhysObjProducer("MediumElectronProducer","Electron","M
 jetProducer             = JetProducer("JetProducer","Jet",["MediumMuons","MediumElectrons"],"LooseJets","Moriond17LooseJet",0.4)
 plotter                 = Plotter("Plotter",plots)
 anaProducer             = AnalysisProducer("AnaProducer")
-eventSkimmer            = ZMuMuSkimmer("ZMuMuSkim")
+eventSkimmer            = TTbarSkimmer("TTbarSkim")
 hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
 jsonSkimmer             = JSONSkimmer("JSONSkim")
 metSkimmer              = METFilter("METSkim")
@@ -92,7 +92,7 @@ sequence.add(eventSkimmer)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/kshi/public_html/dataPlot/ZToMuMu/LO_DYJets/"
+endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/LO_DYJets/"
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")

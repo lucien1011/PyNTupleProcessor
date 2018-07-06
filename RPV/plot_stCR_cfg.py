@@ -41,7 +41,7 @@ for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
-mc_plots = [
+data_plots = [
         Plot("nJet40",      ["TH1D","nJet40","",10,-0.5,9.5],       LambdaFunc('x: x.nJet40')),
         Plot("nBJet25",     ["TH1D","nBJet25","",10,-0.5,9.5],      LambdaFunc('x: len([j for j in x.LooseJets if j.btagCSVV2 > 0.8484])')),
         Plot("nLep40",      ["TH1D","nLep40","",10,-0.5,9.5],       LambdaFunc('x: x.nLep40')),
@@ -56,8 +56,8 @@ mc_plots = [
         Plot("jetchEmEF1",  ["TH1D","jetchEmEF1","",20,0.,1.],      LambdaFunc('x: x.jets[0].chEmEF if len(x.jets) > 0 else -1')),
         Plot("jetchHEF1",   ["TH1D","jetchHEF1","",20,0.,1.],       LambdaFunc('x: x.jets[0].chHEF if len(x.jets) > 0 else -1')),
         Plot("jetPt2",      ["TH1D","jetPt2","",10,0., 500.],       LambdaFunc('x: x.jets[1].pt if len(x.jets) > 1 else -1')),
-        Plot("muonPt1",     ["TH1D","muonPt1","",20,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else -1')),
-        Plot("muonPt2",     ["TH1D","muonPt2","",20,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else -1')),
+        Plot("muonPt1",     ["TH1D","muonPt1","",10,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else -1')),
+        Plot("muonPt2",     ["TH1D","muonPt2","",10,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else -1')),
         Plot("elePt1",      ["TH1D","elePt1","",10,0., 500.],       LambdaFunc('x: x.eles[0].pt if len(x.eles) > 0 else -1')),
         Plot("elePt2",      ["TH1D","elePt2","",10,0., 500.],       LambdaFunc('x: x.eles[1].pt if len(x.eles) > 1 else -1')),
         Plot("nGoodPV",     ["TH1D","nGoodPV","",30,0.0,60.0],      LambdaFunc('x: x.PV_npvsGood[0]')),
@@ -69,7 +69,6 @@ mc_plots = [
         #Plot("m1_bl2",       ["TH1D","m1_bl2","",50,0., 1200.],       LambdaFunc('x: x.m1_bl[1]')),
         Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
         Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
-        Plot("dR_min_jets_leps", ["TH1D","dR_min_jets_leps","",20,0.,3.5], LambdaFunc('x: x.dR_min_jets_leps')),
         ]
 
 ratio_plots = [
@@ -88,10 +87,10 @@ jetProducer             = JetProducer("JetProducer","Jet",["MediumMuons","Medium
 if ratio_switch:
    plotter                 = Plotter("Plotter",ratio_plots)
 else:
-    plotter                 = Plotter("Plotter",mc_plots)
+    plotter                 = Plotter("Plotter",data_plots)
 anaProducer             = AnalysisProducer("AnaProducer")
-eventSkimmer            = EventSkimmer("StopToBLepSkim",cutflow="htCR")
-hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
+eventSkimmer            = EventSkimmer("StopToBLepSkim",cutflow="stCR")
+hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="stCR")
 jsonSkimmer             = JSONSkimmer("JSONSkim")
 
 sequence = Sequence()
@@ -108,10 +107,10 @@ sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=False)
 if not ratio_switch:
-   endModuleOutputDir = "/home/kshi/public_html/dataPlot/htCR"
-   endSequence.add(PlotEndModule(endModuleOutputDir,mc_plots,ratio_switch))
+   endModuleOutputDir = "/home/kshi/public_html/dataPlot/stCR/"
+   endSequence.add(PlotEndModule(endModuleOutputDir,data_plots,ratio_switch))
 else:
-    endModuleOutputDir = "/home/kshi/public_html/ratioPlot/htCR"
+    endModuleOutputDir = "/home/kshi/public_html/ratioPlot/stCR/"
     endSequence.add(PlotEndModule(endModuleOutputDir,ratio_plots,ratio_switch))
 
 outputInfo = OutputInfo("OutputInfo")
