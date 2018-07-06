@@ -19,3 +19,24 @@ ggH = Dataset(
         xs                  = 0.01218,
         )
 ggH.setSumWeight(bkgTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",inUFTier2)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ZH
+ZH_cmpList = ComponentList(
+        [ 
+            Component("ZH",bkgTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","Ana/passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ZH = Dataset(
+        "ZH",
+        ZH_cmpList,
+        isMC                = True,
+        xs                  = 0.01218,
+        )
+ZH.setSumWeight(bkgTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",inUFTier2)
+
+bkgSamples = [
+        #ggH,
+        ZH,
+        ]
