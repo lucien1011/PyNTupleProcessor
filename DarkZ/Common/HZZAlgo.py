@@ -45,17 +45,19 @@ class HZZAlgo(object):
                     candidateList.append(ZCandidate(vecZ,lepi,lepj))
         return candidateList
 
-    def makeZCandidatesFromCollection(self,leps):
+    def makeZCandidatesFromCollection(self,leps,useFSR=False):
         candidateList = []
         for ilep in range(len(leps)):
             for jlep in range(ilep+1,len(leps)):
                 if leps[ilep].id + leps[jlep].id != 0: continue
                 
-                vecli = self.make4VectorFromObject(leps[ilep].pt,leps[ilep].eta,leps[ilep].phi,leps[ilep].mass)
-                veclj = self.make4VectorFromObject(leps[jlep].pt,leps[jlep].eta,leps[jlep].phi,leps[jlep].mass)
-                #veclifsr = self.make4Vector(event.lepFSR_pt,event.lepFSR_eta,event.lepFSR_phi,event.lepFSR_mass,ilep)
-                #vecljfsr = self.make4Vector(event.lepFSR_pt,event.lepFSR_eta,event.lepFSR_phi,event.lepFSR_mass,jlep)
-                
+                if not useFSR:
+                    vecli = self.make4VectorFromObject(leps[ilep].pt,leps[ilep].eta,leps[ilep].phi,leps[ilep].mass)
+                    veclj = self.make4VectorFromObject(leps[jlep].pt,leps[jlep].eta,leps[jlep].phi,leps[jlep].mass)
+                else:
+                    vecli = self.make4VectorFromObject(leps[ilep].getFriendValue("FSR","pt"),leps[ilep].getFriendValue("FSR","eta"),leps[ilep].getFriendValue("FSR","phi"),leps[ilep].getFriendValue("FSR","mass"))
+                    veclj = self.make4VectorFromObject(leps[jlep].getFriendValue("FSR","pt"),leps[jlep].getFriendValue("FSR","eta"),leps[jlep].getFriendValue("FSR","phi"),leps[jlep].getFriendValue("FSR","mass"))
+ 
                 vecZ = vecli + veclj
                 #vecZ = veclifsr + vecljfsr
                 

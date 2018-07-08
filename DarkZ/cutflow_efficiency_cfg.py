@@ -25,10 +25,10 @@ from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
 #out_path = "Higgs/DarkZ/SignalEfficiency/EventSelection_v1/Log/20180630/"
-out_path = "Higgs/DarkZ/CutflowEfficiency/Log/20180706/ZD_UpTo0j_Eps1e-2/"
+out_path = "Higgs/DarkZ/CutflowEfficiency/Log/20180707/ZD_UpTo0j_Eps1e-2_LeptonFSR/"
 #out_path = "Higgs/DarkZ/CutflowEfficiency/Log/20180706/BkgMC_Run2017/"
 
-nCores = 4
+nCores = 5
 outputDir = "/raid/raid7/lucien/"+out_path
 nEvents = -1
 disableProgressBar = False
