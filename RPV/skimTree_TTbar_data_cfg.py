@@ -7,16 +7,16 @@ from DataMC.NanoAOD.Run2016 import *
 
 from RPV.Producer.PhysObjProducer import PhysObjProducer,JetProducer 
 from RPV.Producer.TreeProducer import TreeProducer
-from RPV.Producer.AnalysisProducer import AnalysisProducer 
-from RPV.Skimmer.EventSkimmer import EventSkimmer
+#from RPV.Producer.AnalysisProducer import AnalysisProducer 
+from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
 
-nCores = 8 
-outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/"
+nCores = 6 
+#outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/Data_ZMuMuSelection_v1/"
+outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/TTbar/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False 
-#componentList = allMCSamples 
-componentList = allDataSamples 
+componentList = allDataSamples
 for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
@@ -24,15 +24,13 @@ for dataset in componentList:
 mediumMuonProducer      = PhysObjProducer("MediumMuonProducer","Muon","MediumMuons","Moriond17MediumMuon")
 mediumElectronProducer  = PhysObjProducer("MediumElectronProducer","Electron","MediumElectrons","Moriond17MediumElectron")
 jetProducer             = JetProducer("JetProducer","Jet",["MediumMuons","MediumElectrons"],"LooseJets","Moriond17LooseJet",0.4)
-eventSkimmer            = EventSkimmer("StopToBLepSkim")
+eventSkimmer            = TTbarSkimmer("TTbarSkim")
 treeProducer            = TreeProducer("TreeProducer")
-anaProducer             = AnalysisProducer("AnaProducer")
 
 sequence = Sequence()
 sequence.add(mediumMuonProducer)
 sequence.add(mediumElectronProducer)
 sequence.add(jetProducer)
-sequence.add(anaProducer)
 sequence.add(eventSkimmer)
 sequence.add(treeProducer)
 

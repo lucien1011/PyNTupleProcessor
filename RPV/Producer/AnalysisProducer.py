@@ -1,5 +1,7 @@
 from Core.Module import Module
 import numpy
+import math
+from Utils.DeltaR import deltaR
 
 class AnalysisProducer(Module):
     def analyze(self,event):
@@ -72,5 +74,20 @@ class AnalysisProducer(Module):
         for j in event.jets:
             muEnergy = event.Muon_pt[j.muonIdx1] + event.Muon_pt[j.muonIdx2]
             j.muEF = muEnergy/(j.pt*(1-j.rawFactor))
+       
+        
+        #dphi = [abs(event.jets[0].phi- event.leps[0].phi), abs(event.jets[0].phi- event.leps[1].phi), abs(event.jets[1].phi- event.leps[0].phi), abs(event.jets[1].phi- event.leps[1].phi)]
+           
+        #deta = [abs(event.jets[0].eta- event.leps[0].eta), abs(event.jets[0].eta- event.leps[1].eta), abs(event.jets[1].eta- event.leps[0].eta), abs(event.jets[1].eta- event.leps[1].eta)]
+
+        #dR = [0,0,0,0]    
+ 
+        event.dR_min_jets_leps = 0
+
+        for i in event.jets:
+	    for j in event.leps:
+                temp = deltaR(i.eta,i.phi,j.eta,j.phi)
+                if event.dR_min_jets_leps == 0 or event.dR_min_jets_leps >temp:
+	           event.dR_min_jets_leps = temp
 
         return True

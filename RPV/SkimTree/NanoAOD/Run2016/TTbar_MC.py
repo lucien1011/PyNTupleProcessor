@@ -5,10 +5,10 @@ from DataMC.NanoAOD.CrossSection import xs_dict
 
 fileName        = "SkimTree.root"
 #common_path     = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
-common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/ZToMuMu/"
+common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar/"
 inUFTier2       = False
 #sumw_path       = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_InclusiveSelection_v2/%s/EventWeight.root"
-sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/ZToMuMu/%s/EventWeight.root"
+sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/TTbar/%s/EventWeight.root"
 
 sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n))]
 allMCSamples = []

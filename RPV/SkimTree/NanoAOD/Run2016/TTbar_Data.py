@@ -4,7 +4,7 @@ from Core.Dataset import Dataset
 
 fileName        = "SkimTree.root"
 #common_path     = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/Data_ZMuMuSelection_v1/"
-common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/ZToMuMu/"
+common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/TTbar/"
 inUFTier2       = False
 
 sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n))]
