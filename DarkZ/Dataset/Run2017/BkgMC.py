@@ -1,7 +1,6 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-sigTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180628/HZZNTuple/"
 bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180702/Tree_BkgMC/"
 inUFTier2       = False
 
@@ -33,7 +32,7 @@ VBF = Dataset(
         "VBF",
         VBF_cmpList,
         isMC                = True,
-        xs                  = 0.01218,
+        xs                  = 0.001044,
         )
 VBF.setSumWeight(bkgTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8/VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","Ana/sumWeights",False)
 
@@ -49,7 +48,7 @@ WHplus = Dataset(
         "WHplus",
         WHplus_cmpList,
         isMC                = True,
-        xs                  = 0.01218,
+        xs                  = 0.000232,
         )
 WHplus.setSumWeight(bkgTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8/WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root","Ana/sumWeights",False)
 
@@ -65,7 +64,7 @@ WHminus = Dataset(
         "WHminus",
         WHminus_cmpList,
         isMC                = True,
-        xs                  = 0.01218,
+        xs                  = 0.000147,
         )
 WHminus.setSumWeight(bkgTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8/WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root","Ana/sumWeights",False)
 
@@ -81,7 +80,7 @@ ZH = Dataset(
         "ZH",
         ZH_cmpList,
         isMC                = True,
-        xs                  = 0.01218,
+        xs                  = 0.000668,
         )
 ZH.setSumWeight(bkgTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8/ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8.root","Ana/sumWeights",False)
 
@@ -90,5 +89,5 @@ bkgSamples = [
         VBF,
         WHplus,
         WHminus,
-        #ZH,
+        ZH,
         ]
