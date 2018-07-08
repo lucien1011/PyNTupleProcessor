@@ -29,14 +29,14 @@ class CutflowEndModule(EndModule):
         tableDict["tableList"].append(headerList)
 
         for cutflow in self.cutflows:
-            cutflowList = [cutflow,]
+            cutflowList = [cutflow.getLatexName(),]
             for sample in collector.mcSamples+collector.mergeSamples:
                 if not self.ignoreSumw:
                     totalsum = collector.sampleDict[sample].sumw
                 else:
-                    h = collector.getObj(sample,self.histName+self.cutflows[0])
+                    h = collector.getObj(sample,self.histName+self.cutflows[0].key)
                 totalsum = h.GetBinContent(1)
-                h = collector.getObj(sample,self.histName+cutflow)
+                h = collector.getObj(sample,self.histName+cutflow.key)
                 genWeight = h.GetBinContent(1)
                 cutflowList.append("%4.2f"%(genWeight/totalsum if totalsum else -1))
             tableDict["tableList"].append(cutflowList)

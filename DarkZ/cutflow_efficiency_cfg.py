@@ -25,6 +25,7 @@ from DarkZ.Producer.CollectionProducer import CollectionProducer
 from NanoAOD.Producer.GenWeightCounter import *
 from NanoAOD.Weighter.XSWeighter import *
 from NanoAOD.EndModule.CutflowEndModule import CutflowEndModule
+from NanoAOD.EndModule.Cutflow import Cutflow
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -38,7 +39,7 @@ nCores = 5
 outputDir = "/raid/raid7/lucien/"+out_path
 nEvents = -1
 disableProgressBar = False
-justEndSequence = False
+justEndSequence = True
 #componentList = bkgSamples 
 componentList = sigSamples
 
@@ -100,14 +101,14 @@ sequence.add(fourLeptonCounter)
 #sequence.add(recoCounter)
 
 cutflows = [
-        #"Preskim",
-        "FidicialCut",
-        "nLepton",
-        "LeptonPt",
-        "OSSF",
-        "Z1Z2",
-        "DeltaR",
-        "h4L",
+        #Cutflow("Preskim",)
+        Cutflow("FidicialCut",latexName="Gen-level fidicial cut"),
+        Cutflow("nLepton",latexName="Number of lepton $\geq 4$"),
+        Cutflow("LeptonPt",latexName="Leading and subleading $p_{T}$"),
+        Cutflow("OSSF",latexName="Opposite sign same flavour"),
+        Cutflow("Z1Z2",latexName="$40 < m_{Z1} < 120$, $12 < m_{Z2} < 120$"),
+        Cutflow("DeltaR",latexName="$\\DeltaR_{i,j} > 0.02$"),
+        Cutflow("h4L",latexName="$40 < m_{4l} < 120$"),
         ]
 
 endModuleOutputDir = "/home/lucien/public_html/"+out_path
