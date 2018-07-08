@@ -107,7 +107,7 @@ cutflows = [
         Cutflow("LeptonPt",latexName="Leading and subleading $p_{T}$"),
         Cutflow("OSSF",latexName="Opposite sign same flavour"),
         Cutflow("Z1Z2",latexName="$40 < m_{Z1} < 120$, $12 < m_{Z2} < 120$"),
-        Cutflow("DeltaR",latexName="$\\DeltaR_{i,j} > 0.02$"),
+        Cutflow("DeltaR",latexName="$\\Delta R_{i,j} > 0.02$"),
         Cutflow("h4L",latexName="$40 < m_{4l} < 120$"),
         ]
 
