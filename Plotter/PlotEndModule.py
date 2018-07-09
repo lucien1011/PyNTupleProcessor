@@ -191,6 +191,11 @@ class PlotEndModule(EndModule):
             histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch)
             stack.SetTitle("")
             # stack.GetYaxis().SetTitleSize(0.05)
+
+        if collector.signalSamples:
+            sigHistList = self.makeSignalHist(collector,plot)
+        else:
+            sigHistList = []
         
         if collector.dataSamples and collector.bkgSamples:
             maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
@@ -202,8 +207,6 @@ class PlotEndModule(EndModule):
         if collector.bkgSamples and not collector.dataSamples:
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
-
-            sigHistList = self.makeSignalHist(collector,plot)
 
             leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList)
  
@@ -276,7 +279,7 @@ class PlotEndModule(EndModule):
 
             upperPad.cd()
             
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist)
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,histListSignal=sigHistList)
             
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
@@ -286,6 +289,9 @@ class PlotEndModule(EndModule):
             stack.GetXaxis().SetTitleOffset(0.55)
             self.setStackAxisTitle(stack,axisLabel,plot)
             stack.Draw('hist')
+            for hist,sample,sigCount in sigHistList:
+                hist.Draw('samehist')
+
             leg.Draw()
             
             if smCount > 0.0:
@@ -313,6 +319,8 @@ class PlotEndModule(EndModule):
             stack.SetMaximum(maximum*5)
             stack.SetMinimum(0.1)
             stack.Draw('hist')
+            for hist,sample,sigCount in sigHistList:
+                hist.Draw('samehist')
             dataHist.Draw("samep")
             leg.Draw('same')
             # Draw CMS, lumi and preliminary if specified

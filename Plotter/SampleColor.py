@@ -19,6 +19,8 @@ sampleColorDict = {
                 "WZZ":ROOT.kBlue,
                 "ZZZ":ROOT.kBlue,
                 "WWW_4f":ROOT.kBlue,
+                "LQToBL_mLQ500":ROOT.kRed,
+
                 # Dark Z
                 "ggH": ROOT.kAzure-2,
                 "VBF": ROOT.kSpring+2,
