@@ -32,8 +32,8 @@ from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
 #out_path = "Higgs/DarkZ/SignalEfficiency/EventSelection_v1/Log/20180630/"
-out_path = "Higgs/DarkZ/CutflowEfficiency/Log/20180707/ZD_UpTo0j_Eps1e-2_LeptonFSR/"
-#out_path = "Higgs/DarkZ/CutflowEfficiency/Log/20180706/BkgMC_Run2017/"
+out_path = "Higgs/DarkZ/CutflowEfficiency/2018-07-07/ZD_UpTo0j_Eps1e-2_LeptonFSR/"
+#out_path = "Higgs/DarkZ/CutflowEfficiency/Log/2018-07-07/BkgMC_Run2017_LeptonFSR/"
 
 nCores = 5
 outputDir = "/raid/raid7/lucien/"+out_path
@@ -108,7 +108,7 @@ cutflows = [
         Cutflow("OSSF",latexName="Opposite sign same flavour"),
         Cutflow("Z1Z2",latexName="$40 < m_{Z1} < 120$, $12 < m_{Z2} < 120$"),
         Cutflow("DeltaR",latexName="$\\Delta R_{i,j} > 0.02$"),
-        Cutflow("h4L",latexName="$40 < m_{4l} < 120$"),
+        Cutflow("h4L",latexName="$105 < m_{4l} < 140$"),
         ]
 
 endModuleOutputDir = "/home/lucien/public_html/"+out_path

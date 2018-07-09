@@ -29,7 +29,7 @@ validation_plots = [
         ]
 
 #out_path = "Higgs/DarkZ/SignalEfficiency/EventSelection_v1/Log/20180630/"
-out_path = "Higgs/DarkZ/Acceptance/Run2017/Log/20180706/ZD_Upto0j_Eps1e-2/"
+out_path = "Higgs/DarkZ/Acceptance/Run2017/20180706/ZD_Upto0j_Eps1e-2/"
 
 nCores = 4
 outputDir = "/raid/raid7/lucien/"+out_path
