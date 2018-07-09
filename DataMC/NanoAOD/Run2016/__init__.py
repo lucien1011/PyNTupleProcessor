@@ -1,4 +1,5 @@
 from DYJetsToLL_M10to50 import DYJetsToLL_M10to50
+from DYJetsToLL_M50 import DYJetsToLL_M50
 from DYJetsToLL_M50_LO import DYJetsToLL_M50_LO
 from DYJetsToLL_M50_NLO import DYJetsToLL_M50_NLO 
 #from TGJets import TGJets
@@ -17,6 +18,8 @@ from T_tch import T_tch
 from T_tWch import T_tWch
 from TBar_tWch import TBar_tWch
 
+from LQToBL import LQToBL_mLQ500
+
 from SingleMuon2016B import SingleMuon2016B
 from SingleMuon2016C import SingleMuon2016C
 from SingleMuon2016D import SingleMuon2016D
@@ -28,8 +31,9 @@ from SingleMuon2016H2 import SingleMuon2016H2
 
 allMCSamples = [
     DYJetsToLL_M10to50,
-    DYJetsToLL_M50_LO,
-    DYJetsToLL_M50_NLO,
+    DYJetsToLL_M50,
+    #DYJetsToLL_M50_LO,
+    #DYJetsToLL_M50_NLO,
     #TGJets,
     TT_Powheg,
     ttWJets,
@@ -45,6 +49,10 @@ allMCSamples = [
     T_tch,
     T_tWch,
     TBar_tWch,
+    ]
+
+allSigSamples = [
+    LQToBL_mLQ500,
     ]
 
 allDataSamples = [
