@@ -7,20 +7,32 @@ class RecoSkimmer(Module):
     def __init__(self,name):
         self.name = name
         self.HZZAlgo = HZZAlgo()
+        self.elPtCut = 2.5
+        self.elEtaCut = 2.5
+        self.muPtCut = 2.4
+        self.muEtaCut = 2.4
+        self.lepRelIso = 0.35
+        self.nLep = 4
+        self.leadingPtCut = 20
+        self.subleadingPtCut = 10
+        self.Z1MassRange = [40.,120.]
+        self.Z2MassRange = [12.,120.]
+        self.deltaRCut = 0.02
+        self.m4lRange = [105.,140.]
 
     def analyze(self,event):
-        event.leps = [lep for lep in Collection(event,"lep") if ((abs(lep.eta) < 2.5 and abs(lep.id) == 11 and lep.pt > 7) or (abs(lep.eta) < 2.4 and abs(lep.id) == 13 and lep.pt > 5)) and lep.RelIso < 0.35]
+        event.leps = [lep for lep in Collection(event,"lep") if ((abs(lep.eta) < self.elPtCut and abs(lep.id) == 11 and lep.pt > self.elEtaCut) or (abs(lep.eta) < self.muEtaCut and abs(lep.id) == 13 and lep.pt > self.muPtCut)) and lep.RelIso < self.lepRelIso]
         #event.leps = [lep for lep in Collection(event,"lepFSR") if ((abs(lep.eta) < 2.5 and abs(lep.id) == 11 and lep.pt > 7) or (abs(lep.eta) < 2.4 and abs(lep.id) == 13 and lep.pt > 5)) and lep.RelIso < 0.35]
         event.leps.sort(key=lambda x: x.pt,reverse=True)
 
-        if len(event.leps) < 4: return False
+        if len(event.leps) < self.nLep: return False
         
-        if event.leps[0].pt < 20: return False
-        if event.leps[1].pt < 10: return False
+        if event.leps[0].pt < self.leadingPtCut: return False
+        if event.leps[1].pt < self.subleadingPtCut: return False
 
         if not self.OSSFLeptonPairs(event.leps): return False
         event.ZCandidates = self.HZZAlgo.makeZCandidatesFromCollection(event.leps,useFSR=True)
-        Z1,Z2,passZ1Z2 = self.HZZAlgo.makeZ1Z2(event.ZCandidates,[40.,120.],[12.,120.]) 
+        Z1,Z2,passZ1Z2 = self.HZZAlgo.makeZ1Z2(event.ZCandidates,self.Z1MassRange,self.Z2MassRange) 
         #if Z1.vec.M() < 40 or Z1.vec.M() > 120: return False
         #if Z2.vec.M() < 12 or Z2.vec.M() > 120: return False
         event.Z1 = Z1
@@ -33,11 +45,11 @@ class RecoSkimmer(Module):
             for j,vec2 in enumerate(lep_vec_list):
                 if i >= j: continue
                 deltaRs.append(vec1.DeltaR(vec2))
-        if min(deltaRs) < 0.02: return False
+        if min(deltaRs) < self.deltaRCut: return False
         
         hvec = Z1.vec + Z2.vec
         event.hmass = hvec.M()
-        if event.hmass < 105 or event.hmass > 140: return False
+        if event.hmass < self.m4lRange[0] or event.hmass > self.m4lRange[1]: return False
         
         #return event.passedFiducialSelection[0]
         return True
