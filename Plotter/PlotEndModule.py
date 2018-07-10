@@ -142,7 +142,7 @@ class PlotEndModule(EndModule):
             leg.AddEntry(data, legLabel , "p")
         # if not self._normToData and data:
             # if not self._normToData: leg.AddEntry(data, "Data: {0}".format(int(data.Integral(0,data.GetNbinsX()+1))), "p")
-        legLabel = "SM total"
+        legLabel = "Total"
         if switch:
             legLabel += ": 100%"
         else:
@@ -350,7 +350,7 @@ class PlotEndModule(EndModule):
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)
-        title = "Events / %.2f " % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
+        title = "Events / (%.2f GeV)" % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
         stack.GetYaxis().SetTitle(title)
 
     def makeRatioPlot(self,data,total,bkdgErr):
