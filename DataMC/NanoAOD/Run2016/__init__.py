@@ -29,7 +29,7 @@ from SingleMuon2016H2 import SingleMuon2016H2
 allMCSamples = [
     DYJetsToLL_M10to50,
     DYJetsToLL_M50_LO,
-    DYJetsToLL_M50_NLO,
+#    DYJetsToLL_M50_NLO,
     #TGJets,
     TT_Powheg,
     ttWJets,

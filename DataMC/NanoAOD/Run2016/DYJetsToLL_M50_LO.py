@@ -18,4 +18,4 @@ DYJetsToLL_M50_LO = Dataset(
         xs                  = 5765.0 #pb,
         )
 DYJetsToLL_M50_LO.setSumWeight("/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/DYJetsToLL_M50/EventWeight.root")
-#DYJetsToLL_M50_LO.setSumWeight("/raid/raid7/kshi/SUSY/RPV/sum_weight/DYJetsToLL_M50_LO/EventWeight.root")
+#DYJetsToLL_M50_LO.setSumWeight("/raid/raid7/kshi/SUSY/RPV/sum_weight/TTbar/DYJetsToLL_M50_LO/EventWeight.root")

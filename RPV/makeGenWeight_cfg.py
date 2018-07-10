@@ -11,9 +11,9 @@ else:
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-nCores = 8
+nCores = 4
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_InclusiveSelection_v2/"
-outputDir = "/raid/raid7/kshi/SUSY/RPV/sum_weight/"
+outputDir = "/raid/raid7/kshi/SUSY/RPV/sum_weight/ZToMuMu/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False

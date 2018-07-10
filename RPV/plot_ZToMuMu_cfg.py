@@ -31,7 +31,7 @@ else:
 
 #out_path = "StopToBLep/DataMCDistributions/DataMC_ZToMuMuSelection_v1/2018-06-19/"
 
-nCores = 4 
+nCores = 8 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
 outputDir = "./testPlot_v3/"
 nEvents = -1
