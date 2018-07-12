@@ -69,7 +69,7 @@ class PlotEndModule(EndModule):
         #totalsum = ROOT.TH1D()
 
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
-            if collector.sampleDict[sample].isSignal: continue
+            if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
             h = collector.getObj(sample,plot.rootSetting[1])
             if sample in sampleColorDict:
                 h.SetFillColor(sampleColorDict[sample])

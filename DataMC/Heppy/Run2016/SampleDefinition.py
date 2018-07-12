@@ -1,0 +1,30 @@
+mergeSampleDict = {
+        "DYJets":       ["DYJetsToLL_M10to50","DYJetsToLL_M50"],
+        "TTJets":       ["TTJets_SingleLeptonFromTbar","TTJets_SingleLeptonFromT","TTJets_DiLepton"],
+        "WJets":        ["WJetsToLNu"],
+        "Diboson":      ["ZZTo2L2Nu","WW2L2NuDouble","WWTo2L2Nu","WZTo2L2Q","WGToLNuG","WZTo3LNu","ZGTo2LG",],
+        "TTV":          ["TTWToLNu1","TTGJets","TTZToQQ",],
+        "SingleTop":    ["T_tch_powheg","TBar_tch_powheg"], 
+        "Minor":        [
+                            "TGJets",
+                            "WpWpJJ",
+                            "tZq_ll",
+                            "ZZTo4L",
+                            "TTLLJets_m1to10",
+                            "TTZToLLNuNu",
+                            "TTHnobb_pow",
+                            "WZZ",
+                            "GGHZZ4L",
+                            "TTWToLNu2",
+                            "TTTT",
+                            "ZZZ",
+                            "WZG",
+                            "TTWToQQ",
+                            "WWW",
+                            "WWZ",
+                            "WWG",
+                            "tZW_ll",
+                            "VHToNonbb",
+                        ]
+        }
+
