@@ -4,6 +4,8 @@ from Core.OutputInfo import OutputInfo
 from Core.EndSequence import EndSequence
 
 from RA5.Weighter.XSWeighter import XSWeighter
+from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
+from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -16,7 +18,7 @@ import os
 from DataMC.Heppy.Run2016.MC import * 
 from DataMC.Heppy.Run2016.SampleDefinition import * 
 
-out_path = "test/2018-07-11/"
+out_path = "HeppyValidation/2018-07-11/"
 
 nCores = 1
 outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
@@ -49,9 +51,13 @@ plots = [
         ]
 plotter                 = Plotter("Plotter",plots)
 xsWeighter              = XSWeighter("XSWeighter")
+baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
+signalRegionSkimmer     = SignalRegionSkimmer("SignalRegionSkimmer")
 
 sequence = Sequence()
 sequence.add(xsWeighter)
+sequence.add(baselineSkimmer)
+sequence.add(signalRegionSkimmer)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=False)
@@ -60,4 +66,4 @@ endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")
 outputInfo.outputDir = outputDir
-outputInfo.TFileName = "test.root"
+outputInfo.TFileName = "MCDistributions.root"
