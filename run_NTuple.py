@@ -26,6 +26,7 @@ sequence                = cfg.sequence
 outputInfo              = cfg.outputInfo
 endSequence             = cfg.endSequence
 justEndSequence         = cfg.justEndSequence if hasattr(cfg,"justEndSequence") else False
+mergeSampleDict         = cfg.mergeSampleDict if hasattr(cfg,"mergeSampleDict") else {}
 
 start_time = time.time()
 
@@ -71,7 +72,7 @@ if not justEndSequence:
 
 print "\nBegin Summarising\n"
 print "\nInput used: "+outputInfo.outputDir+"\n"
-endSequence.run(outputInfo,componentList)
+endSequence.run(outputInfo,componentList,mergeSampleDict=mergeSampleDict)
 
 elapsed_time = time.time() - start_time
 print "Time used: "+str(elapsed_time)+"s"

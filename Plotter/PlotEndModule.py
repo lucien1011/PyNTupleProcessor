@@ -42,12 +42,23 @@ class PlotEndModule(EndModule):
 
         self.shiftLastBin(data)
 
+        if plot.plotSetting.divideByBinWidth:
+            self.divideByBinWidth(data)
+
         data.SetLineWidth(2)
         data.SetLineColor(1)
         data.SetMarkerStyle(8)
         data.SetTitle("")
 
         return data
+
+    def divideByBinWidth(self,hist):
+        for iBin in range(1,hist.GetNbinsX()+1):
+            binC = hist.GetBinContent(iBin)
+            binE = hist.GetBinError(iBin)
+            binW = hist.GetBinWidth(iBin)
+            hist.SetBinContent(iBin,binC/binW)
+            hist.SetBinError(iBin,binE/binW)
 
     def stackMC(self,collector,plot,switch):
         stack = ROOT.THStack(plot.key+'_stack',plot.key+'_stack')
@@ -57,9 +68,13 @@ class PlotEndModule(EndModule):
         histList     = []
         #totalsum = ROOT.TH1D()
 
-        for isample,sample in enumerate(collector.mcSamples):
+        for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
+            if collector.sampleDict[sample].isSignal: continue
             h = collector.getObj(sample,plot.rootSetting[1])
-            h.SetFillColor(sampleColorDict[sample])
+            if sample in sampleColorDict:
+                h.SetFillColor(sampleColorDict[sample])
+            else:
+                h.SetFillColor(ROOT.kViolet)
             self.shiftLastBin(h)
             smCountErrTmp = ROOT.Double(0.)
             smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
@@ -75,12 +90,7 @@ class PlotEndModule(EndModule):
 
         if plot.plotSetting.divideByBinWidth:
             for hist,sample,_ in histList:
-                for iBin in range(1,hist.GetNbinsX()+1):
-                    binC = hist.GetBinContent(iBin)
-                    binE = hist.GetBinError(iBin)
-                    binW = hist.GetBinWidth(iBin)
-                    hist.SetBinContent(iBin,binC/binW)
-                    hist.SetBinError(iBin,binE/binW)
+                self.divideByBinWidth(hist)
 
         for h,sample,_ in histList:
             if switch: h.Divide(totalsum)
@@ -98,6 +108,29 @@ class PlotEndModule(EndModule):
 
         return histList,stack,smCount,smCountErrSq,total,bkdgErr
 
+    def makeSignalHist(self,collector,plot):
+        histList = []
+        for sample in collector.signalSamples:
+            h = collector.getObj(sample,plot.rootSetting[1])
+            if sample in sampleColorDict:
+                h.SetFillColor(sampleColorDict[sample])
+            else:
+                h.SetFillColor(ROOT.kViolet)
+            self.shiftLastBin(h)
+            sigCount = h.Integral(0,h.GetNbinsX()+1) 
+            h.SetLineStyle(9)
+            h.SetLineWidth(5)
+            h.SetLineColor(sampleColorDict[sample])
+            h.SetFillColorAlpha(ROOT.kRed,0.)
+            histList.append([h,sample,sigCount])
+
+        if plot.plotSetting.divideByBinWidth:
+            for hist,sample,sigCount in histList:
+                self.divideByBinWidth(hist)
+
+        return histList
+
+
     def makeLegend(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None):
         leg = ROOT.TLegend(0.63,0.58,0.89,0.87)
         leg.SetBorderSize(0)
@@ -114,7 +147,8 @@ class PlotEndModule(EndModule):
             legLabel += ": 100%"
         else:
             legLabel += ": "+str(math.ceil(smCount*10)/10)
-        leg.AddEntry(bkdgErr, legLabel, "fl") 
+        if bkdgErr:
+            leg.AddEntry(bkdgErr, legLabel, "fl") 
         
         for hCount in reversed(histList):
             legLabel = hCount[1]
@@ -123,6 +157,11 @@ class PlotEndModule(EndModule):
             else:         
                 legLabel += ": "+str(math.ceil(hCount[2]*10)/10)
             leg.AddEntry(hCount[0], legLabel, "f")
+
+        for hist,sample,sigCount in histListSignal:
+            legLabel = sample
+            legLabel += ": "+str(math.ceil(sigCount*10)/10)
+            leg.AddEntry(hist,legLabel,"f")
 	
         return leg
 
@@ -148,28 +187,35 @@ class PlotEndModule(EndModule):
         if collector.dataSamples:
             dataHist = self.stackData(collector,plot)
 
-        if collector.mcSamples:
+        if collector.bkgSamples:
             histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch)
             stack.SetTitle("")
             # stack.GetYaxis().SetTitleSize(0.05)
+
+        if collector.signalSamples:
+            sigHistList = self.makeSignalHist(collector,plot)
+        else:
+            sigHistList = []
         
-        if collector.dataSamples and collector.mcSamples:
+        if collector.dataSamples and collector.bkgSamples:
             maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
-        elif collector.mcSamples:
+        elif collector.bkgSamples:
             maximum = stack.GetMaximum()
         elif collector.dataSamples:
             maximum = dataHist.GetMaximum()
 
-        if collector.mcSamples and not collector.dataSamples:
+        if collector.bkgSamples and not collector.dataSamples:
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
 
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch)
-            
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList)
+ 
             c.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
             stack.SetMinimum(0.)
             stack.Draw('hist')
+            for hist,sample,sigCount in sigHistList:
+                hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")
             leg.Draw('same')
@@ -184,6 +230,8 @@ class PlotEndModule(EndModule):
                 stack.SetMaximum(maximum*5)
                 stack.SetMinimum(0.1)
                 stack.Draw('hist')
+                for hist,sample,sigCount in sigHistList:
+                    hist.Draw('samehist')
                 if collector.dataSamples:
                     dataHist.Draw("samep")
                 leg.Draw('same')
@@ -193,7 +241,7 @@ class PlotEndModule(EndModule):
 
                 c.SaveAs(outputDir+"/"+plot.key+"_log.png")
                 c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
-        elif collector.mcSamples and collector.dataSamples:
+        elif collector.bkgSamples and collector.dataSamples:
             c.SetBottomMargin(0.0)
             upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
             lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .325)
@@ -231,7 +279,7 @@ class PlotEndModule(EndModule):
 
             upperPad.cd()
             
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist)
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,histListSignal=sigHistList)
             
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
@@ -241,6 +289,9 @@ class PlotEndModule(EndModule):
             stack.GetXaxis().SetTitleOffset(0.55)
             self.setStackAxisTitle(stack,axisLabel,plot)
             stack.Draw('hist')
+            for hist,sample,sigCount in sigHistList:
+                hist.Draw('samehist')
+
             leg.Draw()
             
             if smCount > 0.0:
@@ -268,6 +319,8 @@ class PlotEndModule(EndModule):
             stack.SetMaximum(maximum*5)
             stack.SetMinimum(0.1)
             stack.Draw('hist')
+            for hist,sample,sigCount in sigHistList:
+                hist.Draw('samehist')
             dataHist.Draw("samep")
             leg.Draw('same')
             # Draw CMS, lumi and preliminary if specified
@@ -278,6 +331,22 @@ class PlotEndModule(EndModule):
             c.SaveAs(outputDir+"/"+plot.key+"_log.png")
             c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
 
+        elif collector.signalSamples and not collector.bkgSamples:
+
+            sigHistList = self.makeSignalHist(collector,plot)
+
+            leg = self.makeLegend([],None,0.,False,histListSignal=sigHistList)
+ 
+            c.SetLogy(0)
+            for hist,sample,sigCount in sigHistList:
+                hist.Draw('samehist')
+            #if collector.dataSamples:
+            #    dataHist.Draw("samep")
+            leg.Draw('same')
+            # Draw CMS, lumi and preliminary if specified
+            #self.drawLabels(pSetPair[0].lumi)
+            c.SaveAs(outputDir+"/"+plot.key+".png")
+            c.SaveAs(outputDir+"/"+plot.key+".pdf")
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)

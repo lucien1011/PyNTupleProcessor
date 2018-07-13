@@ -23,21 +23,23 @@ import os
 
 useSkimTree = True
 if useSkimTree:
+    from DataMC.NanoAOD.Run2016 import allSigSamples
     from RPV.SkimTree.NanoAOD.Run2016.MC import allMCSamples
     from RPV.SkimTree.NanoAOD.Run2016.Data import allDataSamples
 else:
     from DataMC.NanoAOD.Run2016 import * 
 
+out_path = "StopToBLep/DataMCDistributions/DataMC_htCRSelection_v1/2018-07-09/"
 nCores = 8 
-outputDir = "./testPlot_v2/"
+outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
 ratio_switch = False
-componentList = allDataSamples + allMCSamples 
+componentList = allDataSamples + allMCSamples + allSigSamples 
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 5.93
+        dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -106,12 +108,14 @@ sequence.add(anaProducer)
 sequence.add(eventSkimmer)
 sequence.add(plotter)
 
-endSequence = EndSequence(skipHadd=False)
+endSequence = EndSequence(skipHadd=justEndSequence)
 if not ratio_switch:
-   endModuleOutputDir = "/home/kshi/public_html/dataPlot/htCR"
+   #endModuleOutputDir = "/home/kshi/public_html/dataPlot/htCR"
+   endModuleOutputDir = "/home/lucien/public_html/SUSY/RPV/"+out_path
    endSequence.add(PlotEndModule(endModuleOutputDir,mc_plots,ratio_switch))
 else:
-    endModuleOutputDir = "/home/kshi/public_html/ratioPlot/htCR"
+    #endModuleOutputDir = "/home/kshi/public_html/ratioPlot/htCR"
+    endModuleOutputDir = "/home/lucien/public_html/SUSY/RPV/"+out_path
     endSequence.add(PlotEndModule(endModuleOutputDir,ratio_plots,ratio_switch))
 
 outputInfo = OutputInfo("OutputInfo")
