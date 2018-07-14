@@ -20,7 +20,7 @@ postfixs    = [
 
 #componentList = []
 sampleDict = {}
-sampleFileNames = listdir_uberftp(common_path,selection=lambda x: "acosta" in x)
+sampleFileNames = listdir_uberftp(common_path,selection=lambda x: True)
 for sampleName in sampleFileNames:
     if "TT_pow" in sampleName: continue
     parentName = sampleName
