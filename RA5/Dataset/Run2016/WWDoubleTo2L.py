@@ -9,17 +9,17 @@ sumweight_path  = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Leg
 inUFTier2    = True
 filePath = os.path.join(sumweight_path,sampleName,fileName)
 
-cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
+#cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
 
 cmpList = ComponentList(
-                       cmp,
+                       [ Component("WWDoubleTo2L",TreeDir + sampleName +"/"+ "WWDoubleTo2L_%s_SkimTree.root",inUFTier2) for i in range(0,1)]
           )
 
 WWDoubleTo2L= Dataset(
         "WWDoubleTo2L",
         cmpList,
         isMC                = True,
-        xs                  = 16270.0,
+        xs                  = 1,
         )
 WWDoubleTo2L.setSumWeight(filePath,"SumGenWeights",inUFTier2)
 

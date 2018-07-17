@@ -9,17 +9,17 @@ sumweight_path  = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Leg
 inUFTier2    = True
 filePath = os.path.join(sumweight_path,sampleName,fileName)
 
-cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
+#cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
 
 cmpList = ComponentList(
-                       cmp,
+                       [ Component("TTHnobb_pow",TreeDir + sampleName +"/"+ "TTHnobb_pow_%s_SkimTree.root",inUFTier2) for i in range(0,1)]
           )
 
 TTHnobb_pow= Dataset(
         "TTHnobb_pow",
         cmpList,
         isMC                = True,
-        xs                  = 16270.0,
+        xs                  = 1,
         )
 TTHnobb_pow.setSumWeight(filePath,"SumGenWeights",inUFTier2)
 
