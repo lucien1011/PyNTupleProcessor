@@ -12,7 +12,8 @@ from RPV.Analyzer.Plotter.Plot import Plot
 from Core.Utils.LambdaFunc import LambdaFunc
 
 componentList = Component(
-        "/cms/data/store/user/klo/DarkPhoton_Moriond17_GEN-SIM/v2/ZD_UpTo0j_MZD20_Eps1e-2/PUMoriond17-Realistic25ns13TeVEarly2017Collision-93X_mc2017_realistic_v3-LHE-GEN-SIM/180403_154314/0000/",
+        #"/cms/data/store/user/klo/DarkPhoton_Moriond17_GEN-SIM/v2/ZD_UpTo0j_MZD20_Eps1e-2/PUMoriond17-Realistic25ns13TeVEarly2017Collision-93X_mc2017_realistic_v3-LHE-GEN-SIM/180403_154314/0000/",
+        "/cms/data/store/user/klo/DarkPhoton_Moriond17_GEN-SIM/v2/ZD_UpTo0j_MZD3p09_Eps1e-2/PUMoriond17-Realistic25ns13TeVEarly2017Collision-93X_mc2017_realistic_v3-LHE-GEN-SIM/180609_103822/0000/",
         "DarkZTo4l_v1",
         inUFTier2 = True,
         exclude = "inLHE",
@@ -37,7 +38,7 @@ plots = [
         ]
 
 nCores = 1 
-outputDir = "/raid/raid7/lucien/Higgs/DarkZ-EvtGeneration/Log/2018-04-03/GEN-SIM_Validation_v2/"
+outputDir = "/raid/raid7/lucien/Higgs/DarkZ-EvtGeneration/Log/2018-06-13/GEN-SIM_Validation_v2/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
@@ -52,7 +53,7 @@ sequence.add(genJetProducer)
 sequence.add(plotter)
 
 endSequence = EndSequence()
-endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ-EvtGeneration/Log/2018-04-03/GEN-SIM_Validation_v2/"
+endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ-EvtGeneration/Log/2018-06-13/GEN-SIM_Validation_v2/"
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")
