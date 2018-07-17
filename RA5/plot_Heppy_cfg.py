@@ -4,12 +4,15 @@ from Core.OutputInfo import OutputInfo
 from Core.EndSequence import EndSequence
 
 from RA5.Weighter.XSWeighter import XSWeighter
+from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
 from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
 from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
+
+from Producer.TreeProducer import TreeProducer
 
 from Core.Utils.LambdaFunc import LambdaFunc
 
@@ -18,13 +21,15 @@ import os
 from DataMC.Heppy.Run2016.HaddMC import * 
 from DataMC.Heppy.Run2016.SampleDefinition import * 
 
-out_path = "HeppyValidation/2018-07-13/"
+out_path = "./HeppyValidation/2018-07-13/"
 
-nCores = 2
-outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
-nEvents = -1
+nCores = 1
+#outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+outputDir = out_path
+nEvents = 100
 disableProgressBar = False
 justEndSequence = False
+componentList = componentList[4:5]
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9
@@ -50,18 +55,20 @@ plots = [
         #Plot("JetSel_Mini_mass",      ["TH1D","JetSel_Mini_mass","",10,0., 200.],       LambdaFunc('x: x.JetSel_Mini_mass'), isCollection=True),
         ]
 plotter                 = Plotter("Plotter",plots)
+leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
 xsWeighter              = XSWeighter("XSWeighter")
 baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
 signalRegionSkimmer     = SignalRegionSkimmer("SignalRegionSkimmer")
 
 sequence = Sequence()
+sequence.add(leptonJetProducer)
 sequence.add(xsWeighter)
 #sequence.add(baselineSkimmer)
 #sequence.add(signalRegionSkimmer)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=False)
-endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
+endModuleOutputDir = out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")

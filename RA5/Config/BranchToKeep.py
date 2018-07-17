@@ -1,4 +1,5 @@
-branchToKeep = ['run',
+branchesToKeep = [
+'run',
 'lumi',
 'evt',
 'isData',

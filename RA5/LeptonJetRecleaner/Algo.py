@@ -31,6 +31,8 @@ class LeptonJetRecleaner(object):
         self.debugprinted = False
         self.storeJetVariables = storeJetVariables
         self.jetVarToStore = jetVarToStore
+        self.btagCSVLoose = 0.5426
+        self.btagCSVMedium = 0.8484
 
     def fillCollWithVeto(self,ret,refcollection,leps,lab,labext,selection,lepsforveto,doVetoZ,doVetoLM,sortby,ht=-1,pad_zeros_up_to=20):
         ret['i'+lab] = [];
@@ -119,13 +121,13 @@ class LeptonJetRecleaner(object):
             cleanjets.append(j)
             if j.pt > float(self.bJetPt):
                 ret["nJet"+self.strBJetPt+postfix] += 1; ret["htJet"+self.strBJetPt+"j"+postfix] += j.pt; 
-                if j.btagCSV>0.460: ret["nBJetLoose"+self.strBJetPt+postfix] += 1
-                if j.btagCSV>0.800: ret["nBJetMedium"+self.strBJetPt+postfix] += 1
+                if j.btagCSV>self.btagCSVLoose: ret["nBJetLoose"+self.strBJetPt+postfix] += 1
+                if j.btagCSV>self.btagCSVMedium: ret["nBJetMedium"+self.strBJetPt+postfix] += 1
                 mhtBJetPtvec = mhtBJetPtvec - j.p4()
             if j.pt > float(self.jetPt):
                 ret["nJet"+self.strJetPt+postfix] += 1; ret["htJet"+self.strJetPt+"j"+postfix] += j.pt; 
-                if j.btagCSV>0.460: ret["nBJetLoose"+self.strJetPt+postfix] += 1
-                if j.btagCSV>0.800: ret["nBJetMedium"+self.strJetPt+postfix] += 1
+                if j.btagCSV>self.btagCSVLoose: ret["nBJetLoose"+self.strJetPt+postfix] += 1
+                if j.btagCSV>self.btagCSVMedium: ret["nBJetMedium"+self.strJetPt+postfix] += 1
                 mhtJetPtvec = mhtJetPtvec - j.p4()
         ret["mhtJet"+self.strBJetPt+postfix] = mhtBJetPtvec.Pt()
         ret["mhtJet"+self.strJetPt+postfix] = mhtJetPtvec.Pt()
