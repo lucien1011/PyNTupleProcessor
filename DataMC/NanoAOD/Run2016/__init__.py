@@ -75,11 +75,11 @@ allDataSamples = [
 #    SingleMuon2016H2,
 #    SingleElectron2016B1,
 #    SingleElectron2016B2,
-    SingleElectron2016C,
+#    SingleElectron2016C,
 #    SingleElectron2016D,
 #    SingleElectron2016E,
 #    SingleElectron2016F,
 #    SingleElectron2016G,
 #    SingleElectron2016H1,
-#    SingleElectron2016H2,
+    SingleElectron2016H2,
     ]
