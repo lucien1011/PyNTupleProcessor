@@ -52,6 +52,7 @@ xsWeighter              = XSWeighter("XSWeighter")
 #signalRegionSkimmer     = SignalRegionSkimmer("SignalRegionSkimmer")
 
 sequence = Sequence()
+#sequence.add(leptonJetProducer)
 sequence.add(xsWeighter)
 #sequence.add(baselineSkimmer)
 sequence.add(plotter)

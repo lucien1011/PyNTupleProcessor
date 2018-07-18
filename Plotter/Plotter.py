@@ -18,7 +18,11 @@ class Plotter(Module):
             if not values: continue
             if not plot.isCollection and values[0] == None: continue
             for value in values:
-                self.writer.objs[plot.key].Fill(value,event.weight)
+                #self.writer.objs[plot.key].Fill(value,event.weight)
+                try:
+                    self.writer.objs[plot.key].Fill(value,event.weight)
+                except TypeError:
+                    raise RuntimeError, "Can't find "+plot.key+" in the tree"
         return True
 
     def end(self):
