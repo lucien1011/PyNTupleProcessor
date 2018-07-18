@@ -5,7 +5,7 @@ from Core.EndSequence import EndSequence
 
 from RA5.Weighter.XSWeighter import XSWeighter
 from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
-from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
+#from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
 #from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
 
 from Plotter.Plotter import Plotter
@@ -24,13 +24,13 @@ from NanoAOD.Producer.GenWeightCounter import *
 
 out_path = "./test_plot/"
 
-nCores = 8
+nCores = 1
 #outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
 outputDir = out_path
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
-componentList = componentList
+componentList = allMCSamples
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9
@@ -48,12 +48,12 @@ plots = [
 plotter                 = Plotter("Plotter",plots)
 leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
 xsWeighter              = XSWeighter("XSWeighter")
-baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
-signalRegionSkimmer     = SignalRegionSkimmer("SignalRegionSkimmer")
+#baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
+#signalRegionSkimmer     = SignalRegionSkimmer("SignalRegionSkimmer")
 
 sequence = Sequence()
 sequence.add(xsWeighter)
-sequence.add(baselineSkimmer)
+#sequence.add(baselineSkimmer)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=False)

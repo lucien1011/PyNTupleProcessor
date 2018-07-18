@@ -12,7 +12,7 @@ filePath = os.path.join(sumweight_path,sampleName,fileName)
 #cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
 
 cmpList = ComponentList(
-                       [ Component("VHToNonbb",TreeDir + sampleName +"/"+ "VHToNonbb_%s_SkimTree.root",inUFTier2) for i in range(0,1)]
+                       [ Component("VHToNonbb",TreeDir + sampleName +"/"+ "VHToNonbb_%s_SkimTree.root"%i,"tree",inUFTier2) for i in range(0,1)]
           )
 
 VHToNonbb= Dataset(
