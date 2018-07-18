@@ -27,7 +27,7 @@ TTWToLNu_ext= Dataset(
 
 TTWToLNu_ext2= Dataset(
         "TTWToLNu_ext2",
-        cmpList,
+        ComponentList([]),
         isMC                = True,
         xs                  = 1,
         )

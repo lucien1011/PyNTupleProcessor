@@ -12,7 +12,7 @@ filePath = os.path.join(sumweight_path,sampleName,fileName)
 #cmp = makeComponents(sampleName, TreeDir, "tree", inUFTier2)
 
 cmpList = ComponentList(
-                       [ Component("DYJetsToLL_M10to50_LO",TreeDir + sampleName +"/"+ "DYJetsToLL_M10to50_LO_%s_SkimTree.root",inUFTier2) for i in range(0,1) ]
+                       [ Component("DYJetsToLL_M10to50_LO",TreeDir + sampleName +"/"+ "DYJetsToLL_M10to50_LO_%s_SkimTree.root"%i,"tree",inUFTier2) for i in range(0,1) ]
           )
 
 DYJetsToLL_M10to50_LO= Dataset(
