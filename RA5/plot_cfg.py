@@ -16,8 +16,9 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 import os
 
-from DataMC.Heppy.Run2016.HaddMC import * 
+#from DataMC.Heppy.Run2016.HaddMC import * 
 from DataMC.Heppy.Run2016.SampleDefinition import * 
+from RA5.Dataset.Run2016 import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
