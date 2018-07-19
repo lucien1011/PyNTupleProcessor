@@ -33,7 +33,7 @@ else:
 
 nCores = 6 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
-outputDir = "./testPlot_v4/"
+outputDir = "./testPlot_v1/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False

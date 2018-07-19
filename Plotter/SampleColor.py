@@ -10,6 +10,8 @@ sampleColorDict = {
                 "SingleTop":ROOT.kAzure-2,
 
                 "TT_Powheg":ROOT.kAzure-4,
+                "DYJetsToLL_M50_LO":ROOT.kSpring+2,
+                "DYJetsToLL_M50_NLO":ROOT.kSpring+2,
                 "TTJets":ROOT.kAzure-4,
 
                 "DYJetsToLL_M50":ROOT.kSpring+2,

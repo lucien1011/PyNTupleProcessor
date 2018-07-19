@@ -18,22 +18,22 @@ class TTbarSkimmer(Module):
         event.muons = [p for p in event.MediumMuons if p.pt > 30]
         event.muons.sort(key=lambda x: x.pt,reverse=True)
 
-	event.eles = [p for p in event.MediumElectrons if p.pt > 30]
-	event.eles.sort(key=lambda x: x.pt,reverse=True)
+        event.eles = [p for p in event.MediumElectrons if p.pt > 30]
+        event.eles.sort(key=lambda x: x.pt,reverse=True)
 
         if len(event.muons) < 1: return False
-	if len(event.eles) < 1: return False
+        if len(event.eles) < 1: return False
 
-	temp = False
+        temp = False
 
-	for i in range(0,len(event.jets)):
-	    if event.jets[i].btagCSVV2 >= self.csvCut:
+        for i in range(0,len(event.jets)):
+            if event.jets[i].btagCSVV2 >= self.csvCut:
                temp = True
-	       break
-            else:
-		temp = False
-	
-	if not temp: return False
+               break
+        else:
+               temp = False
+
+        if not temp: return False
 
         event.nMuon40 = len(event.muons)
 
