@@ -35,7 +35,7 @@ DYJetsToLL_M50_LO_ext2= Dataset(
 DYJetsToLL_M50_LO_ext.setSumWeight(filePath1,"SumGenWeights",inUFTier2)
 DYJetsToLL_M50_LO_ext2.setSumWeight(filePath2,"SumGenWeights",inUFTier2)
 
-DYJetsToLL_M50_LO_ext.add(DYJetsToLL_M50_LO_ext2)
+#DYJetsToLL_M50_LO_ext.add(DYJetsToLL_M50_LO_ext2)
 
 
 Samples = [

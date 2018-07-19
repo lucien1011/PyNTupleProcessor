@@ -18,7 +18,6 @@ class Plotter(Module):
             if not values: continue
             if not plot.isCollection and values[0] == None: continue
             for value in values:
-                #self.writer.objs[plot.key].Fill(value,event.weight)
                 try:
                     self.writer.objs[plot.key].Fill(value,event.weight)
                 except TypeError:
