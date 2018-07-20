@@ -31,7 +31,7 @@ else:
 
 #out_path = "StopToBLep/DataMCDistributions/DataMC_ZToMuMuSelection_v1/2018-06-19/"
 
-nCores = 6 
+nCores = 1 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
 outputDir = "./testPlot_v1/"
 nEvents = -1
@@ -92,7 +92,7 @@ sequence.add(eventSkimmer)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/LO_DYJets/"
+endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")

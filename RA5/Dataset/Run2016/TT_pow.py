@@ -13,8 +13,9 @@ inUFTier2    = True
 #cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
 
 cmpList = ComponentList(
-                       [ Component("TT_pow",TreeDir + sampleName + "/"+"TT_pow_%s_SkimTree.root"%i,"tree",inUFTier2) for i in range(0,414)]
-        )
+                      # [ Component("TT_pow",TreeDir + sampleName + "/"+"TT_pow_%s_SkimTree.root"%i,"tree",inUFTier2) for i in range(0,414)]
+                       [ Component("TT_pow",TreeDir + sampleName + "/"+"SkimTree.root","tree",inUFTier2)]
+                      )
 
 TT_pow.componentList = cmpList
 

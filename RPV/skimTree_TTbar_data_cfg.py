@@ -15,7 +15,7 @@ nCores = 8
 outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/TTbar/"
 nEvents = -1
 disableProgressBar = False
-justEndSequence = False 
+justEndSequence = True 
 componentList = allDataSamples
 for dataset in componentList:
     for component in dataset.componentList:
