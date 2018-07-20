@@ -21,9 +21,9 @@ from RA5.Dataset.Run2016 import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "./test_plot/"
+out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/MCDistribution/2018-07-20/"
 
-nCores = 1
+nCores = 4
 #outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
 outputDir = out_path
 nEvents = -1
@@ -40,9 +40,9 @@ for dataset in componentList:
 plots = [
         Plot("nJet40",      ["TH1D","nJet40","",10,-0.5,9.5],       LambdaFunc('x: x.nJetSel[0]')),
         Plot("nBJet40",     ["TH1D","nBJet40","",7,-0.5,6.5],      LambdaFunc('x: x.nBJetMedium40[0]')),
-        Plot("htJet",        ["TH1D","htJet","",10,0.,1000.],         LambdaFunc('x: x.htJet40[0]')),
-        Plot("met_pt",         ["TH1D","met_pt","",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')),
-        Plot("met_phi",         ["TH1D","met_phi","",5,0., 10.],          LambdaFunc('x: x.met_phi[0]')),
+        Plot("htJet",       ["TH1D","htJet","",10,0.,1000.],         LambdaFunc('x: x.htJet40[0]')),
+        Plot("met_pt",      ["TH1D","met_pt","",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')),
+        Plot("met_phi",     ["TH1D","met_phi","",5,0., 10.],          LambdaFunc('x: x.met_phi[0]')),
         Plot("mht",         ["TH1D","mht","",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')),
         ]
 plotter                 = Plotter("Plotter",plots)
@@ -58,7 +58,7 @@ sequence.add(xsWeighter)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=False)
-endModuleOutputDir = "/home/kshi/public_html/RA5/mcPlot/"
+endModuleOutputDir = out_path 
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")

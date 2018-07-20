@@ -41,6 +41,7 @@ for sampleName in sampleFileNames:
 # Exceptionally handling TT Powheg sample
 TT_pow_comps = makeComponents("TT_pow","/cms/data/store/user/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v1/TT_pow/180712_162135/0000/",treeName,inUFTier2)
 TT_pow = Dataset("TT_pow",ComponentList([]),xs=1.)
+TT_pow.sumw = 0.
 for comp in TT_pow_comps:
     temp_comp_list = ComponentList([comp])
     tmpDataset = Dataset("TT_pow",temp_comp_list,xs=1.)
@@ -49,6 +50,7 @@ for comp in TT_pow_comps:
 
 TT_pow_ext3_comps = makeComponents("TT_pow","/cms/data/store/user/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v1/TT_pow/180712_162135/0000/",treeName,inUFTier2)
 TT_pow_ext3 = Dataset("TT_pow_ext3",ComponentList([]),xs=1.)
+TT_pow_ext3.sumw = 0.
 for comp in TT_pow_ext3_comps:
     temp_comp_list = ComponentList([comp])
     tmpDataset = Dataset("TT_pow_ext3",temp_comp_list,xs=1.)
