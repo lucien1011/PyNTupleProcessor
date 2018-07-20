@@ -11,6 +11,7 @@ from WGToLNuG import WGToLNuG
 from WJetsToLNu_LO import WJetsToLNu_LO
 from WWDoubleTo2L import WWDoubleTo2L
 from WZTo3LNu import WZTo3LNu
+from TT_pow import TT_pow
 
 allMCSamples = [
    DYJetsToLL_M10to50_LO,
@@ -26,4 +27,5 @@ allMCSamples = [
    WJetsToLNu_LO,
    WWDoubleTo2L,
    WZTo3LNu,
+   TT_pow,
    ]

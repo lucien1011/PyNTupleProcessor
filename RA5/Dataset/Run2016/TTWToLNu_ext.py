@@ -15,7 +15,7 @@ filePath2 = os.path.join(sumweight_path,sumweightName2,fileName)
 #cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
 
 cmpList = ComponentList(
-                       [ Component("TTWToLNu",TreeDir + sampleName +"/"+ "TTWToLNu_%s_SkimTree.root",inUFTier2) for i in range(0,2)]
+                       [ Component("TTWToLNu",TreeDir + sampleName +"/"+ "TTWToLNu_%s_SkimTree.root"%i,"tree",inUFTier2) for i in range(0,2)]
           )
 
 TTWToLNu_ext= Dataset(

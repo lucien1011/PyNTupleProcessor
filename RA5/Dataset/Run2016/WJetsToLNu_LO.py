@@ -14,7 +14,7 @@ filePath2 = os.path.join(sumweight_path,sumweightName,fileName)
 #cmp = makeComponents(sampleName, TreeDir, "Events", inUFTier2)
 
 cmpList = ComponentList(
-                       [ Component("WJetsToLNu_LO",TreeDir + sampleName +"/"+ "WJetsToLNu_LO_%s_SkimTree.root","tree",inUFTier2) for i in range(0,2)]
+                       [ Component("WJetsToLNu_LO",TreeDir + sampleName +"/"+ "WJetsToLNu_LO_%s_SkimTree.root"%i,"tree",inUFTier2) for i in range(0,2)]
           )
 
 WJetsToLNu_LO= Dataset(

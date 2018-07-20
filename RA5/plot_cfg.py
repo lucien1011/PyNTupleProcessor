@@ -5,7 +5,7 @@ from Core.EndSequence import EndSequence
 
 from RA5.Weighter.XSWeighter import XSWeighter
 from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
-from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
+#from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
 #from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
 
 from Plotter.Plotter import Plotter
@@ -39,20 +39,21 @@ for dataset in componentList:
 
 plots = [
         Plot("nJet40",      ["TH1D","nJet40","",10,-0.5,9.5],       LambdaFunc('x: x.nJetSel[0]')),
-        Plot("nBJet40",     ["TH1D","nBJet40","",10,-0.5,9.5],      LambdaFunc('x: x.nBJetMedium40[0]')),
+        Plot("nBJet40",     ["TH1D","nBJet40","",7,-0.5,6.5],      LambdaFunc('x: x.nBJetMedium40[0]')),
         Plot("htJet",        ["TH1D","htJet","",10,0.,1000.],         LambdaFunc('x: x.htJet40[0]')),
         Plot("met_pt",         ["TH1D","met_pt","",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')),
-        Plot("met_phi",         ["TH1D","met_phi","",10,0., 500.],          LambdaFunc('x: x.met_phi[0]')),
+        Plot("met_phi",         ["TH1D","met_phi","",5,0., 10.],          LambdaFunc('x: x.met_phi[0]')),
         Plot("mht",         ["TH1D","mht","",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')),
         ]
 plotter                 = Plotter("Plotter",plots)
 leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
 xsWeighter              = XSWeighter("XSWeighter")
-baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
+#baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
+#signalRegionSkimmer     = SignalRegionSkimmer("SignalRegionSkimmer")
 
 sequence = Sequence()
-sequence.add(xsWeighter)
 #sequence.add(leptonJetProducer)
+sequence.add(xsWeighter)
 #sequence.add(baselineSkimmer)
 sequence.add(plotter)
 
