@@ -25,7 +25,7 @@ from DataMC.Heppy.Run2016.SampleDefinition import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v1_LeptonJetRecleaner/"
+out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v1_LeptonJetRecleaner_TT_pow/"
 #out_path = "HeppyValidation/2018-07-16/"
 
 nCores = 5
@@ -33,7 +33,7 @@ outputDir = out_path
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
-componentList = componentList
+componentList = [TT_pow]
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9

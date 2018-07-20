@@ -10,6 +10,8 @@ sampleColorDict = {
                 "SingleTop":ROOT.kAzure-2,
 
                 "TT_Powheg":ROOT.kAzure-4,
+                "DYJetsToLL_M50_LO":ROOT.kSpring+2,
+                "DYJetsToLL_M50_NLO":ROOT.kSpring+2,
                 "TTJets":ROOT.kAzure-4,
 
                 "DYJetsToLL_M50":ROOT.kSpring+2,
@@ -32,6 +34,22 @@ sampleColorDict = {
                 "ZZZ":ROOT.kBlue,
                 "WWW_4f":ROOT.kBlue,
                 "LQToBL_mLQ500":ROOT.kRed,
+                
+                #RA5
+                "DYJetsToLL_M10to50_LO":ROOT.kSpring+2,
+                "DYJetsToLL_M50_LO_ext":ROOT.kSpring+2,
+                "TGJets":ROOT.kAzure-2,
+                "TTGJets":ROOT.kAzure-2,
+                "TTHnobb_pow":ROOT.kAzure-4,
+                "TTWToLNu_ext":ROOT.kAzure-4,
+                "TTZToLLNuNu":ROOT.kSpring+6,
+                "TTZToLLNuNu_m1to10":ROOT.kSpring+6,
+                "VHToNonbb":ROOT.kSpring+4,
+                "WGToLNuG":ROOT.kBlue,
+                "WJetsToLNu_LO":ROOT.kBlue,
+                "WWDoubleTo2L":ROOT.kBlue,
+                "WZTo3LNu":ROOT.kBlue,
+
 
                 # Dark Z
                 "ggH": ROOT.kAzure-2,

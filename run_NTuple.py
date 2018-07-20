@@ -27,10 +27,15 @@ outputInfo              = cfg.outputInfo
 endSequence             = cfg.endSequence
 justEndSequence         = cfg.justEndSequence if hasattr(cfg,"justEndSequence") else False
 mergeSampleDict         = cfg.mergeSampleDict if hasattr(cfg,"mergeSampleDict") else {}
+verbose                 = cfg.verbose if hasattr(cfg,"verbose") else False
 
+if verbose:
+    print "Starting"
 start_time = time.time()
 
 if not justEndSequence:
+    if verbose:
+        print "Initiating progress bar"
     progressBar = ProgressBar()
     
     if nCores != 1:
@@ -67,6 +72,8 @@ if not justEndSequence:
     with open(gitVerboseFile,'w') as f:
         f.write(getGitDiff())
     
+    if verbose:
+        print "Ending progress bar"
     if not disableProgressBar: progressMonitor.end()
     communicationChannel.end()
 

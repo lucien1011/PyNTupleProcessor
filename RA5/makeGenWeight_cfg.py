@@ -3,21 +3,17 @@ from Core.Sequence import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
-from DataMC.NanoAOD.Run2016 import *
+#from DataMC.NanoAOD.Run2016 import *
 
 from RA5.Producer.GenWeightCounter import *
+from RA5.Dataset.Run2016 import *
 
 nCores = 8 
-outputDir = "/raid/raid7/lucien/SUSY/RA5/SumGenWeight/NanoAOD_InclusiveSelection_v1/Run2016/"
+outputDir = "/raid/raid7/kshi/SUSY/RA5/sum_weight/"
 nEvents = -1
 disableProgressBar = False
-justEndSequence = True
-componentList = [
-    TToLeptons_sch,
-    T_tch,
-    T_tWch,
-    TBar_tWch,
-    ]
+justEndSequence = False
+componentList = allMCSamples
 
 sequence = Sequence()
 eventWeightCount = GenWeightCounter("GenWeightCounter")
