@@ -49,7 +49,13 @@ sampleColorDict = {
                 "WJetsToLNu_LO":ROOT.kBlue,
                 "WWDoubleTo2L":ROOT.kBlue,
                 "WZTo3LNu":ROOT.kBlue,
-
+                "Non-prompt": ROOT.kGray, 
+                "WZ": ROOT.kOrange-2,
+                "ttVorH": ROOT.kGreen+2,    
+                "ttW": ROOT.kBlue+2,
+                "gamma+X": ROOT.kViolet+10,
+                "WW": ROOT.kOrange+8,
+                "Minor": ROOT.kPink+6,
 
                 # Dark Z
                 "ggH": ROOT.kAzure-2,
