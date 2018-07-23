@@ -42,7 +42,7 @@ plots = [
         Plot("nBJet40",     ["TH1D","nBJet40","",7,-0.5,6.5],      LambdaFunc('x: x.nBJetMedium40[0]')),
         Plot("htJet",        ["TH1D","htJet","",10,0.,1000.],         LambdaFunc('x: x.htJet40[0]')),
         Plot("met_pt",         ["TH1D","met_pt","",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')),
-        Plot("met_phi",         ["TH1D","met_phi","",5,0., 10.],          LambdaFunc('x: x.met_phi[0]')),
+        Plot("met_phi",         ["TH1D","met_phi","",5,0., 5.],          LambdaFunc('x: x.met_phi[0]')),
         Plot("mht",         ["TH1D","mht","",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')),
         ]
 plotter                 = Plotter("Plotter",plots)
