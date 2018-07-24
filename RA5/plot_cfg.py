@@ -21,11 +21,11 @@ from RA5.Dataset.Run2016 import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "./test_plot/"
+#out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/MCDistribution/2018-07-20/"
 
-nCores = 1
+nCores = 1 
 #outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
-outputDir = out_path
+outputDir = "./test_plot/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
