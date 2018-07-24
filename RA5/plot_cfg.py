@@ -13,6 +13,7 @@ from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
 from Core.Utils.LambdaFunc import LambdaFunc
+from Core.Utils.WhichMachine import where
 
 import os
 
@@ -21,9 +22,16 @@ from RA5.Dataset.Run2016 import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/MCDistribution/2018-07-20/"
+if where == "hpg":
+    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/MCDistribution/2018-07-20/"
+    outputDir = out_path
+    endModuleOutputDir = out_path 
+elif where == "ihepa":
+    out_path = "MCDistribution/2018-07-22/"
+    outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 
-nCores = 4
+nCores = 1
 #outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
 outputDir = out_path
 nEvents = -1
@@ -39,6 +47,9 @@ for dataset in componentList:
 
 plots = [
         Plot("nJet40",      ["TH1D","nJet40","",10,-0.5,9.5],       LambdaFunc('x: x.nJetSel[0]')),
+        Plot("nLepTight",   ["TH1D","nLepTight","",10,-0.5,9.5],       LambdaFunc('x: x.nLepTight[0]')),
+        Plot("nLepLoose",   ["TH1D","nLepLoose","",10,-0.5,9.5],       LambdaFunc('x: x.nLepLoose[0]')),
+        Plot("nLepCleaning",   ["TH1D","nLepCleaning","",10,-0.5,9.5],       LambdaFunc('x: x.nLepCleaning[0]')),
         Plot("nBJet40",     ["TH1D","nBJet40","",7,-0.5,6.5],      LambdaFunc('x: x.nBJetMedium40[0]')),
         Plot("htJet",       ["TH1D","htJet","",10,0.,1000.],         LambdaFunc('x: x.htJet40[0]')),
         Plot("met_pt",      ["TH1D","met_pt","",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')),
