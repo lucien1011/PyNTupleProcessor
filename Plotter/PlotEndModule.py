@@ -131,7 +131,7 @@ class PlotEndModule(EndModule):
         return histList
 
 
-    def makeLegend(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None):
+    def makeLegend(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,smCountErr=None):
         leg = ROOT.TLegend(0.63,0.58,0.89,0.87)
         leg.SetBorderSize(0)
         leg.SetFillColor(0)
@@ -147,6 +147,9 @@ class PlotEndModule(EndModule):
             legLabel += ": 100%"
         else:
             legLabel += ": "+str(math.ceil(smCount*10)/10)
+        if smCountErr:
+            legLabel += " #pm "+str(math.ceil(smCountErr*10)/10)
+
         if bkdgErr:
             leg.AddEntry(bkdgErr, legLabel, "fl") 
         
@@ -208,7 +211,7 @@ class PlotEndModule(EndModule):
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
 
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList)
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
  
             c.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
@@ -279,7 +282,7 @@ class PlotEndModule(EndModule):
 
             upperPad.cd()
             
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,histListSignal=sigHistList)
+            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
             
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
