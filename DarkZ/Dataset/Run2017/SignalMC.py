@@ -16,7 +16,7 @@ ggHZZd_M15 = Dataset(
         cmpList_M15,
         isMC                = True,
         isSignal            = True,
-        xs                  = 0.0000119*100,
+        xs                  = 0.0000119,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 15",
         )
@@ -32,7 +32,7 @@ ggHZZd_M20 = Dataset(
         cmpList_M20,
         isMC                = True,
         isSignal            = True,
-        xs                  = 6.285e-06*100,
+        xs                  = 6.285e-06,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 20",
         )
@@ -48,7 +48,7 @@ ggHZZd_M25 = Dataset(
         cmpList_M25,
         isMC                = True,
         isSignal            = True,
-        xs                  = 9.857e-06*100,
+        xs                  = 9.857e-06,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 25",
         )
@@ -64,7 +64,7 @@ ggHZZd_M30 = Dataset(
         cmpList_M30,
         isMC                = True,
         isSignal            = True,
-        xs                  = 1.190e-05*100,
+        xs                  = 1.190e-05,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 30",
         )
@@ -80,7 +80,7 @@ ggHZZd_M35 = Dataset(
         cmpList_M35,
         isMC                = True,
         isSignal            = True,
-        xs                  = 6.285e-06*100,
+        xs                  = 6.285e-06,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 35",
         )
@@ -91,5 +91,5 @@ sigSamples = [
         ggHZZd_M20,
         ggHZZd_M25,
         ggHZZd_M30,
-        ggHZZd_M35,
+        #ggHZZd_M35,
         ]
