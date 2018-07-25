@@ -27,14 +27,16 @@ from RA5.Dataset.Run2016 import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-if where == "hpg":
-    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-07-23/"
-    outputDir = out_path
-    endModuleOutputDir = out_path 
-elif where == "ihepa":
-    out_path = "Sync2016/2018-07-23/"
-    outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
-    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
+#if where == "hpg":
+#    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-07-23/"
+#    outputDir = out_path
+#    endModuleOutputDir = out_path 
+#elif where == "ihepa":
+#    out_path = "Sync2016/2018-07-23/"
+#    outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+#    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
+outputDir = ./test_count/
+endModuleOutputDir = "/raid/raid7/kshi/SUSY/RA5/yieldcount/"
 lepCats = ["HH","HL","LL"]
 
 nCores = 1
