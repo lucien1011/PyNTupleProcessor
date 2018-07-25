@@ -28,11 +28,11 @@ from RA5.Dataset.Run2016 import *
 from NanoAOD.Producer.GenWeightCounter import *
 
 if where == "hpg":
-    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-07-23/"
+    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-07-26/"
     outputDir = out_path
     endModuleOutputDir = out_path 
 elif where == "ihepa":
-    out_path = "Sync2016/2018-07-23/"
+    out_path = "Sync2016/2018-07-26/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]

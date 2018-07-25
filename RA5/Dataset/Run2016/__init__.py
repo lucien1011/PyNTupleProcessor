@@ -13,6 +13,8 @@ from WWDoubleTo2L import WWDoubleTo2L
 from WZTo3LNu import WZTo3LNu
 from TT_pow import TT_pow
 
+from T1qqqqL import T1qqqqL_1000,T1qqqq_1500
+
 allMCSamples = [
    DYJetsToLL_M10to50_LO,
    DYJetsToLL_M50_LO_ext,
@@ -29,3 +31,8 @@ allMCSamples = [
    WZTo3LNu,
    TT_pow,
    ]
+
+allSignalSamples = [
+        T1qqqqL_1000,
+        T1qqqqL_1500,
+        ]
