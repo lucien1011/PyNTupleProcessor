@@ -81,7 +81,7 @@ ggHZZd_M35 = Dataset(
         cmpList_M35,
         isMC                = True,
         isSignal            = True,
-        xs                  = 6.285e-06*100,
+        xs                  = 6.285e-06,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 35",
         )
@@ -92,5 +92,5 @@ sigSamples = [
         ggHZZd_M20,
         ggHZZd_M25,
         ggHZZd_M30,
-        ggHZZd_M35,
+        #ggHZZd_M35,
         ]

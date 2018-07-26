@@ -124,6 +124,7 @@ class PlotEndModule(EndModule):
             h.SetLineWidth(5)
             h.SetLineColor(sampleColorDict[sample])
             h.SetFillColorAlpha(ROOT.kRed,0.)
+	    h.SetStats(0)
             histList.append([h,sample,sigCount])
 
         if plot.plotSetting.divideByBinWidth:
@@ -184,7 +185,7 @@ class PlotEndModule(EndModule):
         axisLabel = self.getAxisTitle(plot)
 
         if not collector.mcSamples and not collector.dataSamples:
-            raise RuntimeError, "Nothing to be drown"
+            raise RuntimeError, "Nothing to be drawn"
 
         if collector.dataSamples and switch:
             raise RuntimeError, "Cannot run incorporate data samples and background ratio at the same time"
@@ -343,7 +344,10 @@ class PlotEndModule(EndModule):
             leg = self.makeLegend([],None,0.,False,histListSignal=sigHistList)
  
             c.SetLogy(0)
+	    # sigHistList looks like: histList.append([h,sample,sigCount])
+	    maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
             for hist,sample,sigCount in sigHistList:
+		hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
                 hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")
