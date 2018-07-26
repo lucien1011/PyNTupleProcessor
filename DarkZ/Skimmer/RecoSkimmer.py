@@ -21,7 +21,9 @@ class RecoSkimmer(Module):
         self.m4lRange = [105.,140.]
 
     def analyze(self,event):
-        event.leps = [lep for lep in Collection(event,"lep") if ((abs(lep.eta) < self.elPtCut and abs(lep.id) == 11 and lep.pt > self.elEtaCut) or (abs(lep.eta) < self.muEtaCut and abs(lep.id) == 13 and lep.pt > self.muPtCut)) and lep.RelIso < self.lepRelIso]
+        event.leps = [lep for lep in Collection(event,"lep") 
+			if ((abs(lep.eta) < self.elEtaCut and abs(lep.id) == 11 and lep.pt > self.elPtCut) or 
+			    (abs(lep.eta) < self.muEtaCut and abs(lep.id) == 13 and lep.pt > self.muPtCut)) and lep.RelIso < self.lepRelIso]
         #event.leps = [lep for lep in Collection(event,"lepFSR") if ((abs(lep.eta) < 2.5 and abs(lep.id) == 11 and lep.pt > 7) or (abs(lep.eta) < 2.4 and abs(lep.id) == 13 and lep.pt > 5)) and lep.RelIso < 0.35]
         event.leps.sort(key=lambda x: x.pt,reverse=True)
 
@@ -40,9 +42,9 @@ class RecoSkimmer(Module):
         event.Z2 = Z2
         if not passZ1Z2: return False
 
-# Make list of the four leptons which come from the Z bosons.
-# lep1 and lep2 come from Z1; lep3 and lep4 come from Z2
-        lep_vec_list = [Z1.lep1.vec,Z1.lep2.vec,Z2.lep1.vec,Z2.lep2.vec]
+	# Make list of the four leptons which come from the Z bosons.
+	# Generally, lep1 and lep2 come from Z1; lep3 and lep4 come from Z2
+        lep_vec_list = [Z1.lep1.vec, Z1.lep2.vec, Z2.lep1.vec, Z2.lep2.vec]
         deltaRs = []
         for i,vec1 in enumerate(lep_vec_list):
             for j,vec2 in enumerate(lep_vec_list):
@@ -58,14 +60,13 @@ class RecoSkimmer(Module):
         return True
 
     def OSSFLeptonPairs(self,leps):
-# mm = muon_minus (13), mp = muon_plus (-13), em = electron_minus (11), ep = electron_plus (-11)
+	# mm = muon_minus (13), mp = muon_plus (-13), em = electron_minus (11), ep = electron_plus (-11)
         Nmm = 0
         Nmp = 0
         Nem = 0
         Nep = 0
         lepids = [lep.id for lep in leps]
         for lep_id in lepids:
-# lep_ids were initially wrong. E.g. mm was -13. Shouldn't matter in the end. 
             if lep_id == 13:
                 Nmm += 1
             elif lep_id == -13:
@@ -74,6 +75,7 @@ class RecoSkimmer(Module):
                 Nem += 1
             elif lep_id == -11:
                 Nep += 1
+	# Require at least 4 leptons
         return (Nmm >= 2 and Nmp >= 2) or (Nem >= 2 and Nep >= 2) or (Nmm > 0 and Nmp > 0 and Nem > 0 and Nep > 0)
 
 
