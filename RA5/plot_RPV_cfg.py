@@ -32,7 +32,7 @@ if where == "hpg":
     outputDir = out_path
     endModuleOutputDir = out_path 
 elif where == "ihepa":
-    out_path = "Sync2016/2018-07-23/"
+    out_path = "SigBkgDistribution/2018-07-26/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -40,9 +40,9 @@ lepCats = ["HH","HL","LL"]
 nCores = 1
 nEvents = -1
 disableProgressBar = False
-justEndSequence = True
-verbose = True
-componentList = allMCSamples
+justEndSequence = False
+verbose = False
+componentList = allMCSamples + allSignalSamples
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9
@@ -65,6 +65,13 @@ for lepCat in lepCats:
         Plot("met_pt"+lepCat,      ["TH1D","met_pt"+lepCat,"",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')           ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("met_phi"+lepCat,     ["TH1D","met_phi"+lepCat,"",10,-5, 5.],          LambdaFunc('x: x.met_phi[0]')           ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("mht"+lepCat,         ["TH1D","mht"+lepCat,"",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        
+        Plot("LepTightPt1"+lepCat,    ["TH1D","LepTightPt1"+lepCat,"",10,0.,200.],      LambdaFunc('x: x.tightLeps[0].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("LepTightEta1"+lepCat,    ["TH1D","LepTightEta1"+lepCat,"",10,-3.,3.],      LambdaFunc('x: x.tightLeps[0].eta')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("LepTightPhi1"+lepCat,    ["TH1D","LepTightPhi1"+lepCat,"",10,-5.,5.],      LambdaFunc('x: x.tightLeps[0].phi')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("LepTightPt2"+lepCat,    ["TH1D","LepTightPt2"+lepCat,"",10,0.,200.],      LambdaFunc('x: x.tightLeps[1].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("LepTightEta2"+lepCat,    ["TH1D","LepTightEta2"+lepCat,"",10,-3.,3.],      LambdaFunc('x: x.tightLeps[1].eta')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("LepTightPhi2"+lepCat,    ["TH1D","LepTightPhi2"+lepCat,"",10,-5.,5.],      LambdaFunc('x: x.tightLeps[1].phi')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         ]
         )
 plotter                 = Plotter("Plotter",plots)
@@ -79,14 +86,14 @@ nJet40Producer           = NJet40Producer("NJet40Producer")
 sequence = Sequence()
 #sequence.add(leptonJetProducer)
 #sequence.add(baselineSkimmer)
-sequence.add(metSkimmer)
+#sequence.add(metSkimmer)
 sequence.add(categoryProducer)
 sequence.add(llHtSkimmer)
 sequence.add(nJet40Producer)
 sequence.add(xsWeighter)
 sequence.add(plotter)
 
-endSequence = EndSequence(skipHadd=False,)
+endSequence = EndSequence(skipHadd=justEndSequence,)
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")
