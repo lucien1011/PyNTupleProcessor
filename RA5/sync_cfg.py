@@ -10,6 +10,7 @@ from RA5.Skimmer.METSkimmer import METSkimmer
 from RA5.Skimmer.LLHtSkimmer import LLHtSkimmer
 from RA5.Producer.CategoryProducer import CategoryProducer
 from RA5.Producer.NJet40Producer import NJet40Producer
+from RA5.Producer.YieldCounter import *
 from RA5.Config.MergeSampleDefinition import mergeSampleDict
 #from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
 
@@ -85,6 +86,11 @@ sequence.add(metSkimmer)
 sequence.add(categoryProducer)
 sequence.add(llHtSkimmer)
 sequence.add(nJet40Producer)
+for i in lepCats:
+    if x: x.cat.lepCat == i:
+        for j in x: x.cat.jetCat:
+            YieldCounter = YieldCounter("YieldCounter", i+j)
+            sequence.add(YieldCounter)
 sequence.add(xsWeighter)
 sequence.add(plotter)
 
