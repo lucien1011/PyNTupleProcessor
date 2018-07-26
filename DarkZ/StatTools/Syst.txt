@@ -1,0 +1,2 @@
+logN            VBF     WHminus     WHplus      ZH      ggH     ggHZZd_M15      ggHZZd_M20      ggHZZd_M25      ggHZZd_M30 
+lumi            0.025   0.025       0.025       0.025   0.025   0.025           0.25            0.25            0.25
