@@ -17,9 +17,11 @@ class PlotEndModule(EndModule):
             self.drawPlot(collector,plot,self.outputDir,self.switch)
 
     def drawPlot(self,collector,plot,outputDir,switch):
+        self.makedirs(outputDir)
         if plot.dim == 1:
-            self.makedirs(outputDir)
             self.draw1DPlot(collector,plot,outputDir,switch)
+        elif plot.dim == 2:
+            self.draw2DPlot(collector,plot,outputDir)
         else:
             print "Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment"
 
@@ -350,6 +352,15 @@ class PlotEndModule(EndModule):
             #self.drawLabels(pSetPair[0].lumi)
             c.SaveAs(outputDir+"/"+plot.key+".png")
             c.SaveAs(outputDir+"/"+plot.key+".pdf")
+
+    def draw2DPlot(self,collector,plot,outputDir):
+        c = ROOT.TCanvas()
+        for isample,sample in enumerate(collector.samples):
+            hist = collector.getObj(sample,plot.rootSetting[1])
+            hist.SetStats(0)
+            hist.Draw("colz")
+            c.SaveAs(outputDir+"/"+sample+"_"+plot.key+".png")
+            c.SaveAs(outputDir+"/"+sample+"_"+plot.key+".pdf")
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)

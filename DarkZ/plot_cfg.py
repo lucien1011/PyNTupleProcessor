@@ -18,8 +18,8 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
-#out_path = "MCDistributions/MC_HiggsTo4LSelection_v1/2018-07-09/"
+#out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
+out_path = "MCDistributions/MC_HiggsTo4LSelection_v1/2018-07-26/"
 
 muon_plots = [
         Plot("Muon1_Pt", ["TH1D","Muon1_pt","",20,0.,200.], LambdaFunc('x: x.Z1.lep1.vec.Pt()'),),
@@ -43,6 +43,7 @@ general_plots = [
         Plot("Z1_mass",     ["TH1D","Z1_mass","",30,0.,150.],   LambdaFunc('x: x.Z1.vec.M()'),       ),
         Plot("Z2_mass",     ["TH1D","Z2_mass","",30,0.,150.],   LambdaFunc('x: x.Z2.vec.M()'),       ),
         Plot("h4L_mass",    ["TH1D","4L_mass","",25,100.,150.], LambdaFunc('x: x.hmass'),           ),
+        Plot("Z1mass_vs_Z2mass",["TH2D","Z1mass_vs_Z2mass","",30,0.,150.,30,0.,150.], LambdaFunc('x: [x.Z1.vec.M(),x.Z2.vec.M(),]'),dim=2),
         #Plot("h4L_Pt",      ["TH1D","4L_Pt","",40,0.,200.],     LambdaFunc('x: x.pT4l[0]'),         ),
         #Plot("met",         ["TH1D","met","",40,0.,200.],       LambdaFunc('x: x.met[0]'),          ),
         #Plot("nVtx",        ["TH1D","nVtx","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]')),
@@ -61,7 +62,7 @@ outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + sigSamples
-justEndSequence         = False
+justEndSequence         = True
 
 for dataset in componentList:
     if dataset.isMC:
@@ -72,9 +73,9 @@ for dataset in componentList:
 sequence                = Sequence()
 xsWeighter              = XSWeighter("XSWeighter")
 recoSkimmer             = RecoSkimmer("RecoSkimmer")
-recoSkimmer.Z1MassRange = [80.,100.]
-recoSkimmer.Z2MassRange = [15.,115.]
-recoSkimmer.m4lCut      = [115.,130.]
+#recoSkimmer.Z1MassRange = [80.,100.]
+#recoSkimmer.Z2MassRange = [15.,115.]
+#recoSkimmer.m4lCut      = [115.,130.]
 plotter                 = Plotter("Plotter",plots)
 
 sequence.add(xsWeighter)
