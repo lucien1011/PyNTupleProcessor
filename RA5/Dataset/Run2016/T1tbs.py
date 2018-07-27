@@ -20,6 +20,7 @@ T1tbs_1000 = Dataset(
         cmpList_1000,
         isSignal = True,
         isMC = True,
+        xsFactor = 0.09,
         plotLabel = "T1tbs, m_{Gluino} = 1000",
         )
 T1tbs_1000.setSumWeight(sumweight_path+"mGluino1000/"+sumweight_file,sumWeight,inUFTier2=inUFTier2)
@@ -33,6 +34,7 @@ T1tbs_1500 = Dataset(
         cmpList_1500,
         isSignal = True,
         isMC = True,
+        xsFactor = 0.09,
         plotLabel = "T1tbs, m_{Gluino} = 1500",
         )
 T1tbs_1500.setSumWeight(sumweight_path+"mGluino1500/"+sumweight_file,sumWeight,inUFTier2=inUFTier2)

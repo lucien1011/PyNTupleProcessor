@@ -86,7 +86,7 @@ sequence.add(nJet40Producer)
 sequence.add(xsWeighter)
 sequence.add(plotter)
 
-endSequence = EndSequence(skipHadd=False,)
+endSequence = EndSequence(skipHadd=justEndSequence,)
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")

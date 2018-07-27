@@ -10,6 +10,7 @@ sampleColorDict = {
                 "SingleTop":ROOT.kAzure-2,
 
                 "TT_Powheg":ROOT.kAzure-4,
+                "TT_pow":ROOT.kAzure-4,
                 "DYJetsToLL_M50_LO":ROOT.kSpring+2,
                 "DYJetsToLL_M50_NLO":ROOT.kSpring+2,
                 "TTJets":ROOT.kAzure-4,
@@ -57,7 +58,9 @@ sampleColorDict = {
                 "WW": ROOT.kOrange+8,
                 "Minor": ROOT.kPink+6,
                 "SMS-T1qqqqL_mGluino1000": ROOT.kRed,
-                "SMS-T1qqqqL_mGluino1500": ROOT.kRed,
+                "SMS-T1qqqqL_mGluino1500": ROOT.kRed+1,
+                "SMS-T1tbs_mGluino1000": ROOT.kBlue+2,
+                "SMS-T1tbs_mGluino1500": ROOT.kBlue+3,
 
                 # Dark Z
                 "ggH": ROOT.kAzure-2,
