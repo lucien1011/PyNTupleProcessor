@@ -4,6 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 #from DarkZ.Dataset.Run2016.MC import * 
+from DarkZ.Dataset.Run2017.Data import * 
 from DarkZ.Dataset.Run2017.BkgMC import * 
 from DarkZ.Dataset.Run2017.SignalMC import * 
 #from DarkZ.Dataset.Run2017.SkimTree import * 
@@ -11,15 +12,17 @@ from DarkZ.Dataset.Run2017.SignalMC import *
 #from DarkZ.Skimmer.Preskimmer import GENPreskimmer
 #from DarkZ.Skimmer.FiducialSkimmer import FiducialSkimmer
 from DarkZ.Skimmer.RecoSkimmer import RecoSkimmer
+from DarkZ.Skimmer.BlindSkimmer import BlindSkimmer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
+from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
 #out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
-out_path = "MCDistributions/MC_HiggsTo4LSelection_v1/2018-07-26/"
+out_path = "DataMCDistributions/MC_HiggsTo4LSelection_v1/2018-07-26/"
 
 lepton_plots = [
         Plot("Lepton1_Pt", ["TH1D","Lepton1_pt","",20,0.,200.], LambdaFunc('x: x.Z1.lep1.vec.Pt()'),),
@@ -57,29 +60,32 @@ plots = lepton_plots + general_plots + jet_plots
 for plot in plots:
     plot.plotSetting.divideByBinWidth = True
 
-nCores                  = 5
+nCores                  = 8
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples
+componentList           = bkgSamples + sigSamples + [data2017]
 justEndSequence         = False
 
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 77.30
+        #dataset.lumi = 77.30
+        dataset.lumi = 41.4
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
 sequence                = Sequence()
 xsWeighter              = XSWeighter("XSWeighter")
 recoSkimmer             = RecoSkimmer("RecoSkimmer")
-#recoSkimmer.Z1MassRange = [80.,100.]
-recoSkimmer.Z2MassRange = [4.,120.]
-#recoSkimmer.m4lCut      = [115.,130.]
+blindSkimmer            = BlindSkimmer("BlindSkimmer")
+dataMCWeighter          = DataMCWeighter("DataMCWeighter")
+#recoSkimmer.Z2MassRange = [4.,120.]
 plotter                 = Plotter("Plotter",plots)
 
-sequence.add(xsWeighter)
 sequence.add(recoSkimmer)
+sequence.add(blindSkimmer)
+sequence.add(xsWeighter)
+sequence.add(dataMCWeighter)
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")

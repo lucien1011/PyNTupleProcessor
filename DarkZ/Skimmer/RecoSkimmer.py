@@ -40,6 +40,8 @@ class RecoSkimmer(Module):
         #if Z2.vec.M() < 12 or Z2.vec.M() > 120: return False
         event.Z1 = Z1
         event.Z2 = Z2
+        event.Z1mass= Z1.vec.M()
+        event.Z2mass= Z2.vec.M()
         if not passZ1Z2: return False
 
 	# Make list of the four leptons which come from the Z bosons.
