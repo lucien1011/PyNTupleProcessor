@@ -1,7 +1,7 @@
 from Core.Module import Module
 from Core.Collection import Collection 
 
-from DarkZ.Common.HZZAlgo import HZZAlgo
+from DarkZ.CommonTools.HZZAlgo import HZZAlgo
 
 class RecoSkimmer(Module):
     def __init__(self,name):
@@ -40,9 +40,9 @@ class RecoSkimmer(Module):
         #if Z2.vec.M() < 12 or Z2.vec.M() > 120: return False
         event.Z1 = Z1
         event.Z2 = Z2
+        if not passZ1Z2: return False
         event.Z1mass= Z1.vec.M()
         event.Z2mass= Z2.vec.M()
-        if not passZ1Z2: return False
 
 	# Make list of the four leptons which come from the Z bosons.
 	# Generally, lep1 and lep2 come from Z1; lep3 and lep4 come from Z2
