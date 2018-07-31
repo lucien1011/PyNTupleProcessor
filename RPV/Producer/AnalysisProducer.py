@@ -85,9 +85,9 @@ class AnalysisProducer(Module):
         event.dR_min_jets_leps = 0
 
         for i in event.jets:
-	    for j in event.leps:
-                temp = deltaR(i.eta,i.phi,j.eta,j.phi)
-                if event.dR_min_jets_leps == 0 or event.dR_min_jets_leps >temp:
-	           event.dR_min_jets_leps = temp
+            for j in event.leps:
+                    temp = deltaR(i.eta,i.phi,j.eta,j.phi)
+                    if event.dR_min_jets_leps == 0 or event.dR_min_jets_leps >temp:
+	                    event.dR_min_jets_leps = temp
 
         return True
