@@ -3,11 +3,13 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.Run2017.PySkimTree import * 
+from DarkZ.Dataset.Run2017.PySkimTree import bkgSamples,sigSamples,Data2017
+#from DarkZ.Dataset.Run2017.Data import *
 
 #from DarkZ.Skimmer.Preskimmer import GENPreskimmer
 #from DarkZ.Skimmer.FiducialSkimmer import FiducialSkimmer
 from DarkZ.Skimmer.RecoSkimmer import RecoSkimmer
+from DarkZ.Skimmer.HLTSkimmer import HLTSkimmer
 from DarkZ.Skimmer.BlindSkimmer import BlindSkimmer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
@@ -18,7 +20,9 @@ from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
 #out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
-out_path = "DataMCDistributions/HIG-16-041-Table005-Selection_v1/2018-07-28/"
+#out_path = "DataMCDistributions/Run2017_HIG-16-041-Table005-Selection_v1/2018-07-28/"
+out_path = "DataMCDistributions/Run2017_HIG-16-041-Table005-FourLeptonSelection_v1/2018-07-29/"
+#out_path = "DataMCDistributions/test/2018-07-28/"
 
 lepton_plots = [
         Plot("Lepton1_Pt", ["TH1D","Lepton1_pt","",20,0.,200.], LambdaFunc('x: x.Z1.lep1.vec.Pt()'),),
@@ -54,20 +58,20 @@ jet_plots = [
 
 plots = lepton_plots + general_plots + jet_plots
 for plot in plots:
-    plot.plotSetting.divideByBinWidth = True
+    plot.plotSetting.divideByBinWidth = False
 
 nCores                  = 8
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples + [data2017]
+componentList           = bkgSamples + sigSamples + [SingleMuon2017,SingleElectron2017,]#DoubleEG2017,DoubleMuon2017,MuonEG2017]
 justEndSequence         = False
 
 for dataset in componentList:
     if dataset.isMC:
         #dataset.lumi = 77.30
-        #dataset.lumi = 41.4
-        dataset.lumi = 35.9
+        dataset.lumi = 41.4
+        #dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -75,11 +79,13 @@ sequence                = Sequence()
 xsWeighter              = XSWeighter("XSWeighter")
 recoSkimmer             = RecoSkimmer("RecoSkimmer")
 blindSkimmer            = BlindSkimmer("BlindSkimmer")
+hltSkimmer              = HLTSkimmer("HLTSkimmer")
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 recoSkimmer.m4lRange    = [118.,130.]
 plotter                 = Plotter("Plotter",plots)
 
 sequence.add(recoSkimmer)
+sequence.add(hltSkimmer)
 sequence.add(blindSkimmer)
 sequence.add(xsWeighter)
 sequence.add(dataMCWeighter)

@@ -57,7 +57,8 @@ for plot in plots:
     plot.plotSetting.divideByBinWidth = True
 
 nCores                  = 2
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+#outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+outputDir               = "Log/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples
@@ -88,5 +89,6 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path
+#endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path
+endModuleOutputDir = "~/public_html/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))

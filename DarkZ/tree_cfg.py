@@ -10,14 +10,12 @@ from DarkZ.Skimmer.RecoSkimmer import RecoSkimmer
 from Common.TreeProducer import TreeProducer
 
 nCores                  = 8
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180728_qqToZZ_partial/"
+outputDir               = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180728/"
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + sigSamples + [data2017]
-componentList           = [qqToZZ]
-#componentList           = [ggToZZ]
-qqToZZ.componentList[0].beginEntry = 62000000
-justEndSequence         = False
+componentList           = [qqToZZ,ggToZZ]
+justEndSequence         = True
 
 for dataset in componentList:
     for component in dataset.componentList:
@@ -35,4 +33,4 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "SkimTree.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence)
+endSequence = EndSequence(skipHadd=False)

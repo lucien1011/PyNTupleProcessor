@@ -124,6 +124,6 @@ bkgSamples = [
         WHplus,
         WHminus,
         ZH,
-        #ggToZZ,
-        #qqToZZ,
+        ggToZZ,
+        qqToZZ,
         ]

@@ -23,3 +23,5 @@ class Plot(object):
 
     def end(self):
         self.funcObj.end()
+        if self.selFunc:
+            self.selFunc.end()
