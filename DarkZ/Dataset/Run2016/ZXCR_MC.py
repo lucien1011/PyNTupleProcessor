@@ -1,7 +1,8 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_ZXCRSelection/"
+#bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_ZXCRSelection/"
+bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_HIG-16-041-ZXCRSelection_v2/"
 inUFTier2       = False
 
 # ____________________________________________________________________________________________________________________________________________ ||

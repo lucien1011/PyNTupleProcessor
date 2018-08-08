@@ -3,8 +3,7 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-#from DarkZ.Dataset.Run2017.SkimTree import * 
-from DarkZ.Dataset.Run2017.SkimTree_SMHiggs import * 
+from DarkZ.Dataset.Run2016.SkimTree_SMHiggs import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -12,12 +11,7 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-#out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-02/"
-#out_path = "DataMCDistributions/SkimTree_SignalSelection_v2/2018-07-30/"
-#out_path = "DataMCDistributions/SkimTree_SignalSelection_v3/2018-08-03/"
-#out_path = "DataMCDistributions/SkimTree_HiggsTo4L-m4l118To130Selection_v2/2018-07-30/"
-out_path = "DataMCDistributions/SkimTree_HiggsTo4L-SideBandHiggsWindowSelection_v1/2018-08-07/"
-#out_path = "DataMCDistributions/Dibug_passFullSelection/2018-07-30/"
+out_path = "DataMCDistributions/SkimTree_HIG-16-041Selection_v1/2018-08-09/"
 
 muon_plots = [
         Plot("LeadingLepton_pt", ["TH1D","LeadingLepton_pt","",20,0.,200.], LambdaFunc('x: max([ x.pTL1[0], x.pTL2[0], x.pTL3[0], x.pTL4[0] ])')),

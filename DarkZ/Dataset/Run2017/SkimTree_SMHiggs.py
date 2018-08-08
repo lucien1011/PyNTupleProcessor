@@ -10,6 +10,22 @@ inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 
 # ____________________________________________________________________________________________________________________________________________ ||
+# Z+X
+ZPlusX_cmpList = ComponentList(
+        [
+            Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight.root","passedEvents",False)
+            #Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v2.root","passedEvents",False)
+        ]
+        )
+ZPlusX = Dataset(
+        "ZPlusX",
+        ZPlusX_cmpList,
+        isMC                = True,
+        skipWeight          = True,
+        )
+
+
+# ____________________________________________________________________________________________________________________________________________ ||
 # Data2017
 data2017_cmpList = ComponentList(
         [ 
@@ -322,6 +338,7 @@ bkgSamples = [
         ggZZTo4e,
         ggZZTo4mu,
         ggZZTo4tau,
+        ZPlusX,
         ]
 
 sigSamples = [
