@@ -13,6 +13,7 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
 
 from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
 from RPV.Skimmer.HLTSkimmer import HLTSkimmer
+from RPV.Weighter.Triggereff import Triggereff
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -77,6 +78,7 @@ eventSkimmer            = TTbarSkimmer("TTbarSkim")
 hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
 jsonSkimmer             = JSONSkimmer("JSONSkim")
 metSkimmer              = METFilter("METSkim")
+triggereff              = Triggereff("Triggereff")
 
 sequence = Sequence()
 sequence.add(metSkimmer)
@@ -89,6 +91,7 @@ sequence.add(xsWeighter)
 sequence.add(puWeighter)
 sequence.add(anaProducer)
 sequence.add(eventSkimmer)
+sequence.add(triggereff)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=justEndSequence)

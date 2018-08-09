@@ -65,14 +65,14 @@ allSigSamples = [
     ]
 
 allDataSamples = [
-#    SingleMuon2016B,
-#    SingleMuon2016C,
-#    SingleMuon2016D,
-#    SingleMuon2016E,
-#    SingleMuon2016F,
-#    SingleMuon2016G,
-#    SingleMuon2016H,
-#    SingleMuon2016H2,
+    SingleMuon2016B,
+    SingleMuon2016C,
+    SingleMuon2016D,
+    SingleMuon2016E,
+    SingleMuon2016F,
+    SingleMuon2016G,
+    SingleMuon2016H,
+    SingleMuon2016H2,
     SingleElectron2016B1,
     SingleElectron2016B2,
     SingleElectron2016C,

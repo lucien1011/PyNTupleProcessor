@@ -11,5 +11,5 @@ class YieldCounter(Module):
             if "YieldCount"+event.cat.lepCat+event.cat.jetCat not in self.writer.objs:
                 self.writer.book("YieldCount"+event.cat.lepCat+event.cat.jetCat,"TH1D","YieldCount"+event.cat.lepCat+event.cat.jetCat,"",1,-0.5,0.5)
         if event.cat.jetCat != "0":
-            self.writer.objs["YieldCount"+event.cat.lepCat+event.cat.jetCat].Fill(0.)
+            self.writer.objs["YieldCount"+event.cat.lepCat+event.cat.jetCat].Fill(0.,event.weight)
         return True
