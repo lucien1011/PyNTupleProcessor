@@ -34,10 +34,11 @@ else:
 
 nCores = 1 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
-outputDir = "./testPlot_v1/"
+outputDir = "./testPlot_v2/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
+#componentList = allDataSamples
 componentList = allDataSamples + allMCSamples 
 for dataset in componentList:
     if dataset.isMC:

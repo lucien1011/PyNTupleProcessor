@@ -7,12 +7,12 @@ from math import sqrt
 
 class Triggereff(Module):
 
-    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
+    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
         self.filenameTrigeff = [(weight, "/home/kshi/SUSY/CMSSW_8_0_25/src/UF-PyNTupleRunner/DataMC/Trigger_Eff/Run2016/"+filename) for (weight, filename) in filenameTrigeff]
         self.flatTrigSyst = flatTrigSyst
         self.Trigeffhistpath = Trigeffhistpath
         
-    def begin(self):
+    #def beginJob(self):
         self.fileTrigeff = [(weight, ROOT.TFile(filepath)) for (weight, filepath) in self.filenameTrigeff]
         for (_, rootfile) in self.fileTrigeff:
             recursiveHistCheck(rootfile, self.Trigeffhistpath)
@@ -24,12 +24,25 @@ class Triggereff(Module):
         #self.muon_pt = event.muons[0].pt
         #self.muon_eta = event.muons[0].eta
 
+    def histToPickle(self, hist):
+        xs = [hist.GetXaxis().GetBinLowEdge(iX) for iX in range(hist.GetNbinsX()+2)]
+        ys = [hist.GetYaxis().GetBinLowEdge(iY) for iY in range(hist.GetNbinsY()+2)]
+        sf = {}
+        for iX in range(len(xs)):
+            if len(ys) > 3: # 2D hist
+                for iY in range(len(ys)):
+                    sf[iX, iY] = (hist.GetBinContent(iX, iY), hist.GetBinError(iX, iY))
+            else: # 1D hist
+                sf[iX] = (hist.GetBinContent(iX), hist.GetBinError(iX))
+        if len(ys) > 3: return xs, ys, sf
+        else:           return xs, sf
+
     def analyze(self,event):
 
         self.muon_pt = event.muons[0].pt
         #print(self.muon_pt)
         self.muon_eta = event.muons[0].eta
-        #print(self.muon_eta)
+        #print(abs(self.muon_eta))
         if self.dataset.isData: return True
         if self.muon_pt == 0: return True
         statErrSq = 0.0
@@ -61,19 +74,6 @@ class Triggereff(Module):
 
         return True
     
-    def histToPickle(self, hist):
-        xs = [hist.GetXaxis().GetBinLowEdge(iX) for iX in range(hist.GetNbinsX()+2)]
-        ys = [hist.GetYaxis().GetBinLowEdge(iY) for iY in range(hist.GetNbinsY()+2)]
-        sf = {}
-        for iX in range(len(xs)):
-            if len(ys) > 3: # 2D hist
-                for iY in range(len(ys)):
-                    sf[iX, iY] = (hist.GetBinContent(iX, iY), hist.GetBinError(iX, iY))
-            else: # 1D hist
-                sf[iX] = (hist.GetBinContent(iX), hist.GetBinError(iX))
-        if len(ys) > 3: return xs, ys, sf
-        else:           return xs, sf
-
     @staticmethod
     def getLeptonEfficiency(hist,pt,eta,maxpt = 120.0):
         if pt > maxpt: pt = maxpt - 1.0
