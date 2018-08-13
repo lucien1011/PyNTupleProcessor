@@ -2,6 +2,7 @@ from Core.ComponentList import *
 from Core.Dataset import Dataset
 
 bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180808/SkimTree_HIG-16-041_Run2016Data_v1/"
+bkgSkimTreeDir2     = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180730/SkimTree_BkgMC/SMHiggs/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/"
 dataTreeDir         = bkgSkimTreeDir 
 inUFTier2           = False
@@ -11,8 +12,9 @@ sumWeightHist       = "Ana/sumWeights"
 # Z+X
 ZPlusX_cmpList = ComponentList(
         [
-            Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight.root","passedEvents",False)
+            #Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight.root","passedEvents",False)
             #Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v2.root","passedEvents",False)
+            Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v4.root","passedEvents",False)
         ]
         )
 ZPlusX = Dataset(
@@ -36,107 +38,108 @@ data2016 = Dataset(
         isMC                = False,
         )
 
-## ____________________________________________________________________________________________________________________________________________ ||
-## ggZZTo4tau
-#ggZZTo4L_cmpList = ComponentList(
-#        [ 
-#            Component("ggZZTo4tau",bkgSkimTreeDir+"GluGluToContinToZZTo4tau/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
-#        ]
-#        )
-#
-#ggZZTo4tau = Dataset(
-#        "ggZZTo4tau",
-#        ggZZTo4L_cmpList,
-#        isMC                = True,
-#        xs                  = 0.001586,
-#        )
-#ggZZTo4tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
-#
-## ____________________________________________________________________________________________________________________________________________ ||
-## ggZZTo4e
-#ggZZTo4L_cmpList = ComponentList(
-#        [ 
-#            Component("ggZZTo4e",bkgSkimTreeDir+"GluGluToContinToZZTo4e/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
-#        ]
-#        )
-#
-#ggZZTo4e = Dataset(
-#        "ggZZTo4e",
-#        ggZZTo4L_cmpList,
-#        isMC                = True,
-#        xs                  = 0.001586,
-#        )
-#ggZZTo4e.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
-#
-## ____________________________________________________________________________________________________________________________________________ ||
-## ggZZTo4mu
-#ggZZTo4L_cmpList = ComponentList(
-#        [ 
-#            Component("ggZZTo4mu",bkgSkimTreeDir+"GluGluToContinToZZTo4mu/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
-#        ]
-#        )
-#
-#ggZZTo4mu = Dataset(
-#        "ggZZTo4mu",
-#        ggZZTo4L_cmpList,
-#        isMC                = True,
-#        xs                  = 0.001586,
-#        )
-#ggZZTo4mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
-#
-## ____________________________________________________________________________________________________________________________________________ ||
-## ggZZTo2mu2tau
-#ggZZTo4L_cmpList = ComponentList(
-#        [ 
-#            Component("ggZZTo2mu2tau",bkgSkimTreeDir+"GluGluToContinToZZTo2mu2tau/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
-#        ]
-#        )
-#
-#ggZZTo2mu2tau = Dataset(
-#        "ggZZTo2mu2tau",
-#        ggZZTo4L_cmpList,
-#        isMC                = True,
-#        xs                  = 0.00319,
-#        )
-#ggZZTo2mu2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
-#
-## ____________________________________________________________________________________________________________________________________________ ||
-## ggZZTo2e2mu
-#ggZZTo4L_cmpList = ComponentList(
-#        [ 
-#            Component("ggZZTo2e2mu",bkgSkimTreeDir+"GluGluToContinToZZTo2e2mu/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
-#        ]
-#        )
-#
-#ggZZTo2e2mu = Dataset(
-#        "ggZZTo2e2mu",
-#        ggZZTo4L_cmpList,
-#        isMC                = True,
-#        xs                  = 0.00319,
-#        )
-#ggZZTo2e2mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
-#
-## ____________________________________________________________________________________________________________________________________________ ||
-## ggZZTo2e2tau
-#ggZZTo4L_cmpList = ComponentList(
-#        [ 
-#            Component("ggZZTo2e2tau",bkgSkimTreeDir+"GluGluToContinToZZTo2e2tau/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
-#        ]
-#        )
-#
-#ggZZTo2e2tau = Dataset(
-#        "ggZZTo2e2tau",
-#        ggZZTo4L_cmpList,
-#        isMC                = True,
-#        xs                  = 0.00319,
-#        )
-#ggZZTo2e2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggZZTo4tau
+ggZZTo4L_cmpList = ComponentList(
+        [ 
+            Component("ggZZTo4tau",bkgSkimTreeDir2+"GluGluToContinToZZTo4tau/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ggZZTo4tau = Dataset(
+        "ggZZTo4tau",
+        ggZZTo4L_cmpList,
+        isMC                = True,
+        xs                  = 0.001586,
+        )
+ggZZTo4tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggZZTo4e
+ggZZTo4L_cmpList = ComponentList(
+        [ 
+            Component("ggZZTo4e",bkgSkimTreeDir2+"GluGluToContinToZZTo4e/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ggZZTo4e = Dataset(
+        "ggZZTo4e",
+        ggZZTo4L_cmpList,
+        isMC                = True,
+        xs                  = 0.001586,
+        )
+ggZZTo4e.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggZZTo4mu
+ggZZTo4L_cmpList = ComponentList(
+        [ 
+            Component("ggZZTo4mu",bkgSkimTreeDir2+"GluGluToContinToZZTo4mu/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ggZZTo4mu = Dataset(
+        "ggZZTo4mu",
+        ggZZTo4L_cmpList,
+        isMC                = True,
+        xs                  = 0.001586,
+        )
+ggZZTo4mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggZZTo2mu2tau
+ggZZTo4L_cmpList = ComponentList(
+        [ 
+            Component("ggZZTo2mu2tau",bkgSkimTreeDir2+"GluGluToContinToZZTo2mu2tau/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ggZZTo2mu2tau = Dataset(
+        "ggZZTo2mu2tau",
+        ggZZTo4L_cmpList,
+        isMC                = True,
+        xs                  = 0.00319,
+        )
+ggZZTo2mu2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggZZTo2e2mu
+ggZZTo4L_cmpList = ComponentList(
+        [ 
+            Component("ggZZTo2e2mu",bkgSkimTreeDir2+"GluGluToContinToZZTo2e2mu/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ggZZTo2e2mu = Dataset(
+        "ggZZTo2e2mu",
+        ggZZTo4L_cmpList,
+        isMC                = True,
+        xs                  = 0.00319,
+        )
+ggZZTo2e2mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggZZTo2e2tau
+ggZZTo4L_cmpList = ComponentList(
+        [ 
+            Component("ggZZTo2e2tau",bkgSkimTreeDir2+"GluGluToContinToZZTo2e2tau/HaddTree.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ggZZTo2e2tau = Dataset(
+        "ggZZTo2e2tau",
+        ggZZTo4L_cmpList,
+        isMC                = True,
+        xs                  = 0.00319,
+        )
+ggZZTo2e2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # qqZZ
 qqZZ_cmpList = ComponentList(
         [ 
-            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            #Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -147,7 +150,7 @@ qqZZTo4L = Dataset(
         xs                  = 1.256,
         )
 qqZZTo4L.setSumWeight(
-        bkgTreeDir+"ZZTo4L_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root",
+        bkgTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2.root",
         sumWeightHist,
         True,
         )
@@ -164,7 +167,8 @@ ggH = Dataset(
         "ggH",
         ggH_cmpList,
         isMC                = True,
-        xs                  = 0.01218,
+        #xs                  = 0.01218,
+        xs                  = 48.52*0.0002768,
         )
 ggH.setSumWeight(
         bkgTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root",
@@ -336,14 +340,14 @@ bkgSamples = [
         WHminus,
         ZH,
         qqZZTo4L,
-        #ggZZTo2e2mu,
-        #ggZZTo2e2tau,
-        #ggZZTo2mu2tau,
-        #ggZZTo4e,
-        #ggZZTo4mu,
-        #ggZZTo4tau,
+        ggZZTo2e2mu,
+        ggZZTo2e2tau,
+        ggZZTo2mu2tau,
+        ggZZTo4e,
+        ggZZTo4mu,
+        ggZZTo4tau,
         ZPlusX,
-        data2016,
+        #data2016,
         ]
 
 sigSamples = [

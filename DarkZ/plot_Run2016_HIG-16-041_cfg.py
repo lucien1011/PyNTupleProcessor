@@ -11,7 +11,39 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "DataMCDistributions/SkimTree_HIG-16-041Selection_v1/2018-08-09/"
+mergeSampleDict = {
+        "ggH":  ["ggH"],
+        "VBF":  ["VBF"],
+        "WH":   ["WHPlus","WHminus",],
+        "ZH":   ["ZH",],
+        "qqZZ": ["qqZZTo4L",],
+        "ggZZ": [
+            "ggZZTo2e2mu",
+            "ggZZTo2e2tau",
+            "ggZZTo2mu2tau",
+            "ggZZTo4e",
+            "ggZZTo4mu",
+            "ggZZTo4tau",
+            ],
+        "ZPlusX": ["ZPlusX"],
+        }
+
+mZ1PlotRange = [40,40.,120.]
+mZ2PlotRange = [60,0.,120.]
+h4lPlotRange = [110,60.,500.]
+#h4lPlotRange = [25,100.,150.]
+#h4lPlotRange = [20,100.,140.]
+
+out_path                = "DataMCDistributions/test/2018-08-09/"
+lumi                    = 35.9
+nCores                  = 5
+outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+nEvents                 = -1
+disableProgressBar      = False
+componentList           = bkgSamples + [data2016]
+#componentList           = [ZPlusX]
+justEndSequence         = False
+
 
 muon_plots = [
         Plot("LeadingLepton_pt", ["TH1D","LeadingLepton_pt","",20,0.,200.], LambdaFunc('x: max([ x.pTL1[0], x.pTL2[0], x.pTL3[0], x.pTL4[0] ])')),
@@ -47,10 +79,6 @@ muon_plots = [
         Plot("Electron4_Phi", ["TH1D","Electron4_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL4[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
         ]
 
-mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [30,0.,60.]
-h4lPlotRange = [110,60.,500.]
-#h4lPlotRange = [20,100.,140.]
 general_plots = [
         Plot("Z1_mass",     ["TH1D","Z1_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       ),
         Plot("Z2_mass",     ["TH1D","Z2_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'),       ),
@@ -62,9 +90,12 @@ general_plots = [
         Plot("Z2_2e2mu_mass",     ["TH1D","Z2_2e2mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')     ),
               
         Plot("h4L_mass",    ["TH1D","h4L_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4l[0]'),       ),
-        Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')       ),
-        Plot("h4mu_mass",   ["TH1D","h4mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4mu[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')       ),
-        Plot("h2e2mu_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')       ),
+        #Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')       ),
+        #Plot("h4mu_mass",   ["TH1D","h4mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4mu[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')       ),
+        #Plot("h2e2mu_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')       ),
+        Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')       ),
+        Plot("h4mu_mass",   ["TH1D","h4mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4mu[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0 and x.mass4e[0] < 0 and x.mass2e2mu[0] < 0')       ),
+        Plot("h2e2mu_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0')       ),
         Plot("h4L_Pt",      ["TH1D","h4L_Pt","",40,0.,200.],     LambdaFunc('x: x.pT4l[0]'),         ),
         
         Plot("met",         ["TH1D","met","",40,0.,200.],       LambdaFunc('x: x.met[0]'),          ),
@@ -82,23 +113,16 @@ plots = muon_plots + general_plots + jet_plots
 #for plot in plots:
 #    plot.plotSetting.divideByBinWidth = True
 
-nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
-nEvents                 = -1
-disableProgressBar      = False
-#componentList           = bkgSamples + [data2017]
-componentList           = [ZPlusX]
-justEndSequence         = False
-
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 41.4
+        dataset.lumi = lumi
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = darkphoton_signal_sequence
+sequence                = higgs_signal_sequence
+#sequence                = higgs_m4lNarrowWindow_sequence
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")

@@ -18,12 +18,12 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "DataMCDistributions/SkimTree_ZXCR_Run2016DataMC_v2/2018-08-06/"
+out_path = "DataMCDistributions/SkimTree_ZXCR_HIG-16-041Selection_Run2016DataMC_v2/2018-08-08/"
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
-#h4lPlotRange = [110,60.,500.]
-h4lPlotRange = [20,100.,140.]
+h4lPlotRange = [110,60.,500.]
+#h4lPlotRange = [20,100.,140.]
 general_plots = []
 for eachCR in ["3p1f","2p2f"]:
     if eachCR == "3p1f":
