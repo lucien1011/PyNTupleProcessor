@@ -5,7 +5,7 @@ class FakeRateWeighter(Module):
     def analyze(self,event):
         if "ZPlusX" in self.dataset.name:
             #if event.nZXCRFailedLeptons[0] == 1:
-            if event.FRWeight == -1.: continue
+            if event.FRWeight == -1.: return False
             if event.nFailedLeptonsZ2[0] == 1:
                 event.weight *= event.FRWeight[0]
             #elif event.nZXCRFailedLeptons[0] == 2:

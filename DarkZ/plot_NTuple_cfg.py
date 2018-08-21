@@ -4,7 +4,9 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 #from DarkZ.Dataset.Run2017.SkimTree import * 
-from DarkZ.Dataset.Run2017.SkimTree_SMHiggs import * 
+#from DarkZ.Dataset.Run2017.SkimTree_SMHiggs import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton import * 
+#from DarkZ.Dataset.Run2017.SignalMC import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -16,8 +18,28 @@ from Plotter.Plot import Plot
 #out_path = "DataMCDistributions/SkimTree_SignalSelection_v2/2018-07-30/"
 #out_path = "DataMCDistributions/SkimTree_SignalSelection_v3/2018-08-03/"
 #out_path = "DataMCDistributions/SkimTree_HiggsTo4L-m4l118To130Selection_v2/2018-07-30/"
-out_path = "DataMCDistributions/SkimTree_HiggsTo4L-SideBandHiggsWindowSelection_v1/2018-08-07/"
+#out_path = "DataMCDistributions/SkimTree_HiggsTo4L-SideBandHiggsWindowSelection_v1/2018-08-07/"
+#out_path = "DataMCDistributions/SkimTree_Data80X_HIG-16-041-ZXCRSelection_FRWeight_v1/2018-08-07/"
+#out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_mZ2-12To120_v1/2018-08-20/"
+out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_v1/2018-08-20/"
 #out_path = "DataMCDistributions/Dibug_passFullSelection/2018-07-30/"
+
+mergeSampleDict = {
+        "ggH":  ["ggH"],
+        "VBF":  ["VBF"],
+        "WH":   ["WHPlus","WHminus",],
+        "ZH":   ["ZH",],
+        "qqZZ": ["qqZZTo4L",],
+        "ggZZ": [
+            "ggZZTo2e2mu",
+            "ggZZTo2e2tau",
+            "ggZZTo2mu2tau",
+            "ggZZTo4e",
+            "ggZZTo4mu",
+            "ggZZTo4tau",
+            ],
+        "ZPlusX": ["ZPlusX"],
+        }
 
 muon_plots = [
         Plot("LeadingLepton_pt", ["TH1D","LeadingLepton_pt","",20,0.,200.], LambdaFunc('x: max([ x.pTL1[0], x.pTL2[0], x.pTL3[0], x.pTL4[0] ])')),
@@ -55,8 +77,8 @@ muon_plots = [
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
-h4lPlotRange = [110,60.,500.]
-#h4lPlotRange = [20,100.,140.]
+#h4lPlotRange = [110,60.,500.]
+h4lPlotRange = [25,100.,150.]
 general_plots = [
         Plot("Z1_mass",     ["TH1D","Z1_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       ),
         Plot("Z2_mass",     ["TH1D","Z2_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'),       ),
@@ -92,18 +114,20 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + [data2017]
-componentList           = [ZPlusX]
+componentList           = bkgSamples + [data2016] + sigSamples
+#componentList           = sigSamples
 justEndSequence         = False
+skipGitDetail           = True
 
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 41.4
+        dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
 plotter                 = Plotter("Plotter",plots)
 
+#sequence                = higgs_cr_sequence
 sequence                = darkphoton_signal_sequence
 sequence.add(plotter)
 
@@ -111,6 +135,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence)
+endSequence = EndSequence(skipHadd=False)
 endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
