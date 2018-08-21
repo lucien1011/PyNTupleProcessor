@@ -13,6 +13,7 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
 
 from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
 from RPV.Skimmer.HLTSkimmer import HLTSkimmer
+from RPV.Weighter.Triggereff import Triggereff
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -31,12 +32,13 @@ else:
 
 #out_path = "StopToBLep/DataMCDistributions/DataMC_ZToMuMuSelection_v1/2018-06-19/"
 
-nCores = 6 
+nCores = 1 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/"+out_path
-outputDir = "./testPlot_v1/"
+outputDir = "./testPlot_v2/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
+#componentList = allDataSamples
 componentList = allDataSamples + allMCSamples 
 for dataset in componentList:
     if dataset.isMC:
@@ -77,6 +79,7 @@ eventSkimmer            = TTbarSkimmer("TTbarSkim")
 hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
 jsonSkimmer             = JSONSkimmer("JSONSkim")
 metSkimmer              = METFilter("METSkim")
+triggereff              = Triggereff("Triggereff")
 
 sequence = Sequence()
 sequence.add(metSkimmer)
@@ -89,10 +92,11 @@ sequence.add(xsWeighter)
 sequence.add(puWeighter)
 sequence.add(anaProducer)
 sequence.add(eventSkimmer)
+sequence.add(triggereff)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/LO_DYJets/"
+endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")

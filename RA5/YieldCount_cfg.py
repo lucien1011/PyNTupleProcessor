@@ -5,6 +5,9 @@ from Core.EndSequence import EndSequence
 
 from RA5.Weighter.XSWeighter import XSWeighter
 from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
+from RA5.Producer.CategoryProducer import *
+from RA5.Producer.YieldCounter import *
+from RA5.Producer.NJet40Producer import *
 from RA5.Config.MergeSampleDefinition import mergeSampleDict
 #from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
 #from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
@@ -46,19 +49,14 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 plots = [
-        Plot("nJet40",      ["TH1D","nJet40","",10,-0.5,9.5],       LambdaFunc('x: x.nJetSel[0]')),
-        Plot("nLepTight",   ["TH1D","nLepTight","",10,-0.5,9.5],       LambdaFunc('x: x.nLepTight[0]')),
-        Plot("nLepLoose",   ["TH1D","nLepLoose","",10,-0.5,9.5],       LambdaFunc('x: x.nLepLoose[0]')),
-        Plot("nLepCleaning",   ["TH1D","nLepCleaning","",10,-0.5,9.5],       LambdaFunc('x: x.nLepCleaning[0]')),
-        Plot("nBJet40",     ["TH1D","nBJet40","",7,-0.5,6.5],      LambdaFunc('x: x.nBJetMedium40[0]')),
-        Plot("htJet",        ["TH1D","htJet","",10,0.,1000.],         LambdaFunc('x: x.htJet40[0]')),
-        Plot("met_pt",         ["TH1D","met_pt","",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')),
-        Plot("met_phi",         ["TH1D","met_phi","",5,0., 5.],          LambdaFunc('x: x.met_phi[0]')),
-        Plot("mht",         ["TH1D","mht","",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')),
-        ]
+               ]
+
 plotter                 = Plotter("Plotter",plots)
 leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
 xsWeighter              = XSWeighter("XSWeighter")
+NJet40Producer          = NJet40Producer("NJet40Producer")
+CategoryProducer        = CategoryProducer("CategoryProducer")
+YieldCounter            = YieldCounter("YieldCounter")
 #baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
 #signalRegionSkimmer     = SignalRegionSkimmer("SignalRegionSkimmer")
 
@@ -66,10 +64,13 @@ sequence = Sequence()
 #sequence.add(leptonJetProducer)
 sequence.add(xsWeighter)
 #sequence.add(baselineSkimmer)
+sequence.add(NJet40Producer)
+sequence.add(CategoryProducer)
+sequence.add(YieldCounter)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=False)
-endModuleOutputDir = "/home/kshi/public_html/RA5/mcPlot/"
+endModuleOutputDir = "/home/kshi/public_html/RA5/yieldcount/"
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")
