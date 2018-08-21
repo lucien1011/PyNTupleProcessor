@@ -7,7 +7,7 @@ fileName        = "SkimTree.root"
 common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/data/TTbar/"
 inUFTier2       = False
 
-sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n))]
+sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n)) and "Muon" in n]
 allDataSamples = []
 for sampleName in sampleNames:
     tmpList = ComponentList([Component(sampleName,"/".join([common_path,sampleName,fileName]),"Events",inUFTier2,maxEvents=-1)],)
