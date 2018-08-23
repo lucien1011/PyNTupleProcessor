@@ -21,7 +21,8 @@ from Plotter.Plot import Plot
 #out_path = "DataMCDistributions/SkimTree_HiggsTo4L-SideBandHiggsWindowSelection_v1/2018-08-07/"
 #out_path = "DataMCDistributions/SkimTree_Data80X_HIG-16-041-ZXCRSelection_FRWeight_v1/2018-08-07/"
 #out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_mZ2-12To120_v1/2018-08-20/"
-out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_v1/2018-08-20/"
+#out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_v1/2018-08-20/"
+out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_Sig_v1/2018-08-23/"
 #out_path = "DataMCDistributions/Dibug_passFullSelection/2018-07-30/"
 
 mergeSampleDict = {
@@ -114,9 +115,9 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016] + sigSamples
-#componentList           = sigSamples
-justEndSequence         = False
+#componentList           = bkgSamples + [data2016] + sigSamples
+componentList           = sigSamples
+justEndSequence         = True
 skipGitDetail           = True
 
 for dataset in componentList:

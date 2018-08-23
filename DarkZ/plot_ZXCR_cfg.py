@@ -7,18 +7,13 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from DarkZ.Dataset.Run2016.ZXCR_MC import * 
 from DarkZ.Dataset.Run2016.ZXCR_Data import * 
 
-from DarkZ.Skimmer.AnalysisSkimmer import AnalysisSkimmer
-from DarkZ.Skimmer.BlindSkimmer import BlindSkimmer
-from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
-from DarkZ.Weighter.NLOWeighter import NLOWeighter
-
-from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
+from DarkZ.Sequence.RecoSequence import * 
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "DataMCDistributions/SkimTree_ZXCR_HIG-16-041Selection_Run2016DataMC_v2/2018-08-08/"
+out_path = "DataMCDistributions/SkimTree_ZXCR_HIG-16-041Selection_Run2016DataMC_v2/2018-08-23/"
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
@@ -60,7 +55,7 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2017]
+componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,predCR]
 justEndSequence         = False
 
 for dataset in componentList:
@@ -70,17 +65,10 @@ for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
-sequence                = Sequence()
-dataMCWeighter          = DataMCWeighter("DataMCWeighter")
-nloWeighter             = NLOWeighter("NLOWeighter")
-xsWeighter              = XSWeighter("XSWeighter")
-anaSkimmer              = AnalysisSkimmer("AnalysisSkimmer")
 plotter                 = Plotter("Plotter",plots)
 
-sequence.add(anaSkimmer)
-sequence.add(xsWeighter)
-sequence.add(nloWeighter)
-sequence.add(dataMCWeighter)
+sequence                = higgs_cr_sequence
+
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")

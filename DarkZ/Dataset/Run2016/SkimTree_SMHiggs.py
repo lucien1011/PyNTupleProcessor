@@ -14,7 +14,8 @@ ZPlusX_cmpList = ComponentList(
         [
             #Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight.root","passedEvents",False)
             #Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v2.root","passedEvents",False)
-            Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v4.root","passedEvents",False)
+            #Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v4.root","passedEvents",False)
+            Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v5.root","passedEvents",False)
         ]
         )
 ZPlusX = Dataset(
@@ -50,7 +51,7 @@ ggZZTo4tau = Dataset(
         "ggZZTo4tau",
         ggZZTo4L_cmpList,
         isMC                = True,
-        xs                  = 0.001586,
+        xs                 = 0.001586,
         )
 ggZZTo4tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 

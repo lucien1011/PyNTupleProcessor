@@ -6,6 +6,22 @@ bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X
 inUFTier2       = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
+# Z+X
+predCR_cmpList = ComponentList(
+        [
+            #Component("PredCR","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v5.root","passedEvents",False),
+            Component("PredCR","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180823/SkimTree_Data80X_HIG-16-041-ZXCRSelectionWithFlag_v3_liteHZZAna/Data_Run2016_noDuplicates_1_FRWeight.root","passedEvents",False),
+        ]
+        )
+predCR = Dataset(
+        "PredCR",
+        predCR_cmpList,
+        isMC                = True,
+        isSignal            = True,
+        skipWeight          = True,
+        )
+
+# ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M50_cmpList = ComponentList(
         [
             Component("DYJetsToLL_M50",bkgTreeDir+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),

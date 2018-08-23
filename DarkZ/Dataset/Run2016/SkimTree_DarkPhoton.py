@@ -263,15 +263,15 @@ ZH.setSumWeight(
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggHZZd_M15
 ggHZZd_M15_cmpList = ComponentList(
-        [ Component("ggHZZd_M15",sigSkimTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
+        [ Component("HZZd_M15",sigSkimTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
         )
 ggHZZd_M15 = Dataset(
-        "ggHZZd_M15",
+        "HZZd_M15",
         ggHZZd_M15_cmpList,
         isMC                = True,
         isSignal            = True,
-        #xs                  = 3.396e-6*xsBoost,
-        xs                  = 48.58*0.288*0.1**2*0.06729,
+        xs                  = 3.396e-6*xsBoost,
+        #xs                  = 48.58*0.288*0.1**2*0.06729,
         )
 ggHZZd_M15.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -281,12 +281,12 @@ ggHZZd_M20_cmpList = ComponentList(
         [ Component("ggHZZd_M20",sigSkimTreeDir+"ZD_UpTo0j_MZD20_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
         )
 ggHZZd_M20 = Dataset(
-        "ggHZZd_M20",
+        "HZZd_M20",
         ggHZZd_M20_cmpList,
         isMC                = True,
         isSignal            = True,
-        #xs                  = 6.34e-06*xsBoost,
-        xs                  = 48.58*0.286*0.1**2*0.06729,
+        xs                  = 6.34e-06*xsBoost,
+        #xs                  = 48.58*0.286*0.1**2*0.06729,
         )
 ggHZZd_M20.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD20_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -296,12 +296,12 @@ ggHZZd_M25_cmpList = ComponentList(
         [ Component("ggHZZd_M25",sigSkimTreeDir+"ZD_UpTo0j_MZD25_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
         )
 ggHZZd_M25 = Dataset(
-        "ggHZZd_M25",
+        "HZZd_M25",
         ggHZZd_M25_cmpList,
         isMC                = True,
         isSignal            = True,
-        #xs                  = 9.956e-06*xsBoost,
-        xs                  = 48.58*0.283*0.1**2*0.06729,
+        xs                  = 9.956e-06*xsBoost,
+        #xs                  = 48.58*0.283*0.1**2*0.06729,
         )
 ggHZZd_M25.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD25_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -311,12 +311,12 @@ ggHZZd_M30_cmpList = ComponentList(
         [ Component("ggHZZd_M30",sigSkimTreeDir+"ZD_UpTo0j_MZD30_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
         )
 ggHZZd_M30 = Dataset(
-        "ggHZZd_M30",
+        "HZZd_M30",
         ggHZZd_M30_cmpList,
         isMC                = True,
         isSignal            = True,
-        #xs                  = 1.196e-05*xsBoost,
-        xs                  = 48.58*0.280*0.1**2*0.06729,
+        xs                  = 1.196e-05*xsBoost,
+        #xs                  = 48.58*0.280*0.1**2*0.06729,
         )
 ggHZZd_M30.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD30_Eps1e-2_klo.root","Ana/sumWeights",True)
 
