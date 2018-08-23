@@ -34,14 +34,14 @@ h4lPlotRange = [110,60.,500.]
 #h4lPlotRange = [25,100.,150.]
 #h4lPlotRange = [20,100.,140.]
 
-out_path                = "DataMCDistributions/test/2018-08-09/"
+out_path                = "DataMCDistributions/test/2018-08-23/"
 lumi                    = 35.9
 nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016]
-#componentList           = [ZPlusX]
+#componentList           = bkgSamples + [data2016]
+componentList           = [ZPlusX]
 justEndSequence         = False
 
 

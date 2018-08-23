@@ -4,8 +4,8 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 #from DarkZ.Dataset.Run2017.SkimTree import * 
-#from DarkZ.Dataset.Run2017.SkimTree_SMHiggs import * 
-from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton import * 
+from DarkZ.Dataset.Run2016.SkimTree_SMHiggs import * 
+#from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton import * 
 #from DarkZ.Dataset.Run2017.SignalMC import * 
 
 from DarkZ.Sequence.RecoSequence import * 
@@ -22,7 +22,8 @@ from Plotter.Plot import Plot
 #out_path = "DataMCDistributions/SkimTree_Data80X_HIG-16-041-ZXCRSelection_FRWeight_v1/2018-08-07/"
 #out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_mZ2-12To120_v1/2018-08-20/"
 #out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_v1/2018-08-20/"
-out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_Sig_v1/2018-08-23/"
+#out_path = "DataMCDistributions/SkimTree_DarkPhotonSelection_Sig_v1/2018-08-23/"
+out_path = "DataMCDistributions/SkimTree_HIG-16-041Selection_v4/2018-08-23/"
 #out_path = "DataMCDistributions/Dibug_passFullSelection/2018-07-30/"
 
 mergeSampleDict = {
@@ -78,8 +79,8 @@ muon_plots = [
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
-#h4lPlotRange = [110,60.,500.]
-h4lPlotRange = [25,100.,150.]
+h4lPlotRange = [110,60.,500.]
+#h4lPlotRange = [25,100.,150.]
 general_plots = [
         Plot("Z1_mass",     ["TH1D","Z1_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       ),
         Plot("Z2_mass",     ["TH1D","Z2_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'),       ),
@@ -115,9 +116,9 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + [data2016] + sigSamples
-componentList           = sigSamples
-justEndSequence         = True
+componentList           = bkgSamples + [data2016] + sigSamples
+#componentList           = sigSamples
+justEndSequence         = False
 skipGitDetail           = True
 
 for dataset in componentList:
@@ -128,8 +129,9 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
+sequence                = higgs_signal_sequence
 #sequence                = higgs_cr_sequence
-sequence                = darkphoton_signal_sequence
+#sequence                = darkphoton_signal_sequence
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
