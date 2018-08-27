@@ -28,6 +28,7 @@ endSequence             = cfg.endSequence
 justEndSequence         = cfg.justEndSequence if hasattr(cfg,"justEndSequence") else False
 mergeSampleDict         = cfg.mergeSampleDict if hasattr(cfg,"mergeSampleDict") else {}
 verbose                 = cfg.verbose if hasattr(cfg,"verbose") else False
+skipGitDetail           = cfg.skipGitDetail if hasattr(cfg,"skipGitDetail") else False
 
 if verbose:
     print "Starting"
@@ -63,14 +64,15 @@ if not justEndSequence:
     
     print "\nEnd Running\n"
     print "\nOutput saved in "+outputInfo.outputDir+"\n"
+   
+    if not skipGitDetail:
+        gitFile        = os.path.join(outputInfo.outputDir,"gitDetails.txt")
+        gitVerboseFile = os.path.join(outputInfo.outputDir,"gitVerboseDetails.txt")
+        with open(gitFile,'w') as f:
+            f.write(getGitDescribe())
     
-    gitFile        = os.path.join(outputInfo.outputDir,"gitDetails.txt")
-    gitVerboseFile = os.path.join(outputInfo.outputDir,"gitVerboseDetails.txt")
-    with open(gitFile,'w') as f:
-        f.write(getGitDescribe())
-    
-    with open(gitVerboseFile,'w') as f:
-        f.write(getGitDiff())
+        with open(gitVerboseFile,'w') as f:
+            f.write(getGitDiff())
     
     if verbose:
         print "Ending progress bar"
