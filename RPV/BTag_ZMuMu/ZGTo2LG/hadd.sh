@@ -1,0 +1,1 @@
+hadd -f ./BTag_ZMuMu/ZGTo2LG/DataMCDistribution.root  ./BTag_ZMuMu/ZGTo2LG/*_DataMCDistribution.root 

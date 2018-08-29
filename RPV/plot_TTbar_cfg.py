@@ -14,6 +14,8 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
 from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
 from RPV.Skimmer.HLTSkimmer import HLTSkimmer
 from RPV.Weighter.Triggereff import Triggereff
+from RPV.Weighter.Btageff import Btageff
+from RPV.Weighter.BtagscaleFactor import BtagscaleFactor
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -63,7 +65,7 @@ plots = [
         Plot("muonPt1",     ["TH1D","muonPt1","",20,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else None')),
         Plot("muonPt2",     ["TH1D","muonPt2","",20,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else None')),
         Plot("nGoodPV",     ["TH1D","nGoodPV","",30,0.0,60.0],      LambdaFunc('x: x.PV_npvsGood[0]')),
-	   #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
+       #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
 	   #Plot("m1_bl",       ["TH1D","m1_bl1","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
 	   #Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
 	   #Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
@@ -80,6 +82,9 @@ hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
 jsonSkimmer             = JSONSkimmer("JSONSkim")
 metSkimmer              = METFilter("METSkim")
 triggereff              = Triggereff("Triggereff")
+btageff                 = Btageff("Btageff")
+btagscalefactor         = BtagscaleFactor("BtagscaleFactor")
+
 
 sequence = Sequence()
 sequence.add(metSkimmer)
@@ -93,10 +98,12 @@ sequence.add(puWeighter)
 sequence.add(anaProducer)
 sequence.add(eventSkimmer)
 sequence.add(triggereff)
+sequence.add(btageff)
+sequence.add(btagscalefactor)
 sequence.add(plotter)
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
+endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/Btageff_ratio/"
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")

@@ -24,16 +24,20 @@ class TTbarSkimmer(Module):
         if len(event.muons) < 1 or len(event.muons) > 1: return False
         if len(event.eles) < 1 or len(event.eles) > 1: return False
 
-        temp = False
+        #temp = False
 
-        for i in range(0,len(event.jets)):
-            if event.jets[i].btagCSVV2 >= self.csvCut:
-               temp = True
-               break
-        else:
-               temp = False
+        #for i in range(0,len(event.jets)):
+            #if event.jets[i].btagCSVV2 >= self.csvCut:
+               #temp = True
+               #break
+        #else:
+               #temp = False
 
-        if not temp: return False
+        #if not temp: return False
+
+        if len(event.jets) <= 0:
+            return False
+
 
         event.nMuon40 = len(event.muons)
 
