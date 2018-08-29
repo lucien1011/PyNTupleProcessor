@@ -1,6 +1,6 @@
 from Core.Module import Module
 
-from DarkZ.Common.HZZAlgo import HZZAlgo
+from DarkZ.CommonTools.HZZAlgo import HZZAlgo
 
 class Z1Z2Skimmer(Module):
     def __init__(self,name):

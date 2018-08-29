@@ -1,10 +1,11 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-baseDir = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180706/"
-inUFTier2 = False
-treeName = "Ana/passedEvents"
-sumWeightHist = "Ana/sumWeights"
+baseDir         = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180706/"
+inUFTier2       = False
+treeName        = "Ana/passedEvents"
+sumWeightHist   = "Ana/sumWeights"
+xsBoost         = 25
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggHZZd_M15
@@ -16,7 +17,7 @@ ggHZZd_M15 = Dataset(
         cmpList_M15,
         isMC                = True,
         isSignal            = True,
-        xs                  = 0.0000119*100,
+        xs                  = 3.396e-6*xsBoost,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 15",
         )
@@ -32,7 +33,7 @@ ggHZZd_M20 = Dataset(
         cmpList_M20,
         isMC                = True,
         isSignal            = True,
-        xs                  = 6.285e-06*100,
+        xs                  = 6.34e-06*xsBoost,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 20",
         )
@@ -48,7 +49,7 @@ ggHZZd_M25 = Dataset(
         cmpList_M25,
         isMC                = True,
         isSignal            = True,
-        xs                  = 9.857e-06*100,
+        xs                  = 9.956e-06*xsBoost,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 25",
         )
@@ -64,7 +65,7 @@ ggHZZd_M30 = Dataset(
         cmpList_M30,
         isMC                = True,
         isSignal            = True,
-        xs                  = 1.190e-05*100,
+        xs                  = 1.196e-05*xsBoost,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 30",
         )
@@ -80,7 +81,7 @@ ggHZZd_M35 = Dataset(
         cmpList_M35,
         isMC                = True,
         isSignal            = True,
-        xs                  = 6.285e-06*100,
+        xs                  = 6.285e-06,
         #xs                  = 48.58*0.001,
         plotLabel           = "mZd = 35",
         )
@@ -91,5 +92,5 @@ sigSamples = [
         ggHZZd_M20,
         ggHZZd_M25,
         ggHZZd_M30,
-        ggHZZd_M35,
+        #ggHZZd_M35,
         ]

@@ -72,6 +72,7 @@ class HZZAlgo(object):
         deltaM = 999
         foundZ1 = False
         passZ1Cut = False
+        Z1 = None
         for i in range(len(ZCandidates)):
             Zi = ZCandidates[i]
             if abs(Zi.vec.M()-self.Zmass) < deltaM:
@@ -79,15 +80,16 @@ class HZZAlgo(object):
                 Z1 = Zi
                 Z1index = i
                 foundZ1 = True
-        
+        Z2 = None
+        foundZ2 = False
         if Z1.vec.M() > mZ1Range[0] and Z1.vec.M() < mZ1Range[1]:
             passZ1Cut = True
-
+        
         for j in range(len(ZCandidates)):
             Zj = ZCandidates[j]
             if Zj.lep1.index == Z1.lep1.index or Zj.lep1.index == Z1.lep2.index or Zj.lep2.index == Z1.lep1.index or Zj.lep2.index == Z1.lep2.index: continue
-            foundZ2 = Zj.vec.M() > mZ2Range[0] and Zj.vec.M() < mZ2Range[1]
             Z2 = Zj
+            foundZ2 = Zj.vec.M() > mZ2Range[0] and Zj.vec.M() < mZ2Range[1]
 
         return Z1,Z2,foundZ1 and passZ1Cut and foundZ2
 

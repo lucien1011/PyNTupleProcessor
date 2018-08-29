@@ -32,11 +32,11 @@ ZH = Dataset(
         "ZH",
         ZH_cmpList,
         isMC                = True,
-        xs                  = 0.01218,
+        xs                  = 0.000668,
         )
 ZH.setSumWeight(bkgTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",inUFTier2)
 
 bkgSamples = [
-        #ggH,
+        ggH,
         ZH,
         ]

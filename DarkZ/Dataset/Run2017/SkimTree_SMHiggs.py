@@ -1,21 +1,35 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-#bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180730/SkimTree_BkgMC/DarkZ/"
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180802/Sync_Run2017MC_v1_m4l105To140_mZ140To120_mZ24To120/"
+bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180730/SkimTree_BkgMC/SMHiggs/"
 bkgTreeDir          = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180702/Tree_BkgMC/"
 sigSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180619/"
 sigTreeDir          = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180628/HZZNTuple/"
-#dataTreeDir         = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180730/SkimTree_Run2017Data/DarkZ/"
-dataTreeDir         = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180802/Sync_Run2017Data_v1_m4l105To140_mZ140To120_mZ24To120/"
+dataTreeDir         = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180730/SkimTree_Run2017Data/SMHiggs/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# Z+X
+ZPlusX_cmpList = ComponentList(
+        [
+            Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight.root","passedEvents",False)
+            #Component("ZPlusX","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v2.root","passedEvents",False)
+        ]
+        )
+ZPlusX = Dataset(
+        "ZPlusX",
+        ZPlusX_cmpList,
+        isMC                = True,
+        skipWeight          = True,
+        )
+
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Data2017
 data2017_cmpList = ComponentList(
         [ 
-            Component("Data2017",dataTreeDir+"/Data_Run2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2017",dataTreeDir+"/Data_Run2017.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -324,6 +338,7 @@ bkgSamples = [
         ggZZTo4e,
         ggZZTo4mu,
         ggZZTo4tau,
+        ZPlusX,
         ]
 
 sigSamples = [
