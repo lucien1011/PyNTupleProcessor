@@ -79,10 +79,10 @@ class PlotEndModule(EndModule):
                 h.SetFillColor(sampleColorDict[sample])
             else:
                 h.SetFillColor(ROOT.kViolet)
-            self.shiftLastBin(h)
             smCountErrTmp = ROOT.Double(0.)
             smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             smCountErrSq += smCountErrTmp**2
+            self.shiftLastBin(h)
             histList.append([h,sample,h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
             if switch:
                 if not isample:
@@ -120,8 +120,8 @@ class PlotEndModule(EndModule):
                 h.SetFillColor(sampleColorDict[sample])
             else:
                 h.SetFillColor(ROOT.kViolet)
-            self.shiftLastBin(h)
             sigCount = h.Integral(0,h.GetNbinsX()+1) 
+            self.shiftLastBin(h)
             h.SetLineStyle(9)
             h.SetLineWidth(5)
             h.SetLineColor(sampleColorDict[sample])

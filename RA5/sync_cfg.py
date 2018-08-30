@@ -3,16 +3,10 @@ from Core.Sequence import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
-from RA5.Weighter.XSWeighter import XSWeighter
-from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
-from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
-from RA5.Skimmer.METSkimmer import METSkimmer
-from RA5.Skimmer.LLHtSkimmer import LLHtSkimmer
-from RA5.Producer.CategoryProducer import CategoryProducer
-from RA5.Producer.NJet40Producer import NJet40Producer
+from RA5.Sequence.RecoSequence import sr_sequence
+
 from RA5.Producer.YieldCounter import YieldCounter
 from RA5.Config.MergeSampleDefinition import mergeSampleDict
-#from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -28,22 +22,20 @@ from RA5.Dataset.Run2016 import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-#if where == "hpg":
-#    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-07-23/"
-#    outputDir = out_path
-#    endModuleOutputDir = out_path 
-#elif where == "ihepa":
-#    out_path = "Sync2016/2018-07-23/"
-#    outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
-#    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
-outputDir = "./test_count/"
-endModuleOutputDir = "/raid/raid7/kshi/SUSY/RA5/yieldcount/"
+if where == "hpg":
+    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-07-23/"
+    outputDir = out_path
+    endModuleOutputDir = out_path 
+elif where == "ihepa":
+    out_path = "Sync2016/2018-08-23/"
+    outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
 
 nCores = 1
 nEvents = -1
 disableProgressBar = False
-justEndSequence = False
+justEndSequence = True
 verbose = False
 componentList = allMCSamples
 for dataset in componentList:
@@ -71,31 +63,17 @@ for dataset in componentList:
 #        ]
 #        )
 #plotter                 = Plotter("Plotter",plots)
-leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
-xsWeighter              = XSWeighter("XSWeighter")
-baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
-metSkimmer              = METSkimmer("METSkimmer")
-llHtSkimmer             = LLHtSkimmer("LLHtSkimmer")
-categoryProducer        = CategoryProducer("CategoryProducer")
-nJet40Producer          = NJet40Producer("NJet40Producer")
-YieldCounter            = YieldCounter("YieldCounter")
+yieldCounter            = YieldCounter("YieldCounter")
 
-sequence = Sequence()
-#sequence.add(leptonJetProducer)
-#sequence.add(baselineSkimmer)
-sequence.add(xsWeighter)
-sequence.add(nJet40Producer)
-sequence.add(categoryProducer)
-sequence.add(metSkimmer)
-sequence.add(llHtSkimmer)
-sequence.add(YieldCounter)
+sequence = sr_sequence 
+sequence.add(yieldCounter)
 #sequence.add(plotter)
 
 #endSequence = EndSequence(skipHadd=False,)
 #endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
-endSequence = EndSequence()
+endSequence = EndSequence(haddAllSamples=True)
 
 outputInfo = OutputInfo("OutputInfo")
 outputInfo.outputDir = outputDir
-outputInfo.TFileName = "MCDistributions.root"
+outputInfo.TFileName = "SyncFile.root"
