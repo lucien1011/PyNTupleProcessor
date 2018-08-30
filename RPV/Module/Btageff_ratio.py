@@ -33,6 +33,9 @@ class Btageff_ratio(EndModule):
             h1 = ROOT.TH2D("BTageff"+sample, "BTageff"+sample, 10,0.,200.,10,-2.4,2.4)
             h2 = ROOT.TH2D("CTageff"+sample, "CTageff"+sample, 10,0.,200.,10,-2.4,2.4)
             h3 = ROOT.TH2D("LTageff"+sample, "LTageff"+sample, 10,0.,200.,10,-2.4,2.4)
+            c1 = ROOT.TCanvas("BTageff"+sample) 
+            c2 = ROOT.TCanvas("CTageff"+sample)
+            c3 = ROOT.TCanvas("LTageff"+sample)
 
             for p in hist_name: 
                 h = collector.getObj(sample,p)
@@ -43,19 +46,28 @@ class Btageff_ratio(EndModule):
                         h1 = h
                     if p == "BTageffDem": #and Btemp != None:
                         h1.Divide(h)
-                        h1.SaveAs("BTageff"+sample+".png")
+                        c1.cd()
+                        h1.Draw("colz")
+                        c1.SaveAs("BTageff"+sample+".png")
+                        #h1.SaveAs("BTageff"+sample+".png")
                         #self.writer.objs["BTageff"+sample] = Btemp
                     if p == "CTageffNum":
                         h2 = h
                     if p == "CTageffDem": #and Ctemp != None:
                         h2.Divide(h)
-                        h2.SaveAs("CTageff"+sample+".png")
+                        c2.cd()
+                        h2.Draw("colz")
+                        c2.SaveAs("CTageff"+sample+".png")
+                        #h2.SaveAs("CTageff"+sample+".png")
                         #self.writer.objs["CTageff"+sample] = Ctemp
                     if p == "LTageffNum":
                         h3 = h
                     if p == "LTageffDem": #and Ltemp != None:
                         h3.Divide(h)
-                        h3.SaveAs("LTageff"+sample+".png")
+                        c3.cd()
+                        h3.Draw("colz")
+                        c3.SaveAs("LTageff"+sample+".png")
+                        #h3.SaveAs("LTageff"+sample+".png")
                         #self.writer.objs["LTageff"+sample] = Ltemp
 
         return True
