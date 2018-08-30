@@ -35,7 +35,7 @@ lepCats = ["HH","HL","LL"]
 nCores = 1
 nEvents = -1
 disableProgressBar = False
-justEndSequence = False
+justEndSequence = True
 verbose = False
 componentList = allMCSamples
 for dataset in componentList:
@@ -63,24 +63,17 @@ for dataset in componentList:
 #        ]
 #        )
 #plotter                 = Plotter("Plotter",plots)
-leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
-xsWeighter              = XSWeighter("XSWeighter")
-baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
-metSkimmer              = METSkimmer("METSkimmer")
-llHtSkimmer             = LLHtSkimmer("LLHtSkimmer")
-categoryProducer        = CategoryProducer("CategoryProducer")
-nJet40Producer          = NJet40Producer("NJet40Producer")
-YieldCounter            = YieldCounter("YieldCounter")
+yieldCounter            = YieldCounter("YieldCounter")
 
 sequence = sr_sequence 
-sequence.add(YieldCounter)
+sequence.add(yieldCounter)
 #sequence.add(plotter)
 
 #endSequence = EndSequence(skipHadd=False,)
 #endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
-endSequence = EndSequence()
+endSequence = EndSequence(haddAllSamples=True)
 
 outputInfo = OutputInfo("OutputInfo")
 outputInfo.outputDir = outputDir
-outputInfo.TFileName = "MCDistributions.root"
+outputInfo.TFileName = "SyncFile.root"
