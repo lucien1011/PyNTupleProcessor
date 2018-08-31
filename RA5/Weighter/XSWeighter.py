@@ -11,6 +11,8 @@ class XSWeighter(Module):
         if self.dataset.isMC:
             event.weight *= event.genWeight[0]
             xs = event.xsec[0]
+            if self.dataset.parent.xsFactor:
+                xs *= self.dataset.parent.xsFactor
             nevts = self.dataset.sumw
             lumi = self.dataset.lumi
             event.weight *= xs*lumi*self.fb_to_pb_factor/self.dataset.sumw

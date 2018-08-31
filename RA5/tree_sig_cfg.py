@@ -21,11 +21,12 @@ from Core.Utils.LambdaFunc import LambdaFunc
 import os,array
 
 from DataMC.Heppy.Run2016.T1qqqqL import * 
+from DataMC.Heppy.Run2016.T1tbs import * 
 from DataMC.Heppy.Run2016.SampleDefinition import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SMS-T1qqqqL_LeptonJetRecleaner/"
+out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SMS-T1tbs_LeptonJetRecleaner/"
 #out_path = "HeppyValidation/2018-07-16/"
 
 nCores = 5
@@ -33,7 +34,7 @@ outputDir = out_path
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
-componentList = [T1qqqqL_1000,T1qqqqL_1500,]
+componentList = [T1tbs_1000,T1tbs_1500,]
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9

@@ -1,6 +1,8 @@
 from Core.Module import Module
 from Core.Collection import Collection
 
+from Utils.MiscVar import mtFunc
+
 import ROOT
 
 class Category(object):
@@ -17,21 +19,21 @@ class CategoryProducer(Module):
         if event.tightLeps[0].pt > 25 and event.tightLeps[1].pt > 25: event.cat.lepCat = "HH"
         if event.tightLeps[0].pt > 25 and event.tightLeps[1].pt < 25: event.cat.lepCat = "HL"
         if event.tightLeps[0].pt < 25 and event.tightLeps[1].pt < 25: event.cat.lepCat = "LL"
-        
-        veclep1 = event.tightLeps[0].p4()
-        veclep2 = event.tightLeps[1].p4()
-        met_pt = event.met_pt[0]
-        met_phi = event.met_phi[0]
-        met = ROOT.TLorentzVector() 
-        met.SetPtEtaPhiM(met_pt,0,met_phi,0)
-        met.SetPz(0)
-        met.SetE(met.Pt())
-        mt1 = (veclep1 + met).Mt()
-        mt2 = (veclep2 + met).Mt()
-        if mt1 < mt2:
-            mt = mt1
-        else:
-            mt = mt2              
+
+        mt = min([mtFunc(event.tightLeps[0].pt,event.tightLeps[0].phi,event.met_pt[0],event.met_phi[0]),mtFunc(event.tightLeps[1].pt,event.tightLeps[1].phi,event.met_pt[0],event.met_phi[0]),])
+
+        #veclep1 = event.tightLeps[0].p4()
+        #veclep2 = event.tightLeps[1].p4()
+        #met_pt = event.met_pt[0]
+        #met_phi = event.met_phi[0]
+        #met = ROOT.TLorentzVector() 
+        #met.SetPtEtaPhiM(met_pt,0,met_phi,0)
+        #met.SetPz(0)
+        #met.SetE(met.Pt())
+        #mt1 = (veclep1 + met).Mt()
+        #mt2 = (veclep2 + met).Mt()
+        #mt = min([mt1,mt2])
+        event.mtmin = mt
         event.cat.jetCat = "0"
         #print(event.cat.lepCat, event.nJet25[0], mt, event.met_pt[0], event.nJet40_recal, event.htJet40[0], event.tightLeps[0].charge, event.tightLeps[1].charge)
         if event.cat.lepCat == "HH":
