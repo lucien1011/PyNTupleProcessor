@@ -270,8 +270,9 @@ ggHZZd_M15 = Dataset(
         ggHZZd_M15_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = 3.396e-6*xsBoost,
-        #xs                  = 48.58*0.288*0.1**2*0.06729,
+        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
+        #xs                  = 48.58*0.288*0.1**2*0.06729, # Assume h->ZZd br to be 100%
+        xs                  = 48.58*0.1**2*(0.00252+0.00338)/2., # Take Br(h->ZZd->4l from paper
         )
 ggHZZd_M15.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -285,8 +286,9 @@ ggHZZd_M20 = Dataset(
         ggHZZd_M20_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = 6.34e-06*xsBoost,
+        #xs                  = 6.34e-06*xsBoost,
         #xs                  = 48.58*0.286*0.1**2*0.06729,
+        xs                  = 48.58*0.1**2*0.00555, # Take Br(h->ZZd->4l) from paper
         )
 ggHZZd_M20.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD20_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -300,8 +302,9 @@ ggHZZd_M25 = Dataset(
         ggHZZd_M25_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = 9.956e-06*xsBoost,
+        #xs                  = 9.956e-06*xsBoost,
         #xs                  = 48.58*0.283*0.1**2*0.06729,
+        xs                  = 48.58*0.1**2*(0.00814+0.00940)/2., # Take Br(h->ZZd->4l from paper
         )
 ggHZZd_M25.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD25_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -315,8 +318,9 @@ ggHZZd_M30 = Dataset(
         ggHZZd_M30_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = 1.196e-05*xsBoost,
+        #xs                  = 1.196e-05*xsBoost,
         #xs                  = 48.58*0.280*0.1**2*0.06729,
+        xs                  = 48.58*0.1**2*0.0108, # Take Br(h->ZZd->4l from paper
         )
 ggHZZd_M30.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD30_Eps1e-2_klo.root","Ana/sumWeights",True)
 
