@@ -3,7 +3,7 @@ from Core.Sequence import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
-from RA5.Sequence.RecoSequence import sr_sequence
+from RA5.Sequence.RecoSequence import sync_sequence
 from RA5.Analyzer.Sync import SyncPrinter 
 from RA5.Config.MergeSampleDefinition import mergeSampleDict
 
@@ -42,7 +42,7 @@ for dataset in componentList:
 if not os.path.exists(endModuleOutputDir):
     os.makedirs(endModuleOutputDir)
 
-sequence = sr_sequence 
+sequence = sync_sequence 
 syncPrinter = SyncPrinter("SyncPrinter",endModuleOutputDir+"uf_TTW_80X_dump_global.txt")
 sequence.add(syncPrinter)
 
