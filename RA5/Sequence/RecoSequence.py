@@ -19,7 +19,7 @@ categoryProducer        = CategoryProducer("CategoryProducer")
 nJet40Producer           = NJet40Producer("NJet40Producer")
 
 sr_sequence = Sequence()
-#sr_sequence.add(leptonJetProducer)
+sr_sequence.add(leptonJetProducer)
 #sr_sequence.add(baselineSkimmer)
 sr_sequence.add(metSkimmer)
 sr_sequence.add(nJet40Producer)
