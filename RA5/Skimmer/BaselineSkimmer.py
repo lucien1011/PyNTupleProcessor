@@ -24,3 +24,8 @@ class BaselineSkimmer(Module):
                 if not passMllVeto(l1,l2,mZ1Ranges[0],mZ1Ranges[1],True): return False
                 if not passMllVeto(l1,l2,mZ2Ranges[0],mZ2Ranges[1],True): return False
         return True
+
+class NJetSkimmer(Module):
+    def analyze(self,event):
+        if event.ret["nJet40_Mini"] < 2: return False
+        return True

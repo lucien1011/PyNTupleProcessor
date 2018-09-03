@@ -4,8 +4,9 @@ from Core.Utils.MakeComponent import makeComponents
 
 # ________________________________________________________________________________________________ ||
 sampleName      = "SyncMC"
-filePath        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
-inUFTier2       = True
+#filePath        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+filePath        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+inUFTier2       = False
 
 cmpList = ComponentList(
                        [ Component(
@@ -30,9 +31,10 @@ SyncMC.setSumWeight(filePath,"SumGenWeights",inUFTier2)
 skimCmpList = ComponentList(
                        [ Component(
                             "SkimSyncMC",
-                            "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/SyncMC/SkimTree.root",
+                            #"/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/SyncMC/SkimTree.root",
+                            "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/SyncMC/SkimTree.root",
                             "tree",
-                            True,
+                            False,
                            )
                         ]
                         )
@@ -43,5 +45,5 @@ SkimSyncMC = Dataset(
         isMC                = True,
         xs                  = 1,
         )
-SkimSyncMC.setSumWeight(filePath,"SumGenWeights",inUFTier2)
+#SkimSyncMC.setSumWeight(filePath,"SumGenWeights",inUFTier2)
 

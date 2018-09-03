@@ -9,6 +9,7 @@ from RA5.Skimmer.LLHtSkimmer import LLHtSkimmer
 from RA5.Producer.CategoryProducer import CategoryProducer
 from RA5.Producer.NJet40Producer import NJet40Producer
 from RA5.Producer.LeptonProducer import LeptonProducer
+from RA5.Producer.JetProducer import JetProducer
 
 lepCats = ["HH","HL","LL"]
 
@@ -21,6 +22,7 @@ llHtSkimmer             = LLHtSkimmer("LLHtSkimmer")
 categoryProducer        = CategoryProducer("CategoryProducer")
 nJet40Producer          = NJet40Producer("NJet40Producer")
 leptonProducer          = LeptonProducer("LeptonProducer")
+jetProducer             = JetProducer("JetProducer")
 
 sr_sequence = Sequence()
 #sr_sequence.add(leptonJetProducer)
@@ -41,6 +43,7 @@ rpv_sequence.add(xsWeighter)
 
 sync_sequence = Sequence()
 sync_sequence.add(leptonProducer)
+sync_sequence.add(jetProducer)
 sync_sequence.add(syncSkimmer)
 #sr_sequence.add(llHtSkimmer)
 

@@ -4,7 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.EndSequence import EndSequence
 
 from RA5.Sequence.RecoSequence import sync_sequence
-from RA5.Analyzer.Sync import SyncPrinter 
+from RA5.Analyzer.Sync import LeptonSyncPrinter,JetSyncPrinter
 from RA5.Config.MergeSampleDefinition import mergeSampleDict
 
 from Core.Utils.LambdaFunc import LambdaFunc
@@ -29,7 +29,7 @@ lepCats = ["HH","HL","LL"]
 
 nCores = 1
 nEvents = -1
-disableProgressBar = False
+disableProgressBar = True
 justEndSequence = False
 verbose = False
 componentList = [SkimSyncMC]
@@ -43,8 +43,10 @@ if not os.path.exists(endModuleOutputDir):
     os.makedirs(endModuleOutputDir)
 
 sequence = sync_sequence 
-syncPrinter = SyncPrinter("SyncPrinter",endModuleOutputDir+"uf_TTW_80X_dump_global.txt")
-sequence.add(syncPrinter)
+lepSyncPrinter = LeptonSyncPrinter("SyncPrinter",endModuleOutputDir+"uf_TTW_80X_dump_leptons.txt")
+jetSyncPrinter = JetSyncPrinter("SyncPrinter",endModuleOutputDir+"uf_TTW_80X_dump_jets.txt")
+sequence.add(lepSyncPrinter)
+sequence.add(jetSyncPrinter)
 
 endSequence = EndSequence(haddAllSamples=True)
 
