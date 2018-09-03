@@ -18,9 +18,11 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-3#out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
-out_path = "StatInput/DarkPhotonSelection_v1/2018-08-20/"
-out_path = "StatInput/DarkPhotonSelection_ATLAS-BrHToZZd100_v1/2018-08-20/"
+#out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
+#out_path = "StatInput/DarkPhotonSelection_v1/2018-08-20/"
+#out_path = "StatInput/DarkPhotonSelection_ATLAS-BrHToZZd100_v1/2018-08-20/"
+out_path = "StatInput/DarkPhotonSelection_m4l118To130/2018-08-31/"
+#out_path = "StatInput/DarkPhotonSelection_m4l105To140/2018-08-31/"
 
 mergeSampleDict = {
         "ggH":  ["ggH"],
