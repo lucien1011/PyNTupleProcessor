@@ -5,7 +5,7 @@ from Core.EndSequence import EndSequence
 
 from Common.TreeProducer import TreeProducer
 
-from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer,NJetSkimmer
+from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer,NJetSkimmer,TreeSkimmer
 from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
 
 from Config.BranchToAdd import branchesToAdd
@@ -15,15 +15,15 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 import os,array
 
-#from DataMC.Heppy.Run2016.HaddMC import * 
-from RA5.Dataset.Run2016.SyncMC import * 
+from DataMC.Heppy.Run2016.HaddMC import * 
+#from RA5.Dataset.Run2016.SyncMC import * 
 from DataMC.Heppy.Run2016.SampleDefinition import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-#out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v1_LeptonJetRecleaner_TT_pow/"
+out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner/"
 #out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
-out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
+#out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
 
 nCores = 5
 outputDir = out_path
@@ -31,7 +31,7 @@ nEvents = -1
 disableProgressBar = False
 justEndSequence = False
 #componentList = [TT_pow]
-componentList = [SyncMC]
+#componentList = [SyncMC]
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9
@@ -42,13 +42,15 @@ leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
 treeProducer            = TreeProducer("TreeProducer",listOfBranchesToKeep=branchesToKeep,branchesToAdd=branchesToAdd)
 #baselineSkimmer         = BaselineSkimmer("SignalRegionSkimmer")
 nJetSkimmer             = NJetSkimmer("SignalRegionSkimmer")
+treeSkimmer             = TreeSkimmer("TreeSkimmer")
 preskimCounter          = GenWeightCounter("GenWeightCounter",postfix="PreBaselineCut")
 postskimCounter         = GenWeightCounter("GenWeightCounter",postfix="PostBaselineCut")
 
 sequence = Sequence()
 sequence.add(preskimCounter)
 sequence.add(leptonJetProducer)
-sequence.add(nJetSkimmer)
+#sequence.add(nJetSkimmer)
+sequence.add(treeSkimmer)
 sequence.add(postskimCounter)
 sequence.add(treeProducer)
 

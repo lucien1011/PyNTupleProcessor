@@ -29,3 +29,10 @@ class NJetSkimmer(Module):
     def analyze(self,event):
         if event.ret["nJet40_Mini"] < 2: return False
         return True
+
+class TreeSkimmer(Module):
+    def analyze(self,event):
+        if event.ret["nJet40_Mini"] < 2: return False
+        if len(event.tightLeps) < 2: return False
+        return True
+
