@@ -3,9 +3,11 @@ from RA5.LeptonJetRecleaner.Algo import passMllVeto
 
 class BaselineSkimmer(Module):
     def analyze(self,event):
-        if event.ret["htJet40j_Mini"] < 80.: return False
-        if event.ret["nJet40_Mini"] < 2: return False
-        
+        #if event.ret["htJet40j_Mini"] < 80.: return False
+        #if event.ret["nJet40_Mini"] < 2: return False
+        if event.htJet40[0] < 80: return False
+        if event.nJetRA540[0] < 2: return False
+
         nSSLepPlus = 0
         nSSLepMinus = 0
         for l in event.tightLeps:
@@ -13,7 +15,19 @@ class BaselineSkimmer(Module):
             if l.pdgId == -11 or l.pdgId == -13: nSSLepMinus += 1
         if nSSLepPlus != 2 and nSSLepMinus != 2: return False
         if not self.passMllTL(event.looseLeps,event.tightLeps,[0.,12.],[76.,106.]): return False
-        if (event.tightLeps[0].p4()+event.tightLeps[1].p4()).M() < 8.: return False
+        
+        mllList = []
+        nTightLep = len(event.tightLeps)
+        for il in range(0,nTightLep-1):
+            lep1 = event.tightLeps[il]
+            for jl in range(il+1,len(event.tightLeps)):
+                lep2 = event.tightLeps[jl]
+                lep12Vec = lep1.p4()+lep2.p4()
+                mll = lep12Vec.M()
+                mllList.append(mll)
+
+        if min(mllList) < 8.: return False
+         
         return True
     
     def passMllTL(self,lepsl, lepst , mZ1Ranges, mZ2Ranges):

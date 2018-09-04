@@ -9,6 +9,20 @@ class Category(object):
     def __init__(self):
         pass
 
+class LeptonCatProducer(Module):
+    def analyze(self,event):
+        event.tightLeps.sort(key=lambda x: x.pt,reverse=True)
+        event.cat = Category()
+        if event.tightLeps[0].pt > 25 and event.tightLeps[1].pt > 25: event.cat.lepCat = "HH"
+        if event.tightLeps[0].pt > 25 and event.tightLeps[1].pt < 25: event.cat.lepCat = "HL"
+        if event.tightLeps[0].pt < 25 and event.tightLeps[1].pt < 25: event.cat.lepCat = "LL"
+
+        mt = min([mtFunc(event.tightLeps[0].pt,event.tightLeps[0].phi,event.met_pt[0],event.met_phi[0]),mtFunc(event.tightLeps[1].pt,event.tightLeps[1].phi,event.met_pt[0],event.met_phi[0]),])
+        event.mtmin = mt
+
+        return True
+
+
 class CategoryProducer(Module):
     def analyze(self,event):
         event.goodLeps = Collection(event,"LepGood")

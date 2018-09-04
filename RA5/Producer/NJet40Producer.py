@@ -25,6 +25,3 @@ class NJet40Producer(Module):
                 event.nJet40_recal += 1
             
         return True
-    
-    def end(self):
-        self.writer.objs
