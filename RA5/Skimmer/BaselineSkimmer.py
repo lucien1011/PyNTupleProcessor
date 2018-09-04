@@ -13,7 +13,7 @@ class BaselineSkimmer(Module):
         for l in event.tightLeps:
             if l.pdgId == 11 or l.pdgId == 13: nSSLepPlus += 1
             if l.pdgId == -11 or l.pdgId == -13: nSSLepMinus += 1
-        if nSSLepPlus != 2 and nSSLepMinus != 2: return False
+        if nSSLepPlus < 2 and nSSLepMinus < 2: return False
         if not self.passMllTL(event.looseLeps,event.tightLeps,[0.,12.],[76.,106.]): return False
         
         mllList = []
