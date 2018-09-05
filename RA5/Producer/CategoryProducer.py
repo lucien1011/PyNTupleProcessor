@@ -150,7 +150,7 @@ class LeptonCatProducer(Module):
         mt = min([mtFunc(event.tightLeps[0].pt,event.tightLeps[0].phi,event.met_pt[0],event.met_phi[0]),mtFunc(event.tightLeps[1].pt,event.tightLeps[1].phi,event.met_pt[0],event.met_phi[0]),])
         event.mtmin = mt
         
-        event.cat.SRCat = self.SRCatProducer(event.nJetRA540[0],event.nBJetRA525[0],event.htJet40[0],event.met_pt[0],event.mtmin,event.cat.lepCat,[firstLep.charge,secondLep.charge])
+        event.cat.SRCat = self.SRCatProducer(event.nJetRA540[0],event.nBJetMediumRA525[0],event.htJet40[0],event.met_pt[0],event.mtmin,event.cat.lepCat,[firstLep.charge,secondLep.charge])
 
         return True
 
