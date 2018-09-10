@@ -51,6 +51,13 @@ higgs_3p1f_sequence.add(higgs3P1FSkimmer)
 higgs_m4lSB_sequence = Sequence()
 higgs_m4lSB_sequence.add(m4lSBSkimmer)
 
+upsilon_sequence = Sequence()
+upsilon_sequence.add(xsWeighter)
+
+upsilon_signal_sequence = Sequence()
+upsilon_signal_sequence.add(darkPhotonSRSkimmer)
+upsilon_signal_sequence.add(xsWeighter)
+
 allSequence = [
         darkphoton_signal_sequence,
         darkphoton_cr_sequence,
