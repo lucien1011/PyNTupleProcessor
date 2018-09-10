@@ -5,8 +5,7 @@ from Core.EndSequence import EndSequence
 
 from Common.TreeProducer import TreeProducer
 
-from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer,NJetSkimmer,TreeSkimmer
-from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
+from RA5.Sequence.RecoSequence import rpv_sequence
 
 from Config.BranchToAdd import branchesToAdd
 from Config.BranchToKeep import branchesToKeep
@@ -15,15 +14,14 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 import os,array
 
-from DataMC.Heppy.Run2016.HaddMC import * 
-#from RA5.Dataset.Run2016.SyncMC import * 
+from RA5.Dataset.Run2016.all import *
 from DataMC.Heppy.Run2016.SampleDefinition import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner/"
+#out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner/"
 #out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
-#out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
+out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SkimMC2016/July18_v2_LeptonJetRecleaner_rpv/"
 
 nCores = 5
 outputDir = out_path
@@ -46,12 +44,8 @@ treeSkimmer             = TreeSkimmer("TreeSkimmer")
 preskimCounter          = GenWeightCounter("GenWeightCounter",postfix="PreBaselineCut")
 postskimCounter         = GenWeightCounter("GenWeightCounter",postfix="PostBaselineCut")
 
-sequence = Sequence()
-sequence.add(preskimCounter)
-sequence.add(leptonJetProducer)
-#sequence.add(nJetSkimmer)
-sequence.add(treeSkimmer)
-sequence.add(postskimCounter)
+
+sequence = rpv_sequence
 sequence.add(treeProducer)
 
 endSequence = EndSequence(skipHadd=False)

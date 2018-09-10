@@ -60,13 +60,13 @@ for jecStr in jecStrs:
             BranchToAdd("nDiscJetSel"+jecStr,'i',1,"nDiscJetSel"+jecStr,method=method,inputs="nDiscJetSel"+label+jecStr),
             BranchToAdd("iDiscJetSel"+jecStr,'i',20,"nDiscJetSel"+jecStr,method=method,inputs="iDiscJSel"+label+jecStr),
             
-            BranchToAdd("nBJetLoose"+jetPtStr+jecStr,'i',1,"nBJetLoose"+jetPtStr+jecStr,method=method,inputs="nBJetLoose"+jetPtStr+label+jecStr),
-            BranchToAdd("nBJetMedium"+jetPtStr+jecStr,'i',1,"nBJetMedium"+jetPtStr+jecStr,method=method,inputs="nBJetMedium"+jetPtStr+label+jecStr), 
-            BranchToAdd("nBJetLoose"+bJetPtStr+jecStr,'i',1,"nBJetLoose"+bJetPtStr+jecStr,method=method,inputs="nBJetLoose"+bJetPtStr+label+jecStr),
-            BranchToAdd("nBJetMedium"+bJetPtStr+jecStr,'i',1,"nBJetMedium"+bJetPtStr+jecStr,method=method,inputs="nBJetMedium"+bJetPtStr+label+jecStr), 
+            BranchToAdd("nBJetLooseRA5"+jetPtStr+jecStr,'i',1,"nBJetLoose"+jetPtStr+jecStr,method=method,inputs="nBJetLoose"+jetPtStr+label+jecStr),
+            BranchToAdd("nBJetMediumRA5"+jetPtStr+jecStr,'i',1,"nBJetMedium"+jetPtStr+jecStr,method=method,inputs="nBJetMedium"+jetPtStr+label+jecStr), 
+            BranchToAdd("nBJetLooseRA5"+bJetPtStr+jecStr,'i',1,"nBJetLoose"+bJetPtStr+jecStr,method=method,inputs="nBJetLoose"+bJetPtStr+label+jecStr),
+            BranchToAdd("nBJetMediumRA5"+bJetPtStr+jecStr,'i',1,"nBJetMedium"+bJetPtStr+jecStr,method=method,inputs="nBJetMedium"+bJetPtStr+label+jecStr), 
             
-            BranchToAdd("nJet"+jetPtStr+jecStr,'i',1,"nJet"+jetPtStr+jecStr,method=method,inputs="nJet"+jetPtStr+label+jecStr),
-            BranchToAdd("nJet"+bJetPtStr+jecStr,'i',1,"nJet"+bJetPtStr+jecStr,method=method,inputs="nJet"+bJetPtStr+label+jecStr),
+            BranchToAdd("nJetRA5"+jetPtStr+jecStr,'i',1,"nJet"+jetPtStr+jecStr,method=method,inputs="nJet"+jetPtStr+label+jecStr),
+            BranchToAdd("nJetRA5"+bJetPtStr+jecStr,'i',1,"nJet"+bJetPtStr+jecStr,method=method,inputs="nJet"+bJetPtStr+label+jecStr),
 
             BranchToAdd("htJet"+jetPtStr+jecStr,'f',1,"htJet"+jetPtStr+jecStr,method=method,inputs="htJet"+jetPtStr+"j"+label+jecStr),
             BranchToAdd("htJet"+bJetPtStr+jecStr,'f',1,"htJet"+bJetPtStr+jecStr,method=method,inputs="htJet"+bJetPtStr+"j"+label+jecStr),

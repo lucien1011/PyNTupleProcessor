@@ -9,6 +9,151 @@ class Category(object):
     def __init__(self):
         pass
 
+class SRCatProducer(object):
+    def __init__(self):
+        self.posCharges = [+1.,+1.]
+        self.negCharges = [-1.,-1.]
+
+    def getSRStr(self,number):
+        return "SR"+number
+
+    def getSRCat(self,nj,nb,ht,met,mt,lepCat,charges):
+        if lepCat == "HH":
+            return self.getSRCatHH(nj,nb,ht,met,mt,charges)
+        elif lepCat == "HL":
+            return self.getSRCatHL(nj,nb,ht,met,mt,charges)
+        elif lepCat == "LL":
+            return self.getSRCatLL(nj,nb,ht,met,mt,charges)
+
+    def getSRCatHH(self,nj,nb,ht,met,mt):
+        if met < 300.:
+            if ht > 1125. and ht < 1300.:
+                if charges == self.posCharges: return self.getSRStr("46") 
+                if charges == self.negCharges: return self.getSRStr("47") 
+            elif ht > 1300. and ht < 1600.:
+                if charges == self.posCharges: return self.getSRStr("48") 
+                if charges == self.negCharges: return self.getSRStr("49") 
+            elif ht > 1600:
+                if charges == self.posCharges: return self.getSRStr("50") 
+                if charges == self.negCharges: return self.getSRStr("51")
+            elif ht > 300. and ht < 1125.:
+                if nb == 0:
+                    if njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        return self.getSRStr("2")
+                    elif njet >= 5 and mt < 120. and met > 50. and met < 200.:
+                        return self.getSRStr("4")
+                    elif njet >= 2 and nj <= 4 and mt < 120. and met > 200. and met < 300.:
+                        if charges == self.posCharges: return self.getSRStr("5") 
+                        if charges == self.negCharges: return self.getSRStr("6")
+                    elif njet >= 5 and mt < 120. and met > 200. and met < 300.:
+                        return self.getSRStr("7")
+                    elif njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        if charges == self.posCharges: return self.getSRStr("8") 
+                        if charges == self.negCharges: return self.getSRStr("9")
+                    else:
+                        return self.getSRStr("10")
+                elif nb == 1:
+                    if njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        return self.getSRStr("12")
+                    elif njet >= 5 and mt < 120. and met > 50. and met < 200.:
+                        if charges == self.posCharges: return self.getSRStr("15") 
+                        if charges == self.negCharges: return self.getSRStr("16")
+                    elif njet >= 2 and nj <= 4 and mt < 120. and met > 200. and met < 300.:
+                        if charges == self.posCharges: return self.getSRStr("17") 
+                        if charges == self.negCharges: return self.getSRStr("18")
+                    elif njet >= 5 and mt < 120. and met > 200. and met < 300.:
+                        return self.getSRStr("19")
+                    elif njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        if charges == self.posCharges: return self.getSRStr("20") 
+                        if charges == self.negCharges: return self.getSRStr("21")
+                    else:
+                        return self.getSRStr("22")
+                elif nb == 2:
+                    if njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        return self.getSRStr("24")
+                    elif njet >= 5 and mt < 120. and met > 50. and met < 200.:
+                        if charges == self.posCharges: return self.getSRStr("27") 
+                        if charges == self.negCharges: return self.getSRStr("28")
+                    elif njet >= 2 and nj <= 4 and mt < 120. and met > 200. and met < 300.:
+                        if charges == self.posCharges: return self.getSRStr("29") 
+                        if charges == self.negCharges: return self.getSRStr("30")
+                    elif njet >= 5 and mt < 120. and met > 200. and met < 300.:
+                        return self.getSRStr("31")
+                    elif njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        if charges == self.posCharges: return self.getSRStr("32") 
+                        if charges == self.negCharges: return self.getSRStr("33")
+                    else:
+                        return self.getSRStr("34")
+                elif nb >= 3:
+                    if mt < 120.:
+                        if met > 50. and met < 200.:
+                            if charges == self.posCharges: return self.getSRStr("37") 
+                            if charges == self.negCharges: return self.getSRStr("38")
+                        elif met > 200. and met < 300.:
+                            return self.getSRStr("39")
+                    else:
+                            return self.getSRStr("41")
+            elif ht < 300.:
+                if nb == 0:
+                    if njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        return self.getSRStr("1")
+                    else:
+                        return self.getSRStr("3")
+                elif nb == 1:
+                    if njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        return self.getSRStr("11")
+                    else:
+                        if charges == self.posCharges: return self.getSRStr("13") 
+                        if charges == self.negCharges: return self.getSRStr("14")
+                elif nb == 2:
+                    if njet >= 2 and nj <= 4 and mt < 120. and met > 50. and met < 200.:
+                        return self.getSRStr("23")
+                    else:
+                        if charges == self.posCharges: return self.getSRStr("25") 
+                        if charges == self.negCharges: return self.getSRStr("26")
+                elif nb >= 3:
+                    if mt < 120.:
+                        if charges == self.posCharges: return self.getSRStr("35") 
+                        if charges == self.negCharges: return self.getSRStr("36")
+                    else:
+                        return self.getSRStr("40")
+        elif met > 300. and met < 500.:
+                if charges == self.posCharges: return self.getSRStr("42") 
+                if charges == self.negCharges: return self.getSRStr("43")
+        elif met > 500.:
+                if charges == self.posCharges: return self.getSRStr("44") 
+                if charges == self.negCharges: return self.getSRStr("45")
+
+    def getSRCatLL(self,nj,nb,ht,met,mt):
+        return self.getSRStr("1")
+
+    def getSRCatHL(self,nj,nb,ht,met,mt):
+        return self.getSRStr("1")
+
+class LeptonCatProducer(Module):
+    def __init__(self,name):
+        super(LeptonCatProducer,self).__init__(name)
+        self.SRCatProducer =  SRCatProducer()
+
+    def analyze(self,event):
+        event.tightLeps.sort(key=lambda x: x.pt,reverse=True)
+        event.cat = Category()
+
+        firstLep = event.tightLeps[0]
+        for l in event.tightLeps[1:]:
+            if l.charge == event.tightLeps[0].charge:
+                secondLep = l
+        if firstLep.pt > 25 and secondLep.pt > 25: event.cat.lepCat = "HH"
+        if firstLep.pt > 25 and secondLep.pt < 25: event.cat.lepCat = "HL"
+        if firstLep.pt < 25 and secondLep.pt < 25: event.cat.lepCat = "LL"
+
+        mt = min([mtFunc(event.tightLeps[0].pt,event.tightLeps[0].phi,event.met_pt[0],event.met_phi[0]),mtFunc(event.tightLeps[1].pt,event.tightLeps[1].phi,event.met_pt[0],event.met_phi[0]),])
+        event.mtmin = mt
+        
+        event.cat.SRCat = self.SRCatProducer(event.nJetRA540[0],event.nBJetMediumRA525[0],event.htJet40[0],event.met_pt[0],event.mtmin,event.cat.lepCat,[firstLep.charge,secondLep.charge])
+
+        return True
+
 class CategoryProducer(Module):
     def analyze(self,event):
         event.goodLeps = Collection(event,"LepGood")
