@@ -6,7 +6,7 @@ from DataMC.Heppy.Run2016.HaddMC import TT_pow
 sampleName      = "T1qqqqL"
 fileName        = "SkimTree.root"
 treeName        = "tree"
-treeDir         = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SMS-T1qqqqL_LeptonJetRecleaner/"
+treeDir         = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SMS-T1qqqqL_LeptonJetRecleaner_v2/"
 sumweight_path  = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v1_SMS-T1qqqqL/"
 sumweight_file  = "treeProducerSusyRA5.root"
 sumWeight       = "SumGenWeights"

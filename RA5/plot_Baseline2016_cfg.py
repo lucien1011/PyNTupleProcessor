@@ -21,7 +21,7 @@ import os
 from RA5.Dataset.Run2016.all import *
 
 if where == "hpg":
-    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-07-26/"
+    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-09-04/"
     outputDir = out_path
     endModuleOutputDir = out_path 
 elif where == "ihepa":
