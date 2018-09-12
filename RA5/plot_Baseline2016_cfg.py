@@ -21,7 +21,7 @@ import os
 from RA5.Dataset.Run2016.all import *
 
 if where == "hpg":
-    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-09-04/"
+    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-09-12/"
     outputDir = out_path
     endModuleOutputDir = out_path 
 elif where == "ihepa":
@@ -35,10 +35,11 @@ nEvents = -1
 disableProgressBar = False
 justEndSequence = False
 verbose = False
-componentList = allMCSamples 
+componentList = allMCSamples + [Data_Run2016B,] 
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 35.9
+        #dataset.lumi = 35.9
+        dataset.lumi = 5.93
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -78,4 +79,4 @@ endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")
 outputInfo.outputDir = outputDir
-outputInfo.TFileName = "MCDistributions.root"
+outputInfo.TFileName = "DataMCDistributions.root"
