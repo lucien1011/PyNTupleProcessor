@@ -53,10 +53,14 @@ higgs_m4lSB_sequence.add(m4lSBSkimmer)
 
 upsilon_sequence = Sequence()
 upsilon_sequence.add(xsWeighter)
+upsilon_sequence.add(nloWeighter)
+upsilon_sequence.add(fakeRateWeighter)
 
 upsilon_signal_sequence = Sequence()
 upsilon_signal_sequence.add(darkPhotonSRSkimmer)
+upsilon_signal_sequence.add(nloWeighter)
 upsilon_signal_sequence.add(xsWeighter)
+upsilon_signal_sequence.add(fakeRateWeighter)
 
 allSequence = [
         darkphoton_signal_sequence,

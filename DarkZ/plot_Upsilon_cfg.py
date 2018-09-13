@@ -1,10 +1,11 @@
-
 from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 from DarkZ.Dataset.Run2016.Upsilon_Data import * 
+from DarkZ.Dataset.Run2016.Upsilon_MC import * 
+from DarkZ.Dataset.Run2016.Upsilon_ZX import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -12,17 +13,69 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
+mergeSampleDict = {
+        #"ggH":  ["ggH"],
+        #"VBF":  ["VBF"],
+        #"WH":   ["WHPlus","WHminus",],
+        #"ZH":   ["ZH",],
+        "qqZZ": ["qqZZTo4L",],
+        "ggZZ": [
+            "ggZZTo2e2mu",
+            "ggZZTo2e2tau",
+            "ggZZTo2mu2tau",
+            "ggZZTo4e",
+            "ggZZTo4mu",
+            "ggZZTo4tau",
+            ],
+        "ZPlusX": ["ZPlusX"],
+        }
+
 isDarkPhotonReco = True
 
 if isDarkPhotonReco:
-    #out_path = "Upsilon/DataMCDistributions/SkimTree_mZ18p96-9p96_DarkPhotonReco/2018-09-10/"
-    out_path = "Upsilon/DataMCDistributions/SkimTree_mZ18p96-9p96_DarkPhotonReco_DarkPhotonSelection/2018-09-10/"
+    out_path = "Upsilon/DataMCDistributions/SkimTree_mZ18p96-9p96_DarkPhotonReco/2018-09-11/"
+    #out_path = "Upsilon/DataMCDistributions/SkimTree_mZ18p96-9p96_DarkPhotonReco_DarkPhotonSelection/2018-09-10/"
     mZ1PlotRange = [60,0.,120.]
-    mZ2PlotRange = [60,0.,120.]
+    mZ2PlotRange = [30,0.,60.]
     h4lPlotRange = [75,50.,200.]
     Data_Run2016.componentList = ComponentList(
         [
             Component("Data_Run2016","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco//Data_Run2016-03Feb2017_4l_1_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    qqZZTo4L.componentList = ComponentList(
+        [
+            Component("qqZZTo4L","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    ggZZTo4tau.componentList = ComponentList(
+        [
+            Component("ggZZTo4tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    ggZZTo4e.componentList = ComponentList(
+        [
+            Component("ggZZTo4e","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    ggZZTo4mu.componentList = ComponentList(
+        [
+            Component("ggZZTo4mu","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    ggZZTo2mu2tau.componentList = ComponentList(
+        [
+            Component("ggZZTo2mu2tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    ggZZTo2e2mu.componentList = ComponentList(
+        [
+            Component("ggZZTo2e2mu","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    ggZZTo2e2tau.componentList = ComponentList(
+        [
+            Component("ggZZTo2e2tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
 else:
@@ -33,6 +86,11 @@ else:
     Data_Run2016.componentList = ComponentList(
         [
             Component("Data_Run2016","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1//Data_Run2016-03Feb2017_4l_1.root","passedEvents",inUFTier2=False),
+        ]
+        )
+    qqZZTo4L.componentList = ComponentList(
+        [
+            Component("qqZZTo4L","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1/ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=False),
         ]
         )
 
@@ -67,7 +125,17 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [Data_Run2016,]
+componentList           = [
+        Data_Run2016,
+        qqZZTo4L,
+        ZPlusX,
+        ggZZTo2e2mu,
+        ggZZTo2e2tau,
+        ggZZTo2mu2tau,
+        ggZZTo4e,
+        ggZZTo4mu,
+        ggZZTo4tau,
+        ]
 justEndSequence         = False
 
 for dataset in componentList:
@@ -79,8 +147,8 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
-#sequence                = upsilon_sequence
-sequence                = upsilon_signal_sequence
+sequence                = upsilon_sequence
+#sequence                = upsilon_signal_sequence
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
