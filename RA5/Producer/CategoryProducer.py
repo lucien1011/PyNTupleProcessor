@@ -182,10 +182,13 @@ class LeptonCatProducer(Module):
         if firstLep.pt > 25 and secondLep.pt < 25: event.cat.lepCat = "HL"
         if firstLep.pt < 25 and secondLep.pt < 25: event.cat.lepCat = "LL"
 
-        mt = min([mtFunc(event.tightLeps[0].pt,event.tightLeps[0].phi,event.met_pt[0],event.met_phi[0]),mtFunc(event.tightLeps[1].pt,event.tightLeps[1].phi,event.met_pt[0],event.met_phi[0]),])
+        mt = min([mtFunc(firstLep.pt,firstLep.phi,event.met_pt[0],event.met_phi[0]),mtFunc(secondLep.pt,secondLep.phi,event.met_pt[0],event.met_phi[0]),])
         event.mtmin = mt
         
         event.cat.SRCat = self.SRCatProducer.getSRCat(event.nJetRA540[0],event.nBJetMediumRA525[0],event.htJet40[0],event.met_pt[0],event.mtmin,event.cat.lepCat,[firstLep.charge,secondLep.charge])
+
+        event.firstLep = firstLep
+        event.secondLep = secondLep
 
         return True
 

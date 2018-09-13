@@ -13,7 +13,7 @@ pdNames     = [
                 "DoubleMuon",
                 "DoubleEG",
               ]
-selection   = lambda x: "Run2016B" in x
+selection   = lambda x: "Run2016B" not in x
 
 #componentList = []
 sampleDict = {}

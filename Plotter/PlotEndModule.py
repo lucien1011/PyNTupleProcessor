@@ -303,10 +303,11 @@ class PlotEndModule(EndModule):
 
             leg.Draw()
             
-            if smCount > 0.0:
+            if smCount > 0.0 and dataCount > 0.:
                 scaleFactor = dataCount*1.0/smCount
                 scaleFactorErr = scaleFactor*math.sqrt(1/dataCount + smCountErrSq/smCount**2)
             else:
+                print "Warning, smCount or dataCount is zero :"+plot.key
                 scaleFactor    = 0.0
                 scaleFactorErr = 0.0
 

@@ -21,7 +21,7 @@ import os
 from RA5.Dataset.Run2016.all import *
 
 if where == "hpg":
-    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-09-12/"
+    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/Sync2016/2018-09-13_HLTEmulation/"
     outputDir = out_path
     endModuleOutputDir = out_path 
 elif where == "ihepa":
@@ -55,11 +55,11 @@ for lepCat in lepCats:
         Plot("nBJet25"+lepCat,     ["TH1D","nBJet25"+lepCat,"",7,-0.5,6.5],      LambdaFunc('x: x.nBJetMediumRA525[0]')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("nLepTight"+lepCat,    ["TH1D","nLepTight"+lepCat,"",7,-0.5,6.5],      LambdaFunc('x: x.nLepTight[0]')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("nLepLoose"+lepCat,    ["TH1D","nLepLoose"+lepCat,"",7,-0.5,6.5],      LambdaFunc('x: x.nLepLoose[0]')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
-        Plot("htJet"+lepCat,       ["TH1D","htJet"+lepCat,"",20,0.,2000.],         LambdaFunc('x: x.htJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("htJet"+lepCat,       ["TH1D","htJet"+lepCat,"",12,0.,1200.],         LambdaFunc('x: x.htJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("met_pt"+lepCat,      ["TH1D","met_pt"+lepCat,"",10,0., 500.],          LambdaFunc('x: x.met_pt[0]')           ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("met_phi"+lepCat,     ["TH1D","met_phi"+lepCat,"",10,-5, 5.],          LambdaFunc('x: x.met_phi[0]')           ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("mht"+lepCat,         ["TH1D","mht"+lepCat,"",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
-        Plot("mtmin"+lepCat,         ["TH1D","mtmin"+lepCat,"",20,0., 300.],          LambdaFunc('x: x.mtmin')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("mtmin"+lepCat,         ["TH1D","mtmin"+lepCat,"",20,0., 200.],          LambdaFunc('x: x.mtmin')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         
         Plot("LepTightPt1"+lepCat,    ["TH1D","LepTightPt1"+lepCat,"",20,0.,400.],      LambdaFunc('x: x.tightLeps[0].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("LepTightEta1"+lepCat,    ["TH1D","LepTightEta1"+lepCat,"",10,-3.,3.],      LambdaFunc('x: x.tightLeps[0].eta')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
