@@ -9,7 +9,9 @@ class JetProducer(Module):
         event.jets = Collection(event,"Jet")
         event.discjets = Collection(event,"DiscJet")
         event.selJets = []
+        event.iJetSel = [int(ijet) for ijet in event.JetSelIndex]
         for ijet in event.iJetSel:
+        #for ijet in event.JetSelIndex:
             try:
                 jetToAdd = None
                 if ijet >= 0:
@@ -18,8 +20,8 @@ class JetProducer(Module):
                 else:
                     index = -ijet-1
                     jetToAdd = event.discjets[index]
-                if jetToAdd and jetToAdd.pt > 40 and abs(jetToAdd.eta) < 2.4:
-                    event.selJets.append(jetToAdd)
+                #if jetToAdd and jetToAdd.pt > 40 and abs(jetToAdd.eta) < 2.4:
+                event.selJets.append(jetToAdd)
             except IndexError:
                 self.writer.objs["DiscardedEvent"].Fill(0)
                 return False

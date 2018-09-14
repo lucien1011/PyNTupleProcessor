@@ -5,6 +5,7 @@ from RA5.LeptonJetRecleaner.conept import conept_RA5
 
 class SyncSkimmer(Module):
     def analyze(self,event):
+        #if len(event.selJets) < 2: return False
         event.tightLeps.sort(key=lambda l: l.pt,reverse=True)
         event.tightLepsPt = [ l for l in event.tightLeps if (abs(l.pdgId) == 11 and l.pt > 15 ) or (abs(l.pdgId) == 13 and l.pt > 10)]
         event.tightLepsPt.sort(key=lambda l: l.pt,reverse=True)
@@ -24,8 +25,14 @@ class SyncSkimmer(Module):
                 lep12Vec = lep1.p4()+lep2.p4()
                 mll = lep12Vec.M()
                 mllList.append(mll)
+        
+        if event.evt[0] == 17126:
+            print event.nJetRA540[0],event.htJet40[0],nSSLepPlus,nSSLepMinus
+            print[j.pt for j in event.selJets]
 
-        if event.htJet40 < 80.: return False
+        if event.nJetRA540[0] < 2: return False
+        
+        if event.htJet40[0] < 80.: return False
         
         if nSSLepPlus < 2 and nSSLepMinus < 2: return False
         

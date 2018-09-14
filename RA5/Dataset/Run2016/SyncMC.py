@@ -5,7 +5,8 @@ from Core.Utils.MakeComponent import makeComponents
 # ________________________________________________________________________________________________ ||
 sampleName      = "SyncMC"
 #filePath        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
-filePath        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+#filePath        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+filePath        = "/raid/raid7/lucien/SUSY/RA5/SkimTree/SyncMC2016v2/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
 inUFTier2       = False
 
 cmpList = ComponentList(

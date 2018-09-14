@@ -13,7 +13,8 @@ from Core.Utils.WhichMachine import where
 import os
 
 #from DataMC.Heppy.Run2016.SampleDefinition import * 
-from RA5.Dataset.Run2016.SyncMC import SkimSyncMC
+#from RA5.Dataset.Run2016.SyncMC import SkimSyncMC
+from RA5.Dataset.Run2016.SyncMC import SyncMC
 
 from NanoAOD.Producer.GenWeightCounter import *
 
@@ -22,7 +23,7 @@ if where == "hpg":
     outputDir = out_path
     endModuleOutputDir = out_path 
 elif where == "ihepa":
-    out_path = "Sync2016/2018-09-02/"
+    out_path = "Sync2016/2018-09-13/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -32,7 +33,8 @@ nEvents = -1
 disableProgressBar = True
 justEndSequence = False
 verbose = False
-componentList = [SkimSyncMC]
+#componentList = [SkimSyncMC]
+componentList = [SyncMC]
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9
