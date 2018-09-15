@@ -2,7 +2,7 @@ from Core.ComponentList import *
 from Core.Dataset import Dataset
 
 bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180808/SkimTree_DarkPhoton_Run2016Data_v1/"
-bkgTreeDir          = "/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/"
+bkgTreeDir          = "/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/"
 sumWeightHist       = "Ana/sumWeights"
 inUFTier2           = False
 
@@ -41,7 +41,7 @@ ggZZTo4tau = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-ggZZTo4tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo4tau.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4e
@@ -57,7 +57,7 @@ ggZZTo4e = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-ggZZTo4e.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo4e.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4mu
@@ -73,7 +73,7 @@ ggZZTo4mu = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-ggZZTo4mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo4mu.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2mu2tau
@@ -89,7 +89,7 @@ ggZZTo2mu2tau = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-ggZZTo2mu2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo2mu2tau.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2mu
@@ -105,7 +105,7 @@ ggZZTo2e2mu = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-ggZZTo2e2mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo2e2mu.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2tau
@@ -121,5 +121,5 @@ ggZZTo2e2tau = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-ggZZTo2e2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo2e2tau.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 

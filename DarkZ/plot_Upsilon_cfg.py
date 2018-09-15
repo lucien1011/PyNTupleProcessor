@@ -33,49 +33,49 @@ mergeSampleDict = {
 isDarkPhotonReco = True
 
 if isDarkPhotonReco:
-    out_path = "Upsilon/DataMCDistributions/SkimTree_mZ18p96-9p96_DarkPhotonReco/2018-09-11/"
+    out_path = "Upsilon/DataMCDistributions/SkimTree_mZ14-20_DarkPhotonReco/2018-09-14/"
     #out_path = "Upsilon/DataMCDistributions/SkimTree_mZ18p96-9p96_DarkPhotonReco_DarkPhotonSelection/2018-09-10/"
-    mZ1PlotRange = [60,0.,120.]
-    mZ2PlotRange = [30,0.,60.]
-    h4lPlotRange = [75,50.,200.]
+    mZ1PlotRange = [40,40.,120.]
+    mZ2PlotRange = [120,0.,60.]
+    h4lPlotRange = [140,50.,120.]
     Data_Run2016.componentList = ComponentList(
         [
-            Component("Data_Run2016","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco//Data_Run2016-03Feb2017_4l_1_1.root","passedEvents",inUFTier2=False),
+            Component("Data_Run2016","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco//Data_Run2016-03Feb2017_4l_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
     qqZZTo4L.componentList = ComponentList(
         [
-            Component("qqZZTo4L","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+            Component("qqZZTo4L","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
     ggZZTo4tau.componentList = ComponentList(
         [
-            Component("ggZZTo4tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+            Component("ggZZTo4tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
     ggZZTo4e.componentList = ComponentList(
         [
-            Component("ggZZTo4e","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+            Component("ggZZTo4e","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
     ggZZTo4mu.componentList = ComponentList(
         [
-            Component("ggZZTo4mu","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+            Component("ggZZTo4mu","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
     ggZZTo2mu2tau.componentList = ComponentList(
         [
-            Component("ggZZTo2mu2tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+            Component("ggZZTo2mu2tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
     ggZZTo2e2mu.componentList = ComponentList(
         [
-            Component("ggZZTo2e2mu","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+            Component("ggZZTo2e2mu","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
     ggZZTo2e2tau.componentList = ComponentList(
         [
-            Component("ggZZTo2e2tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
+            Component("ggZZTo2e2tau","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180914/SkimTree_Upsilon_Run2016Data_v1_DarkPhotonReco/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1_1.root","passedEvents",inUFTier2=False),
         ]
         )
 else:
