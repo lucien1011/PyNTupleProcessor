@@ -17,9 +17,8 @@ from Core.Utils.WhichMachine import where
 
 import os
 
-#from DataMC.Heppy.Run2016.SampleDefinition import * 
-#from RA5.Dataset.Run2016.all import *
-from RA5.Dataset.Run2016.Sept18_v1 import *
+#from RA5.Dataset.Run2016.Sept18_v1 import *
+from RA5.Dataset.Run2016.Sept18_v1_skim import *
 
 if where == "hpg":
     out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/RPV/DataMCDistributions/2018-09-12_HLTEmulation/"
@@ -34,11 +33,12 @@ lepCats = ["HH","HL","LL"]
 nCores = 5
 nEvents = -1
 disableProgressBar = False
-justEndSequence = False
+justEndSequence = True
 verbose = False
 #componentList = allMCSamples + allSignalSamples + [Data_Run2016B,]
 #componentList = allMCSamples + [Data_Run2016B,]
-componentList = componentDict.values()
+#componentList = componentDict.values()
+componentList = skimComponentDict.values()
 for dataset in componentList:
     if dataset.isMC:
         #dataset.lumi = 35.9
@@ -78,7 +78,7 @@ plotter                 = Plotter("Plotter",plots)
 sequence = rpv_sequence
 sequence.add(plotter)
 
-endSequence = EndSequence(skipHadd=justEndSequence,)
+endSequence = EndSequence(skipHadd=False,)
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")
