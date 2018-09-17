@@ -6,7 +6,10 @@ from Core.Utils.MakeComponent import makeComponents
 sampleName      = "SyncMC"
 #filePath        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
 #filePath        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
-filePath        = "/raid/raid7/lucien/SUSY/RA5/SkimTree/SyncMC2016v2/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+#filePath        = "/raid/raid7/lucien/SUSY/RA5/SkimTree/SyncMC2016v2/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+#filePath        = "/raid/raid7/lucien/SUSY/RA5/SkimTree/SyncMC2016v3/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+#filePath        = "/raid/raid7/lucien/SUSY/RA5/SkimTree/SyncMC2016v4/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
+filePath        = "/raid/raid7/lucien/SUSY/RA5/SkimTree/SyncMC2016v5/TTW_RA5_sync/treeProducerSusyRA5/tree.root"
 inUFTier2       = False
 
 cmpList = ComponentList(
@@ -32,10 +35,10 @@ SyncMC.setSumWeight(filePath,"SumGenWeights",inUFTier2)
 skimCmpList = ComponentList(
                        [ Component(
                             "SkimSyncMC",
-                            #"/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/SyncMC/SkimTree.root",
-                            "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/SyncMC/SkimTree.root",
+                            "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/SyncMC/SkimTree.root",
+                            #"/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/SyncMC/SkimTree.root",
                             "tree",
-                            False,
+                            True,
                            )
                         ]
                         )

@@ -1,5 +1,6 @@
-ufTextFilePath = "/home/lucien/public_html/SUSY/RA5/Sync2016/2018-09-02/uf_TTW_80X_dump_leptons.txt"
-ucTextFilePath = "/home/lucien/public_html/SUSY/RA5/Sync2016/2018-09-02/ucsx_TTW_80X_dump_global.txt"
+ufTextFilePath = "/home/lucien/public_html/SUSY/RA5/Sync2016/2018-09-16/uf_TTW_80X_dump_leptons.txt"
+#ucTextFilePath = "/home/lucien/public_html/SUSY/RA5/Sync2016/2018-09-02/ucsx_TTW_80X_dump_global.txt"
+ucTextFilePath = "/home/lucien/public_html/SUSY/RA5/Sync2016/2018-09-02/uf_TTW_80X_dump_leptons.txt"
 
 ufEvtList = []
 uff = open(ufTextFilePath,"r")
