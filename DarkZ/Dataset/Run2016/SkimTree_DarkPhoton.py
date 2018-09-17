@@ -5,11 +5,12 @@ bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180808/SkimTree_D
 bkgSkimTreeDir2     = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180808/SkimTree_DarkPhoton_Run2016Data_v1/"
 sigSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180808/SkimTree_DarkPhoton_Run2017Sig_v1/"
 sigTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/SigMC_Run2016_v1/"
-bkgTreeDir          = "/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/"
+bkgTreeDir          = "/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/"
 dataTreeDir         = bkgSkimTreeDir 
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 xsBoost             = 100
+epsilon             = 0.03
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -56,7 +57,7 @@ ggZZTo4tau = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-ggZZTo4tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo4tau.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4e
@@ -72,7 +73,7 @@ ggZZTo4e = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-ggZZTo4e.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo4e.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4mu
@@ -88,7 +89,7 @@ ggZZTo4mu = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-ggZZTo4mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo4mu.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2mu2tau
@@ -104,7 +105,7 @@ ggZZTo2mu2tau = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-ggZZTo2mu2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo2mu2tau.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2mu
@@ -120,7 +121,7 @@ ggZZTo2e2mu = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-ggZZTo2e2mu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo2e2mu.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2tau
@@ -136,7 +137,7 @@ ggZZTo2e2tau = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-ggZZTo2e2tau.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+ggZZTo2e2tau.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # qqZZ
@@ -261,6 +262,54 @@ ZH.setSumWeight(
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
+# ggHZZd_M4
+ggHZZd_M4_cmpList = ComponentList(
+        [ Component("HZZd_M4",sigSkimTreeDir+"ZD_UpTo0j_MZD4_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
+        )
+ggHZZd_M4 = Dataset(
+        "HZZd_M4",
+        ggHZZd_M4_cmpList,
+        isMC                = True,
+        isSignal            = True,
+        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
+        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
+        xs                  = 48.58*epsilon**2*0.000219, # Take Br(h->ZZd->4l from paper
+        )
+ggHZZd_M4.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD4_Eps1e-2_klo.root","Ana/sumWeights",True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggHZZd_M7
+ggHZZd_M7_cmpList = ComponentList(
+        [ Component("HZZd_M7",sigSkimTreeDir+"ZD_UpTo0j_MZD7_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
+        )
+ggHZZd_M7 = Dataset(
+        "HZZd_M7",
+        ggHZZd_M7_cmpList,
+        isMC                = True,
+        isSignal            = True,
+        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
+        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
+        xs                  = 48.58*epsilon**2*0.000597, # Take Br(h->ZZd->4l from paper
+        )
+ggHZZd_M7.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD7_Eps1e-2_klo.root","Ana/sumWeights",True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ggHZZd_M10
+ggHZZd_M10_cmpList = ComponentList(
+        [ Component("HZZd_M10",sigSkimTreeDir+"ZD_UpTo0j_MZD10_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
+        )
+ggHZZd_M10 = Dataset(
+        "HZZd_M10",
+        ggHZZd_M10_cmpList,
+        isMC                = True,
+        isSignal            = True,
+        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
+        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
+        xs                  = 48.58*epsilon**2*0.00126, # Take Br(h->ZZd->4l from paper
+        )
+ggHZZd_M10.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo.root","Ana/sumWeights",True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
 # ggHZZd_M15
 ggHZZd_M15_cmpList = ComponentList(
         [ Component("HZZd_M15",sigSkimTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
@@ -271,8 +320,8 @@ ggHZZd_M15 = Dataset(
         isMC                = True,
         isSignal            = True,
         #xs                  = 3.396e-6*xsBoost, # Madgraph xs
-        #xs                  = 48.58*0.288*0.1**2*0.06729, # Assume h->ZZd br to be 100%
-        xs                  = 48.58*0.1**2*(0.00252+0.00338)/2., # Take Br(h->ZZd->4l from paper
+        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
+        xs                  = 48.58*epsilon**2*(0.00252+0.00338)/2., # Take Br(h->ZZd->4l from paper
         )
 ggHZZd_M15.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -287,8 +336,8 @@ ggHZZd_M20 = Dataset(
         isMC                = True,
         isSignal            = True,
         #xs                  = 6.34e-06*xsBoost,
-        #xs                  = 48.58*0.286*0.1**2*0.06729,
-        xs                  = 48.58*0.1**2*0.00555, # Take Br(h->ZZd->4l) from paper
+        #xs                  = 48.58*0.286*epsilon**2*0.06729,
+        xs                  = 48.58*epsilon**2*0.00555, # Take Br(h->ZZd->4l) from paper
         )
 ggHZZd_M20.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD20_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -303,8 +352,8 @@ ggHZZd_M25 = Dataset(
         isMC                = True,
         isSignal            = True,
         #xs                  = 9.956e-06*xsBoost,
-        #xs                  = 48.58*0.283*0.1**2*0.06729,
-        xs                  = 48.58*0.1**2*(0.00814+0.00940)/2., # Take Br(h->ZZd->4l from paper
+        #xs                  = 48.58*0.283*epsilon**2*0.06729,
+        xs                  = 48.58*epsilon**2*(0.00814+0.00940)/2., # Take Br(h->ZZd->4l from paper
         )
 ggHZZd_M25.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD25_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -319,8 +368,8 @@ ggHZZd_M30 = Dataset(
         isMC                = True,
         isSignal            = True,
         #xs                  = 1.196e-05*xsBoost,
-        #xs                  = 48.58*0.280*0.1**2*0.06729,
-        xs                  = 48.58*0.1**2*0.0108, # Take Br(h->ZZd->4l from paper
+        #xs                  = 48.58*0.280*epsilon**2*0.06729,
+        xs                  = 48.58*epsilon**2*0.0108, # Take Br(h->ZZd->4l from paper
         )
 ggHZZd_M30.setSumWeight(sigTreeDir+"ZD_UpTo0j_MZD30_Eps1e-2_klo.root","Ana/sumWeights",True)
 
@@ -359,6 +408,9 @@ bkgSamples = [
         ]
 
 sigSamples = [
+        ggHZZd_M4,
+        ggHZZd_M7,
+        ggHZZd_M10,
         ggHZZd_M15,
         ggHZZd_M20,
         ggHZZd_M25,
