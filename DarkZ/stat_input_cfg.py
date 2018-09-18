@@ -11,6 +11,7 @@ from DarkZ.Sequence.RecoSequence import *
 
 from DarkZ.StatTools.MassWindow import MassWindow
 from DarkZ.StatTools.YieldProducer import YieldProducer
+from DarkZ.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
@@ -21,7 +22,7 @@ from Plotter.Plot import Plot
 #out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
 #out_path = "StatInput/DarkPhotonSelection_v1/2018-08-20/"
 #out_path = "StatInput/DarkPhotonSelection_ATLAS-BrHToZZd100_v1/2018-08-20/"
-out_path = "StatInput/DarkPhotonSelection_m4l118To130/2018-08-31/"
+out_path = "StatInput/DarkPhotonSelection_m4l118To130/2018-09-18_MinDeltaR0p6/"
 #out_path = "StatInput/DarkPhotonSelection_m4l105To140/2018-08-31/"
 
 mergeSampleDict = {
@@ -42,6 +43,9 @@ mergeSampleDict = {
         }
 
 mass_window_list = [
+        MassWindow(4,0.02),
+        MassWindow(7,0.02),
+        MassWindow(10,0.02),
         MassWindow(15,0.02),
         MassWindow(20,0.02),
         MassWindow(25,0.02),
@@ -63,7 +67,10 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 sequence                = darkphoton_signal_sequence
+variableProducer        = VariableProducer("VariableProducer")
 yieldProducer           = YieldProducer("YieldProducer",mass_window_list)
+
+sequence.add(variableProducer)
 sequence.add(yieldProducer)
 
 outputInfo              = OutputInfo("OutputInfo")

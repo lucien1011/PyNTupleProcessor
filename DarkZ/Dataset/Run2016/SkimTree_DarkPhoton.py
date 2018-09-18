@@ -10,7 +10,7 @@ dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 xsBoost             = 100
-epsilon             = 0.03
+epsilon             = 0.05
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
