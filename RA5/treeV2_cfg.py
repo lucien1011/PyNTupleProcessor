@@ -20,8 +20,9 @@ from DataMC.Heppy.Run2016.SampleDefinition import *
 from NanoAOD.Producer.GenWeightCounter import *
 
 #out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner/"
+out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner_rpv/"
 #out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
-out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SkimMC2016/July18_v2_LeptonJetRecleaner_rpv/"
+#out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SkimMC2016/July18_v2_LeptonJetRecleaner_rpv/"
 
 nCores = 5
 outputDir = out_path
@@ -30,20 +31,14 @@ disableProgressBar = False
 justEndSequence = False
 #componentList = [TT_pow]
 #componentList = [SyncMC]
+componentList = allMCSamples
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
-leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
-treeProducer            = TreeProducer("TreeProducer",listOfBranchesToKeep=branchesToKeep,branchesToAdd=branchesToAdd)
-#baselineSkimmer         = BaselineSkimmer("SignalRegionSkimmer")
-nJetSkimmer             = NJetSkimmer("SignalRegionSkimmer")
-treeSkimmer             = TreeSkimmer("TreeSkimmer")
-preskimCounter          = GenWeightCounter("GenWeightCounter",postfix="PreBaselineCut")
-postskimCounter         = GenWeightCounter("GenWeightCounter",postfix="PostBaselineCut")
-
+treeProducer            = TreeProducer("TreeProducer")#,listOfBranchesToKeep=branchesToKeep,branchesToAdd=branchesToAdd)
 
 sequence = rpv_sequence
 sequence.add(treeProducer)

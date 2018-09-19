@@ -8,12 +8,22 @@ class BaselineSkimmer(Module):
         if event.htJet40[0] < 80: return False
         if event.nJetRA540[0] < 2: return False
 
-        nSSLepPlus = 0
-        nSSLepMinus = 0
-        for l in event.tightLeps:
-            if l.pdgId == 11 or l.pdgId == 13: nSSLepPlus += 1
-            if l.pdgId == -11 or l.pdgId == -13: nSSLepMinus += 1
-        if nSSLepPlus < 2 and nSSLepMinus < 2: return False
+        #nSSLepPlus = 0
+        #nSSLepMinus = 0
+        #for l in event.tightLeps:
+        #    if l.pdgId == 11 or l.pdgId == 13: nSSLepPlus += 1
+        #    if l.pdgId == -11 or l.pdgId == -13: nSSLepMinus += 1
+        #if nSSLepPlus < 2 and nSSLepMinus < 2: return False
+        event.firstLep = event.tightLeps[0]
+        event.found2nd = False
+        for l in event.tightLeps[1:]:
+            if l.charge == event.firstLep.charge:
+                event.found2nd = True
+                secondLep = l
+        
+        if len(event.tightLeps) != 2: return False
+        if not event.found2nd: return False
+        
         if not self.passMllTL(event.looseLeps,event.tightLeps,[0.,12.],[76.,106.]): return False
         
         mllList = []
@@ -47,6 +57,6 @@ class NJetSkimmer(Module):
 class TreeSkimmer(Module):
     def analyze(self,event):
         if event.ret["nJet40_Mini"] < 2: return False
-        if len(event.tightLeps) < 2: return False
+        if len(event.tightLeps) < 1: return False
         return True
 

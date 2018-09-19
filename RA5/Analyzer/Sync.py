@@ -55,8 +55,10 @@ class LeptonSyncPrinter(Module):
                 event.tightLeps[1].mcMatchPdgId,
                 event.tightLeps[1].mcMatchPdgId,
 
-                event.tightLeps[0].trackIso,
-                event.tightLeps[1].trackIso,
+                event.tightLeps[0].mcMatchPdgId,
+                event.tightLeps[1].mcMatchPdgId,
+                #event.tightLeps[0].trackIso,
+                #event.tightLeps[1].trackIso,
                 )
         if not self.sort:
             #"%1d%9d%12d\t%5.3f\t%5.3f\t%5.3f\t%+2d\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%1d\t%1d\t%1d\t%1d\t%5.3f\t%5.3f\t%5.3f\t%+2d\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%5.3f\t%1d\t%1d\t%1d\t%1d\t%5.3f\t%5.3f\n"%(

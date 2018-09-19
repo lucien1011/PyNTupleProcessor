@@ -21,11 +21,12 @@ from DataMC.Heppy.Run2016.SampleDefinition import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner/"
+#out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner/"
+out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v3_nJet2TightLep1_LeptonJetRecleaner/"
 #out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
 #out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
 
-nCores = 5
+nCores = 6
 outputDir = out_path
 nEvents = -1
 disableProgressBar = False

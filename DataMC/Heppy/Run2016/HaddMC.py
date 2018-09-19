@@ -17,12 +17,21 @@ postfixs    = [
         "part2",
         "part3",
         ]
+dataSamples = [
+        "MuonEG",
+        "DoubleEG",
+        "DoubleMuon",
+        "SingleMuon",
+        "SingleElectron",
+        "Tau",
+        ]
 
 #componentList = []
 sampleDict = {}
 sampleFileNames = listdir_uberftp(common_path,selection=lambda x: True)
 for sampleName in sampleFileNames:
     if "TT_pow" in sampleName: continue
+    if any([dataSample in sampleName for dataSample in dataSamples]): continue
     parentName = sampleName
     for postfix in postfixs:
         if postfix in sampleName: parentName = parentName.replace("_"+postfix,"")

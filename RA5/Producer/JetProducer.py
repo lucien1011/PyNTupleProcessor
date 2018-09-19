@@ -9,7 +9,9 @@ class JetProducer(Module):
         event.jets = Collection(event,"Jet")
         event.discjets = Collection(event,"DiscJet")
         event.selJets = []
+        event.iJetSel = [int(ijet) for ijet in event.JetSelIndex]
         for ijet in event.iJetSel:
+        #for ijet in event.JetSelIndex:
             try:
                 jetToAdd = None
                 if ijet >= 0:

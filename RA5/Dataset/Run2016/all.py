@@ -16,7 +16,9 @@ from TT_pow import TT_pow
 from T1qqqqL import T1qqqqL_1000,T1qqqqL_1500
 from T1tbs import T1tbs_1000,T1tbs_1500
 
-from SyncMC import SyncMC,SkimSyncMC
+from Data import Data_Run2016B
+
+#from SyncMC import SyncMC,SkimSyncMC
 
 allMCSamples = [
    DYJetsToLL_M10to50_LO,
