@@ -9,7 +9,7 @@ dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_Data/"
 inUFTier2       = False
 treeName        = "tree"
 
-componentDict = {}
+dataComponentDict = {}
 if inUFTier2:
     fileNames = [ n for n in listdir_uberftp(dir_path) if n.endswith(".root") ]
 else:
@@ -27,8 +27,8 @@ for fileName in fileNames:
                 ),
             isMC = False,
             )
-    tmpDataset.setSumWeight(os.path.join(dir_path,fileName),"SumGenWeights",inUFTier2)
-    if sampleName not in componentDict:
-        componentDict[sampleName] = tmpDataset
+    #tmpDataset.setSumWeight(os.path.join(dir_path,fileName),"SumGenWeights",inUFTier2)
+    if sampleName not in dataComponentDict:
+        dataComponentDict[sampleName] = tmpDataset
     else:
-        componentDict[sampleName].add(tmpDataset)
+        dataComponentDict[sampleName].add(tmpDataset)
