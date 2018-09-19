@@ -42,6 +42,7 @@ outputDir = "./BTag_ZMuMu/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = True
+haddSamples = True
 componentList = allMCSamples
 #componentList = allDataSamples + allMCSamples 
 for dataset in componentList:
@@ -85,7 +86,7 @@ sequence.add(btageff)
 #sequence.add(btagscalefactor)
 sequence.add(plotter)
 
-endSequence = EndSequence(skipHadd=justEndSequence)
+endSequence = EndSequence(skipHadd=justEndSequence,haddAllSamples=haddSamples)
 endModuleOutputDir = "/home/kshi/public_html/test/"
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 endSequence.add(Btageff_ratio(endModuleOutputDir))

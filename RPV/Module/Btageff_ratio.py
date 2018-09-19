@@ -30,13 +30,14 @@ class Btageff_ratio(EndModule):
 
         hist_name = ["BTageffNum", "BTageffDem", "CTageffNum", "CTageffDem", "LTageffNum", "LTageffDem"] 
         pt_bins = numpy.array([20, 30, 50, 70, 100, 140, 200, 300, 600, 1000], dtype='float64')
-        eta_bins = numpy.array([0., 2.4], dtype='float64')
+        eta_bins = numpy.array([-2.4,-1.42,0.,1.42,2.4], dtype='float64')
         histList = []
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             #if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continuei
-            h1 = ROOT.TH2D("BTageff"+sample, "BTageff"+sample, 1,20.,1000.,1,-2.4,2.4)
-            h2 = ROOT.TH2D("CTageff"+sample, "CTageff"+sample, 9,pt_bins,1,eta_bins)
-            h3 = ROOT.TH2D("LTageff"+sample, "LTageff"+sample, 9,pt_bins,1,eta_bins)
+            print(sample)
+            h1 = ROOT.TH2D("BTageff"+sample, "BTageff"+sample, 9,pt_bins,4,eta_bins)
+            h2 = ROOT.TH2D("CTageff"+sample, "CTageff"+sample, 9,pt_bins,4,eta_bins)
+            h3 = ROOT.TH2D("LTageff"+sample, "LTageff"+sample, 9,pt_bins,4,eta_bins)
             c1 = ROOT.TCanvas("BTageff"+sample) 
             c2 = ROOT.TCanvas("CTageff"+sample)
             c3 = ROOT.TCanvas("LTageff"+sample)
@@ -48,9 +49,9 @@ class Btageff_ratio(EndModule):
                 if s == sample:
                     if p == "BTageffNum":
                         h1 = h
-                        h1.SetBins(1,20.,1000.,1,-2.4,2.4)
+                        h1.SetBins(9,pt_bins,4,eta_bins)
                     if p == "BTageffDem": #and Btemp != None:
-                        h.SetBins(1,20.,1000.,1,-2.4,2.4)
+                        h.SetBins(9,pt_bins,4,eta_bins)
                         h1.Divide(h)
                         c1.cd()
                         h1.SetStats(0)
@@ -60,9 +61,9 @@ class Btageff_ratio(EndModule):
                         #self.writer.objs["BTageff"+sample] = Btemp
                     if p == "CTageffNum":
                         h2 = h
-                        h2.SetBins(9,pt_bins,1,eta_bins)
+                        h2.SetBins(9,pt_bins,4,eta_bins)
                     if p == "CTageffDem": #and Ctemp != None:
-                        h.SetBins(9,pt_bins,1,eta_bins)
+                        h.SetBins(9,pt_bins,4,eta_bins)
                         h2.Divide(h)
                         c2.cd()
                         h2.SetStats(0)
@@ -72,9 +73,9 @@ class Btageff_ratio(EndModule):
                         #self.writer.objs["CTageff"+sample] = Ctemp
                     if p == "LTageffNum":
                         h3 = h
-                        h3.SetBins(9,pt_bins,1,eta_bins)
+                        h3.SetBins(9,pt_bins,4,eta_bins)
                     if p == "LTageffDem": #and Ltemp != None:
-                        h.SetBins(9,pt_bins,1,eta_bins)
+                        h.SetBins(9,pt_bins,4,eta_bins)
                         h3.Divide(h)
                         c3.cd()
                         h3.SetStats(0)
@@ -82,5 +83,17 @@ class Btageff_ratio(EndModule):
                         c3.SaveAs("LTageff"+sample+".png")
                         #h3.SaveAs("LTageff"+sample+".png")
                         #self.writer.objs["LTageff"+sample] = Ltemp
+
+        h = collector.getObj("AllSample","BTageffNum")
+        h1 = h
+        h1.SetBins(1,20.,1000.,1,-2.4,2.4)
+        h1.SaveAs("text.png")
+        h = collector.getObj("AllSample","BTageffDem")
+        h.SetBins(1,20.,1000.,1,-2.4,2.4)
+        h1.Divide(h)
+        c1.cd()
+        h1.SetStats(0)
+        h1.Draw("colz")
+        c1.SaveAs("BTageffAllSample.png")
 
         return True
