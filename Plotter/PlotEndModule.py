@@ -303,10 +303,11 @@ class PlotEndModule(EndModule):
 
             leg.Draw()
             
-            if smCount > 0.0:
+            if smCount > 0.0 and dataCount > 0.:
                 scaleFactor = dataCount*1.0/smCount
                 scaleFactorErr = scaleFactor*math.sqrt(1/dataCount + smCountErrSq/smCount**2)
             else:
+                print "Warning, smCount or dataCount is zero :"+plot.key
                 scaleFactor    = 0.0
                 scaleFactorErr = 0.0
 
@@ -359,6 +360,19 @@ class PlotEndModule(EndModule):
             #self.drawLabels(pSetPair[0].lumi)
             c.SaveAs(outputDir+"/"+plot.key+".png")
             c.SaveAs(outputDir+"/"+plot.key+".pdf")
+        
+        elif collector.dataSamples and not collector.mcSamples:
+            dataHist.SetStats(0)
+            dataHist.GetXaxis().SetTitle(axisLabel)
+            dataHist.Draw('p')
+            n1 = ROOT.TLatex()
+            n1.SetNDC()
+            n1.SetTextFont(42)
+            n1.SetTextSize(0.05);
+            n1.DrawLatex(0.11, 0.92, "Data: %s" % (int(dataHist.Integral(0,dataHist.GetNbinsX()+1))))
+            c.SaveAs(outputDir+"/"+plot.key+".png")
+            c.SaveAs(outputDir+"/"+plot.key+".pdf")
+
 
     def draw2DPlot(self,collector,plot,outputDir):
         c = ROOT.TCanvas()
