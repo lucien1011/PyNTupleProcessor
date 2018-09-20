@@ -10,9 +10,9 @@ from RPV.Producer.TreeProducer import TreeProducer
 from RPV.Producer.AnalysisProducer import AnalysisProducer 
 from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
 
-nCores = 8 
+nCores = 1 
 #outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
-outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar/"
+outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar_Btageff/"
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False 

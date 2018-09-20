@@ -19,6 +19,10 @@ class AnalysisProducer(Module):
         event.jets.sort(key=lambda x: x.pt,reverse=True)
         event.nJet40 = len(event.jets)
 
+        event.jets25 = [p for p in event.LooseJets if p.pt > 25]
+        event.jets25.sort(key=lambda x: x.pt,reverse=True)
+        event.nJet25 = len(event.jets25)
+
         event.ht40 = 0.
         for ps in [event.jets,event.leps]:
             for p in ps:

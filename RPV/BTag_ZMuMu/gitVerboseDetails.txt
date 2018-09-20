@@ -1,0 +1,168 @@
+diff --git a/RPV/Producer/AnalysisProducer.py b/RPV/Producer/AnalysisProducer.py
+index 0978b5f..b3535c7 100644
+--- a/RPV/Producer/AnalysisProducer.py
++++ b/RPV/Producer/AnalysisProducer.py
+@@ -19,6 +19,10 @@ class AnalysisProducer(Module):
+         event.jets.sort(key=lambda x: x.pt,reverse=True)
+         event.nJet40 = len(event.jets)
+ 
++        event.jets25 = [p for p in event.LooseJets if p.pt > 25]
++        event.jets25.sort(key=lambda x: x.pt,reverse=True)
++        event.nJet25 = len(event.jets25)
++
+         event.ht40 = 0.
+         for ps in [event.jets,event.leps]:
+             for p in ps:
+diff --git a/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py b/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
+index 7eeaa63..5b70ef2 100644
+--- a/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
++++ b/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
+@@ -8,12 +8,12 @@ fileName        = "SkimTree.root"
+ common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/ZToMuMu/"
+ inUFTier2       = False
+ #sumw_path       = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_InclusiveSelection_v2/%s/EventWeight.root"
+-sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/ZToMuMu/%s/EventWeight.root"
++sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/%s/EventWeight.root"
+ 
+ sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n))]
+ allMCSamples = []
+ for sampleName in sampleNames:
+-    if sampleName != "DYJetsToLL_M50_NLO":
++    if sampleName != "DYJetsToLL_M50_LO":
+         tmpList = ComponentList([Component(sampleName,"/".join([common_path,sampleName,fileName]),"Events",inUFTier2,maxEvents=-1)],)
+         tmpDataset = Dataset(sampleName,tmpList,xs=xs_dict[sampleName])
+         tmpDataset.setSumWeight(sumw_path%sampleName)
+diff --git a/RPV/Skimmer/HLTSkimmer.py b/RPV/Skimmer/HLTSkimmer.py
+index d0d4eb6..2514801 100644
+--- a/RPV/Skimmer/HLTSkimmer.py
++++ b/RPV/Skimmer/HLTSkimmer.py
+@@ -7,7 +7,7 @@ class HLTSkimmer(Module):
+ 
+     def analyze(self,event):
+         if(self.dataset.isMC):
+-            return True #event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
++            return event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
+             #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+ 
+         else:
+diff --git a/RPV/Skimmer/TTbarSkimmer.py b/RPV/Skimmer/TTbarSkimmer.py
+index 4a090e1..c7087f9 100644
+--- a/RPV/Skimmer/TTbarSkimmer.py
++++ b/RPV/Skimmer/TTbarSkimmer.py
+@@ -24,16 +24,20 @@ class TTbarSkimmer(Module):
+         if len(event.muons) < 1 or len(event.muons) > 1: return False
+         if len(event.eles) < 1 or len(event.eles) > 1: return False
+ 
+-        temp = False
++        #temp = False
+ 
+-        for i in range(0,len(event.jets)):
+-            if event.jets[i].btagCSVV2 >= self.csvCut:
+-               temp = True
+-               break
+-        else:
+-               temp = False
++        #for i in range(0,len(event.jets)):
++            #if event.jets[i].btagCSVV2 >= self.csvCut:
++               #temp = True
++               #break
++        #else:
++               #temp = False
++
++        #if not temp: return False
++
++        if len(event.jets) <= 0:
++            return False
+ 
+-        if not temp: return False
+ 
+         event.nMuon40 = len(event.muons)
+ 
+diff --git a/RPV/Weighter/Triggereff.py b/RPV/Weighter/Triggereff.py
+index b0bf14b..f7569ad 100644
+--- a/RPV/Weighter/Triggereff.py
++++ b/RPV/Weighter/Triggereff.py
+@@ -7,7 +7,7 @@ from math import sqrt
+ 
+ class Triggereff(Module):
+ 
+-    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
++    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
+         self.filenameTrigeff = [(weight, "/home/kshi/SUSY/CMSSW_8_0_25/src/UF-PyNTupleRunner/DataMC/Trigger_Eff/Run2016/"+filename) for (weight, filename) in filenameTrigeff]
+         self.flatTrigSyst = flatTrigSyst
+         self.Trigeffhistpath = Trigeffhistpath
+diff --git a/RPV/plot_TTbar_cfg.py b/RPV/plot_TTbar_cfg.py
+index 569efff..260d21a 100644
+--- a/RPV/plot_TTbar_cfg.py
++++ b/RPV/plot_TTbar_cfg.py
+@@ -14,6 +14,8 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
+ from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
+ from RPV.Skimmer.HLTSkimmer import HLTSkimmer
+ from RPV.Weighter.Triggereff import Triggereff
++from RPV.Weighter.Btageff import Btageff
++from RPV.Weighter.BtagscaleFactor import BtagscaleFactor
+ 
+ from Plotter.Plotter import Plotter
+ from Plotter.PlotEndModule import PlotEndModule
+@@ -63,7 +65,7 @@ plots = [
+         Plot("muonPt1",     ["TH1D","muonPt1","",20,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else None')),
+         Plot("muonPt2",     ["TH1D","muonPt2","",20,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else None')),
+         Plot("nGoodPV",     ["TH1D","nGoodPV","",30,0.0,60.0],      LambdaFunc('x: x.PV_npvsGood[0]')),
+-	   #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
++       #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
+ 	   #Plot("m1_bl",       ["TH1D","m1_bl1","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
+ 	   #Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
+ 	   #Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
+@@ -80,6 +82,9 @@ hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
+ jsonSkimmer             = JSONSkimmer("JSONSkim")
+ metSkimmer              = METFilter("METSkim")
+ triggereff              = Triggereff("Triggereff")
++btageff                 = Btageff("Btageff")
++btagscalefactor         = BtagscaleFactor("BtagscaleFactor")
++
+ 
+ sequence = Sequence()
+ sequence.add(metSkimmer)
+@@ -93,10 +98,12 @@ sequence.add(puWeighter)
+ sequence.add(anaProducer)
+ sequence.add(eventSkimmer)
+ sequence.add(triggereff)
++sequence.add(btageff)
++sequence.add(btagscalefactor)
+ sequence.add(plotter)
+ 
+ endSequence = EndSequence(skipHadd=justEndSequence)
+-endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
++endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/Btageff_ratio/"
+ endSequence.add(PlotEndModule(endModuleOutputDir,plots))
+ 
+ outputInfo = OutputInfo("OutputInfo")
+diff --git a/RPV/skimTree_TTbar_mc_cfg.py b/RPV/skimTree_TTbar_mc_cfg.py
+index 73935f6..da89ca7 100644
+--- a/RPV/skimTree_TTbar_mc_cfg.py
++++ b/RPV/skimTree_TTbar_mc_cfg.py
+@@ -10,9 +10,9 @@ from RPV.Producer.TreeProducer import TreeProducer
+ from RPV.Producer.AnalysisProducer import AnalysisProducer 
+ from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
+ 
+-nCores = 8 
++nCores = 1 
+ #outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
+-outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar/"
++outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar_Btageff/"
+ nEvents = -1
+ disableProgressBar = False
+ justEndSequence = False 
+diff --git a/RPV/skimTree_ZToMuMu_mc_cfg.py b/RPV/skimTree_ZToMuMu_mc_cfg.py
+index 8486bed..c223493 100644
+--- a/RPV/skimTree_ZToMuMu_mc_cfg.py
++++ b/RPV/skimTree_ZToMuMu_mc_cfg.py
+@@ -10,7 +10,7 @@ from RPV.Producer.TreeProducer import TreeProducer
+ from RPV.Producer.AnalysisProducer import AnalysisProducer 
+ from RPV.Skimmer.ZMuMuSkimmer import ZMuMuSkimmer
+ 
+-nCores = 4 
++nCores = 8 
+ #outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
+ outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/ZToMuMu/"
+ nEvents = -1

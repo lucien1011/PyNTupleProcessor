@@ -7,7 +7,7 @@ from math import sqrt
 
 class Triggereff(Module):
 
-    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
+    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
         self.filenameTrigeff = [(weight, "/home/kshi/SUSY/CMSSW_8_0_25/src/UF-PyNTupleRunner/DataMC/Trigger_Eff/Run2016/"+filename) for (weight, filename) in filenameTrigeff]
         self.flatTrigSyst = flatTrigSyst
         self.Trigeffhistpath = Trigeffhistpath

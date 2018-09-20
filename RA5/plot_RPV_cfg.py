@@ -21,15 +21,19 @@ import os
 from RA5.Dataset.Run2016.Sept18_v1_Data import *
 from RA5.Dataset.Run2016.Sept18_v1_skim import *
 
-if where == "hpg":
-    out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/RPV/DataMCDistributions/2018-09-12_HLTEmulation/"
-    outputDir = out_path
-    endModuleOutputDir = out_path 
-elif where == "ihepa":
+#if where == "hpg":
+    #out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/RPV/DataMCDistributions/2018-09-12_HLTEmulation/"
+    #outputDir = out_path
+    #endModuleOutputDir = out_path 
+#elif where == "ihepa":
     #out_path = "RPV/DataMCDistribution/2018-09-19_OnlyMET0To50/"
-    out_path = "RPV/DataMCDistribution/2018-09-19/"
-    outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
-    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
+    #out_path = "RPV/DataMCDistribution/2018-09-19/"
+    #outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+    #endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
+
+#out_path = ""
+outputDir = "./testPlot/"
+endModuleOutputDir = "/home/kshi/public_html/RA5/tightleptons/"
 lepCats = ["HH","HL","LL"]
 
 nCores = 5
