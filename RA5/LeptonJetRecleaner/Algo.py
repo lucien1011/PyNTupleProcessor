@@ -103,11 +103,19 @@ class LeptonJetRecleaner(object):
                 for idx in ret["iJSel"+postfix]:
                     jet = jetcollcleaned[idx] if idx >= 0 else jetcolldiscarded[-1-idx]
                     for jfloat in self.jetVarToStore.split():
-                        jetret[jfloat].append( getattr(jet,jfloat) )
+                        if "Flavour" in jfloat:
+                            valueToStore = getattr(jet,jfloat,-99.)
+                        else:
+                            valueToStore = getattr(jet,jfloat)
+                        jetret[jfloat].append( valueToStore )
                 for idx in ret["iDiscJSel"+postfix]:
                     jet = jetcollcleaned[idx] if idx >= 0 else jetcolldiscarded[-1-idx]
                     for jfloat in self.jetVarToStore.split():
-                        discjetret[jfloat].append( getattr(jet,jfloat) )
+                        if "Flavour" in jfloat:
+                            valueToStore = getattr(jet,jfloat,-99.)
+                        else:
+                            valueToStore = getattr(jet,jfloat)
+                        discjetret[jfloat].append( valueToStore )
          # 5. compute the sums
         ret["nJet"+self.strBJetPt+postfix] = 0; ret["htJet"+self.strBJetPt+"j"+postfix] = 0; ret["mhtJet"+self.strBJetPt+postfix] = 0; ret["nBJetLoose"+self.strBJetPt+postfix] = 0; ret["nBJetMedium"+self.strBJetPt+postfix] = 0
         ret["nJet"+self.strJetPt+postfix] = 0; ret["htJet"+self.strJetPt+"j"+postfix] = 0; ret["mhtJet"+self.strJetPt+postfix] = 0; ret["nBJetLoose"+self.strJetPt+postfix] = 0; ret["nBJetMedium"+self.strJetPt+postfix] = 0

@@ -3,14 +3,10 @@ from Core.Sequence import Sequence
 from Core.OutputInfo import OutputInfo 
 from Core.EndSequence import EndSequence
 
+from Common.TreeProducer import TreeProducer
+
 from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer,NJetSkimmer,TreeSkimmer
 from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
-
-from Plotter.Plotter import Plotter
-from Plotter.PlotEndModule import PlotEndModule
-from Plotter.Plot import Plot
-
-from Common.TreeProducer import TreeProducer
 
 from Config.BranchToAdd import branchesToAdd
 from Config.BranchToKeep import branchesToKeep
@@ -19,23 +15,20 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 import os,array
 
-from DataMC.Heppy.Run2016.T1qqqqL import * 
-#from DataMC.Heppy.Run2016.T1tbs import * 
+from DataMC.Heppy.Run2016.HaddData import * 
 from DataMC.Heppy.Run2016.SampleDefinition import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-#out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SMS-T1tbs_LeptonJetRecleaner/"
-#out_path = "HeppyValidation/2018-07-16/"
-out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SMS-T1qqqqL_LeptonJetRecleaner_v2/"
+out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/Data_Run2016B_July18_v1_nJet2TightLep1_LeptonJetRecleaner/"
 
 nCores = 5
 outputDir = out_path
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
-#componentList = [T1tbs_1000,T1tbs_1500,]
-componentList = [T1qqqqL_1000,T1qqqqL_1500,]
+#componentList = [TT_pow]
+#componentList = [SyncMC]
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9

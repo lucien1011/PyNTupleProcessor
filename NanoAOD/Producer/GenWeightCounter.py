@@ -12,6 +12,7 @@ class GenWeightCounter(Module):
         self.writer.book("EventCount"+self.postfix,"TH1D","EventCount"+self.postfix,"",1,-0.5,0.5)
         
     def analyze(self,event):
-        self.writer.objs["SumWeight"+self.postfix].Fill(0.,event.genWeight[0])
+        genWeight = event.genWeight[0] if self.dataset.isMC else 1.
+        self.writer.objs["SumWeight"+self.postfix].Fill(0.,genWeight)
         self.writer.objs["EventCount"+self.postfix].Fill(0.)
         return True

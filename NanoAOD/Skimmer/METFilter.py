@@ -21,6 +21,7 @@ class METFilter(Module):
         self.flags = flags
 
     def analyze(self,event):
+        if self.dataset.isMC: return True
         for flag in self.flags:
             if not getattr(event,flag)[0]: return False
         return True

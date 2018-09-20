@@ -7,9 +7,9 @@ class YieldCounter(Module):
         self.postfix = postfix
 
     def analyze(self,event):
-        if event.cat.jetCat != "0":
-            if "YieldCount"+event.cat.lepCat+event.cat.jetCat not in self.writer.objs:
-                self.writer.book("YieldCount"+event.cat.lepCat+event.cat.jetCat,"TH1D","YieldCount"+event.cat.lepCat+event.cat.jetCat,"",1,-0.5,0.5)
-        if event.cat.jetCat != "0":
-            self.writer.objs["YieldCount"+event.cat.lepCat+event.cat.jetCat].Fill(0.,event.weight)
+        if event.cat.SRCat != "0":
+            if "YieldCount"+event.cat.lepCat+event.cat.SRCat not in self.writer.objs:
+                self.writer.book("YieldCount"+event.cat.lepCat+event.cat.SRCat,"TH1D","YieldCount"+event.cat.lepCat+event.cat.SRCat,"",1,-0.5,0.5)
+        if event.cat.SRCat != "0":
+            self.writer.objs["YieldCount"+event.cat.lepCat+event.cat.SRCat].Fill(0.,event.weight)
         return True
