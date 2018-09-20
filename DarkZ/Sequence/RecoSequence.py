@@ -18,6 +18,7 @@ m4lNarrowSkimmer        = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="Higgs-m4lN
 darkPhotonM4lSBSkimmer  = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="DarkPhoton-m4lSB")
 darkPhotonCRV2Skimmer   = AnalysisSkimmer("DarkPhoton-ZXCR-v2",cutflow="DarkPhoton-ZXCR-v2")
 upsilonCRSkimmer        = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="Upsilon-CR")
+WrongFCSkimmer          = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="WrongFC-SR")
 
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")
@@ -63,6 +64,10 @@ upsilon_signal_sequence.add(darkPhotonSRSkimmer)
 upsilon_signal_sequence.add(nloWeighter)
 upsilon_signal_sequence.add(xsWeighter)
 upsilon_signal_sequence.add(fakeRateWeighter)
+
+wrongFC_sequence = Sequence()
+wrongFC_sequence.add(WrongFCSkimmer)
+wrongFC_sequence.add(xsWeighter)
 
 allSequence = [
         darkphoton_signal_sequence,
