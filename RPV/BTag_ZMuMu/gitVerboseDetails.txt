@@ -1,168 +1,478 @@
-diff --git a/RPV/Producer/AnalysisProducer.py b/RPV/Producer/AnalysisProducer.py
-index 0978b5f..b3535c7 100644
---- a/RPV/Producer/AnalysisProducer.py
-+++ b/RPV/Producer/AnalysisProducer.py
-@@ -19,6 +19,10 @@ class AnalysisProducer(Module):
-         event.jets.sort(key=lambda x: x.pt,reverse=True)
-         event.nJet40 = len(event.jets)
+diff --git a/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/DYJetsToLL_M10to50_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/DYJetsToLL_M10to50_0_DataMCDistribution.root
+index fc53f3f..9d52ef5 100644
+Binary files a/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/DYJetsToLL_M10to50_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/DYJetsToLL_M10to50_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/DataMCDistribution.root b/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/DataMCDistribution.root
+deleted file mode 100644
+index 379f759..0000000
+Binary files a/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/hadd.sh b/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/hadd.sh
+deleted file mode 100644
+index 99a8399..0000000
+--- a/RPV/BTag_ZMuMu/DYJetsToLL_M10to50/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/DYJetsToLL_M10to50/DataMCDistribution.root  ./BTag_ZMuMu/DYJetsToLL_M10to50/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/DYJetsToLL_M50_NLO_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/DYJetsToLL_M50_NLO_0_DataMCDistribution.root
+index f6e67fe..0ca5586 100644
+Binary files a/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/DYJetsToLL_M50_NLO_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/DYJetsToLL_M50_NLO_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/DataMCDistribution.root b/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/DataMCDistribution.root
+deleted file mode 100644
+index e8cb1ab..0000000
+Binary files a/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/hadd.sh b/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/hadd.sh
+deleted file mode 100644
+index 77e963a..0000000
+--- a/RPV/BTag_ZMuMu/DYJetsToLL_M50_NLO/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/DYJetsToLL_M50_NLO/DataMCDistribution.root  ./BTag_ZMuMu/DYJetsToLL_M50_NLO/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/TBar_tWch/DataMCDistribution.root b/RPV/BTag_ZMuMu/TBar_tWch/DataMCDistribution.root
+deleted file mode 100644
+index 920b118..0000000
+Binary files a/RPV/BTag_ZMuMu/TBar_tWch/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/TBar_tWch/TBar_tWch_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/TBar_tWch/TBar_tWch_0_DataMCDistribution.root
+index 560d8e4..c3ea458 100644
+Binary files a/RPV/BTag_ZMuMu/TBar_tWch/TBar_tWch_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/TBar_tWch/TBar_tWch_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/TBar_tWch/hadd.sh b/RPV/BTag_ZMuMu/TBar_tWch/hadd.sh
+deleted file mode 100644
+index 6c1c6cc..0000000
+--- a/RPV/BTag_ZMuMu/TBar_tWch/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/TBar_tWch/DataMCDistribution.root  ./BTag_ZMuMu/TBar_tWch/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/TT_Powheg/DataMCDistribution.root b/RPV/BTag_ZMuMu/TT_Powheg/DataMCDistribution.root
+deleted file mode 100644
+index 9a6e4b7..0000000
+Binary files a/RPV/BTag_ZMuMu/TT_Powheg/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/TT_Powheg/TT_Powheg_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/TT_Powheg/TT_Powheg_0_DataMCDistribution.root
+index 349be9b..0b20f88 100644
+Binary files a/RPV/BTag_ZMuMu/TT_Powheg/TT_Powheg_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/TT_Powheg/TT_Powheg_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/TT_Powheg/hadd.sh b/RPV/BTag_ZMuMu/TT_Powheg/hadd.sh
+deleted file mode 100644
+index b8e948d..0000000
+--- a/RPV/BTag_ZMuMu/TT_Powheg/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/TT_Powheg/DataMCDistribution.root  ./BTag_ZMuMu/TT_Powheg/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/TToLeptons_sch/DataMCDistribution.root b/RPV/BTag_ZMuMu/TToLeptons_sch/DataMCDistribution.root
+deleted file mode 100644
+index e92ad6e..0000000
+Binary files a/RPV/BTag_ZMuMu/TToLeptons_sch/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/TToLeptons_sch/TToLeptons_sch_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/TToLeptons_sch/TToLeptons_sch_0_DataMCDistribution.root
+index 702c950..5b08526 100644
+Binary files a/RPV/BTag_ZMuMu/TToLeptons_sch/TToLeptons_sch_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/TToLeptons_sch/TToLeptons_sch_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/TToLeptons_sch/hadd.sh b/RPV/BTag_ZMuMu/TToLeptons_sch/hadd.sh
+deleted file mode 100644
+index 42777a4..0000000
+--- a/RPV/BTag_ZMuMu/TToLeptons_sch/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/TToLeptons_sch/DataMCDistribution.root  ./BTag_ZMuMu/TToLeptons_sch/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/T_tWch/DataMCDistribution.root b/RPV/BTag_ZMuMu/T_tWch/DataMCDistribution.root
+deleted file mode 100644
+index f5bd5ad..0000000
+Binary files a/RPV/BTag_ZMuMu/T_tWch/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/T_tWch/T_tWch_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/T_tWch/T_tWch_0_DataMCDistribution.root
+index a674270..d00a2dc 100644
+Binary files a/RPV/BTag_ZMuMu/T_tWch/T_tWch_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/T_tWch/T_tWch_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/T_tWch/hadd.sh b/RPV/BTag_ZMuMu/T_tWch/hadd.sh
+deleted file mode 100644
+index 06fcbb7..0000000
+--- a/RPV/BTag_ZMuMu/T_tWch/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/T_tWch/DataMCDistribution.root  ./BTag_ZMuMu/T_tWch/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/T_tch/DataMCDistribution.root b/RPV/BTag_ZMuMu/T_tch/DataMCDistribution.root
+deleted file mode 100644
+index 8deebee..0000000
+Binary files a/RPV/BTag_ZMuMu/T_tch/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/T_tch/T_tch_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/T_tch/T_tch_0_DataMCDistribution.root
+index 987a1d1..5c8be91 100644
+Binary files a/RPV/BTag_ZMuMu/T_tch/T_tch_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/T_tch/T_tch_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/T_tch/hadd.sh b/RPV/BTag_ZMuMu/T_tch/hadd.sh
+deleted file mode 100644
+index 9cdf201..0000000
+--- a/RPV/BTag_ZMuMu/T_tch/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/T_tch/DataMCDistribution.root  ./BTag_ZMuMu/T_tch/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/WJetsToLNu/DataMCDistribution.root b/RPV/BTag_ZMuMu/WJetsToLNu/DataMCDistribution.root
+deleted file mode 100644
+index 976e195..0000000
+Binary files a/RPV/BTag_ZMuMu/WJetsToLNu/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/WJetsToLNu/WJetsToLNu_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/WJetsToLNu/WJetsToLNu_0_DataMCDistribution.root
+index 411e6f5..30b8a4f 100644
+Binary files a/RPV/BTag_ZMuMu/WJetsToLNu/WJetsToLNu_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/WJetsToLNu/WJetsToLNu_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/WJetsToLNu/hadd.sh b/RPV/BTag_ZMuMu/WJetsToLNu/hadd.sh
+deleted file mode 100644
+index dabfc35..0000000
+--- a/RPV/BTag_ZMuMu/WJetsToLNu/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/WJetsToLNu/DataMCDistribution.root  ./BTag_ZMuMu/WJetsToLNu/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/WWW_4f/DataMCDistribution.root b/RPV/BTag_ZMuMu/WWW_4f/DataMCDistribution.root
+deleted file mode 100644
+index 5913877..0000000
+Binary files a/RPV/BTag_ZMuMu/WWW_4f/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/WWW_4f/WWW_4f_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/WWW_4f/WWW_4f_0_DataMCDistribution.root
+index 69b36cd..feecb6a 100644
+Binary files a/RPV/BTag_ZMuMu/WWW_4f/WWW_4f_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/WWW_4f/WWW_4f_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/WWW_4f/hadd.sh b/RPV/BTag_ZMuMu/WWW_4f/hadd.sh
+deleted file mode 100644
+index 2e057b5..0000000
+--- a/RPV/BTag_ZMuMu/WWW_4f/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/WWW_4f/DataMCDistribution.root  ./BTag_ZMuMu/WWW_4f/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/WWZ/DataMCDistribution.root b/RPV/BTag_ZMuMu/WWZ/DataMCDistribution.root
+deleted file mode 100644
+index 85d20a7..0000000
+Binary files a/RPV/BTag_ZMuMu/WWZ/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/WWZ/WWZ_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/WWZ/WWZ_0_DataMCDistribution.root
+index 3e71ec6..33edb5a 100644
+Binary files a/RPV/BTag_ZMuMu/WWZ/WWZ_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/WWZ/WWZ_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/WWZ/hadd.sh b/RPV/BTag_ZMuMu/WWZ/hadd.sh
+deleted file mode 100644
+index 11ac596..0000000
+--- a/RPV/BTag_ZMuMu/WWZ/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/WWZ/DataMCDistribution.root  ./BTag_ZMuMu/WWZ/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/WZTo3LNu/DataMCDistribution.root b/RPV/BTag_ZMuMu/WZTo3LNu/DataMCDistribution.root
+deleted file mode 100644
+index 0bb853c..0000000
+Binary files a/RPV/BTag_ZMuMu/WZTo3LNu/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/WZTo3LNu/WZTo3LNu_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/WZTo3LNu/WZTo3LNu_0_DataMCDistribution.root
+index c92fa19..f3cafaa 100644
+Binary files a/RPV/BTag_ZMuMu/WZTo3LNu/WZTo3LNu_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/WZTo3LNu/WZTo3LNu_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/WZTo3LNu/hadd.sh b/RPV/BTag_ZMuMu/WZTo3LNu/hadd.sh
+deleted file mode 100644
+index 721b167..0000000
+--- a/RPV/BTag_ZMuMu/WZTo3LNu/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/WZTo3LNu/DataMCDistribution.root  ./BTag_ZMuMu/WZTo3LNu/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/WZZ/DataMCDistribution.root b/RPV/BTag_ZMuMu/WZZ/DataMCDistribution.root
+deleted file mode 100644
+index e76b6ee..0000000
+Binary files a/RPV/BTag_ZMuMu/WZZ/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/WZZ/WZZ_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/WZZ/WZZ_0_DataMCDistribution.root
+index ae25afc..67fa90f 100644
+Binary files a/RPV/BTag_ZMuMu/WZZ/WZZ_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/WZZ/WZZ_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/WZZ/hadd.sh b/RPV/BTag_ZMuMu/WZZ/hadd.sh
+deleted file mode 100644
+index aa2b123..0000000
+--- a/RPV/BTag_ZMuMu/WZZ/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/WZZ/DataMCDistribution.root  ./BTag_ZMuMu/WZZ/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/ZGTo2LG/DataMCDistribution.root b/RPV/BTag_ZMuMu/ZGTo2LG/DataMCDistribution.root
+deleted file mode 100644
+index 684982d..0000000
+Binary files a/RPV/BTag_ZMuMu/ZGTo2LG/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/ZGTo2LG/ZGTo2LG_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/ZGTo2LG/ZGTo2LG_0_DataMCDistribution.root
+index 7c96abf..bdcced1 100644
+Binary files a/RPV/BTag_ZMuMu/ZGTo2LG/ZGTo2LG_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/ZGTo2LG/ZGTo2LG_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/ZGTo2LG/hadd.sh b/RPV/BTag_ZMuMu/ZGTo2LG/hadd.sh
+deleted file mode 100644
+index 8b3c5a3..0000000
+--- a/RPV/BTag_ZMuMu/ZGTo2LG/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/ZGTo2LG/DataMCDistribution.root  ./BTag_ZMuMu/ZGTo2LG/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/ZZZ/DataMCDistribution.root b/RPV/BTag_ZMuMu/ZZZ/DataMCDistribution.root
+deleted file mode 100644
+index fe4d830..0000000
+Binary files a/RPV/BTag_ZMuMu/ZZZ/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/ZZZ/ZZZ_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/ZZZ/ZZZ_0_DataMCDistribution.root
+index 713c21a..1b369e7 100644
+Binary files a/RPV/BTag_ZMuMu/ZZZ/ZZZ_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/ZZZ/ZZZ_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/ZZZ/hadd.sh b/RPV/BTag_ZMuMu/ZZZ/hadd.sh
+deleted file mode 100644
+index 9de65eb..0000000
+--- a/RPV/BTag_ZMuMu/ZZZ/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/ZZZ/DataMCDistribution.root  ./BTag_ZMuMu/ZZZ/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/gitDetails.txt b/RPV/BTag_ZMuMu/gitDetails.txt
+index 10e2b37..9245d0c 100644
+--- a/RPV/BTag_ZMuMu/gitDetails.txt
++++ b/RPV/BTag_ZMuMu/gitDetails.txt
+@@ -1 +1 @@
+-v0.0-203-g7c6a9fb
++v0.0-247-g9659973
+diff --git a/RPV/BTag_ZMuMu/gitVerboseDetails.txt b/RPV/BTag_ZMuMu/gitVerboseDetails.txt
+index fbd84d0..e69de29 100644
+--- a/RPV/BTag_ZMuMu/gitVerboseDetails.txt
++++ b/RPV/BTag_ZMuMu/gitVerboseDetails.txt
+@@ -1,168 +0,0 @@
+-diff --git a/RPV/Producer/AnalysisProducer.py b/RPV/Producer/AnalysisProducer.py
+-index 0978b5f..b3535c7 100644
+---- a/RPV/Producer/AnalysisProducer.py
+-+++ b/RPV/Producer/AnalysisProducer.py
+-@@ -19,6 +19,10 @@ class AnalysisProducer(Module):
+-         event.jets.sort(key=lambda x: x.pt,reverse=True)
+-         event.nJet40 = len(event.jets)
+- 
+-+        event.jets25 = [p for p in event.LooseJets if p.pt > 25]
+-+        event.jets25.sort(key=lambda x: x.pt,reverse=True)
+-+        event.nJet25 = len(event.jets25)
+-+
+-         event.ht40 = 0.
+-         for ps in [event.jets,event.leps]:
+-             for p in ps:
+-diff --git a/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py b/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
+-index 7eeaa63..5b70ef2 100644
+---- a/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
+-+++ b/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
+-@@ -8,12 +8,12 @@ fileName        = "SkimTree.root"
+- common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/ZToMuMu/"
+- inUFTier2       = False
+- #sumw_path       = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_InclusiveSelection_v2/%s/EventWeight.root"
+--sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/ZToMuMu/%s/EventWeight.root"
+-+sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/%s/EventWeight.root"
+- 
+- sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n))]
+- allMCSamples = []
+- for sampleName in sampleNames:
+--    if sampleName != "DYJetsToLL_M50_NLO":
+-+    if sampleName != "DYJetsToLL_M50_LO":
+-         tmpList = ComponentList([Component(sampleName,"/".join([common_path,sampleName,fileName]),"Events",inUFTier2,maxEvents=-1)],)
+-         tmpDataset = Dataset(sampleName,tmpList,xs=xs_dict[sampleName])
+-         tmpDataset.setSumWeight(sumw_path%sampleName)
+-diff --git a/RPV/Skimmer/HLTSkimmer.py b/RPV/Skimmer/HLTSkimmer.py
+-index d0d4eb6..2514801 100644
+---- a/RPV/Skimmer/HLTSkimmer.py
+-+++ b/RPV/Skimmer/HLTSkimmer.py
+-@@ -7,7 +7,7 @@ class HLTSkimmer(Module):
+- 
+-     def analyze(self,event):
+-         if(self.dataset.isMC):
+--            return True #event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
+-+            return event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
+-             #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+- 
+-         else:
+-diff --git a/RPV/Skimmer/TTbarSkimmer.py b/RPV/Skimmer/TTbarSkimmer.py
+-index 4a090e1..c7087f9 100644
+---- a/RPV/Skimmer/TTbarSkimmer.py
+-+++ b/RPV/Skimmer/TTbarSkimmer.py
+-@@ -24,16 +24,20 @@ class TTbarSkimmer(Module):
+-         if len(event.muons) < 1 or len(event.muons) > 1: return False
+-         if len(event.eles) < 1 or len(event.eles) > 1: return False
+- 
+--        temp = False
+-+        #temp = False
+- 
+--        for i in range(0,len(event.jets)):
+--            if event.jets[i].btagCSVV2 >= self.csvCut:
+--               temp = True
+--               break
+--        else:
+--               temp = False
+-+        #for i in range(0,len(event.jets)):
+-+            #if event.jets[i].btagCSVV2 >= self.csvCut:
+-+               #temp = True
+-+               #break
+-+        #else:
+-+               #temp = False
+-+
+-+        #if not temp: return False
+-+
+-+        if len(event.jets) <= 0:
+-+            return False
+- 
+--        if not temp: return False
+- 
+-         event.nMuon40 = len(event.muons)
+- 
+-diff --git a/RPV/Weighter/Triggereff.py b/RPV/Weighter/Triggereff.py
+-index b0bf14b..f7569ad 100644
+---- a/RPV/Weighter/Triggereff.py
+-+++ b/RPV/Weighter/Triggereff.py
+-@@ -7,7 +7,7 @@ from math import sqrt
+- 
+- class Triggereff(Module):
+- 
+--    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
+-+    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
+-         self.filenameTrigeff = [(weight, "/home/kshi/SUSY/CMSSW_8_0_25/src/UF-PyNTupleRunner/DataMC/Trigger_Eff/Run2016/"+filename) for (weight, filename) in filenameTrigeff]
+-         self.flatTrigSyst = flatTrigSyst
+-         self.Trigeffhistpath = Trigeffhistpath
+-diff --git a/RPV/plot_TTbar_cfg.py b/RPV/plot_TTbar_cfg.py
+-index 569efff..260d21a 100644
+---- a/RPV/plot_TTbar_cfg.py
+-+++ b/RPV/plot_TTbar_cfg.py
+-@@ -14,6 +14,8 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
+- from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
+- from RPV.Skimmer.HLTSkimmer import HLTSkimmer
+- from RPV.Weighter.Triggereff import Triggereff
+-+from RPV.Weighter.Btageff import Btageff
+-+from RPV.Weighter.BtagscaleFactor import BtagscaleFactor
+- 
+- from Plotter.Plotter import Plotter
+- from Plotter.PlotEndModule import PlotEndModule
+-@@ -63,7 +65,7 @@ plots = [
+-         Plot("muonPt1",     ["TH1D","muonPt1","",20,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else None')),
+-         Plot("muonPt2",     ["TH1D","muonPt2","",20,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else None')),
+-         Plot("nGoodPV",     ["TH1D","nGoodPV","",30,0.0,60.0],      LambdaFunc('x: x.PV_npvsGood[0]')),
+--	   #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
+-+       #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
+- 	   #Plot("m1_bl",       ["TH1D","m1_bl1","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
+- 	   #Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
+- 	   #Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
+-@@ -80,6 +82,9 @@ hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
+- jsonSkimmer             = JSONSkimmer("JSONSkim")
+- metSkimmer              = METFilter("METSkim")
+- triggereff              = Triggereff("Triggereff")
+-+btageff                 = Btageff("Btageff")
+-+btagscalefactor         = BtagscaleFactor("BtagscaleFactor")
+-+
+- 
+- sequence = Sequence()
+- sequence.add(metSkimmer)
+-@@ -93,10 +98,12 @@ sequence.add(puWeighter)
+- sequence.add(anaProducer)
+- sequence.add(eventSkimmer)
+- sequence.add(triggereff)
+-+sequence.add(btageff)
+-+sequence.add(btagscalefactor)
+- sequence.add(plotter)
+- 
+- endSequence = EndSequence(skipHadd=justEndSequence)
+--endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
+-+endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/Btageff_ratio/"
+- endSequence.add(PlotEndModule(endModuleOutputDir,plots))
+- 
+- outputInfo = OutputInfo("OutputInfo")
+-diff --git a/RPV/skimTree_TTbar_mc_cfg.py b/RPV/skimTree_TTbar_mc_cfg.py
+-index 73935f6..da89ca7 100644
+---- a/RPV/skimTree_TTbar_mc_cfg.py
+-+++ b/RPV/skimTree_TTbar_mc_cfg.py
+-@@ -10,9 +10,9 @@ from RPV.Producer.TreeProducer import TreeProducer
+- from RPV.Producer.AnalysisProducer import AnalysisProducer 
+- from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
+- 
+--nCores = 8 
+-+nCores = 1 
+- #outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
+--outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar/"
+-+outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar_Btageff/"
+- nEvents = -1
+- disableProgressBar = False
+- justEndSequence = False 
+-diff --git a/RPV/skimTree_ZToMuMu_mc_cfg.py b/RPV/skimTree_ZToMuMu_mc_cfg.py
+-index 8486bed..c223493 100644
+---- a/RPV/skimTree_ZToMuMu_mc_cfg.py
+-+++ b/RPV/skimTree_ZToMuMu_mc_cfg.py
+-@@ -10,7 +10,7 @@ from RPV.Producer.TreeProducer import TreeProducer
+- from RPV.Producer.AnalysisProducer import AnalysisProducer 
+- from RPV.Skimmer.ZMuMuSkimmer import ZMuMuSkimmer
+- 
+--nCores = 4 
+-+nCores = 8 
+- #outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
+- outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/ZToMuMu/"
+- nEvents = -1
+diff --git a/RPV/BTag_ZMuMu/ttWJets/DataMCDistribution.root b/RPV/BTag_ZMuMu/ttWJets/DataMCDistribution.root
+deleted file mode 100644
+index 54c963d..0000000
+Binary files a/RPV/BTag_ZMuMu/ttWJets/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/ttWJets/hadd.sh b/RPV/BTag_ZMuMu/ttWJets/hadd.sh
+deleted file mode 100644
+index e196256..0000000
+--- a/RPV/BTag_ZMuMu/ttWJets/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/ttWJets/DataMCDistribution.root  ./BTag_ZMuMu/ttWJets/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/ttWJets/ttWJets_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/ttWJets/ttWJets_0_DataMCDistribution.root
+index 89e2a2e..d1ed339 100644
+Binary files a/RPV/BTag_ZMuMu/ttWJets/ttWJets_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/ttWJets/ttWJets_0_DataMCDistribution.root differ
+diff --git a/RPV/BTag_ZMuMu/ttZJets/DataMCDistribution.root b/RPV/BTag_ZMuMu/ttZJets/DataMCDistribution.root
+deleted file mode 100644
+index 1f01506..0000000
+Binary files a/RPV/BTag_ZMuMu/ttZJets/DataMCDistribution.root and /dev/null differ
+diff --git a/RPV/BTag_ZMuMu/ttZJets/hadd.sh b/RPV/BTag_ZMuMu/ttZJets/hadd.sh
+deleted file mode 100644
+index 273fc60..0000000
+--- a/RPV/BTag_ZMuMu/ttZJets/hadd.sh
++++ /dev/null
+@@ -1 +0,0 @@
+-hadd -f ./BTag_ZMuMu/ttZJets/DataMCDistribution.root  ./BTag_ZMuMu/ttZJets/*_DataMCDistribution.root 
+\ No newline at end of file
+diff --git a/RPV/BTag_ZMuMu/ttZJets/ttZJets_0_DataMCDistribution.root b/RPV/BTag_ZMuMu/ttZJets/ttZJets_0_DataMCDistribution.root
+index 72e05e1..3e35ebd 100644
+Binary files a/RPV/BTag_ZMuMu/ttZJets/ttZJets_0_DataMCDistribution.root and b/RPV/BTag_ZMuMu/ttZJets/ttZJets_0_DataMCDistribution.root differ
+diff --git a/RPV/Weighter/Btageff.py b/RPV/Weighter/Btageff.py
+index 4f76625..84b0aa1 100644
+--- a/RPV/Weighter/Btageff.py
++++ b/RPV/Weighter/Btageff.py
+@@ -1,6 +1,6 @@
+ import ROOT
+ from Core.Module import Module
+-import os,array
++import os,array,numpy
  
-+        event.jets25 = [p for p in event.LooseJets if p.pt > 25]
-+        event.jets25.sort(key=lambda x: x.pt,reverse=True)
-+        event.nJet25 = len(event.jets25)
-+
-         event.ht40 = 0.
-         for ps in [event.jets,event.leps]:
-             for p in ps:
-diff --git a/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py b/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
-index 7eeaa63..5b70ef2 100644
---- a/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
-+++ b/RPV/SkimTree/NanoAOD/Run2016/ZToMuMu_MC.py
-@@ -8,12 +8,12 @@ fileName        = "SkimTree.root"
- common_path    = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/ZToMuMu/"
- inUFTier2       = False
- #sumw_path       = "/raid/raid7/lucien/SUSY/RPV/SumGenWeight/NanoAOD_InclusiveSelection_v2/%s/EventWeight.root"
--sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/ZToMuMu/%s/EventWeight.root"
-+sumw_path       = "/raid/raid7/kshi/SUSY/RPV/sum_weight/%s/EventWeight.root"
+ class Btageff(Module):
  
- sampleNames = [n for n in os.listdir(common_path) if os.path.isdir(os.path.join(common_path, n))]
- allMCSamples = []
- for sampleName in sampleNames:
--    if sampleName != "DYJetsToLL_M50_NLO":
-+    if sampleName != "DYJetsToLL_M50_LO":
-         tmpList = ComponentList([Component(sampleName,"/".join([common_path,sampleName,fileName]),"Events",inUFTier2,maxEvents=-1)],)
-         tmpDataset = Dataset(sampleName,tmpList,xs=xs_dict[sampleName])
-         tmpDataset.setSumWeight(sumw_path%sampleName)
-diff --git a/RPV/Skimmer/HLTSkimmer.py b/RPV/Skimmer/HLTSkimmer.py
-index d0d4eb6..2514801 100644
---- a/RPV/Skimmer/HLTSkimmer.py
-+++ b/RPV/Skimmer/HLTSkimmer.py
-@@ -7,7 +7,7 @@ class HLTSkimmer(Module):
+@@ -22,18 +22,26 @@ class Btageff(Module):
+         #self.writer.book("CTageffDem","TH2D","CTageffDem",10,0.,200.,10,-2.4,2.4)
+         #self.writer.book("LTageffNum","TH2D","LTageffNum",10,0.,200.,10,-2.4,2.4)
+         #self.writer.book("LTageffDem","TH2D","LTageffDem",10,0.,200.,10,-2.4,2.4)
++        pt_bins = numpy.array([20,30,50,70,100,140,200,300,600,1000], dtype='float64')
++        eta_bins = numpy.array([-2.4,-1.42,0,1.42,2.4], dtype='float64')
+         if "BTageffNum" not in self.writer.objs:
+-            self.writer.book("BTageffNum","TH2D","BTageffNum","",10,0.,200.,10,-2.4,2.4)
++            #self.writer.book("BTageffNum","TH2D","BTageffNum","",10,0.,200.,10,-2.4,2.4)
++            self.writer.book("BTageffNum","TH2D","BTageffNum","",9,pt_bins,4,eta_bins)
+         if "BTageffDem" not in self.writer.objs:
+-            self.writer.book("BTageffDem","TH2D","BTageffDem","",10,0.,200.,10,-2.4,2.4)
++            #self.writer.book("BTageffDem","TH2D","BTageffDem","",10,0.,200.,10,-2.4,2.4)
++            self.writer.book("BTageffDem","TH2D","BTageffDem","",9,pt_bins,4,eta_bins)
+         if "CTageffNum" not in self.writer.objs:
+-            self.writer.book("CTageffNum","TH2D","CTageffNum","",10,0.,200.,10,-2.4,2.4)
++            #self.writer.book("CTageffNum","TH2D","CTageffNum","",10,0.,200.,10,-2.4,2.4)
++            self.writer.book("CTageffNum","TH2D","CTageffNum","",9,pt_bins,4,eta_bins)
+         if "CTageffDem" not in self.writer.objs:
+-            self.writer.book("CTageffDem","TH2D","CTageffDem","",10,0.,200.,10,-2.4,2.4)
++            #self.writer.book("CTageffDem","TH2D","CTageffDem","",10,0.,200.,10,-2.4,2.4)
++            self.writer.book("CTageffDem","TH2D","CTageffDem","",9,pt_bins,4,eta_bins)
+         if "LTageffNum" not in self.writer.objs:
+-            self.writer.book("LTageffNum","TH2D","LTageffNum","",10,0.,200.,10,-2.4,2.4)
++            #self.writer.book("LTageffNum","TH2D","LTageffNum","",10,0.,200.,10,-2.4,2.4)
++            self.writer.book("LTageffNum","TH2D","LTageffNum","",9,pt_bins,4,eta_bins)
+         if "LTageffDem" not in self.writer.objs:
+-            self.writer.book("LTageffDem","TH2D","LTageffDem","",10,0.,200.,10,-2.4,2.4)
++            #self.writer.book("LTageffDem","TH2D","LTageffDem","",10,0.,200.,10,-2.4,2.4)
++            self.writer.book("LTageffDem","TH2D","LTageffDem","",9,pt_bins,4,eta_bins)
  
-     def analyze(self,event):
-         if(self.dataset.isMC):
--            return True #event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
-+            return event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
-             #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
  
-         else:
-diff --git a/RPV/Skimmer/TTbarSkimmer.py b/RPV/Skimmer/TTbarSkimmer.py
-index 4a090e1..c7087f9 100644
---- a/RPV/Skimmer/TTbarSkimmer.py
-+++ b/RPV/Skimmer/TTbarSkimmer.py
-@@ -24,16 +24,20 @@ class TTbarSkimmer(Module):
-         if len(event.muons) < 1 or len(event.muons) > 1: return False
-         if len(event.eles) < 1 or len(event.eles) > 1: return False
  
--        temp = False
-+        #temp = False
- 
--        for i in range(0,len(event.jets)):
--            if event.jets[i].btagCSVV2 >= self.csvCut:
--               temp = True
--               break
--        else:
--               temp = False
-+        #for i in range(0,len(event.jets)):
-+            #if event.jets[i].btagCSVV2 >= self.csvCut:
-+               #temp = True
-+               #break
-+        #else:
-+               #temp = False
-+
-+        #if not temp: return False
-+
-+        if len(event.jets) <= 0:
-+            return False
- 
--        if not temp: return False
- 
-         event.nMuon40 = len(event.muons)
- 
-diff --git a/RPV/Weighter/Triggereff.py b/RPV/Weighter/Triggereff.py
-index b0bf14b..f7569ad 100644
---- a/RPV/Weighter/Triggereff.py
-+++ b/RPV/Weighter/Triggereff.py
-@@ -7,7 +7,7 @@ from math import sqrt
- 
- class Triggereff(Module):
- 
--    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
-+    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
-         self.filenameTrigeff = [(weight, "/home/kshi/SUSY/CMSSW_8_0_25/src/UF-PyNTupleRunner/DataMC/Trigger_Eff/Run2016/"+filename) for (weight, filename) in filenameTrigeff]
-         self.flatTrigSyst = flatTrigSyst
-         self.Trigeffhistpath = Trigeffhistpath
-diff --git a/RPV/plot_TTbar_cfg.py b/RPV/plot_TTbar_cfg.py
-index 569efff..260d21a 100644
---- a/RPV/plot_TTbar_cfg.py
-+++ b/RPV/plot_TTbar_cfg.py
-@@ -14,6 +14,8 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
- from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
- from RPV.Skimmer.HLTSkimmer import HLTSkimmer
- from RPV.Weighter.Triggereff import Triggereff
-+from RPV.Weighter.Btageff import Btageff
-+from RPV.Weighter.BtagscaleFactor import BtagscaleFactor
- 
- from Plotter.Plotter import Plotter
- from Plotter.PlotEndModule import PlotEndModule
-@@ -63,7 +65,7 @@ plots = [
-         Plot("muonPt1",     ["TH1D","muonPt1","",20,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else None')),
-         Plot("muonPt2",     ["TH1D","muonPt2","",20,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else None')),
-         Plot("nGoodPV",     ["TH1D","nGoodPV","",30,0.0,60.0],      LambdaFunc('x: x.PV_npvsGood[0]')),
--	   #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
-+       #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
- 	   #Plot("m1_bl",       ["TH1D","m1_bl1","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
- 	   #Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
- 	   #Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
-@@ -80,6 +82,9 @@ hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
- jsonSkimmer             = JSONSkimmer("JSONSkim")
- metSkimmer              = METFilter("METSkim")
- triggereff              = Triggereff("Triggereff")
-+btageff                 = Btageff("Btageff")
-+btagscalefactor         = BtagscaleFactor("BtagscaleFactor")
-+
- 
- sequence = Sequence()
- sequence.add(metSkimmer)
-@@ -93,10 +98,12 @@ sequence.add(puWeighter)
- sequence.add(anaProducer)
- sequence.add(eventSkimmer)
- sequence.add(triggereff)
-+sequence.add(btageff)
-+sequence.add(btagscalefactor)
- sequence.add(plotter)
- 
- endSequence = EndSequence(skipHadd=justEndSequence)
--endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
-+endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/Btageff_ratio/"
- endSequence.add(PlotEndModule(endModuleOutputDir,plots))
- 
- outputInfo = OutputInfo("OutputInfo")
-diff --git a/RPV/skimTree_TTbar_mc_cfg.py b/RPV/skimTree_TTbar_mc_cfg.py
-index 73935f6..da89ca7 100644
---- a/RPV/skimTree_TTbar_mc_cfg.py
-+++ b/RPV/skimTree_TTbar_mc_cfg.py
-@@ -10,9 +10,9 @@ from RPV.Producer.TreeProducer import TreeProducer
- from RPV.Producer.AnalysisProducer import AnalysisProducer 
- from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
- 
--nCores = 8 
-+nCores = 1 
- #outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
--outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar/"
-+outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/TTbar_Btageff/"
+diff --git a/RPV/btageff_cfg.py b/RPV/btageff_cfg.py
+index 1885fd9..255f1da 100644
+--- a/RPV/btageff_cfg.py
++++ b/RPV/btageff_cfg.py
+@@ -41,7 +41,7 @@ nCores = 1
+ outputDir = "./BTag_ZMuMu/"
  nEvents = -1
  disableProgressBar = False
- justEndSequence = False 
-diff --git a/RPV/skimTree_ZToMuMu_mc_cfg.py b/RPV/skimTree_ZToMuMu_mc_cfg.py
-index 8486bed..c223493 100644
---- a/RPV/skimTree_ZToMuMu_mc_cfg.py
-+++ b/RPV/skimTree_ZToMuMu_mc_cfg.py
-@@ -10,7 +10,7 @@ from RPV.Producer.TreeProducer import TreeProducer
- from RPV.Producer.AnalysisProducer import AnalysisProducer 
- from RPV.Skimmer.ZMuMuSkimmer import ZMuMuSkimmer
- 
--nCores = 4 
-+nCores = 8 
- #outputDir = "/raid/raid7/lucien/SUSY/RPV/SkimTree/ZMuMu/2018-06-19/BkgMC_ZMuMuSelection_v1/"
- outputDir = "/raid/raid7/kshi/SUSY/RPV/SkimTree/mc/ZToMuMu/"
- nEvents = -1
+-justEndSequence = True
++justEndSequence = False
+ haddSamples = True
+ componentList = allMCSamples
+ #componentList = allDataSamples + allMCSamples 

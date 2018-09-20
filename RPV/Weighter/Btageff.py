@@ -1,6 +1,6 @@
 import ROOT
 from Core.Module import Module
-import os,array
+import os,array,numpy
 
 class Btageff(Module):
 
@@ -22,18 +22,26 @@ class Btageff(Module):
         #self.writer.book("CTageffDem","TH2D","CTageffDem",10,0.,200.,10,-2.4,2.4)
         #self.writer.book("LTageffNum","TH2D","LTageffNum",10,0.,200.,10,-2.4,2.4)
         #self.writer.book("LTageffDem","TH2D","LTageffDem",10,0.,200.,10,-2.4,2.4)
+        pt_bins = numpy.array([20,30,50,70,100,140,200,300,600,1000], dtype='float64')
+        eta_bins = numpy.array([-2.4,-1.42,0,1.42,2.4], dtype='float64')
         if "BTageffNum" not in self.writer.objs:
-            self.writer.book("BTageffNum","TH2D","BTageffNum","",10,0.,200.,10,-2.4,2.4)
+            #self.writer.book("BTageffNum","TH2D","BTageffNum","",10,0.,200.,10,-2.4,2.4)
+            self.writer.book("BTageffNum","TH2D","BTageffNum","",9,pt_bins,4,eta_bins)
         if "BTageffDem" not in self.writer.objs:
-            self.writer.book("BTageffDem","TH2D","BTageffDem","",10,0.,200.,10,-2.4,2.4)
+            #self.writer.book("BTageffDem","TH2D","BTageffDem","",10,0.,200.,10,-2.4,2.4)
+            self.writer.book("BTageffDem","TH2D","BTageffDem","",9,pt_bins,4,eta_bins)
         if "CTageffNum" not in self.writer.objs:
-            self.writer.book("CTageffNum","TH2D","CTageffNum","",10,0.,200.,10,-2.4,2.4)
+            #self.writer.book("CTageffNum","TH2D","CTageffNum","",10,0.,200.,10,-2.4,2.4)
+            self.writer.book("CTageffNum","TH2D","CTageffNum","",9,pt_bins,4,eta_bins)
         if "CTageffDem" not in self.writer.objs:
-            self.writer.book("CTageffDem","TH2D","CTageffDem","",10,0.,200.,10,-2.4,2.4)
+            #self.writer.book("CTageffDem","TH2D","CTageffDem","",10,0.,200.,10,-2.4,2.4)
+            self.writer.book("CTageffDem","TH2D","CTageffDem","",9,pt_bins,4,eta_bins)
         if "LTageffNum" not in self.writer.objs:
-            self.writer.book("LTageffNum","TH2D","LTageffNum","",10,0.,200.,10,-2.4,2.4)
+            #self.writer.book("LTageffNum","TH2D","LTageffNum","",10,0.,200.,10,-2.4,2.4)
+            self.writer.book("LTageffNum","TH2D","LTageffNum","",9,pt_bins,4,eta_bins)
         if "LTageffDem" not in self.writer.objs:
-            self.writer.book("LTageffDem","TH2D","LTageffDem","",10,0.,200.,10,-2.4,2.4)
+            #self.writer.book("LTageffDem","TH2D","LTageffDem","",10,0.,200.,10,-2.4,2.4)
+            self.writer.book("LTageffDem","TH2D","LTageffDem","",9,pt_bins,4,eta_bins)
 
 
 
