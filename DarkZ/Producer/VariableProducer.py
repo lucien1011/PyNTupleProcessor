@@ -16,5 +16,5 @@ class VariableProducer(Module):
                                event.deltaRL24,
                                event.deltaRL34,])
         #if event.minDeltaRL < 0.3: return False
-        if event.minDeltaRL < 0.6: return False
+        #if event.minDeltaRL < 0.6: return False
         return True

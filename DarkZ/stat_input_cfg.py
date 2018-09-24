@@ -22,7 +22,9 @@ from Plotter.Plot import Plot
 #out_path = "MCDistributions/MC_BaselineSelection_v1/2018-07-09/"
 #out_path = "StatInput/DarkPhotonSelection_v1/2018-08-20/"
 #out_path = "StatInput/DarkPhotonSelection_ATLAS-BrHToZZd100_v1/2018-08-20/"
-out_path = "StatInput/DarkPhotonSelection_m4l118To130/2018-09-18_MinDeltaR0p6/"
+#out_path = "StatInput/DarkPhotonSelection_m4l118To130/2018-08-31/"
+out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-09-21/"
+#out_path = "StatInput/DarkPhotonSelection_m4l118To130_UniformIso/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l105To140/2018-08-31/"
 
 mergeSampleDict = {
@@ -67,10 +69,10 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 sequence                = darkphoton_signal_sequence
-variableProducer        = VariableProducer("VariableProducer")
+#variableProducer        = VariableProducer("VariableProducer")
 yieldProducer           = YieldProducer("YieldProducer",mass_window_list)
 
-sequence.add(variableProducer)
+#sequence.add(variableProducer)
 sequence.add(yieldProducer)
 
 outputInfo              = OutputInfo("OutputInfo")

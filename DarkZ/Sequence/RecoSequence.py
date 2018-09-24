@@ -5,6 +5,7 @@ from DarkZ.Skimmer.BlindSkimmer import BlindSkimmer
 from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
 from DarkZ.Weighter.NLOWeighter import NLOWeighter
 from DarkZ.Weighter.FakeRateWeighter import FakeRateWeighter
+from DarkZ.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
@@ -26,8 +27,11 @@ xsWeighter              = XSWeighter("XSWeighter")
 bliSkimmer              = BlindSkimmer("BlindSkimmer")
 fakeRateWeighter        = FakeRateWeighter("FakeRateWeighter")
 
+variableProducer        = VariableProducer("VariableProducer")
+
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
+darkphoton_signal_sequence.add(variableProducer)
 
 darkphoton_cr_sequence = Sequence()
 darkphoton_cr_sequence.add(darkPhotonCRSkimmer)
@@ -48,6 +52,7 @@ higgs_cr_sequence = Sequence()
 higgs_cr_sequence.add(higgsCRSkimmer)
 
 higgs_3p1f_sequence = Sequence()
+higgs_3p1f_sequence.add(variableProducer)
 higgs_3p1f_sequence.add(higgs3P1FSkimmer)
 
 higgs_m4lSB_sequence = Sequence()
