@@ -29,12 +29,18 @@ mergeSampleDict = {
         }
 
 mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [60,0.,120.]
-h4lPlotRange = [110,60.,500.]
+#mZ2PlotRange = [60,0.,120.]
+mZ2PlotRange = [30,0.,60.]
+#h4lPlotRange = [110,60.,500.]
+h4lPlotRange = [10,110.,130.]
 #h4lPlotRange = [25,100.,150.]
 #h4lPlotRange = [20,100.,140.]
 
-out_path                = "ZPlusX/m4lSBValidation/2018-09-24/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-24_m4l-105-118-or-130-140/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-140/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-150/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-160/"
+out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-180/"
 lumi                    = 35.9
 nCores                  = 4
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path

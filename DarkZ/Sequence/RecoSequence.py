@@ -40,6 +40,7 @@ darkphoton_cr_v2_sequence = Sequence()
 darkphoton_cr_v2_sequence.add(darkPhotonCRV2Skimmer)
 
 darkphoton_m4lSB_sequence = Sequence()
+darkphoton_m4lSB_sequence.add(variableProducer)
 darkphoton_m4lSB_sequence.add(darkPhotonM4lSBSkimmer)
 
 higgs_signal_sequence = Sequence()

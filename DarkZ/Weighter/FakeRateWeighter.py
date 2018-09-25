@@ -11,6 +11,10 @@ class FakeRateWeighter(Module):
                 #event.weight *= event.FRWeight[0]
             elif event.nFailedLeptonsZ2[0] == 2:
                 event.weight *= -1*event.FRWeightProd[0]
+                #if event.deltaRL34 > 0.6:
+                #    event.weight *= event.FRWeightProd[0]
+                #else:
+                #    event.weight *= -1*event.FRWeightProdCorr[0]
             else:
                 return False
             #if event.mass4l[0] < 150:
