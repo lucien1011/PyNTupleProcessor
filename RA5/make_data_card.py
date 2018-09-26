@@ -18,12 +18,16 @@ lnSystFilePath      = "/home/lucien/UF-PyNTupleRunner/RA5/StatFW/Config/CommonSy
 allSampleDir        = "AllSample"
 fileName            = "StatInput.root"
 setDataToMC         = True
+addMCStat           = True
 sigModel            = "SMS-T1qqqqL_1500"
+fixWidthStr         = "%15s"
+fixWidthFloat       = "%15.2f"
 
 # ____________________________________________________________________________________________________________________________________________ ||
 parser = argparse.ArgumentParser()
 parser.add_argument("--inputDir",action="store")
 parser.add_argument("--outputDir",action="store")
+parser.add_argument("--makeTextFile",action="store_true")
 parser.add_argument("--verbose",action="store_true")
 
 option = parser.parse_args()
@@ -49,6 +53,7 @@ for k in inputFileAll.GetListOfKeys():
     if "DiscardedEvent" in objName: continue
     lepCat = objName.split("_")[1]
     SRCat = objName.split("_")[2]
+    #if lepCat == "HH" and int(SRCat) > 52: continue
     if "-1" in SRCat: continue
     keyForDict = lepCat+"_SR"+SRCat
     binDict[keyForDict] = SR(int(SRCat),lepCat)
@@ -56,11 +61,25 @@ for k in inputFileAll.GetListOfKeys():
     binDict[keyForDict].binList.append(
             Bin("SR",sysFile=lnSystFilePath,inputBinName="SR"),
             )
+if option.makeTextFile:
+    textFile = open(option.outputDir+"/Yield.txt","w")
+    headerStr = fixWidthStr%"SR"+" "
+    for bkgName in collector.mergeSamples:
+        headerStr += fixWidthStr%bkgName+" "
+    headerStr += fixWidthStr%"Data"+" "
+    for sigSample in collector.signalSamples:
+        headerStr += fixWidthStr%sigSample+" "
+    textFile.write(headerStr+"\n")
 
 combTextFile = open(option.outputDir+"/DataCardList.txt","w")
-for key,eachSR in binDict.iteritems():
+SRList = binDict.keys()
+SRList.sort()
+for key in SRList:
+    eachSR = binDict[key]
     if option.verbose: print "*"*100
     if option.verbose: print eachSR.getBinName()
+    if option.makeTextFile:
+        rowStr = fixWidthStr%key+" "
     for bin in eachSR.binList:
 
         totalBkgCount = 0.
@@ -77,9 +96,12 @@ for key,eachSR in binDict.iteritems():
             totalBkgCount += count if count >= 0. else 0.
             bin.processList.append(process)
             if count > 0.:
-                process.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),bkgName,"MCStatUnc",]),[bkgName,],lambda syst,procName,anaBin: error/count)
+                process.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),bkgName,"MCStatUnc",]),[bkgName,],error/count)
             else:
                 process.mcStatUnc = None
+            if option.makeTextFile:
+                rowStr += fixWidthFloat%count+" "
+
         if option.verbose: print "Total bkg count: ", totalBkgCount
         
         dataCount = 0.
@@ -95,10 +117,21 @@ for key,eachSR in binDict.iteritems():
                 count = 0.
                 error = 0.
             dataCount += count
+        if option.makeTextFile:
+            rowStr += fixWidthFloat%dataCount+" "
         bin.data = Process("data_obs",int(dataCount) if not setDataToMC else int(totalBkgCount),math.sqrt(int(dataCount)))
         if option.verbose: print "Total data count: ", dataCount
         
         for sigSample in collector.signalSamples:
+            try:
+                hist = collector.getObj(sigSample,histName)
+                count = hist.GetBinContent(1)
+                error = hist.GetBinError(1)
+            except AttributeError:
+                count = 0.
+                error = 0.
+            if option.makeTextFile:
+                rowStr += fixWidthFloat%count+" "
             if bin.isSignal(sigSample) and sigModel in sigSample: break
         #histName = "_".join([window.makeHistName(),sigSample,bin.name,])
         histName = "Central_"+key.replace("SR","")
@@ -114,15 +147,17 @@ for key,eachSR in binDict.iteritems():
         sigProcess = Process(sigSample,count,error)
         bin.processList.append(sigProcess)
         if count > 0.:
-                sigProcess.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),sigSample,"MCStatUnc",]),[sigSample,],lambda syst,procName,anaBin: error/count,)
+                sigProcess.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),sigSample,"MCStatUnc",]),[sigSample,],error/count,)
         else:
             sigProcess.mcStatUnc = None
         bin.systList = []
         for syst in commonLnSystematics:
             bin.systList.append(copy.deepcopy(syst))
         for process in bin.processList:
-            if process.mcStatUnc:
+            if addMCStat and process.mcStatUnc:
                 bin.systList.append(process.mcStatUnc)
+    if option.makeTextFile:
+        textFile.write(rowStr+"\n")
 
     dataCard = DataCard(eachSR)
     dataCard.makeCard(option.outputDir,eachSR.binList) 
