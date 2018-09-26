@@ -1,0 +1,130 @@
+import os,copy,ROOT
+
+from RA5.StatFW.DataCard import *
+from RA5.StatFW.SR import *
+from RA5.StatFW.Systematic import *
+from RA5.StatFW.Process import *
+from RA5.StatFW.Reader import *
+from RA5.StatFW.Channel import Bin
+
+from Core.Collector import Collector
+
+from RA5.stat_input_cfg import componentList,mergeSampleDict,outputInfo
+
+import math,argparse
+
+# ____________________________________________________________________________________________________________________________________________ ||
+lnSystFilePath      = "/home/lucien/UF-PyNTupleRunner/RA5/StatFW/Config/CommonSyst.txt"
+allSampleDir        = "AllSample"
+fileName            = "StatInput.root"
+setDataToMC         = True
+sigModel            = "SMS-T1qqqqL_1500"
+
+# ____________________________________________________________________________________________________________________________________________ ||
+parser = argparse.ArgumentParser()
+parser.add_argument("--inputDir",action="store")
+parser.add_argument("--outputDir",action="store")
+parser.add_argument("--verbose",action="store_true")
+
+option = parser.parse_args()
+
+# ____________________________________________________________________________________________________________________________________________ ||
+collector = Collector()
+collector.makeSampleList(componentList)
+collector.makeMergedSampleList(componentList,mergeSampleDict)
+collector.openFiles(collector.samples+collector.mergeSamples,outputInfo)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# syst
+lnSystReader = LogNormalSystReader()
+commonLnSystematics = lnSystReader.makeLnSyst(lnSystFilePath)
+
+if not os.path.exists(os.path.abspath(option.outputDir)):
+    os.makedirs(os.path.abspath(option.outputDir))
+
+binDict = {}
+inputFileAll = ROOT.TFile(os.path.join(option.inputDir,allSampleDir,fileName))
+for k in inputFileAll.GetListOfKeys():
+    objName = k.GetName()
+    if "DiscardedEvent" in objName: continue
+    lepCat = objName.split("_")[1]
+    SRCat = objName.split("_")[2]
+    if "-1" in SRCat: continue
+    keyForDict = lepCat+"_SR"+SRCat
+    binDict[keyForDict] = SR(int(SRCat),lepCat)
+    binDict[keyForDict].binList = []
+    binDict[keyForDict].binList.append(
+            Bin("SR",sysFile=lnSystFilePath,inputBinName="SR"),
+            )
+
+combTextFile = open(option.outputDir+"/DataCardList.txt","w")
+for key,eachSR in binDict.iteritems():
+    if option.verbose: print "*"*100
+    if option.verbose: print eachSR.getBinName()
+    for bin in eachSR.binList:
+
+        totalBkgCount = 0.
+        for bkgName in collector.mergeSamples:
+            histName = "Central_"+key.replace("SR","")
+            try:
+                hist = collector.getObj(bkgName,histName)
+                count = hist.GetBinContent(1)
+                error = hist.GetBinError(1)
+            except AttributeError:
+                count = 0.
+                error = 0.
+            process = Process(bkgName,count if count >= 0. else 0.,error)
+            totalBkgCount += count if count >= 0. else 0.
+            bin.processList.append(process)
+            if count > 0.:
+                process.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),bkgName,"MCStatUnc",]),[bkgName,],lambda syst,procName,anaBin: error/count)
+            else:
+                process.mcStatUnc = None
+        if option.verbose: print "Total bkg count: ", totalBkgCount
+        
+        dataCount = 0.
+        for sample in collector.dataSamples:
+            #histName = "_".join([window.makeHistName(),sample,bin.name,])
+            histName = "Central_"+key.replace("SR","")
+            hist = collector.getObj(sample,histName)
+            try:
+                hist = collector.getObj(sample,histName)
+                count = hist.GetBinContent(1)
+                error = hist.GetBinError(1)
+            except AttributeError:
+                count = 0.
+                error = 0.
+            dataCount += count
+        bin.data = Process("data_obs",int(dataCount) if not setDataToMC else int(totalBkgCount),math.sqrt(int(dataCount)))
+        if option.verbose: print "Total data count: ", dataCount
+        
+        for sigSample in collector.signalSamples:
+            if bin.isSignal(sigSample) and sigModel in sigSample: break
+        #histName = "_".join([window.makeHistName(),sigSample,bin.name,])
+        histName = "Central_"+key.replace("SR","")
+        sigHist = collector.getObj(sigSample,histName)
+        try:
+            hist = collector.getObj(sigSample,histName)
+            count = hist.GetBinContent(1)
+            error = hist.GetBinError(1)
+        except AttributeError:
+            count = 0.
+            error = 0.
+        if option.verbose: print "Total signal count: ", count
+        sigProcess = Process(sigSample,count,error)
+        bin.processList.append(sigProcess)
+        if count > 0.:
+                sigProcess.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),sigSample,"MCStatUnc",]),[sigSample,],lambda syst,procName,anaBin: error/count,)
+        else:
+            sigProcess.mcStatUnc = None
+        bin.systList = []
+        for syst in commonLnSystematics:
+            bin.systList.append(copy.deepcopy(syst))
+        for process in bin.processList:
+            if process.mcStatUnc:
+                bin.systList.append(process.mcStatUnc)
+
+    dataCard = DataCard(eachSR)
+    dataCard.makeCard(option.outputDir,eachSR.binList) 
+    combTextFile.write(dataCard.getBinName()+" "+dataCard.makeOutFileName(".txt","")+"\n")
+combTextFile.close()
