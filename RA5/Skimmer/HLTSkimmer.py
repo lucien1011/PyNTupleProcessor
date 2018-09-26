@@ -10,13 +10,19 @@ class HLTSkimmer(Module):
 
         if not hasattr(event,"firstLep") or not hasattr(event,"secondLep"):
             event.tightLeps.sort(key=lambda x: x.pt,reverse=True)
+            event.looseLeps.sort(key=lambda x: x.pt,reverse=True)
             firstLep = event.tightLeps[0]
-            for l in event.tightLeps[1:]:
-                if l.charge*event.tightLeps[0].charge > 0.:
-                    secondLep = l
+            #for l in event.tightLeps[1:]:
+                #if l.charge*event.tightLeps[0].charge > 0.:
+                    #secondLep = l
+            for l in range(0,len(event.looseLeps)):
+                if event.looseLeps[l].charge*event.tightLeps[0].charge > 0.:
+                    secondLep = event.looseLeps[l]
+                    #break
+            if len(event.tightLeps) != 1: return False
+            if len(event.looseLeps) != 1: return False
             event.firstLep = firstLep
-            event.secondLep = secondLep
-        
+            event.secondLep = secondLep 
         if self.emulation or (self.dataset.isData and "2016" in self.dataset.parent.name):
             notRunH = ("2016H" not in self.dataset.parent.name and self.dataset.isData) or self.dataset.isMC
             if event.htJet40[0] < 300.:

@@ -175,11 +175,15 @@ class LeptonCatProducer(Module):
         #print [l.pt for l in event.tightLeps]
         #print [l.charge for l in event.tightLeps]
         firstLep = event.tightLeps[0]
-        for l in event.tightLeps[1:]:
+        #for l in event.tightLeps[1:]:
+            #if l.charge*event.tightLeps[0].charge > 0.:
+                #secondLep = l
+        for l in event.looseLeps[0:]:
             if l.charge*event.tightLeps[0].charge > 0.:
                 secondLep = l
-        if firstLep.pt > 25 and secondLep.pt > 25: event.cat.lepCat = "HH"
-        if firstLep.pt > 25 and secondLep.pt < 25: event.cat.lepCat = "HL"
+        if firstLep.pt >= 25 and secondLep.pt >= 25: event.cat.lepCat = "HH"
+        if firstLep.pt >= 25 and secondLep.pt < 25: event.cat.lepCat = "HL"
+        if firstLep.pt < 25 and secondLep.pt >= 25: event.cat.lepCat = "HL"
         if firstLep.pt < 25 and secondLep.pt < 25: event.cat.lepCat = "LL"
 
         mt = min([mtFunc(firstLep.pt,firstLep.phi,event.met_pt[0],event.met_phi[0]),mtFunc(secondLep.pt,secondLep.phi,event.met_pt[0],event.met_phi[0]),])

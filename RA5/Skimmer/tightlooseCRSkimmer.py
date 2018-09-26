@@ -1,13 +1,13 @@
 from Core.Module import Module 
 from RA5.LeptonJetRecleaner.Algo import passMllVeto
 
-class BaselineSkimmer(Module):
+class tightlooseCRSkimmer(Module):
     def analyze(self,event):
         #if event.ret["htJet40j_Mini"] < 80.: return False
         #if event.ret["nJet40_Mini"] < 2: return False
         if event.htJet40[0] < 80: return False
         if event.nJetRA540[0] < 2: return False
-
+        
         #nSSLepPlus = 0
         #nSSLepMinus = 0
         #for l in event.tightLeps:
@@ -15,29 +15,49 @@ class BaselineSkimmer(Module):
         #    if l.pdgId == -11 or l.pdgId == -13: nSSLepMinus += 1
         #if nSSLepPlus < 2 and nSSLepMinus < 2: return False
         event.firstLep = event.tightLeps[0]
-        event.found2nd = False            
-        for l in event.tightLeps[1:]:
-            if l.charge == event.firstLep.charge:
+        event.found2nd = False
+        for l in range(0,len(event.looseLeps)):
+            if event.looseLeps[l].charge == event.firstLep.charge:
                 event.found2nd = True
-                secondLep = l
+                event.secondLep = event.looseLeps[l]
+                #break
+            
+        #for l in event.tightLeps[1:]:
+            #if l.charge == event.firstLep.charge:
+                #event.found2nd = True
+                #secondLep = l
         
-        if len(event.tightLeps) != 2: return False
+        if len(event.tightLeps) != 1: return False
+        #if len(event.tightLeps) + len(event.looseLeps) != 2: return False
+        if len(event.looseLeps) != 1: return False
         if not event.found2nd: return False
-        
+        if event.firstLep.pt < 10: return False
+        if event.secondLep.pt < 10: return False
+
         if not self.passMllTL(event.looseLeps,event.tightLeps,[0.,12.],[76.,106.]): return False
         
+        #mllList = []
+        #nTightLep = len(event.tightLeps)
+        #for il in range(0,nTightLep-1):
+            #lep1 = event.tightLeps[il]
+            #for jl in range(il+1,len(event.tightLeps)):
+                #lep2 = event.tightLeps[jl]
+                #lep12Vec = lep1.p4()+lep2.p4()
+                #mll = lep12Vec.M()
+                #mllList.append(mll)
+
+        #if min(mllList) < 8.: return False
+         
         mllList = []
-        nTightLep = len(event.tightLeps)
-        for il in range(0,nTightLep-1):
-            lep1 = event.tightLeps[il]
-            for jl in range(il+1,len(event.tightLeps)):
-                lep2 = event.tightLeps[jl]
-                lep12Vec = lep1.p4()+lep2.p4()
-                mll = lep12Vec.M()
-                mllList.append(mll)
+        lep1 = event.tightLeps[0]
+        lep2 = event.looseLeps[0]
+        lep12Vec = lep1.p4()+lep2.p4()
+        mll = lep12Vec.M()
+        mllList.append(mll)
 
         if min(mllList) < 8.: return False
-         
+
+
         return True
     
     def passMllTL(self,lepsl, lepst , mZ1Ranges, mZ2Ranges):

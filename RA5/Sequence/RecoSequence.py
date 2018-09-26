@@ -3,6 +3,7 @@ from Core.Sequence import Sequence
 from RA5.Weighter.XSWeighter import XSWeighter
 from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
 from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
+from RA5.Skimmer.tightlooseCRSkimmer import tightlooseCRSkimmer
 from RA5.Skimmer.SyncSkimmer import SyncSkimmer
 from RA5.Skimmer.METSkimmer import METSkimmer
 from RA5.Skimmer.LLHtSkimmer import LLHtSkimmer
@@ -22,6 +23,7 @@ lepCats = ["HH","HL","LL"]
 xsWeighter              = XSWeighter("XSWeighter")
 
 baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
+tightlooseCRSkimmer     = tightlooseCRSkimmer("tightlooseCRSkimmer")
 syncSkimmer             = SyncSkimmer("SyncSkimmer")
 metSkimmer              = METSkimmer("METSkimmer")
 llHtSkimmer             = LLHtSkimmer("LLHtSkimmer")
@@ -44,7 +46,7 @@ metFilter               = METFilter("METFilter",flags=[
     ])
 
 leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
-leptonCatProducer       = LeptonCatProducer("CategoryProducer")
+leptonCatProducer       = LeptonCatProducer("LeptonCatProducer")
 nJet40Producer          = NJet40Producer("NJet40Producer")
 leptonProducer          = LeptonProducer("LeptonProducer")
 jetProducer             = JetProducer("JetProducer")
@@ -72,6 +74,20 @@ rpv_sequence.add(hltSkimmer)
 rpv_sequence.add(rpvSkimmer)
 rpv_sequence.add(xsWeighter)
 rpv_sequence.add(hltWeighter)
+
+tightlooseCR_sequence = Sequence()
+tightlooseCR_sequence.add(leptonProducer)
+tightlooseCR_sequence.add(jetProducer)
+tightlooseCR_sequence.add(metFilter)
+tightlooseCR_sequence.add(tightlooseCRSkimmer)
+#tightlooseCR_sequence.add(leptonCatProducer)
+#tightlooseCR_sequence.add(llHtSkimmer)
+#tightlooseCR_sequence.add(baselineSkimmer)
+tightlooseCR_sequence.add(hltSkimmer)
+tightlooseCR_sequence.add(rpvSkimmer)
+tightlooseCR_sequence.add(xsWeighter)
+tightlooseCR_sequence.add(hltWeighter)
+
 
 sync_sequence = Sequence()
 sync_sequence.add(leptonProducer)
