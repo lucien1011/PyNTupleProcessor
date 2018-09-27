@@ -62,7 +62,12 @@ int rpv_binning_v1(int njets, int nbtags, float met, float ht, float mt_min, int
 int rpvSignalRegionChargeSplit(int njets, int nbtags, float met, float ht, float mt_min, int id1, int id2, float lep1pt, float lep2pt, TString lepCat){
     int base=52; // total number of baseline SR in HH
     if (lepCat == HighHigh){
-        return base+rpv_binning_v1(njets,nbtags,met,ht,mt_min,id1,id2);
+        int rpv_sr = rpv_binning_v1(njets,nbtags,met,ht,mt_min,id1,id2);
+        if (rpv_sr != -1){
+            return base+rpv_sr;
+        } else {
+            return -1;
+        };
     } else {
         return -1;
     };

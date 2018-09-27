@@ -20,6 +20,7 @@ import os
 #from RA5.Dataset.Run2016.Sept18_v1 import *
 from RA5.Dataset.Run2016.Sept18_v1_Data import *
 from RA5.Dataset.Run2016.Sept18_v1_skim import *
+from RA5.Dataset.Run2016.Sept18_v1_SMS import sigComponentDict
 
 if where == "hpg":
     out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/RPV/DataMCDistributions/2018-09-12_HLTEmulation/"
@@ -28,7 +29,7 @@ if where == "hpg":
 elif where == "ihepa":
     #out_path = "RPV/DataMCDistribution/2018-09-19_OnlyMET0To50/"
     #out_path = "RPV/DataMCDistribution/2018-09-19/"
-    out_path = "RPV/test/2018-09-25/"
+    out_path = "RPV/DataMCDistribution/2018-09-26/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -36,16 +37,16 @@ lepCats = ["HH","HL","LL"]
 nCores = 5
 nEvents = -1
 disableProgressBar = False
-justEndSequence = False
+justEndSequence = True
 verbose = False
 #componentList = allMCSamples + allSignalSamples + [Data_Run2016B,]
 #componentList = allMCSamples + [Data_Run2016B,]
 #componentList = componentDict.values()
-componentList = skimComponentDict.values() + dataComponentDict.values()
+componentList = skimComponentDict.values() + dataComponentDict.values() + sigComponentDict.values()
 for dataset in componentList:
     if dataset.isMC:
         #dataset.lumi = 35.9
-        dataset.lumi = 5.93
+        dataset.lumi = 120.0
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -91,7 +92,7 @@ plotter                 = Plotter("Plotter",plots)
 sequence = rpv_sequence
 sequence.add(plotter)
 
-endSequence = EndSequence(skipHadd=False,)
+endSequence = EndSequence(skipHadd=True,)
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
 
 outputInfo = OutputInfo("OutputInfo")
