@@ -25,6 +25,7 @@ for fileName in fileNames:
                 [Component(sampleName,os.path.join(dir_path,fileName),treeName,inUFTier2,),]
                 ),
             isMC = True,
+            isSignal = "SMS" in fileName,
             )
     tmpDataset.setSumWeight(os.path.join(dir_path,fileName),"SumGenWeights",inUFTier2)
     if sampleName not in componentDict:

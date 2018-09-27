@@ -12,6 +12,7 @@ from RA5.Producer.CategoryProducer import CategoryProducer,LeptonCatProducer
 from RA5.Producer.NJet40Producer import NJet40Producer
 from RA5.Producer.LeptonProducer import LeptonProducer
 from RA5.Producer.JetProducer import JetProducer
+from RA5.Producer.SRProducer import SRProducer
 
 from NanoAOD.Skimmer.METFilter import METFilter
 
@@ -44,7 +45,8 @@ metFilter               = METFilter("METFilter",flags=[
     ])
 
 leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
-leptonCatProducer       = LeptonCatProducer("CategoryProducer")
+#leptonCatProducer       = LeptonCatProducer("CategoryProducer")
+leptonCatProducer       = SRProducer("CategoryProducer")
 nJet40Producer          = NJet40Producer("NJet40Producer")
 leptonProducer          = LeptonProducer("LeptonProducer")
 jetProducer             = JetProducer("JetProducer")

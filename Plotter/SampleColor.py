@@ -59,9 +59,13 @@ sampleColorDict = {
                 "Minor": ROOT.kPink+6,
                 "QCD": ROOT.kOrange+4,
                 "SMS-T1qqqqL_mGluino1000": ROOT.kRed,
+                "SMS-T1qqqqL_1000": ROOT.kRed,
+                "SMS-T1qqqqL_1500": ROOT.kRed+1,
                 "SMS-T1qqqqL_mGluino1500": ROOT.kRed+1,
                 "SMS-T1tbs_mGluino1000": ROOT.kBlue+2,
                 "SMS-T1tbs_mGluino1500": ROOT.kBlue+3,
+                "SMS-T1tbs_1000": ROOT.kBlue+2,
+                "SMS-T1tbs_1500": ROOT.kBlue+3,
 
                 # Dark Z
                 "ggH": ROOT.kAzure-2,
