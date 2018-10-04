@@ -3,6 +3,8 @@ from Core.Sequence import Sequence
 from RA5.Weighter.XSWeighter import XSWeighter
 from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
 from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
+from RA5.Skimmer.TightLooseSkimmer import TightLooseSkimmer
+from RA5.Skimmer.GammaCRSkimmer import GammaCRSkimmer,GammaCRTreeSkimmer
 from RA5.Skimmer.SyncSkimmer import SyncSkimmer
 from RA5.Skimmer.METSkimmer import METSkimmer
 from RA5.Skimmer.LLHtSkimmer import LLHtSkimmer
@@ -12,7 +14,9 @@ from RA5.Producer.CategoryProducer import CategoryProducer,LeptonCatProducer
 from RA5.Producer.NJet40Producer import NJet40Producer
 from RA5.Producer.LeptonProducer import LeptonProducer
 from RA5.Producer.JetProducer import JetProducer
+from RA5.Producer.PhotonProducer import PhotonProducer
 from RA5.Producer.SRProducer import SRProducer
+from RA5.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Skimmer.METFilter import METFilter
 
@@ -23,6 +27,7 @@ lepCats = ["HH","HL","LL"]
 xsWeighter              = XSWeighter("XSWeighter")
 
 baselineSkimmer         = BaselineSkimmer("BaselineSkimmer")
+tightLooseSkimmer       = TightLooseSkimmer("TightLooseSkimmer")
 syncSkimmer             = SyncSkimmer("SyncSkimmer")
 metSkimmer              = METSkimmer("METSkimmer")
 llHtSkimmer             = LLHtSkimmer("LLHtSkimmer")
@@ -43,6 +48,8 @@ metFilter               = METFilter("METFilter",flags=[
         #"Flag_badMuonMoriond2017",
         #"Flag_badCloneMuonMoriond2017",
     ])
+gammaCRSkimmer          = GammaCRSkimmer("GammaCRSkimmer")
+gammaCRTreeSkimmer      = GammaCRTreeSkimmer("GammaCRSkimmer")
 
 leptonJetProducer       = LeptonJetProducer("LeptonJetProducer","Run2016")
 #leptonCatProducer       = LeptonCatProducer("CategoryProducer")
@@ -50,8 +57,11 @@ leptonCatProducer       = SRProducer("CategoryProducer")
 nJet40Producer          = NJet40Producer("NJet40Producer")
 leptonProducer          = LeptonProducer("LeptonProducer")
 jetProducer             = JetProducer("JetProducer")
+phoProducer             = PhotonProducer("PhotonProducer")
+variableProducer        = VariableProducer("VariableProducer")
 
 hltWeighter             = HLTWeighter("HLTWeighter")
+tightLooseHLTWeighter   = HLTWeighter("HLTWeighter",cutflow="TightLoose")
 
 sr_sequence = Sequence()
 sr_sequence.add(metSkimmer)
@@ -74,6 +84,40 @@ rpv_sequence.add(hltSkimmer)
 rpv_sequence.add(rpvSkimmer)
 rpv_sequence.add(xsWeighter)
 rpv_sequence.add(hltWeighter)
+
+tl_sr_sequence = Sequence()
+tl_sr_sequence.add(metFilter)
+tl_sr_sequence.add(metSkimmer)
+tl_sr_sequence.add(leptonProducer)
+tl_sr_sequence.add(jetProducer)
+tl_sr_sequence.add(tightLooseSkimmer)
+tl_sr_sequence.add(hltSkimmer)
+tl_sr_sequence.add(xsWeighter)
+tl_sr_sequence.add(tightLooseHLTWeighter)
+
+tl_rpv_sequence = Sequence()
+tl_rpv_sequence.add(metFilter)
+tl_rpv_sequence.add(leptonProducer)
+tl_rpv_sequence.add(jetProducer)
+tl_rpv_sequence.add(tightLooseSkimmer)
+tl_rpv_sequence.add(hltSkimmer)
+tl_rpv_sequence.add(xsWeighter)
+tl_rpv_sequence.add(tightLooseHLTWeighter)
+tl_rpv_sequence.add(variableProducer)
+
+tl_rpv_skim_sequence = Sequence()
+tl_rpv_skim_sequence.add(metFilter)
+tl_rpv_skim_sequence.add(leptonProducer)
+tl_rpv_skim_sequence.add(jetProducer)
+tl_rpv_skim_sequence.add(tightLooseSkimmer)
+#tl_rpv_skim_sequence.add(hltSkimmer)
+
+gamma_cr_skim_sequence = Sequence()
+gamma_cr_skim_sequence.add(metFilter)
+gamma_cr_skim_sequence.add(leptonProducer)
+gamma_cr_skim_sequence.add(jetProducer)
+gamma_cr_skim_sequence.add(phoProducer)
+gamma_cr_skim_sequence.add(gammaCRTreeSkimmer)
 
 sync_sequence = Sequence()
 sync_sequence.add(leptonProducer)

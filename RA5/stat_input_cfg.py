@@ -26,7 +26,8 @@ if where == "hpg":
 elif where == "ihepa":
     #out_path = "RPV/DataMCDistribution/2018-09-19_OnlyMET0To50/"
     #out_path = "RPV/DataMCDistribution/2018-09-19/"
-    out_path = "RPV/StatInput/rpv_binning2016_v1_120fb-1/2018-09-26/"
+    #out_path = "RPV/StatInput/rpv_binning2016_v1_120fb-1/2018-09-26/"
+    out_path = "RPV/StatInput/rpv_binning2016_v4_120fb-1/2018-10-04/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -36,7 +37,8 @@ nEvents = -1
 disableProgressBar = False
 justEndSequence = False
 verbose = False
-componentList = skimComponentDict.values() + dataComponentDict.values() + sigComponentDict.values()
+#componentList = skimComponentDict.values() + dataComponentDict.values() + sigComponentDict.values()
+componentList = skimComponentDict.values() + sigComponentDict.values()
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 120.0

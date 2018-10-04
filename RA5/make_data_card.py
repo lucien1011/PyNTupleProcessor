@@ -12,6 +12,16 @@ from Core.Collector import Collector
 from RA5.stat_input_cfg import componentList,mergeSampleDict,outputInfo
 
 import math,argparse
+# ____________________________________________________________________________________________________________________________________________ ||
+parser = argparse.ArgumentParser()
+parser.add_argument("--inputDir",action="store")
+parser.add_argument("--outputDir",action="store")
+parser.add_argument("--makeTextFile",action="store_true")
+parser.add_argument("--verbose",action="store_true")
+parser.add_argument("--baseline",action="store_true")
+parser.add_argument("--sigModel",action="store")
+
+option = parser.parse_args()
 
 # ____________________________________________________________________________________________________________________________________________ ||
 lnSystFilePath      = "/home/lucien/UF-PyNTupleRunner/RA5/StatFW/Config/CommonSyst.txt"
@@ -19,18 +29,9 @@ allSampleDir        = "AllSample"
 fileName            = "StatInput.root"
 setDataToMC         = True
 addMCStat           = True
-sigModel            = "SMS-T1qqqqL_1500"
+sigModel            = "SMS-T1qqqqL_1500" if not option.sigModel else option.sigModel
 fixWidthStr         = "%15s"
 fixWidthFloat       = "%15.2f"
-
-# ____________________________________________________________________________________________________________________________________________ ||
-parser = argparse.ArgumentParser()
-parser.add_argument("--inputDir",action="store")
-parser.add_argument("--outputDir",action="store")
-parser.add_argument("--makeTextFile",action="store_true")
-parser.add_argument("--verbose",action="store_true")
-
-option = parser.parse_args()
 
 # ____________________________________________________________________________________________________________________________________________ ||
 collector = Collector()
@@ -53,7 +54,8 @@ for k in inputFileAll.GetListOfKeys():
     if "DiscardedEvent" in objName: continue
     lepCat = objName.split("_")[1]
     SRCat = objName.split("_")[2]
-    #if lepCat == "HH" and int(SRCat) > 52: continue
+    if lepCat != "HH": continue
+    if option.baseline and lepCat == "HH" and int(SRCat) > 52: continue
     if "-1" in SRCat: continue
     keyForDict = lepCat+"_SR"+SRCat
     binDict[keyForDict] = SR(int(SRCat),lepCat)
@@ -96,7 +98,7 @@ for key in SRList:
             totalBkgCount += count if count >= 0. else 0.
             bin.processList.append(process)
             if count > 0.:
-                process.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),bkgName,"MCStatUnc",]),[bkgName,],error/count)
+                process.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),bkgName,"MCStatUnc",]),[bkgName,],1.+error/count)
             else:
                 process.mcStatUnc = None
             if option.makeTextFile:
@@ -130,9 +132,14 @@ for key in SRList:
             except AttributeError:
                 count = 0.
                 error = 0.
-            if option.makeTextFile:
-                rowStr += fixWidthFloat%count+" "
-            if bin.isSignal(sigSample) and sigModel in sigSample: break
+            if bin.isSignal(sigSample) and sigModel in sigSample:
+                if option.makeTextFile:
+                    rowStr += fixWidthFloat%count+" "
+                break
+            else:
+                if option.makeTextFile:
+                    rowStr += fixWidthFloat%(-1)+" "
+
         #histName = "_".join([window.makeHistName(),sigSample,bin.name,])
         histName = "Central_"+key.replace("SR","")
         sigHist = collector.getObj(sigSample,histName)
@@ -147,7 +154,7 @@ for key in SRList:
         sigProcess = Process(sigSample,count,error)
         bin.processList.append(sigProcess)
         if count > 0.:
-                sigProcess.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),sigSample,"MCStatUnc",]),[sigSample,],error/count,)
+                sigProcess.mcStatUnc = lnNSystematic("_".join([eachSR.getBinName(),sigSample,"MCStatUnc",]),[sigSample,],1.+error/count,)
         else:
             sigProcess.mcStatUnc = None
         bin.systList = []
