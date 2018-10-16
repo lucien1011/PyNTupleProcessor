@@ -32,6 +32,7 @@ syncSkimmer             = SyncSkimmer("SyncSkimmer")
 metSkimmer              = METSkimmer("METSkimmer")
 llHtSkimmer             = LLHtSkimmer("LLHtSkimmer")
 hltSkimmer              = HLTSkimmer("HLTSkimmer",emulation=True)
+tlHLTSkimmer            = HLTSkimmer("HLTSkimmer",emulation=True,cutflow="TightLoose")
 rpvSkimmer              = RPVSkimmer("RPVSkimmer")
 metFilter               = METFilter("METFilter",flags=[
         "Flag_HBHENoiseFilter",
@@ -45,8 +46,11 @@ metFilter               = METFilter("METFilter",flags=[
         "Flag_badChargedHadronFilter",
         "Flag_globalTightHalo2016Filter",
         # Moriond17 bad muons (temporary recipe from https://hypernews.cern.ch/HyperNews/CMS/get/physics-validation/2786.html)
-        #"Flag_badMuonMoriond2017",
-        #"Flag_badCloneMuonMoriond2017",
+        "Flag_badMuonMoriond2017",
+        "Flag_badCloneMuonMoriond2017",
+        #"Flag_badMuonFilter",
+        #"Flag_MuFlag_bad",
+        #"Flag_MuFlag_dup",
     ])
 gammaCRSkimmer          = GammaCRSkimmer("GammaCRSkimmer")
 gammaCRTreeSkimmer      = GammaCRTreeSkimmer("GammaCRSkimmer")
@@ -91,7 +95,7 @@ tl_sr_sequence.add(metSkimmer)
 tl_sr_sequence.add(leptonProducer)
 tl_sr_sequence.add(jetProducer)
 tl_sr_sequence.add(tightLooseSkimmer)
-tl_sr_sequence.add(hltSkimmer)
+tl_sr_sequence.add(tlHLTSkimmer)
 tl_sr_sequence.add(xsWeighter)
 tl_sr_sequence.add(tightLooseHLTWeighter)
 
@@ -100,7 +104,7 @@ tl_rpv_sequence.add(metFilter)
 tl_rpv_sequence.add(leptonProducer)
 tl_rpv_sequence.add(jetProducer)
 tl_rpv_sequence.add(tightLooseSkimmer)
-tl_rpv_sequence.add(hltSkimmer)
+tl_rpv_sequence.add(tlHLTSkimmer)
 tl_rpv_sequence.add(xsWeighter)
 tl_rpv_sequence.add(tightLooseHLTWeighter)
 tl_rpv_sequence.add(variableProducer)

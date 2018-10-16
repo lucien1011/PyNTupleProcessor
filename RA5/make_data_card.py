@@ -32,6 +32,7 @@ addMCStat           = True
 sigModel            = "SMS-T1qqqqL_1500" if not option.sigModel else option.sigModel
 fixWidthStr         = "%15s"
 fixWidthFloat       = "%15.2f"
+if option.inputDir: outputInfo.outputDir = option.inputDir
 
 # ____________________________________________________________________________________________________________________________________________ ||
 collector = Collector()

@@ -17,7 +17,7 @@ import os
 #from RA5.Dataset.Run2016.Sept18_v1 import *
 from RA5.Dataset.Run2016.Sept18_v1_Data import *
 from RA5.Dataset.Run2016.Sept18_v1_skim import *
-from RA5.Dataset.Run2016.Sept18_v1_SMS import sigComponentDict
+from RA5.Dataset.Run2016.Oct18_v1_SMS import sigComponentDict
 
 if where == "hpg":
     out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/RPV/DataMCDistributions/2018-09-12_HLTEmulation/"
@@ -27,7 +27,7 @@ elif where == "ihepa":
     #out_path = "RPV/DataMCDistribution/2018-09-19_OnlyMET0To50/"
     #out_path = "RPV/DataMCDistribution/2018-09-19/"
     #out_path = "RPV/StatInput/rpv_binning2016_v1_120fb-1/2018-09-26/"
-    out_path = "RPV/StatInput/rpv_binning2016_v4_120fb-1/2018-10-04/"
+    out_path = "RPV/StatInput/rpv_binning2016_v4_150fb-1/2018-10-15/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -41,7 +41,7 @@ verbose = False
 componentList = skimComponentDict.values() + sigComponentDict.values()
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 120.0
+        dataset.lumi = 150.0
     for component in dataset.componentList:
         component.maxEvents = nEvents
 

@@ -15,6 +15,7 @@ else:
     fileNames = [ n for n in os.listdir(dir_path) if n.endswith(".root") ]
 
 for fileName in fileNames:
+    if "SMS" in fileName: continue # New signal model ntuples in Oct18_v1
     if "ext" not in fileName:
         sampleName = fileName.replace(".root","")
     else:

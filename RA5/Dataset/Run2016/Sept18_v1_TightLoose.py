@@ -4,7 +4,7 @@ from RA5.Dataset.Run2016.Sept18_v1 import componentDict
 from RA5.Dataset.Run2016.Sept18_v1_Data import dataComponentDict
 import os
 
-dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_TightLooseSkim/"
+dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_TightLooseSkim_v2/"
 inUFTier2       = False
 treeName        = "tree"
 rootFileName    = "SkimTree.root"
@@ -17,6 +17,9 @@ else:
 
 skimComponentDict = {}
 for fileName in fileNames:
+    #if ("WJets" in fileName and "HT" not in fileName) or ("DYJets" in fileName and "HT" not in fileName): continue
+    if ("WJets" in fileName and "HT" in fileName) or ("DYJets" in fileName and "HT" in fileName): continue 
+    if "SMS" in fileName: continue
     if "ext" not in fileName:
         sampleName = fileName.replace(postfix,"")
     else:

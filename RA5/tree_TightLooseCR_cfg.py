@@ -25,14 +25,14 @@ from NanoAOD.Producer.GenWeightCounter import *
 #out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/July18_v2_LeptonJetRecleaner_rpv/"
 #out_path = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/SyncMC2016/TTW_RA5_sync_LeptonJetRecleaner/"
 #out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/SkimMC2016/July18_v2_LeptonJetRecleaner_rpv/"
-out_path  = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_TightLooseSkim/"
+out_path  = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_TightLooseSkim_v2/"
 
 nCores                      = 5
 outputDir                   = out_path
 nEvents                     = -1
 disableProgressBar          = False
 justEndSequence             = False
-componentList               = [c for c in dataComponentDict.values() if "2016H" not in c.name] + componentDict.values() 
+componentList               = dataComponentDict.values() + componentDict.values() 
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9
