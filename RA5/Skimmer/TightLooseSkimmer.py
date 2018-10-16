@@ -10,7 +10,7 @@ class TightLooseSkimmer(Module):
         if event.firstLep.pt < 25: return False
 
         event.found2nd = False
-        for l in event.looseLeps[1:]:
+        for l in event.cleanLeps:
             if l.pt < 10: continue
             if l.charge == event.firstLep.charge:
                 event.found2nd = True
@@ -18,6 +18,10 @@ class TightLooseSkimmer(Module):
         
         if not event.found2nd: return False
         if event.secondLep.pt < 25: return False
+
+        #if event.met_pt[0] < 50.: return False
+        #if event.met_pt[0] > 50.: return False
+        #if event.selJets[0].chHEF < 0.1: return False
         
         if not self.passMllTL(event.looseLeps,event.tightLeps,[0.,12.],[76.,106.]): return False 
         return True

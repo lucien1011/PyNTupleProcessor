@@ -19,6 +19,7 @@ from RA5.Producer.SRProducer import SRProducer
 from RA5.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Skimmer.METFilter import METFilter
+from Common.BTagSFWeighter import BTagSFWeighter
 
 from RA5.Weighter.HLTWeighter import HLTWeighter
 
@@ -66,6 +67,7 @@ variableProducer        = VariableProducer("VariableProducer")
 
 hltWeighter             = HLTWeighter("HLTWeighter")
 tightLooseHLTWeighter   = HLTWeighter("HLTWeighter",cutflow="TightLoose")
+tightLooseBTagWeighter  = BTagSFWeighter("BTagSFWeighter",cutflow="TightLoose",fileTag="_CSVv2_Moriond17_B_H")
 
 sr_sequence = Sequence()
 sr_sequence.add(metSkimmer)
@@ -106,6 +108,7 @@ tl_rpv_sequence.add(jetProducer)
 tl_rpv_sequence.add(tightLooseSkimmer)
 tl_rpv_sequence.add(tlHLTSkimmer)
 tl_rpv_sequence.add(xsWeighter)
+tl_rpv_sequence.add(tightLooseBTagWeighter)
 tl_rpv_sequence.add(tightLooseHLTWeighter)
 tl_rpv_sequence.add(variableProducer)
 
