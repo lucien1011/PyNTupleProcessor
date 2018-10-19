@@ -30,8 +30,8 @@ if where == "hpg":
     endModuleOutputDir = out_path 
 elif where == "ihepa":
     #out_path = "TightLoose/DataMCDistribution/2018-10-11_MET0ToInf_CleaningLep/"
-    #out_path = "TightLoose/DataMCDistribution/2018-10-11_MET0To50_CleaningLep/"
-    out_path = "TightLoose/DataMCDistribution/2018-10-11_MET50ToInf_CleaningLep/"
+    out_path = "TightLoose/DataMCDistribution/2018-10-18_MET0To50_CleaningLep/"
+    #out_path = "TightLoose/DataMCDistribution/2018-10-11_MET50ToInf_CleaningLep/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = [""]
@@ -61,7 +61,8 @@ jet1PhiRange        = [18,-4.75,4.25]
 jet2PtRange         = [12,0.,120.]
 jetEtaRange         = [10,-3.,3.]
 jet2PhiRange        = [10,-4.,4.]
-htRange             = [20,0.,600.]
+htRange             = [16,200.,1000.]
+#htRange             = [20,0.,600.]
 #metRange            = [20,0.,50.]
 metRange            = [20,0.,200.]
 mtRange             = [20,0.,120.]

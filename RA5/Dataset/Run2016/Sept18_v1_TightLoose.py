@@ -17,8 +17,8 @@ else:
 
 skimComponentDict = {}
 for fileName in fileNames:
-    #if ("WJets" in fileName and "HT" not in fileName) or ("DYJets" in fileName and "HT" not in fileName): continue
-    if ("WJets" in fileName and "HT" in fileName) or ("DYJets" in fileName and "HT" in fileName): continue 
+    if ("WJets" in fileName and "HT" not in fileName) or ("DYJets" in fileName and "HT" not in fileName): continue
+    #if ("WJets" in fileName and "HT" in fileName) or ("DYJets" in fileName and "HT" in fileName): continue 
     if "SMS" in fileName: continue
     if "ext" not in fileName:
         sampleName = fileName.replace(postfix,"")

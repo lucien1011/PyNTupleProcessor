@@ -58,6 +58,7 @@ sampleColorDict = {
                 "WW": ROOT.kOrange+8,
                 "Minor": ROOT.kPink+6,
                 "QCD": ROOT.kOrange+4,
+                "TTWW": ROOT.kRed+4,
                 "SMS-T1qqqqL_mGluino1000": ROOT.kRed,
                 "SMS-T1qqqqL_1000": ROOT.kRed,
                 "SMS-T1qqqqL_1500": ROOT.kRed+1,

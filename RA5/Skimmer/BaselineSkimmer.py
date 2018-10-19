@@ -20,7 +20,7 @@ class BaselineSkimmer(Module):
         if not event.found2nd: return False
         event.secondLep = secondLep
         
-        if not self.passMllTL(event.cleanLeps,event.tightLeps,[0.,12.],[76.,106.]): return False
+        if not self.passMllTL(event.looseLeps,event.tightLeps,[0.,12.],[76.,106.]): return False
         
         mllList = []
         nTightLep = len(event.tightLeps)

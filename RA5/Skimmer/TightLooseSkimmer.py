@@ -3,7 +3,8 @@ from RA5.LeptonJetRecleaner.Algo import passMllVeto
 
 class TightLooseSkimmer(Module):
     def analyze(self,event):
-        if event.htJet40[0] < 80: return False
+        #if event.htJet40[0] < 80: return False
+        if event.htJet40[0] < 300: return False
         if event.nJetRA540[0] < 2: return False
 
         event.firstLep = event.tightLeps[0]

@@ -6,7 +6,7 @@ from Core.EndSequence import EndSequence
 from RA5.Config.MergeSampleDefinition import mergeSampleDict
 #from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
 
-from RA5.Sequence.RecoSequence import rpv_sequence
+from RA5.Sequence.RecoSequence import rpv_sequence,low_met_sequence
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -31,7 +31,7 @@ elif where == "ihepa":
     #out_path = "RPV/DataMCDistribution/2018-09-19/"
     #out_path = "RPV/DataMCDistribution/2018-09-26/"
     #out_path = "RPV/SignalRegion/DataMCDistribution/2018-10-10/"
-    out_path = "RPV/SignalRegion/DataMCDistribution/2018-10-15/"
+    out_path = "RPV/SignalRegion/DataMCDistribution/2018-10-18_Run2016B/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -39,16 +39,17 @@ lepCats = ["HH","HL","LL"]
 nCores = 5
 nEvents = -1
 disableProgressBar = False
-justEndSequence = True
+justEndSequence = False
 verbose = False
-componentList = skimComponentDict.values() + dataComponentDict.values() + sigComponentList_plot
+#componentList = skimComponentDict.values() + dataComponentDict.values() + sigComponentList_plot
+componentList = skimComponentDict.values() + [c for c in dataComponentDict.values() if "Run2016B" in c.name]
 #componentList = dataComponentDict.values()
 #componentList = skimComponentDict.values() + sigComponentList_plot
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 35.9
+        #dataset.lumi = 35.9
         #dataset.lumi = 120.0
-        #dataset.lumi = 5.93
+        dataset.lumi = 5.93
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -65,8 +66,8 @@ for lepCat in lepCats:
         Plot("nBJet25"+lepCat,     ["TH1D","nBJet25"+lepCat,"",7,-0.5,6.5],      LambdaFunc('x: x.nBJetMediumRA525[0]')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("nLepTight"+lepCat,    ["TH1D","nLepTight"+lepCat,"",7,-0.5,6.5],      LambdaFunc('x: len(x.tightLeps)')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         #Plot("nLepLoose"+lepCat,    ["TH1D","nLepLoose"+lepCat,"",7,-0.5,6.5],      LambdaFunc('x: x.nLepLoose[0]')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
-        Plot("htJet"+lepCat,       ["TH1D","htJet"+lepCat,"",20,0.,2000.],         LambdaFunc('x: x.htJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
-        Plot("met_pt"+lepCat,      ["TH1D","met_pt"+lepCat,"",100,0., 1000.],          LambdaFunc('x: x.met_pt[0]')           ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("htJet"+lepCat,       ["TH1D","htJet"+lepCat,"",20,0.,1000.],         LambdaFunc('x: x.htJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("met_pt"+lepCat,      ["TH1D","met_pt"+lepCat,"",100,0., 500.],          LambdaFunc('x: x.met_pt[0]')           ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("met_phi"+lepCat,     ["TH1D","met_phi"+lepCat,"",10,-5, 5.],          LambdaFunc('x: x.met_phi[0]')           ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("mht"+lepCat,         ["TH1D","mht"+lepCat,"",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("mtmin"+lepCat,         ["TH1D","mtmin"+lepCat,"",20,0., 200.],          LambdaFunc('x: x.mtmin')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
@@ -96,7 +97,8 @@ for lepCat in lepCats:
         )
 plotter                 = Plotter("Plotter",plots)
 
-sequence = rpv_sequence
+#sequence = rpv_sequence
+sequence = low_met_sequence
 sequence.add(plotter)
 
 #endSequence = EndSequence(skipHadd=False,)
