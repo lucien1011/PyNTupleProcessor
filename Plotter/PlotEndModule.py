@@ -7,10 +7,11 @@ from SampleColor import sampleColorDict
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 class PlotEndModule(EndModule):
-    def __init__(self,outputDir,plots,ratio_switch=False):
+    def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False):
         self.outputDir = outputDir
         self.plots = plots
         self.switch = ratio_switch
+        self.scaleToData = scaleToData
 
     def __call__(self,collector):
         for plot in self.plots:
@@ -64,7 +65,7 @@ class PlotEndModule(EndModule):
             hist.SetBinContent(iBin,binC/binW)
             hist.SetBinError(iBin,binE/binW)
 
-    def stackMC(self,collector,plot,switch):
+    def stackMC(self,collector,plot,switch,histToScale=None):
         stack = ROOT.THStack(plot.key+'_stack',plot.key+'_stack')
 
         smCount      = 0.0
@@ -75,13 +76,21 @@ class PlotEndModule(EndModule):
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
             h = collector.getObj(sample,plot.rootSetting[1])
+            smCountErrTmp = ROOT.Double(0.)
+            smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
+            smCountErrSq += smCountErrTmp**2
+
+        for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
+            if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
+            h = collector.getObj(sample,plot.rootSetting[1])
+            if histToScale and smCount: h.Scale(histToScale.Integral(0,histToScale.GetNbinsX()+1)/smCount)
             if sample in sampleColorDict:
                 h.SetFillColor(sampleColorDict[sample])
             else:
                 h.SetFillColor(ROOT.kViolet)
-            smCountErrTmp = ROOT.Double(0.)
-            smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
-            smCountErrSq += smCountErrTmp**2
+            #smCountErrTmp = ROOT.Double(0.)
+            #smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
+            #smCountErrSq += smCountErrTmp**2
             self.shiftLastBin(h)
             histList.append([h,sample,h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
             if switch:
@@ -197,7 +206,7 @@ class PlotEndModule(EndModule):
             dataHist,dataCount,dataCountErr = self.stackData(collector,plot)
 
         if collector.bkgSamples:
-            histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch)
+            histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch,histToScale=dataHist if self.scaleToData else None)
             stack.SetTitle("")
             # stack.GetYaxis().SetTitleSize(0.05)
 

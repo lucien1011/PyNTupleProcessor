@@ -9,12 +9,6 @@ class BaselineSkimmer(Module):
         if event.htJet40[0] < 80: return False
         if event.nJetRA540[0] < 2: return False
 
-        #nSSLepPlus = 0
-        #nSSLepMinus = 0
-        #for l in event.tightLeps:
-        #    if l.pdgId == 11 or l.pdgId == 13: nSSLepPlus += 1
-        #    if l.pdgId == -11 or l.pdgId == -13: nSSLepMinus += 1
-        #if nSSLepPlus < 2 and nSSLepMinus < 2: return False
         event.firstLep = event.tightLeps[0]
         event.found2nd = False
         for l in event.tightLeps[1:]:
