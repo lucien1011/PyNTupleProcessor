@@ -5,6 +5,7 @@ from DarkZ.Skimmer.BlindSkimmer import BlindSkimmer
 from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
 from DarkZ.Weighter.NLOWeighter import NLOWeighter
 from DarkZ.Weighter.FakeRateWeighter import FakeRateWeighter
+from DarkZ.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
@@ -18,6 +19,7 @@ m4lNarrowSkimmer        = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="Higgs-m4lN
 darkPhotonM4lSBSkimmer  = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="DarkPhoton-m4lSB")
 darkPhotonCRV2Skimmer   = AnalysisSkimmer("DarkPhoton-ZXCR-v2",cutflow="DarkPhoton-ZXCR-v2")
 upsilonCRSkimmer        = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="Upsilon-CR")
+WrongFCSkimmer          = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="WrongFC-SR")
 
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")
@@ -25,8 +27,11 @@ xsWeighter              = XSWeighter("XSWeighter")
 bliSkimmer              = BlindSkimmer("BlindSkimmer")
 fakeRateWeighter        = FakeRateWeighter("FakeRateWeighter")
 
+variableProducer        = VariableProducer("VariableProducer")
+
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
+darkphoton_signal_sequence.add(variableProducer)
 
 darkphoton_cr_sequence = Sequence()
 darkphoton_cr_sequence.add(darkPhotonCRSkimmer)
@@ -35,6 +40,7 @@ darkphoton_cr_v2_sequence = Sequence()
 darkphoton_cr_v2_sequence.add(darkPhotonCRV2Skimmer)
 
 darkphoton_m4lSB_sequence = Sequence()
+darkphoton_m4lSB_sequence.add(variableProducer)
 darkphoton_m4lSB_sequence.add(darkPhotonM4lSBSkimmer)
 
 higgs_signal_sequence = Sequence()
@@ -47,6 +53,7 @@ higgs_cr_sequence = Sequence()
 higgs_cr_sequence.add(higgsCRSkimmer)
 
 higgs_3p1f_sequence = Sequence()
+higgs_3p1f_sequence.add(variableProducer)
 higgs_3p1f_sequence.add(higgs3P1FSkimmer)
 
 higgs_m4lSB_sequence = Sequence()
@@ -63,6 +70,10 @@ upsilon_signal_sequence.add(darkPhotonSRSkimmer)
 upsilon_signal_sequence.add(nloWeighter)
 upsilon_signal_sequence.add(xsWeighter)
 upsilon_signal_sequence.add(fakeRateWeighter)
+
+wrongFC_sequence = Sequence()
+wrongFC_sequence.add(WrongFCSkimmer)
+wrongFC_sequence.add(xsWeighter)
 
 allSequence = [
         darkphoton_signal_sequence,

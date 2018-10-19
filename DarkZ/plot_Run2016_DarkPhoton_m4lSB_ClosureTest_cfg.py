@@ -3,9 +3,9 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
+
 from DarkZ.Sequence.RecoSequence import * 
-from DarkZ.Producer.VariableProducer import VariableProducer
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -29,22 +29,25 @@ mergeSampleDict = {
         }
 
 mZ1PlotRange = [40,40.,120.]
+#mZ2PlotRange = [60,0.,120.]
 mZ2PlotRange = [30,0.,60.]
 #h4lPlotRange = [110,60.,500.]
+h4lPlotRange = [10,110.,130.]
 #h4lPlotRange = [25,100.,150.]
-h4lPlotRange = [20,100.,140.]
-deltaRPlotRange2 = [20,0.,2.]
-deltaRPlotRange = [40,0.,4.]
+#h4lPlotRange = [20,100.,140.]
 
-#out_path                = "SignalDistributions/2018-09-18_Epsilon0p1_LowMZD/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2018-09-21_UniformIso/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2018-09-21_Nominal/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-24_m4l-105-118-or-130-140/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-140/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-150/"
+#out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-160/"
+out_path                = "ZPlusX/m4lSBValidation/2018-09-25_m4l-130-180/"
 lumi                    = 35.9
-nCores                  = 5
+nCores                  = 4
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016] + sigSamples
+componentList           = bkgSamples + [data2016]
+#componentList           = [ZPlusX]
 justEndSequence         = False
 
 
@@ -80,14 +83,6 @@ muon_plots = [
         Plot("Electron2_Phi", ["TH1D","Electron2_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL2[0]] if abs(x.idL2[0]) == 11 else []'), isCollection=True),
         Plot("Electron3_Phi", ["TH1D","Electron3_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL3[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
         Plot("Electron4_Phi", ["TH1D","Electron4_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL4[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        
-        Plot("DeltaRL12",     ["TH1D","DeltaL12","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL12'),       ),
-        Plot("DeltaRL13",     ["TH1D","DeltaL13","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL13'),       ),
-        Plot("DeltaRL14",     ["TH1D","DeltaL14","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL14'),       ),
-        Plot("DeltaRL23",     ["TH1D","DeltaL23","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL23'),       ),
-        Plot("DeltaRL24",     ["TH1D","DeltaL24","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL24'),       ),
-        Plot("DeltaRL34",     ["TH1D","DeltaL34","",]+deltaRPlotRange2,  LambdaFunc('x: x.deltaRL34'),       ),
-        Plot("MinDeltaRL",     ["TH1D","MinDeltaRL","",]+deltaRPlotRange2,  LambdaFunc('x: x.minDeltaRL'),       ),
         ]
 
 general_plots = [
@@ -131,16 +126,13 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 plotter                 = Plotter("Plotter",plots)
-variableProducer        = VariableProducer("VariableProducer")
 
-sequence                = darkphoton_signal_sequence
-#sequence                = higgs_m4lNarrowWindow_sequence
-sequence.add(variableProducer)
+sequence                = darkphoton_m4lSB_sequence
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
-outputInfo.TFileName    = "DataMCDistribution.root"
+outputInfo.TFileName    = "ClosureTest.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path

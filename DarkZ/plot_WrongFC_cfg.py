@@ -4,8 +4,8 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.Run2016.ZXCR_MC import * 
-from DarkZ.Dataset.Run2016.ZXCR_Data import * 
+from DarkZ.Dataset.Run2016.WrongFC_MC import * 
+from DarkZ.Dataset.Run2016.WrongFC_Data import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -13,21 +13,26 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-#out_path = "DataMCDistributions/SkimTree_ZXCR_HIG-16-041Selection_Run2016DataMC_v2/2018-08-23/"
-out_path = "ZPlusX/DataMCDistributions/SkimTree_PedjaInput_HIG-16-041/2018-09-24/"
+#out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l70_Run2016Data_v1/2018-09-20/"
+out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l108To140_Run2016Data_v1/2018-09-20/"
 
 mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [30,0.,60.]
-h4lPlotRange = [110,60.,500.]
-#h4lPlotRange = [20,100.,140.]
+#mZ2PlotRange = [30,0.,60.]
+mZ2PlotRange = [60,0.,120.]
+#h4lPlotRange = [110,60.,500.]
+h4lPlotRange = [40,100.,140.]
 general_plots = []
-for eachCR in ["3p1f","2p2f"]:
+for eachCR in ["3p1f","2p2f","sr",]:
     if eachCR == "3p1f":
         region_sel_str = "x.nZXCRFailedLeptons[0] == 1"
         region_sel_str_whole = "x: x.nZXCRFailedLeptons[0] == 1"
-    else:
+    elif eachCR == "2p2f":
         region_sel_str = "x.nZXCRFailedLeptons[0] == 2"
         region_sel_str_whole = "x: x.nZXCRFailedLeptons[0] == 2"
+    else:
+        region_sel_str = "x.nZXCRFailedLeptons[0] == 0"
+        region_sel_str_whole = "x: x.nZXCRFailedLeptons[0] == 0"
+
 
     general_plots.extend([
         Plot("Z1_mass_"+eachCR,         ["TH1D","Z1_mass_"+eachCR,"",]+mZ1PlotRange,        LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc(region_sel_str_whole)      ),
@@ -56,9 +61,7 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,predCR]
-#componentList           = [PedjaData_Run2016,PedjaPredCR]
-componentList           = [PedjaData_Run2016,]
+componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,]
 justEndSequence         = False
 
 for dataset in componentList:
@@ -70,7 +73,7 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = higgs_3p1f_sequence
+sequence                = wrongFC_sequence
 
 sequence.add(plotter)
 
