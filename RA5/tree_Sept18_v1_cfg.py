@@ -5,13 +5,14 @@ from Core.EndSequence import EndSequence
 
 from Common.TreeProducer import TreeProducer
 
-from RA5.Sequence.RecoSequence import rpv_sequence
+from RA5.Sequence.RecoSequence import rpv_skim_sequence
 
 from Core.Utils.LambdaFunc import LambdaFunc
 
 import os,array
 
 from RA5.Dataset.Run2016.Sept18_v1 import *
+from RA5.Dataset.Run2016.Sept18_v1_Data import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
@@ -22,7 +23,7 @@ outputDir                   = out_path
 nEvents                     = -1
 disableProgressBar          = False
 justEndSequence             = False
-componentList               = componentDict.values()
+componentList               = componentDict.values() + dataComponentDict.values()
 
 for dataset in componentList:
     if dataset.isMC:
@@ -32,7 +33,7 @@ for dataset in componentList:
 
 treeProducer                = TreeProducer("TreeProducer")
 
-sequence                    = rpv_sequence
+sequence                    = rpv_skim_sequence
 sequence.add(treeProducer)
 
 endSequence                 = EndSequence(skipHadd=False)

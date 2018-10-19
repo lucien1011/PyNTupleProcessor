@@ -16,7 +16,7 @@ class BaselineSkimmer(Module):
                 event.found2nd = True
                 secondLep = l
         
-        if len(event.tightLeps) != 2: return False
+        if len(event.tightLeps) < 2: return False
         if not event.found2nd: return False
         event.secondLep = secondLep
         
