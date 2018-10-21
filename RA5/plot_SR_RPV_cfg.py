@@ -18,7 +18,7 @@ from Core.Utils.WhichMachine import where
 import os
 
 #from RA5.Dataset.Run2016.Sept18_v1 import *
-from RA5.Dataset.Run2016.Sept18_v1_Data import *
+#from RA5.Dataset.Run2016.Sept18_v1_Data import *
 from RA5.Dataset.Run2016.Sept18_v1_skim import *
 from RA5.Dataset.Run2016.Oct18_v1_SMS import sigComponentList_plot
 
@@ -31,7 +31,7 @@ elif where == "ihepa":
     #out_path = "RPV/DataMCDistribution/2018-09-19/"
     #out_path = "RPV/DataMCDistribution/2018-09-26/"
     #out_path = "RPV/SignalRegion/DataMCDistribution/2018-10-10/"
-    out_path = "RPV/SignalRegion/DataMCDistribution/2018-10-18_Run2016B/"
+    out_path = "RPV/SignalRegion/DataMCDistribution/2018-10-21_v1.0_Include3LepInLowMETBin_181019/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -42,14 +42,15 @@ disableProgressBar = False
 justEndSequence = False
 verbose = False
 #componentList = skimComponentDict.values() + dataComponentDict.values() + sigComponentList_plot
-componentList = skimComponentDict.values() + [c for c in dataComponentDict.values() if "Run2016B" in c.name]
+#componentList = skimComponentDict.values() + [c for c in dataComponentDict.values() if "Run2016B" in c.name]
+componentList = skimComponentDict.values()
 #componentList = dataComponentDict.values()
 #componentList = skimComponentDict.values() + sigComponentList_plot
 for dataset in componentList:
     if dataset.isMC:
-        #dataset.lumi = 35.9
+        dataset.lumi = 35.9
         #dataset.lumi = 120.0
-        dataset.lumi = 5.93
+        #dataset.lumi = 5.93
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -72,21 +73,21 @@ for lepCat in lepCats:
         Plot("mht"+lepCat,         ["TH1D","mht"+lepCat,"",10,0., 500.],          LambdaFunc('x: x.mhtJet40[0]')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("mtmin"+lepCat,         ["TH1D","mtmin"+lepCat,"",20,0., 200.],          LambdaFunc('x: x.mtmin')            ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         
-        Plot("LepTightPt1"+lepCat,    ["TH1D","LepTightPt1"+lepCat,"",40,0.,800.],      LambdaFunc('x: x.tightLeps[0].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("LepTightPt1"+lepCat,    ["TH1D","LepTightPt1"+lepCat,"",10,0.,400.],      LambdaFunc('x: x.tightLeps[0].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("LepTightEta1"+lepCat,    ["TH1D","LepTightEta1"+lepCat,"",10,-3.,3.],      LambdaFunc('x: x.tightLeps[0].eta')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("LepTightPhi1"+lepCat,    ["TH1D","LepTightPhi1"+lepCat,"",10,-5.,5.],      LambdaFunc('x: x.tightLeps[0].phi')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
-        Plot("LepTightPt2"+lepCat,    ["TH1D","LepTightPt2"+lepCat,"",40,0.,400.],      LambdaFunc('x: x.tightLeps[1].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("LepTightPt2"+lepCat,    ["TH1D","LepTightPt2"+lepCat,"",10,0.,200.],      LambdaFunc('x: x.tightLeps[1].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("LepTightEta2"+lepCat,    ["TH1D","LepTightEta2"+lepCat,"",10,-3.,3.],      LambdaFunc('x: x.tightLeps[1].eta')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("LepTightPhi2"+lepCat,    ["TH1D","LepTightPhi2"+lepCat,"",10,-5.,5.],      LambdaFunc('x: x.tightLeps[1].phi')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
 
 
-        Plot("Jet1_Pt"+lepCat,    ["TH1D","JetPt1"+lepCat,"",40,0.,800.],      LambdaFunc('x: x.selJets[0].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("Jet1_Pt"+lepCat,    ["TH1D","JetPt1"+lepCat,"",10,0.,400.],      LambdaFunc('x: x.selJets[0].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("Jet1_Eta"+lepCat,    ["TH1D","JetEta1"+lepCat,"",10,-3.,3.],      LambdaFunc('x: x.selJets[0].eta')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("Jet1_Phi"+lepCat,    ["TH1D","JetPhi1"+lepCat,"",10,-5.,5.],      LambdaFunc('x: x.selJets[0].phi')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("Jet1_chHEF"+lepCat,    ["TH1D","Jet1_chHEF"+lepCat,"",25,0.,1.],      LambdaFunc('x: x.selJets[0].chHEF')   ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("Jet1_neHEF"+lepCat,    ["TH1D","Jet1_neHEF"+lepCat,"",25,0.,1.],      LambdaFunc('x: x.selJets[0].neHEF')   ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),    
 
-        Plot("Jet2_Pt"+lepCat,    ["TH1D","JetPt2"+lepCat,"",40,0.,800.],      LambdaFunc('x: x.selJets[1].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
+        Plot("Jet2_Pt"+lepCat,    ["TH1D","JetPt2"+lepCat,"",10,0.,200.],      LambdaFunc('x: x.selJets[1].pt')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("Jet2_Eta"+lepCat,    ["TH1D","JetEta2"+lepCat,"",10,-3.,3.],      LambdaFunc('x: x.selJets[1].eta')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("Jet2_Phi"+lepCat,    ["TH1D","JetPhi2"+lepCat,"",10,-5.,5.],      LambdaFunc('x: x.selJets[1].phi')        ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),
         Plot("Jet2_chHEF"+lepCat,    ["TH1D","Jet2_chHEF"+lepCat,"",25,0.,1.],      LambdaFunc('x: x.selJets[1].chHEF')   ,selFunc=LambdaFunc('x: x.cat.lepCat == \"%s\"'%lepCat)),

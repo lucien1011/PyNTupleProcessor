@@ -16,7 +16,7 @@ from RA5.Dataset.Run2016.Sept18_v1_Data import *
 
 from NanoAOD.Producer.GenWeightCounter import *
 
-out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
+out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim_v1.0_Include3LepInLowMETBin_181019/"
 
 nCores                      = 6
 outputDir                   = out_path

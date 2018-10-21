@@ -1,10 +1,12 @@
 from Core.ComponentList import *
 from Core.Utils.UFTier2Utils import listdir_uberftp
 from RA5.Dataset.Run2016.Sept18_v1 import componentDict
+from RA5.Dataset.Run2016.Sept18_v1_Data import dataComponentDict
 import os
 
 #dir_path        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/Sept18_v1/"
-dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
+#dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
+dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim_v1.0_Include3LepInLowMETBin_181019/"
 inUFTier2       = False
 treeName        = "tree"
 rootFileName    = "SkimTree.root"
@@ -24,6 +26,12 @@ for fileName in fileNames:
     if sampleName in componentDict:
         if sampleName not in skimComponentDict:
             skimComponentDict[sampleName] = componentDict[sampleName]
+            skimComponentDict[sampleName].componentList = ComponentList( [Component(sampleName,os.path.join(dir_path,fileName,rootFileName),treeName,inUFTier2,),] )
+        else:
+            skimComponentDict[sampleName].componentList.extend( [Component(sampleName,os.path.join(dir_path,fileName,rootFileName),treeName,inUFTier2,),] )
+    if sampleName in dataComponentDict:
+        if sampleName not in skimComponentDict:
+            skimComponentDict[sampleName] = dataComponentDict[sampleName]
             skimComponentDict[sampleName].componentList = ComponentList( [Component(sampleName,os.path.join(dir_path,fileName,rootFileName),treeName,inUFTier2,),] )
         else:
             skimComponentDict[sampleName].componentList.extend( [Component(sampleName,os.path.join(dir_path,fileName,rootFileName),treeName,inUFTier2,),] )
