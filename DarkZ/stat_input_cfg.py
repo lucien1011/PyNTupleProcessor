@@ -4,13 +4,14 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 #from DarkZ.Dataset.Run2016.SkimTree_SMHiggs import * 
-from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
 #from DarkZ.Dataset.Run2017.SignalMC import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
 from DarkZ.StatTools.MassWindow import MassWindow
 from DarkZ.StatTools.YieldProducer import YieldProducer
+from DarkZ.StatTools.Syst import Syst
 from DarkZ.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
@@ -23,7 +24,8 @@ from Plotter.Plot import Plot
 #out_path = "StatInput/DarkPhotonSelection_v1/2018-08-20/"
 #out_path = "StatInput/DarkPhotonSelection_ATLAS-BrHToZZd100_v1/2018-08-20/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130/2018-08-31/"
-out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-09-21/"
+#out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-09-21/"
+out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-10-21_DarkPhotonSR-Unblinding/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_UniformIso/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l105To140/2018-08-31/"
 
@@ -54,6 +56,11 @@ mass_window_list = [
         MassWindow(30,0.02),
         ]
 
+syst_list = [
+        Syst("FRUniIso",LambdaFunc("x: x.weight_FRUniIso_Up")),
+        ]
+
+
 nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
@@ -70,7 +77,7 @@ for dataset in componentList:
 
 sequence                = darkphoton_signal_sequence
 #variableProducer        = VariableProducer("VariableProducer")
-yieldProducer           = YieldProducer("YieldProducer",mass_window_list)
+yieldProducer           = YieldProducer("YieldProducer",mass_window_list,systList=syst_list)
 
 #sequence.add(variableProducer)
 sequence.add(yieldProducer)

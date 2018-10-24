@@ -11,6 +11,7 @@ from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAO
 
 darkPhotonSRSkimmer     = AnalysisSkimmer("DarkPhotonSRSkimmer")
 darkPhotonCRSkimmer     = AnalysisSkimmer("DarkPhotonCRSkimmer",cutflow="DarkPhoton-ZXCR")
+darkPhoton3P1FSkimmer   = AnalysisSkimmer("DarkPhoton3P1FSkimmer",cutflow="DarkPhoton-3P1F")
 higgsSRSkimmer          = AnalysisSkimmer("HiggsSRSkimmer",cutflow="Higgs-SR")
 higgsCRSkimmer          = AnalysisSkimmer("HiggsCRSkimmer",cutflow="Higgs-ZXCR")
 higgs3P1FSkimmer        = AnalysisSkimmer("Higgs3P1FSkimmer",cutflow="Higgs-3P1F")
@@ -26,12 +27,17 @@ nloWeighter             = NLOWeighter("NLOWeighter")
 xsWeighter              = XSWeighter("XSWeighter")
 bliSkimmer              = BlindSkimmer("BlindSkimmer")
 fakeRateWeighter        = FakeRateWeighter("FakeRateWeighter")
+fakeRateWeighter_map    = FakeRateWeighter("FakeRateWeighter","make_map")
 
 variableProducer        = VariableProducer("VariableProducer")
 
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
 darkphoton_signal_sequence.add(variableProducer)
+
+zx_map_sequence = Sequence()
+zx_map_sequence.add(darkPhotonSRSkimmer)
+zx_map_sequence.add(variableProducer)
 
 darkphoton_cr_sequence = Sequence()
 darkphoton_cr_sequence.add(darkPhotonCRSkimmer)
@@ -56,6 +62,10 @@ higgs_3p1f_sequence = Sequence()
 higgs_3p1f_sequence.add(variableProducer)
 higgs_3p1f_sequence.add(higgs3P1FSkimmer)
 
+darkphoton_3p1f_sequence = Sequence()
+darkphoton_3p1f_sequence.add(variableProducer)
+darkphoton_3p1f_sequence.add(darkPhoton3P1FSkimmer)
+
 higgs_m4lSB_sequence = Sequence()
 higgs_m4lSB_sequence.add(m4lSBSkimmer)
 
@@ -74,10 +84,13 @@ upsilon_signal_sequence.add(fakeRateWeighter)
 wrongFC_sequence = Sequence()
 wrongFC_sequence.add(WrongFCSkimmer)
 wrongFC_sequence.add(xsWeighter)
+wrongFC_sequence.add(dataMCWeighter)
+wrongFC_sequence.add(fakeRateWeighter)
 
 allSequence = [
         darkphoton_signal_sequence,
         darkphoton_cr_sequence,
+        darkphoton_3p1f_sequence,
         higgs_signal_sequence,
         higgs_cr_sequence,
         higgs_3p1f_sequence,
@@ -85,7 +98,7 @@ allSequence = [
         higgs_m4lNarrowWindow_sequence,
         ]
 for sequence in allSequence:
-    sequence.add(bliSkimmer)
+    #sequence.add(bliSkimmer)
     sequence.add(xsWeighter)
     sequence.add(nloWeighter)
     sequence.add(dataMCWeighter)
@@ -100,3 +113,8 @@ for sequence in [
     sequence.add(dataMCWeighter)
     sequence.add(fakeRateWeighter)
 
+zx_map_sequence.add(bliSkimmer)
+zx_map_sequence.add(xsWeighter)
+zx_map_sequence.add(nloWeighter)
+zx_map_sequence.add(dataMCWeighter)
+zx_map_sequence.add(fakeRateWeighter_map)

@@ -4,8 +4,8 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.Run2016.ZXCR_MC import * 
-from DarkZ.Dataset.Run2016.ZXCR_Data import * 
+from DarkZ.Dataset.Run2016.ZXCR_MC_DarkPhoton import * 
+from DarkZ.Dataset.Run2016.ZXCR_Data_DarkPhoton import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -13,13 +13,14 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2018-09-05/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2018-09-05/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2018-10-23/"
 
 mZ1PlotRange = [40,40.,120.]
-#mZ2PlotRange = [30,0.,60.]
-mZ2PlotRange = [60,0.,120.]
-h4lPlotRange = [100,0.,500.]
-#h4lPlotRange = [20,100.,140.]
+mZ2PlotRange = [30,0.,60.]
+#mZ2PlotRange = [60,0.,120.]
+#h4lPlotRange = [100,0.,500.]
+h4lPlotRange = [20,100.,140.]
 general_plots = []
 for eachCR in ["3p1f","2p2f"]:
     if eachCR == "3p1f":
@@ -56,7 +57,7 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,]#predCR]
+componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,predCR]
 justEndSequence         = False
 
 for dataset in componentList:

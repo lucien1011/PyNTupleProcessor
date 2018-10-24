@@ -4,8 +4,8 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.Run2016.ZXCR_MC import * 
-from DarkZ.Dataset.Run2016.ZXCR_Data import * 
+from DarkZ.Dataset.Run2016.ZXCR_MC_DarkPhoton import * 
+from DarkZ.Dataset.Run2016.ZXCR_Data_DarkPhoton import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -13,7 +13,10 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "DataMCDistributions/SkimTree_3P1F_HIG-16-041Selection_Run2016DataMC_v2/2018-08-23/"
+#out_path = "DataMCDistributions/SkimTree_3P1F_HIG-16-041Selection_Run2016DataMC_v2/2018-08-23/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2018-10-23_3P1F_DataVsPred/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2018-10-23_3P1F_DataVsPred_SumCorrIso/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2018-10-23_3P1F_DataVsPred_SumCorrIso/"
 
 mZ1PlotRange = [20,40.,120.]
 mZ2PlotRange = [15,0.,60.]
@@ -60,7 +63,7 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = higgs_3p1f_sequence
+sequence                = darkphoton_3p1f_sequence
 
 sequence.add(plotter)
 

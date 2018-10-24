@@ -3,7 +3,7 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
 
@@ -38,13 +38,14 @@ deltaRPlotRange = [40,0.,4.]
 
 #out_path                = "SignalDistributions/2018-09-18_Epsilon0p1_LowMZD/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2018-09-21_UniformIso/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2018-09-21_Nominal/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-21_DarkPhotonSR-Unblinding/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-24_DarkPhotonSR_mZ212To120/"
 lumi                    = 35.9
 nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016] + sigSamples
+componentList           = bkgSamples + [data2016] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
 justEndSequence         = False
 
 

@@ -26,11 +26,6 @@ class PlotEndModule(EndModule):
         else:
             print "Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment"
 
-    @staticmethod
-    def makedirs(outputDir):
-        if not os.path.exists(os.path.abspath(outputDir)):
-            os.makedirs(os.path.abspath(outputDir))
-
     def sortHistList(self,histList):
         histList.sort(key=lambda l: l[2], reverse=False)
 
