@@ -98,7 +98,7 @@ allSequence = [
         higgs_m4lNarrowWindow_sequence,
         ]
 for sequence in allSequence:
-    #sequence.add(bliSkimmer)
+    sequence.add(bliSkimmer)
     sequence.add(xsWeighter)
     sequence.add(nloWeighter)
     sequence.add(dataMCWeighter)

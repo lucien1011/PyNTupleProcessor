@@ -7,11 +7,12 @@ from SampleColor import sampleColorDict
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 class PlotEndModule(EndModule):
-    def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False):
+    def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False,skipSF=False):
         self.outputDir = outputDir
         self.plots = plots
         self.switch = ratio_switch
         self.scaleToData = scaleToData
+        self.skipSF = skipSF
 
     def __call__(self,collector):
         for plot in self.plots:
@@ -319,7 +320,8 @@ class PlotEndModule(EndModule):
             n1.SetNDC()
             n1.SetTextFont(42)
             n1.SetTextSize(0.05);
-            n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+            if not self.skipSF:
+                n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
 
             dataHist.DrawCopy('samep')
             bkdgErr.Draw("samee2")
