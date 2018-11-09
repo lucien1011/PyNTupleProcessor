@@ -2,7 +2,7 @@ from Core.Module import Module
 
 class TightLeptonSkimmer(Module):
     def analyze(self,event):
-        if len(self.tightLeps)< 2: return False
+        if len(event.tightLeps)< 2: return False
 
         event.tightLeps.sort(key=lambda x: x.pt,reverse=True)
         event.firstLep = event.tightLeps[0]
