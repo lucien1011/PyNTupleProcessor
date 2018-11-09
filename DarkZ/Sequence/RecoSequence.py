@@ -43,6 +43,7 @@ darkphoton_cr_sequence = Sequence()
 darkphoton_cr_sequence.add(darkPhotonCRSkimmer)
 
 darkphoton_cr_v2_sequence = Sequence()
+darkphoton_cr_v2_sequence.add(variableProducer)
 darkphoton_cr_v2_sequence.add(darkPhotonCRV2Skimmer)
 
 darkphoton_m4lSB_sequence = Sequence()
@@ -65,6 +66,10 @@ higgs_3p1f_sequence.add(higgs3P1FSkimmer)
 darkphoton_3p1f_sequence = Sequence()
 darkphoton_3p1f_sequence.add(variableProducer)
 darkphoton_3p1f_sequence.add(darkPhoton3P1FSkimmer)
+darkphoton_3p1f_sequence.add(xsWeighter)
+darkphoton_3p1f_sequence.add(nloWeighter)
+darkphoton_3p1f_sequence.add(dataMCWeighter)
+darkphoton_3p1f_sequence.add(fakeRateWeighter)
 
 higgs_m4lSB_sequence = Sequence()
 higgs_m4lSB_sequence.add(m4lSBSkimmer)
@@ -90,7 +95,6 @@ wrongFC_sequence.add(fakeRateWeighter)
 allSequence = [
         darkphoton_signal_sequence,
         darkphoton_cr_sequence,
-        darkphoton_3p1f_sequence,
         higgs_signal_sequence,
         higgs_cr_sequence,
         higgs_3p1f_sequence,

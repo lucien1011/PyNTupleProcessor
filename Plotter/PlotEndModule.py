@@ -7,12 +7,13 @@ from SampleColor import sampleColorDict
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 class PlotEndModule(EndModule):
-    def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False,skipSF=False):
+    def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False,skipSF=False,customSMCountFunc=None):
         self.outputDir = outputDir
         self.plots = plots
         self.switch = ratio_switch
         self.scaleToData = scaleToData
         self.skipSF = skipSF
+        self.customSMCountFunc = customSMCountFunc
 
     def __call__(self,collector):
         for plot in self.plots:
@@ -204,7 +205,10 @@ class PlotEndModule(EndModule):
         if collector.bkgSamples:
             histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch,histToScale=dataHist if self.scaleToData else None)
             stack.SetTitle("")
-            # stack.GetYaxis().SetTitleSize(0.05)
+            if self.customSMCountFunc:
+                customSMCount = self.customSMCountFunc(collector,plot)
+            else:
+                customSMCount = None
 
         if collector.signalSamples:
             sigHistList = self.makeSignalHist(collector,plot)
@@ -382,7 +386,7 @@ class PlotEndModule(EndModule):
 
     def draw2DPlot(self,collector,plot,outputDir):
         c = ROOT.TCanvas()
-        for isample,sample in enumerate(collector.samples):
+        for isample,sample in enumerate(collector.samples+collector.mergeSamples):
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)
             hist.Draw("colz")

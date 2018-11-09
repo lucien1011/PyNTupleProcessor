@@ -64,11 +64,11 @@ class FakeRateWeighter(Module):
             #if event.nZXCRFailedLeptons[0] == 1:
             if event.FRWeightSum[0] == -1.: return False
             if event.nFailedLeptonsZ2[0] == 2:
-                #event.weight *= event.FRWeightSum[0]
-                if event.deltaRL34 > 0.6:
-                    event.weight *= event.FRWeightSum[0]
-                else:
-                    event.weight *= event.FRWeightSumCorrIso[0]
+                event.weight *= event.FRWeightSum[0]
+                #if event.deltaRL34 > 0.6:
+                #    event.weight *= event.FRWeightSum[0]
+                #else:
+                #    event.weight *= event.FRWeightSumCorrIso[0]
             else:
                 return False
         return True
