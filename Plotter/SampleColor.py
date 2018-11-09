@@ -77,6 +77,7 @@ sampleColorDict = {
                 "WHminus": ROOT.kSpring+4,
                 "WH": ROOT.kSpring+4,
                 "ZH": ROOT.kSpring+4,
+                "ZPlusX": ROOT.kViolet,
                 "qqZZ": ROOT.kBlue+2,
                 "ggZZ": ROOT.kBlue,
                 "ggZZTo4L": ROOT.kBlue,
@@ -90,4 +91,6 @@ sampleColorDict = {
                 "HZZd_M30": ROOT.kOrange+6,
                 "HZZd_M35": ROOT.kOrange+7,
                 "PredCR": ROOT.kRed,
+                "WFC_Reducible": ROOT.kGreen,
+                "WFC_Irreducible": ROOT.kBlue,
 }

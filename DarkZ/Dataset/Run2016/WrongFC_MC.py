@@ -6,6 +6,44 @@ from Core.Dataset import Dataset
 bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180920/SkimTree_WFC_Run2016Data_v1/"
 inUFTier2       = False
 
+ZPlusXFile      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180920/SkimTree_WFC_Run2016Data_v1/Data_Run2016-03Feb2017_4l_1_FRWeight.root"
+qqZZSumWFile    = "/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/"
+sumWeightHist       = "Ana/sumWeights"
+
+# ____________________________________________________________________________________________________________________________________________ ||
+WFC_Reducible_cmpList = ComponentList(
+        [
+            Component("WFC_Reducible",ZPlusXFile,"passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+WFC_Reducible = Dataset(
+        "WFC_Reducible",
+        WFC_Reducible_cmpList,
+        isMC = True,
+        skipWeight = True,
+        )
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# qqZZ
+qqZZ_cmpList = ComponentList(
+        [ 
+            #Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("WFC_Irreducible",bkgTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+qqZZTo4L = Dataset(
+        "WFC_Irreducible",
+        qqZZ_cmpList,
+        isMC                = True,
+        xs                  = 1.256,
+        )
+qqZZTo4L.setSumWeight(
+        qqZZSumWFile+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2.root",
+        sumWeightHist,
+        True,
+        )
+
 # ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M50_cmpList = ComponentList(
         [
