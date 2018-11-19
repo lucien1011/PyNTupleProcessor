@@ -7,17 +7,42 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-from LJMet.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
+from LJMet.Weighter.XSWeighter import XSWeighter
+from LJMet.Skimmer.AnalysisSkimmer import AnalysisSkimmer
+from LJMet.Weighter.DataMCWeighter import DataMCWeighter
 
 from LJMet.Dataset.LJMet94X_1lepTT_101118newB_step1hadds_2018 import *
 
-out_path                = "TestPlot/2018-11-05/"
-lumi                    = 35.9
+mergeSampleDict = {
+
+
+		"DYJets":	["DY"],
+		"WJets":	['WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',],
+		"TTJets":	[
+						'TTJetsHad0','TTJetsHad700','TTJetsHad1000',
+						'TTJetsSemiLep0','TTJetsSemiLep700','TTJetsSemiLep1000',
+						'TTJets2L2nu0','TTJets2L2nu700','TTJets2L2nu1000',
+						'TTJetsPH700mtt','TTJetsPH1000mtt',
+					],
+		"SingleTop":	[
+
+							'Ts','Tt','Tbt','TtW','TbtW',
+						],
+		"TTV":		[
+						'TTWl','TTZl',
+					],
+		"QCD":		[
+						'QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
+					],
+		}
+
+out_path                = "TestPlot/2018-11-19/"
+lumi                    = 41.298
 nCores                  = 5
 outputDir               = out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [TTToSemiLep_Mtt1000ToInf,]
+componentList           = bkgSamples + dataSamples
 justEndSequence         = False
 
 plots = [
@@ -32,15 +57,19 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 xsWeighter              = XSWeighter("XSWeighter")
+dataMCWeighter          = DataMCWeighter("DataMCWeighter")
+anaSkimmer              = AnalysisSkimmer("AnalysisSkimmer")
 
 sequence                = Sequence()
+sequence.add(anaSkimmer)
 sequence.add(xsWeighter)
+sequence.add(dataMCWeighter)
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence)
+endSequence = EndSequence(skipHadd=False,)
 endModuleOutputDir = out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
