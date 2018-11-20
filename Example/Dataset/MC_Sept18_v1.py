@@ -8,7 +8,7 @@ inUFTier2       = True
 DYJetsToLL_M10to50_LO_cmpList = ComponentList(
                        [ Component(
                            "DYJetsToLL_M10to50_LO",
-                           mc_dir+"DYJetsToLL_M50_LO_ext.root",
+                           mc_dir+"DYJetsToLL_M10to50_LO.root",
                            inUFTier2),
                         ]
           )
@@ -19,7 +19,7 @@ DYJetsToLL_M10to50_LO = Dataset(
         isMC                = True,
         xs                  = 1,
         )
-DYJetsToLL_M10to50_LO.setSumWeight(mc_dir+"DYJetsToLL_M50_LO_ext.root","SumGenWeights",inUFTier2)
+DYJetsToLL_M10to50_LO.setSumWeight(mc_dir+"DYJetsToLL_M10oto50_LO.root","SumGenWeights",inUFTier2)
 
 # __________________________________________________________________________________________ ||
 DYJetsToLL_M50_LO_cmpList = ComponentList(
