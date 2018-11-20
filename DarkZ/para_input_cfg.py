@@ -26,29 +26,31 @@ from Plotter.Plot import Plot
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-10-24_DarkPhotonSR-Unblinding/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-10-25_DarkPhotonSR-Unblinding/"
-out_path = "ParaInput/DarkPhotonSelection_m4l118To130_Nominal/2018-11-06_DarkPhotonSR-Unblinding/"
+out_path = "ParaInput/DarkPhotonSelection_m4l118To130_Nominal/2018-11-20_DarkPhotonSR-Unblinding/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_UniformIso/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l105To140/2018-08-31/"
 
 mergeSampleDict = {
-        "ggH":  ["ggH"],
-        "VBF":  ["VBF"],
-        "WH":   ["WHPlus","WHminus",],
-        "ZH":   ["ZH",],
-        "qqZZ": ["qqZZTo4L",],
-        "ggZZ": [
-            "ggZZTo2e2mu",
-            "ggZZTo2e2tau",
-            "ggZZTo2mu2tau",
-            "ggZZTo4e",
-            "ggZZTo4mu",
-            "ggZZTo4tau",
-            ],
-        "ZPlusX": ["ZPlusX"],
+        "ggH":      ["ggH"],
+        "VBF":      ["VBF"],
+        "WH":       ["WHPlus","WHminus",],
+        "ZH":       ["ZH",],
+        "Higgs":    ["ggH","VBF","WHPlus","WHMinus","ZH",],
+        "qqZZ":     ["qqZZTo4L",],
+        "ggZZ":     [
+                        "ggZZTo2e2mu",
+                        "ggZZTo2e2tau",
+                        "ggZZTo2mu2tau",
+                        "ggZZTo4e",
+                        "ggZZTo4mu",
+                        "ggZZTo4tau",
+                        ],
+        "ZPlusX":   ["ZPlusX"],
         }
 
 syst_list = [
-        Syst("FRUniIso",LambdaFunc("x: x.weight_FRUniIso_Up")),
+        Syst("FRUniIso",LambdaFunc("x: x.weight_FRUniIso")),
+        Syst("FRAsymIso",LambdaFunc("x: x.weight_FRAsymIso")),
         ]
 
 
@@ -56,7 +58,8 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples + [data2016]
+#componentList           = bkgSamples + sigSamples + [data2016]
+componentList           = [ZPlusX]
 justEndSequence         = False
 skipGitDetail           = True
 

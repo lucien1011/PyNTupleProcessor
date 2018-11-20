@@ -5,7 +5,8 @@ class ParaYieldProducer(Module):
         self.name = name
         self.systList = systList
         #self.channelNames = ["4mu","4e","2e2mu","comb"]
-        self.channelNames = ["4mu","4e","2e2mu","2mu2e","comb"]
+        #self.channelNames = ["4mu","4e","2e2mu","2mu2e","comb"]
+        self.channelNames = ["2mu","2e","comb"]
         self.binning = [1200,0.,120.]
 
     def begin(self):
@@ -23,14 +24,23 @@ class ParaYieldProducer(Module):
         histName = "comb"
         self.writer.objs[histName].Fill(event.massZ2[0],event.weight)
          
+        #if event.mass4mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
+        #    channelName = "4mu"
+        #elif event.mass4e[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
+        #    channelName = "4e"
+        #elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
+        #    channelName = "2mu2e"
+        #elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
+        #    channelName = "2e2mu"
+
         if event.mass4mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
-            channelName = "4mu"
+            channelName = "2mu"
         elif event.mass4e[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
-            channelName = "4e"
+            channelName = "2e"
         elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
-            channelName = "2mu2e"
+            channelName = "2e"
         elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
-            channelName = "2e2mu"
+            channelName = "2mu"
 
         histName = channelName
         self.writer.objs[histName].Fill(event.massZ2[0],event.weight)

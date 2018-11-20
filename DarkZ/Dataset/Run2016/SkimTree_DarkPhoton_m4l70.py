@@ -1,12 +1,12 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180924/SkimTree_DarkPhoton_Run2016Data_m4l70/"
-bkgSkimTreeDir2     = bkgSkimTreeDir
+bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_Run2016Data_m4l70/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/"
 dataTreeDir         = bkgSkimTreeDir
 sigSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181019/SkimTree_DarkPhoton_Run2017Sig_m4l70/"
 sigTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/SigMC_Run2016_v1/"
+zxSkimTreeDir       = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 xsBoost             = 100
@@ -18,7 +18,7 @@ sumWeightFromT2     = False
 ZPlusX_cmpList = ComponentList(
         [
             Component("ZPlusX",
-                "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180924/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/Data_Run2016_noDuplicates_FRWeightCorr.root",
+                zxSkimTreeDir+"Data_Run2016-03Feb2017_noDuplicates_FRWeight.root",
                 "passedEvents",False)
         ]
         )
@@ -33,7 +33,7 @@ ZPlusX = Dataset(
 # Data2016
 data2016_cmpList = ComponentList(
         [ 
-            Component("Data2016",dataTreeDir+"/Data_Run2016-03Feb2017_4l_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2016",dataTreeDir+"Data_Run2016-03Feb2017_4l_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -47,7 +47,9 @@ data2016 = Dataset(
 # ggZZTo4tau
 ggZZTo4L_cmpList = ComponentList(
         [ 
-            Component("ggZZTo4tau",bkgSkimTreeDir2+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggZZTo4tau",
+                bkgSkimTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+                "passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -58,7 +60,9 @@ ggZZTo4tau = Dataset(
         xs                  = 0.001586,
         )
 if sumWeightFromT2:
-    ggZZTo4tau.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+    ggZZTo4tau.setSumWeight(
+            bkgTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+            sumWeightHist,True)
 else:
     ggZZTo4tau.sumw = 495800.000000
 
@@ -66,7 +70,9 @@ else:
 # ggZZTo4e
 ggZZTo4L_cmpList = ComponentList(
         [ 
-            Component("ggZZTo4e",bkgSkimTreeDir2+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggZZTo4e",
+                bkgSkimTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+                "passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -77,7 +83,9 @@ ggZZTo4e = Dataset(
         xs                  = 0.001586,
         )
 if sumWeightFromT2:
-    ggZZTo4e.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+    ggZZTo4e.setSumWeight(
+            bkgTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+            sumWeightHist,True)
 else:
     ggZZTo4e.sumw = 965000.0
 
@@ -85,7 +93,9 @@ else:
 # ggZZTo4mu
 ggZZTo4L_cmpList = ComponentList(
         [ 
-            Component("ggZZTo4mu",bkgSkimTreeDir2+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggZZTo4mu",
+                bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+                "passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -96,7 +106,9 @@ ggZZTo4mu = Dataset(
         xs                  = 0.001586,
         )
 if sumWeightFromT2:
-    ggZZTo4mu.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+    ggZZTo4mu.setSumWeight(
+            bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+            sumWeightHist,True)
 else:
     ggZZTo4mu.sumw = 995200.0
 
@@ -104,7 +116,9 @@ else:
 # ggZZTo2mu2tau
 ggZZTo4L_cmpList = ComponentList(
         [ 
-            Component("ggZZTo2mu2tau",bkgSkimTreeDir2+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggZZTo2mu2tau",
+                bkgSkimTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+                "passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -115,7 +129,9 @@ ggZZTo2mu2tau = Dataset(
         xs                  = 0.00319,
         )
 if sumWeightFromT2:
-    ggZZTo2mu2tau.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+    ggZZTo2mu2tau.setSumWeight(
+            bkgTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+            sumWeightHist,True)
 else:
     ggZZTo2mu2tau.sumw = 499800.0
 
@@ -123,7 +139,9 @@ else:
 # ggZZTo2e2mu
 ggZZTo4L_cmpList = ComponentList(
         [ 
-            Component("ggZZTo2e2mu",bkgSkimTreeDir2+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggZZTo2e2mu",
+                bkgSkimTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+                "passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -134,7 +152,8 @@ ggZZTo2e2mu = Dataset(
         xs                  = 0.00319,
         )
 if sumWeightFromT2:
-    ggZZTo2e2mu.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+    ggZZTo2e2mu.setSumWeight(
+            bkgTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 else:
     ggZZTo2e2mu.sumw = 1386000.0
 
@@ -142,7 +161,9 @@ else:
 # ggZZTo2e2tau
 ggZZTo4L_cmpList = ComponentList(
         [ 
-            Component("ggZZTo2e2tau",bkgSkimTreeDir2+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggZZTo2e2tau",
+                bkgSkimTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+                "passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -153,7 +174,8 @@ ggZZTo2e2tau = Dataset(
         xs                  = 0.00319,
         )
 if sumWeightFromT2:
-    ggZZTo2e2tau.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
+    ggZZTo2e2tau.setSumWeight(
+            bkgTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",sumWeightHist,True)
 else:
     ggZZTo2e2tau.sumw = 500000.0
 
@@ -162,7 +184,7 @@ else:
 qqZZ_cmpList = ComponentList(
         [ 
             #Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
-            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -185,7 +207,7 @@ else:
 # ggH
 ggH_cmpList = ComponentList(
         [ 
-            Component("ggH",bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggH",bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -209,7 +231,7 @@ else:
 # VBF
 VBF_cmpList = ComponentList(
         [ 
-            Component("VBF",bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("VBF",bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -232,7 +254,7 @@ else:
 # WHplus
 WHplus_cmpList = ComponentList(
         [ 
-            Component("WHplus",bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("WHplus",bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -255,7 +277,7 @@ else:
 # WHminus
 WHminus_cmpList = ComponentList(
         [ 
-            Component("WHminus",bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("WHminus",bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -278,7 +300,7 @@ else:
 # ZH
 ZH_cmpList = ComponentList(
         [ 
-            Component("ZH",bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ZH",bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
