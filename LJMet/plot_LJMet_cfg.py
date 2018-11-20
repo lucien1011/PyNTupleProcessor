@@ -46,7 +46,17 @@ componentList           = bkgSamples + dataSamples
 justEndSequence         = False
 
 plots = [
-        Plot("AK4HT",        ["TH1D","AK4HT","",25,500.0,3000.0],      LambdaFunc('x: x.AK4HT[0]'),),
+        Plot("AK4HT",        ["TH1D","AK4HT","",25,500.0,3000.0],	LambdaFunc('x: x.AK4HT[0]'),),
+        Plot("MET",        	 ["TH1D","MET","",50,0.0,1500.0],	LambdaFunc('x: x.corr_met_singleLepCalc[0]'),),
+        Plot("AK4ST",        ["TH1D","AK4ST","",50,0.0,5000.0],	LambdaFunc('x: x.AK4HTpMETpLepPt[0]'),),
+        Plot("minMlb",       ["TH1D","minMlb","",50,0.0,800.0],	LambdaFunc('x: x.minMleppBjet[0]'),),
+        Plot("Njets",        ["TH1D","Njets","",10,0.0,10.0],	LambdaFunc('x: x.NJets_JetSubCalc[0]'),),
+        Plot("AK8Njets",     ["TH1D","AK8Njets","",10,0.0,10.0],	LambdaFunc('x: x.NJetsAK8_JetSubCalc[0]'),),
+        Plot("Nwtag",        ["TH1D","Nwtag","",10,0.0,10.0],	LambdaFunc('x: x.NJetsWtagged_0p6[0]'),),
+        Plot("Nh1btag",      ["TH1D","Nh1btag","",5,0.0,5.0],	LambdaFunc('x: x.NJetsH1btagged[0]'),),
+        Plot("Nh2btag",      ["TH1D","Nh2btag","",5,0.0,5.0],	LambdaFunc('x: x.NJetsH2btagged[0]'),),
+
+        Plot("lept",      	 ["TH1D","lept","",50,0.0,1000],	LambdaFunc('x: x.leptonPt_singleLepCalc[0]'),),
         ]
 
 for dataset in componentList:
