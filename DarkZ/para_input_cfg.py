@@ -26,7 +26,7 @@ from Plotter.Plot import Plot
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-10-24_DarkPhotonSR-Unblinding/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-10-25_DarkPhotonSR-Unblinding/"
-out_path = "ParaInput/DarkPhotonSelection_m4l118To130_Nominal/2018-11-20_DarkPhotonSR-Unblinding/"
+out_path = "ParaInput/DarkPhotonSelection_m4l118To130_Nominal/2018-11-21_DarkPhotonSR_mZ2-35_Norm/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_UniformIso/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l105To140/2018-08-31/"
 
@@ -58,8 +58,7 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + sigSamples + [data2016]
-componentList           = [ZPlusX]
+componentList           = bkgSamples + sigSamples + [data2016]
 justEndSequence         = False
 skipGitDetail           = True
 
