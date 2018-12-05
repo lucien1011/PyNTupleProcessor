@@ -5,7 +5,7 @@ from LJMet.Dataset.weights import *
 from LJMet.Dataset.samples import *
 
 # ____________________________________________________________________________________________________________________________________________ ||
-dir_prefix	= "root://cmseos.fnal.gov//store/group/lpcljm/2018/LJMet94X_1lepTT_112818newB_step1hadds/nominal/"
+dir_prefix	= "root://cmseos.fnal.gov//store/user/yiting11/lpcljm_step1test/"
 treeName	= "ljmet"
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -61,4 +61,30 @@ for dataName in dataList:
 			isMC		= False,
 			)
 	dataSamples.append(tmpDataset)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+sigList = [
+            'TTM1200BWBW',
+        ]
+sigXSDict = {
+        'TTM1200BWBW': 'TTM1200',
+        }
+sigSamples = []
+for sigName in sigList:
+	tmpDataset = Dataset(
+			sigName,
+			ComponentList(
+					[
+						Component(sigName,
+							dir_prefix+samples[sigName]+".root",
+							treeName,
+							False,
+							),
+					]
+				),
+			isMC		= True,
+			xs			= xsec[sigXSDict[sigName]],
+			sumw		= nRun[sigName],
+			)
+	sigSamples.append(tmpDataset)
 

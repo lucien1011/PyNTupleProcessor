@@ -73,8 +73,9 @@ labelDict = {
         }
 
 class PlotSetting(object):
-    def __init__(self,divideByBinWidth=False,x_axis_title=None,defaultLabelDict=labelDict):
+    def __init__(self,divideByBinWidth=False,x_axis_title=None,x_axis_labels=None,defaultLabelDict=labelDict):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
         self.defaultLabelDict = defaultLabelDict
-        
+        self.x_axis_labels = x_axis_labels
+
