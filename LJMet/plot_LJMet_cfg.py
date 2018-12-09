@@ -13,7 +13,8 @@ from LJMet.Skimmer.AnalysisSkimmer import AnalysisSkimmer
 from LJMet.Weighter.DataMCWeighter import DataMCWeighter
 from LJMet.Producer.CategoryProducer import CategoryProducer
 
-from LJMet.Dataset.LJMet94X_1lepTT_101118newB_step1hadds_2018 import *
+#from LJMet.Dataset.LJMet94X_1lepTT_101118newB_step1hadds_2018 import *
+from LJMet.Dataset.LJMet_step1test_yiting import *
 
 mergeSampleDict = {
 
@@ -38,8 +39,8 @@ mergeSampleDict = {
 					],
 		}
 
-out_path                = "TestPlot/2018-12-03/"
-lumi                    = 41.298
+out_path                = "TestPlot/2018-12-06_muonOnly/"
+lumi                    = 56.100 #41.298
 nCores                  = 5
 outputDir               = out_path
 nEvents                 = -1
