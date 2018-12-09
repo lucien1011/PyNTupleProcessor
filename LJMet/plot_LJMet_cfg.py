@@ -39,13 +39,14 @@ mergeSampleDict = {
 					],
 		}
 
-out_path                = "TestPlot/2018-12-06_muonOnly/"
+out_path                = "/home/lucien/public_html/LJMet/test/2018-12-09_MuonOnly_Run2017/"
 lumi                    = 56.100 #41.298
 nCores                  = 5
 outputDir               = out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + dataSamples
+#componentList           = bkgSamples + dataSamples
+componentList           = dataSamples
 justEndSequence         = False
 
 plots = [
@@ -98,20 +99,20 @@ plots = [
         Plot("AK4HT",        ["TH1D","AK4HT","",25,500.0,3000.0],	LambdaFunc('x: x.AK4HT[0]'),plotSetting=PlotSetting(x_axis_title="AK4 H_{T}")),
         Plot("AK4ST",        ["TH1D","AK4ST","",50,0.0,5000.0],	LambdaFunc('x: x.AK4HTpMETpLepPt[0]'),plotSetting=PlotSetting(x_axis_title="AK4 S_{T}")),
 
-		Plot("SummaryCategory", ["TH1D","SummaryCategory","",10,0.5,10.5],	LambdaFunc('x: x.categoryNumber'), selFunc=LambdaFunc('x: x.region == \"SR\"'), plotSetting=PlotSetting(x_axis_labels=
-			[
-				"0H/0W/0b",
-                "0H/0W/1b",
-                "0H/0W/2b",
-                "0H/0W/3b",
-                "0H/1W/0b",
-                "0H/1W/1b",
-                "0H/1W/2b",
-                "0H/1W/3b",
-                "1H/0W/1b",
-                "2H/0W/1b",
-			],
-			)),
+		#Plot("SummaryCategory", ["TH1D","SummaryCategory","",10,0.5,10.5],	LambdaFunc('x: x.categoryNumber'), selFunc=LambdaFunc('x: x.region == \"SR\"'), plotSetting=PlotSetting(x_axis_labels=
+		#	[
+		#		"0H/0W/0b",
+        #        "0H/0W/1b",
+        #        "0H/0W/2b",
+        #        "0H/0W/3b",
+        #        "0H/1W/0b",
+        #        "0H/1W/1b",
+        #        "0H/1W/2b",
+        #        "0H/1W/3b",
+        #        "1H/0W/1b",
+        #        "2H/0W/1b",
+		#	],
+		#	)),
 		#Plot("SummaryCategory", ["TH1D","SummaryCategory","",10,0.5,10.5],	LambdaFunc('x: x.cateogryNumber'), selFunc=LambdaFunc('x: x.region == \"CR\"')),
         ]
 

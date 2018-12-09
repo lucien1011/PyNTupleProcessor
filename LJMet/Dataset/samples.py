@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
 samples = {
-'Data_SingleElectron': 'SingleElectron_Sep2018',
-'Data_SingleMuon': 'SingleMuon_Sep2018',
+'Data_SingleElectron': 'SingleElectron_Mar2018', # 2017 
+'Data_SingleMuon': 'SingleMuon_Mar2018', # 2017
+#'Data_SingleElectron': 'SingleElectron_Sep2018', # 2018
+#'Data_SingleMuon': 'SingleMuon_Sep2018', # 2018
 
 'TTM700BWBW':'TprimeTprime_M-700_TuneCP5_13TeV-madgraph-pythia8_BWBW',
 'TTM800BWBW':'TprimeTprime_M-800_TuneCP5_13TeV-madgraph-pythia8_BWBW',

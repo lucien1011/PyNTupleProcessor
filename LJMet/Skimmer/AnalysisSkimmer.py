@@ -21,6 +21,6 @@ class AnalysisSkimmer(Module):
 		if event.corr_met_singleLepCalc[0] < 75: return False
 		if event.NJetsAK8_JetSubCalc[0] < 2: return False
 		#if event.minMleppBjet[0] > 3: return False
-		#if not ((event.isElectron[0] == 1 and event.isMuon[0] == 0) or (event.isElectron[0] == 0 and event.isMuon[0] == 1)): return False
-		if not (event.isElectron[0] == 0 and event.isMuon[0] == 1): return False
+		if not ((event.isElectron[0] == 1 and event.isMuon[0] == 0) or (event.isElectron[0] == 0 and event.isMuon[0] == 1)): return False
+		#if not (event.isElectron[0] == 0 and event.isMuon[0] == 1): return False
 		return True

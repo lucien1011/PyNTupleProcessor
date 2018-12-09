@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-targetlumi = 56100. # 1/pb #41298. #56100.
-
 BR={}
 BR['BW'] = 0.5
 BR['TZ'] = 0.25
@@ -345,12 +343,3 @@ xsec['QCDht700'] = 6831. # from https://twiki.cern.ch/twiki/bin/viewauth/CMS/Sum
 xsec['QCDht1000'] = 1207. # from https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#QCD
 xsec['QCDht1500'] = 119.9 # from https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#QCD
 xsec['QCDht2000'] = 25.24 # from https://twiki.cern.ch/twiki/bin/viewauth/CMS/SummaryTable1G25ns#QCD
-
-# Calculate lumi normalization weights
-weight = {}
-for sample in sorted(nRun.keys()):
-	if 'BBM' not in sample and 'TTM' not in sample:
-		#print sample, (xsec[sample]) , (nRun[sample])
-		weight[sample] = (targetlumi*xsec[sample]) / (nRun[sample])
-	else: weight[sample] = (targetlumi*BR[sample[:2]+sample[-4:]]*xsec[sample[:-4]]) / (nRun[sample])
-
