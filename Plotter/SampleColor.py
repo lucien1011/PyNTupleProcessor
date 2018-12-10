@@ -93,4 +93,8 @@ sampleColorDict = {
                 "PredCR": ROOT.kRed,
                 "WFC_Reducible": ROOT.kGreen,
                 "WFC_Irreducible": ROOT.kBlue,
+                
+                # HZZ4l 
+                "WrongFC_Reducible": ROOT.kGreen,
+                "WrongFC_Irreducible": ROOT.kBlue,
 }
