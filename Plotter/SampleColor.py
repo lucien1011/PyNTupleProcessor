@@ -58,10 +58,16 @@ sampleColorDict = {
                 "WW": ROOT.kOrange+8,
                 "Minor": ROOT.kPink+6,
                 "QCD": ROOT.kOrange+4,
+                "TTWW": ROOT.kRed+4,
                 "SMS-T1qqqqL_mGluino1000": ROOT.kRed,
-                "SMS-T1qqqqL_mGluino1500": ROOT.kRed+1,
+                "SMS-T1qqqqL_1000": ROOT.kRed,
+                "SMS-T1qqqqL_1500": ROOT.kRed+1,
+                "SMS-T1qqqqL_2000": ROOT.kRed+2,
+                "SMS-T1qqqqL_2500": ROOT.kRed+3,
                 "SMS-T1tbs_mGluino1000": ROOT.kBlue+2,
                 "SMS-T1tbs_mGluino1500": ROOT.kBlue+3,
+                "SMS-T1tbs_1000": ROOT.kBlue+2,
+                "SMS-T1tbs_1500": ROOT.kBlue+3,
 
                 # Dark Z
                 "ggH": ROOT.kAzure-2,
@@ -71,6 +77,7 @@ sampleColorDict = {
                 "WHminus": ROOT.kSpring+4,
                 "WH": ROOT.kSpring+4,
                 "ZH": ROOT.kSpring+4,
+                "ZPlusX": ROOT.kViolet,
                 "qqZZ": ROOT.kBlue+2,
                 "ggZZ": ROOT.kBlue,
                 "ggZZTo4L": ROOT.kBlue,
@@ -84,4 +91,10 @@ sampleColorDict = {
                 "HZZd_M30": ROOT.kOrange+6,
                 "HZZd_M35": ROOT.kOrange+7,
                 "PredCR": ROOT.kRed,
+                "WFC_Reducible": ROOT.kGreen,
+                "WFC_Irreducible": ROOT.kBlue,
+                
+                # HZZ4l 
+                "WrongFC_Reducible": ROOT.kGreen,
+                "WrongFC_Irreducible": ROOT.kBlue,
 }

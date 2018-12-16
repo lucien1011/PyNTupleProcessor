@@ -5,7 +5,8 @@ class YieldProducer(Module):
         self.name = name
         self.mass_window_list = mass_window_list
         self.systList = systList
-        self.channelNames = ["4mu","4e","2e2mu","comb"]
+        #self.channelNames = ["4mu","4e","2e2mu","comb"]
+        self.channelNames = ["4mu","4e","2e2mu","2mu2e","comb"]
 
     def begin(self):
         for mWindow in self.mass_window_list:
@@ -20,22 +21,29 @@ class YieldProducer(Module):
 
 
     def analyze(self,event):
-        for mWindow in self.mass_window_list:
-            #if mWindow.inWindow(event.Z2.vec.M()):
-            if mWindow.inWindow(event.massZ2[0]):
-                #histName = "_".join([mWindow.makeHistName(),self.dataset.parent.name,"comb",])
-                histName = "_".join([mWindow.makeHistName(),"comb",])
-                self.writer.objs[histName].Fill(0.,event.weight)
-                if event.mass4e[0] > 0.:
-                    #histName = "_".join([mWindow.makeHistName(),self.dataset.parent.name,"4e",])
-                    histName = "_".join([mWindow.makeHistName(),"4e",])
+        for multi_mWindow in self.mass_window_list:
+            for mWindow in multi_mWindow:
+                if not mWindow.selection(event): continue
+                if mWindow.inWindow(event.massZ2[0]):
+                    histName = "_".join([multi_mWindow.makeHistName(),"comb",])
                     self.writer.objs[histName].Fill(0.,event.weight)
-                elif event.mass4mu[0] > 0.:
-                    #histName = "_".join([mWindow.makeHistName(),self.dataset.parent.name,"4mu",])
-                    histName = "_".join([mWindow.makeHistName(),"4mu",])
+                    
+                    channelName = mWindow.name
+
+                    histName = "_".join([multi_mWindow.makeHistName(),channelName,])
                     self.writer.objs[histName].Fill(0.,event.weight)
-                elif event.mass2e2mu[0] > 0.:
-                    #histName = "_".join([mWindow.makeHistName(),self.dataset.parent.name,"2e2mu",])
-                    histName = "_".join([mWindow.makeHistName(),"2e2mu",])
-                    self.writer.objs[histName].Fill(0.,event.weight)
+
+                    for syst in self.systList:
+                        sysHistName = "_".join([multi_mWindow.makeHistName(),"comb",syst.name])
+                        self.writer.objs[sysHistName].Fill(0.,event.weight*syst.factorFunc(event))
+
+                        sysHistName = "_".join([multi_mWindow.makeHistName(),channelName,syst.name])
+                        self.writer.objs[sysHistName].Fill(0.,event.weight*syst.factorFunc(event))
         return True
+
+    def end(self):
+        for syst in self.systList:
+            syst.factorFunc.end()
+        
+        for multi_mWindow in self.mass_window_list:
+            multi_mWindow.end()

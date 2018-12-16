@@ -1,10 +1,11 @@
 class MassWindow(object):
-    def __init__(self,central_value,width):
+    def __init__(self,name,central_value,width,selection=None):
         self.central_value = central_value
         self.width = width
         self.lower = central_value*(1-self.width)
         self.higher = central_value*(1+self.width)
-        self.processList = []
+        self.selection = selection
+        self.name = name
 
     def makeHistName(self):
         return "_".join([str(self.central_value),str(self.width)])
@@ -12,8 +13,23 @@ class MassWindow(object):
     def inWindow(self,value):
         return value > self.lower and value < self.higher
 
-    def getBinName(self):
-        return "window_"+str(self.central_value)+"_"+str(self.width).replace(".","p")
+class MultiMassWindow(object):
+    def __init__(self,name,windowList):
+        self.name = name
+        self.windowList = windowList
 
-    def matchSample(self,sampleName):
-        return str(self.central_value) in sampleName
+    def makeHistName(self):
+        return self.name
+
+    def __len__(self):
+        return len(self.windowList)
+
+    def __getitem__(self,index):
+        if index >= len(self):
+            raise IndexError
+        else:
+            return self.windowList[index] 
+
+    def end(self):
+        for w in self.windowList:
+            w.selection.end()

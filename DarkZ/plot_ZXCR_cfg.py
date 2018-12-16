@@ -13,7 +13,8 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "DataMCDistributions/SkimTree_ZXCR_HIG-16-041Selection_Run2016DataMC_v2/2018-08-23/"
+#out_path = "DataMCDistributions/SkimTree_ZXCR_HIG-16-041Selection_Run2016DataMC_v2/2018-08-23/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_PedjaInput_HIG-16-041/2018-09-24/"
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
@@ -55,7 +56,9 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,predCR]
+#componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,predCR]
+#componentList           = [PedjaData_Run2016,PedjaPredCR]
+componentList           = [PedjaData_Run2016,]
 justEndSequence         = False
 
 for dataset in componentList:
@@ -67,7 +70,7 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = higgs_cr_sequence
+sequence                = higgs_3p1f_sequence
 
 sequence.add(plotter)
 

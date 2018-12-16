@@ -1052,3 +1052,46 @@ double TotalTriggerSF(int lep1_pdgId, double lep1_pt, double lep1_eta, int lep2_
   else return 0.; 
   
 }
+
+double TightLooseTriggerSF(int lep1_pdgId, double lep1_pt, double lep1_eta, int lep2_pdgId, double lep2_pt, double lep2_eta, double HT){
+
+  double fracrunH =  1-27.22/36.46;
+  
+  // Make sure lep 1 is the leading lepton
+  if(lep1_pt<lep2_pt){
+    int buf_pdgId = lep1_pdgId;
+    double buf_pt = lep1_pt;
+    double buf_eta = lep1_eta;
+    lep1_pdgId =  lep2_pdgId;
+    lep1_pt = lep2_pt;
+    lep1_eta = lep2_eta;
+    lep2_pdgId =  buf_pdgId;
+    lep2_pt = buf_pt;
+    lep2_eta = buf_eta;
+    
+  }
+
+
+  if(abs(lep1_pdgId)+ abs(lep2_pdgId) ==22) {//ele-Ele
+    if(HT<300) return Ele23_Ele12_LeadingLeg_SF(lep1_pt,lep1_eta)*Ele23_Ele12_DZLeg(lep1_eta,lep2_eta);
+    else  return DoubleEle8_PFHT300_EleLeg_SF(lep1_pt,lep1_eta); //HT SF is one here. 
+  }
+  else if(abs(lep1_pdgId)+ abs(lep2_pdgId) ==26) {//mu-mu
+    if(HT<300) return  Mu17_Mu8orTkMu8_LeadingLeg_SF(lep1_pt,lep1_eta);
+    //The last factor applies the DZ effcy on the fraction of lumi corresponding to Run H
+    else return DoubleMu8_PFHT300_MuLeg_SF(lep1_pt,lep1_eta);
+  }
+  else if(abs(lep1_pdgId)+ abs(lep2_pdgId) ==24) {//ele-mu
+    if(abs(lep1_pdgId)==11){//leading ele
+      if(HT<300) return Mu8_Ele23_LeadingLeg_SF(lep1_pt,lep1_eta); 
+      else return Mu8Ele8_PFHT300_EleLeg_SF(lep1_pt,lep1_eta);
+    }
+    else{//leading mu
+      if(HT<300) return Mu23_Ele8_TrailingLeg_SF(lep1_pt,lep1_eta);
+      else return Mu8Ele8_PFHT300_MuLeg_SF(lep1_pt,lep1_eta);
+    } 
+  }
+  
+  else return 0.; 
+  
+}

@@ -17,6 +17,7 @@ else:
     fileNames = [ n for n in os.listdir(dir_path) if n.endswith(".root") ]
 
 for fileName in fileNames:
+    if all([pd not in fileName for pd in ["MuonEG","DoubleMuon","DoubleEG",]]): continue
     if "ext" not in fileName:
         sampleName = fileName.replace(".root","")
     else:

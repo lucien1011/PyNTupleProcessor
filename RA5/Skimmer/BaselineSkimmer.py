@@ -1,5 +1,6 @@
 from Core.Module import Module 
 from RA5.LeptonJetRecleaner.Algo import passMllVeto
+from Utils.MiscVar import mtFunc
 
 class BaselineSkimmer(Module):
     def analyze(self,event):
@@ -8,12 +9,6 @@ class BaselineSkimmer(Module):
         if event.htJet40[0] < 80: return False
         if event.nJetRA540[0] < 2: return False
 
-        #nSSLepPlus = 0
-        #nSSLepMinus = 0
-        #for l in event.tightLeps:
-        #    if l.pdgId == 11 or l.pdgId == 13: nSSLepPlus += 1
-        #    if l.pdgId == -11 or l.pdgId == -13: nSSLepMinus += 1
-        #if nSSLepPlus < 2 and nSSLepMinus < 2: return False
         event.firstLep = event.tightLeps[0]
         event.found2nd = False            
         for l in event.tightLeps[1:]:
@@ -23,6 +18,7 @@ class BaselineSkimmer(Module):
         
         if len(event.tightLeps) != 2: return False
         if not event.found2nd: return False
+        event.secondLep = secondLep
         
         if not self.passMllTL(event.looseLeps,event.tightLeps,[0.,12.],[76.,106.]): return False
         
@@ -37,6 +33,9 @@ class BaselineSkimmer(Module):
                 mllList.append(mll)
 
         if min(mllList) < 8.: return False
+
+        mt = min([mtFunc(event.firstLep.pt,event.firstLep.phi,event.met_pt[0],event.met_phi[0]),mtFunc(event.secondLep.pt,event.secondLep.phi,event.met_pt[0],event.met_phi[0]),])
+        event.mtmin = mt
          
         return True
     

@@ -10,7 +10,10 @@ class XSWeighter(Module):
         event.weight = 1.
         if self.dataset.isMC:
             event.weight *= event.genWeight[0]
-            xs = event.xsec[0]
+            if not self.dataset.xs:
+                xs = event.xsec[0]
+            else:
+                xs = self.dataset.xs
             if self.dataset.parent.xsFactor:
                 xs *= self.dataset.parent.xsFactor
             nevts = self.dataset.sumw
