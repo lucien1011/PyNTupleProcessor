@@ -37,7 +37,7 @@ outputDir = "./testPlot/"
 endModuleOutputDir = "/home/kshi/public_html/RA5/1tight_1loose_leptons/"
 lepCats = ["HH","HL","LL"]
 
-nCores = 2
+nCores = 8
 nEvents = -1
 disableProgressBar = False
 justEndSequence = False
@@ -48,8 +48,8 @@ componentList = componentDict.values() + dataComponentDict.values()
 #componentList = skimComponentDict.values() + dataComponentDict.values()
 for dataset in componentList:
     if dataset.isMC:
-        #dataset.lumi = 35.9
-        dataset.lumi = 5.93
+        dataset.lumi = 35.9
+        #dataset.lumi = 5.93
     for component in dataset.componentList:
         component.maxEvents = nEvents
 

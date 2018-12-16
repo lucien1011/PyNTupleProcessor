@@ -5,7 +5,8 @@ from Core.Utils.UFTier2Utils import listdir_uberftp
 import os
 
 #dir_path        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/Sept18_v1/"
-dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_Data/"
+#dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_Data/"
+dir_path        = "/raid/raid7/kshi/SUSY/RA5/SkimTree/data/Sept18_v1_Data/"
 inUFTier2       = False
 treeName        = "tree"
 

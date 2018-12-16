@@ -83,10 +83,10 @@ tightlooseCR_sequence.add(tightlooseCRSkimmer)
 #tightlooseCR_sequence.add(leptonCatProducer)
 #tightlooseCR_sequence.add(llHtSkimmer)
 #tightlooseCR_sequence.add(baselineSkimmer)
-tightlooseCR_sequence.add(hltSkimmer)
+#tightlooseCR_sequence.add(hltSkimmer)
 tightlooseCR_sequence.add(rpvSkimmer)
 tightlooseCR_sequence.add(xsWeighter)
-tightlooseCR_sequence.add(hltWeighter)
+#tightlooseCR_sequence.add(hltWeighter)
 
 
 sync_sequence = Sequence()
