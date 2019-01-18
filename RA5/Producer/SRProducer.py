@@ -14,7 +14,7 @@ class Category(object):
 
 class SRProducer(Module):
     def begin(self):
-        ROOT.gSystem.Load("Library/Binning2016_cxx.so")
+        ROOT.gSystem.Load("Library/BinningRun2Legacy_cxx.so")
 
     def analyze(self,event):
         event.SRCategory = ROOT.signalRegionChargeSplit(
