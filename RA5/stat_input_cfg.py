@@ -27,7 +27,11 @@ elif where == "ihepa":
     #out_path = "RPV/DataMCDistribution/2018-09-19_OnlyMET0To50/"
     #out_path = "RPV/DataMCDistribution/2018-09-19/"
     #out_path = "RPV/StatInput/rpv_binning2016_v1_120fb-1/2018-09-26/"
-    out_path = "RPV/StatInput/rpv_binning2016_v4_150fb-1/2018-10-15/"
+    #out_path = "RPV/StatInput/rpv_binning2016_v4_150fb-1/2018-10-15/"
+    #out_path = "RPV/StatInput/rpv_binning2016_v4_136p3fb-1/2019-01-17/"
+    #out_path = "RPV/StatInput/rpv_binning2016_v3_136p3fb-1/2019-01-17/"
+    #out_path = "RPV/StatInput/rpv_binning2016_v5_136p3fb-1/2019-01-17/"
+    out_path = "RPV/StatInput/rpv_binning2016_v6_136p3fb-1/2019-01-17/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 lepCats = ["HH","HL","LL"]
@@ -41,7 +45,7 @@ verbose = False
 componentList = skimComponentDict.values() + sigComponentDict.values()
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 150.0
+        dataset.lumi = 136.3
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
