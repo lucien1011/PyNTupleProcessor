@@ -3,17 +3,15 @@ from Core.Dataset import Dataset
 
 #bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_ZXCRSelection/"
 #bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_HIG-16-041-ZXCRSelection_v2/"
-bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
-predCRTreeDir   = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180924/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
+bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
+predCRTreeDir   = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
 inUFTier2       = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
 predCR_cmpList = ComponentList(
         [
-            #Component("PredCR","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v5.root","passedEvents",False),
-            #Component("PredCR","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180823/SkimTree_Data80X_HIG-16-041-ZXCRSelectionWithFlag_v3_liteHZZAna/Data_Run2016_noDuplicates_1_FRWeight.root","passedEvents",False),
-            Component("PredCR",predCRTreeDir+"/Data_Run2016_noDuplicates_FRWeightCorrMyFR.root","passedEvents",False),
+            Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightv2.root","passedEvents",False),
         ]
         )
 predCR = Dataset(

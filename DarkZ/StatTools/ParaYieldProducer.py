@@ -7,7 +7,7 @@ class ParaYieldProducer(Module):
         #self.channelNames = ["4mu","4e","2e2mu","comb"]
         #self.channelNames = ["4mu","4e","2e2mu","2mu2e","comb"]
         self.channelNames = ["2mu","2e","comb"]
-        self.binning = [6000,4.,35.]
+        self.binning = [12000,4.,35.]
         self.norm_binning = [6000,0.,1.]
         self.hist_postfix = "-Norm"
 
