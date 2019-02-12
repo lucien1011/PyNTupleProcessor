@@ -64,45 +64,6 @@ justEndSequence         = False
 
 
 muon_plots = [
-        #Plot("LeadingLepton_pt", ["TH1D","LeadingLepton_pt","",20,0.,200.], LambdaFunc('x: max([ x.pTL1[0], x.pTL2[0], x.pTL3[0], x.pTL4[0] ])')),
-        #
-        #Plot("Muon1_Pt", ["TH1D","Muon1_pt","",20,0.,200.], LambdaFunc('x: [x.pTL1[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon2_Pt", ["TH1D","Muon2_pt","",20,0.,100.], LambdaFunc('x: [x.pTL2[0]] if abs(x.idL2[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon3_Pt", ["TH1D","Muon3_pt","",20,0.,100.], LambdaFunc('x: [x.pTL3[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon4_Pt", ["TH1D","Muon4_pt","",20,0.,50.],  LambdaFunc('x: [x.pTL4[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #
-        #Plot("Muon1_Eta", ["TH1D","Muon1_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL1[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon2_Eta", ["TH1D","Muon2_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL2[0]] if abs(x.idL2[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon3_Eta", ["TH1D","Muon3_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL3[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon4_Eta", ["TH1D","Muon4_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL4[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #
-        #Plot("Muon1_Phi", ["TH1D","Muon1_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL1[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon2_Phi", ["TH1D","Muon2_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL2[0]] if abs(x.idL2[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon3_Phi", ["TH1D","Muon3_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL3[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-        #Plot("Muon4_Phi", ["TH1D","Muon4_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL4[0]] if abs(x.idL1[0]) == 13 else []'), isCollection=True),
-
-        #Plot("Electron1_Pt", ["TH1D","Electron1_pt","",20,0.,200.], LambdaFunc('x: [x.pTL1[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron2_Pt", ["TH1D","Electron2_pt","",20,0.,100.], LambdaFunc('x: [x.pTL2[0]] if abs(x.idL2[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron3_Pt", ["TH1D","Electron3_pt","",20,0.,100.], LambdaFunc('x: [x.pTL3[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron4_Pt", ["TH1D","Electron4_pt","",20,0.,50.],  LambdaFunc('x: [x.pTL4[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #
-        #Plot("Electron1_Eta", ["TH1D","Electron1_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL1[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron2_Eta", ["TH1D","Electron2_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL2[0]] if abs(x.idL2[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron3_Eta", ["TH1D","Electron3_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL3[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron4_Eta", ["TH1D","Electron4_eta","",20,-3.,3.], LambdaFunc('x: [x.etaL4[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #
-        #Plot("Electron1_Phi", ["TH1D","Electron1_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL1[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron2_Phi", ["TH1D","Electron2_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL2[0]] if abs(x.idL2[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron3_Phi", ["TH1D","Electron3_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL3[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        #Plot("Electron4_Phi", ["TH1D","Electron4_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL4[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
-        
-        #Plot("DeltaRL12",     ["TH1D","DeltaL12","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL12'),       ),
-        #Plot("DeltaRL13",     ["TH1D","DeltaL13","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL13'),       ),
-        #Plot("DeltaRL14",     ["TH1D","DeltaL14","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL14'),       ),
-        #Plot("DeltaRL23",     ["TH1D","DeltaL23","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL23'),       ),
-        #Plot("DeltaRL24",     ["TH1D","DeltaL24","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL24'),       ),
-        #Plot("DeltaRL34",     ["TH1D","DeltaL34","",]+deltaRPlotRange2,  LambdaFunc('x: x.deltaRL34'),       ),
-        #Plot("MinDeltaRL",     ["TH1D","MinDeltaRL","",]+deltaRPlotRange2,  LambdaFunc('x: x.minDeltaRL'),       ),
         ]
 
 general_plots = [
