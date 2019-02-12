@@ -17,7 +17,7 @@ sumWeightFromT2     = True
 ZPlusX_cmpList = ComponentList(
         [
             Component("ZPlusX",
-                "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190205/SkimTree_HToZdZd_ZX_Run2016Data_m4l70/Data_Run2016_noDuplicates_FRWeight.root",
+                "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_ZX_Run2016Data_m4l70_noZCandRatioCut/Data_Run2016-2l_noDuplicates_FRWeight.root",
                 "passedEvents",False)
         ]
         )
@@ -32,7 +32,7 @@ ZPlusX = Dataset(
 # Data2016
 data2016_cmpList = ComponentList(
         [ 
-            Component("Data2016",dataTreeDir+"Data_Run2016-03Feb2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2016",dataTreeDir+"Data_Run2016-03Feb2017_4l.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -479,7 +479,7 @@ bkgSamples = [
         #ZZZ,
         #WpWpJJ,
         #WWTo2L2Nu,
-        #ZPlusX,
+        ZPlusX,
         ]
 
 sigSamples = [
