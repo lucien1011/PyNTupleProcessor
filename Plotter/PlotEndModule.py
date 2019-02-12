@@ -6,6 +6,11 @@ from SampleColor import sampleColorDict
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
+bkdgErrBarColor = 3004
+#SetLineWidth(1)
+#SetFillColor(kBlack)
+#SetLineColor(kBlack)
+
 class PlotEndModule(EndModule):
     def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False,skipSF=False,customSMCountFunc=None):
         self.outputDir = outputDir
@@ -105,16 +110,16 @@ class PlotEndModule(EndModule):
         for h,sample,_,_ in histList:
             if switch: h.Divide(totalsum)
             stack.Add(h) 
-
+        
         total = stack.GetStack().Last().Clone("total_"+plot.key)
         total.SetFillColor(ROOT.kYellow)
         total.SetLineColor(ROOT.kRed)
-        bkdgErr = stack.GetStack().Last().Clone("totalErr_"+plot.key)
+        bkdgErr = stack.GetStack().Last().Clone("totalErr_"+plot.key)   # grey error bars on Monte Carlo
         bkdgErr.SetMarkerStyle(1)
         bkdgErr.SetLineColor(1)
         bkdgErr.SetLineWidth(3)
         bkdgErr.SetFillColor(13)
-        bkdgErr.SetFillStyle(3001)
+        bkdgErr.SetFillStyle(bkdgErrBarColor)
 
         return histList,stack,smCount,smCountErrSq,total,bkdgErr
 
@@ -240,8 +245,8 @@ class PlotEndModule(EndModule):
             # Draw CMS, lumi and preliminary if specified
             #self.drawLabels(pSetPair[0].lumi)
             bkdgErr.Draw("samee2")
-            c.SaveAs(outputDir+"/"+plot.key+".png")
-            c.SaveAs(outputDir+"/"+plot.key+".pdf")
+            c.SaveAs(outputDir+plot.key+".png")
+            c.SaveAs(outputDir+plot.key+".pdf")
 
             if not switch:
                 c.SetLogy(1)
@@ -257,12 +262,13 @@ class PlotEndModule(EndModule):
                 #self.drawLabels(pSetPair[0].lumi)
                 bkdgErr.Draw("samee2")
 
-                c.SaveAs(outputDir+"/"+plot.key+"_log.png")
-                c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
+                c.SaveAs(outputDir+plot.key+"_log.png")
+                c.SaveAs(outputDir+plot.key+"_log.pdf")
         elif collector.bkgSamples and collector.dataSamples:
             c.SetBottomMargin(0.0)
+            ## TPad("name","title",xlow,ylow,xup,yup)
             upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
-            lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .325)
+            lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .32)
             upperPad.Draw()
             lowerPad.Draw()
             
@@ -275,7 +281,25 @@ class PlotEndModule(EndModule):
             ratio.Draw()
             bkdgErrRatio.Draw("samee2")
 
-            ratio.GetYaxis().SetRangeUser(0.5,1.5)
+
+            ## Set the bounds for the Data/MC ratio plot
+            #maxDataErr = dataHist.GetMaximum()
+            #minDataErr = dataHist.GetMinimum()
+            #maxBkgErr = bkdgErr.GetMaximum()
+            #minBkgErr = bkdgErr.GetMinimum()
+            #maxRatio = maxDataErr/maxBkgErr
+
+            ##print "This is what the dataHist looks like:\n", dataHist
+            #print "This is what dataHist.GetMaximum() looks like:\n", dataHist.GetMaximum()
+            ##print "This is what dataHist.GetMinimum() looks like:\n", dataHist.GetMinimum()
+            ##print "This is what the bkdgErr looks like:\n", bkdgErr
+            #print "This is what bkdgErr.GetMaximum() looks like:\n", bkdgErr.GetMaximum()
+            ##print "This is what bkdgErr.GetMinimum() looks like:\n", bkdgErr.GetMinimum()
+            #print "This is what the maxRatio (maxDataErr/maxBkgErr) looks like:\n", maxRatio
+
+            ## Make this symmetric about 1!
+            ratio.GetYaxis().SetRangeUser(-1,3)
+            #ratio.GetYaxis().SetRangeUser(0.5,1.5)
             #ratio.GetYaxis().SetRangeUser(0.0,2.0)
             ratio.GetYaxis().SetLabelSize(0.075)
             ratio.GetXaxis().SetLabelSize(0.075)
@@ -289,7 +313,7 @@ class PlotEndModule(EndModule):
             bkdgErrRatio.SetMarkerStyle(1)
             bkdgErrRatio.SetLineColor(1)
             bkdgErrRatio.SetFillColor(13)
-            bkdgErrRatio.SetFillStyle(3001)
+            bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
 
             ratio.DrawCopy()
             bkdgErrRatio.DrawCopy("samee2") 
@@ -332,8 +356,8 @@ class PlotEndModule(EndModule):
 
             # c.cd()
             
-            c.SaveAs(outputDir+"/"+plot.key+".png")
-            c.SaveAs(outputDir+"/"+plot.key+".pdf")
+            c.SaveAs(outputDir+plot.key+".png")
+            c.SaveAs(outputDir+plot.key+".pdf")
 
             upperPad.SetLogy(1)
             stack.SetMaximum(maximum*10)
@@ -348,8 +372,8 @@ class PlotEndModule(EndModule):
             bkdgErr.Draw("samee2")
             n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
 
-            c.SaveAs(outputDir+"/"+plot.key+"_log.png")
-            c.SaveAs(outputDir+"/"+plot.key+"_log.pdf")
+            c.SaveAs(outputDir+plot.key+"_log.png")
+            c.SaveAs(outputDir+plot.key+"_log.pdf")
 
         elif collector.signalSamples and not collector.bkgSamples:
 
@@ -360,16 +384,18 @@ class PlotEndModule(EndModule):
             c.SetLogy(0)
 	    # sigHistList looks like: histList.append([h,sample,sigCount])
 	    maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+            #maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
             for hist,sample,sigCount in sigHistList:
 		hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
+		        #hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
                 hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")
             leg.Draw('same')
             # Draw CMS, lumi and preliminary if specified
             #self.drawLabels(pSetPair[0].lumi)
-            c.SaveAs(outputDir+"/"+plot.key+".png")
-            c.SaveAs(outputDir+"/"+plot.key+".pdf")
+            c.SaveAs(outputDir+plot.key+".png")
+            c.SaveAs(outputDir+plot.key+".pdf")
         
         elif collector.dataSamples and not collector.mcSamples:
             dataHist.SetStats(0)
@@ -380,8 +406,8 @@ class PlotEndModule(EndModule):
             n1.SetTextFont(42)
             n1.SetTextSize(0.05);
             n1.DrawLatex(0.11, 0.92, "Data: %s" % (int(dataHist.Integral(0,dataHist.GetNbinsX()+1))))
-            c.SaveAs(outputDir+"/"+plot.key+".png")
-            c.SaveAs(outputDir+"/"+plot.key+".pdf")
+            c.SaveAs(outputDir+plot.key+".png")
+            c.SaveAs(outputDir+plot.key+".pdf")
 
 
     def draw2DPlot(self,collector,plot,outputDir):
@@ -390,12 +416,12 @@ class PlotEndModule(EndModule):
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)
             hist.Draw("colz")
-            c.SaveAs(outputDir+"/"+sample+"_"+plot.key+".png")
-            c.SaveAs(outputDir+"/"+sample+"_"+plot.key+".pdf")
+            c.SaveAs(outputDir+sample+"_"+plot.key+".png")
+            c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)
-        title = "Events / (%.2f GeV)" % (stack.GetXaxis().GetBinWidth(2)) if plot.plotSetting.divideByBinWidth else "Events / GeV "
+        title = "Events / GeV" if plot.plotSetting.divideByBinWidth else "Events / (%.2f GeV)" % (stack.GetXaxis().GetBinWidth(2)) 
         stack.GetYaxis().SetTitle(title)
 
     def makeRatioPlot(self,data,total,bkdgErr):

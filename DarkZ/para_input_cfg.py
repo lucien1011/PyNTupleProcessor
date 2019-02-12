@@ -55,7 +55,7 @@ syst_list = [
 
 
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+outputDir               = "/raid/raid7/rosedj1/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + sigSamples + [data2016]

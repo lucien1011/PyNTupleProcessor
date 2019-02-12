@@ -70,7 +70,8 @@ sampleColorDict = {
                 "SMS-T1tbs_1500": ROOT.kBlue+3,
 
                 # Dark Z
-                "ggH": ROOT.kAzure-2,
+                #"ggH": ROOT.kAzure-2,
+                "ggH": ROOT.kAzure+8,
                 "VBF": ROOT.kSpring+2,
                 "ZH": ROOT.kSpring+2,
                 "WHplus": ROOT.kSpring+4,
@@ -78,9 +79,11 @@ sampleColorDict = {
                 "WH": ROOT.kSpring+4,
                 "ZH": ROOT.kSpring+4,
                 "ZPlusX": ROOT.kViolet,
-                "qqZZ": ROOT.kBlue+2,
+                #"qqZZ": ROOT.kBlue+2,
+                "qqZZ": ROOT.kRed,
                 "ggZZ": ROOT.kBlue,
-                "ggZZTo4L": ROOT.kBlue,
+                #"ggZZTo4L": ROOT.kBlue,
+                "ggZZTo4L": ROOT.kBlue+1,
                 "qqZZTo4L": ROOT.kBlue+2,
                 "HZZd_M4": ROOT.kRed,
                 "HZZd_M7": ROOT.kRed+1,
