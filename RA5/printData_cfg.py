@@ -16,7 +16,7 @@ import os
 from RA5.Dataset.Run2016.Sept18_v1_Data import *
 #from RA5.Dataset.Run2016.Sept18_v1_skim import *
 
-out_path = "RPV/EventList/rpv_binning2016_v6_136p3fb-1/2019-01-17/"
+out_path = "RPV/EventList/rpv_binning2016_v6_136p3fb-1/2019-01-23_v1.0_IncludeOnly2LepInLowMETBin_181019/"
 outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
 endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 

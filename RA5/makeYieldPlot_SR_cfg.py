@@ -17,9 +17,9 @@ from Core.Utils.WhichMachine import where
 
 import os
 
-#from RA5.Dataset.Run2016.Sept18_v1 import *
+from RA5.Dataset.Run2016.Sept18_v1 import *
 from RA5.Dataset.Run2016.Sept18_v1_Data import *
-from RA5.Dataset.Run2016.Sept18_v1_skim import *
+#from RA5.Dataset.Run2016.Sept18_v1_skim import *
 from RA5.Dataset.Run2016.Oct18_v1_SMS import sigComponentList_plot
 
 if where == "hpg":
@@ -27,7 +27,9 @@ if where == "hpg":
     outputDir = out_path
     endModuleOutputDir = out_path 
 elif where == "ihepa":
-    out_path = "SignalRegion/YieldPlot/2018-10-16/"
+    #out_path = "SignalRegion/YieldPlot/2018-10-16/"
+    #out_path = "SignalRegion/YieldPlot/2019-01-18/"
+    out_path = "SignalRegion/YieldPlot/2019-01-23/"
     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
 
@@ -36,7 +38,8 @@ nEvents = -1
 disableProgressBar = False
 justEndSequence = False
 verbose = False
-componentList = skimComponentDict.values() + dataComponentDict.values()
+#componentList = skimComponentDict.values() + dataComponentDict.values()
+componentList = componentDict.values() + dataComponentDict.values()
 for dataset in componentList:
     if dataset.isMC:
         dataset.lumi = 35.9

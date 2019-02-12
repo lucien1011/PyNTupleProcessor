@@ -135,7 +135,10 @@ class PlotEndModule(EndModule):
             self.shiftLastBin(h)
             h.SetLineStyle(9)
             h.SetLineWidth(5)
-            h.SetLineColor(sampleColorDict[sample])
+            if sample in sampleColorDict:
+                h.SetLineColor(sampleColorDict[sample])
+            else:
+                h.SetLineColor(ROOT.kRed)
             h.SetFillColorAlpha(ROOT.kRed,0.)
 	    h.SetStats(0)
             histList.append([h,sample,sigCount])
