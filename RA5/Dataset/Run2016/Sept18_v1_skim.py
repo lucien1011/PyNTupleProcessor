@@ -4,7 +4,7 @@ from RA5.Dataset.Run2016.Sept18_v1 import componentDict
 import os
 
 #dir_path        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/Sept18_v1/"
-dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
+dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim_v1.0_Include3LepInLowMETBin_181019/"
 inUFTier2       = False
 treeName        = "tree"
 rootFileName    = "SkimTree.root"
