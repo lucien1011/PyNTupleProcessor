@@ -4,8 +4,8 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
-from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
+#from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
+#from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
 from Plotter.Plotter import Plotter
@@ -22,7 +22,8 @@ h4lPlotRange = [70,60.,200.]
 out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-12_test_NoRatioCut/"
 lumi                    = 35.9
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+#outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = "/raid/raid7/rosedj1/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [HToZdZd_MZD30,] 
