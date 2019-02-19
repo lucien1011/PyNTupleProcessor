@@ -8,7 +8,7 @@
 ## DATE:    2019-02-13
 
 from ROOT import *
-from Config.Significance import standardSignif, standardSignifErr
+from Config.Significance import *
 from Config.Utils import copyFile, makeDirs
 from Config.tdrStyle import *
 
@@ -17,27 +17,37 @@ import subprocess
 import numpy as np
 import glob
 
+setTDRStyle()
+
 #____________________________________________________________________________________________________
 # Programs for User to run: 1 = run, 0 = don't run
-haddFiles   = 0 # set to 1 if you rebin the background files using a plot_DarkPhoton_SR.py script
-analyzeFiles= 1 
-makePlot    = 1 # also make analyzeFiles = 1
-PRINT       = 1
+HaddFiles   = 0 # set to 1 if you rebin the background files using a plot_DarkPhoton_SR.py script
+AnalyzeFiles= 1 
+DRAW        = 1 # must also make AnalyzeFiles = 1 to make plots
 DEBUG       = 0
 
 #____________________________________________________________________________________________________
 # User's parameters. Look them over and make sure they're appropriate for your work.
-massList        = [30]
-massRatioCuts   = np.arange(0.,0.100,0.001) # steps of 0.1%
+#masslist        = [15]             # Zd mass points you want to run over
+masslist        = [15,30,50,60]             # Zd mass points you want to run over
+massratio_cuts  = np.arange(0.,0.100,0.002) # (start, stop, interval)
+finalstatelist  = ["mass_ratio_4e","mass_ratio_4mu","mass_ratio_2e2mu","mass_ratio_2mu2e"]
+#finalstatelist  = ["mass_ratio_2e2mu"]
+signifFunclist  = ["Standard Signif.","AMS Signif."]
+#signifFunclist  = ["Standard Signif.","AMS Signif.","Punzi Signif."]
+
 # Inputs
 dirToRootFiles  = "/raid/raid7/rosedj1/Higgs/HToZdZd/DarkPhotonSR/DataMCDistributions/2019-02-12_NoRatioCut_SignificanceTesting/"
-#dirToRootFiles  = "/raid/raid7/rosedj1/Higgs/HToZdZd/DarkPhotonSR/DataMCDistributions/2019-02-12_NoRatioCut_TEST3/"
-signalFile      = "HToZdZd_MZD60/DataMCDistribution.root" # LATER CHANGE THIS TO HToZdZd_MZDXX
+signalFile      = "HToZdZd_MZDMASS/DataMCDistribution.root" 
 bkgFile         = "allhaddedbkgs.root"
+
 # Outputs
 haddOutFileName = "allhaddedbkgs.root" 
-outputDir       = "/home/rosedj1/public_html/HToZdZd/SignificancePlots/"
-plotFileName    = "SignificanceVsmassRatioCut_mZd60"
+outputDir       = "/home/rosedj1/public_html/HToZdZd/SignificancePlots/AllKindsOfSignificance/"
+plotFileName    = "SignificanceVsmassRatioCut_mZdMASS_FINALSTATE" # Generic file name format. The `MASS' will become mZd value
+linecolor       = 1 # 1=kBlack
+graphOptions    = "APC"
+#graphOptions    = "ACPZ"
 ROOT.gROOT.SetBatch(kTRUE)  # kTRUE = will NOT draw canvas
 
 #____________________________________________________________________________________________________
@@ -45,93 +55,83 @@ ROOT.gROOT.SetBatch(kTRUE)  # kTRUE = will NOT draw canvas
 haddOutPath     = dirToRootFiles+haddOutFileName
 signalPath      = dirToRootFiles+signalFile
 bkgPath         = dirToRootFiles+bkgFile
+masslist        = [str(i) for i in masslist] # the replace method only accepts strings
 
 #____________________________________________________________________________________________________
 # hadd all bkg files
-if (haddFiles):
-
-    # Delete produced hadded file if it already exists
-    if os.path.exists(haddOutPath): 
-        print "Removing %s" % (haddOutPath)
-        os.remove(haddOutPath)
-    
-    # hadd bkg files
-    bkgfilelist = glob.glob(dirToRootFiles + "[!H]*/DataMCDistribution.root")
-    print "Hadding files..."
-    subprocess.call(['hadd','%s' % haddOutPath] + bkgfilelist)
-    if os.path.exists(haddOutPath): print "Successfully hadded files into %s" % haddOutFileName
+if (HaddFiles): haddFiles(haddOutpath,dirToRootFiles,haddOutFileName)
 
 #____________________________________________________________________________________________________
 # Make plots
-if (analyzeFiles):
+if (AnalyzeFiles):
+    for zdmass in masslist:
 
-    def getIntegralArr(signalFile, massRatioCuts, histo):
-        '''
-        This function can take in a signal file for a given Zd mass or a hadded background file.
-        Returns an array of integral values 
+        tempSignalPath = dirToRootFiles + signalFile.replace("MASS",zdmass)
 
-        signalFile      = HToZdZd signal file
-        massRatioCuts   = array of abs( (Z1-Z2)/(Z1+Z2) ) values
-        histo           = which histogram in signalFile you want to analyze, e.g. mass_ratio_2e2mu
-        '''
-        signalArr   = np.array([])
-        errorArr    = np.array([])
-        integErr    = ROOT.Double(0)
+        for finalstate in finalstatelist:
+            mg = TMultiGraph() # Multigraph allows you to draw multiple TGraphs on same canvas
+            leg = TLegend(0.77,0.78,0.97,0.93)
+            #leg = TLegend(0.7,0.7,0.9,0.9)
+            tmplinecolor = linecolor
 
-        sigfile = TFile.Open( signalFile )
-        sigmassratio = sigfile.Get( histo )
-        totalbins = sigmassratio.GetNbinsX()
-        if (PRINT): print "Found %i bins in file %s" % (totalbins, signalFile)
+            # Load files
+            sigArr, sigErrArr = getIntegralArr(tempSignalPath, massratio_cuts, finalstate)
+            bkgArr, bkgErrArr = getIntegralArr(bkgPath,        massratio_cuts, finalstate)
+            massratio_cutsErr = np.zeros(massratio_cuts.size) # x-axis doesn't have errors?
 
-        for cut in massRatioCuts:
+            c1 = TCanvas()
 
-        # Get integral of signal for different ZmassRatio cuts:
-            # The x-axis goes from 0 to 1. It is the (Z1-Z2)/(Z1+Z2) cut. This is the "ZmassRatio".
-            # The larger this value, the less likely the two Zd's are the same particle.
-            # Therefore the smaller the number of events we should observe.
-            # If our cut is 10%, then we need the Integral from 0 to 0.1 on the x-axis.
-            # Need to identify the corresponding bin at 0.1. 
-            # The integral will act as "number of events" for signal or for background.
+            for signifFunc in signifFunclist:
 
-            # e.g. if you have 8 total bins, and want to cut at 25%, then the finalbin = 2
-            finalbin = int( round( float(totalbins)*cut ))
-            #sigInteg = sigmassratio.Integral(1,finalbin)
-            sigInteg = sigmassratio.IntegralAndError(1,finalbin,integErr) # stores error in third argument
-            signalArr = np.append(signalArr, sigInteg)
-            errorArr = np.append(errorArr, integErr)
-            if (PRINT): 
-                print "Making massRatioCut of %f%%" % (cut*100.)
-                print "Therefore cutting at bin: %i" % finalbin
-                print "%s integral gives: %f" % (signalFile, sigInteg)
-                print "error on the integral: %f" % integErr
+                    # make array of different TGraphs
+                    #for tgraph in tgraphlist:
+                    #for finalstate in finalstatelist:
+                        #graph = makeTGraph(massratio_cuts, signifArr, massratio_cutsErr, signifErrArr, finalstate, zdmass)
+                #sigArr, sigErrArr = getIntegralArr(signalPath, massratio_cuts, finalstate)
+                #bkgArr, bkgErrArr = getIntegralArr(bkgPath,    massratio_cuts, finalstate)
 
-        return signalArr, errorArr
+                # Calculate significance
+                signifArr, signifErrArr = signifdict[signifFunc](sigArr, bkgArr, sigErrArr, bkgErrArr)
+                #signifArr, signifErrArr = standardSignifAndErr(sigArr, bkgArr, sigErrArr, bkgErrArr)
+                if (DEBUG): 
+                    print "Using significance function:",signifFunc
+                    print "sigArr looks like:\n",sigArr
+                    print "bkgArr looks like:\n",bkgArr
+                    print "signifArr looks like:\n",signifArr
+                    print "signifErrArr looks like:\n",signifErrArr
 
-    # Load files
-    sigArr, sigErrArr = getIntegralArr(signalPath, massRatioCuts, "mass_ratio")
-    bkgArr, bkgErrArr = getIntegralArr(bkgPath,    massRatioCuts, "mass_ratio")
+                tg = TGraphErrors(signifArr.size, massratio_cuts, signifArr, massratio_cutsErr, signifErrArr)
+                #mg.AddmakeTGraph(massratio_cuts, signifArr, massratio_cutsErr, signifErrArr, finalstate, zdmass) 
+                tg.SetLineColor(tmplinecolor)
+                tg.SetLineWidth(2)
+                mg.Add(tg)
+                tmplinecolor+=1
+                #tg, legentry = makeTGraph(massratio_cuts, signifArr, massratio_cutsErr, signifErrArr, finalstate, zdmass) 
+                leg.AddEntry(tg,signifFunc,"lp") # l=line, p=point, f=fill
+                #finalstate="ALLfinalstates" # for naming purposes
+            #tg.SetLineColor(1) 
+            #tg.GetXaxis().SetTitle("Mass Ratio Cut, #abs{ Z_{1}-Z_{2}/(Z_{1}+Z_{2} }")
+            #tg.GetYaxis().SetTitle("Significance")
+            #tg.GetYaxis().SetTitle("Significance = #frac{S}{#sqrt{B}}")
+            plottitle   = "SigVsMassRatio, mZd = %s GeV, final state = %s," % (zdmass, finalstate)
+            xtitle      = "Mass Ratio Cut, |(Z_{1}-Z_{2})/(Z_{1}+Z_{2})|" 
+            ytitle      = "Significance"
+            mg.SetTitle(plottitle +";"+ xtitle+";"+ ytitle)
+            mg.Draw(graphOptions)
+            leg.Draw("same")
 
-    # x-axis doesn't have errors?
-    massRatioCutsErr = np.zeros(massRatioCuts.size)
+            tempFileName = plotFileName.replace("MASS",zdmass)
+            tempFileName = tempFileName.replace("FINALSTATE",finalstate)
 
-    # Calculate significance
-    signifArr = standardSignif(sigArr, bkgArr)
-    signifErrArr = standardSignifErr(sigArr, bkgArr, sigErrArr, bkgErrArr)
-    if (PRINT): 
-        print "sigArr looks like:\n",sigArr
-        print "bkgArr looks like:\n",bkgArr
-        print "signifArr looks like:\n",signifArr
-        print "signifErrArr looks like:\n",signifErrArr
+    #            else: 
+    #                tg = TGraphErrors(signifArr.size, massratio_cuts, signifArr, massratio_cutsErr, signifErrArr)
+    #                #tg = TGraph(signifArr.size, massratio_cuts, signifArr)
+    #                                
+    #                tempFileName = plotFileName.replace("MASS",zdmass)
+    #                tempFileName = tempFileName.replace("FINALSTATE",finalstate)
 
-    c1 = TCanvas("c1","c1",800,800)
-    c1.cd()
+            makeDirs(outputDir)
+            copyFile("/home/rosedj1/","index.php",outputDir)
+            c1.SaveAs(outputDir+tempFileName + ".pdf")
+            c1.SaveAs(outputDir+tempFileName + ".png")
 
-    tg = TGraphErrors(signifArr.size, massRatioCuts, signifArr, massRatioCutsErr, signifErrArr)
-    #tg = TGraph(signifArr.size, massRatioCuts, signifArr)
-    tg.Draw("ACP")
-    #setTDRStyle()
-    
-    makeDirs(outputDir)
-    copyFile("/home/rosedj1/","index.php",outputDir)
-    c1.SaveAs(outputDir+plotFileName + ".pdf")
-    c1.SaveAs(outputDir+plotFileName + ".png")
