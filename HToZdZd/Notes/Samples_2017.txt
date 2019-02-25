@@ -1,0 +1,16 @@
+# ____________________________________________________________________________________________________________________ ||
+Data and MC
+
+Skim tree output: /raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2017Data_m4l70_noZCandRatioCut/
+
+From /cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/ and /cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/Data_Run2017/
+
+# ____________________________________________________________________________________________________________________ ||
+Z+X data
+
+Skim tree without FR weight: /raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_ZX_Run2017Data_m4l70_noZCandRatioCut/Data_Run2017-17Nov2017_noDuplicates.root
+Skim tree with FR weight: /raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_ZX_Run2017Data_m4l70_noZCandRatioCut/Data_Run2017-17Nov2017_noDuplicates_FRWeight.root
+
+From /cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/ZPlusX_Early2017_v1/
+
+# ____________________________________________________________________________________________________________________ ||

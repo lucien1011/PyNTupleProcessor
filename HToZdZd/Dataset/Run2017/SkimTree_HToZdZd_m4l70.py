@@ -3,7 +3,8 @@ from Core.Dataset import Dataset
 
 # ____________________________________________________________________________________________________________________________________________ ||
 #HToZdZd_SkimTreeDir        = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190205/SkimTree_HToZdZd_Run2017Data_m4l70/"
-HToZdZd_SkimTreeDir        = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
+#HToZdZd_SkimTreeDir        = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
+HToZdZd_SkimTreeDir        = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
 HToZdZd_SumWeightDir       = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/HToZdZd_Run2017/"
 skimTreeName                = "passedEvents"
 sumWeightHist               = "Ana/sumWeights"
