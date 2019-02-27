@@ -29,6 +29,7 @@ justEndSequence         = cfg.justEndSequence if hasattr(cfg,"justEndSequence") 
 mergeSampleDict         = cfg.mergeSampleDict if hasattr(cfg,"mergeSampleDict") else {}
 verbose                 = cfg.verbose if hasattr(cfg,"verbose") else False
 skipGitDetail           = cfg.skipGitDetail if hasattr(cfg,"skipGitDetail") else False
+eventSelection          = cfg.eventSelection if hasattr(cfg,"eventSelection") else None
 
 if verbose:
     print "Starting"
@@ -56,7 +57,7 @@ if not justEndSequence:
     
     eventLoopRunner = MPEventLoopRunner(communicationChannel)
     eventBuilder    = BEventBuilder()
-    componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo)
+    componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo,selection=eventSelection)
     componentLoop   = ComponentLoop(componentReader)
     
     print "\nBegin Running\n"

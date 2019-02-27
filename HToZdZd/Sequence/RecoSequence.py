@@ -20,6 +20,7 @@ darkPhotonSRSkimmer         = AnalysisSkimmer("DarkPhotonSRSkimmer")
 darkPhotonSBSkimmer         = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-m4lSB")
 darkPhotonFullM4lSkimmer    = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-m4l70")
 #darkPhotonSignifSkimmer     = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-signifmasswindow")
+darkPhoton3P1FSkimmer       = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-3P1F")
 
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(blindSkimmer)
@@ -66,3 +67,10 @@ darkphoton_fullm4l_sequence.add(darkPhotonFullM4lSkimmer) ## Full m4l skimmer
 #darkphoton_signif_masswindow_sequence.add(fakeRateWeighter)
 #darkphoton_signif_masswindow_sequence.add() ## 
 #
+darkphoton_3p1f_sequence = Sequence()
+darkphoton_3p1f_sequence.add(darkPhoton3P1FSkimmer)
+darkphoton_3p1f_sequence.add(xsWeighter)
+darkphoton_3p1f_sequence.add(nloWeighter)
+darkphoton_3p1f_sequence.add(dataMCWeighter)
+darkphoton_3p1f_sequence.add(variableProducer)
+darkphoton_3p1f_sequence.add(fakeRateWeighter)

@@ -3,8 +3,7 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
+from HToZdZd.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
 from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
@@ -19,13 +18,21 @@ mZ2PlotRange = [50,0.,100.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
-out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-02-25_Run2016_NoRatioCut/"
-lumi                    = 35.9
+out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-02-25_Run2017_NoRatioCut/"
+lumi                    = 41.7
 nCores                  = 3
 outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016,] + [HToZdZd_MZD30,] 
+componentList           = bkgSamples + [data2017,] + [HToZdZd_MZD30,] 
+#componentList           = [ZPlusX,] 
+#componentList           = bkgSamples + [
+#componentList           = [
+#                                            HToZdZd_MZD15,
+#                                            HToZdZd_MZD30,
+#                                            HToZdZd_MZD50,
+#                                            HToZdZd_MZD60,
+#                                        ] 
 justEndSequence         = False
 
 
