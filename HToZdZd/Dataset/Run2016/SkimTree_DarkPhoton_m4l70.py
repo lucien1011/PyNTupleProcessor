@@ -498,12 +498,12 @@ bkgSamples = [
         ggZZTo4e,
         ggZZTo4mu,
         ggZZTo4tau,
-        WWW_4F,
-        WWZ,
-        WZZ,
-        ZZZ,
-        WpWpJJ,
-        WWTo2L2Nu,
+        #WWW_4F,
+        #WWZ,
+        #WZZ,
+        #ZZZ,
+        #WpWpJJ,
+        #WWTo2L2Nu,
         ZPlusX, # a special file in a special spot
         ]
 

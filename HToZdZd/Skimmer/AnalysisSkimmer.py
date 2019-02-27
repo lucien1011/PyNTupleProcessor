@@ -1,12 +1,13 @@
 from Core.Module import Module
+from numpy import sqrt
 
 class AnalysisSkimmer(Module):
-    def __init__(self,name,cutflow="DarkPhoton-SR"):
+    def __init__(self,name,cutflow="DarkPhoton-SR",signalmass=30):
         super(AnalysisSkimmer,self).__init__(name)
         self.cutflow = cutflow
 
     def analyze(self,event):
-        ZCandRatioM = (event.massZ1[0]-event.massZ2[0])/(event.massZ1[0]+event.massZ2[0])
+        ZCandRatioM = abs(event.massZ1[0]-event.massZ2[0])/(event.massZ1[0]+event.massZ2[0])
         if self.cutflow == "DarkPhoton-SR":
             if event.mass4l[0] < 118. or event.mass4l[0] > 130.: return False
             #if event.massZ1[0] < 0. or event.massZ1[0] > 60.: return False
@@ -27,6 +28,10 @@ class AnalysisSkimmer(Module):
             if "ZPlusX" not in self.dataset.name:
                 if not event.passedFullSelection[0]: return False
             return True
+        #elif self.cutflow == "DarkPhoton-signifmasswindow":
+        #    # NOTES: make below automatic for the mass point of the signal?
+        #     
+        #    if sqrt(event.massZ1[0]**2 + event.massZ2[0]**2) > mass: return False
         elif self.cutflow == "DarkPhoton-m4l70":
             if event.mass4l[0] < 70.: return False
             if event.massZ1[0] < 0. or event.massZ1[0] > 60.: return False
