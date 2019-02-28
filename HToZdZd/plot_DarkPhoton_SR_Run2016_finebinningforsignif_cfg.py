@@ -5,8 +5,8 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Core.Utils.mkdir_p import mkdir_p,copyFile
 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
 #from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
+from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
 from Plotter.Plotter import Plotter
@@ -28,9 +28,22 @@ outputDir               = "/raid/raid7/rosedj1/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [
+                                HToZdZd_MZD4,
+                                HToZdZd_MZD5,
+                                HToZdZd_MZD6,
+                                HToZdZd_MZD7,
+                                HToZdZd_MZD8,
+                                HToZdZd_MZD9,
+                                HToZdZd_MZD10,
                                 HToZdZd_MZD15, 
+                                HToZdZd_MZD20,
+                                HToZdZd_MZD25,
                                 HToZdZd_MZD30,
+                                HToZdZd_MZD35,
+                                HToZdZd_MZD40,
+                                HToZdZd_MZD45,
                                 HToZdZd_MZD50,
+                                HToZdZd_MZD55,
                                 HToZdZd_MZD60,
                                 ]
 justEndSequence         = False
