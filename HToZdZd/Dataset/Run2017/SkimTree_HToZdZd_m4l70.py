@@ -421,3 +421,22 @@ HToZdZd_MZD60.setSumWeight(
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
+sigSamples2017 = [
+        HToZdZd_MZD4,
+        HToZdZd_MZD5,
+        HToZdZd_MZD6,
+        HToZdZd_MZD7,
+        HToZdZd_MZD8,
+        HToZdZd_MZD9,
+        HToZdZd_MZD10,
+        HToZdZd_MZD15,
+        HToZdZd_MZD20,
+        HToZdZd_MZD25,
+        HToZdZd_MZD30,
+        HToZdZd_MZD35,
+        HToZdZd_MZD40,
+        HToZdZd_MZD45,
+        HToZdZd_MZD50,
+        HToZdZd_MZD55,
+        HToZdZd_MZD60,
+        ]

@@ -14,22 +14,17 @@ from DarkZ.StatTools.Syst import Syst # Stealing from DarkZ
 from HToZdZd.Config.MergeSampleDict import *
 
 #out_path                = "DarkPhotonSR/StatInput/2019-02-18_35p9_RatioCut0p05/"
-out_path                = "DarkPhotonSR/StatInput/2019-02-18_35p9_RatioCut0p02/"
+out_path                = "DarkPhotonSR/StatInput/2019-02-28_35p9_RatioCut0p02/"
 #lumi                    = 136.1
 lumi                    = 35.9
 nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016, 
-        HToZdZd_MZD15,
-        HToZdZd_MZD30,
-        HToZdZd_MZD50,
-        HToZdZd_MZD60,
-        ] 
+componentList           = bkgSamples + [data2016,] + sigSamples2017  
 justEndSequence         = False
-#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
-eventSelection          = LambdaFunc("x: ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.01 and abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13) or ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.01 and abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11) or ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.02 and abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11) or ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.02 and abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13)") 
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
+#eventSelection          = LambdaFunc("x: ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.01 and abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13) or ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.01 and abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11) or ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.02 and abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11) or ((x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.02 and abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13)") 
 
 for dataset in componentList:
     if dataset.isMC:
