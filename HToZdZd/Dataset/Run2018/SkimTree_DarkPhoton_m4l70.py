@@ -15,7 +15,7 @@ sumWeightFromT2     = True
 ZPlusX_cmpList = ComponentList(
         [
             Component("ZPlusX",
-                zxSkimTreeDir+"Data_Run2017-17Nov2017_noDuplicates_FRWeight.root",
+                zxSkimTreeDir+"Data_Run2018_UFHZZNTuple_noDuplicates_FRWeight.root",
                 "passedEvents",False)
         ]
         )
@@ -27,16 +27,16 @@ ZPlusX = Dataset(
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
-# Data2017
-data2017_cmpList = ComponentList(
+# Data2018
+data2018_cmpList = ComponentList(
         [ 
-            Component("Data2018",dataTreeDir+"Data_Run2017-17Nov2017-v1_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2018",dataTreeDir+"Data_Run2018_UFHZZNTuple_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
-data2017 = Dataset(
-        "Data2017",
-        data2017_cmpList,
+data2018 = Dataset(
+        "Data2018",
+        data2018_cmpList,
         isMC                = False,
         )
 

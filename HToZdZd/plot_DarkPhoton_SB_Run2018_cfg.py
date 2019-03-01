@@ -24,7 +24,7 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples #+ [data2018,] + [HToZdZd_MZD30,] 
+componentList           = bkgSamples + [data2018,] #+ [data2018,] + [HToZdZd_MZD30,] 
 justEndSequence         = False
 
 
