@@ -4,6 +4,8 @@ from Core.Dataset import Dataset
 #bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_ZXCRSelection/"
 #bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_HIG-16-041-ZXCRSelection_v2/"
 bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
+#predCRTreeDir   = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180924/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
+predCRTreeDir   = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190115/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
 inUFTier2       = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -11,7 +13,9 @@ inUFTier2       = False
 predCR_cmpList = ComponentList(
         [
             #Component("PredCR","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/Data_Run2016_noDuplicates_FRWeight_v5.root","passedEvents",False),
-            Component("PredCR","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180823/SkimTree_Data80X_HIG-16-041-ZXCRSelectionWithFlag_v3_liteHZZAna/Data_Run2016_noDuplicates_1_FRWeight.root","passedEvents",False),
+            #Component("PredCR","/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180823/SkimTree_Data80X_HIG-16-041-ZXCRSelectionWithFlag_v3_liteHZZAna/Data_Run2016_noDuplicates_1_FRWeight.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"/Data_Run2016_noDuplicates_FRWeightCorrMyFR.root","passedEvents",False),
+            Component("PredCR",predCRTreeDir+"/Data_Run2016-03Feb2017_noDuplicates_FRWeight.root","passedEvents",False),
         ]
         )
 predCR = Dataset(
@@ -34,7 +38,7 @@ DYJetsToLL_M50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M50.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Mar11/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+DYJetsToLL_M50.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Mar11/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M10To50_cmpList = ComponentList(
@@ -48,7 +52,7 @@ DYJetsToLL_M10To50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M10To50.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Mar11/DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+DYJetsToLL_M10To50.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Mar11/DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 TTJets_cmpList = ComponentList(
@@ -62,7 +66,7 @@ TTJets = Dataset(
         isMC = True,
         xs = 87.31, 
         )
-TTJets.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Feb21/TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+TTJets.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Feb21/TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 WZTo3LNu_cmpList = ComponentList(
@@ -76,5 +80,5 @@ WZTo3LNu = Dataset(
         isMC = True,
         xs = 0.04430, 
         )
-WZTo3LNu.setSumWeight("/cms/data/store/user/t2/users/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Feb21/WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+WZTo3LNu.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Feb21/WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
 

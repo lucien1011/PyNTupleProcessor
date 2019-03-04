@@ -14,41 +14,26 @@ from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
 #out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l70_Run2016Data_v1/2018-09-20/"
-out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l108To140_Run2016Data_v1/2018-09-20/"
+out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l118To130_Run2016Data_v1/2018-10-24/"
 
 mZ1PlotRange = [40,40.,120.]
-#mZ2PlotRange = [30,0.,60.]
-mZ2PlotRange = [60,0.,120.]
+mZ2PlotRange = [30,0.,60.]
+#mZ2PlotRange = [60,0.,120.]
 #h4lPlotRange = [110,60.,500.]
 h4lPlotRange = [40,100.,140.]
 general_plots = []
-for eachCR in ["3p1f","2p2f","sr",]:
+for eachCR in ["3p1f","2p2f",]:
     if eachCR == "3p1f":
         region_sel_str = "x.nZXCRFailedLeptons[0] == 1"
         region_sel_str_whole = "x: x.nZXCRFailedLeptons[0] == 1"
     elif eachCR == "2p2f":
         region_sel_str = "x.nZXCRFailedLeptons[0] == 2"
         region_sel_str_whole = "x: x.nZXCRFailedLeptons[0] == 2"
-    else:
-        region_sel_str = "x.nZXCRFailedLeptons[0] == 0"
-        region_sel_str_whole = "x: x.nZXCRFailedLeptons[0] == 0"
-
 
     general_plots.extend([
         Plot("Z1_mass_"+eachCR,         ["TH1D","Z1_mass_"+eachCR,"",]+mZ1PlotRange,        LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc(region_sel_str_whole)      ),
-        Plot("Z2_mass_"+eachCR,         ["TH1D","Z2_mass_"+eachCR,"",]+mZ2PlotRange,        LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc(region_sel_str_whole)      ),
-        Plot("Z1_4e_mass_"+eachCR,      ["TH1D","Z1_4e_mass_"+eachCR,"",]+mZ1PlotRange,     LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x: x.mass4e[0] > 0 and '+region_sel_str)          ),
-        Plot("Z2_4e_mass_"+eachCR,      ["TH1D","Z2_4e_mass_"+eachCR,"",]+mZ2PlotRange,     LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc('x: x.mass4e[0] > 0 and '+region_sel_str)          ),
-        Plot("Z1_4mu_mass_"+eachCR,     ["TH1D","Z1_4mu_mass_"+eachCR,"",]+mZ1PlotRange,    LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x: x.mass4mu[0] > 0 and '+region_sel_str)         ),
-        Plot("Z2_4mu_mass_"+eachCR,     ["TH1D","Z2_4mu_mass_"+eachCR,"",]+mZ2PlotRange,    LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc('x: x.mass4mu[0] > 0 and '+region_sel_str)         ),
-        Plot("Z1_2e2mu_mass_"+eachCR,   ["TH1D","Z1_2e2mu_mass_"+eachCR,"",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and '+region_sel_str)       ),
-        Plot("Z2_2e2mu_mass_"+eachCR,   ["TH1D","Z2_2e2mu_mass_"+eachCR,"",]+mZ2PlotRange,  LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and '+region_sel_str)       ),
-              
-        Plot("h4L_mass_"+eachCR,        ["TH1D","h4L_mass_"+eachCR,"",]+h4lPlotRange,       LambdaFunc('x: x.mass4l[0]'),       selFunc=LambdaFunc(region_sel_str_whole)                                  ),
-        Plot("h4e_mass_"+eachCR,        ["TH1D","h4e_mass_"+eachCR,"",]+h4lPlotRange,       LambdaFunc('x: x.mass4e[0]'),       selFunc=LambdaFunc('x: x.mass4e[0] > 0 and '+region_sel_str)        ),
-        Plot("h4mu_mass_"+eachCR,       ["TH1D","h4mu_mass_"+eachCR,"",]+h4lPlotRange,      LambdaFunc('x: x.mass4mu[0]'),      selFunc=LambdaFunc('x: x.mass4mu[0] > 0 and '+region_sel_str)       ),
-        Plot("h2e2mu_mass_"+eachCR,     ["TH1D","h2mu2e_mass_"+eachCR,"",]+h4lPlotRange,    LambdaFunc('x: x.mass2e2mu[0]'),    selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and '+region_sel_str)     ),
-        
+        Plot("Z2_mass_"+eachCR,         ["TH1D","Z2_mass_"+eachCR,"",]+mZ2PlotRange,        LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc(region_sel_str_whole)      ), 
+        Plot("h4L_mass_"+eachCR,        ["TH1D","h4L_mass_"+eachCR,"",]+h4lPlotRange,       LambdaFunc('x: x.mass4l[0]'),       selFunc=LambdaFunc(region_sel_str_whole)      ), 
         Plot("met_"+eachCR,             ["TH1D","met_"+eachCR,"",40,0.,200.],               LambdaFunc('x: x.met[0]'),          selFunc=LambdaFunc(region_sel_str_whole),     ),
         Plot("nVtx_"+eachCR,            ["TH1D","nVtx_"+eachCR,"",30,0.0,60.0],             LambdaFunc('x: x.nVtx[0]'),         selFunc=LambdaFunc(region_sel_str_whole),     ),
         ])

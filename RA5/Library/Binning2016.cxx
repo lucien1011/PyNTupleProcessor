@@ -15,6 +15,50 @@ TString leptonCategory(int id1, int id2, float lep1pt, float lep2pt) {
   return "";
 };
 
+int rpv_binning_v5(int njets, int nbtags, float met, float ht, float mt_min, int id1, int id2) {
+    if (ht >= 1125) {
+        if(ht < 1300) {
+            if (njets<5) {
+                return 8;
+            } else if ((njets==5 || njets==6)) {
+                return 9;
+            } else {
+                return 10;
+            };
+        } else if (ht < 1600) {
+            if (njets<5) {
+                return 11;
+            } else if ((njets==5 || njets==6)) {
+                return 12;
+            } else {
+                return 13;
+            };
+        } else {
+            if (njets<5) {
+                return 14;
+            } else if ((njets==5 || njets==6)) {
+                return 15;
+            } else {
+                return 16;
+            };
+        };
+    } else if (ht >= 300 && ht < 1125) {
+        if (nbtags==0) {
+            if ((njets<=4)) return 1;
+            if ((njets>4)) return 2;
+        } else if (nbtags==1) {
+            if ((njets<=4)) return 3;
+            if ((njets>4)) return 4;
+        } else if (nbtags==2) {
+            if ((njets<=4)) return 5;
+            if ((njets>4)) return 6;
+        } else if (nbtags>=3) {
+            return 7;
+        };
+    };
+    return -1;
+}
+
 int rpv_binning_v4(int njets, int nbtags, float met, float ht, float mt_min, int id1, int id2) {
     if (ht >= 1125) {
         if(ht < 1300) {

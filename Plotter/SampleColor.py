@@ -77,6 +77,7 @@ sampleColorDict = {
                 "WHminus": ROOT.kSpring+4,
                 "WH": ROOT.kSpring+4,
                 "ZH": ROOT.kSpring+4,
+                "ZPlusX": ROOT.kViolet,
                 "qqZZ": ROOT.kBlue+2,
                 "ggZZ": ROOT.kBlue,
                 "ggZZTo4L": ROOT.kBlue,
@@ -89,5 +90,16 @@ sampleColorDict = {
                 "HZZd_M25": ROOT.kOrange+5,
                 "HZZd_M30": ROOT.kOrange+6,
                 "HZZd_M35": ROOT.kOrange+7,
+                "DarkSUSY_mH_125_mN1_10_mGammaD_8p5_cT_0": ROOT.kRed,
+                "HToZdZd_MZD15": ROOT.kOrange+4,
+                "HToZdZd_MZD30": ROOT.kOrange+5,
+                "HToZdZd_MZD50": ROOT.kOrange+6,
+                "HToZdZd_MZD60": ROOT.kOrange+7,
                 "PredCR": ROOT.kRed,
+                "WFC_Reducible": ROOT.kGreen,
+                "WFC_Irreducible": ROOT.kBlue,
+                
+                # HZZ4l 
+                "WrongFC_Reducible": ROOT.kGreen,
+                "WrongFC_Irreducible": ROOT.kBlue,
 }

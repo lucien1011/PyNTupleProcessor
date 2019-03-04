@@ -7,11 +7,13 @@ from SampleColor import sampleColorDict
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 class PlotEndModule(EndModule):
-    def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False):
+    def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False,skipSF=False,customSMCountFunc=None):
         self.outputDir = outputDir
         self.plots = plots
         self.switch = ratio_switch
         self.scaleToData = scaleToData
+        self.skipSF = skipSF
+        self.customSMCountFunc = customSMCountFunc
 
     def __call__(self,collector):
         for plot in self.plots:
@@ -25,11 +27,6 @@ class PlotEndModule(EndModule):
             self.draw2DPlot(collector,plot,outputDir)
         else:
             print "Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment"
-
-    @staticmethod
-    def makedirs(outputDir):
-        if not os.path.exists(os.path.abspath(outputDir)):
-            os.makedirs(os.path.abspath(outputDir))
 
     def sortHistList(self,histList):
         histList.sort(key=lambda l: l[2], reverse=False)
@@ -133,7 +130,10 @@ class PlotEndModule(EndModule):
             self.shiftLastBin(h)
             h.SetLineStyle(9)
             h.SetLineWidth(5)
-            h.SetLineColor(sampleColorDict[sample])
+            if sample in sampleColorDict:
+                h.SetLineColor(sampleColorDict[sample])
+            else:
+                h.SetLineColor(ROOT.kRed)
             h.SetFillColorAlpha(ROOT.kRed,0.)
 	    h.SetStats(0)
             histList.append([h,sample,sigCount])
@@ -208,7 +208,10 @@ class PlotEndModule(EndModule):
         if collector.bkgSamples:
             histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch,histToScale=dataHist if self.scaleToData else None)
             stack.SetTitle("")
-            # stack.GetYaxis().SetTitleSize(0.05)
+            if self.customSMCountFunc:
+                customSMCount = self.customSMCountFunc(collector,plot)
+            else:
+                customSMCount = None
 
         if collector.signalSamples:
             sigHistList = self.makeSignalHist(collector,plot)
@@ -326,7 +329,8 @@ class PlotEndModule(EndModule):
             n1.SetNDC()
             n1.SetTextFont(42)
             n1.SetTextSize(0.05);
-            n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+            if not self.skipSF:
+                n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
 
             dataHist.DrawCopy('samep')
             bkdgErr.Draw("samee2")
@@ -387,7 +391,7 @@ class PlotEndModule(EndModule):
 
     def draw2DPlot(self,collector,plot,outputDir):
         c = ROOT.TCanvas()
-        for isample,sample in enumerate(collector.samples):
+        for isample,sample in enumerate(collector.samples+collector.mergeSamples):
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)
             hist.Draw("colz")

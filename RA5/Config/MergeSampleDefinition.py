@@ -31,7 +31,7 @@ mergeSampleDict = {
         "WW":           ["WWTo2L2Nu",],
         "ttVorH":       ["TTHnobb_pow","TTZToLLNuNu","TTZToLLNuNu_m1to10"],
         "ttW":          ["TTWToLNu"],
-        "gamma+X":      ["WGToLNuG","TGJets","TTGJets","ZGTo2LG","WGToLNuG",],
+        "gamma+X":      ["WGToLNuG","TGJets","TTGJets","ZGTo2LG",],
         "Triboson":     ["WWW","WWZ","WZZ","ZZZ"],
         "SingleTop":    ["tWll",],
         "Minor":        [
