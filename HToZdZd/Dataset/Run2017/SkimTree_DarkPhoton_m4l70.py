@@ -60,8 +60,6 @@ if sumWeightFromT2:
         sumWeightHist,
         True,
         )
-else:
-    qqZZTo4L.sumw = 6669988.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggH
@@ -84,8 +82,6 @@ if sumWeightFromT2:
         sumWeightHist,
         True,
         )
-else:
-    ggH.sumw = 999800.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # VBF
@@ -107,8 +103,6 @@ if sumWeightFromT2:
         sumWeightHist,
         True,
         )
-else:
-    VBF.sumw = 499312.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # WHplus
@@ -130,8 +124,6 @@ if sumWeightFromT2:
         sumWeightHist,
         True,
         )
-else:
-    WHplus.sumw = 279824.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # WHminus
@@ -153,8 +145,6 @@ if sumWeightFromT2:
         sumWeightHist,
         True,
         )
-else:
-    WHminus.sumw = 186036.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ZH
@@ -176,8 +166,6 @@ if sumWeightFromT2:
         sumWeightHist,
         True,
         )
-else:
-    ZH.sumw = 470416.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4tau
@@ -197,8 +185,6 @@ if sumWeightFromT2:
     ggZZTo4tau.setSumWeight(
             bkgTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.root",
             sumWeightHist,True)
-else:
-    ggZZTo4tau.sumw = 495800.000000
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4e
@@ -218,8 +204,6 @@ if sumWeightFromT2:
     ggZZTo4e.setSumWeight(
             bkgTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.root",
             sumWeightHist,True)
-else:
-    ggZZTo4e.sumw = 965000.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4mu
@@ -237,8 +221,6 @@ ggZZTo4mu = Dataset(
         )
 if sumWeightFromT2:
     ggZZTo4mu.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo4mu.sumw = 995200.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2mu2tau
@@ -256,8 +238,6 @@ ggZZTo2mu2tau = Dataset(
         )
 if sumWeightFromT2:
     ggZZTo2mu2tau.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo2mu2tau.sumw = 499800.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2mu
@@ -275,8 +255,6 @@ ggZZTo2e2mu = Dataset(
         )
 if sumWeightFromT2:
     ggZZTo2e2mu.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo2e2mu.sumw = 1386000.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2tau
@@ -294,8 +272,6 @@ ggZZTo2e2tau = Dataset(
         )
 if sumWeightFromT2:
     ggZZTo2e2tau.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo2e2tau.sumw = 500000.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ____________________________________________________________________________________________________________________________________________ ||
