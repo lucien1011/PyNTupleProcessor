@@ -7,9 +7,6 @@ from SampleColor import sampleColorDict
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 bkdgErrBarColor = 3004
-#SetLineWidth(1)
-#SetFillColor(kBlack)
-#SetLineColor(kBlack)
 
 class PlotEndModule(EndModule):
     def __init__(self,outputDir,plots,ratio_switch=False,scaleToData=False,skipSF=False,customSMCountFunc=None):
@@ -110,7 +107,6 @@ class PlotEndModule(EndModule):
         for h,sample,_,_ in histList:
             if switch: h.Divide(totalsum)
             stack.Add(h) 
-        
         total = stack.GetStack().Last().Clone("total_"+plot.key)
         total.SetFillColor(ROOT.kYellow)
         total.SetLineColor(ROOT.kRed)
@@ -283,27 +279,7 @@ class PlotEndModule(EndModule):
             ratio.SetStats(0)
             ratio.Draw()
             bkdgErrRatio.Draw("samee2")
-
-
-            ## Set the bounds for the Data/MC ratio plot
-            #maxDataErr = dataHist.GetMaximum()
-            #minDataErr = dataHist.GetMinimum()
-            #maxBkgErr = bkdgErr.GetMaximum()
-            #minBkgErr = bkdgErr.GetMinimum()
-            #maxRatio = maxDataErr/maxBkgErr
-
-            ##print "This is what the dataHist looks like:\n", dataHist
-            #print "This is what dataHist.GetMaximum() looks like:\n", dataHist.GetMaximum()
-            ##print "This is what dataHist.GetMinimum() looks like:\n", dataHist.GetMinimum()
-            ##print "This is what the bkdgErr looks like:\n", bkdgErr
-            #print "This is what bkdgErr.GetMaximum() looks like:\n", bkdgErr.GetMaximum()
-            ##print "This is what bkdgErr.GetMinimum() looks like:\n", bkdgErr.GetMinimum()
-            #print "This is what the maxRatio (maxDataErr/maxBkgErr) looks like:\n", maxRatio
-
-            ## Make this symmetric about 1!
-            ratio.GetYaxis().SetRangeUser(-1,3)
-            #ratio.GetYaxis().SetRangeUser(0.5,1.5)
-            #ratio.GetYaxis().SetRangeUser(0.0,2.0)
+            ratio.GetYaxis().SetRangeUser(-0.2,2.2) # Make this symmetric about 1
             ratio.GetYaxis().SetLabelSize(0.075)
             ratio.GetXaxis().SetLabelSize(0.075)
             ratio.GetYaxis().SetTitle("Data/MC")
@@ -314,8 +290,9 @@ class PlotEndModule(EndModule):
             ratio.GetXaxis().SetTitle(axisLabel)
 
             bkdgErrRatio.SetMarkerStyle(1)
+            bkdgErrRatio.SetLineWidth(1)
             bkdgErrRatio.SetLineColor(1)
-            bkdgErrRatio.SetFillColor(13)
+            bkdgErrRatio.SetFillColor(1)
             bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
 
             ratio.DrawCopy()
@@ -386,11 +363,9 @@ class PlotEndModule(EndModule):
  
             c.SetLogy(0)
 	    # sigHistList looks like: histList.append([h,sample,sigCount])
-	    maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
-            #maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+	        maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
             for hist,sample,sigCount in sigHistList:
-		hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
-		        #hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
+		        hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
                 hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")
@@ -414,7 +389,7 @@ class PlotEndModule(EndModule):
 
 
     def draw2DPlot(self,collector,plot,outputDir):
-        c = ROOT.TCanvas()
+        c = ROOT.TCanvas("c_"+plot.key, "c_"+plot.key,0,0, 650, 650)
         for isample,sample in enumerate(collector.samples+collector.mergeSamples):
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)

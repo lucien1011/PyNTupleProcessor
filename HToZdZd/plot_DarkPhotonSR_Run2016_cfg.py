@@ -42,11 +42,13 @@ h4lPlotRange = [50,95.,195.]
 #h4lPlotRange = [140,60.,200.]
 
 phpFile                 = 'index.php'
+User                    = os.environ['USER']
+print User
 out_path                = "DarkPhotonSB/DataMCDistributions/20190130_Run2016_mZdTEST6/"
 lumi                    = 35.9
 nCores                  = 5
 #outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
-outputDir               = "/raid/raid7/rosedj1/Higgs/HToZdZd/"+out_path
+outputDir               = "/raid/raid7/"+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2016] 
@@ -154,8 +156,8 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence) # compiles the histograms!
 #endModuleOutputDir = "/home/lucien/public_html/Higgs/HToZdZd/"+out_path
-endModuleOutputDir = "/home/rosedj1/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = "/home/"+User+"/public_html/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
 
 ## Put an index.php file into Plots dir for easy visualization
-copyFile('/home/rosedj1/','index.php',endModuleOutputDir)
+copyFile('/home/'+User+'/','index.php',endModuleOutputDir)

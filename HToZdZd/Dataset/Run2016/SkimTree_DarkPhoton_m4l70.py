@@ -1,32 +1,11 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-#bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181214/SkimTree_HToZdZd_Run2016Data_m4l70/" 
-
-# __________________________________________________________________________________________________________________________________________
 # MC Bkg samples produced from DarkZLiteAnalyzer
-#bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/" 
-#bkgSkimTreeDir      = "/raid/raid7/rosedj1/Higgs/DarkZ-NTuple/20181214/SkimTree_HToZdZd_Run2016_mZd15to60_MC/"  
-#bkgSkimTreeDir      = "/raid/raid7/rosedj1/Higgs/DarkZ-NTuple/20181214/SkimTree_HToZdZd_Run2016_MC_mZd4to60/"   
-
-# Contains 6 BIG VBSVVV files, used only for setSumWeight
-=======
-#bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190205/SkimTree_HToZdZd_Run2016Data_m4l70/"
-#bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/" # newest nomassratiocut!
-
-# Used for setSumweight
-bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run2016/"
-
-# Only used if SumWeightFromT2 == True
-bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
-#bkgTreeDir          = "/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_4lskim_M17_Feb21/" # DELETED!  
-
-# Skimmed DATA using DarkZLiteAnalyzer
-dataTreeDir         = bkgSkimTreeDir
-#dataTreeDir         = "/raid/raid7/rosedj1/Higgs/DarkZ-NTuple/20181214/SkimTree_HToZdZd_Run2016_mZd15to60_Data/"    
-#dataTreeDir         = "/raid/raid7/rosedj1/Higgs/DarkZ-NTuple/20181214/SkimTree_HToZdZd_Run2016MC_mZdTEST/"
-
+bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/" 
+bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run2016/" # Used for setSumweight
+bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/" # Only used if SumWeightFromT2 == True
+dataTreeDir         = bkgSkimTreeDir # Skimmed DATA using DarkZLiteAnalyzer
 sigSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181019/SkimTree_DarkPhoton_Run2017Sig_m4l70/"    # Currently not used below
 sigTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/SigMC_Run2016_v1/"                 # Currently not used below
 # ____________________________________________________________________________________________________________________________________________
@@ -34,7 +13,7 @@ sigTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/Sig
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 xsBoost             = 100
-epsilon             = 0.05
+epsilon             = 0.02 # not used below!
 sumWeightFromT2     = True
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -59,11 +38,6 @@ ZPlusX = Dataset(
 data2016_cmpList = ComponentList(
         [ 
             Component("Data2016",dataTreeDir+"Data_Run2016-03Feb2017_4l.root","passedEvents",inUFTier2=inUFTier2),
-            #Component("Data2016",dataTreeDir+"Data_Run2016-03Feb2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
-            #Component("Data2016",dataTreeDir+"Data_Run2016-03Feb2017_4l_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
-            #Component("Data2016",
-                      #"/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181214/SkimTree_HToZdZd_Run2016Data_m4l70/Data_Run2016-03Feb2017_4l_noDuplicates.root",
-                      #"passedEvents",inUFTier2=inUFTier2),
         ]
         )
 

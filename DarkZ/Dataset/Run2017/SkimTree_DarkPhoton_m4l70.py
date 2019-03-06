@@ -14,8 +14,7 @@ sumWeightFromT2     = True
 # Z+X
 ZPlusX_cmpList = ComponentList(
         [
-            #Component("ZPlusX",zxSkimTreeDir+"Data_Run2017-17Nov2017_noDuplicates_FRWeight.root","passedEvents",False)
-            Component("ZPlusX",zxSkimTreeDir+"Data_Run2017-17Nov2017_noDuplicates.root","passedEvents",False)
+            Component("ZPlusX",zxSkimTreeDir+"Data_Run2017-17Nov2017_noDuplicates_FRWeight.root","passedEvents",False)
         ]
         )
 ZPlusX = Dataset(
@@ -300,17 +299,17 @@ else:
 # ____________________________________________________________________________________________________________________________________________ ||
 # ____________________________________________________________________________________________________________________________________________ ||
 bkgSamples = [
-        #ggH,
-        #VBF,
-        #WHplus,
-        #WHminus,
-        #ZH,
-        #qqZZTo4L,
-        #ggZZTo2e2mu,
-        #ggZZTo2e2tau,
-        #ggZZTo2mu2tau,
-        #ggZZTo4e,
-        #ggZZTo4mu,
-        #ggZZTo4tau,
+        ggH,
+        VBF,
+        WHplus,
+        WHminus,
+        ZH,
+        qqZZTo4L,
+        ggZZTo2e2mu,
+        ggZZTo2e2tau,
+        ggZZTo2mu2tau,
+        ggZZTo4e,
+        ggZZTo4mu,
+        ggZZTo4tau,
         ZPlusX,
         ]

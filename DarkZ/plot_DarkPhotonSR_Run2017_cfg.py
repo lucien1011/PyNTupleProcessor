@@ -35,12 +35,13 @@ deltaRPlotRange2 = [20,0.,2.]
 deltaRPlotRange = [40,0.,4.]
 
 out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
+User                    = os.environ['USER']
 lumi                    = 41.4
-nCores                  = 1
-outputDir               = "/raid/raid7/rosedj1/DarkZ/"+out_path
+nCores                  = 5
+outputDir               = "/raid/raid7/"+User+"/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples #+ [data2017] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
+componentList           = bkgSamples + [data2017] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
 justEndSequence         = False
 
 
@@ -142,5 +143,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/rosedj1/public_html/DarkZ/"+out_path
+endModuleOutputDir = "/home/"+User+"/public_html/DarkZ/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))

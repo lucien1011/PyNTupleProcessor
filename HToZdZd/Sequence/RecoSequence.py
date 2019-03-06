@@ -9,6 +9,8 @@ from DarkZ.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
+#____________________________________________________________________________________________________
+# Define Skimmers
 blindSkimmer                = BlindSkimmer("BlindSkimmer")
 xsWeighter                  = XSWeighter("XSWeighter")
 nloWeighter                 = NLOWeighter("NLOWeighter")
@@ -19,9 +21,10 @@ fakeRateWeighter            = FakeRateWeighter("FakeRateWeighter")
 darkPhotonSRSkimmer         = AnalysisSkimmer("DarkPhotonSRSkimmer")
 darkPhotonSBSkimmer         = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-m4lSB")
 darkPhotonFullM4lSkimmer    = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-m4l70")
-#darkPhotonSignifSkimmer     = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-signifmasswindow")
 darkPhoton3P1FSkimmer       = AnalysisSkimmer("DarkPhotonSRSkimmer",cutflow="DarkPhoton-3P1F")
 
+#____________________________________________________________________________________________________
+# Make Sequences
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(blindSkimmer)
 darkphoton_signal_sequence.add(xsWeighter)
@@ -57,20 +60,10 @@ darkphoton_fullm4l_sequence.add(variableProducer)
 darkphoton_fullm4l_sequence.add(fakeRateWeighter)
 darkphoton_fullm4l_sequence.add(darkPhotonFullM4lSkimmer) ## Full m4l skimmer
 
-# Perhaps make a significance skimmer?
-#darkphoton_signif_masswindow_sequence = Sequence()
-#darkphoton_signif_masswindow_sequence.add(blindSkimmer)
-#darkphoton_signif_masswindow_sequence.add(xsWeighter)
-#darkphoton_signif_masswindow_sequence.add(nloWeighter)
-#darkphoton_signif_masswindow_sequence.add(dataMCWeighter)
-#darkphoton_signif_masswindow_sequence.add(variableProducer)
-#darkphoton_signif_masswindow_sequence.add(fakeRateWeighter)
-#darkphoton_signif_masswindow_sequence.add() ## 
-#
 darkphoton_3p1f_sequence = Sequence()
-darkphoton_3p1f_sequence.add(darkPhoton3P1FSkimmer)
 darkphoton_3p1f_sequence.add(xsWeighter)
 darkphoton_3p1f_sequence.add(nloWeighter)
 darkphoton_3p1f_sequence.add(dataMCWeighter)
 darkphoton_3p1f_sequence.add(variableProducer)
 darkphoton_3p1f_sequence.add(fakeRateWeighter)
+darkphoton_3p1f_sequence.add(darkPhoton3P1FSkimmer) ## Full m4l skimmer
