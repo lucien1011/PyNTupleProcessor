@@ -358,14 +358,14 @@ class PlotEndModule(EndModule):
         elif collector.signalSamples and not collector.bkgSamples:
 
             sigHistList = self.makeSignalHist(collector,plot)
-
+            
             leg = self.makeLegend([],None,0.,False,histListSignal=sigHistList)
- 
+            
             c.SetLogy(0)
-	    # sigHistList looks like: histList.append([h,sample,sigCount])
-	        maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+            #sigHistList looks like: histList.append([h,sample,sigCount])
+            maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
             for hist,sample,sigCount in sigHistList:
-		        hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
+                hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
                 hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")
@@ -374,7 +374,7 @@ class PlotEndModule(EndModule):
             #self.drawLabels(pSetPair[0].lumi)
             c.SaveAs(outputDir+plot.key+".png")
             c.SaveAs(outputDir+plot.key+".pdf")
-        
+
         elif collector.dataSamples and not collector.mcSamples:
             dataHist.SetStats(0)
             dataHist.GetXaxis().SetTitle(axisLabel)
