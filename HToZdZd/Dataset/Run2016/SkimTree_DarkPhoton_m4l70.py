@@ -3,8 +3,11 @@ from Core.Dataset import Dataset
 
 #bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190205/SkimTree_HToZdZd_Run2016Data_m4l70/"
 #bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
+#bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
+bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190304/SkimTree_HToZdZd_Run2016Data_0p5To62p5_m4l70_noZCandRatioCut/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
+bkgTreeDirFeb02     = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2l_Feb21/"
+bkgTreeDirAug10     = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2lskim_Aug10/"
 bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run2016/"
 dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = False
@@ -42,6 +45,34 @@ data2016 = Dataset(
         data2016_cmpList,
         isMC                = False,
         )
+
+# ____________________________________________________________________________________________________________________________________________ ||
+DYJetsToLL_M50_cmpList = ComponentList(
+        [
+            Component("DYJetsToLL_M50",bkgSkimTreeDir+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+DYJetsToLL_M50 = Dataset(
+        "DYJetsToLL_M50",
+        DYJetsToLL_M50_cmpList,
+        isMC = True,
+        xs = 6104, 
+        )
+DYJetsToLL_M50.setSumWeight(bkgTreeDirFeb02+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+DYJetsToLL_M10To50_cmpList = ComponentList(
+        [
+            Component("DYJetsToLL_M10To50",bkgSkimTreeDir+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+DYJetsToLL_M10To50 = Dataset(
+        "DYJetsToLL_M10To50",
+        DYJetsToLL_M10To50_cmpList,
+        isMC = True,
+        xs = 6104, 
+        )
+DYJetsToLL_M10To50.setSumWeight(bkgTreeDirAug10+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4tau
@@ -481,6 +512,8 @@ bkgSamples = [
         #WpWpJJ,
         #WWTo2L2Nu,
         ZPlusX,
+        DYJetsToLL_M50,
+        DYJetsToLL_M10To50,
         ]
 
 sigSamples = [
