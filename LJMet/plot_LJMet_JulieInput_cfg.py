@@ -13,7 +13,7 @@ from LJMet.Skimmer.AnalysisSkimmer import AnalysisSkimmer
 from LJMet.Weighter.DataMCWeighter import DataMCWeighter
 from LJMet.Producer.CategoryProducer import CategoryProducer
 
-from LJMet.Dataset.LJMet94X_1lepTT_101118newB_step1hadds_2018 import *
+from LJMet.Dataset.LJMet_step1_tptp2017 import *
 
 mergeSampleDict = {
 
@@ -38,9 +38,9 @@ mergeSampleDict = {
 					],
 		}
 
-out_path                = "TestPlot/2018-12-03/"
+out_path                = "TestPlot/2019-03-07/"
 lumi                    = 41.298
-nCores                  = 5
+nCores                  = 8
 outputDir               = out_path
 nEvents                 = -1
 disableProgressBar      = False
@@ -53,7 +53,7 @@ plots = [
         Plot("AK8Njets",     ["TH1D","AK8Njets","AK8 jet multiplicity",10,0,10],	LambdaFunc('x: x.NJetsAK8_JetSubCalc[0]'),),
         Plot("Nbjets",       ["TH1D","Nbjets","b tag multiplicity",10,0,10],	LambdaFunc('x: x.NJetsCSV_JetSubCalc[0]'),),
         Plot("NbjetsWithSF", ["TH1D","NbjetsWithSF","b tag multiplicity",10,0,10],	LambdaFunc('x: x.NJetsCSVwithSF_JetSubCalc[0]'),),
-        Plot("NWtag",        ["TH1D","NWtag","W tag multiplicity",10,0,10],	LambdaFunc('x: x.NPuppiWtagged_0p55[0]'),), #check if it's 0p6 or something else?
+        Plot("NWtag",        ["TH1D","NWtag","W tag multiplicity",10,0,10],	LambdaFunc('x: x.NJetsWtagged[0]'),), #check if it's 0p6 or something else?
         Plot("Nh1btag",      ["TH1D","Nh1btag","h1b tag multiplicity",5,0,5],	LambdaFunc('x: x.NJetsH1btagged[0]'),),
         Plot("Nh2btag",      ["TH1D","Nh2btag","h2b tag multiplicity",5,0,5],	LambdaFunc('x: x.NJetsH2btagged[0]'),),
         Plot("PV",       	 ["TH1D","PV","PV",40,0,40],	LambdaFunc('x: x.nPV_singleLepCalc[0]'),),

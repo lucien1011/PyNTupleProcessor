@@ -39,7 +39,7 @@ mergeSampleDict = {
 					],
 		}
 
-out_path                = "/home/lucien/public_html/LJMet/test/2018-12-09_MuonOnly_Run2017/"
+out_path                = "TestPlot/2018-12-09_MuonOnly_Run2017/"
 lumi                    = 56.100 #41.298
 nCores                  = 5
 outputDir               = out_path

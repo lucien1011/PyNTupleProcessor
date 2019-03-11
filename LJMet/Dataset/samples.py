@@ -1,8 +1,10 @@
 #!/usr/bin/python
 
 samples = {
-'Data_SingleElectron': 'SingleElectron_Mar2018', # 2017 
-'Data_SingleMuon': 'SingleMuon_Mar2018', # 2017
+'Data_SingleElectron': 'SingleElectron_31Mar18', # 2017
+'Data_SingleMuon': 'SingleMuon_31Mar18', # 2017
+#'Data_SingleElectron': 'SingleElectron_Mar2018', # 2017
+#'Data_SingleMuon': 'SingleMuon_Mar2018', # 2017
 #'Data_SingleElectron': 'SingleElectron_Sep2018', # 2018
 #'Data_SingleMuon': 'SingleMuon_Sep2018', # 2018
 
@@ -84,7 +86,8 @@ samples = {
 'TTM1700THTH':'TprimeTprime_M-1700_TuneCP5_13TeV-madgraph-pythia8_THTH',
 'TTM1800THTH':'TprimeTprime_M-1800_TuneCP5_13TeV-madgraph-pythia8_THTH',
 
-'DY':'DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8',
+#'DY':'DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8',
+'DY':'DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8',
 'DYMG':'DYJetsToLL_M-50_TuneCP5_13TeV-madgraph-pythia8',
 'DYMG100':'DYJetsToLL_M-50_HT-100to200_TuneCP5_13TeV-madgraph-pythia8',
 'DYMG200':'DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraph-pythia8',
@@ -116,6 +119,10 @@ samples = {
 
 'TTJetsMG':'TTJets_TuneCP5_13TeV-madgraphMLM-pythia8',
 ## new ttbar for 2017
+'TTJetsHad':'TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8',
+'TTJetsSemiLep':'TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8',
+'TTJets2L2nu':'TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8',
+
 'TTJetsHad0':'TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt0to700',
 'TTJetsHad700':'TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000',
 'TTJetsHad1000':'TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf',
@@ -126,11 +133,19 @@ samples = {
 'TTJets2L2nu700':'TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt700to1000',
 'TTJets2L2nu1000':'TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8_Mtt1000toInf',
 'TTJetsPH700mtt':'TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8',
-'TTJetsPH1000mtt':'TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8',
+#'TTJetsPH1000mtt':'TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8',
+'TTJetsPH1000mtt':'TT_Mtt-1000toInf_TuneCP5_PSweights_13TeV-powheg-pythia8',
 
-'Ts':'ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8',
-'Tbt':'ST_t-channel_antitop_5f_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8_vtd_vts_prod',
-'Tt':'ST_t-channel_top_5f_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8_vtd_vts_prod',
+#'Ts':'ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8',
+#'Tbt':'ST_t-channel_antitop_5f_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8_vtd_vts_prod',
+#'Tt':'ST_t-channel_top_5f_TuneCP5_PSweights_13TeV-powheg-madspin-pythia8_vtd_vts_prod',
+#'TbtW':'ST_tW_antitop_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8',
+#'TtW':'ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8',
+#new
+'Ts':'ST_s-channel_antitop_leptonDecays_13TeV-PSweights_powheg-pythia',
+#'ST_s-channel_top_leptonDecays_13TeV-PSweights_powheg-pythia',
+'Tbt':'ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8',
+'Tt':'ST_t-channel_top_4f_InclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8',
 'TbtW':'ST_tW_antitop_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8',
 'TtW':'ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8',
 

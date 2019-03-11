@@ -18,7 +18,7 @@ class CategoryProducer(Module):
 
 		if event.minMleppBjet[0] > 3.:
 			event.region = "isSR"
-			if event.NJetsH1btagged[0] == 0 and event.NJetsH2btagged[0] == 0 and event.NPuppiWtagged_0p55[0] == 0:
+			if event.NJetsH1btagged[0] == 0 and event.NJetsH2btagged[0] == 0 and event.NJetsWtagged[0] == 0:
 				if event.NJetsCSV_JetSubCalc[0] == 0:
 					event.category = "nH0_nW0_nB0"
 					event.categoryNumber = 1
@@ -31,7 +31,7 @@ class CategoryProducer(Module):
 				else:
 					event.category = "nH0_nW0_nB3p"
 					event.categoryNumber = 4
-			elif event.NJetsH1btagged[0] == 0 and event.NJetsH2btagged[0] == 0 and event.NPuppiWtagged_0p55[0] >= 1:
+			elif event.NJetsH1btagged[0] == 0 and event.NJetsH2btagged[0] == 0 and event.NJetsWtagged[0] >= 1:
 				if event.NJetsCSV_JetSubCalc[0] == 0:
 					event.category = "nH0_nW1p_nB0"
 					event.categoryNumber = 5
@@ -44,15 +44,15 @@ class CategoryProducer(Module):
 				else:
 					event.category = "nH0_nW1p_nB3p"
 					event.categoryNumber = 8
-			elif event.NJetsH1btagged[0] > 0 and event.NJetsH2btagged[0] == 0 and event.NPuppiWtagged_0p55[0] >= 0 and event.NJetsCSVnotH_JetSubCalc[0] >= 1:
+			elif event.NJetsH1btagged[0] > 0 and event.NJetsH2btagged[0] == 0 and event.NJetsWtagged[0] >= 0 and event.NJetsCSVnotH_JetSubCalc[0] >= 1:
 				event.category ="nH1b_nW0p_nB1p"
 				event.categoryNumber = 9
-			elif event.NJetsH2btagged[0] > 0 and event.NPuppiWtagged_0p55[0] >= 0 and event.NJetsCSVnotH_JetSubCalc[0] >= 1:
+			elif event.NJetsH2btagged[0] > 0 and event.NJetsWtagged[0] >= 0 and event.NJetsCSVnotH_JetSubCalc[0] >= 1:
 				event.category ="nH2b_nW0p_nB1p"
 				event.categoryNumber = 10
 		else:
 			event.region = "isCR"
-			if event.NJetsH1btagged[0] == 0 and event.NJetsH2btagged[0] == 0 and event.NPuppiWtagged_0p55[0] >= 0:
+			if event.NJetsH1btagged[0] == 0 and event.NJetsH2btagged[0] == 0 and event.NJetsWtagged[0] >= 0:
 				if event.NJetsCSV_JetSubCalc[0] == 0:
 					event.category = "nH0_nW0p_nB0"
 					event.categoryNumber = 11
