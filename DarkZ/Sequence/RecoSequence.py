@@ -86,11 +86,14 @@ upsilon_signal_sequence.add(nloWeighter)
 upsilon_signal_sequence.add(xsWeighter)
 upsilon_signal_sequence.add(fakeRateWeighter)
 
-wrongFC_sequence = Sequence()
-wrongFC_sequence.add(WrongFCSkimmer)
-wrongFC_sequence.add(xsWeighter)
-wrongFC_sequence.add(dataMCWeighter)
-wrongFC_sequence.add(fakeRateWeighter)
+wrongFC_signal_sequence = Sequence()
+wrongFC_signal_sequence.add(WrongFCSkimmer)
+wrongFC_signal_sequence.add(variableProducer)
+wrongFC_signal_sequence.add(nloWeighter)
+wrongFC_signal_sequence.add(xsWeighter)
+wrongFC_signal_sequence.add(dataMCWeighter)
+wrongFC_signal_sequence.add(fakeRateWeighter)
+
 
 allSequence = [
         darkphoton_signal_sequence,

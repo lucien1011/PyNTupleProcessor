@@ -15,13 +15,20 @@ from Plotter.Plot import Plot
 
 #out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l70_Run2016Data_v1/2018-09-20/"
 #out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l108To140_Run2016Data_v1/2018-10-24_SR/"
-out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l118To130_Run2016Data_v1/2019-01-21_SR/"
+#out_path = "WrongFC/DataMCDistributions/SkimTree_WFC_m4l118To130_Run2016Data_v1/2019-01-21_SR/"
+#out_path = "WrongFC/DataMCDistributions/SkimTree_DarkPhoton_WrongFC_Run2016Data_m4l70/2019-03-08_SR_FRWeightUniIso/"
+#out_path = "WrongFC/DataMCDistributions/SkimTree_DarkPhoton_WrongFC_Run2016Data_m4l118-130/2019-03-08_SR_FRWeight-mZ2-6/"
+#out_path = "WrongFC/DataMCDistributions/SkimTree_DarkPhoton_WrongFC_Run2016Data_m4l70/2019-03-08_SR_FRWeight-mZ2-6/"
+out_path = "WrongFC/DataMCDistributions/SkimTree_DarkPhoton_WrongFC_Run2016Data_m4l118-130/2019-03-08_SR_FRWeight-mZ2-6/"
+#out_path = "WrongFC/DataMCDistributions/SkimTree_DarkPhoton_WrongFC_Run2016Data_m4l118-130/2019-03-08_SR/"
 
-mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [30,0.,60.]
+#mZ1PlotRange = [60,0.,120.]
 #mZ2PlotRange = [60,0.,120.]
-#h4lPlotRange = [110,60.,500.]
-h4lPlotRange = [40,100.,140.]
+#h4lPlotRange = [55,60.,500.]
+mZ1PlotRange = [40,40.,120.]
+mZ2PlotRange = [60,0.,120.]
+#mZ2PlotRange = [30,0.,60.]
+h4lPlotRange = [20,100.,140.]
 general_plots = []
 general_plots.extend([
     Plot("Z1_mass",     ["TH1D","Z1_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       ),
@@ -44,7 +51,7 @@ plots =  general_plots
 #for plot in plots:
 #    plot.plotSetting.divideByBinWidth = True
 
-nCores                  = 1
+nCores                  = 3
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
@@ -60,7 +67,7 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = darkphoton_signal_sequence
+sequence                = wrongFC_signal_sequence
 
 sequence.add(plotter)
 

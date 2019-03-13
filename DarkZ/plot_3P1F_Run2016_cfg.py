@@ -13,22 +13,19 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-#out_path = "DataMCDistributions/SkimTree_3P1F_HIG-16-041Selection_Run2016DataMC_v2/2018-08-23/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2018-10-23_3P1F_DataVsPred/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2018-10-23_3P1F_DataVsPred_SumCorrIso/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2018-10-23_3P1F_DataVsPred_SumCorrIso/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2018-11-06_3P1F_DataVsPred/"
-out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2019-01-16_3P1F_DataVsPred_FRv2/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-01-15_3P1F_DataVsPred_Run2016/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l130/2019-01-15_3P1F_DataVsPred_Run2016/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130_DR340p6/2019-01-15_3P1F_DataVsPred_Run2016/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2019-01-16_3P1F_DataVsPred_FRv2/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightFromVukasin/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightSumCorrIso/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightFromVukasin_MaxFRL3L4/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-11_3P1F_DataVsPred_FRWeightFromVukasin/"
 
 #mZ1PlotRange = [60,0.,120.]
 #mZ2PlotRange = [60,0.,120.]
-#h4lPlotRange = [220,60.,500.]
+h4lPlotRange = [55,60.,500.]
 mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [30,0.,60.]
-h4lPlotRange = [20,100.,140.]
+mZ2PlotRange = [60,0.,120.]
+#mZ2PlotRange = [30,0.,60.]
+#h4lPlotRange = [20,100.,140.]
 
 eachCR = "3p1f"
 general_plots = []
@@ -44,10 +41,11 @@ general_plots.extend([
     Plot("Z1_2mu2e_mass_"+eachCR,   ["TH1D","Z1_2mu2e_mass_"+eachCR,"",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
     Plot("Z2_2mu2e_mass_"+eachCR,   ["TH1D","Z2_2mu2e_mass_"+eachCR,"",]+mZ2PlotRange,  LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
                    
-    Plot("h4L_mass_"+eachCR,        ["TH1D","h4L_mass_"+eachCR,"",]+h4lPlotRange,       LambdaFunc('x: x.mass4l[0]'),       ),
-    Plot("h4e_mass_"+eachCR,        ["TH1D","h4e_mass_"+eachCR,"",]+h4lPlotRange,       LambdaFunc('x: x.mass4e[0]'),       ),
-    Plot("h4mu_mass_"+eachCR,       ["TH1D","h4mu_mass_"+eachCR,"",]+h4lPlotRange,      LambdaFunc('x: x.mass4mu[0]'),      ),
-    Plot("h2e2mu_mass_"+eachCR,     ["TH1D","h2mu2e_mass_"+eachCR,"",]+h4lPlotRange,    LambdaFunc('x: x.mass2e2mu[0]'),    ),
+    Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')       ),
+    Plot("h4mu_mass",   ["TH1D","h4mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4mu[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0 and x.mass4e[0] < 0 and x.mass2e2mu[0] < 0')       ),
+    Plot("h2e2mu_mass", ["TH1D","h2e2mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')       ),
+    Plot("h2mu2e_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')       ),
+    Plot("h4L_Pt",      ["TH1D","h4L_Pt","",40,0.,200.],     LambdaFunc('x: x.pT4l[0]'),         ),
     
     Plot("met_"+eachCR,             ["TH1D","met_"+eachCR,"",40,0.,200.],               LambdaFunc('x: x.met[0]'),          ),
     Plot("nVtx_"+eachCR,            ["TH1D","nVtx_"+eachCR,"",30,0.0,60.0],             LambdaFunc('x: x.nVtx[0]'),         ),
@@ -63,8 +61,7 @@ nCores                  = 5
 outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,predCR]
-componentList           = [Data_Run2016,predCR]
+componentList           = [Data_Run2016,predCR,WZTo3LNu,]
 justEndSequence         = False
 
 for dataset in componentList:
