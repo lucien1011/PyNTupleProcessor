@@ -1,17 +1,18 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
+from Utils.System import system
 
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190122/SkimTree_DarkPhoton_Run2016Data_m4l70/"
+bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190122/SkimTree_DarkPhoton_Run2016Data_m4l70/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
-dataTreeDir         = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_Run2016Data_m4l70/"
-sigSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181019/SkimTree_DarkPhoton_Run2017Sig_m4l70/"
+dataTreeDir         = bkgSkimTreeDir 
+sigSkimTreeDir      = system+getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181019/SkimTree_DarkPhoton_Run2017Sig_m4l70/"
 sigTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/SigMC_Run2016_v1/"
-zxSkimTreeDir       = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
+zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 xsBoost             = 100
 epsilon             = 0.05
-sumWeightFromT2     = True
+saveSumWeightTxt    = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -59,12 +60,14 @@ ggZZTo4tau = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-if sumWeightFromT2:
+if system.getSystemMode() == system.remote_str:
     ggZZTo4tau.setSumWeight(
             bkgTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.root",
             sumWeightHist,True)
-else:
-    ggZZTo4tau.sumw = 495800.000000
+    if saveSumWeightTxt:
+        ggZZTo4tau.saveSumWeightToPath(bkgSkimTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.txt")
+elif system.getSystemMode() == system.local_str:
+    ggZZTo4tau.setSumWeightByTxt(bkgSkimTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4e
@@ -82,12 +85,14 @@ ggZZTo4e = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-if sumWeightFromT2:
+if system.getSystemMode() == system.remote_str:
     ggZZTo4e.setSumWeight(
             bkgTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.root",
             sumWeightHist,True)
-else:
-    ggZZTo4e.sumw = 965000.0
+    if saveSumWeightTxt:
+        ggZZTo4e.saveSumWeightToPath(bkgSkimTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.txt")
+elif system.getSystemMode() == system.local_str:
+    ggZZTo4e.setSumWeightByTxt(bkgSkimTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4mu
@@ -105,12 +110,14 @@ ggZZTo4mu = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-if sumWeightFromT2:
+if system.getSystemMode() == system.remote_str:
     ggZZTo4mu.setSumWeight(
             bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.root",
             sumWeightHist,True)
-else:
-    ggZZTo4mu.sumw = 995200.0
+    if saveSumWeightTxt:
+        ggZZTo4mu.saveSumWeightToPath(bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.txt")
+elif system.getSystemMode() == system.local_str:
+    ggZZTo4mu.setSumWeightByTxt(bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2mu2tau
@@ -128,12 +135,14 @@ ggZZTo2mu2tau = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-if sumWeightFromT2:
+if system.getSystemMode() == system.remote_str:
     ggZZTo2mu2tau.setSumWeight(
             bkgTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.root",
             sumWeightHist,True)
-else:
-    ggZZTo2mu2tau.sumw = 499800.0
+    if saveSumWeightTxt:
+        ggZZTo2mu2tau.saveSumWeightToPath(bkgSkimTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.txt")
+elif system.getSystemMode() == system.local_str:
+    ggZZTo2mu2tau.setSumWeightByTxt(bkgSkimTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2mu
@@ -151,11 +160,14 @@ ggZZTo2e2mu = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-if sumWeightFromT2:
+if system.getSystemMode() == system.remote_str:
     ggZZTo2e2mu.setSumWeight(
-            bkgTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo2e2mu.sumw = 1386000.0
+            bkgTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.root",
+            sumWeightHist,True)
+    if saveSumWeightTxt:
+        ggZZTo2e2mu.saveSumWeightToPath(bkgSkimTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.txt")
+elif system.getSystemMode() == system.local_str:
+    ggZZTo2e2mu.setSumWeightByTxt(bkgSkimTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2tau

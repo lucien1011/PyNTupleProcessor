@@ -3,6 +3,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from HZZ4l.Dataset.Run2017.ZXCR_MC import * 
 from HZZ4l.Dataset.Run2017.ZXCR_Data import * 
@@ -64,7 +65,7 @@ plots =  general_plots
 predCR.isSignal         = False
 
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/HZZ4l/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/HZZ4l/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [Data_Run2017,predCR,WZTo3LNu,qqZZTo4L,]
@@ -88,5 +89,6 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/HZZ4l/"+out_path
+#endModuleOutputDir = "/home/lucien/public_html/Higgs/HZZ4l/"+out_path
+endModuleOutputDir = "/Users/lucien1011/CMS/analysis/public_html/Higgs/HZZ4l/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
