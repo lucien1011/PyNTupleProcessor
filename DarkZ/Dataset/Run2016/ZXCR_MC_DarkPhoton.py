@@ -75,7 +75,7 @@ WZTo3LNu = Dataset(
         "WZTo3LNu",
         WZTo3LNu_cmpList,
         isMC = True,
-        xs = 0.04430, 
+        xs = 4.430, 
         )
 WZTo3LNu.setSumWeight(bkgTreeDirT2_Feb21+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
 
