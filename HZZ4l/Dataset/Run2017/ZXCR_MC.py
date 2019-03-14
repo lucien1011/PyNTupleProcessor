@@ -37,10 +37,10 @@ DYJetsToLL_M50 = Dataset(
         xs = 6104, 
         )
 path_DYJetsToLL_M50 = bkgTreeDirT2+"DYJetsToLL_M50.root"
-if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+if system.getSystemModel() == system.remote_str:
     DYJetsToLL_M50.setSumWeight(path_DYJetsToLL_M50,sumWeightHist,True)
-elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
-    DYJetsToLL_M50.setSumWeight(path_DYJetsToLL_M50,sumWeightHist,True)
+    if saveSumWeightTxt:
+        DYJetsToLL_M50.saveSumWeightToPath(path_DYJetsToLL_M50.replace(".root","txt"))
 else system.getSystemModel() == system.local_str:
     DYJetsToLL_M50.setSumWeightByTxt(bkgTreeDir+"DYJetsToLL_M50.txt")
 
@@ -57,10 +57,10 @@ DYJetsToLL_M10To50 = Dataset(
         xs = 6104, 
         )
 path_DYJetsToLL_M10To50 = bkgTreeDirT2+"DYJetsToLL_M10To50.root"
-if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+if system.getSystemModel() == system.remote_str:
     DYJetsToLL_M10To50.setSumWeight(path_DYJetsToLL_M10To50,sumWeightHist,True)
-elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
-    DYJetsToLL_M10To50.setSumWeight(path_DYJetsToLL_M10To50,sumWeightHist,True)
+    if saveSumWeightTxt:
+        DYJetsToLL_M10To50.saveSumWeightToPath(path_DYJetsToLL_M10To50.replace(".root","txt"))
 else system.getSystemModel() == system.local_str:
     DYJetsToLL_M10To50.setSumWeightByTxt(bkgTreeDir+"DYJetsToLL_M10To50.txt")
 
@@ -77,10 +77,10 @@ TTJets = Dataset(
         xs = 87.31, 
         )
 path_TTJets = bkgTreeDirT2+"TTJets.root"
-if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+if system.getSystemModel() == system.remote_str:
     TTJets.setSumWeight(path_TTJets,sumWeightHist,True)
-elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
-    TTJets.setSumWeight(path_TTJets,sumWeightHist,True)
+    if saveSumWeightTxt:
+        TTJets.saveSumWeightToPath(path_TTJets.replace(".root","txt"))
 else system.getSystemModel() == system.local_str:
     TTJets.setSumWeightByTxt(bkgTreeDir+"TTJets.txt")
 
@@ -97,10 +97,10 @@ WZTo3LNu = Dataset(
         xs = 4.430, 
         )
 path_WZTo3LNu = bkgTreeDirT2+"WZTo3LNu.root"
-if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+if system.getSystemModel() == system.remote_str:
     WZTo3LNu.setSumWeight(path_WZTo3LNu,sumWeightHist,True)
-elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
-    WZTo3LNu.setSumWeight(path_WZTo3LNu,sumWeightHist,True)
+    if saveSumWeightTxt:
+        WZTo3LNu.saveSumWeightToPath(path_WZTo3LNu.replace(".root","txt"))
 else system.getSystemModel() == system.local_str:
     WZTo3LNu.setSumWeightByTxt(bkgTreeDir+"WZTo3LNu.txt")
     
@@ -118,10 +118,10 @@ qqZZTo4L = Dataset(
         isMC                = True,
         xs                  = 1.256,
         )
-path_qqZZTo4L = bkgTreeDirT2+"qqZZTo4L.root"
-if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+path_qqZZTo4L = bkgTreeDirT2+"ZZTo4L_ext1.root"
+if system.getSystemModel() == system.remote_str:
     qqZZTo4L.setSumWeight(path_qqZZTo4L,sumWeightHist,True)
-elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
-    qqZZTo4L.setSumWeight(path_qqZZTo4L,sumWeightHist,True)
+    if saveSumWeightTxt:
+        qqZZTo4L.saveSumWeightToPath(path_qqZZTo4L.replace(".root","txt"))
 else system.getSystemModel() == system.local_str:
-    qqZZTo4L.setSumWeightByTxt(bkgTreeDir+"qqZZTo4L.txt")
+    qqZZTo4L.setSumWeightByTxt(bkgTreeDir+"ZZTo4L_ext1.txt")
