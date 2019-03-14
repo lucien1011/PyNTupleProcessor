@@ -1,11 +1,14 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
+from Utils.System import system
+from Utils.SumWeight import handleSumWeight
 
-bkgTreeDir              = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
-predCRTreeDir           = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
+bkgTreeDir              = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
+predCRTreeDir           = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
 bkgTreeDirT2_Feb21      = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2l_Feb21/"
 bkgTreeDirT2_Aug10      = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2lskim_Aug10/"
-inUFTier2       = False
+inUFTier2               = False
+saveSumWeightTxt        = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -35,7 +38,16 @@ DYJetsToLL_M50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M50.setSumWeight(bkgTreeDirT2_Feb21+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
+handleSumWeight(
+        DYJetsToLL_M50,
+        system,
+        bkgTreeDirT2_Feb21+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root"
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
+        )
+#DYJetsToLL_M50.setSumWeight(bkgTreeDirT2_Feb21+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M10To50_cmpList = ComponentList(
@@ -49,7 +61,16 @@ DYJetsToLL_M10To50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M10To50.setSumWeight(bkgTreeDirT2_Aug10+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
+handleSumWeight(
+        DYJetsToLL_M10To50,
+        system,
+        bkgTreeDirT2_Aug10+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root"
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
+        )
+#DYJetsToLL_M10To50.setSumWeight(bkgTreeDirT2_Aug10+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 TTJets_cmpList = ComponentList(
@@ -63,7 +84,16 @@ TTJets = Dataset(
         isMC = True,
         xs = 87.31, 
         )
-TTJets.setSumWeight(bkgTreeDirT2_Feb21+"TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
+handleSumWeight(
+        TTJets,
+        system,
+        bkgTreeDirT2_Feb21+"TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8.root"
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8.txt",
+        )
+#TTJets.setSumWeight(bkgTreeDirT2_Feb21+"TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 WZTo3LNu_cmpList = ComponentList(
@@ -77,5 +107,13 @@ WZTo3LNu = Dataset(
         isMC = True,
         xs = 0.04430, 
         )
-WZTo3LNu.setSumWeight(bkgTreeDirT2_Feb21+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
-
+handleSumWeight(
+        WZTo3LNu,
+        system,
+        bkgTreeDirT2_Feb21+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root"
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
+        )
+#WZTo3LNu.setSumWeight(bkgTreeDirT2_Feb21+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
