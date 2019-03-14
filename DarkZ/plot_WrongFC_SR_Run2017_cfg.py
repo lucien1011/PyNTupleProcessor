@@ -3,6 +3,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from DarkZ.Dataset.Run2017.WrongFC_MC import * 
 from DarkZ.Dataset.Run2017.WrongFC_Data import * 
@@ -56,7 +57,7 @@ plots =  general_plots
 #    plot.plotSetting.divideByBinWidth = True
 
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [qqZZTo4L,Data_Run2016,WFC_Reducible,]
@@ -80,5 +81,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))

@@ -1,13 +1,15 @@
-
 from Core.ComponentList import *
 from Core.Dataset import Dataset
+from Utils.System import system
+from Utils.SumWeight import handleSumWeight
 
-bkgSkimTreeDir              = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190307/SkimTree_DarkPhoton_WrongFC_Run2017Data_m4l70/"
+bkgSkimTreeDir              = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190307/SkimTree_DarkPhoton_WrongFC_Run2017Data_m4l70/"
 inUFTier2                   = False
 
 bkgTreeDir_2lskim           = '/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/ZPlusX_Early2017_v1/'
 bkgTreeDir_4lskim           = '/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/'
 sumWeightHist               = "Ana/sumWeights"
+saveSumWeightTxt            = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 WFC_Reducible_cmpList = ComponentList(
@@ -36,10 +38,14 @@ qqZZTo4L = Dataset(
         isMC                = True,
         xs                  = 1.256,
         )
-qqZZTo4L.setSumWeight(
+handleSumWeight(
+        qqZZTo4L,
+        system,
         bkgTreeDir_4lskim+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -54,10 +60,14 @@ DYJetsToLL_M50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M50.setSumWeight(
+handleSumWeight(
+        DYJetsToLL_M50,
+        system,
         bkgTreeDir_2lskim+"DYJetsToLL_M50.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"DYJetsToLL_M50.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -72,10 +82,14 @@ DYJetsToLL_M10To50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M10To50.setSumWeight(
+handleSumWeight(
+        DYJetsToLL_M10To50,
+        system,
         bkgTreeDir_2lskim+"DYJetsToLL_M10To50.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"DYJetsToLL_M10To50.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -90,10 +104,14 @@ TTJets = Dataset(
         isMC = True,
         xs = 87.31, 
         )
-TTJets.setSumWeight(
+handleSumWeight(
+        TTJets,
+        system,
         bkgTreeDir_2lskim+"TTJets.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"TTJets.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -108,9 +126,12 @@ WZTo3LNu = Dataset(
         isMC = True,
         xs = 0.04430, 
         )
-WZTo3LNu.setSumWeight(
+handleSumWeight(
+        WZTo3LNu,
+        system,
         bkgTreeDir_2lskim+"WZTo3LNu.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"WZTo3LNu.txt",
         )
-
