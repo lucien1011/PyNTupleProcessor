@@ -2,6 +2,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
 from DarkZ.Sequence.RecoSequence import * 
@@ -44,7 +45,7 @@ deltaRPlotRange = [40,0.,4.]
 out_path                = "DarkPhotonSR/DataMCDistributions/2019-01-22_Run2016/"
 lumi                    = 35.9
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2016] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
@@ -149,5 +150,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))

@@ -13,5 +13,8 @@ class System(object):
 
     def getStoragePath(self):
         return os.environ["NTUPLERUNNER_STORAGE"]
+    
+    def getPublicHtmlPath(self):
+        return os.environ["NTUPLERUNNER_WWW"]
 
 system = System()

@@ -9,3 +9,4 @@ cd -
 
 export NTUPLERUNNER_MODE="Remote"
 export NTUPLERUNNER_STORAGE=$1
+export NTUPLERUNNER_WWW="/home/${USER}/public_html/"
