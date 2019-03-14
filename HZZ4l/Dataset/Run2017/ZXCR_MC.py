@@ -41,7 +41,7 @@ if system.getSystemModel() == system.remote_str:
     DYJetsToLL_M50.setSumWeight(path_DYJetsToLL_M50,sumWeightHist,True)
     if saveSumWeightTxt:
         DYJetsToLL_M50.saveSumWeightToPath(path_DYJetsToLL_M50.replace(".root","txt"))
-elif system.getSystemModel() == system.local_str:
+else system.getSystemModel() == system.local_str:
     DYJetsToLL_M50.setSumWeightByTxt(bkgTreeDir+"DYJetsToLL_M50.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -61,7 +61,7 @@ if system.getSystemModel() == system.remote_str:
     DYJetsToLL_M10To50.setSumWeight(path_DYJetsToLL_M10To50,sumWeightHist,True)
     if saveSumWeightTxt:
         DYJetsToLL_M10To50.saveSumWeightToPath(path_DYJetsToLL_M10To50.replace(".root","txt"))
-elif system.getSystemModel() == system.local_str:
+else system.getSystemModel() == system.local_str:
     DYJetsToLL_M10To50.setSumWeightByTxt(bkgTreeDir+"DYJetsToLL_M10To50.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -81,7 +81,7 @@ if system.getSystemModel() == system.remote_str:
     TTJets.setSumWeight(path_TTJets,sumWeightHist,True)
     if saveSumWeightTxt:
         TTJets.saveSumWeightToPath(path_TTJets.replace(".root","txt"))
-elif system.getSystemModel() == system.local_str:
+else system.getSystemModel() == system.local_str:
     TTJets.setSumWeightByTxt(bkgTreeDir+"TTJets.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -101,7 +101,7 @@ if system.getSystemModel() == system.remote_str:
     WZTo3LNu.setSumWeight(path_WZTo3LNu,sumWeightHist,True)
     if saveSumWeightTxt:
         WZTo3LNu.saveSumWeightToPath(path_WZTo3LNu.replace(".root","txt"))
-elif system.getSystemModel() == system.local_str:
+else system.getSystemModel() == system.local_str:
     WZTo3LNu.setSumWeightByTxt(bkgTreeDir+"WZTo3LNu.txt")
     
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -123,5 +123,5 @@ if system.getSystemModel() == system.remote_str:
     qqZZTo4L.setSumWeight(path_qqZZTo4L,sumWeightHist,True)
     if saveSumWeightTxt:
         qqZZTo4L.saveSumWeightToPath(path_qqZZTo4L.replace(".root","txt"))
-elif system.getSystemModel() == system.local_str:
+else system.getSystemModel() == system.local_str:
     qqZZTo4L.setSumWeightByTxt(bkgTreeDir+"ZZTo4L_ext1.txt")
