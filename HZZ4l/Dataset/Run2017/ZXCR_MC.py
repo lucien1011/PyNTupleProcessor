@@ -1,12 +1,13 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
+from Utils.System import system
 
-#bkgTreeDir             = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_ZXCRSelection/"
-#bkgTreeDir             = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_HIG-16-041-ZXCRSelection_v2/"
-bkgTreeDir              = "/raid/raid7/lucien/Higgs/HZZ4l/NTuple/ZPlusX/ZXCR/20190313_Run2017_ZXCR-Z1LSkim_LiteHZZTree/"
+bkgTreeDir              = system.getStoragePath()+"/lucien/Higgs/HZZ4l/NTuple/ZPlusX/ZXCR/20190313_Run2017_ZXCR-Z1LSkim_LiteHZZTree/"
 bkgTreeDirT2            = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/ZPlusX_Early2017_v1/"
-predCRTreeDir           = "/raid/raid7/lucien/Higgs/HZZ4l/NTuple/ZPlusX/ZXCR/20190313_Run2017_ZXCR-Z1LSkim_LiteHZZTree/"
+predCRTreeDir           = system.getStoragePath()+"/lucien/Higgs/HZZ4l/NTuple/ZPlusX/ZXCR/20190313_Run2017_ZXCR-Z1LSkim_LiteHZZTree/"
 inUFTier2               = False
+saveSumWeightTxt        = False
+sumWeightHist           = "Ana/sumWeights"
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -35,7 +36,13 @@ DYJetsToLL_M50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M50.setSumWeight(bkgTreeDirT2+"DYJetsToLL_M50.root","Ana/sumWeights",True)
+path_DYJetsToLL_M50 = bkgTreeDirT2+"DYJetsToLL_M50.root"
+if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+    DYJetsToLL_M50.setSumWeight(path_DYJetsToLL_M50,sumWeightHist,True)
+elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
+    DYJetsToLL_M50.setSumWeight(path_DYJetsToLL_M50,sumWeightHist,True)
+else system.getSystemModel() == system.local_str:
+    DYJetsToLL_M50.setSumWeightByTxt(bkgTreeDir+"DYJetsToLL_M50.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M10To50_cmpList = ComponentList(
@@ -49,7 +56,13 @@ DYJetsToLL_M10To50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M10To50.setSumWeight(bkgTreeDirT2+"DYJetsToLL_M10To50.root","Ana/sumWeights",True)
+path_DYJetsToLL_M10To50 = bkgTreeDirT2+"DYJetsToLL_M10To50.root"
+if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+    DYJetsToLL_M10To50.setSumWeight(path_DYJetsToLL_M10To50,sumWeightHist,True)
+elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
+    DYJetsToLL_M10To50.setSumWeight(path_DYJetsToLL_M10To50,sumWeightHist,True)
+else system.getSystemModel() == system.local_str:
+    DYJetsToLL_M10To50.setSumWeightByTxt(bkgTreeDir+"DYJetsToLL_M10To50.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 TTJets_cmpList = ComponentList(
@@ -63,7 +76,13 @@ TTJets = Dataset(
         isMC = True,
         xs = 87.31, 
         )
-TTJets.setSumWeight(bkgTreeDirT2+"TTJets.root","Ana/sumWeights",True)
+path_TTJets = bkgTreeDirT2+"TTJets.root"
+if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+    TTJets.setSumWeight(path_TTJets,sumWeightHist,True)
+elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
+    TTJets.setSumWeight(path_TTJets,sumWeightHist,True)
+else system.getSystemModel() == system.local_str:
+    TTJets.setSumWeightByTxt(bkgTreeDir+"TTJets.txt")
 
 # ____________________________________________________________________________________________________________________________________________ ||
 WZTo3LNu_cmpList = ComponentList(
@@ -77,8 +96,14 @@ WZTo3LNu = Dataset(
         isMC = True,
         xs = 4.430, 
         )
-WZTo3LNu.setSumWeight(bkgTreeDirT2+"WZTo3LNu.root","Ana/sumWeights",True)
-
+path_WZTo3LNu = bkgTreeDirT2+"WZTo3LNu.root"
+if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+    WZTo3LNu.setSumWeight(path_WZTo3LNu,sumWeightHist,True)
+elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
+    WZTo3LNu.setSumWeight(path_WZTo3LNu,sumWeightHist,True)
+else system.getSystemModel() == system.local_str:
+    WZTo3LNu.setSumWeightByTxt(bkgTreeDir+"WZTo3LNu.txt")
+    
 # ____________________________________________________________________________________________________________________________________________ ||
 # qqZZ
 qqZZ_cmpList = ComponentList(
@@ -93,8 +118,10 @@ qqZZTo4L = Dataset(
         isMC                = True,
         xs                  = 1.256,
         )
-qqZZTo4L.setSumWeight(
-    bkgTreeDirT2+"ZZTo4L_ext1.root",
-    "Ana/sumWeights",
-    True,
-    )
+path_qqZZTo4L = bkgTreeDirT2+"qqZZTo4L.root"
+if system.getSystemModel() == system.remote_str and not saveSumWeightTxt:
+    qqZZTo4L.setSumWeight(path_qqZZTo4L,sumWeightHist,True)
+elif system.getSystemModel() == system.remote_str and saveSumWeightTxt:
+    qqZZTo4L.setSumWeight(path_qqZZTo4L,sumWeightHist,True)
+else system.getSystemModel() == system.local_str:
+    qqZZTo4L.setSumWeightByTxt(bkgTreeDir+"qqZZTo4L.txt")
