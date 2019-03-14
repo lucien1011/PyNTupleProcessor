@@ -106,7 +106,7 @@ WZTo3LNu = Dataset(
         "WZTo3LNu",
         WZTo3LNu_cmpList,
         isMC = True,
-        xs = 0.04430, 
+        xs = 4.430, 
         )
 handleSumWeight(
         WZTo3LNu,
