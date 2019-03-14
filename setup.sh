@@ -8,3 +8,4 @@ eval `scramv1 runtime -sh`
 cd -
 
 export NTUPLERUNNER_MODE="Remote"
+export NTUPLERUNNER_STORAGE=$1
