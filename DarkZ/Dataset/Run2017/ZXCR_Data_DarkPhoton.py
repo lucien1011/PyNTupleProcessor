@@ -1,7 +1,8 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
+from Utils.System import system
 
-dataTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
+dataTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
 inUFTier2       = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
