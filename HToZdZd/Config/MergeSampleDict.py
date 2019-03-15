@@ -22,4 +22,5 @@ mergeSampleDict = {
             "WWTo2L2Nu",
             ],
         "ZPlusX": ["ZPlusX"],
+        "DYJets": ["DYJetsToLL_M50","DYJetsToLL_M10To50",],
         }
