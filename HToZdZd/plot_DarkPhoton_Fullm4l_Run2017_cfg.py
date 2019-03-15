@@ -2,6 +2,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from HToZdZd.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
 from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
@@ -21,7 +22,7 @@ h4lPlotRange = [70,60.,200.]
 out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-02-25_Run2017_NoRatioCut/"
 lumi                    = 41.7
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2017,] + [HToZdZd_MZD30,] 
@@ -94,5 +95,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
