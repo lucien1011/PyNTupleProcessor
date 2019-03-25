@@ -4,7 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from DarkZ.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
 
@@ -31,17 +31,24 @@ mergeSampleDict = {
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
+#h4lPlotRange = [110,60.,500.]
+#h4lPlotRange = [25,100.,150.]
 h4lPlotRange = [20,100.,140.]
 deltaRPlotRange2 = [20,0.,2.]
 deltaRPlotRange = [40,0.,4.]
 
-out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
-lumi                    = 41.4
-nCores                  = 2
+#out_path                = "SignalDistributions/2018-09-18_Epsilon0p1_LowMZD/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2018-09-21_UniformIso/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-21_DarkPhotonSR-Unblinding/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-24_DarkPhotonSR_mZ212To120/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-20_Run2016/"
+out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-25_Run2016/"
+lumi                    = 35.9
+nCores                  = 3
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2017] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
+componentList           = bkgSamples + [data2016] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
 justEndSequence         = False
 
 
@@ -133,8 +140,7 @@ for dataset in componentList:
 plotter                 = Plotter("Plotter",plots)
 variableProducer        = VariableProducer("VariableProducer")
 
-sequence                = darkphoton_signal_sequence
-#sequence                = higgs_m4lNarrowWindow_sequence
+sequence                = darkphoton_m4lSB_sequence
 sequence.add(variableProducer)
 sequence.add(plotter)
 
