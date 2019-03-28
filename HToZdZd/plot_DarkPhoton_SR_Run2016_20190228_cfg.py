@@ -15,43 +15,47 @@ from Plotter.Plot import Plot
 
 from HToZdZd.Config.MergeSampleDict import *
 
-mZ1PlotRange = [65,0.,65.]
-mZ2PlotRange = [65,0.,65.]
-#h4lPlotRange = [50,95.,195.]
-h4lPlotRange = [70,60.,200.]
+nBinsMassRatio = 65
+mZ1PlotRange = [nBinsMassRatio,0.,65.]
+mZ2PlotRange = [nBinsMassRatio,0.,65.]
+h4lPlotRange = [60,115.,135.]
+#h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-12_NoRatioCut_TEST4/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-15_MC_RatioCut0p05/" # Lucien's new dir
-out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts/"
-User                    = os.environ['USER']
+out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts_oddmasses/"
 lumi                    = 35.9
 nCores                  = 5
-outputDir               = "/raid/raid7/"+User+"/Higgs/HToZdZd/"+out_path
+#outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = "/raid/raid7/rosedj1/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [
-                                HToZdZd_MZD4,
+                                #HToZdZd_MZD4,
                                 HToZdZd_MZD5,
-                                HToZdZd_MZD6,
+                                #HToZdZd_MZD6,
                                 HToZdZd_MZD7,
-                                HToZdZd_MZD8,
+                                #HToZdZd_MZD8,
                                 HToZdZd_MZD9,
-                                HToZdZd_MZD10,
+                                #HToZdZd_MZD10,
                                 HToZdZd_MZD15, 
-                                HToZdZd_MZD20,
+                                #HToZdZd_MZD20,
                                 HToZdZd_MZD25,
-                                HToZdZd_MZD30,
+                                #HToZdZd_MZD30,
                                 HToZdZd_MZD35,
-                                HToZdZd_MZD40,
+                                #HToZdZd_MZD40,
                                 HToZdZd_MZD45,
-                                HToZdZd_MZD50,
+                                #HToZdZd_MZD50,
                                 HToZdZd_MZD55,
-                                HToZdZd_MZD60,
+                                #HToZdZd_MZD60,
                                 ]
 justEndSequence         = False
 phpFile                 = "index.php"
-nBinsMassRatio          = 50
-#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05")  # Lucien's mass ratio cut 
+# Lucien's mass ratio cut 
+#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05")  
+eventSelection          = LambdaFunc("x: True")  
+
 
 muon_plots = [
         ]
@@ -77,18 +81,22 @@ general_plots = [
         
         Plot("mass_ratio",["TH1D","mass_ratio","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), ),
         Plot("mass_ratio_4e",["TH1D","mass_ratio_4e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
+        #Plot("mass_ratio_4e",["TH1D","mass_ratio_4e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')),
         Plot("mass_ratio_4mu",["TH1D","mass_ratio_4mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
-        Plot("mass_ratio_2e2mu",["TH1D","mass_ratio_2e2mu","",nBinsMassRatio,-1.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
-        Plot("mass_ratio_2mu2e",["TH1D","mass_ratio_2mu2e","",nBinsMassRatio,-1.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
+        #Plot("mass_ratio_4mu",["TH1D","mass_ratio_4mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass4e[0] < 0 and x.mass4mu[0] > 0 and x.mass2e2mu[0] < 0')),
+        Plot("mass_ratio_2e2mu",["TH1D","mass_ratio_2e2mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
+        #Plot("mass_ratio_2e2mu",["TH1D","mass_ratio_2e2mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
+        Plot("mass_ratio_2mu2e",["TH1D","mass_ratio_2mu2e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
+        #Plot("mass_ratio_2mu2e",["TH1D","mass_ratio_2mu2e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
         ]
 
 jet_plots = [
         #Plot("nJet",    ["TH1D","nJet","",5,-0.5,4.5],      LambdaFunc('x: x.njets_pt30_eta2p5[0]'),     ),
         ]
 
-plots = muon_plots + general_plots + jet_plots 
+plots = muon_plots + general_plots + jet_plots # big list of Plot objects
 #for plot in plots:
-#    plot.plotSetting.divideByBinWidth = True
+    #plot.plotSetting.divideByBinWidth = True
 
 for dataset in componentList:
     if dataset.isMC:
@@ -106,8 +114,8 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/"+User+"/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = "/home/rosedj1/public_html/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
 
 ## Put an index.php file into Plots dir for easy visualization
-copyFile('/home/'+User+'/',phpFile,endModuleOutputDir)
+copyFile('/home/rosedj1/',phpFile,endModuleOutputDir)

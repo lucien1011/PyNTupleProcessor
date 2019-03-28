@@ -1,4 +1,5 @@
 from Core.Module import Module
+from numpy import sqrt
 
 class AnalysisSkimmer(Module):
     def __init__(self,name,cutflow="DarkPhoton-SR"):
@@ -6,7 +7,7 @@ class AnalysisSkimmer(Module):
         self.cutflow = cutflow
 
     def analyze(self,event):
-        ZCandRatioM = (event.massZ1[0]-event.massZ2[0])/(event.massZ1[0]+event.massZ2[0])
+        ZCandRatioM = abs(event.massZ1[0]-event.massZ2[0])/(event.massZ1[0]+event.massZ2[0])
         if self.cutflow == "DarkPhoton-SR":
             if event.mass4l[0] < 118. or event.mass4l[0] > 130.: return False
             #if event.massZ1[0] < 0. or event.massZ1[0] > 60.: return False
