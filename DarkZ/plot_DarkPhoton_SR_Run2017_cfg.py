@@ -39,11 +39,7 @@ out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
 User                    = os.environ['USER']
 lumi                    = 41.4
 nCores                  = 5
-<<<<<<< HEAD:DarkZ/plot_DarkPhotonSR_Run2017_cfg.py
-outputDir               = "/raid/raid7/"+User+"/DarkZ/"+out_path
-=======
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
->>>>>>> 78188c5e93667c0f69275b8af87cd31fded4e632:DarkZ/plot_DarkPhoton_SR_Run2017_cfg.py
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2017] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
@@ -148,9 +144,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-<<<<<<< HEAD:DarkZ/plot_DarkPhotonSR_Run2017_cfg.py
-endModuleOutputDir = "/home/"+User+"/public_html/DarkZ/"+out_path
-=======
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
->>>>>>> 78188c5e93667c0f69275b8af87cd31fded4e632:DarkZ/plot_DarkPhoton_SR_Run2017_cfg.py
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
