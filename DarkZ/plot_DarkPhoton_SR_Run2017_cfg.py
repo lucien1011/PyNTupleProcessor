@@ -36,12 +36,13 @@ deltaRPlotRange2 = [20,0.,2.]
 deltaRPlotRange = [40,0.,4.]
 
 out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
+User                    = os.environ['USER']
 lumi                    = 41.4
 nCores                  = 2
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2017] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
+componentList           = bkgSamples + [data2017] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
 justEndSequence         = False
 
 

@@ -15,18 +15,16 @@ from Plotter.Plot import Plot
 
 from HToZdZd.Config.MergeSampleDict import *
 
-mZ1PlotRange = [65,0.,65.]
-mZ2PlotRange = [65,0.,65.]
-#h4lPlotRange = [50,95.,195.]
+mZ1PlotRange = [40,0.,80.]
+mZ2PlotRange = [40,0.,80.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-15_MC_RatioCut0p05/" # Lucien's new dir
-out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts/"
-User                    = os.environ['USER']
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-12_NoRatioCut_SignificanceTesting/"
 lumi                    = 35.9
 nCores                  = 5
-outputDir               = "/raid/raid7/"+User+"/Higgs/HToZdZd/"+out_path
+#outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = "/raid/raid7/rosedj1/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [
@@ -50,8 +48,8 @@ componentList           = bkgSamples + [
                                 ]
 justEndSequence         = False
 phpFile                 = "index.php"
-nBinsMassRatio          = 50
-#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05")  # Lucien's mass ratio cut 
+nBinsMassRatio          = 1000
+
 
 muon_plots = [
         ]
@@ -63,10 +61,10 @@ general_plots = [
         Plot("Z2_4e_mass",     ["TH1D","Z2_4e_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')     ),
         Plot("Z1_4mu_mass",     ["TH1D","Z1_4mu_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')      ),
         Plot("Z2_4mu_mass",     ["TH1D","Z2_4mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')     ),
-        Plot("Z1_2e2mu_mass",     ["TH1D","Z1_2e2mu_mass","",]+mZ1PlotRange,   LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
-        Plot("Z1_2mu2e_mass",     ["TH1D","Z1_2mu2e_mass","",]+mZ1PlotRange,   LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
-        Plot("Z2_2e2mu_mass",     ["TH1D","Z2_2e2mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
-        Plot("Z2_2mu2e_mass",     ["TH1D","Z2_2mu2e_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
+        Plot("Z1_2e2mu_mass",     ["TH1D","Z1_2e2mu_mass","",]+mZ1PlotRange,   LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
+        Plot("Z1_2mu2e_mass",     ["TH1D","Z1_2mu2e_mass","",]+mZ1PlotRange,   LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
+        Plot("Z2_2e2mu_mass",     ["TH1D","Z2_2e2mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
+        Plot("Z2_2mu2e_mass",     ["TH1D","Z2_2mu2e_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
               
         Plot("h4L_mass",    ["TH1D","h4L_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4l[0]'),       ),
         Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')       ),
@@ -76,19 +74,19 @@ general_plots = [
         Plot("h4L_Pt",      ["TH1D","h4L_Pt","",40,0.,200.],     LambdaFunc('x: x.pT4l[0]'),         ),
         
         Plot("mass_ratio",["TH1D","mass_ratio","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), ),
-        Plot("mass_ratio_4e",["TH1D","mass_ratio_4e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
-        Plot("mass_ratio_4mu",["TH1D","mass_ratio_4mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
-        Plot("mass_ratio_2e2mu",["TH1D","mass_ratio_2e2mu","",nBinsMassRatio,-1.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
-        Plot("mass_ratio_2mu2e",["TH1D","mass_ratio_2mu2e","",nBinsMassRatio,-1.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
+        Plot("mass_ratio_4e",["TH1D","mass_ratio_4e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')),
+        Plot("mass_ratio_4mu",["TH1D","mass_ratio_4mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass4e[0] < 0 and x.mass4mu[0] > 0 and x.mass2e2mu[0] < 0')),
+        Plot("mass_ratio_2e2mu",["TH1D","mass_ratio_2e2mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
+        Plot("mass_ratio_2mu2e",["TH1D","mass_ratio_2mu2e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
         ]
 
 jet_plots = [
         #Plot("nJet",    ["TH1D","nJet","",5,-0.5,4.5],      LambdaFunc('x: x.njets_pt30_eta2p5[0]'),     ),
         ]
 
-plots = muon_plots + general_plots + jet_plots 
+plots = muon_plots + general_plots + jet_plots # big list of Plot objects
 #for plot in plots:
-#    plot.plotSetting.divideByBinWidth = True
+    #plot.plotSetting.divideByBinWidth = True
 
 for dataset in componentList:
     if dataset.isMC:
@@ -106,8 +104,8 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/"+User+"/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = "/home/rosedj1/public_html/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
 
 ## Put an index.php file into Plots dir for easy visualization
-copyFile('/home/'+User+'/',phpFile,endModuleOutputDir)
+copyFile('/home/rosedj1/',phpFile,endModuleOutputDir)

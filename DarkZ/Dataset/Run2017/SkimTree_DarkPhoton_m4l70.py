@@ -16,9 +16,7 @@ saveSumWeightTxt    = True
 # Z+X
 ZPlusX_cmpList = ComponentList(
         [
-            Component("ZPlusX",
-                zxSkimTreeDir+"Data_Run2017-17Nov2017_noDuplicates_FRWeight.root",
-                "passedEvents",False)
+            Component("ZPlusX",zxSkimTreeDir+"Data_Run2017-17Nov2017_noDuplicates_FRWeight.root","passedEvents",False)
         ]
         )
 ZPlusX = Dataset(
@@ -32,8 +30,13 @@ ZPlusX = Dataset(
 # Data2017
 data2017_cmpList = ComponentList(
         [ 
+<<<<<<< HEAD
+            #Component("Data2017",dataTreeDir+"Data_Run2017-17Nov2017_4l_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2017",dataTreeDir+"Data_Run2017-17Nov2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+=======
             #Component("Data2017",dataTreeDir+"/Data_Run2017-17Nov2017_4l_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
             Component("Data2017",dataTreeDir+"/Data_Run2017-17Nov2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+>>>>>>> 78188c5e93667c0f69275b8af87cd31fded4e632
         ]
         )
 
