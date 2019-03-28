@@ -15,10 +15,10 @@ bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run
 dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = False
+saveSumWeightTxt    = True
 xsBoost             = 100
 epsilon             = 0.02 # not used below!
-sumWeightFromT2     = True
+sumWeightFromT2     = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -597,8 +597,8 @@ bkgSamples = [
         #WpWpJJ,
         #WWTo2L2Nu,
         ZPlusX,
-        DYJetsToLL_M50,
-        DYJetsToLL_M10To50,
+        #DYJetsToLL_M50,
+        #DYJetsToLL_M10To50,
         ]
 
 sigSamples = [
