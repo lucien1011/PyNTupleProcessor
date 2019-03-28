@@ -3,17 +3,8 @@ from Core.Dataset import Dataset
 from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
-<<<<<<< HEAD
-# MC Bkg samples produced from DarkZLiteAnalyzer
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/" 
-bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run2016/" # Used for setSumweight
-bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/" # Only used if SumWeightFromT2 == True
-dataTreeDir         = bkgSkimTreeDir # Skimmed DATA using DarkZLiteAnalyzer
-sigSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181019/SkimTree_DarkPhoton_Run2017Sig_m4l70/"    # Currently not used below
-sigTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/SigMC_Run2016_v1/"                 # Currently not used below
 # ____________________________________________________________________________________________________________________________________________
 # User parameters
-=======
 #bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190205/SkimTree_HToZdZd_Run2016Data_m4l70/"
 #bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
 #bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
@@ -23,7 +14,6 @@ bkgTreeDirFeb02     = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2
 bkgTreeDirAug10     = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2lskim_Aug10/"
 bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run2016/"
 dataTreeDir         = bkgSkimTreeDir
->>>>>>> 78188c5e93667c0f69275b8af87cd31fded4e632
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 saveSumWeightTxt    = False
@@ -653,13 +643,9 @@ bkgSamples = [
         #ZZZ,
         #WpWpJJ,
         #WWTo2L2Nu,
-<<<<<<< HEAD
-        ZPlusX, # a special file in a special spot
-=======
         ZPlusX,
         DYJetsToLL_M50,
         DYJetsToLL_M10To50,
->>>>>>> 78188c5e93667c0f69275b8af87cd31fded4e632
         ]
 
 sigSamples = [
