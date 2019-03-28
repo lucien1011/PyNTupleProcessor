@@ -18,7 +18,8 @@ predCR_cmpList = ComponentList(
         [
             #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeight.root","passedEvents",False),
             #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightv2.root","passedEvents",False),
-            Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasin.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasin.root","passedEvents",False),
+            Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasinWZRemoved.root","passedEvents",False),
             #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasinV2.root","passedEvents",False),
         ]
         )
