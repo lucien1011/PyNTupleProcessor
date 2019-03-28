@@ -12,9 +12,9 @@ do
 done
 
 if [ "$interactive" = true ]; then 
-    ipython -i -- tmp_NTuple.py "$@"
+    python -i -- tmp_NTuple.py "$@"
 else
-    ipython -- tmp_NTuple.py "$@"
+    python -- tmp_NTuple.py "$@"
 fi 
 
 rm tmp_NTuple.py

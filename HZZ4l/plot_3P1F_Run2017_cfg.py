@@ -5,24 +5,21 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from DarkZ.Dataset.Run2016.ZXCR_MC_DarkPhoton import * 
-from DarkZ.Dataset.Run2016.ZXCR_Data_DarkPhoton import * 
+from HZZ4l.Dataset.Run2017.ZXCR_MC import * 
+from HZZ4l.Dataset.Run2017.ZXCR_Data import * 
 
-from DarkZ.Sequence.RecoSequence import * 
+from HZZ4l.Sequence.RecoSequence import * 
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2019-01-16_3P1F_DataVsPred_FRv2/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightFromVukasin/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightSumCorrIso/"
-#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightFromVukasin_MaxFRL3L4/"
-out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-11_3P1F_DataVsPred_FRWeightFromVukasin/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_HZZ4l_ZX_Run2017Data_m4l70/2019-03-11_3P1F_DataVsPred_FRWeightFromVukasin/"
 
 #mZ1PlotRange = [60,0.,120.]
 #mZ2PlotRange = [60,0.,120.]
-h4lPlotRange = [55,60.,500.]
+#h4lPlotRange = [55,60.,500.]
+h4lPlotRange = [37,60.,800.]
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [60,0.,120.]
 #mZ2PlotRange = [30,0.,60.]
@@ -33,10 +30,10 @@ mZ2PlotRange = [60,0.,120.]
 #sel_str_2e2mu = "x: abs(x.lep_id[x.lep_Hindex[0]]) == 11 and abs(x.lep_id[x.lep_Hindex[1]]) == 11 and abs(x.lep_id[x.lep_Hindex[2]]) == 13 and abs(x.lep_id[x.lep_Hindex[3]]) == 13"
 #sel_str_2mu2e = "x: abs(x.lep_id[x.lep_Hindex[0]]) == 13 and abs(x.lep_id[x.lep_Hindex[1]]) == 13 and abs(x.lep_id[x.lep_Hindex[2]]) == 11 and abs(x.lep_id[x.lep_Hindex[3]]) == 11"
 
-sel_str_4e = "x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11"
-sel_str_4mu = "x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13"
-sel_str_2mu2e = "x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11"
-sel_str_2e2mu = "x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13"
+sel_str_4e = "x: x.finalState[0] == 2"
+sel_str_4mu = "x: x.finalState[0] == 1"
+sel_str_2e2mu = "x: x.finalState[0] == 3"
+sel_str_2mu2e = "x: x.finalState[0] == 4"
 
 eachCR = "3p1f"
 general_plots = []
@@ -68,22 +65,22 @@ plots =  general_plots
 predCR.isSignal         = False
 
 nCores                  = 5
-outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/HZZ4l/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [Data_Run2016,predCR,WZTo3LNu,]
+componentList           = [Data_Run2017,predCR,WZTo3LNu,qqZZTo4L,]
 justEndSequence         = False
 
 for dataset in componentList:
     if dataset.isMC:
-        #dataset.lumi = 41.4
-        dataset.lumi = 35.9
+        dataset.lumi = 41.4
+        #dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = darkphoton_3p1f_sequence
+sequence                = zx_3p1f_sequence
 
 sequence.add(plotter)
 
@@ -92,5 +89,6 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
+#endModuleOutputDir = "/home/lucien/public_html/Higgs/HZZ4l/"+out_path
+endModuleOutputDir = "/Users/lucien1011/CMS/analysis/public_html/Higgs/HZZ4l/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))

@@ -3,6 +3,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from HToZdZd.Dataset.Run2016.ZXCR_MC_DarkPhoton import * 
 from HToZdZd.Dataset.Run2016.ZXCR_Data_DarkPhoton import * 
@@ -45,7 +46,7 @@ plots =  general_plots
 predCR.isSignal         = False
 
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [Data_Run2016,predCR]
@@ -69,5 +70,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))

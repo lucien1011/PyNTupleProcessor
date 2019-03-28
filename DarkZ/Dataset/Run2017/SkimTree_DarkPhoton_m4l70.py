@@ -1,14 +1,16 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
+from Utils.System import system
+from Utils.SumWeight import handleSumWeight
 
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_Run2017Data_m4l70/"
+bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_Run2017Data_m4l70/"
 bkgSkimTreeDir2     = bkgSkimTreeDir
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/"
 dataTreeDir         = bkgSkimTreeDir
-zxSkimTreeDir       = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
+zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-sumWeightFromT2     = True
+saveSumWeightTxt    = True
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -30,7 +32,8 @@ ZPlusX = Dataset(
 # Data2017
 data2017_cmpList = ComponentList(
         [ 
-            Component("Data2017",dataTreeDir+"/Data_Run2017-17Nov2017_4l_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            #Component("Data2017",dataTreeDir+"/Data_Run2017-17Nov2017_4l_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2017",dataTreeDir+"/Data_Run2017-17Nov2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -54,14 +57,15 @@ qqZZTo4L = Dataset(
         isMC                = True,
         xs                  = 1.256,
         )
-if sumWeightFromT2:
-    qqZZTo4L.setSumWeight(
+handleSumWeight(
+        qqZZTo4L,
+        system,
         bkgTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
         )
-else:
-    qqZZTo4L.sumw = 6669988.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggH
@@ -78,14 +82,15 @@ ggH = Dataset(
         #xs                  = 0.01218,
         xs                  = 48.52*0.0002768,
         )
-if sumWeightFromT2:
-    ggH.setSumWeight(
+handleSumWeight(
+        ggH,
+        system,
         bkgTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
         )
-else:
-    ggH.sumw = 999800.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # VBF
@@ -101,14 +106,15 @@ VBF = Dataset(
         isMC                = True,
         xs                  = 0.001044,
         )
-if sumWeightFromT2:
-    VBF.setSumWeight(
+handleSumWeight(
+        VBF,
+        system,
         bkgTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
         )
-else:
-    VBF.sumw = 499312.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # WHplus
@@ -124,14 +130,15 @@ WHplus = Dataset(
         isMC                = True,
         xs                  = 0.000232,
         )
-if sumWeightFromT2:
-    WHplus.setSumWeight(
+handleSumWeight(
+        WHplus,
+        system,
         bkgTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.txt",
         )
-else:
-    WHplus.sumw = 279824.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # WHminus
@@ -147,14 +154,15 @@ WHminus = Dataset(
         isMC                = True,
         xs                  = 0.000147,
         )
-if sumWeightFromT2:
-    WHminus.setSumWeight(
+handleSumWeight(
+        WHminus,
+        system,
         bkgTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.txt",
         )
-else:
-    WHminus.sumw = 186036.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ZH
@@ -170,14 +178,15 @@ ZH = Dataset(
         isMC                = True,
         xs                  = 0.000668,
         )
-if sumWeightFromT2:
-    ZH.setSumWeight(
+handleSumWeight(
+        ZH,
+        system,
         bkgTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8.root",
         sumWeightHist,
         True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8.txt",
         )
-else:
-    ZH.sumw = 470416.0
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4tau
@@ -193,12 +202,15 @@ ggZZTo4tau = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-if sumWeightFromT2:
-    ggZZTo4tau.setSumWeight(
-            bkgTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.root",
-            sumWeightHist,True)
-else:
-    ggZZTo4tau.sumw = 495800.000000
+handleSumWeight(
+        ggZZTo4tau,
+        system,
+        bkgTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4e
@@ -214,12 +226,15 @@ ggZZTo4e = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-if sumWeightFromT2:
-    ggZZTo4e.setSumWeight(
-            bkgTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.root",
-            sumWeightHist,True)
-else:
-    ggZZTo4e.sumw = 965000.0
+handleSumWeight(
+        ggZZTo4e,
+        system,
+        bkgTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4mu
@@ -235,10 +250,15 @@ ggZZTo4mu = Dataset(
         isMC                = True,
         xs                  = 0.001586,
         )
-if sumWeightFromT2:
-    ggZZTo4mu.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo4mu.sumw = 995200.0
+handleSumWeight(
+        ggZZTo4mu,
+        system,
+        bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2mu2tau
@@ -254,10 +274,15 @@ ggZZTo2mu2tau = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-if sumWeightFromT2:
-    ggZZTo2mu2tau.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo2mu2tau.sumw = 499800.0
+handleSumWeight(
+        ggZZTo2mu2tau,
+        system,
+        bkgTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2mu
@@ -273,10 +298,15 @@ ggZZTo2e2mu = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-if sumWeightFromT2:
-    ggZZTo2e2mu.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo2e2mu.sumw = 1386000.0
+handleSumWeight(
+        ggZZTo2e2mu,
+        system,
+        bkgTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo2e2tau
@@ -292,12 +322,16 @@ ggZZTo2e2tau = Dataset(
         isMC                = True,
         xs                  = 0.00319,
         )
-if sumWeightFromT2:
-    ggZZTo2e2tau.setSumWeight(bkgTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8.root",sumWeightHist,True)
-else:
-    ggZZTo2e2tau.sumw = 500000.0
+handleSumWeight(
+        ggZZTo2e2tau,
+        system,
+        bkgTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8.txt",
+        )
 
-# ____________________________________________________________________________________________________________________________________________ ||
 # ____________________________________________________________________________________________________________________________________________ ||
 bkgSamples = [
         ggH,
