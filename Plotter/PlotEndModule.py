@@ -4,6 +4,8 @@ import os,ROOT,math
 
 from SampleColor import sampleColorDict
 
+from Core.Utils.printFunc import pyPrint
+
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 class PlotEndModule(EndModule):
@@ -26,7 +28,7 @@ class PlotEndModule(EndModule):
         elif plot.dim == 2:
             self.draw2DPlot(collector,plot,outputDir)
         else:
-            print "Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment"
+            pyPrint("Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment")
 
     def sortHistList(self,histList):
         histList.sort(key=lambda l: l[2], reverse=False)
@@ -319,7 +321,7 @@ class PlotEndModule(EndModule):
                 scaleFactor = dataCount*1.0/smCount
                 scaleFactorErr = scaleFactor*math.sqrt(1/dataCount + smCountErrSq/smCount**2)
             else:
-                print "Warning, smCount or dataCount is zero :"+plot.key
+                pyPrint("Warning, smCount or dataCount is zero :"+plot.key)
                 scaleFactor    = 0.0
                 scaleFactorErr = 0.0
 
