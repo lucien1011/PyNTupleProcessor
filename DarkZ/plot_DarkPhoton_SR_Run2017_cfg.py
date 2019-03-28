@@ -35,9 +35,9 @@ h4lPlotRange = [20,100.,140.]
 deltaRPlotRange2 = [20,0.,2.]
 deltaRPlotRange = [40,0.,4.]
 
-out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-26_Run2017/"
 lumi                    = 41.4
-nCores                  = 2
+nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
