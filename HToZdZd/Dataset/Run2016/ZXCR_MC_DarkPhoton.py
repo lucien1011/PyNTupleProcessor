@@ -10,7 +10,8 @@ inUFTier2       = False
 # Z+X
 predCR_cmpList = ComponentList(
         [
-            Component("PredCR",predCRTreeDir+"Data_Run2016-2l_noDuplicates_FRWeight.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"Data_Run2016-2l_noDuplicates_FRWeight.root","passedEvents",False),
+            Component("PredCR",predCRTreeDir+"Data_Run2016-2l_noDuplicates_FRWeightFromVukasin.root","passedEvents",False),
         ]
         )
 predCR = Dataset(

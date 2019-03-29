@@ -15,13 +15,14 @@ from Plotter.Plot import Plot
 
 from HToZdZd.Config.MergeSampleDict import *
 
-mZ1PlotRange = [30,0.,60.]
-mZ2PlotRange = [30,0.,60.]
+mZ1PlotRange = [35,0.,70.]
+mZ2PlotRange = [35,0.,70.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
 #out_path                = "DarkPhotonSB/DataMCDistributions/2019-02-25_Run2016_NoRatioCut/"
-out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-28_Run2016_NoRatioCut_0p5To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-29_Run2016_RatioCut_4To62p5/"
+out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-29_Run2017_InvertedRatioCut_m4l118-130_4To62p5/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
@@ -29,7 +30,7 @@ nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2016,] + [HToZdZd_MZD30,] 
 justEndSequence         = False
-
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
 
 muon_plots = [
         ]
@@ -76,7 +77,8 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = darkphoton_sb_sequence
+#sequence                = darkphoton_sb_sequence
+sequence                = darkphoton_signal_sequence
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
