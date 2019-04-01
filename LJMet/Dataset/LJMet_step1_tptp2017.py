@@ -17,7 +17,7 @@ treeName	        = "ljmet"
 #ntupleWhere         = '/eos/uscms/store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
 ntupleWhere         = 'root://cmseos.fnal.gov//store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
 #txtWhere            = '/uscms/home/yiting11/nobackup/UF-PyNTupleRunner/LJMet/Dataset/txt/'
-txtWhere            = os.environ['BASE_PATH']+'LJMet/Dataset/txt/'
+txtWhere            = os.environ['BASE_PATH']+'/LJMet/Dataset/txt/'
 
 # ____________________________________________________________________________________________________________________________________________ ||
 bkgList = [
