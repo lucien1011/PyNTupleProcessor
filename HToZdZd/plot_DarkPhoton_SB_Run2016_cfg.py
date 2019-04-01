@@ -2,9 +2,10 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
+#from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
 from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
@@ -14,20 +15,25 @@ from Plotter.Plot import Plot
 
 from HToZdZd.Config.MergeSampleDict import *
 
-mZ1PlotRange = [30,0.,60.]
-mZ2PlotRange = [30,0.,60.]
+mZ1PlotRange = [35,0.,70.]
+mZ2PlotRange = [35,0.,70.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
-out_path                = "DarkPhotonSB/DataMCDistributions/2019-02-25_Run2016_NoRatioCut/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-02-25_Run2016_NoRatioCut/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-29_Run2016_RatioCut_4To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2017_InvertedRatioCut_m4l118-130_4To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2016_RatioCut_4To62p5/"
+out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2016_InvertedRatioCut_4To62p5/"
 lumi                    = 35.9
 nCores                  = 3
-outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2016,] + [HToZdZd_MZD30,] 
 justEndSequence         = False
-
+#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
 
 muon_plots = [
         ]
@@ -75,12 +81,13 @@ for dataset in componentList:
 plotter                 = Plotter("Plotter",plots)
 
 sequence                = darkphoton_sb_sequence
+#sequence                = darkphoton_signal_sequence
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/HToZdZd/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence = EndSequence(skipHadd=False)
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

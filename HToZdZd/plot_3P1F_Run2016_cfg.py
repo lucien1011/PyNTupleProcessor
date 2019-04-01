@@ -3,6 +3,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from HToZdZd.Dataset.Run2016.ZXCR_MC_DarkPhoton import * 
 from HToZdZd.Dataset.Run2016.ZXCR_Data_DarkPhoton import * 
@@ -13,7 +14,7 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2019-02-19_3P1F_DataVsPred/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2019-03-29_3P1F_DataVsPred/"
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
@@ -45,7 +46,7 @@ plots =  general_plots
 predCR.isSignal         = False
 
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [Data_Run2016,predCR]
@@ -69,5 +70,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))

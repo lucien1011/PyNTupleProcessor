@@ -1,8 +1,8 @@
 mergeSampleDict = {
-        "ggH":  ["ggH"],
-        "VBF":  ["VBF"],
-        "WH":   ["WHPlus","WHminus",],
-        "ZH":   ["ZH",],
+        #"ggH":  ["ggH"],
+        #"VBF":  ["VBF"],
+        #"WH":   ["WHPlus","WHminus",],
+        #"ZH":   ["ZH",],
         "Higgs":    ["ggH","VBF","WHPlus","WHMinus","ZH",],
         "qqZZ": ["qqZZTo4L",],
         "ggZZ": [
@@ -22,4 +22,5 @@ mergeSampleDict = {
             "WWTo2L2Nu",
             ],
         "ZPlusX": ["ZPlusX"],
+        "DYJets": ["DYJetsToLL_M50","DYJetsToLL_M10To50",],
         }

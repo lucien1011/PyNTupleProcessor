@@ -2,10 +2,10 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Core.Utils.mkdir_p import mkdir_p,copyFile
 
-from DarkZ.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
-from DarkZ.Sequence.RecoSequence import * 
-from DarkZ.Producer.VariableProducer import VariableProducer
+from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
+from HToZdZd.Sequence.RecoSequence import * 
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -25,24 +25,35 @@ mergeSampleDict = {
             "ggZZTo4mu",
             "ggZZTo4tau",
             ],
+        "VVVVBS": [
+            "WWW_4F",
+            "WWZ",
+            "WZZ",
+            "ZZZ",
+            "WpWpJJ",
+            "WWTo2L2Nu",
+            ],
         "ZPlusX": ["ZPlusX"],
         }
 
-mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [30,0.,60.]
-h4lPlotRange = [20,100.,140.]
-deltaRPlotRange2 = [20,0.,2.]
-deltaRPlotRange = [40,0.,4.]
+mZ1PlotRange = [31,0.,62.]
+mZ2PlotRange = [31,0.,62.]
+h4lPlotRange = [50,95.,195.]
+#h4lPlotRange = [140,60.,200.]
 
-out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
-lumi                    = 41.4
+phpFile                 = 'index.php'
+User                    = os.environ['USER']
+print User
+out_path                = "DarkPhotonSB/DataMCDistributions/20190130_Run2016_mZdTEST6/"
+lumi                    = 35.9
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+#outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = "/raid/raid7/"+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2017] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
+componentList           = bkgSamples + [data2016] 
 justEndSequence         = False
-
+region_sel_str_whole = "x: True"
 
 muon_plots = [
         Plot("LeadingLepton_pt", ["TH1D","LeadingLepton_pt","",20,0.,200.], LambdaFunc('x: max([ x.pTL1[0], x.pTL2[0], x.pTL3[0], x.pTL4[0] ])')),
@@ -77,42 +88,45 @@ muon_plots = [
         Plot("Electron3_Phi", ["TH1D","Electron3_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL3[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
         Plot("Electron4_Phi", ["TH1D","Electron4_phi","",20,-5.,5.], LambdaFunc('x: [x.phiL4[0]] if abs(x.idL1[0]) == 11 else []'), isCollection=True),
         
-        Plot("DeltaRL12",     ["TH1D","DeltaL12","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL12'),       ),
-        Plot("DeltaRL13",     ["TH1D","DeltaL13","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL13'),       ),
-        Plot("DeltaRL14",     ["TH1D","DeltaL14","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL14'),       ),
-        Plot("DeltaRL23",     ["TH1D","DeltaL23","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL23'),       ),
-        Plot("DeltaRL24",     ["TH1D","DeltaL24","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL24'),       ),
-        Plot("DeltaRL34",     ["TH1D","DeltaL34","",]+deltaRPlotRange2,  LambdaFunc('x: x.deltaRL34'),       ),
-        Plot("MinDeltaRL",     ["TH1D","MinDeltaRL","",]+deltaRPlotRange2,  LambdaFunc('x: x.minDeltaRL'),       ),
+        #Plot("DeltaRL12",     ["TH1D","DeltaL12","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL12'),       ),
+        #Plot("DeltaRL13",     ["TH1D","DeltaL13","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL13'),       ),
+        #Plot("DeltaRL14",     ["TH1D","DeltaL14","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL14'),       ),
+        #Plot("DeltaRL23",     ["TH1D","DeltaL23","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL23'),       ),
+        #Plot("DeltaRL24",     ["TH1D","DeltaL24","",]+deltaRPlotRange,  LambdaFunc('x: x.deltaRL24'),       ),
+        #Plot("DeltaRL34",     ["TH1D","DeltaL34","",]+deltaRPlotRange2,  LambdaFunc('x: x.deltaRL34'),       ),
+        #Plot("MinDeltaRL",     ["TH1D","MinDeltaRL","",]+deltaRPlotRange2,  LambdaFunc('x: x.minDeltaRL'),       ),
         ]
 
 general_plots = [
-        Plot("Z1_mass",     ["TH1D","Z1_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       ),
-        Plot("Z2_mass",     ["TH1D","Z2_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'),       ),
-        Plot("Z1_4e_mass",     ["TH1D","Z1_4e_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')      ),
-        Plot("Z2_4e_mass",     ["TH1D","Z2_4e_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')     ),
-        Plot("Z1_4mu_mass",     ["TH1D","Z1_4mu_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')      ),
-        Plot("Z2_4mu_mass",     ["TH1D","Z2_4mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')     ),
-        Plot("Z1_2e2mu_mass",     ["TH1D","Z1_2e2mu_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')      ),
-        Plot("Z2_2e2mu_mass",     ["TH1D","Z2_2e2mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
-        Plot("Z2_2mu2e_mass",     ["TH1D","Z2_2mu2e_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
+        Plot("Z1_mass",      ["TH1D","Z1_mass","",]+mZ1PlotRange,       LambdaFunc('x: x.massZ1[0]'),       ),
+        Plot("Z2_mass",      ["TH1D","Z2_mass","",]+mZ2PlotRange,       LambdaFunc('x: x.massZ2[0]'),       ),
+        Plot("Z1_4e_mass",   ["TH1D","Z1_4e_mass","",]+mZ1PlotRange,    LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')      ),
+        Plot("Z2_4e_mass",   ["TH1D","Z2_4e_mass","",]+mZ2PlotRange,    LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')     ),
+        Plot("Z1_4mu_mass",  ["TH1D","Z1_4mu_mass","",]+mZ1PlotRange,   LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')      ),
+        Plot("Z2_4mu_mass",  ["TH1D","Z2_4mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')     ),
+        Plot("Z1_2e2mu_mass",["TH1D","Z1_2e2mu_mass","",]+mZ1PlotRange, LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')      ),
+        Plot("Z2_2e2mu_mass",["TH1D","Z2_2e2mu_mass","",]+mZ2PlotRange, LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
+        Plot("Z2_2mu2e_mass",["TH1D","Z2_2mu2e_mass","",]+mZ2PlotRange, LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
               
-        Plot("h4L_mass",    ["TH1D","h4L_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4l[0]'),       ),
+        Plot("h4L_mass",    ["TH1D","h4L_mass","",]+h4lPlotRange,    LambdaFunc('x: x.mass4l[0]'),       ),
         #Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')       ),
+        Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,    LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')       ),
         #Plot("h4mu_mass",   ["TH1D","h4mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4mu[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')       ),
-        #Plot("h2e2mu_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')       ),
-        Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')       ),
         Plot("h4mu_mass",   ["TH1D","h4mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4mu[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0 and x.mass4e[0] < 0 and x.mass2e2mu[0] < 0')       ),
+        ##Plot("h2e2mu_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')       ),
         #Plot("h2e2mu_mass", ["TH1D","h2e2mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0')       ),
         Plot("h2e2mu_mass", ["TH1D","h2e2mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')       ),
         Plot("h2mu2e_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')       ),
-        Plot("h4L_Pt",      ["TH1D","h4L_Pt","",40,0.,200.],     LambdaFunc('x: x.pT4l[0]'),         ),
+        Plot("h4L_Pt",      ["TH1D","h4L_Pt","",40,0.,200.],        LambdaFunc('x: x.pT4l[0]'),         ),
         
-        Plot("met",         ["TH1D","met","",40,0.,200.],       LambdaFunc('x: x.met[0]'),          ),
-        Plot("nVtx",        ["TH1D","nVtx","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]')),
-        Plot("nVtx_4mu",        ["TH1D","nVtx_4mu","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')),
-        Plot("nVtx_4e",        ["TH1D","nVtx_4e","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')),
-        Plot("nVtx_2e2mu",        ["TH1D","nVtx_2e2mu","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')),
+        Plot("met",         ["TH1D","met","",40,0.,200.],           LambdaFunc('x: x.met[0]'),          ),
+        Plot("nVtx",        ["TH1D","nVtx","",30,0.0,60.0],         LambdaFunc('x: x.nVtx[0]')),
+        Plot("nVtx_4mu",    ["TH1D","nVtx_4mu","",30,0.0,60.0],     LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')),
+        Plot("nVtx_4e",     ["TH1D","nVtx_4e","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')),
+        Plot("nVtx_2e2mu",  ["TH1D","nVtx_2e2mu","",30,0.0,60.0],   LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')),
+        #Plot("h4Lmass_vs_Z1mass",["TH2D","h4Lmass_vs_Z1mass","",]+h4lPlotRange+mZ1PlotRange, LambdaFunc('x: [x.mass4l[0],x.massZ1[0]]'), dim=2, selFunc=LambdaFunc(region_sel_str_whole)),
+        #Plot("h4Lmass_vs_Z2mass",["TH2D","h4Lmass_vs_Z2mass","",]+h4lPlotRange+mZ2PlotRange, LambdaFunc('x: [x.mass4l[0],x.massZ2[0]]'), dim=2, selFunc=LambdaFunc(region_sel_str_whole)),
+        Plot("Z1mass_vs_Z2mass",["TH2D","Z1mass_vs_Z2mass","",]+mZ1PlotRange+mZ2PlotRange, LambdaFunc('x: [x.massZ1[0],x.massZ2[0]]'), dim=2, selFunc=LambdaFunc(region_sel_str_whole)),
         ]
 
 jet_plots = [
@@ -120,6 +134,7 @@ jet_plots = [
         ]
 
 plots = muon_plots + general_plots + jet_plots
+#plots = muon_plots + general_plots
 #for plot in plots:
 #    plot.plotSetting.divideByBinWidth = True
 
@@ -130,17 +145,19 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 plotter                 = Plotter("Plotter",plots)
-variableProducer        = VariableProducer("VariableProducer")
 
-sequence                = darkphoton_signal_sequence
-#sequence                = higgs_m4lNarrowWindow_sequence
-sequence.add(variableProducer)
+#sequence                = darkphoton_fullm4l_sequence
+sequence                = darkphoton_sb_sequence
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path
+endSequence = EndSequence(skipHadd=justEndSequence) # compiles the histograms!
+#endModuleOutputDir = "/home/lucien/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = "/home/"+User+"/public_html/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+
+## Put an index.php file into Plots dir for easy visualization
+copyFile('/home/'+User+'/','index.php',endModuleOutputDir)

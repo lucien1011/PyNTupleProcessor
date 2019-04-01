@@ -1,17 +1,26 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
+from Utils.System import system
+from Utils.SumWeight import handleSumWeight
 
-#bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_ZXCRSelection/"
-#bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_HIG-16-041-ZXCRSelection_v2/"
-bkgTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
-predCRTreeDir   = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
-inUFTier2       = False
+#bkgTreeDir             = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_ZXCRSelection/"
+#bkgTreeDir             = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_MC80X_HIG-16-041-ZXCRSelection_v2/"
+bkgTreeDir              = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
+bkgTreeDirT2            = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/ZPlusX_Early2017_v1/"
+predCRTreeDir           = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
+inUFTier2               = False
+saveSumWeightTxt        = True
+sumWeightHist           = "Ana/sumWeights"
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
 predCR_cmpList = ComponentList(
         [
-            Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightv2.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeight.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightv2.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasin.root","passedEvents",False),
+            Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasinWZRemoved.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"/Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasinV2.root","passedEvents",False),
         ]
         )
 predCR = Dataset(
@@ -25,7 +34,7 @@ predCR = Dataset(
 # ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M50_cmpList = ComponentList(
         [
-            Component("DYJetsToLL_M50",bkgTreeDir+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("DYJetsToLL_M50",bkgTreeDir+"DYJetsToLL_M50.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 DYJetsToLL_M50 = Dataset(
@@ -34,12 +43,21 @@ DYJetsToLL_M50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M50.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Mar11/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+#DYJetsToLL_M50.setSumWeight(bkgTreeDirT2+"DYJetsToLL_M50.root","Ana/sumWeights",True)
+handleSumWeight(
+        DYJetsToLL_M50,
+        system,
+        bkgTreeDirT2+"DYJetsToLL_M50.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"DYJetsToLL_M50.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M10To50_cmpList = ComponentList(
         [
-            Component("DYJetsToLL_M10To50",bkgTreeDir+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("DYJetsToLL_M10To50",bkgTreeDir+"DYJetsToLL_M10To50.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 DYJetsToLL_M10To50 = Dataset(
@@ -48,12 +66,21 @@ DYJetsToLL_M10To50 = Dataset(
         isMC = True,
         xs = 6104, 
         )
-DYJetsToLL_M10To50.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Mar11/DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+#DYJetsToLL_M10To50.setSumWeight(bkgTreeDirT2+"DYJetsToLL_M10To50.root","Ana/sumWeights",True)
+handleSumWeight(
+        DYJetsToLL_M10To50,
+        system,
+        bkgTreeDirT2+"DYJetsToLL_M10To50.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"DYJetsToLL_M10To50.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 TTJets_cmpList = ComponentList(
         [
-            Component("TTJets",bkgTreeDir+"TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("TTJets",bkgTreeDir+"TTJets.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 TTJets = Dataset(
@@ -62,19 +89,65 @@ TTJets = Dataset(
         isMC = True,
         xs = 87.31, 
         )
-TTJets.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Feb21/TTJets_Dilept_TuneCUETP8M2T4_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+#TTJets.setSumWeight(bkgTreeDirT2+"TTJets.root","Ana/sumWeights",True)
+handleSumWeight(
+        TTJets,
+        system,
+        bkgTreeDirT2+"TTJets.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"TTJets.txt",
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 WZTo3LNu_cmpList = ComponentList(
         [
-            Component("WZTo3LNu",bkgTreeDir+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2_1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("WZTo3LNu",bkgTreeDir+"WZTo3LNu.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 WZTo3LNu = Dataset(
         "WZTo3LNu",
         WZTo3LNu_cmpList,
         isMC = True,
-        xs = 0.04430, 
+        xs = 4.430, 
         )
-WZTo3LNu.setSumWeight("/cms/data/store/user/t2/users/archived/dsperka/Run2/HZZ4l/SubmitArea_13TeV/rootfiles_MC80X_2lskim_M17_Feb21/WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8_RunIISummer16MiniAODv2.root","Ana/sumWeights",True)
+#WZTo3LNu.setSumWeight(bkgTreeDirT2+"WZTo3LNu.root","Ana/sumWeights",True)
+handleSumWeight(
+        WZTo3LNu,
+        system,
+        bkgTreeDirT2+"WZTo3LNu.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"WZTo3LNu.txt",
+        )
 
+# ____________________________________________________________________________________________________________________________________________ ||
+# qqZZ
+qqZZ_cmpList = ComponentList(
+        [ 
+            Component("qqZZTo4L",bkgTreeDir+"ZZTo4L_ext1.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+qqZZTo4L = Dataset(
+        "qqZZTo4L",
+        qqZZ_cmpList,
+        isMC                = True,
+        xs                  = 1.256,
+        )
+#qqZZTo4L.setSumWeight(
+#    bkgTreeDirT2+"ZZTo4L_ext1.root",
+#    "Ana/sumWeights",
+#    True,
+#    )
+handleSumWeight(
+        qqZZTo4L,
+        system,
+        bkgTreeDirT2+"ZZTo4L_ext1.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"qqZZTo4L.txt",
+        )

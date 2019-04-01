@@ -16,24 +16,38 @@ class FakeRateWeighter(Module):
         if "WFC_Reducible" in self.dataset.name and self.task == analyze_name:
             if event.FRWeightProd[0] == -1.: return False
             if event.nFailedLeptonsZ2[0] == 1:
+                #if event.deltaRL34 < 0.6:
+                #    return False
+                #else:
+                #    event.weight *= event.FRWeightProd[0]
+
+                #event.weight *= event.FRWeightProd[0]
+
                 if event.massZ2[0] > 6.:
                     event.weight *= event.FRWeightProd[0]
-                    event.weight_FRUniIso_Up *= event.FRWeightProd[0]
-                    event.weight_FRUniIso_Down *= event.FRWeightProd[0]
+                    event.weight_FRUniIso *= event.FRWeightProd[0]
+                    event.weight_FRAsymIso *= event.FRWeightProd[0]
                     #event.weight *= event.FRWeight[0]
                 else:
                     return False
             elif event.nFailedLeptonsZ2[0] == 2:
+                #if event.deltaRL34 < 0.6:
+                #    event.weight *= event.FRWeightProd_AsymIso[0]
+                #else:
+                #    event.weight *= -1*event.FRWeightProd[0]
+
+                #event.weight *= -1*event.FRWeightProd[0]
+                
                 if event.massZ2[0] > 6.: 
                     event.weight *= -1*event.FRWeightProd[0]
                 else:
                     event.weight *= event.FRWeightProd[0]
                 #if event.deltaRL34 > 0.6:
-                #    event.weight_FRUniIso_Up *= -1*event.FRWeightProd[0]
-                #    event.weight_FRUniIso_Down *= -1*event.FRWeightProd[0]
+                #    event.weight_FRUniIso *= -1*event.FRWeightProd[0]
+                #    event.weight_FRAsymIso *= -1*event.FRWeightProd[0]
                 #else:
-                #    event.weight_FRUniIso_Up *= -1*event.FRWeightProdCorr[0]
-                #    event.weight_FRUniIso_Down *= -1*event.FRWeightProdCorr[0]
+                #    event.weight_FRUniIso *= -1*event.FRWeightProd[0]
+                #    event.weight_FRAsymIso *= -1*event.FRWeightProd[0]
             else:
                 return False
         elif "ZPlusX" in self.dataset.name and self.task == analyze_name:
@@ -65,11 +79,14 @@ class FakeRateWeighter(Module):
             #if event.nZXCRFailedLeptons[0] == 1:
             if event.FRWeightSum[0] == -1.: return False
             if event.nFailedLeptonsZ2[0] == 2:
-                event.weight *= event.FRWeightSum[0]
+                #event.weight *= event.FRWeightSum[0]
                 #if event.deltaRL34 > 0.6:
-                #    event.weight *= event.FRWeightSum[0]
-                #else:
-                #    event.weight *= event.FRWeightSumCorrIso[0]
+                if event.massZ2[0] > 12.:
+                    event.weight *= event.FRWeightSum[0]
+                else:
+                    #event.weight *= event.FRWeightSum[0]
+                    #event.weight *= event.FRWeightProd_AsymIso[0]
+                    event.weight *= (event.FRWeightL3[0]+event.FRWeightL4[0])/2.
             else:
                 return False
         return True

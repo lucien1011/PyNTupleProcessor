@@ -69,7 +69,7 @@ plots =  general_plots
 #    plot.plotSetting.divideByBinWidth = True
 
 nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/DarkZ/"+out_path
+outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,]#predCR]
@@ -93,5 +93,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/DarkZ/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))

@@ -1,6 +1,7 @@
 from Core.Sequence import Sequence
 
 from HZZ4l.Skimmer.WrongFCSkimmer import WrongFCSkimmer
+from HZZ4l.Skimmer.ZXCRSkimmer import ZXCRSkimmer
 from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
 from DarkZ.Weighter.NLOWeighter import NLOWeighter
 from HZZ4l.Weighter.FakeRateWeighter import FakeRateWeighter
@@ -10,6 +11,8 @@ from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAO
 WrongFCSkimmer_SR       = WrongFCSkimmer("WrongFC-SR",cutflow="SR")
 WrongFCSkimmer_CR       = WrongFCSkimmer("WrongFC-CR",cutflow="CR")
 WrongFCSkimmer_3P1F     = WrongFCSkimmer("WrongFC-CR",cutflow="3P1F")
+
+zxSkimmer               = ZXCRSkimmer("ZXCRSkimmer")
 
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")
@@ -33,3 +36,11 @@ wrongFC_3p1f_sequence.add(WrongFCSkimmer_3P1F)
 wrongFC_3p1f_sequence.add(xsWeighter)
 wrongFC_3p1f_sequence.add(dataMCWeighter)
 wrongFC_3p1f_sequence.add(fakeRateWeighter)
+
+zx_3p1f_sequence = Sequence()
+zx_3p1f_sequence.add(zxSkimmer)
+zx_3p1f_sequence.add(xsWeighter)
+zx_3p1f_sequence.add(dataMCWeighter)
+zx_3p1f_sequence.add(fakeRateWeighter)
+
+
