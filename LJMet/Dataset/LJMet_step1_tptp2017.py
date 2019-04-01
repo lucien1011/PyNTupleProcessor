@@ -10,8 +10,10 @@ import os
 #dir_prefix	        = "root://cmseos.fnal.gov//store/user/yiting11/lpcljm_step1test/"
 #dir_prefix	        = "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb/nominal/"
 #dir_prefix_TTInc	= "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb_addNumCounter/nominal/"
-dir_prefix          = "root://cmseos.fnal.gov//store/user/lpcljm/yiting/2017/Feb_addNumCounter/nominal/"
-dir_prefix_TTInc    = "root://cmseos.fnal.gov//store/user/lpcljm/yiting/2017/Feb/nominal/"
+#dir_prefix          = "root://cmseos.fnal.gov//store/user/lpcljm/yiting/2017/Feb_addNumCounter/nominal/"
+#dir_prefix_TTInc    = "root://cmseos.fnal.gov//store/user/lpcljm/yiting/2017/Feb/nominal/"
+dir_prefix          = "/raid/raid7/lucien/LJMet/B2G/Step1NTuple/lpcljm_yiting_2017_Feb_addNumCounter/nominal/"
+dir_prefix_TTInc    = "/raid/raid7/lucien/LJMet/B2G/Step1NTuple/lpcljm_yiting_2017_Feb_addNumCounter/nominal/"
 treeName	        = "ljmet"
 
 #ntupleWhere         = '/eos/uscms/store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
