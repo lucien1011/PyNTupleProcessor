@@ -26,7 +26,8 @@ from Plotter.Plot import Plot
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-10-24_DarkPhotonSR-Unblinding/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_Nominal/2018-10-25_DarkPhotonSR-Unblinding/"
-out_path = "ParaInput/DarkPhotonSelection_m4l118To130_Nominal/2018-11-21_DarkPhotonSR_mZ2-35_Norm/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l118To130_Nominal/2018-11-21_DarkPhotonSR_mZ2-35_Norm/"
+out_path = "ParaInput/DarkPhotonSelection_m4l118To130_Nominal/2019-03-29_DarkPhotonSR_mZ2-35_Norm/"
 #out_path = "StatInput/DarkPhotonSelection_m4l118To130_UniformIso/2018-09-21/"
 #out_path = "StatInput/DarkPhotonSelection_m4l105To140/2018-08-31/"
 
@@ -56,7 +57,7 @@ syst_list = [
 
 User                    = os.environ['USER']
 nCores                  = 5
-outputDir               = "/raid/raid7/"+User+"/DarkZ/"+out_path
+outputDir               = "/raid/raid7/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + sigSamples + [data2016]
@@ -65,7 +66,7 @@ skipGitDetail           = True
 
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 150.0
+        dataset.lumi = 136.1
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
