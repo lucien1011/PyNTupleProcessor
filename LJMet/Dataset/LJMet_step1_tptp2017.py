@@ -4,14 +4,21 @@ from Core.Dataset import Dataset
 from LJMet.Dataset.weights_step1_tptp2017 import *
 from LJMet.Dataset.samples_step1_tptp2017 import *
 
+import os
+
 # ____________________________________________________________________________________________________________________________________________ ||
 #dir_prefix	        = "root://cmseos.fnal.gov//store/user/yiting11/lpcljm_step1test/"
-dir_prefix	        = "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb/nominal/"
-dir_prefix_TTInc	= "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb_addNumCounter/nominal/"
+#dir_prefix	        = "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb/nominal/"
+#dir_prefix_TTInc	= "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb_addNumCounter/nominal/"
+dir_prefix          = "root://cmseos.fnal.gov//store/user/lpcljm/yiting/2017/Feb_addNumCounter/nominal/"
+dir_prefix_TTInc    = "root://cmseos.fnal.gov//store/user/lpcljm/yiting/2017/Feb/nominal/"
 treeName	        = "ljmet"
 
-ntupleWhere         = '/eos/uscms/store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
-txtWhere            = '/uscms/home/yiting11/nobackup/UF-PyNTupleRunner/LJMet/Dataset/txt/'
+#ntupleWhere         = '/eos/uscms/store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
+ntupleWhere         = 'root://cmseos.fnal.gov//store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
+#txtWhere            = '/uscms/home/yiting11/nobackup/UF-PyNTupleRunner/LJMet/Dataset/txt/'
+txtWhere            = os.environ['BASE_PATH']+'LJMet/Dataset/txt/'
+
 # ____________________________________________________________________________________________________________________________________________ ||
 bkgList = [
         'DY',
