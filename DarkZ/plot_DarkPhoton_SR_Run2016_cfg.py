@@ -27,6 +27,11 @@ deltaRPlotRange = [40,0.,4.]
 #out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-21_DarkPhotonSR-Unblinding/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-24_DarkPhotonSR_mZ212To120/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-20_Run2016/"
+<<<<<<< HEAD
+=======
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-01-22_Run2016/"
+User                    = os.environ['USER']
+>>>>>>> 3361955... Update for ZZd and ZdZd
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-26_Run2016/"
 out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2016/"
 lumi                    = 35.9

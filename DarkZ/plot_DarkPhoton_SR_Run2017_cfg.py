@@ -20,6 +20,11 @@ h4lPlotRange = [20,100.,140.]
 deltaRPlotRange2 = [20,0.,2.]
 deltaRPlotRange = [40,0.,4.]
 
+<<<<<<< HEAD
+=======
+User                    = os.environ['USER']
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-26_Run2017/"
+>>>>>>> 3361955... Update for ZZd and ZdZd
 out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2017/"
 lumi                    = 41.4
 nCores                  = 2
