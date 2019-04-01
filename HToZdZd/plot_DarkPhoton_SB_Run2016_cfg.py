@@ -20,15 +20,19 @@ h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
 #out_path                = "DarkPhotonSB/DataMCDistributions/2019-02-25_Run2016_NoRatioCut/"
-out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-04_Run2016_NoRatioCut_0p5To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-04_Run2016_NoRatioCut_0p5To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-29_Run2016_RatioCut_4To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2017_InvertedRatioCut_m4l118-130_4To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2016_RatioCut_4To62p5/"
+out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2016_InvertedRatioCut_4To62p5/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2016,] + [HToZdZd_MZD30,] 
-justEndSequence         = True 
-
+justEndSequence         = False
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
 
 muon_plots = [
         ]
@@ -76,6 +80,10 @@ for dataset in componentList:
 plotter                 = Plotter("Plotter",plots)
 
 sequence                = darkphoton_sb_sequence
+<<<<<<< HEAD
+=======
+#sequence                = darkphoton_signal_sequence
+>>>>>>> 3361955... Update for ZZd and ZdZd
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")

@@ -71,6 +71,7 @@ sampleColorDict = {
 
                 # Dark Z
                 #"ggH": ROOT.kAzure+1,
+                "Higgs": ROOT.kAzure-2,
                 "ggH": ROOT.kAzure-2,
                 "VBF": ROOT.kSpring+2,
                 "ZH": ROOT.kSpring+2,
