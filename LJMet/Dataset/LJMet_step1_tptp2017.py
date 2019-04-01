@@ -1,23 +1,24 @@
 from Core.ComponentList import *
 from Core.Dataset import Dataset
 
-from LJMet.Dataset.weights import *
-from LJMet.Dataset.samples import *
+from LJMet.Dataset.weights_step1_tptp2017 import *
+from LJMet.Dataset.samples_step1_tptp2017 import *
 
 # ____________________________________________________________________________________________________________________________________________ ||
-#dir_prefix	= "root://cmseos.fnal.gov//store/user/yiting11/lpcljm_step1test/"
-dir_prefix	= "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb/nominal/"
-treeName	= "ljmet"
+#dir_prefix	        = "root://cmseos.fnal.gov//store/user/yiting11/lpcljm_step1test/"
+dir_prefix	        = "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb/nominal/"
+dir_prefix_TTInc	= "~/nobackup/CMSSW_9_4_6_patch1/src/LJMet-Slimmer/results/2017/Feb_addNumCounter/nominal/"
+treeName	        = "ljmet"
 
-ntupleWhere = '/eos/uscms/store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
-txtWhere = '/uscms/home/yiting11/nobackup/UF-PyNTupleRunner/LJMet/Dataset/txt/'
+ntupleWhere         = '/eos/uscms/store/user/lpcljm/2018/LJMet94X_1lep_013019/nominal/'
+txtWhere            = '/uscms/home/yiting11/nobackup/UF-PyNTupleRunner/LJMet/Dataset/txt/'
 # ____________________________________________________________________________________________________________________________________________ ||
 bkgList = [
         'DY',
         'WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',
-        'TTJetsHad',
-        'TTJetsSemiLep',
-        'TTJets2L2nu',
+        'TTJetsHad0',
+        'TTJetsSemiLep0',
+        'TTJets2L2nu0',
         'TTJetsPH700mtt','TTJetsPH1000mtt',
         'Ts','Tt','Tbt','TtW','TbtW',
         'QCDht200','QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
@@ -40,11 +41,22 @@ for bkgName in bkgList:
             xs			= xsec[bkgName],
             #sumw		= nRun[bkgName],
             )
-    if not os.path.isfile(txtWhere+samples[bkgName]+'.txt'):
-        tmpDataset.setSumWeightByDir(ntupleWhere+samples[bkgName])
-        tmpDataset.saveSumWeightToPath(txtWhere+samples[bkgName]+'.txt')
+
+    if bkgName == "TTJetsHad0" or bkgName == "TTJetsSemiLep0" or bkgName == "TTJets2L2nu0":
+        tmpDataset.componentList[0].fileName = dir_prefix_TTInc+samples[bkgName]+".root"
+        txtFilePath = txtWhere+samples[bkgName].replace('_Mtt0to700','')+'.txt'
+        if not os.path.isfile(txtFilePath):
+            tmpDataset.setSumWeightByDir(ntupleWhere+samples[bkgName].replace('_Mtt0to700',''),verbose=True)
+            tmpDataset.saveSumWeightToPath(txtFilePath)
+        else:
+            tmpDataset.setSumWeightByTxt(txtFilePath)
+        tmpDataset.sumw *= 0.8832
     else:
-        tmpDataset.setSumWeightByTxt(txtWhere+samples[bkgName]+'.txt')
+        if not os.path.isfile(txtWhere+samples[bkgName]+'.txt'):
+            tmpDataset.setSumWeightByDir(ntupleWhere+samples[bkgName],verbose=True)
+            tmpDataset.saveSumWeightToPath(txtWhere+samples[bkgName]+'.txt')
+        else:
+            tmpDataset.setSumWeightByTxt(txtWhere+samples[bkgName]+'.txt')
 
     bkgSamples.append(tmpDataset)
 
@@ -201,7 +213,7 @@ for sigName in sigList:
                 ),
             isMC		= True,
             xs			= xsec[sigXSDict[sigName]],
-            sumw		= nRun[sigName],
+            #sumw		= nRun[sigName],
             )
     sigSamples.append(tmpDataset)
 

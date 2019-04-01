@@ -38,9 +38,9 @@ mergeSampleDict = {
 					],
 		}
 
-out_path                = "TestPlot/2019-03-07/"
+out_path                = "TestPlot/2019-03-11/"
 lumi                    = 41.298
-nCores                  = 8
+nCores                  = 5
 outputDir               = out_path
 nEvents                 = -1
 disableProgressBar      = False
