@@ -220,13 +220,23 @@ class PlotEndModule(EndModule):
             sigHistList = self.makeSignalHist(collector,plot)
         else:
             sigHistList = []
+
+        if collector.bkgSamples:
+            bkgMax = stack.GetMaximum()
+        else:
+            bkgMax = 0.
+
+        if collector.dataSamples:
+            dataMax = dataHist.GetMaximum()
+        else:
+            dataMax = 0.
         
-        if collector.dataSamples and collector.bkgSamples:
-            maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
-        elif collector.bkgSamples:
-            maximum = stack.GetMaximum()
-        elif collector.dataSamples:
-            maximum = dataHist.GetMaximum()
+        if collector.signalSamples:
+            sigMax = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+        else:
+            sigMax = 0.
+
+        maximum = max([bkgMax,dataMax,sigMax])
 
         if collector.bkgSamples and not collector.dataSamples:
             stack.Draw('hist')

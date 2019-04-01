@@ -13,14 +13,5 @@ mergeSampleDict = {
             "ggZZTo4mu",
             "ggZZTo4tau",
             ],
-        "VVVVBS": [
-            "WWW_4F",
-            "WWZ",
-            "WZZ",
-            "ZZZ",
-            "WpWpJJ",
-            "WWTo2L2Nu",
-            ],
         "ZPlusX": ["ZPlusX"],
-        "DYJets": ["DYJetsToLL_M50","DYJetsToLL_M10To50",],
         }
