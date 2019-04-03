@@ -4,6 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_ppZZd4l import * 
 from DarkZ.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
@@ -30,19 +31,27 @@ mergeSampleDict = {
         }
 
 mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [30,0.,60.]
-h4lPlotRange = [20,100.,140.]
+mZ2PlotRange = [60,0.,120.]
+#mZ2PlotRange = [30,0.,60.]
+h4lPlotRange = [170,60.,400.]
+#h4lPlotRange = [20,100.,140.]
 deltaRPlotRange2 = [20,0.,2.]
 deltaRPlotRange = [40,0.,4.]
 
-out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
+out_path                = "DarkPhotonSR/DataMCDistributions/20190403_Run2017/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
 User                    = os.environ['USER']
 lumi                    = 41.4
-nCores                  = 2
-outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
+nCores                  = 8
+outputDir               = system.getStoragePath()+"/rosedj1/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2017] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
+componentList           = bkgSamples + [
+                                        #ppZZd4l_M5,
+                                        ppZZd4l_M15,
+                                        ppZZd4l_M30,
+                                        ]
+#componentList           = bkgSamples + [data2017] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
 justEndSequence         = False
 
 
