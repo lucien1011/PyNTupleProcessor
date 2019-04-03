@@ -3,33 +3,22 @@ from Core.Dataset import Dataset
 from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
-<<<<<<< HEAD
-# MC Bkg samples produced from DarkZLiteAnalyzer
-bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/" 
-bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run2016/" # Used for setSumweight
-bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/" # Only used if SumWeightFromT2 == True
-dataTreeDir         = bkgSkimTreeDir # Skimmed DATA using DarkZLiteAnalyzer
-sigSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20181019/SkimTree_DarkPhoton_Run2017Sig_m4l70/"    # Currently not used below
-sigTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/SigMC_Run2016_v1/"                 # Currently not used below
 # ____________________________________________________________________________________________________________________________________________
 # User parameters
-=======
 #bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190205/SkimTree_HToZdZd_Run2016Data_m4l70/"
 #bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190207/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
-#bkgSkimTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
-bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190304/SkimTree_HToZdZd_Run2016Data_0p5To62p5_m4l70_noZCandRatioCut/"
+bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190218/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
 bkgTreeDirFeb02     = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2l_Feb21/"
 bkgTreeDirAug10     = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2lskim_Aug10/"
 bkgTreeDirLucien    = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/BkgMC_Run2016/"
 dataTreeDir         = bkgSkimTreeDir
->>>>>>> 78188c5e93667c0f69275b8af87cd31fded4e632
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = False
+saveSumWeightTxt    = True
 xsBoost             = 100
 epsilon             = 0.02 # not used below!
-sumWeightFromT2     = True
+sumWeightFromT2     = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -60,52 +49,6 @@ data2016 = Dataset(
         "Data2016",
         data2016_cmpList,
         isMC                = False,
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-DYJetsToLL_M50_cmpList = ComponentList(
-        [
-            Component("DYJetsToLL_M50",bkgSkimTreeDir+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","passedEvents",inUFTier2=inUFTier2),
-        ]
-        )
-DYJetsToLL_M50 = Dataset(
-        "DYJetsToLL_M50",
-        DYJetsToLL_M50_cmpList,
-        isMC = True,
-        xs = 6104, 
-        )
-#DYJetsToLL_M50.setSumWeight(bkgTreeDirFeb02+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
-handleSumWeight(
-        DYJetsToLL_M50,
-        system,
-        bkgTreeDirFeb02+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        bkgSkimTreeDir+"DYJetsToLL_M-50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-DYJetsToLL_M10To50_cmpList = ComponentList(
-        [
-            Component("DYJetsToLL_M10To50",bkgSkimTreeDir+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","passedEvents",inUFTier2=inUFTier2),
-        ]
-        )
-DYJetsToLL_M10To50 = Dataset(
-        "DYJetsToLL_M10To50",
-        DYJetsToLL_M10To50_cmpList,
-        isMC = True,
-        xs = 6104, 
-        )
-#DYJetsToLL_M10To50.setSumWeight(bkgTreeDirAug10+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
-handleSumWeight(
-        DYJetsToLL_M10To50,
-        system,
-        bkgTreeDirAug10+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        bkgSkimTreeDir+"DYJetsToLL_M-10to50_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -653,13 +596,9 @@ bkgSamples = [
         #ZZZ,
         #WpWpJJ,
         #WWTo2L2Nu,
-<<<<<<< HEAD
-        ZPlusX, # a special file in a special spot
-=======
         ZPlusX,
-        DYJetsToLL_M50,
-        DYJetsToLL_M10To50,
->>>>>>> 78188c5e93667c0f69275b8af87cd31fded4e632
+        #DYJetsToLL_M50,
+        #DYJetsToLL_M10To50,
         ]
 
 sigSamples = [

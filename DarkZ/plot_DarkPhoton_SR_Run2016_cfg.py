@@ -12,22 +12,7 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-mergeSampleDict = {
-        "ggH":  ["ggH"],
-        "VBF":  ["VBF"],
-        "WH":   ["WHPlus","WHminus",],
-        "ZH":   ["ZH",],
-        "qqZZ": ["qqZZTo4L",],
-        "ggZZ": [
-            "ggZZTo2e2mu",
-            "ggZZTo2e2tau",
-            "ggZZTo2mu2tau",
-            "ggZZTo4e",
-            "ggZZTo4mu",
-            "ggZZTo4tau",
-            ],
-        "ZPlusX": ["ZPlusX"],
-        }
+from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
 mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
@@ -42,11 +27,13 @@ deltaRPlotRange = [40,0.,4.]
 #out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-21_DarkPhotonSR-Unblinding/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2018-10-24_DarkPhotonSR_mZ212To120/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-20_Run2016/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-01-22_Run2016/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-01-22_Run2016/"
 User                    = os.environ['USER']
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-26_Run2016/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2016/"
 lumi                    = 35.9
 nCores                  = 3
-outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
+outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2016] + [HZZd_M4,HZZd_M15,HZZd_M30,] 

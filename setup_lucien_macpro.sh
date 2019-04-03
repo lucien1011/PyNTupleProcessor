@@ -5,4 +5,4 @@ export BASE_PATH=${PWD}
 
 export NTUPLERUNNER_MODE="Local"
 export NTUPLERUNNER_STORAGE="/Users/lucien/NTuple/"
-export NTUPLERUNNER_WWW="/Users/lucien/CMS/analysis/public_html/"
+export NTUPLERUNNER_WWW="/Users/lucien/public_html/"

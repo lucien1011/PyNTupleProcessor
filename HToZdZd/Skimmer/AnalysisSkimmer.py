@@ -23,8 +23,8 @@ class AnalysisSkimmer(Module):
             #if not ((event.mass4l[0]>130. and event.mass4l[0]<160.)): return False
             #if not ((event.mass4l[0]>130. and event.mass4l[0]<180.)): return False
             if event.mass4l[0] > 118. and event.mass4l[0] < 130.: return False
-            if event.massZ1[0] < 0. or event.massZ1[0] > 62.5: return False
-            if event.massZ2[0] < 0. or event.massZ2[0] > 62.5: return False
+            if event.massZ1[0] < 4. or event.massZ1[0] > 62.5: return False
+            if event.massZ2[0] < 4. or event.massZ2[0] > 62.5: return False
             if "ZPlusX" not in self.dataset.name:
                 if not event.passedFullSelection[0]: return False
             return True

@@ -4,6 +4,8 @@ import os,ROOT,math
 
 from SampleColor import sampleColorDict
 
+from Core.Utils.printFunc import pyPrint
+
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 bkdgErrBarColor = 3004
@@ -28,7 +30,7 @@ class PlotEndModule(EndModule):
         elif plot.dim == 2:
             self.draw2DPlot(collector,plot,outputDir)
         else:
-            print "Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment"
+            pyPrint("Skipping plot "+plot.key+" as TH"+str(plot.dim)+" is not supported at the moment")
 
     def sortHistList(self,histList):
         histList.sort(key=lambda l: l[2], reverse=False)
@@ -37,11 +39,11 @@ class PlotEndModule(EndModule):
 
         for isample,sample in enumerate(collector.dataSamples):
             h = collector.getObj(sample,plot.rootSetting[1])
-            if not isample: 
+            if not isample:
                 data = h.Clone("data")
-            else: 
+            else:
                 data.Add(h)
-        
+
         dataCountErr = ROOT.Double(0.)
         dataCount = data.IntegralAndError(0,data.GetNbinsX()+1,dataCountErr)
         self.shiftLastBin(data)
@@ -107,6 +109,7 @@ class PlotEndModule(EndModule):
         for h,sample,_,_ in histList:
             if switch: h.Divide(totalsum)
             stack.Add(h) 
+        
         total = stack.GetStack().Last().Clone("total_"+plot.key)
         total.SetFillColor(ROOT.kYellow)
         total.SetLineColor(ROOT.kRed)
@@ -127,7 +130,7 @@ class PlotEndModule(EndModule):
                 h.SetFillColor(sampleColorDict[sample])
             else:
                 h.SetFillColor(ROOT.kViolet)
-            sigCount = h.Integral(0,h.GetNbinsX()+1) 
+            sigCount = h.Integral(0,h.GetNbinsX()+1)
             self.shiftLastBin(h)
             h.SetLineStyle(9)
             h.SetLineWidth(5)
@@ -166,14 +169,14 @@ class PlotEndModule(EndModule):
             legLabel += " #pm "+str(math.ceil(smCountErr*10)/10)
 
         if bkdgErr:
-            leg.AddEntry(bkdgErr, legLabel, "fl") 
-        
+            leg.AddEntry(bkdgErr, legLabel, "fl")
+
         for hCount in reversed(histList):
             legLabel = hCount[1]
             error = hCount[3]
             if switch:
 	       legLabel += ": "+str(math.ceil(math.ceil(hCount[2]*10)/math.ceil(smCount*10)*100000)/1000)+"%"
-            else:         
+            else:
                 legLabel += ": "+str(math.ceil(hCount[2]*10)/10)+" #pm"+str(math.ceil(error*10)/10)
             leg.AddEntry(hCount[0], legLabel, "f")
 
@@ -181,16 +184,16 @@ class PlotEndModule(EndModule):
             legLabel = sample
             legLabel += ": "+str(math.ceil(sigCount*10)/10)
             leg.AddEntry(hist,legLabel,"f")
-	
+
         return leg
 
     def getAxisTitle(self,plot):
         if plot.plotSetting.x_axis_title:
-            return plot.plotSetting.x_axis_title 
+            return plot.plotSetting.x_axis_title
         elif plot.key in plot.plotSetting.defaultLabelDict:
             return plot.plotSetting.defaultLabelDict[plot.key]
         else:
-            return plot.key 
+            return plot.key
 
     def draw1DPlot(self,collector,plot,outputDir,switch):
         c = ROOT.TCanvas("c_"+plot.key, "c_"+plot.key,0,0, 650, 750)
@@ -218,20 +221,30 @@ class PlotEndModule(EndModule):
             sigHistList = self.makeSignalHist(collector,plot)
         else:
             sigHistList = []
+
+        if collector.bkgSamples:
+            bkgMax = stack.GetMaximum()
+        else:
+            bkgMax = 0.
+
+        if collector.dataSamples:
+            dataMax = dataHist.GetMaximum()
+        else:
+            dataMax = 0.
         
-        if collector.dataSamples and collector.bkgSamples:
-            maximum = max(stack.GetMaximum(),dataHist.GetMaximum())
-        elif collector.bkgSamples:
-            maximum = stack.GetMaximum()
-        elif collector.dataSamples:
-            maximum = dataHist.GetMaximum()
+        if collector.signalSamples:
+            sigMax = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+        else:
+            sigMax = 0.
+
+        maximum = max([bkgMax,dataMax,sigMax])
 
         if collector.bkgSamples and not collector.dataSamples:
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
 
             leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
- 
+
             c.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
             stack.SetMinimum(0.)
@@ -270,11 +283,11 @@ class PlotEndModule(EndModule):
             lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .32)
             upperPad.Draw()
             lowerPad.Draw()
-            
+
             lowerPad.cd()
             lowerPad.SetGridy(1)
             ROOT.gPad.SetBottomMargin(0.24)
-        
+
             ratio,bkdgErrRatio,line = self.makeRatioPlot(dataHist,total,bkdgErr)
             ratio.SetStats(0)
             ratio.Draw()
@@ -288,6 +301,8 @@ class PlotEndModule(EndModule):
             ratio.GetXaxis().SetTitleOffset(0.90)
             ratio.GetYaxis().SetTitleOffset(0.50)
             ratio.GetXaxis().SetTitle(axisLabel)
+            if plot.plotSetting.x_axis_labels:
+                for ibin,label in enumerate(plot.plotSetting.x_axis_labels): ratio.GetXaxis().SetBinLabel(ibin+1,label)
 
             bkdgErrRatio.SetMarkerStyle(1)
             bkdgErrRatio.SetLineWidth(1)
@@ -296,13 +311,13 @@ class PlotEndModule(EndModule):
             bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
 
             ratio.DrawCopy()
-            bkdgErrRatio.DrawCopy("samee2") 
+            bkdgErrRatio.DrawCopy("samee2")
             line.Draw()
 
             upperPad.cd()
-            
+
             leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
-            
+
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*1.5)
             dataHist.SetMaximum(maximum*1.5)
@@ -315,12 +330,12 @@ class PlotEndModule(EndModule):
                 hist.Draw('samehist')
 
             leg.Draw()
-            
+
             if smCount > 0.0 and dataCount > 0.:
                 scaleFactor = dataCount*1.0/smCount
                 scaleFactorErr = scaleFactor*math.sqrt(1/dataCount + smCountErrSq/smCount**2)
             else:
-                print "Warning, smCount or dataCount is zero :"+plot.key
+                pyPrint("Warning, smCount or dataCount is zero :"+plot.key)
                 scaleFactor    = 0.0
                 scaleFactorErr = 0.0
 
@@ -374,7 +389,6 @@ class PlotEndModule(EndModule):
             #self.drawLabels(pSetPair[0].lumi)
             c.SaveAs(outputDir+plot.key+".png")
             c.SaveAs(outputDir+plot.key+".pdf")
-
         elif collector.dataSamples and not collector.mcSamples:
             dataHist.SetStats(0)
             dataHist.GetXaxis().SetTitle(axisLabel)
@@ -408,7 +422,7 @@ class PlotEndModule(EndModule):
         ratio.Divide(total)
 
         bkdgErrRatio = ratio.Clone("ratioerr")
-        for i in range(1, bkdgErrRatio.GetNbinsX()+1): 
+        for i in range(1, bkdgErrRatio.GetNbinsX()+1):
             binC = bkdgErr.GetBinContent(i)
             binE = bkdgErr.GetBinError(i)
             bkdgErrRatio.SetBinContent(i,1)
@@ -431,4 +445,4 @@ class PlotEndModule(EndModule):
             h.SetBinContent( LastBin + 1, 0. )
             h.SetBinError( LastBin + 1, 0. )
             pass
-        return                
+        return

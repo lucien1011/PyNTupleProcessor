@@ -1,8 +1,8 @@
 mergeSampleDict = {
-        "ggH":  ["ggH"],
-        "VBF":  ["VBF"],
-        "WH":   ["WHPlus","WHminus",],
-        "ZH":   ["ZH",],
+        #"ggH":  ["ggH"],
+        #"VBF":  ["VBF"],
+        #"WH":   ["WHPlus","WHminus",],
+        #"ZH":   ["ZH",],
         "Higgs":    ["ggH","VBF","WHPlus","WHMinus","ZH",],
         "qqZZ": ["qqZZTo4L",],
         "ggZZ": [

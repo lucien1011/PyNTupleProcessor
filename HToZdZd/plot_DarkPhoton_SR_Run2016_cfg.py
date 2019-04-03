@@ -2,7 +2,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
-from Core.Utils.mkdir_p import mkdir_p,copyFile
+from Utils.System import system
 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
 #from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
@@ -15,46 +15,44 @@ from Plotter.Plot import Plot
 
 from HToZdZd.Config.MergeSampleDict import *
 
-mZ1PlotRange = [65,0.,65.]
-mZ2PlotRange = [65,0.,65.]
+mZ1PlotRange = [32,0.,64.]
+mZ2PlotRange = [32,0.,64.]
 #h4lPlotRange = [50,95.,195.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-15_MC_RatioCut0p05/" # Lucien's new dir
-out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2017_MC_RatioCut0p05/"
 User                    = os.environ['USER']
 lumi                    = 35.9
 nCores                  = 5
-outputDir               = "/raid/raid7/"+User+"/Higgs/HToZdZd/"+out_path
+outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [
-                                HToZdZd_MZD4,
+                                #HToZdZd_MZD4,
                                 HToZdZd_MZD5,
-                                HToZdZd_MZD6,
-                                HToZdZd_MZD7,
-                                HToZdZd_MZD8,
-                                HToZdZd_MZD9,
+                                #HToZdZd_MZD6,
+                                #HToZdZd_MZD7,
+                                #HToZdZd_MZD8,
+                                #HToZdZd_MZD9,
                                 HToZdZd_MZD10,
-                                HToZdZd_MZD15, 
-                                HToZdZd_MZD20,
-                                HToZdZd_MZD25,
+                                #HToZdZd_MZD15, 
+                                #HToZdZd_MZD20,
+                                #HToZdZd_MZD25,
                                 HToZdZd_MZD30,
-                                HToZdZd_MZD35,
-                                HToZdZd_MZD40,
-                                HToZdZd_MZD45,
-                                HToZdZd_MZD50,
-                                HToZdZd_MZD55,
+                                #HToZdZd_MZD35,
+                                #HToZdZd_MZD40,
+                                #HToZdZd_MZD45,
+                                #HToZdZd_MZD50,
+                                #HToZdZd_MZD55,
                                 HToZdZd_MZD60,
                                 ]
 justEndSequence         = False
 phpFile                 = "index.php"
 nBinsMassRatio          = 50
-#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05")  # Lucien's mass ratio cut 
-
-muon_plots = [
-        ]
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
 
 general_plots = [
         Plot("Z1_mass",     ["TH1D","Z1_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       ),
@@ -74,21 +72,9 @@ general_plots = [
         Plot("h2e2mu_mass", ["TH1D","h2e2mu_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')       ),
         Plot("h2mu2e_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')       ),
         Plot("h4L_Pt",      ["TH1D","h4L_Pt","",40,0.,200.],     LambdaFunc('x: x.pT4l[0]'),         ),
-        
-        Plot("mass_ratio",["TH1D","mass_ratio","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), ),
-        Plot("mass_ratio_4e",["TH1D","mass_ratio_4e","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
-        Plot("mass_ratio_4mu",["TH1D","mass_ratio_4mu","",nBinsMassRatio,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
-        Plot("mass_ratio_2e2mu",["TH1D","mass_ratio_2e2mu","",nBinsMassRatio,-1.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
-        Plot("mass_ratio_2mu2e",["TH1D","mass_ratio_2mu2e","",nBinsMassRatio,-1.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
         ]
 
-jet_plots = [
-        #Plot("nJet",    ["TH1D","nJet","",5,-0.5,4.5],      LambdaFunc('x: x.njets_pt30_eta2p5[0]'),     ),
-        ]
-
-plots = muon_plots + general_plots + jet_plots 
-#for plot in plots:
-#    plot.plotSetting.divideByBinWidth = True
+plots = general_plots 
 
 for dataset in componentList:
     if dataset.isMC:
@@ -106,8 +92,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/"+User+"/public_html/Higgs/HToZdZd/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
-
-## Put an index.php file into Plots dir for easy visualization
-copyFile('/home/'+User+'/',phpFile,endModuleOutputDir)
