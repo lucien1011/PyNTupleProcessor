@@ -6,13 +6,13 @@ dataTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190402/
 inUFTier2       = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
-Data_Run2017_cmpList = ComponentList(
+Data_Run2018_cmpList = ComponentList(
         [
             Component("Data_Run2018",dataTreeDir+"Data_Run2018_noDuplicates_FRWeightFromVukasinWZRemoved.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
-Data_Run2017 = Dataset(
+Data_Run2018 = Dataset(
         "Data_Run2018",
-        Data_Run2017_cmpList,
+        Data_Run2018_cmpList,
         isMC = False,
         )

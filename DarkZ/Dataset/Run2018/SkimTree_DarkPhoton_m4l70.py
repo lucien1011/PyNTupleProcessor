@@ -30,15 +30,15 @@ ZPlusX = Dataset(
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Data2017
-data2017_cmpList = ComponentList(
+data2018_cmpList = ComponentList(
         [ 
             Component("Data2018",dataTreeDir+"/Data_Run2018_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
-data2017 = Dataset(
-        "Data2017",
-        data2017_cmpList,
+data2018 = Dataset(
+        "Data2018",
+        data2018_cmpList,
         isMC                = False,
         )
 
