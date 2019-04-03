@@ -116,6 +116,10 @@ sampleColorDict = {
                 "PredCR": ROOT.kRed,
                 "WFC_Reducible": ROOT.kGreen,
                 "WFC_Irreducible": ROOT.kBlue,
+                "ppZZd4l_M4": ROOT.kTeal,
+                "ppZZd4l_M5": ROOT.kTeal+1,
+                "ppZZd4l_M15": ROOT.kTeal+2,
+                "ppZZd4l_M30": ROOT.kTeal+4,
                 
                 # HZZ4l 
                 "WrongFC_Reducible": ROOT.kGreen,
