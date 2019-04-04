@@ -20,11 +20,11 @@ h4lPlotRange = [20,100.,140.]
 deltaRPlotRange2 = [20,0.,2.]
 deltaRPlotRange = [40,0.,4.]
 
-out_path                = "DarkPhotonSB/DataMCDistributions/2019-04-02_Run2018_m4l105To118/"
-#out_path                = "DarkPhotonSB/DataMCDistributions/2019-04-02_Run2018_m4l130To140/"
+User                    = os.environ['USER']
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-04-02_Run2018/"
 lumi                    = 59.7
-nCores                  = 2
-outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
+nCores                  = 5
+outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2018] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
@@ -119,7 +119,7 @@ for dataset in componentList:
 plotter                 = Plotter("Plotter",plots)
 variableProducer        = VariableProducer("VariableProducer")
 
-sequence                = darkphoton_m4lSB_sequence
+sequence                = darkphoton_signal_sequence
 #sequence                = higgs_m4lNarrowWindow_sequence
 sequence.add(variableProducer)
 sequence.add(plotter)
@@ -130,4 +130,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
