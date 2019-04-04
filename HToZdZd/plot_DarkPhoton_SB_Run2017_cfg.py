@@ -79,10 +79,6 @@ for dataset in componentList:
 plotter                 = Plotter("Plotter",plots)
 
 sequence                = darkphoton_sb_sequence
-<<<<<<< HEAD
-=======
-#sequence                = darkphoton_signal_sequence
->>>>>>> 3361955... Update for ZZd and ZdZd
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
