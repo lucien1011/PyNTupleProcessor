@@ -102,7 +102,7 @@ handleSumWeight(
 
 ppZZdSamples = [
         #ppZZd4l_M4,
-        #ppZZd4l_M5,
+        ppZZd4l_M5,
         ppZZd4l_M15,
         ppZZd4l_M30,
         ]
