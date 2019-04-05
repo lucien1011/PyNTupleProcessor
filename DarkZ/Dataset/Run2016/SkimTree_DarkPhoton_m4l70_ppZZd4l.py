@@ -9,6 +9,7 @@ inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 epsilon             = 0.05
 saveSumWeightTxt    = False
+qqZZXs              = 0.04
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ppZZd4l_M4
@@ -42,7 +43,7 @@ ppZZd4l_M5 = Dataset(
         ppZZd4l_M5_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = 1.256*epsilon**4*11487.02544020530, 
+        xs                  = qqZZXs*epsilon**4*11487.02544020530, 
         )
 handleSumWeight(
         ppZZd4l_M5,
@@ -64,7 +65,7 @@ ppZZd4l_M15 = Dataset(
         ppZZd4l_M15_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = 1.256*epsilon**4*12375.279990617282, 
+        xs                  = qqZZXs*epsilon**4*12375.279990617282, 
         )
 handleSumWeight(
         ppZZd4l_M15,
@@ -86,7 +87,7 @@ ppZZd4l_M30 = Dataset(
         ppZZd4l_M30_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = 1.256*epsilon**4*11963.471893354734, 
+        xs                  = qqZZXs*epsilon**4*11963.471893354734, 
         )
 handleSumWeight(
         ppZZd4l_M30,
@@ -102,7 +103,7 @@ handleSumWeight(
 
 ppZZdSamples = [
         #ppZZd4l_M4,
-        #ppZZd4l_M5,
+        ppZZd4l_M5,
         ppZZd4l_M15,
         ppZZd4l_M30,
         ]
