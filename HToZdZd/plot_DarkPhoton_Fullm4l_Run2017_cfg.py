@@ -15,11 +15,12 @@ from Plotter.Plot import Plot
 from HToZdZd.Config.MergeSampleDict import *
 
 mZ1PlotRange = [50,0.,100.]
-mZ2PlotRange = [50,0.,100.]
+mZ2PlotRange = [30,0.,60.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
-out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-02-25_Run2017_NoRatioCut/"
+#out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-02-25_Run2017_NoRatioCut/"
+out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-04-03_Run2017_InvertedRatioCut/"
 lumi                    = 41.7
 nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
@@ -35,7 +36,7 @@ componentList           = bkgSamples + [data2017,] + [HToZdZd_MZD30,]
 #                                            HToZdZd_MZD60,
 #                                        ] 
 justEndSequence         = False
-
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
 
 muon_plots = [
         ]
@@ -95,5 +96,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
