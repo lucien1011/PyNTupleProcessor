@@ -1,7 +1,7 @@
 from PlotSetting import PlotSetting
 
 class Plot(object):
-    def __init__(self,key,rootSetting,funcObj,isCollection=False,selFunc=None,dim=1,plotSetting=None):
+    def __init__(self,key,rootSetting,funcObj,isCollection=False,selFunc=None,dim=1,plotSetting=None,getEventWeight=None):
         self.key = key
         self.rootSetting = rootSetting
         self.funcObj = funcObj
@@ -11,6 +11,7 @@ class Plot(object):
         self.plotSetting = plotSetting if plotSetting else PlotSetting()
         if self.isCollection and self.dim == 2:
             raise RuntimeError,"Can't do collection and dim2 at the same time"
+        self.getEventWeight = getEventWeight
 
     def getWriterSetting(self):
         return [self.key]+self.rootSetting
@@ -25,3 +26,5 @@ class Plot(object):
         self.funcObj.end()
         if self.selFunc:
             self.selFunc.end()
+        if self.getEventWeight:
+            self.getEventWeight.end()
