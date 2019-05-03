@@ -28,6 +28,7 @@ xsWeighter              = XSWeighter("XSWeighter")
 bliSkimmer              = BlindSkimmer("BlindSkimmer")
 fakeRateWeighter        = FakeRateWeighter("FakeRateWeighter")
 fakeRateWeighter_map    = FakeRateWeighter("FakeRateWeighter","make_map")
+fakeRateWeighter_syst    = FakeRateWeighter("FakeRateWeighter","syst")
 
 variableProducer        = VariableProducer("VariableProducer")
 
@@ -94,6 +95,14 @@ wrongFC_signal_sequence.add(xsWeighter)
 wrongFC_signal_sequence.add(dataMCWeighter)
 wrongFC_signal_sequence.add(fakeRateWeighter)
 
+zx_syst_signal_sequence = Sequence()
+zx_syst_signal_sequence.add(darkPhotonSRSkimmer)
+zx_syst_signal_sequence.add(variableProducer)
+zx_syst_signal_sequence.add(bliSkimmer)
+zx_syst_signal_sequence.add(xsWeighter)
+zx_syst_signal_sequence.add(nloWeighter)
+zx_syst_signal_sequence.add(dataMCWeighter)
+zx_syst_signal_sequence.add(fakeRateWeighter_syst)
 
 allSequence = [
         darkphoton_signal_sequence,
