@@ -2,6 +2,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
 from HToZdZd.Dataset.Run2018.SkimTree_DarkPhoton_m4l70 import * 
 from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
@@ -18,15 +19,17 @@ mZ2PlotRange = [30,0.,60.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
-out_path                = "DarkPhotonSB/DataMCDistributions/2019-02-25_Run2018_NoRatioCut/"
+User                    = os.environ['USER']
+out_path                = "DarkPhotonSB/DataMCDistributions/2019-05-03_Run2018_InvertedRatioCut_4To62p5/"
 lumi                    = 58.8
-nCores                  = 5
-outputDir               = "/raid/raid7/lucien/Higgs/HToZdZd/"+out_path
+nCores                  = 3
+outputDir               = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2018,] #+ [data2018,] + [HToZdZd_MZD30,] 
 justEndSequence         = False
-
+#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
 
 muon_plots = [
         ]
@@ -81,5 +84,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/lucien/public_html/Higgs/HToZdZd/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
