@@ -7,7 +7,7 @@ bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/201904
 bkgSkimTreeDir2     = bkgSkimTreeDir
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC2018_M19_Feb19_fixGENjet_bestCandLegacy/"
 dataTreeDir         = bkgSkimTreeDir
-zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190408/SkimTree_HToZdZd_ZX_Run2018Data_m4l70/"
+zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190408/SkimTree_HToZdZd_Run2018Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 sumWeightFromT2     = True
@@ -18,7 +18,7 @@ saveSumWeightTxt    = False
 ZPlusX_cmpList = ComponentList(
         [
             Component("ZPlusX",
-                zxSkimTreeDir+"Data_Run2018_noDuplicates_FRWeight.root",
+                zxSkimTreeDir+"Data_Run2018_noDuplicates_FRWeightFromVukasinWZRemoved.root",
                 "passedEvents",False)
         ]
         )
@@ -33,7 +33,7 @@ ZPlusX = Dataset(
 # Data2017
 data2018_cmpList = ComponentList(
         [ 
-            Component("Data2018",dataTreeDir+"Data_Run2018_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2018",dataTreeDir+"Data_Run2018_UFHZZNTuple_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 

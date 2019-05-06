@@ -4,9 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-#from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
-from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
+from HToZdZd.Dataset.Run2018.SkimTree_DarkPhoton_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
 from Plotter.Plotter import Plotter
@@ -20,15 +18,13 @@ mZ2PlotRange = [30,0.,60.]
 h4lPlotRange = [70,60.,200.]
 #h4lPlotRange = [140,60.,200.]
 
-#out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-02-25_Run2016_NoRatioCut/"
-#out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-04-03_Run2016_InvertedRatioCut/"
-out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-06_Run2016_InvertedRatioCut/"
-lumi                    = 35.9
+out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-06_Run2018_InvertedRatioCut/"
+lumi                    = 58.8
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016,] + [HToZdZd_MZD30,] 
+componentList           = bkgSamples + [data2018,] 
 justEndSequence         = False
 eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
 
