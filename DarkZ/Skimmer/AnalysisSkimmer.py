@@ -15,6 +15,13 @@ class AnalysisSkimmer(Module):
             if "ZPlusX" not in self.dataset.name and "WFC_Reducible" not in self.dataset.name:
                 if not event.passedFullSelection[0]: return False
             return True
+        elif self.cutflow == "DarkPhoton-Fullm4l":
+            if event.mass4l[0] < 70.: return False
+            if event.massZ1[0] < 40. or event.massZ1[0] > 120.: return False
+            if event.massZ2[0] < 4. or event.massZ2[0] > 120.: return False
+            if "ZPlusX" not in self.dataset.name and "WFC_Reducible" not in self.dataset.name:
+                if not event.passedFullSelection[0]: return False
+            return True
         elif self.cutflow == "DarkPhoton-m4lSB":
             #if not ((event.mass4l[0]>105. and event.mass4l[0]<118.) or (event.mass4l[0]>130. and event.mass4l[0]<140.)): return False
             if not ((event.mass4l[0]>105. and event.mass4l[0]<118.)): return False

@@ -36,6 +36,10 @@ darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
 darkphoton_signal_sequence.add(variableProducer)
 
+darkphoton_fullm4l_sequence = Sequence()
+darkphoton_fullm4l_sequence.add(darkPhotonSRSkimmer)
+darkphoton_fullm4l_sequence.add(variableProducer)
+
 zx_map_sequence = Sequence()
 zx_map_sequence.add(darkPhotonSRSkimmer)
 zx_map_sequence.add(variableProducer)
@@ -106,6 +110,7 @@ zx_syst_signal_sequence.add(fakeRateWeighter_syst)
 
 allSequence = [
         darkphoton_signal_sequence,
+        darkphoton_fullm4l_sequence,
         darkphoton_cr_sequence,
         higgs_signal_sequence,
         higgs_cr_sequence,
