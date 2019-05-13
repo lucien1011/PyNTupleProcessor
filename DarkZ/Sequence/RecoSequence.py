@@ -12,6 +12,7 @@ from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAO
 darkPhotonSRSkimmer     = AnalysisSkimmer("DarkPhotonSRSkimmer")
 darkPhotonCRSkimmer     = AnalysisSkimmer("DarkPhotonCRSkimmer",cutflow="DarkPhoton-ZXCR")
 darkPhoton3P1FSkimmer   = AnalysisSkimmer("DarkPhoton3P1FSkimmer",cutflow="DarkPhoton-3P1F")
+darkPhotonFullm4lSkimmer= AnalysisSkimmer("DarkPhoton3P1FSkimmer",cutflow="DarkPhoton-Fullm4l")
 higgsSRSkimmer          = AnalysisSkimmer("HiggsSRSkimmer",cutflow="Higgs-SR")
 higgsCRSkimmer          = AnalysisSkimmer("HiggsCRSkimmer",cutflow="Higgs-ZXCR")
 higgs3P1FSkimmer        = AnalysisSkimmer("Higgs3P1FSkimmer",cutflow="Higgs-3P1F")
@@ -37,7 +38,7 @@ darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
 darkphoton_signal_sequence.add(variableProducer)
 
 darkphoton_fullm4l_sequence = Sequence()
-darkphoton_fullm4l_sequence.add(darkPhotonSRSkimmer)
+darkphoton_fullm4l_sequence.add(darkPhotonFullm4lSkimmer)
 darkphoton_fullm4l_sequence.add(variableProducer)
 
 zx_map_sequence = Sequence()

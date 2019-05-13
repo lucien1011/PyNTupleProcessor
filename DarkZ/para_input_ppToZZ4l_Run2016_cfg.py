@@ -22,7 +22,8 @@ from Plotter.Plot import Plot
 
 from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_DarkPhotonSR_mZ2-35_Norm_qqZZXs0p04pb/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_DarkPhotonSR_mZ2-35_Norm_qqZZXs0p04pb/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_m4lSR-m4lSB_HZZd-ppZZd/"
 
 syst_list = [
         Syst("FRUniIso",LambdaFunc("x: x.weight_FRUniIso")),
@@ -50,7 +51,7 @@ el_ch_sel_str = 'abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11'
 higgsSR_sel_str = 'event.mass4l[0] > 118. and event.mass4l[0] < 130.'
 higgsSB_sel_str = 'not (event.mass4l[0] > 118. and event.mass4l[0] < 130.) and event.mass4l[0] > 100. and event.mass4l[0] < 170.'
 higgsLowSB_sel_str = 'event.mass4l[0] > 100. and event.mass4l[0] < 118.'
-higgsHighSB_sel_str = 'event.mass4l[0] > 1300. and event.mass4l[0] < 170.'
+higgsHighSB_sel_str = 'event.mass4l[0] > 130. and event.mass4l[0] < 170.'
 input_channel_dict      = {
         "2mu_HiggsSR": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsSR_sel_str])),
         "2e_HiggsSR": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsSR_sel_str])),

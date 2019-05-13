@@ -4,7 +4,9 @@ from Core.Utils.LambdaFunc import LambdaFunc
 # ________________________________________________________________________ ||
 mZ1PlotRange        = [40,40.,120.]
 mZ2PlotRange        = [30,0.,60.]
+#mZ2PlotRange        = [60,0.,120.]
 h4lPlotRange        = [20,100.,140.]
+#h4lPlotRange        = [170,60.,400.]
 deltaRPlotRange2    = [20,0.,2.]
 deltaRPlotRange     = [40,0.,4.]
 hPtPlotRange        = [40,0.,200.]
