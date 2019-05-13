@@ -124,4 +124,7 @@ sampleColorDict = {
                 # HZZ4l 
                 "WrongFC_Reducible": ROOT.kGreen,
                 "WrongFC_Irreducible": ROOT.kBlue,
+
+                #Zprime
+                "zpToMuMu_M15": ROOT.kViolet+9,
 }
