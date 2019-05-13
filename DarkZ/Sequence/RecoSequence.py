@@ -12,6 +12,7 @@ from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAO
 darkPhotonSRSkimmer     = AnalysisSkimmer("DarkPhotonSRSkimmer")
 darkPhotonCRSkimmer     = AnalysisSkimmer("DarkPhotonCRSkimmer",cutflow="DarkPhoton-ZXCR")
 darkPhoton3P1FSkimmer   = AnalysisSkimmer("DarkPhoton3P1FSkimmer",cutflow="DarkPhoton-3P1F")
+darkPhotonFullm4lSkimmer= AnalysisSkimmer("DarkPhoton3P1FSkimmer",cutflow="DarkPhoton-Fullm4l")
 higgsSRSkimmer          = AnalysisSkimmer("HiggsSRSkimmer",cutflow="Higgs-SR")
 higgsCRSkimmer          = AnalysisSkimmer("HiggsCRSkimmer",cutflow="Higgs-ZXCR")
 higgs3P1FSkimmer        = AnalysisSkimmer("Higgs3P1FSkimmer",cutflow="Higgs-3P1F")
@@ -28,12 +29,17 @@ xsWeighter              = XSWeighter("XSWeighter")
 bliSkimmer              = BlindSkimmer("BlindSkimmer")
 fakeRateWeighter        = FakeRateWeighter("FakeRateWeighter")
 fakeRateWeighter_map    = FakeRateWeighter("FakeRateWeighter","make_map")
+fakeRateWeighter_syst    = FakeRateWeighter("FakeRateWeighter","syst")
 
 variableProducer        = VariableProducer("VariableProducer")
 
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
 darkphoton_signal_sequence.add(variableProducer)
+
+darkphoton_fullm4l_sequence = Sequence()
+darkphoton_fullm4l_sequence.add(darkPhotonFullm4lSkimmer)
+darkphoton_fullm4l_sequence.add(variableProducer)
 
 zx_map_sequence = Sequence()
 zx_map_sequence.add(darkPhotonSRSkimmer)
@@ -94,9 +100,18 @@ wrongFC_signal_sequence.add(xsWeighter)
 wrongFC_signal_sequence.add(dataMCWeighter)
 wrongFC_signal_sequence.add(fakeRateWeighter)
 
+zx_syst_signal_sequence = Sequence()
+zx_syst_signal_sequence.add(darkPhotonSRSkimmer)
+zx_syst_signal_sequence.add(variableProducer)
+zx_syst_signal_sequence.add(bliSkimmer)
+zx_syst_signal_sequence.add(xsWeighter)
+zx_syst_signal_sequence.add(nloWeighter)
+zx_syst_signal_sequence.add(dataMCWeighter)
+zx_syst_signal_sequence.add(fakeRateWeighter_syst)
 
 allSequence = [
         darkphoton_signal_sequence,
+        darkphoton_fullm4l_sequence,
         darkphoton_cr_sequence,
         higgs_signal_sequence,
         higgs_cr_sequence,

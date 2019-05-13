@@ -31,6 +31,7 @@ mergeSampleDict         = cfg.mergeSampleDict if hasattr(cfg,"mergeSampleDict") 
 verbose                 = cfg.verbose if hasattr(cfg,"verbose") else False
 skipGitDetail           = cfg.skipGitDetail if hasattr(cfg,"skipGitDetail") else False
 eventSelection          = cfg.eventSelection if hasattr(cfg,"eventSelection") else None
+checkInputFile          = cfg.checkInputFile if hasattr(cfg,"checkInputFile") else False
 
 if verbose:
     pyPrint("Starting")
@@ -52,14 +53,25 @@ if not justEndSequence:
     if not disableProgressBar: progressMonitor.begin()
     communicationChannel.begin()
     
-    pyPrint("\nLoading samples:\n")
-    for cmp in componentList:
-        pyPrint(cmp.name)
-    
     eventLoopRunner = MPEventLoopRunner(communicationChannel)
     eventBuilder    = BEventBuilder()
     componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo,selection=eventSelection)
     componentLoop   = ComponentLoop(componentReader)
+
+    if checkInputFile:
+        pyPrint("\nChecking samples...\n")
+        try:
+            for d in componentList:
+                cmps = d.makeComponents()
+                for cmp in cmps:
+                    eventBuilder.build(cmp)
+        except ReferenceError:
+            pyPrint("Paths for input files are wrong, please check")
+            sys.exit()
+    
+    pyPrint("\nLoading samples:\n")
+    for cmp in componentList:
+        pyPrint(cmp.name)
     
     pyPrint("\nBegin Running\n")
     componentLoop(componentList)

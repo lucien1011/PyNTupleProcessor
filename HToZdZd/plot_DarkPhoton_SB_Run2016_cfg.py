@@ -24,7 +24,9 @@ h4lPlotRange = [70,60.,200.]
 #out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-29_Run2016_RatioCut_4To62p5/"
 #out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2017_InvertedRatioCut_m4l118-130_4To62p5/"
 #out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2016_RatioCut_4To62p5/"
-out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2016_InvertedRatioCut_4To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-03-31_Run2016_InvertedRatioCut_4To62p5/"
+#out_path                = "DarkPhotonSB/DataMCDistributions/2019-05-05_Run2016_InvertedRatioCut_4To62p5/"
+out_path                = "DarkPhotonSB/DataMCDistributions/2019-05-05_Run2016_RatioCut_4To62p5/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
@@ -32,8 +34,9 @@ nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [data2016,] + [HToZdZd_MZD30,] 
 justEndSequence         = False
-#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
-eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
+eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
+#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
+checkInputFile          = True
 
 muon_plots = [
         ]

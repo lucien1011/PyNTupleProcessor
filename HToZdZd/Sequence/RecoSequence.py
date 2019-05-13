@@ -52,7 +52,7 @@ darkphoton_sb_sequence.add(fakeRateWeighter)
 darkphoton_sb_sequence.add(darkPhotonSBSkimmer) ## Signal-Background Skimmer
 
 darkphoton_fullm4l_sequence = Sequence()
-darkphoton_fullm4l_sequence.add(blindSkimmer)
+#darkphoton_fullm4l_sequence.add(blindSkimmer)
 darkphoton_fullm4l_sequence.add(xsWeighter)
 darkphoton_fullm4l_sequence.add(nloWeighter)
 darkphoton_fullm4l_sequence.add(dataMCWeighter)

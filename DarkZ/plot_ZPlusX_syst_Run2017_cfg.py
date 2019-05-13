@@ -4,36 +4,36 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-#from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
-from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
-from HToZdZd.Sequence.RecoSequence import * 
+from DarkZ.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Sequence.RecoSequence import * 
+from DarkZ.Producer.VariableProducer import VariableProducer
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-from HToZdZd.Config.MergeSampleDict import *
+from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
-mZ1PlotRange = [50,0.,100.]
+import copy
+
+mZ1PlotRange = [40,40.,120.]
 mZ2PlotRange = [30,0.,60.]
-h4lPlotRange = [70,60.,200.]
-#h4lPlotRange = [140,60.,200.]
+#h4lPlotRange = [110,60.,500.]
+#h4lPlotRange = [25,100.,150.]
+h4lPlotRange = [20,100.,140.]
+deltaRPlotRange2 = [20,0.,2.]
+deltaRPlotRange = [40,0.,4.]
 
-#out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-02-25_Run2016_NoRatioCut/"
-#out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-04-03_Run2016_InvertedRatioCut/"
-out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-06_Run2016_InvertedRatioCut/"
-lumi                    = 35.9
+
+User                    = os.environ['USER']
+out_path                = "ZPlusX/Systematic/2019-05-03_Run2017/"
+lumi                    = 41.4
 nCores                  = 3
-outputDir               = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
+outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016,] + [HToZdZd_MZD30,] 
+componentList           = [ZPlusX,] 
 justEndSequence         = False
-eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) > 0.05") 
-
-muon_plots = [
-        ]
 
 general_plots = [
         Plot("Z1_mass",     ["TH1D","Z1_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'),       ),
@@ -43,8 +43,8 @@ general_plots = [
         Plot("Z1_4mu_mass",     ["TH1D","Z1_4mu_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')      ),
         Plot("Z2_4mu_mass",     ["TH1D","Z2_4mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')     ),
         Plot("Z1_2e2mu_mass",     ["TH1D","Z1_2e2mu_mass","",]+mZ1PlotRange,  LambdaFunc('x: x.massZ1[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')      ),
-        Plot("Z2_2e2mu_mass",     ["TH1D","Z2_2e2mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
-        Plot("Z2_2mu2e_mass",     ["TH1D","Z2_2mu2e_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
+        Plot("Z2_2e2mu_mass",     ["TH1D","Z2_2e2mu_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')     ),
+        Plot("Z2_2mu2e_mass",     ["TH1D","Z2_2mu2e_mass","",]+mZ2PlotRange,   LambdaFunc('x: x.massZ2[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')     ),
               
         Plot("h4L_mass",    ["TH1D","h4L_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4l[0]'),       ),
         #Plot("h4e_mass",    ["TH1D","h4e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass4e[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')       ),
@@ -57,20 +57,30 @@ general_plots = [
         Plot("h2mu2e_mass", ["TH1D","h2mu2e_mass","",]+h4lPlotRange,   LambdaFunc('x: x.mass2e2mu[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and x.mass4mu[0] < 0 and x.mass4e[0] < 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')       ),
         Plot("h4L_Pt",      ["TH1D","h4L_Pt","",40,0.,200.],     LambdaFunc('x: x.pT4l[0]'),         ),
         
-        Plot("mass_ratio",["TH1D","mass_ratio","",100,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), ),
-        Plot("mass_ratio_4e",["TH1D","mass_ratio_4e","",100,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass4e[0] > 0 and x.mass4mu[0] < 0 and x.mass2e2mu[0] < 0')),
-        Plot("mass_ratio_4mu",["TH1D","mass_ratio_4mu","",100,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass4e[0] < 0 and x.mass4mu[0] > 0 and x.mass2e2mu[0] < 0')),
-        Plot("mass_ratio_2e2mu",["TH1D","mass_ratio_2e2mu","",100,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11')),
-        Plot("mass_ratio_2mu2e",["TH1D","mass_ratio_2mu2e","",100,0.,1.], LambdaFunc('x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0])'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13')),
+        Plot("met",         ["TH1D","met","",40,0.,200.],       LambdaFunc('x: x.met[0]'),          ),
+        Plot("nVtx",        ["TH1D","nVtx","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]')),
+        Plot("nVtx_4mu",        ["TH1D","nVtx_4mu","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass4mu[0] > 0')),
+        Plot("nVtx_4e",        ["TH1D","nVtx_4e","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass4e[0] > 0')),
+        Plot("nVtx_2e2mu",        ["TH1D","nVtx_2e2mu","",30,0.0,60.0],      LambdaFunc('x: x.nVtx[0]'), selFunc=LambdaFunc('x: x.mass2e2mu[0] > 0')),
         ]
 
-jet_plots = [
-        #Plot("nJet",    ["TH1D","nJet","",5,-0.5,4.5],      LambdaFunc('x: x.njets_pt30_eta2p5[0]'),     ),
-        ]
+syst_UniIso_plots = []
+syst_AsymIso_plots = []
+for p in general_plots:
+    new_UniIso_p = copy.deepcopy(p)
+    new_UniIso_p.getEventWeight = LambdaFunc('x: x.weight*x.weight_FRUniIso')
+    new_UniIso_p.key += "_UniIso"
+    new_UniIso_p.rootSetting[1] += "_UniIso"
+    syst_UniIso_plots.append(new_UniIso_p)
 
-plots = muon_plots + general_plots + jet_plots
-#for plot in plots:
-#    plot.plotSetting.divideByBinWidth = True
+    new_AsymIso_p = copy.deepcopy(p)
+    new_AsymIso_p.getEventWeight = LambdaFunc('x: x.weight*x.weight_FRAsymIso')
+    new_AsymIso_p.key += "_AsymIso"
+    new_AsymIso_p.rootSetting[1] += "_AsymIso"
+    syst_AsymIso_plots.append(new_AsymIso_p)
+
+
+plots = general_plots + syst_AsymIso_plots + syst_UniIso_plots
 
 for dataset in componentList:
     if dataset.isMC:
@@ -79,10 +89,10 @@ for dataset in componentList:
         component.maxEvents = nEvents
 
 plotter                 = Plotter("Plotter",plots)
+variableProducer        = VariableProducer("VariableProducer")
 
-sequence                = darkphoton_fullm4l_sequence
-#sequence                = darkphoton_sb_sequence
-#sequence                = darkphoton_signal_sequence
+sequence                = zx_syst_signal_sequence
+sequence.add(variableProducer)
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
@@ -90,5 +100,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
