@@ -12,7 +12,7 @@ from Zprime.Config.PlotDefinition import *
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 
-from DarkZ.Config.MergeSampleDict import mergeSampleDict
+from Zprime.Config.MergeSampleDict import mergeSampleDict
 
 User                    = os.environ['USER']
 out_path                = "SR/DataMCDistributions/2019-05-07_Run2017/"
