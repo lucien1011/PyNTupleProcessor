@@ -17,10 +17,14 @@ class Plotter(Module):
             values = plot.getValues(event)
             if not values: continue
             if not plot.isCollection and values[0] == None: continue
+            if plot.getEventWeight:
+                eventWeight = plot.getEventWeight(event)
+            else:
+                eventWeight = event.weight
             if plot.dim == 1:
                 for value in values:
                     try:
-                        self.writer.objs[plot.key].Fill(value,event.weight)
+                        self.writer.objs[plot.key].Fill(value,eventWeight)
                     except TypeError:
                         raise RuntimeError, "Can't find "+plot.key+" in the tree"
             elif plot.dim == 2:

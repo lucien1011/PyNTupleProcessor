@@ -13,7 +13,6 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-#from DarkZ.Config.MergeSampleDict import mergeSampleDict # Higgs/DataMCdistribution.root doesn't exist!
 mergeSampleDict = {
         "ggH":  ["ggH"],
         "VBF":  ["VBF"],
@@ -47,12 +46,13 @@ nCores                  = 8
 outputDir               = system.getStoragePath()+"/rosedj1/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [ ppZZd4l_M5, 
-                            ppZZd4l_M15,
-                            ppZZd4l_M30, 
-                            ] + bkgSamples 
+componentList           = bkgSamples + [
+                                        #ppZZd4l_M5,
+                                        ppZZd4l_M15,
+                                        ppZZd4l_M30,
+                                        ]
 #componentList           = bkgSamples + [data2017] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
-justEndSequence         = True
+justEndSequence         = False
 
 
 muon_plots = [

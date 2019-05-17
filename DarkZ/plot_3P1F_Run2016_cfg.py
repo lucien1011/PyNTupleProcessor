@@ -18,15 +18,15 @@ from Plotter.Plot import Plot
 #out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightFromVukasin/"
 #out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightSumCorrIso/"
 #out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-07_3P1F_DataVsPred_FRWeightFromVukasin_MaxFRL3L4/"
-out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/2019-03-11_3P1F_DataVsPred_FRWeightFromVukasin/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2016Data_m4l118-130/2019-05-04_3P1F_DataVsPred_FRWeightFromVukasin/"
 
 #mZ1PlotRange = [60,0.,120.]
 #mZ2PlotRange = [60,0.,120.]
-h4lPlotRange = [55,60.,500.]
+#h4lPlotRange = [55,60.,500.]
 mZ1PlotRange = [40,40.,120.]
-mZ2PlotRange = [60,0.,120.]
-#mZ2PlotRange = [30,0.,60.]
-#h4lPlotRange = [20,100.,140.]
+#mZ2PlotRange = [60,0.,120.]
+mZ2PlotRange = [30,0.,60.]
+h4lPlotRange = [20,100.,140.]
 
 #sel_str_4e = "x: abs(x.lep_id[x.lep_Hindex[0]]) == 11 and abs(x.lep_id[x.lep_Hindex[1]]) == 11 and abs(x.lep_id[x.lep_Hindex[2]]) == 11 and abs(x.lep_id[x.lep_Hindex[3]]) == 11"
 #sel_str_4mu = "x: abs(x.lep_id[x.lep_Hindex[0]]) == 13 and abs(x.lep_id[x.lep_Hindex[1]]) == 13 and abs(x.lep_id[x.lep_Hindex[2]]) == 13 and abs(x.lep_id[x.lep_Hindex[3]]) == 13"

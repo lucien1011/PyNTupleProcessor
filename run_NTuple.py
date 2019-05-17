@@ -10,6 +10,7 @@ from Core.ComponentLoop import ComponentLoop
 from Core.UFComponentReader import UFComponentReader
 
 from Core.Utils.git import getGitDescribe,getGitDiff
+from Core.Utils.printFunc import pyPrint
 
 # Standard package
 import imp,sys,os,time
@@ -30,14 +31,15 @@ mergeSampleDict         = cfg.mergeSampleDict if hasattr(cfg,"mergeSampleDict") 
 verbose                 = cfg.verbose if hasattr(cfg,"verbose") else False
 skipGitDetail           = cfg.skipGitDetail if hasattr(cfg,"skipGitDetail") else False
 eventSelection          = cfg.eventSelection if hasattr(cfg,"eventSelection") else None
+checkInputFile          = cfg.checkInputFile if hasattr(cfg,"checkInputFile") else False
 
 if verbose:
-    print "Starting"
+    pyPrint("Starting")
 start_time = time.time()
 
 if not justEndSequence:
     if verbose:
-        print "Initiating progress bar"
+        pyPrint("Initiating progress bar")
     progressBar = ProgressBar()
     
     if nCores != 1:
@@ -51,20 +53,31 @@ if not justEndSequence:
     if not disableProgressBar: progressMonitor.begin()
     communicationChannel.begin()
     
-    print "\nLoading samples:\n"
-    for cmp in componentList:
-        print cmp.name
-    
     eventLoopRunner = MPEventLoopRunner(communicationChannel)
     eventBuilder    = BEventBuilder()
     componentReader = UFComponentReader(eventBuilder, eventLoopRunner, sequence, outputInfo,selection=eventSelection)
     componentLoop   = ComponentLoop(componentReader)
+
+    if checkInputFile:
+        pyPrint("\nChecking samples...\n")
+        try:
+            for d in componentList:
+                cmps = d.makeComponents()
+                for cmp in cmps:
+                    eventBuilder.build(cmp)
+        except ReferenceError:
+            pyPrint("Paths for input files are wrong, please check")
+            sys.exit()
     
-    print "\nBegin Running\n"
+    pyPrint("\nLoading samples:\n")
+    for cmp in componentList:
+        pyPrint(cmp.name)
+    
+    pyPrint("\nBegin Running\n")
     componentLoop(componentList)
     
-    print "\nEnd Running\n"
-    print "\nOutput saved in "+outputInfo.outputDir+"\n"
+    pyPrint("\nEnd Running\n")
+    pyPrint("\nOutput saved in "+outputInfo.outputDir+"\n")
    
     if not skipGitDetail:
         gitFile        = os.path.join(outputInfo.outputDir,"gitDetails.txt")
@@ -76,13 +89,13 @@ if not justEndSequence:
             f.write(getGitDiff())
     
     if verbose:
-        print "Ending progress bar"
+        pyPrint("Ending progress bar")
     if not disableProgressBar: progressMonitor.end()
     communicationChannel.end()
 
-print "\nBegin Summarising\n"
-print "\nInput used: "+outputInfo.outputDir+"\n"
+pyPrint("\nBegin Summarising\n")
+pyPrint("\nInput used: "+outputInfo.outputDir+"\n")
 endSequence.run(outputInfo,componentList,mergeSampleDict=mergeSampleDict)
 
 elapsed_time = time.time() - start_time
-print "Time used: "+str(elapsed_time)+"s"
+pyPrint("Time used: "+str(elapsed_time)+"s")
