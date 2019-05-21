@@ -23,7 +23,8 @@ from Plotter.Plot import Plot
 from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_DarkPhotonSR_mZ2-35_Norm_qqZZXs0p04pb/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_m4lSR-m4lSB_HZZd-ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_m4lSR-m4lSB_HZZd-ppZZd/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-15_m4lSR-m4lSB_HZZd-ppZZd/"
 
 syst_list = [
         Syst("FRUniIso",LambdaFunc("x: x.weight_FRUniIso")),
@@ -36,7 +37,8 @@ nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples + [data2016] + ppZZdSamples
+#componentList           = bkgSamples + sigSamples + [data2016] + ppZZdSamples
+componentList           = ppZZdSamples
 justEndSequence         = False
 skipGitDetail           = True
 
