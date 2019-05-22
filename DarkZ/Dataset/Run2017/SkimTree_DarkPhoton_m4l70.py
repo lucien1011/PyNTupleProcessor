@@ -10,7 +10,7 @@ dataTreeDir         = bkgSkimTreeDir
 zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = True
+saveSumWeightTxt    = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -35,7 +35,7 @@ ZPlusX = Dataset(
 data2017_cmpList = ComponentList(
         [ 
             #Component("Data2017",dataTreeDir+"/Data_Run2017-17Nov2017_4l_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
-            Component("Data2017",dataTreeDir+"/Data_Run2017-17Nov2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
+            Component("Data2017",dataTreeDir+"Data_Run2017-17Nov2017_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
