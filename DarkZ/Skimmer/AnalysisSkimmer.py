@@ -55,7 +55,8 @@ class AnalysisSkimmer(Module):
                 except AttributeError: 
                     event.nZXCRFailedLeptons = event.nFailedLeptonsZ2
                     if event.nZXCRFailedLeptons[0] != 1: return False 
-            if event.mass4l[0] < 118. or event.mass4l[0] > 130.: return False
+            if event.mass4l[0] < 100. or event.mass4l[0] > 170.: return False
+            #if event.mass4l[0] < 118. or event.mass4l[0] > 130.: return False
             #if event.mass4l[0] < 70. or event.mass4l[0] > 118.: return False
             #if event.mass4l[0] < 130.: return False
             #if event.mass4l[0] < 70.: return False
@@ -118,7 +119,8 @@ class AnalysisSkimmer(Module):
             if event.passedFullSelection[0]: return False
             return True
         elif self.cutflow == "WrongFC-SR":
-            if event.mass4l[0] < 118. or event.mass4l[0] > 130.: return False
+            if event.mass4l[0] < 100. or event.mass4l[0] > 170.: return False
+            #if event.mass4l[0] < 118. or event.mass4l[0] > 130.: return False
             #if event.mass4l[0] < 105. or event.mass4l[0] > 140.: return False
             #if event.mass4l[0] < 70.: return False
             if event.massZ1[0] < 40. or event.massZ1[0] > 120.: return False

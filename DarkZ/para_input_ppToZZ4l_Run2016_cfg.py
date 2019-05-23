@@ -39,7 +39,7 @@ outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_pat
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + sigSamples + [data2016] + ppZZdSamples
-componentList           = ppZZdSamples
+componentList           = sigSamples 
 justEndSequence         = False
 skipGitDetail           = True
 
