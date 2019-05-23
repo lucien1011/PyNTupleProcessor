@@ -3,6 +3,8 @@ import os,ROOT,array
 from Utils.System import system
 from Core.mkdir_p import mkdir_p
 
+from Bin import Bin
+
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # ________________________________________________________________________________________________ ||
@@ -11,19 +13,6 @@ def makePlot(x_points,y_points,err_points):
     n = len(x_points)
     gr = ROOT.TGraphErrors(n,array.array('d',x_points),array.array('d',y_points),array.array('d',[0.]*n),array.array('d',err_points))
     return gr
-
-class Bin(object):
-    def __init__(self,
-            histName,
-            width=None,
-            yieldFunc=None,
-            ):
-        self.histName = histName
-        self.width = width
-        self.yieldFunc = yieldFunc
-
-    def getWindowWidth(self,centre):
-        return centre*(1.-self.width),centre*(1.+self.width)
 
 class SignalModel(object):
     def __init__(self,
