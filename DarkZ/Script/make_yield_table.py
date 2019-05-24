@@ -17,11 +17,16 @@ class Setting(object):
 
 # ________________________________________________________________________________________________ ||
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2016/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2016/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2018/"
-inputDir                = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII/"
+#inputDir                = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
+
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII_MC_RatioCut0p05/"
+inputDir                = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+out_path
 TFileName               = "DataMCDistribution.root"
+era                     = "RunII"
 sampleNames = [
             "Higgs",
             "qqZZ",
@@ -34,12 +39,25 @@ sampleLatexDict = {
         "ggZZ": "\ggZZ",
         "ZPlusX": "$Z+X$",
         }
+setting_list_ZdZd = [
+        Setting(
+                outputFileName = "yield.tex",
+                caption = "Summary for predictions of various backgrounds in the \ZdZd signal region ($118 < \massFourl < 130~\GeV$).",
+                tab = "predSR",
+                bins = [
+                            Bin("mZ2_4e",0.05,latexName="4e"),
+                            Bin("mZ2_2mu2e",0.05,latexName="2\mu2e"),
+                            Bin("mZ2_4mu",0.02,latexName="4\mu"),
+                            Bin("mZ2_2e2mu",0.02,latexName="2e2\mu"),
+                        ],
+                ),
+        ]
 
-setting_list = [
+setting_list_ZZd = [
         Setting(
                 outputFileName = "yield_low-m4l.tex",
-                caption = "Summary for predictions of various backgrounds in the signal region ($100 < \massFourl < 118~\GeV$) for 2016.",
-                tab = "predSR_low-m4l_2016",
+                caption = "Summary for predictions of various backgrounds in the signal region ($100 < \massFourl < 118~\GeV$) for %s."%era,
+                tab = "predSR_low-m4l_"+era,
                 bins = [
                             Bin("mZ2_low-m4l_4e",0.05,latexName="4e"),
                             Bin("mZ2_low-m4l_2mu2e",0.05,latexName="2\mu2e"),
@@ -49,8 +67,8 @@ setting_list = [
                 ),
         Setting(
                 outputFileName = "yield_mid-m4l.tex",
-                caption = "Summary for predictions of various backgrounds in the signal region ($118 < \massFourl < 130~\GeV$) for 2016.",
-                tab = "predSR_mid-M4l_2016",
+                caption = "Summary for predictions of various backgrounds in the signal region ($118 < \massFourl < 130~\GeV$) for %s."%era,
+                tab = "predSR_mid-M4l_"+era,
                 bins = [
                             Bin("mZ2_mid-m4l_4e",0.05,latexName="4e"),
                             Bin("mZ2_mid-m4l_2mu2e",0.05,latexName="2\mu2e"),
@@ -60,8 +78,8 @@ setting_list = [
                 ),
         Setting(
                 outputFileName = "yield_high-m4l.tex",
-                caption = "Summary for predictions of various backgrounds in the signal region ($130 < \massFourl < 170~\GeV$) for 2016.",
-                tab = "predSR_high-m4l_2016",
+                caption = "Summary for predictions of various backgrounds in the signal region ($130 < \massFourl < 170~\GeV$) for %s."%era,
+                tab = "predSR_high-m4l_"+era,
                 bins = [
                             Bin("mZ2_high-m4l_4e",0.05,latexName="4e"),
                             Bin("mZ2_high-m4l_2mu2e",0.05,latexName="2\mu2e"),
@@ -70,9 +88,14 @@ setting_list = [
                         ],
                 ), 
         ]
-outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_Run2016/"
+
+setting_list = setting_list_ZdZd
+
+#outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_Run2016/"
 #outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_Run2017/"
 #outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_Run2018/"
+#outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_RunII/"
+outputDir               = "/Users/lucien/public_html//Higgs/HToZdZd/DarkPhotonSR/Table/2019-05-24_RunII_MC_RatioCut0p05/"
 
 # ________________________________________________________________________________________________ ||
 print("Input directory: "+inputDir)
