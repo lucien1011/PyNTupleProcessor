@@ -16,33 +16,16 @@ from LJMet.Producer.CategoryProducer import CategoryProducer
 
 from LJMet.Dataset.LJMet_step1_tptp2017 import *
 
-mergeSampleDict = {
+from LJMet.Config.MergeSampleDict import mergeSampleDict
 
+import os
 
-		"DYJets":	["DY"],
-		"WJets":	['WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',],
-		"TTJets":	[
-						'TTJetsHad0','TTJetsHad700','TTJetsHad1000',
-						'TTJetsSemiLep0','TTJetsSemiLep700','TTJetsSemiLep1000',
-						'TTJets2L2nu0','TTJets2L2nu700','TTJets2L2nu1000',
-						'TTJetsPH700mtt','TTJetsPH1000mtt',
-					],
-		"SingleTop":	[
-
-							'Ts','Tt','Tbt','TtW','TbtW',
-						],
-		"TTV":		[
-						'TTWl','TTZl',
-					],
-		"QCD":		[
-						'QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-					],
-		}
-
-out_path                = "Preselection/DataMCDistributions/2019-03-31_Run2017_test/"
+User                    = os.environ["USER"]
+#out_path                = "Preselection/DataMCDistributions/2019-03-31_Run2017_test/"
+out_path                = "Preselection/DataMCDistributions/2019-05-27_Run2017_test/"
 lumi                    = 41.298
 nCores                  = 5
-outputDir               = system.getStoragePath()+"/lucien/LJMet/B2G/"+out_path
+outputDir               = system.getStoragePath()+"/"+User+"/LJMet/B2G/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + dataSamples
