@@ -14,52 +14,19 @@ from LJMet.Weighter.DataMCWeighter import DataMCWeighter
 from LJMet.Producer.CategoryProducer import CategoryProducer
 from LJMet.Producer.ThetaProducer import ThetaTemplateProducer
 
-from LJMet.Dataset.LJMet_step1test_yiting import *
+from LJMet.Dataset.LJMet_step1_tptp2017 import *
 
-mergeSampleDict = {
+from LJMet.Config.MergeSampleDict import mergeSampleDict
 
-
-		"EWK":		[
-						"DY",
-						'WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',
-						'TTWl','TTZl',
-					],
-		"WJets":	['WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',],
-		"TTJets":	[
-						'TTJetsHad0','TTJetsHad700','TTJetsHad1000',
-						'TTJetsSemiLep0','TTJetsSemiLep700','TTJetsSemiLep1000',
-						'TTJets2L2nu0','TTJets2L2nu700','TTJets2L2nu1000',
-						'TTJetsPH700mtt','TTJetsPH1000mtt',
-					],
-		"SingleTop":	[
-							'Ts','Tt','Tbt','TtW','TbtW',
-						],
-		"QCD":		[
-						'QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-					],
-		"Bkg":		[
-						"DY",
-						'WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',
-						'TTWl','TTZl',
-						'WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',
-						'TTJetsHad0','TTJetsHad700','TTJetsHad1000',
-						'TTJetsSemiLep0','TTJetsSemiLep700','TTJetsSemiLep1000',
-						'TTJets2L2nu0','TTJets2L2nu700','TTJets2L2nu1000',
-						'TTJetsPH700mtt','TTJetsPH1000mtt',
-						'Ts','Tt','Tbt','TtW','TbtW',
-						'QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-					],
-		}
-
-out_path                = "TestPlot/2018-12-04_StatInput/"
+#out_path                = "TestPlot/2018-12-04_StatInput/"
 #out_path                = "TestPlot/2018-12-05_test/"
+out_path                = "ThetaInput/2019-05-27_StatInput/"
 lumi                    = 41.298
 nCores                  = 5
 outputDir               = out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + dataSamples
-componentList           = sigSamples
+componentList           = bkgSamples + dataSamples
 justEndSequence         = False
 
 for dataset in componentList:

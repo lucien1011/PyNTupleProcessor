@@ -144,9 +144,9 @@ sigList = [
         'TTM1300TZTZ',
         'TTM1400TZTZ',
         'TTM1500TZTZ',
-'TTM1600TZTZ',
-            'TTM1700TZTZ',
-            'TTM1800TZTZ',
+        'TTM1600TZTZ',
+        'TTM1700TZTZ',
+        'TTM1800TZTZ',
 
         ]
 sigXSDict = {
