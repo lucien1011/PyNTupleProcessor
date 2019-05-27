@@ -15,7 +15,8 @@ from HToZdZd.Config.MergeSampleDict import *
 
 #out_path                = "DarkPhotonSR/StatInput/2019-02-18_35p9_RatioCut0p05/"
 #out_path                = "DarkPhotonSR/StatInput/2019-02-28_35p9_RatioCut0p02/"
-out_path                = "DarkPhotonSR/StatInput/2019-03-29_136p1_RatioCut0p02/"
+#out_path                = "DarkPhotonSR/StatInput/2019-03-29_136p1_RatioCut0p02/"
+out_path                = "DarkPhotonSR/StatInput/2019-05-27_136p1_RatioCut0p05/"
 lumi                    = 136.1
 #lumi                    = 35.9
 nCores                  = 5

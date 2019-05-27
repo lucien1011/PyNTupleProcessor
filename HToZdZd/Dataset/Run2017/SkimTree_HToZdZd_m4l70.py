@@ -12,7 +12,7 @@ HToZdZd_SumWeightDir       = "/cms/data/store/user/t2/users/rosedj1/Higgs/HToZdZ
 #HToZdZd_SumWeightDir       = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/HToZdZd_Run2017/"
 skimTreeName                = "passedEvents"
 sumWeightHist               = "Ana/sumWeights"
-kappa                       = 0.001
+kappa                       = 0.0002
 saveSumWeightTxt            = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
