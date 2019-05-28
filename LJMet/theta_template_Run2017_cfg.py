@@ -16,7 +16,7 @@ from LJMet.Producer.ThetaProducer import ThetaTemplateProducer
 
 from LJMet.Dataset.LJMet_step1_tptp2017 import *
 
-from LJMet.Config.MergeSampleDict import mergeSampleDict
+from LJMet.Config.MergeSampleDict_StatInput import mergeSampleDict
 
 #out_path                = "TestPlot/2018-12-04_StatInput/"
 #out_path                = "TestPlot/2018-12-05_test/"
@@ -26,8 +26,8 @@ nCores                  = 5
 outputDir               = out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + dataSamples
-justEndSequence         = False
+componentList           = bkgSamples + dataSamples + sigSamples
+justEndSequence         = False 
 
 for dataset in componentList:
     if dataset.isMC:

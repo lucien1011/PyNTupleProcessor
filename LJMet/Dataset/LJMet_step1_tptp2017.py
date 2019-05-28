@@ -200,7 +200,7 @@ sigXSDict = {
         'TTM1700TZTZ': 'TTM1700',
 
         'TTM1800BWBW': 'TTM1800',
-'TTM1800THBW': 'TTM1800',
+        'TTM1800THBW': 'TTM1800',
         'TTM1800THTH': 'TTM1800',
         'TTM1800TZBW': 'TTM1800',
         'TTM1800TZTH': 'TTM1800',
@@ -224,5 +224,10 @@ for sigName in sigList:
             xs			= xsec[sigXSDict[sigName]],
             #sumw		= nRun[sigName],
             )
+    tmpDataset.setSumWeight(
+                        dir_prefix+samples[sigName]+".root",
+                        "nevents",
+                        )
+    tmpDataset.sumw *= BR[sigName[:2]+sigName[-4:]]
     sigSamples.append(tmpDataset)
 
