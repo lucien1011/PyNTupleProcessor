@@ -2,16 +2,9 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
-from Plotter.Plotter import Plotter
-from Plotter.PlotSetting import PlotSetting
-from Plotter.PlotEndModule import PlotEndModule
-from Plotter.Plot import Plot
-
-from LJMet.Weighter.XSWeighter import XSWeighter
-from LJMet.Skimmer.AnalysisSkimmer import AnalysisSkimmer
-from LJMet.Weighter.DataMCWeighter import DataMCWeighter
-from LJMet.Producer.CategoryProducer import CategoryProducer
+from LJMet.Sequence.RecoSequence import *
 from LJMet.Producer.ThetaProducer import ThetaTemplateProducer
 
 from LJMet.Dataset.LJMet_step1_tptp2017 import *
@@ -20,10 +13,11 @@ from LJMet.Config.MergeSampleDict_StatInput import mergeSampleDict
 
 #out_path                = "TestPlot/2018-12-04_StatInput/"
 #out_path                = "TestPlot/2018-12-05_test/"
-out_path                = "ThetaInput/2019-05-27_StatInput/"
+#out_path                = "ThetaInput/2019-05-27_StatInput/"
+out_path                = "ThetaInput/2019-05-29_StatInput/"
 lumi                    = 41.298
 nCores                  = 5
-outputDir               = out_path
+outputDir               = system.getStoragePath()+"/lucien/LJMet/B2G/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + dataSamples + sigSamples
@@ -35,17 +29,8 @@ for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
-xsWeighter              = XSWeighter("XSWeighter")
-dataMCWeighter          = DataMCWeighter("DataMCWeighter")
-anaSkimmer              = AnalysisSkimmer("AnalysisSkimmer")
-catProducer				= CategoryProducer("CategoryProducer")
 thetaProducer			= ThetaTemplateProducer("TemplateProducer")
-
-sequence                = Sequence()
-sequence.add(anaSkimmer)
-sequence.add(xsWeighter)
-sequence.add(dataMCWeighter)
-sequence.add(catProducer)
+sequence = sr_sequence
 sequence.add(thetaProducer)
 
 outputInfo              = OutputInfo("OutputInfo")
