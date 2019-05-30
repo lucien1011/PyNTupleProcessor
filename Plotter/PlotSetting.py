@@ -81,6 +81,7 @@ class PlotSetting(object):
             sf_y_pos=0.92,
             sf_text_font=42,
             sf_text_size=0.05,
+            leg_name_dict={},
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -90,3 +91,4 @@ class PlotSetting(object):
         self.sf_y_pos = sf_y_pos
         self.sf_text_font = sf_text_font
         self.sf_text_size = sf_text_size
+        self.leg_name_dict=leg_name_dict
