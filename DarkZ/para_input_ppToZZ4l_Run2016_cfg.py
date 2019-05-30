@@ -24,7 +24,8 @@ from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_DarkPhotonSR_mZ2-35_Norm_qqZZXs0p04pb/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_m4lSR-m4lSB_HZZd-ppZZd/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-15_m4lSR-m4lSB_HZZd-ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-15_m4lSR-m4lSB_HZZd-ppZZd/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-23_m4lSR-m4lSB_ppZZd/"
 
 syst_list = [
         Syst("FRUniIso",LambdaFunc("x: x.weight_FRUniIso")),
