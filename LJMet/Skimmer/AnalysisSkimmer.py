@@ -19,4 +19,10 @@ class AnalysisSkimmer(Module):
         if any(eta > 2.4 for eta in event.theJetEta_JetSubCalc_PtOrdered): return False
         if not (event.DataPastTrigger[0] == 1 and event.MCPastTrigger[0] == 1): return False
         if not ((event.isElectron[0] == 1 and event.isMuon[0] == 0) or (event.isElectron[0] == 0 and event.isMuon[0] == 1)): return False
+        if self.cutflow == "SR":
+            if not (event.minDR_leadAK8otherAK8[0] < 3. and event.minDR_leadAK8otherAK8[0] > 0.8): return False
+        elif self.cutflow == "CR":
+            if event.minDR_leadAK8otherAK8[0] < 3.: return False
+        elif self.cutflow == "Preselection":
+            pass
         return True

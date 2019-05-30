@@ -20,7 +20,8 @@ nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/LJMet/B2G/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + dataSamples + sigSamples
+#componentList           = bkgSamples + dataSamples + sigSamples
+componentList           = sigSamples
 justEndSequence         = False 
 
 for dataset in componentList:
