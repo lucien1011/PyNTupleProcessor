@@ -180,6 +180,7 @@ class PlotEndModule(EndModule):
                 legLabel += ": "+str(math.ceil(hCount[2]*10)/10)+" #pm"+str(math.ceil(error*10)/10)
             leg.AddEntry(hCount[0], legLabel, "f")
 
+        histListSignal.sort(key=lambda l: l[1], reverse=False)
         for hist,sample,sigCount in histListSignal:
             legLabel = sample
             legLabel += ": "+str(math.ceil(sigCount*10)/10)
