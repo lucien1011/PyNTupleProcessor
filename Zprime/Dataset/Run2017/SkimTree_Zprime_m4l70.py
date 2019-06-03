@@ -9,7 +9,7 @@ bkgTreeDir          = "/cms/data/store/user/muahmad/rootfiles_2017/"
 dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = True
+saveSumWeightTxt    = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # zpToMuMu
