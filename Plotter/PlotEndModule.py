@@ -93,7 +93,7 @@ class PlotEndModule(EndModule):
             #smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             #smCountErrSq += smCountErrTmp**2
             self.shiftLastBin(h)
-            histList.append([h,sample,h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
+            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.leg_nameplot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
             if switch:
                 if not isample:
                     totalsum = h.Clone("totalsum_"+plot.key)
@@ -139,8 +139,8 @@ class PlotEndModule(EndModule):
             else:
                 h.SetLineColor(ROOT.kRed)
             h.SetFillColorAlpha(ROOT.kRed,0.)
-	    h.SetStats(0)
-            histList.append([h,sample,sigCount])
+            h.SetStats(0)
+            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],sigCount])
 
         if plot.plotSetting.divideByBinWidth:
             for hist,sample,sigCount in histList:
@@ -175,7 +175,7 @@ class PlotEndModule(EndModule):
             legLabel = hCount[1]
             error = hCount[3]
             if switch:
-	       legLabel += ": "+str(math.ceil(math.ceil(hCount[2]*10)/math.ceil(smCount*10)*100000)/1000)+"%"
+                legLabel += ": "+str(math.ceil(math.ceil(hCount[2]*10)/math.ceil(smCount*10)*100000)/1000)+"%"
             else:
                 legLabel += ": "+str(math.ceil(hCount[2]*10)/10)+" #pm"+str(math.ceil(error*10)/10)
             leg.AddEntry(hCount[0], legLabel, "f")
@@ -252,6 +252,8 @@ class PlotEndModule(EndModule):
             stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
             stack.SetMinimum(0.)
             stack.Draw('hist')
+            if plot.plotSetting.x_axis_labels:
+                for ibin,label in enumerate(plot.plotSetting.x_axis_labels): stack.GetXaxis().SetBinLabel(ibin+1,label)
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
             #if collector.dataSamples:
@@ -260,6 +262,8 @@ class PlotEndModule(EndModule):
             # Draw CMS, lumi and preliminary if specified
             #self.drawLabels(pSetPair[0].lumi)
             bkdgErr.Draw("samee2")
+            if plot.plotSetting.x_axis_labels:
+                for ibin,label in enumerate(plot.plotSetting.x_axis_labels): bkdgErr.GetXaxis().SetBinLabel(ibin+1,label)
             c.SaveAs(outputDir+plot.key+".png")
             c.SaveAs(outputDir+plot.key+".pdf")
 

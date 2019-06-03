@@ -1,35 +1,6 @@
-from Core.Sequence import Sequence
-from Core.EndSequence import EndSequence
-from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
-from Utils.System import system
-
-from Plotter.Plotter import Plotter
-from Plotter.PlotSetting import PlotSetting
-from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
-
-from LJMet.Weighter.XSWeighter import XSWeighter
-from LJMet.Skimmer.AnalysisSkimmer import AnalysisSkimmer
-from LJMet.Weighter.DataMCWeighter import DataMCWeighter
-from LJMet.Producer.CategoryProducer import CategoryProducer
-
-from LJMet.Dataset.LJMet_step1_tptp2017 import *
-
-from LJMet.Config.MergeSampleDict import mergeSampleDict
-
-import os
-
-User                    = os.environ["USER"]
-#out_path                = "Preselection/DataMCDistributions/2019-03-31_Run2017_test/"
-out_path                = "Preselection/DataMCDistributions/2019-05-27_Run2017_test/"
-lumi                    = 41.298
-nCores                  = 5
-outputDir               = system.getStoragePath()+"/"+User+"/LJMet/B2G/"+out_path
-nEvents                 = -1
-disableProgressBar      = False
-componentList           = bkgSamples + dataSamples
-justEndSequence         = False
+from Plotter.PlotSetting import PlotSetting
 
 plots = [
 		#multiplicities:
@@ -46,13 +17,20 @@ plots = [
         Plot("MET",        	 ["TH1D","MET","MET",50,0.0,1500.0],	LambdaFunc('x: x.corr_met_singleLepCalc[0]'),),
 		Plot("lept",      	 ["TH1D","lept","lepton p_{T}",50,0.0,1000],	LambdaFunc('x: x.leptonPt_singleLepCalc[0]'),),
         Plot("lepeta",       ["TH1D","lepeta","lepton #eta",40,-4,4],	LambdaFunc('x: x.leptonEta_singleLepCalc[0]'),),
+
         Plot("jetspt",       ["TH1D","jetspt","jet p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetPt_JetSubCalc_PtOrdered'), isCollection=True),
         Plot("jetseta",      ["TH1D","jetseta","jet #eta",40,-4,4],	LambdaFunc('x: x.theJetEta_JetSubCalc_PtOrdered'), isCollection=True),
-        Plot("jetsptAK8",    ["TH1D","jetsptAK8","AK8 jet p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetAK8Pt_JetSubCalc_PtOrdered'), isCollection=True),
-		Plot("jetsetaAK8",   ["TH1D","jetsetaAK8","AK8 jet #eta",40,-4,4],	LambdaFunc('x: x.theJetAK8Eta_JetSubCalc_PtOrdered'), isCollection=True),
         Plot("jet1pt",       ["TH1D","jet1pt","j1 p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetPt_JetSubCalc_PtOrdered[0]'),),
         Plot("jet2pt",       ["TH1D","jet2pt","j2 p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetPt_JetSubCalc_PtOrdered[1]'),),
         Plot("jet3pt",       ["TH1D","jet3pt","j3 p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetPt_JetSubCalc_PtOrdered[2]'),),
+
+        Plot("jetsptAK8",    ["TH1D","jetsptAK8","AK8 jet p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetAK8Pt_JetSubCalc_PtOrdered'), isCollection=True),
+		Plot("jetsetaAK8",   ["TH1D","jetsetaAK8","AK8 jet #eta",40,-4,4],	LambdaFunc('x: x.theJetAK8Eta_JetSubCalc_PtOrdered'), isCollection=True),
+		Plot("jetsCHSPrunedMassAK8",   ["TH1D","jetsCHSPrunedMassAK8","AK8 jet pruned mass", 30, 0.,300.],	LambdaFunc('x: x.theJetAK8CHSPrunedMass_JetSubCalc_PtOrdered'), isCollection=True),
+		Plot("jetsSoftDropMassAK8",   ["TH1D","jetsSoftDropMassAK8","AK8 jet soft drop mass", 30, 0.,300.],	LambdaFunc('x: x.theJetAK8SoftDrop_PtOrdered'), isCollection=True),
+		Plot("jetsSoftDropCorrAK8",   ["TH1D","jetsSoftDropCorrAK8","AK8 jet soft drop corr", 30, 0.,300.],	LambdaFunc('x: x.theJetAK8SoftDropCorr_JetSubCalc_PtOrdered'), isCollection=True),
+		Plot("jetsSoftDropRawAK8",   ["TH1D","jetsSoftDropRawAK8","AK8 jet soft drop corr", 30, 0.,300.],	LambdaFunc('x: x.theJetAK8SoftDropRaw_JetSubCalc_PtOrdered'), isCollection=True),
+        
         #Plot("jet1ptAK8",    ["TH1D","jet1ptAK8","AK8 j1 p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetAK8Pt_JetSubCalc_PtOrdered[0]'),),
         #Plot("jet2ptAK8",    ["TH1D","jet2ptAK8","AK8 j2 p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetAK8Pt_JetSubCalc_PtOrdered[1]'),),
         #Plot("jet3ptAK8",    ["TH1D","jet3ptAK8","AK8 j3 p_{T}",50,0.0,1500],	LambdaFunc('x: x.theJetAK8Pt_JetSubCalc_PtOrdered[2]'),),
@@ -81,47 +59,20 @@ plots = [
         Plot("AK4HT",        ["TH1D","AK4HT","",25,500.0,3000.0],	LambdaFunc('x: x.AK4HT[0]'),plotSetting=PlotSetting(x_axis_title="AK4 H_{T}")),
         Plot("AK4ST",        ["TH1D","AK4ST","",50,0.0,5000.0],	LambdaFunc('x: x.AK4HTpMETpLepPt[0]'),plotSetting=PlotSetting(x_axis_title="AK4 S_{T}")),
 
-		#Plot("SummaryCategory", ["TH1D","SummaryCategory","",10,0.5,10.5],	LambdaFunc('x: x.categoryNumber'), selFunc=LambdaFunc('x: x.region == \"SR\"'), plotSetting=PlotSetting(x_axis_labels=
-		#	[
-		#		"0H/0W/0b",
-        #        "0H/0W/1b",
-        #        "0H/0W/2b",
-        #        "0H/0W/3b",
-        #        "0H/1W/0b",
-        #        "0H/1W/1b",
-        #        "0H/1W/2b",
-        #        "0H/1W/3b",
-        #        "1H/0W/1b",
-        #        "2H/0W/1b",
-		#	],
-		#	)),
-		#Plot("SummaryCategory", ["TH1D","SummaryCategory","",10,0.5,10.5],	LambdaFunc('x: x.cateogryNumber'), selFunc=LambdaFunc('x: x.region == \"CR\"')),
+		Plot("Category", ["TH1D","Category","",12,0.5,12.5],	LambdaFunc('x: x.categoryNumber if x.categoryNumber else None'), plotSetting=PlotSetting(x_axis_labels=
+			[
+				"0H/0W/0b",
+                "0H/0W/1b",
+                "0H/0W/2b",
+                "0H/0W/3b",
+                "0H/1W/0b",
+                "0H/1W/1b",
+                "0H/1W/2b",
+                "0H/1W/3b",
+                "1H/0W/1b",
+                "2H/0W/1b",
+                "0H/0W/0b",
+                "0H/0W/1b",
+			],
+			)),
         ]
-
-
-for dataset in componentList:
-    if dataset.isMC:
-        dataset.lumi = lumi
-    for component in dataset.componentList:
-        component.maxEvents = nEvents
-
-plotter                 = Plotter("Plotter",plots)
-xsWeighter              = XSWeighter("XSWeighter")
-dataMCWeighter          = DataMCWeighter("DataMCWeighter")
-anaSkimmer              = AnalysisSkimmer("AnalysisSkimmer")
-catProducer				= CategoryProducer("CategoryProducer")
-
-sequence                = Sequence()
-sequence.add(anaSkimmer)
-sequence.add(xsWeighter)
-sequence.add(dataMCWeighter)
-sequence.add(catProducer)
-sequence.add(plotter)
-
-outputInfo              = OutputInfo("OutputInfo")
-outputInfo.outputDir    = outputDir
-outputInfo.TFileName    = "DataMCDistribution.root"
-
-endSequence = EndSequence(skipHadd=False,)
-endModuleOutputDir = system.getPublicHtmlPath()+"/LJMet/B2G/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots))
