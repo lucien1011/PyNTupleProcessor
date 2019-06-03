@@ -19,8 +19,9 @@ from DarkZ.Config.PlotDefinition import *
 #out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-10_ppZZd_Run2016/"
 #out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-10_ppZZd_Run2016_mZ180To100/"
 #out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-13_ppZZd_Run2016_m4l100To118/"
-out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-13_ppZZd_Run2016_m4l130To170/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2018-11-09_Run2017/"
+#out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-13_ppZZd_Run2016_m4l130To170/"
+#out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-16_ppZZd_Run2016_m4l70/"
+out_path                = "DarkPhotonFullm4l/DataMCDistributions/2019-05-17_ppZZd_Run2016_m4l100/"
 User                    = os.environ['USER']
 lumi                    = 35.9
 nCores                  = 3
@@ -28,16 +29,23 @@ outputDir               = system.getStoragePath()+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [
-                                        ppZZd4l_M5,
+                                        #ppZZd4l_M5,
                                         ppZZd4l_M15,
                                         ppZZd4l_M30,
                                         ]
 #componentList           = bkgSamples + [data2017] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
 justEndSequence         = False
+eventSelection          = LambdaFunc('x: x.mass4l[0] > 100.')
 #eventSelection          = LambdaFunc('x: x.mass4l[0] > 100. and x.mass4l[0] < 118.')
-eventSelection          = LambdaFunc('x: x.mass4l[0] > 130. and x.mass4l[0] < 170.')
+#eventSelection          = LambdaFunc('x: x.mass4l[0] > 130. and x.mass4l[0] < 170.')
 
 plots                   = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
+
+for p in plots:
+    if "m4l" in p.key or "mZ2" in p.key or "mZ1" in p.key: p.plotSetting.log_x = True
+    if "m4l" in p.key: p.plotSetting.log_max_factor = 50.
+    if "mZ2" in p.key: p.plotSetting.log_max_factor = 50.
+    if "mZ1" in p.key: p.plotSetting.log_max_factor = 50.
 
 #for plot in plots:
 #    plot.plotSetting.divideByBinWidth = True

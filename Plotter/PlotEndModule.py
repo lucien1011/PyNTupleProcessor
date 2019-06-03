@@ -245,8 +245,11 @@ class PlotEndModule(EndModule):
 
             leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
 
+            if plot.plotSetting.log_x:
+                c.SetLogx(1)
+
             c.SetLogy(0)
-            stack.SetMaximum(maximum*1.5)
+            stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
             stack.SetMinimum(0.)
             stack.Draw('hist')
             if plot.plotSetting.x_axis_labels:
@@ -266,7 +269,7 @@ class PlotEndModule(EndModule):
 
             if not switch:
                 c.SetLogy(1)
-                stack.SetMaximum(maximum*5)
+                stack.SetMaximum(maximum*plot.plotSetting.log_max_factor)
                 stack.SetMinimum(0.1)
                 stack.Draw('hist')
                 for hist,sample,sigCount in sigHistList:
@@ -323,8 +326,8 @@ class PlotEndModule(EndModule):
             leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
 
             upperPad.SetLogy(0)
-            stack.SetMaximum(maximum*1.5)
-            dataHist.SetMaximum(maximum*1.5)
+            stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
+            dataHist.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
 
             stack.Draw('hist')
             stack.GetXaxis().SetTitleOffset(0.55)
@@ -359,8 +362,8 @@ class PlotEndModule(EndModule):
             c.SaveAs(outputDir+plot.key+".pdf")
 
             upperPad.SetLogy(1)
-            stack.SetMaximum(maximum*10)
-            stack.SetMinimum(0.1)
+            stack.SetMaximum(maximum*plot.plotSetting.log_max_factor)
+            stack.SetMinimum(plot.plotSetting.log_min)
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
@@ -384,7 +387,7 @@ class PlotEndModule(EndModule):
             #sigHistList looks like: histList.append([h,sample,sigCount])
             maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
             for hist,sample,sigCount in sigHistList:
-                hist.GetYaxis().SetRangeUser(0.,1.2*maximum)
+                hist.GetYaxis().SetRangeUser(0.,maximum*plot.plotSetting.log_max_factor)
                 hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")

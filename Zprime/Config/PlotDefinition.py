@@ -1,17 +1,10 @@
 from Plotter.Plot import Plot
 from Core.Utils.LambdaFunc import LambdaFunc
-import array
 
 # ________________________________________________________________________ ||
-#mZ1PlotRange        = [40,40.,120.]
-mZ1PlotRange        = [60-1,array.array('d',[40.*1.02**i for i in range(60)]),]
-#mZ2PlotRange        = [30,0.,60.]
-mZ2PlotRange        = [180-1,array.array('d',[4.*1.02**i for i in range(180)]),]
-#mZ2PlotRange        = [60,0.,120.]
-#h4lPlotRange        = [20,100.,140.]
-#h4lPlotRange        = [170,60.,400.]
-h4lPlotRange        = [130-1,array.array('d',[80.*1.02**i for i in range(130)]),]
-#h4lPlotRange        = [30-1,array.array('d',[60.*1.02**i for i in range(30)]),]
+mZ1PlotRange        = [60,0.,120.]
+mZ2PlotRange        = [60,0.,120.]
+h4lPlotRange        = [10,80.,100.]
 deltaRPlotRange2    = [20,0.,2.]
 deltaRPlotRange     = [40,0.,4.]
 hPtPlotRange        = [40,0.,200.]

@@ -8,8 +8,10 @@ sigTreeDir          = "/cms/data/store/user/t2/users/rosedj1/Higgs/DarkZ/NTuples
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 epsilon             = 0.05
+epsilon_init        = 0.05
 saveSumWeightTxt    = False
 qqZZXs              = 0.04
+zTollBr             = 0.033632*2
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ppZZd4l_M4
@@ -43,7 +45,7 @@ ppZZd4l_M5 = Dataset(
         ppZZd4l_M5_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = qqZZXs*epsilon**4*11487.02544020530, 
+        xs                  = 0.5889/epsilon_init**2*epsilon**2*0.28*zTollBr, 
         )
 handleSumWeight(
         ppZZd4l_M5,
@@ -65,7 +67,7 @@ ppZZd4l_M15 = Dataset(
         ppZZd4l_M15_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = qqZZXs*epsilon**4*12375.279990617282, 
+        xs                  = 0.2327/epsilon_init**2*epsilon**2*0.286*zTollBr, 
         )
 handleSumWeight(
         ppZZd4l_M15,
@@ -87,7 +89,7 @@ ppZZd4l_M30 = Dataset(
         ppZZd4l_M30_cmpList,
         isMC                = True,
         isSignal            = True,
-        xs                  = qqZZXs*epsilon**4*11963.471893354734, 
+        xs                  = 0.1188/epsilon_init**2*epsilon**2*0.280*zTollBr, 
         )
 handleSumWeight(
         ppZZd4l_M30,
