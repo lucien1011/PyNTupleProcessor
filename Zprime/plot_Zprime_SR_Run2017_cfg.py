@@ -15,16 +15,16 @@ from Plotter.PlotEndModule import PlotEndModule
 from Zprime.Config.MergeSampleDict import mergeSampleDict
 
 User                    = os.environ['USER']
-out_path                = "SR/DataMCDistributions/2019-05-07_Run2017/"
+out_path                = "SR/DataMCDistributions/2019-05-13_Run2017/"
 lumi                    = 41.4
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/Zprime/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + [zpToMuMu_M15] 
-justEndSequence         = True
+justEndSequence         = False
 
-plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
+plots = general_4mu_plots
 
 for dataset in componentList:
     if dataset.isMC:
