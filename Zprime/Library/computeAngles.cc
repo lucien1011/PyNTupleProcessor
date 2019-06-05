@@ -13,15 +13,15 @@
 
 using namespace std;
 
-void HZZ_computeAngles(TLorentzVector p4M11, int Z1_lept1Id,
+void computeAngles(TLorentzVector p4M11, int Z1_lept1Id,
 			 TLorentzVector p4M12, int Z1_lept2Id,
 			 TLorentzVector p4M21, int Z2_lept1Id,
 			 TLorentzVector p4M22, int Z2_lept2Id,
-			 float& costhetastar, 
-			 float& costheta1, 
-			 float& costheta2, 
-			 float& Phi, 
-			 float& Phi1){
+			 Double_t& costhetastar, 
+			 Double_t& costheta1, 
+			 Double_t& costheta2, 
+			 Double_t& Phi, 
+			 Double_t& Phi1){
 
   //build Z 4-vectors
   TLorentzVector p4Z1 = p4M11 + p4M12;
@@ -144,16 +144,16 @@ void HZZ_computeAngles(TLorentzVector p4M11, int Z1_lept1Id,
 
 }
 
-void HZZ_computeAnglesCS(TLorentzVector p4M11, int Z1_lept1Id,
+void computeAnglesCS(TLorentzVector p4M11, int Z1_lept1Id,
 						 TLorentzVector p4M12, int Z1_lept2Id,
 						 TLorentzVector p4M21, int Z2_lept1Id,
 						 TLorentzVector p4M22, int Z2_lept2Id,
-						 float pbeam,  
-						 float& costhetastar, 
-						 float& costheta1, 
-						 float& costheta2, 
-						 float& Phi, 
-						 float& Phi1){
+						 Double_t pbeam,  
+						 Double_t& costhetastar, 
+						 Double_t& costheta1, 
+						 Double_t& costheta2, 
+						 Double_t& Phi, 
+						 Double_t& Phi1){
 	
 
 	TVector3 LabXaxis( 1.0, 0.0, 0.0 );
