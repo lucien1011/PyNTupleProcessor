@@ -4,14 +4,14 @@ import array
 
 # ________________________________________________________________________ ||
 mZ1PlotRange        = [60-1,array.array('d',[40.*1.02**i for i in range(60)]),]
-#mZ2PlotRange        = [180-1,array.array('d',[4.*1.02**i for i in range(180)]),]
-#mZ2LowM4lPlotRange  = [140-1,array.array('d',[4.*1.02**i for i in range(140)]),]
-#mZ2MidM4lPlotRange  = [140-1,array.array('d',[4.*1.02**i for i in range(140)]),]
-#mZ2HighM4lPlotRange = [152-1,array.array('d',[4.*1.02**i for i in range(152)]),]
-mZ2PlotRange        = [38,4.,80.,]
-mZ2LowM4lPlotRange  = [28,4.,60.,]
-mZ2MidM4lPlotRange  = [28,4.,60.,]
-mZ2HighM4lPlotRange = [38,4.,80.,]
+mZ2PlotRange        = [155-1,array.array('d',[4.*1.02**i for i in range(155)]),]
+mZ2LowM4lPlotRange  = [140-1,array.array('d',[4.*1.02**i for i in range(140)]),]
+mZ2MidM4lPlotRange  = [140-1,array.array('d',[4.*1.02**i for i in range(140)]),]
+mZ2HighM4lPlotRange = [155-1,array.array('d',[4.*1.02**i for i in range(155)]),]
+#mZ2PlotRange        = [38,4.,80.,]
+#mZ2LowM4lPlotRange  = [28,4.,60.,]
+#mZ2MidM4lPlotRange  = [28,4.,60.,]
+#mZ2HighM4lPlotRange = [38,4.,80.,]
 h4lPlotRange        = [47-1,array.array('d',[80.*1.02**i for i in range(47)]),]
 
 # ________________________________________________________________________ ||
