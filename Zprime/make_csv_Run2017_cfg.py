@@ -13,7 +13,7 @@ from Zprime.Config.MergeSampleDict import mergeSampleDict
 from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting 
 
 User                    = os.environ['USER']
-out_path                = "MVA/Input/2019-06-03_Run2017_m4l-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
+out_path                = "MVA/Input/2019-06-10_Run2017_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
 lumi                    = 41.4
 nCores                  = 5
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/Zprime/"+out_path
@@ -45,8 +45,8 @@ varsToWrite             = [
                             #LambdaFunc("x: x.phiL3[0]"),
                             #LambdaFunc("x: x.phiL4[0]"),
                             LambdaFunc("x: (x.mass4l[0]-80.)/20."),
-                            #LambdaFunc("x: x.massZ1[0]"),
-                            #LambdaFunc("x: x.massZ2[0]"),
+                            LambdaFunc("x: x.massZ1[0]/60."),
+                            LambdaFunc("x: x.massZ2[0]/60."),
                             LambdaFunc("x: x.cosTheta1"),
                             LambdaFunc("x: x.cosTheta2"),
                             LambdaFunc("x: x.cosThetaStar"),

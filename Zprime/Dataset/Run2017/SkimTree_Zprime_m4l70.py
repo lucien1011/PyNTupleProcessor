@@ -47,7 +47,7 @@ for m in zp_mass_points:
         ],
         ),
         isMC                = True,
-        xs                  = 0.1141,
+        xs                  = zpToMuMuXS_dict[m],
         isSignal            = True,
         )
     handleSumWeight(
