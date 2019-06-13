@@ -1,5 +1,4 @@
 # Installation
->"Whether 'tis nobler in the mind to suffer the slings and arrows of outrageous shape systematics, or to take arms against a sea of bins, and by uncorrelating, end them?"
 
 Framework for running on root ntuples for various CMS physics analysis
 
