@@ -81,6 +81,7 @@ class PlotSetting(object):
             sf_y_pos=0.92,
             sf_text_font=42,
             sf_text_size=0.05,
+            leg_name_dict={},
             log_x=False,
             linear_max_factor=1.5,
             log_max_factor=5,
@@ -97,6 +98,7 @@ class PlotSetting(object):
         self.sf_y_pos = sf_y_pos
         self.sf_text_font = sf_text_font
         self.sf_text_size = sf_text_size
+        self.leg_name_dict=leg_name_dict
         self.log_x = log_x
         self.linear_max_factor = linear_max_factor
         self.log_max_factor = log_max_factor

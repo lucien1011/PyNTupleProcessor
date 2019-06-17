@@ -2,65 +2,27 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Utils.System import system
 
-from Plotter.Plotter import Plotter
-from Plotter.PlotSetting import PlotSetting
-from Plotter.PlotEndModule import PlotEndModule
-from Plotter.Plot import Plot
-
-from LJMet.Weighter.XSWeighter import XSWeighter
-from LJMet.Skimmer.AnalysisSkimmer import AnalysisSkimmer
-from LJMet.Weighter.DataMCWeighter import DataMCWeighter
-from LJMet.Producer.CategoryProducer import CategoryProducer
+from LJMet.Sequence.RecoSequence import *
 from LJMet.Producer.ThetaProducer import ThetaTemplateProducer
 
-from LJMet.Dataset.LJMet_step1test_yiting import *
+from LJMet.Dataset.LJMet_step1_tptp2017 import *
 
-mergeSampleDict = {
+from LJMet.Config.MergeSampleDict_StatInput import mergeSampleDict
 
-
-		"EWK":		[
-						"DY",
-						'WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',
-						'TTWl','TTZl',
-					],
-		"WJets":	['WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',],
-		"TTJets":	[
-						'TTJetsHad0','TTJetsHad700','TTJetsHad1000',
-						'TTJetsSemiLep0','TTJetsSemiLep700','TTJetsSemiLep1000',
-						'TTJets2L2nu0','TTJets2L2nu700','TTJets2L2nu1000',
-						'TTJetsPH700mtt','TTJetsPH1000mtt',
-					],
-		"SingleTop":	[
-							'Ts','Tt','Tbt','TtW','TbtW',
-						],
-		"QCD":		[
-						'QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-					],
-		"Bkg":		[
-						"DY",
-						'WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',
-						'TTWl','TTZl',
-						'WJetsMG400','WJetsMG600','WJetsMG800','WJetsMG1200','WJetsMG2500',
-						'TTJetsHad0','TTJetsHad700','TTJetsHad1000',
-						'TTJetsSemiLep0','TTJetsSemiLep700','TTJetsSemiLep1000',
-						'TTJets2L2nu0','TTJets2L2nu700','TTJets2L2nu1000',
-						'TTJetsPH700mtt','TTJetsPH1000mtt',
-						'Ts','Tt','Tbt','TtW','TbtW',
-						'QCDht300','QCDht500','QCDht700','QCDht1000','QCDht1500','QCDht2000',
-					],
-		}
-
-out_path                = "TestPlot/2018-12-04_StatInput/"
+#out_path                = "TestPlot/2018-12-04_StatInput/"
 #out_path                = "TestPlot/2018-12-05_test/"
+#out_path                = "ThetaInput/2019-05-27_StatInput/"
+out_path                = "ThetaInput/2019-05-29_StatInput/"
 lumi                    = 41.298
 nCores                  = 5
-outputDir               = out_path
+outputDir               = system.getStoragePath()+"/lucien/LJMet/B2G/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + dataSamples
+#componentList           = bkgSamples + dataSamples + sigSamples
 componentList           = sigSamples
-justEndSequence         = False
+justEndSequence         = False 
 
 for dataset in componentList:
     if dataset.isMC:
@@ -68,17 +30,8 @@ for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
-xsWeighter              = XSWeighter("XSWeighter")
-dataMCWeighter          = DataMCWeighter("DataMCWeighter")
-anaSkimmer              = AnalysisSkimmer("AnalysisSkimmer")
-catProducer				= CategoryProducer("CategoryProducer")
 thetaProducer			= ThetaTemplateProducer("TemplateProducer")
-
-sequence                = Sequence()
-sequence.add(anaSkimmer)
-sequence.add(xsWeighter)
-sequence.add(dataMCWeighter)
-sequence.add(catProducer)
+sequence = sr_sequence
 sequence.add(thetaProducer)
 
 outputInfo              = OutputInfo("OutputInfo")

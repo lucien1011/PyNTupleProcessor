@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
 BR={}
-BR['BW'] = 0.5
-BR['TZ'] = 0.25
-BR['TH'] = 0.25
+BR['BW'] = 1./3.
+BR['TZ'] = 1./3.
+BR['TH'] = 1./3.
 BR['TTBWBW'] = BR['BW']*BR['BW']
 BR['TTTHBW'] = 2*BR['TH']*BR['BW']
 BR['TTTZBW'] = 2*BR['TZ']*BR['BW']

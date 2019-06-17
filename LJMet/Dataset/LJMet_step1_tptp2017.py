@@ -94,135 +94,94 @@ for dataName in dataList:
 
 # ____________________________________________________________________________________________________________________________________________ ||
 sigList = [
-        'TTM1100BWBW',
-        'TTM1200BWBW',
-        'TTM1300BWBW',
-        'TTM1400BWBW',
-        'TTM1500BWBW',
-        'TTM1600BWBW',
-        'TTM1700BWBW',
-        'TTM1800BWBW',
+        'TT_M1100_BW-BW',
+        'TT_M1200_BW-BW',
+        'TT_M1300_BW-BW',
+        'TT_M1400_BW-BW',
+        'TT_M1500_BW-BW',
+        'TT_M1600_BW-BW',
+        'TT_M1700_BW-BW',
+        'TT_M1800_BW-BW',
 
-        'TTM1100THBW',
-        'TTM1200THBW',
-        'TTM1300THBW',
-        'TTM1400THBW',
-        'TTM1500THBW',
-        'TTM1600THBW',
-        'TTM1700THBW',
-        'TTM1800THBW',
+        'TT_M1100_TH-BW',
+        'TT_M1200_TH-BW',
+        'TT_M1300_TH-BW',
+        'TT_M1400_TH-BW',
+        'TT_M1500_TH-BW',
+        'TT_M1600_TH-BW',
+        'TT_M1700_TH-BW',
+        'TT_M1800_TH-BW',
 
-        'TTM1100THTH',
-        'TTM1200THTH',
-        'TTM1300THTH',
-        'TTM1400THTH',
-        'TTM1500THTH',
-        'TTM1600THTH',
-        'TTM1700THTH',
-        'TTM1800THTH',
+        'TT_M1100_TH-TH',
+        'TT_M1200_TH-TH',
+        'TT_M1300_TH-TH',
+        'TT_M1400_TH-TH',
+        'TT_M1500_TH-TH',
+        'TT_M1600_TH-TH',
+        'TT_M1700_TH-TH',
+        'TT_M1800_TH-TH',
 
-        'TTM1100TZBW',
-        'TTM1200TZBW',
-        'TTM1300TZBW',
-        'TTM1400TZBW',
-        'TTM1500TZBW',
-        'TTM1600TZBW',
-        'TTM1700TZBW',
-        'TTM1800TZBW',
+        'TT_M1100_TZ-BW',
+        'TT_M1200_TZ-BW',
+        'TT_M1300_TZ-BW',
+        'TT_M1400_TZ-BW',
+        'TT_M1500_TZ-BW',
+        'TT_M1600_TZ-BW',
+        'TT_M1700_TZ-BW',
+        'TT_M1800_TZ-BW',
 
-        'TTM1100TZTH',
-        'TTM1200TZTH',
-        'TTM1300TZTH',
-        'TTM1400TZTH',
-        'TTM1500TZTH',
-        'TTM1600TZTH',
-        'TTM1700TZTH',
-        'TTM1800TZTH',
+        'TT_M1100_TZ-TH',
+        'TT_M1200_TZ-TH',
+        'TT_M1300_TZ-TH',
+        'TT_M1400_TZ-TH',
+        'TT_M1500_TZ-TH',
+        'TT_M1600_TZ-TH',
+        'TT_M1700_TZ-TH',
+        'TT_M1800_TZ-TH',
 
-        'TTM1100TZTZ',
-        'TTM1200TZTZ',
-        'TTM1300TZTZ',
-        'TTM1400TZTZ',
-        'TTM1500TZTZ',
-'TTM1600TZTZ',
-            'TTM1700TZTZ',
-            'TTM1800TZTZ',
+        'TT_M1100_TZ-TZ',
+        'TT_M1200_TZ-TZ',
+        'TT_M1300_TZ-TZ',
+        'TT_M1400_TZ-TZ',
+        'TT_M1500_TZ-TZ',
+        'TT_M1600_TZ-TZ',
+        'TT_M1700_TZ-TZ',
+        'TT_M1800_TZ-TZ',
 
         ]
-sigXSDict = {
-        'TTM1100BWBW': 'TTM1100',
-        'TTM1100THBW': 'TTM1100',
-        'TTM1100THTH': 'TTM1100',
-        'TTM1100TZBW': 'TTM1100',
-        'TTM1100TZTH': 'TTM1100',
-        'TTM1100TZTZ': 'TTM1100',
 
-        'TTM1200BWBW': 'TTM1200',
-        'TTM1200THBW': 'TTM1200',
-        'TTM1200THTH': 'TTM1200',
-        'TTM1200TZBW': 'TTM1200',
-        'TTM1200TZTH': 'TTM1200',
-        'TTM1200TZTZ': 'TTM1200',
-
-        'TTM1300BWBW': 'TTM1300',
-        'TTM1300THBW': 'TTM1300',
-        'TTM1300THTH': 'TTM1300',
-        'TTM1300TZBW': 'TTM1300',
-        'TTM1300TZTH': 'TTM1300',
-        'TTM1300TZTZ': 'TTM1300',
-
-        'TTM1400BWBW': 'TTM1400',
-        'TTM1400THBW': 'TTM1400',
-        'TTM1400THTH': 'TTM1400',
-        'TTM1400TZBW': 'TTM1400',
-        'TTM1400TZTH': 'TTM1400',
-        'TTM1400TZTZ': 'TTM1400',
-
-        'TTM1500BWBW': 'TTM1500',
-        'TTM1500THBW': 'TTM1500',
-        'TTM1500THTH': 'TTM1500',
-        'TTM1500TZBW': 'TTM1500',
-        'TTM1500TZTH': 'TTM1500',
-        'TTM1500TZTZ': 'TTM1500',
-
-        'TTM1600BWBW': 'TTM1600',
-        'TTM1600THBW': 'TTM1600',
-        'TTM1600THTH': 'TTM1600',
-        'TTM1600TZBW': 'TTM1600',
-        'TTM1600TZTH': 'TTM1600',
-        'TTM1600TZTZ': 'TTM1600',
-
-        'TTM1700BWBW': 'TTM1700',
-        'TTM1700THBW': 'TTM1700',
-        'TTM1700THTH': 'TTM1700',
-        'TTM1700TZBW': 'TTM1700',
-        'TTM1700TZTH': 'TTM1700',
-        'TTM1700TZTZ': 'TTM1700',
-
-        'TTM1800BWBW': 'TTM1800',
-'TTM1800THBW': 'TTM1800',
-        'TTM1800THTH': 'TTM1800',
-        'TTM1800TZBW': 'TTM1800',
-        'TTM1800TZTH': 'TTM1800',
-        'TTM1800TZTZ': 'TTM1800',
-
-        }
+br_Tprime = 1./3.
 sigSamples = []
+sigDict = {}
 for sigName in sigList:
+    prodType,massStr,decayType = sigName.split("_")
+    decay1,decay2 = decayType.split("-")
+    if decay1 == decay2:
+        br = br_Tprime**2
+    else:
+        br = br_Tprime**2*2
+    ljmetSigName = "".join([prodType,massStr,decay1,decay2])
     tmpDataset = Dataset(
             sigName,
             ComponentList(
                 [
                     Component(sigName,
-                        dir_prefix+samples[sigName]+".root",
+                        dir_prefix+samples[ljmetSigName]+".root",
                         treeName,
                         False,
                         ),
                     ]
                 ),
             isMC		= True,
-            xs			= xsec[sigXSDict[sigName]],
+            xs			= xsec[prodType+massStr],
             #sumw		= nRun[sigName],
+            isSignal    = True,
             )
+    tmpDataset.setSumWeight(
+                        dir_prefix+samples[ljmetSigName]+".root",
+                        "nevents",
+                        )
+    tmpDataset.sumw *= br 
     sigSamples.append(tmpDataset)
+    sigDict[sigName] = tmpDataset
 
