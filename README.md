@@ -4,6 +4,8 @@ Framework for running on root ntuples for various CMS physics analysis
 
 ```bash
 git clone git@github.com:lucien1011/UF-PyNTupleRunner.git
+git submodule init
+git submodule update
 ```
 
 If you are on UF IHEPA, you can set up the framework by doing:
