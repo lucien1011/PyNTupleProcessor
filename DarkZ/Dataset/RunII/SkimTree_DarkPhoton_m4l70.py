@@ -20,3 +20,5 @@ for sample in sigSamples: sample.lumi = 136.1
 
 ppZZdSamples = sample_ppZZd.ppZZdSamples
 for sample in ppZZdSamples: sample.lumi = 136.1
+
+dataSamples = [sample2016.data2016,sample2017.data2017,sample2018.data2018,]

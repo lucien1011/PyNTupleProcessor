@@ -96,29 +96,30 @@ predCR = Dataset(
 #        bkgTreeDir+"TTJets.txt",
 #        )
 #
-## ____________________________________________________________________________________________________________________________________________ ||
-#WZTo3LNu_cmpList = ComponentList(
-#        [
-#            Component("WZTo3LNu",bkgTreeDir+"WZTo3LNu.root","passedEvents",inUFTier2=inUFTier2),
-#        ]
-#        )
-#WZTo3LNu = Dataset(
-#        "WZTo3LNu",
-#        WZTo3LNu_cmpList,
-#        isMC = True,
-#        xs = 4.430, 
-#        )
-##WZTo3LNu.setSumWeight(bkgTreeDirT2+"WZTo3LNu.root","Ana/sumWeights",True)
-#handleSumWeight(
-#        WZTo3LNu,
-#        system,
-#        bkgTreeDirT2+"WZTo3LNu.root",
-#        sumWeightHist,
-#        True,
-#        saveSumWeightTxt,
-#        bkgTreeDir+"WZTo3LNu.txt",
-#        )
-#
+# ____________________________________________________________________________________________________________________________________________ ||
+WZTo3LNu_cmpList = ComponentList(
+        [
+            Component("WZTo3LNu",bkgTreeDir+"WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+WZTo3LNu = Dataset(
+        "WZTo3LNu",
+        WZTo3LNu_cmpList,
+        isMC = True,
+        xs = 4.430, 
+        )
+#WZTo3LNu.setSumWeight(bkgTreeDirT2+"WZTo3LNu.root","Ana/sumWeights",True)
+handleSumWeight(
+        WZTo3LNu,
+        system,
+        #bkgTreeDirT2+"WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8.root",
+        "/cms/data/store/user/t2/users/rosedj1/Higgs/HZZ4l/NTuple/Run2/MC2018_M19_Mar5_3l_2018Jets_bestCandLegacy/WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8.txt",
+        )
+
 ## ____________________________________________________________________________________________________________________________________________ ||
 ## qqZZ
 #qqZZ_cmpList = ComponentList(
