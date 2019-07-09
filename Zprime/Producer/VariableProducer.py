@@ -1,9 +1,14 @@
 from Core.Module import Module
 from Utils.DeltaR import deltaR
 
+import ROOT
+
 muonMass = 0.
 
 class VariableProducer(Module):
+    def begin(self):
+        ROOT.gSystem.Load("Library/computeAngles_cc.so")
+
     def analyze(self,event):
         event.deltaRL12 = deltaR(event.etaL1[0],event.phiL1[0],event.etaL2[0],event.phiL2[0])
         event.vecL1 = ROOT.TLorentzVector()
@@ -20,5 +25,23 @@ class VariableProducer(Module):
 
         event.vecZ1 = event.vecL1 + event.vecL2
         event.vecZ2 = event.vecL3 + event.vecL4
+
+        event.cosThetaStar = ROOT.Double(0.)
+        event.cosTheta1 = ROOT.Double(0.)
+        event.cosTheta2 = ROOT.Double(0.)
+        event.phi = ROOT.Double(0.)
+        event.phi1 = ROOT.Double(0.)
+
+        ROOT.computeAngles(
+                event.vecL1,event.idL1[0],
+                event.vecL2,event.idL1[0],
+                event.vecL3,event.idL1[0],
+                event.vecL4,event.idL1[0],
+                event.cosThetaStar,
+                event.cosTheta1,
+                event.cosTheta2,
+                event.phi,
+                event.phi1,
+                )
 
         return True

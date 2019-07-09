@@ -21,14 +21,16 @@ from DarkZ.Config.MergeSampleDict_RunII import mergeSampleDict
 
 import os
 
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-24_m4lSR-m4lSB_HZZd-ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-24_m4lSR-m4lSB_HZZd-ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-08_m4lSR-m4lSB_HZZd-ppZZd/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-09_m4lSR-m4lSB_HZZd-ppZZd/"
 
 User                    = os.environ['USER']
 nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples + ppZZdSamples
+componentList           = bkgSamples + sigSamples + ppZZdSamples + dataSamples
 justEndSequence         = False
 skipGitDetail           = True
 
@@ -66,4 +68,4 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "StatInput.root"
 
-endSequence = EndSequence(skipHadd=False)
+endSequence = EndSequence(skipHadd=False,haddDataSamples=True)

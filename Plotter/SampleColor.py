@@ -128,5 +128,13 @@ sampleColorDict = {
                 "WrongFC_Irreducible": ROOT.kBlue,
 
                 #Zprime
-                "zpToMuMu_M15": ROOT.kViolet+9,
+                "zpToMuMu_M5": ROOT.kOrange+1,
+                "zpToMuMu_M10": ROOT.kOrange+2,
+                "zpToMuMu_M15": ROOT.kOrange+3,
+                "zpToMuMu_M20": ROOT.kOrange+4,
+                "zpToMuMu_M30": ROOT.kOrange+5,
+                "zpToMuMu_M40": ROOT.kOrange+6,
+                "zpToMuMu_M50": ROOT.kOrange+7,
+                "zpToMuMu_M60": ROOT.kOrange+8,
+                "zpToMuMu_M70": ROOT.kOrange+9,
 }

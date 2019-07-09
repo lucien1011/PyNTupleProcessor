@@ -1,4 +1,5 @@
 from Core.Module import Module
+import array
 
 class ParaYieldProducer(Module):
     def __init__(self,name,systList=[],channelDict={},binning=[],norm_binning=[],postfix=""):
@@ -11,6 +12,11 @@ class ParaYieldProducer(Module):
         self.channelDict = channelDict
         self.binning = [12000,4.,35.] if not binning else binning
         self.norm_binning = [6000,0.,1.] if not norm_binning else norm_binning
+        #self.binning = [110-1,array.array('d',[4.*1.02**i for i in range(110)]),]
+        #self.norm_binning = [
+        #        len(self.binning[1])-1,
+        #        array.array('d',[(i-self.binning[1][0])/(self.binning[1][-1]-self.binning[1][0]) for i in self.binning[1]]),
+        #        ]
         self.hist_postfix = "-Norm" if not postfix else postfix
 
     def begin(self):
@@ -27,56 +33,19 @@ class ParaYieldProducer(Module):
                 histSettingList = [sysHistName+self.hist_postfix,"TH1D",sysHistName+self.hist_postfix,"",]+self.norm_binning
                 self.writer.book(*histSettingList)
 
-
-
     def analyze(self,event):
+        #norm_value = (event.massZ2[0]-self.binning[1][0])/(self.binning[1][-1]-self.binning[1][0])
         norm_value = (event.massZ2[0]-self.binning[-2])/(self.binning[-1]-self.binning[-2])
-        
+
         histName = "comb"
         self.writer.objs[histName].Fill(event.massZ2[0],event.weight)
         self.writer.objs[histName+self.hist_postfix].Fill(norm_value,event.weight)
-        
-        if not self.channelDict:
-            #if event.mass4mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
-            #    channelName = "4mu"
-            #elif event.mass4e[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
-            #    channelName = "4e"
-            #elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
-            #    channelName = "2mu2e"
-            #elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
-            #    channelName = "2e2mu"
 
-            if event.mass4mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
-                channelName = "2mu"
-            elif event.mass4e[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
-                channelName = "2e"
-            elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11:
-                channelName = "2e"
-            elif event.mass2e2mu[0] > 0. and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
-                channelName = "2mu"
-            histName = channelName
-            self.writer.objs[histName].Fill(event.massZ2[0],event.weight)
-            self.writer.objs[histName+self.hist_postfix].Fill(norm_value,event.weight)
-            for syst in self.systList:
-                sysHistName = "_".join([channelName,syst.name])
-                self.writer.objs[sysHistName].Fill(event.massZ2[0],event.weight*syst.factorFunc(event))
-                self.writer.objs[sysHistName+self.hist_postfix].Fill(norm_value,event.weight*syst.factorFunc(event))
-        else:
-            foundChannel = False
-            for channelName,selFunc in self.channelDict.iteritems():
-                if selFunc(event):
-                    histName = channelName
-                    self.writer.objs[histName].Fill(event.massZ2[0],event.weight)
-                    self.writer.objs[histName+self.hist_postfix].Fill(norm_value,event.weight)
-                    for syst in self.systList:
-                        sysHistName = "_".join([channelName,syst.name])
-                        self.writer.objs[sysHistName].Fill(event.massZ2[0],event.weight*syst.factorFunc(event))
-                        self.writer.objs[sysHistName+self.hist_postfix].Fill(norm_value,event.weight*syst.factorFunc(event))
-
-        for syst in self.systList:
-            sysHistName = "_".join(["comb",syst.name])
-            self.writer.objs[sysHistName].Fill(event.massZ2[0],event.weight*syst.factorFunc(event))
-            self.writer.objs[sysHistName+self.hist_postfix].Fill(norm_value,event.weight*syst.factorFunc(event))
+        for channelName,selFunc in self.channelDict.iteritems():
+            if selFunc(event): 
+                histName = channelName
+                self.writer.objs[histName].Fill(event.massZ2[0],event.weight)
+                self.writer.objs[histName+self.hist_postfix].Fill(norm_value,event.weight)
 
         return True
 

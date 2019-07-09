@@ -7,26 +7,26 @@ from Utils.System import system
 from Zprime.Dataset.Run2017.SkimTree_Bkg_m4l70 import * 
 from Zprime.Dataset.Run2017.SkimTree_Zprime_m4l70 import * 
 from Zprime.Sequence.RecoSequence import * 
-from Zprime.Config.PlotDefinition import *
 
-from Plotter.Plotter import Plotter
-from Plotter.PlotEndModule import PlotEndModule
+from Zprime.StatTools.ParaYieldProducer import ParaYieldProducer
 
 from Zprime.Config.MergeSampleDict import mergeSampleDict
 
+import os
+
+out_path = "ParaInput/EXO-18-001-Nominal/2019-06-10/"
+
 User                    = os.environ['USER']
-out_path                = "SR/DataMCDistributions/2019-06-03_Run2017/"
-lumi                    = 41.4
 nCores                  = 5
-outputDir               = system.getStoragePath()+"/"+User+"/Higgs/Zprime/"+out_path
+lumi                    = 77.3
+outputDir               = system.getStoragePath()+"/lucien/Higgs/Zprime/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [sigSampleDict[m] for m in [10,40,70]]
 #componentList           = bkgSamples + sigSampleDict.values()
-#componentList           = sigSampleDict.values() 
-justEndSequence         = True
-
-plots = general_4mu_plots
+#componentList           = sigSampleDict.values()
+componentList           = bkgSamples
+justEndSequence         = False
+skipGitDetail           = True
 
 for dataset in componentList:
     if dataset.isMC:
@@ -34,15 +34,18 @@ for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
-plotter                 = Plotter("Plotter",plots)
+mu_ch_sel_str = 'abs(event.idL1[0]) == 13 and abs(event.idL2[0]) == 13 and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13'
+
+input_channel_dict      = {
+        "4mu": LambdaFunc('event: '+mu_ch_sel_str),
+        }
 
 sequence                = signal_sequence
-sequence.add(plotter)
+yieldProducer           = ParaYieldProducer("ParaYieldProducer",channelDict=input_channel_dict,)
+sequence.add(yieldProducer)
 
 outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
-outputInfo.TFileName    = "DataMCDistribution.root"
+outputInfo.TFileName    = "StatInput.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/Zprime/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

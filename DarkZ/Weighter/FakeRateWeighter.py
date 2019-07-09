@@ -89,7 +89,7 @@ class FakeRateWeighter(Module):
                 event.weight *= -1*event.FRWeightProd[0]
             else:
                 return False
-        elif "PredCR" in self.dataset.name:
+        elif "PredCR" in self.dataset.name and self.dataset.isMC:
             #if event.nZXCRFailedLeptons[0] == 1:
             if event.FRWeightSum[0] == -1.: return False
             if event.nFailedLeptonsZ2[0] == 2:
