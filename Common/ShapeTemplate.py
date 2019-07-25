@@ -22,8 +22,9 @@ class ShapeTemplateMaker(EndModule):
             for inputHistName in self.config.inputHistNames:
                 h = collector.getObj(sample,inputHistName)
                 h.Fit(self.config.fitFunc,self.config.fitOption)
+                func = h.GetFunction(self.config.fitFunc)
                 funcName = "_".join([sample,inputHistName,self.config.objName])
-                func = self.config.fitFunc.Clone(funcName)
+                func.SetName(funcName)
                 ROOT.gDirectory.Add(func)
                 collector.addObj(funcName,func)
             collector.saveFile(self.config.inputInfo,sample,self.config.outFileName)

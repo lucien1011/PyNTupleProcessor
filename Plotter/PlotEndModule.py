@@ -72,18 +72,23 @@ class PlotEndModule(EndModule):
         smCount      = 0.0
         smCountErrSq = 0.0
         histList     = []
-        #totalsum = ROOT.TH1D()
 
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
-            h = collector.getObj(sample,plot.rootSetting[1])
+            if sample not in plot.customHistDict:
+                h = collector.getObj(sample,plot.rootSetting[1])
+            else:
+                h = plot.customHistDict[sample].hist
             smCountErrTmp = ROOT.Double(0.)
             smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             smCountErrSq += smCountErrTmp**2
 
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
-            h = collector.getObj(sample,plot.rootSetting[1])
+            if sample not in plot.customHistDict:
+                h = collector.getObj(sample,plot.rootSetting[1])
+            else:
+                h = plot.customHistDict[sample].hist
             if histToScale and smCount: h.Scale(histToScale.Integral(0,histToScale.GetNbinsX()+1)/smCount)
             if sample in sampleColorDict:
                 h.SetFillColor(sampleColorDict[sample])
