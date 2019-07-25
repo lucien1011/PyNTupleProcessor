@@ -73,7 +73,7 @@ if fitZX:
                     "ShapeMaker",
                     samples=["ZPlusX",],
                     inputHistNames=["mZ2_4mu",],
-                    fitFunc="landau",
+                    fitFunc=ROOT.TF1("f1","[0]*TMath::Landau(x,[1],[2])",-100,100),
                     outFileName="Shape.root",
                     objName="shape",
                     inputInfo=outputInfo,

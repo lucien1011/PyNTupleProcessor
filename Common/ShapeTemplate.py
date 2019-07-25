@@ -23,7 +23,7 @@ class ShapeTemplateMaker(EndModule):
                 h = collector.getObj(sample,inputHistName)
                 h.Fit(self.config.fitFunc,self.config.fitOption)
                 funcName = "_".join([sample,inputHistName,self.config.objName])
-                func = h.GetFunction(funcName)
+                func = self.config.fitFunc.Clone(funcName)
                 ROOT.gDirectory.Add(func)
                 collector.addObj(funcName,func)
             collector.saveFile(self.config.inputInfo,sample,self.config.outFileName)
