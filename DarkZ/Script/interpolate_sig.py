@@ -26,23 +26,37 @@ draw_option = 'Draw'
 tfile_option = 'TFile'
 
 # ________________________________________________________________________________________________ ||
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-23_m4lSR-m4lSB_HZZd-ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-23_m4lSR-m4lSB_HZZd-ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+
+# ________________________________________________________________________________________________ ||
 inputDir = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 TFileName = "StatInput.root"
-#outputDir = "/Users/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-05-23_FirstVersion/"
-outputDir = "/Users/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-05-23_FirstVersion/"
 
+# ________________________________________________________________________________________________ ||
+#outputDir = "/Users/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-05-23_FirstVersion/"
+#outputDir = "/Users/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-05-23_FirstVersion/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+
+# ________________________________________________________________________________________________ ||
 signals = [
-                #SignalModel("ppZZd4l_M5",5),
-                #SignalModel("ppZZd4l_M15",15),
-                #SignalModel("ppZZd4l_M30",30),
-                SignalModel("HZZd_M4",4),
-                SignalModel("HZZd_M7",7),
-                SignalModel("HZZd_M10",10),
-                SignalModel("HZZd_M15",15),
-                SignalModel("HZZd_M20",20),
-                SignalModel("HZZd_M25",25),
-                SignalModel("HZZd_M30",30),
+                SignalModel("ppZZd4l_M5",5),
+                SignalModel("ppZZd4l_M15",15),
+                SignalModel("ppZZd4l_M30",30),
+                #SignalModel("HZZd_M4",4),
+                #SignalModel("HZZd_M7",7),
+                #SignalModel("HZZd_M10",10),
+                #SignalModel("HZZd_M15",15),
+                #SignalModel("HZZd_M20",20),
+                #SignalModel("HZZd_M25",25),
+                #SignalModel("HZZd_M30",30),
             ]
 bins = [
         Bin("2mu_HiggsLowSB",0.02),
@@ -52,7 +66,7 @@ bins = [
         Bin("2mu_HiggsHighSB",0.02),
         Bin("2e_HiggsHighSB",0.05),
         ]
-saveOption = "Draw"
+saveOption = "TFile"
 
 # ________________________________________________________________________________________________ ||
 print("Input directory: "+inputDir)

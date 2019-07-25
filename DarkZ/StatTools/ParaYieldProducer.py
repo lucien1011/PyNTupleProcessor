@@ -36,16 +36,17 @@ class ParaYieldProducer(Module):
     def analyze(self,event):
         #norm_value = (event.massZ2[0]-self.binning[1][0])/(self.binning[1][-1]-self.binning[1][0])
         norm_value = (event.massZ2[0]-self.binning[-2])/(self.binning[-1]-self.binning[-2])
+        eventWeight = event.weight
 
         histName = "comb"
-        self.writer.objs[histName].Fill(event.massZ2[0],event.weight)
-        self.writer.objs[histName+self.hist_postfix].Fill(norm_value,event.weight)
+        self.writer.objs[histName].Fill(event.massZ2[0],eventWeight)
+        self.writer.objs[histName+self.hist_postfix].Fill(norm_value,eventWeight)
 
         for channelName,selFunc in self.channelDict.iteritems():
             if selFunc(event): 
                 histName = channelName
-                self.writer.objs[histName].Fill(event.massZ2[0],event.weight)
-                self.writer.objs[histName+self.hist_postfix].Fill(norm_value,event.weight)
+                self.writer.objs[histName].Fill(event.massZ2[0],eventWeight)
+                self.writer.objs[histName+self.hist_postfix].Fill(norm_value,eventWeight)
 
         return True
 

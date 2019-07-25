@@ -3,8 +3,7 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
+from HToZdZd.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
 from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
@@ -16,16 +15,13 @@ from HToZdZd.Config.MergeSampleDict import *
 import os
 
 User                    = os.environ['USER']
-#out_path                = "DarkPhotonSR/StatInput/2019-02-18_35p9_RatioCut0p05/"
-#out_path                = "DarkPhotonSR/StatInput/2019-02-28_35p9_RatioCut0p02/"
-#out_path                = "DarkPhotonSR/StatInput/2019-03-29_136p1_RatioCut0p02/"
-out_path                = "DarkPhotonSR/StatInput/2019-07-18_Run2016/"
-lumi                    = 35.9
+out_path                = "DarkPhotonSR/StatInput/2019-07-18_Run2017/"
+lumi                    = 41.7
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016,] + sigSamples2017  
+componentList           = bkgSamples + [data2017,] + sigSamples2017  
 justEndSequence         = False
 eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
 
