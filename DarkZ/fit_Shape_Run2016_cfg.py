@@ -1,56 +1,77 @@
 import ROOT,os
 from Core.mkdir_p import mkdir_p
+from Core.BaseObject import BaseObject
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-inputPath       = "/raid/raid7//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-25_Run2016/ZPlusX/DataMCDistribution.root"
-outputDir       = "/raid/raid7//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-25_Run2016/ZPlusX/"
-histNames       = [
-                        "mZ2_4e",
-                        "mZ2_low-m4l_4e",
-                        "mZ2_mid-m4l_4e",
-                        "mZ2_high-m4l_4e",
-                        "mZ2_2mu2e",
-                        "mZ2_low-m4l_2mu2e",
-                        "mZ2_mid-m4l_2mu2e",
-                        "mZ2_high-m4l_2mu2e",
-                        "mZ2_4mu",
-                        "mZ2_low-m4l_4mu",
-                        "mZ2_mid-m4l_4mu",
-                        "mZ2_high-m4l_4mu",
-                        "mZ2_2e2mu",
-                        "mZ2_low-m4l_2e2mu",
-                        "mZ2_mid-m4l_2e2mu",
-                        "mZ2_high-m4l_2e2mu",
+baseDir         = "/Users/lucien/NTuple//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
+inputPath       = baseDir+"ZPlusX/DataMCDistribution.root"
+outputDir       = baseDir+"ZPlusX/"
+binList         = [
+                        #BaseObject("mZ2_4e",rebin=5,histName="mZ2_4e"),
+                        #BaseObject("mZ2_low-m4l_4e",rebin=5,histName="mZ2_low-m4l_4e"),
+                        #BaseObject("mZ2_mid-m4l_4e",rebin=5,histName="mZ2_mid-m4l_4e"),
+                        #BaseObject("mZ2_high-m4l_4e",rebin=5,histName="mZ2_high-m4l_4e"),
+                        #BaseObject("mZ2_2mu2e",rebin=5,histName="mZ2_2mu2e"),
+                        #BaseObject("mZ2_low-m4l_2mu2e",rebin=5,histName="mZ2_low-m4l_2mu2e"),
+                        #BaseObject("mZ2_mid-m4l_2mu2e",rebin=5,histName="mZ2_mid-m4l_2mu2e"),
+                        #BaseObject("mZ2_high-m4l_2mu2e",rebin=5,histName="mZ2_high-m4l_2mu2e"),
+                        #BaseObject("mZ2_4mu",rebin=10,histName="mZ2_4mu"),
+                        #BaseObject("mZ2_low-m4l_4mu",rebin=5,histName="mZ2_low-m4l_4mu"),
+                        #BaseObject("mZ2_mid-m4l_4mu",rebin=5,histName="mZ2_mid-m4l_4mu"),
+                        #BaseObject("mZ2_high-m4l_4mu",rebin=10,histName="mZ2_high-m4l_4mu"),
+                        #BaseObject("mZ2_2e2mu",rebin=10,histName="mZ2_2e2mu"),
+                        #BaseObject("mZ2_low-m4l_2e2mu",rebin=5,histName="mZ2_low-m4l_2e2mu"),
+                        #BaseObject("mZ2_mid-m4l_2e2mu",rebin=5,histName="mZ2_mid-m4l_2e2mu"),
+                        #BaseObject("mZ2_high-m4l_2e2mu",rebin=10,histName="mZ2_high-m4l_2e2mu"),
+                        BaseObject("mZ2_4e",rebin=5,histName="mZ2_4e"),
+                        BaseObject("mZ2_low-m4l_4e",rebin=5,histName="mZ2_4e"),
+                        BaseObject("mZ2_mid-m4l_4e",rebin=5,histName="mZ2_4e"),
+                        BaseObject("mZ2_high-m4l_4e",rebin=5,histName="mZ2_4e"),
+                        BaseObject("mZ2_2mu2e",rebin=5,histName="mZ2_2mu2e"),
+                        BaseObject("mZ2_low-m4l_2mu2e",rebin=5,histName="mZ2_2mu2e"),
+                        BaseObject("mZ2_mid-m4l_2mu2e",rebin=5,histName="mZ2_2mu2e"),
+                        BaseObject("mZ2_high-m4l_2mu2e",rebin=5,histName="mZ2_2mu2e"),
+                        BaseObject("mZ2_4mu",rebin=10,histName="mZ2_4mu"),
+                        BaseObject("mZ2_low-m4l_4mu",rebin=10,histName="mZ2_4mu"),
+                        BaseObject("mZ2_mid-m4l_4mu",rebin=10,histName="mZ2_4mu"),
+                        BaseObject("mZ2_high-m4l_4mu",rebin=10,histName="mZ2_4mu"),
+                        BaseObject("mZ2_2e2mu",rebin=10,histName="mZ2_2e2mu"),
+                        BaseObject("mZ2_low-m4l_2e2mu",rebin=10,histName="mZ2_2e2mu"),
+                        BaseObject("mZ2_mid-m4l_2e2mu",rebin=10,histName="mZ2_2e2mu"),
+                        BaseObject("mZ2_high-m4l_2e2mu",rebin=10,histName="mZ2_2e2mu"),
                     ]
 drawFit         = True
+rebin           = 5
 
 # _____________________________________________________________________________ ||
 inputFile = ROOT.TFile(inputPath,"READ")
 mkdir_p(os.path.dirname(outputDir))
 if drawFit: c = ROOT.TCanvas()
 outputFile = ROOT.TFile(os.path.join(outputDir,"shape.root"),"RECREATE")
-for histName in histNames:
-    inputHist = inputFile.Get(histName)
+for bin in binList:
+    histName = bin.histName
+    inputHist = inputFile.Get(histName).Clone()
     inputHistClone = inputHist.Clone()
-    inputHist.Rebin(20)
+    inputNormHist = inputFile.Get(bin.name)
+    inputHist.Rebin(bin.rebin)
     inputHist.Fit("landau")
     func = inputHist.GetFunction("landau")
-    func.SetName(histName+"_shape")
-    outputHist = inputHistClone.Clone(histName+"_shapehist")
-    for ibin in range(1,inputHistClone.GetNbinsX()+1):
-        x_value = inputHistClone.GetXaxis().GetBinCenter(ibin)
+    func.SetName(bin.name+"_shape")
+    outputHist = inputNormHist.Clone(bin.name+"_shapehist")
+    for ibin in range(1,inputNormHist.GetNbinsX()+1):
+        x_value = inputNormHist.GetXaxis().GetBinCenter(ibin)
         outputHist.SetBinContent(ibin,func.Eval(x_value))
-    outputHist.Scale(inputHist.Integral()/outputHist.Integral())
+    outputHist.Scale(inputNormHist.Integral()/outputHist.Integral())
     outputFile.cd()
     inputHist.Write()
     outputHist.Write()
     func.Write()
     if drawFit:
-        inputHist.SetStats(0)
-        inputHist.Draw()
-        c.SaveAs(os.path.join(outputDir,"fit_"+histName+".pdf"))
+        outputHist.SetStats(0)
+        outputHist.Draw()
+        c.SaveAs(os.path.join(outputDir,"fit_"+bin.name+".pdf"))
 inputFile.Close()
 
 # _____________________________________________________________________________ ||

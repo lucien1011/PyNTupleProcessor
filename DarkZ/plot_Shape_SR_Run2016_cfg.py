@@ -20,7 +20,9 @@ from DarkZ.Config.MergeSampleDict import mergeSampleDict
 import ROOT,os,copy
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-25_Run2016/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-25_Run2016/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
+end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2016/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
@@ -33,8 +35,13 @@ plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2
 
 inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
 for p in plots:
+    p.plotSetting.divideByBinWidth = True
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
+        #p.customPdfDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
+        #p.customPdfDict = {}
+        #leptonChannel = p.key.split("_")[-1]
+        #p.customPdfDict["ZPlusX"] = BaseObject(p.key,hist=inputShapeFile.Get("mZ2"+"_"+leptonChannel+"_shapehist").Clone(p.key))
 
 for sig in sigSamples:
     for p in plots:
@@ -52,5 +59,5 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
+endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+end_out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
