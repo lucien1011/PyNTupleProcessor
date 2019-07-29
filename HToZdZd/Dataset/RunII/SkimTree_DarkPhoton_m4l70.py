@@ -15,5 +15,7 @@ for sample in sample2018.bkgSamples:
 
 bkgSamples = sample2016.bkgSamples + sample2017.bkgSamples + sample2018.bkgSamples
 
+dataSamples = [sample2016.data2016,sample2017.data2017,sample2018.data2018,]
+
 sigSamples = sampleHToZdZd.sigSamples2017
 for sample in sigSamples: sample.lumi = 136.1

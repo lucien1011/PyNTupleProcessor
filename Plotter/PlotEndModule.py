@@ -72,18 +72,23 @@ class PlotEndModule(EndModule):
         smCount      = 0.0
         smCountErrSq = 0.0
         histList     = []
-        #totalsum = ROOT.TH1D()
 
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
-            h = collector.getObj(sample,plot.rootSetting[1])
+            if sample not in plot.customHistDict:
+                h = collector.getObj(sample,plot.rootSetting[1])
+            else:
+                h = plot.customHistDict[sample].hist
             smCountErrTmp = ROOT.Double(0.)
             smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             smCountErrSq += smCountErrTmp**2
 
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
-            h = collector.getObj(sample,plot.rootSetting[1])
+            if sample not in plot.customHistDict:
+                h = collector.getObj(sample,plot.rootSetting[1])
+            else:
+                h = plot.customHistDict[sample].hist
             if histToScale and smCount: h.Scale(histToScale.Integral(0,histToScale.GetNbinsX()+1)/smCount)
             if sample in sampleColorDict:
                 h.SetFillColor(sampleColorDict[sample])
@@ -132,9 +137,11 @@ class PlotEndModule(EndModule):
                 h.SetFillColor(ROOT.kViolet)
             sigCount = h.Integral(0,h.GetNbinsX()+1)
             self.shiftLastBin(h)
-            h.SetLineStyle(9)
-            h.SetLineWidth(5)
-            if sample in sampleColorDict:
+            h.SetLineStyle(9 if not sample not in plot.plotSetting.line_style_dict else plot.plotSetting.line_style_dict[sample])
+            h.SetLineWidth(5 if not sample not in plot.plotSetting.line_width_dict else plot.plotSetting.line_width_dict[sample])
+            if sample in plot.plotSetting.line_color_dict:
+                h.SetLineColor(plot.plotSetting.line_color_dict[sample])
+            elif sample in sampleColorDict:
                 h.SetLineColor(sampleColorDict[sample])
             else:
                 h.SetLineColor(ROOT.kRed)
@@ -421,7 +428,7 @@ class PlotEndModule(EndModule):
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)
-        title = "Events / GeV" if plot.plotSetting.divideByBinWidth else "Events / (%.2f GeV)" % (stack.GetXaxis().GetBinWidth(2)) 
+        title = "Events / "+plot.plotSetting.bin_width_label if plot.plotSetting.divideByBinWidth else "Events / (%.2f GeV)" % (stack.GetXaxis().GetBinWidth(2)) 
         stack.GetYaxis().SetTitle(title)
 
     def makeRatioPlot(self,data,total,bkdgErr):

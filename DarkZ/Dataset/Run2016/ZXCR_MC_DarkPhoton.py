@@ -17,6 +17,7 @@ predCR_cmpList = ComponentList(
         [
             #Component("PredCR",predCRTreeDir+"/Data_Run2016-03Feb2017_noDuplicates_FRWeight.root","passedEvents",False),
             Component("PredCR",predCRTreeDir+"/Data_Run2016-03Feb2017_noDuplicates_FRWeightFromVukasin.root","passedEvents",False),
+            #Component("PredCR",predCRTreeDir+"/Data_Run2016-03Feb2017_noDuplicates_FRWeightFromFit.root","passedEvents",False),
         ]
         )
 predCR = Dataset(

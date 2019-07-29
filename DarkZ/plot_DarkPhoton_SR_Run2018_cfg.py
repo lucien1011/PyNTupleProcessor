@@ -5,7 +5,8 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
 from DarkZ.Dataset.Run2018.SkimTree_DarkPhoton_m4l70 import * 
-from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import HZZd_M4,HZZd_M15,HZZd_M30
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_ppZZd4l import * 
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
 #from DarkZ.Config.PlotDefinition import *
@@ -17,20 +18,33 @@ from Plotter.Plot import Plot
 
 from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
+import ROOT,os
+
 User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-04-02_Run2018/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-07_Run2018/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2018/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-07-09_Run2018/"
 lumi                    = 59.7
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + [data2018] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
-componentList           = bkgSamples + [HZZd_M4,HZZd_M15,HZZd_M30,] 
+componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30,] 
 justEndSequence         = False
 
 plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
+
+for sig in sigSamples:
+    for p in plots:
+        p.plotSetting.line_style_dict[sig.name] = 10
+        p.plotSetting.line_width_dict[sig.name] = 4
+        p.plotSetting.line_color_dict[sig.name] = ROOT.kRed
+for sig in ppZZdSamples:
+    for p in plots:
+        p.plotSetting.line_style_dict[sig.name] = 9
+        p.plotSetting.line_width_dict[sig.name] = 4
+        p.plotSetting.line_color_dict[sig.name] = ROOT.kOrange
 
 #for plot in plots:
 #    plot.plotSetting.divideByBinWidth = True

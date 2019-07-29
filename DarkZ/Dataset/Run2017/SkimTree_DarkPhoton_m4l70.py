@@ -350,3 +350,5 @@ bkgSamples = [
         ggZZTo4tau,
         ZPlusX,
         ]
+
+dataSamples = [data2017,]

@@ -543,3 +543,5 @@ sigSamples = [
         HZZd_M30,
         #HZZd_M35,
         ]
+
+dataSamples = [data2016,]

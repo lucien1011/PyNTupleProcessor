@@ -25,7 +25,9 @@ from DarkZ.Config.MergeSampleDict import mergeSampleDict
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_DarkPhotonSR_mZ2-35_Norm_qqZZXs0p04pb/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-09_m4lSR-m4lSB_HZZd-ppZZd/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-15_m4lSR-m4lSB_HZZd-ppZZd/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-23_m4lSR-m4lSB_ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-23_m4lSR-m4lSB_ppZZd/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-09_m4lSR-m4lSB_ppZZd_scaleZX/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-09_m4lSR-m4lSB_ppZZd_Run2016/"
 
 syst_list = [
         Syst("FRUniIso",LambdaFunc("x: x.weight_FRUniIso")),
@@ -38,14 +40,14 @@ nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + sigSamples + [data2016] + ppZZdSamples
-componentList           = sigSamples 
+componentList           = bkgSamples + sigSamples + [data2016] + ppZZdSamples
+#componentList           = [ZPlusX]
 justEndSequence         = False
 skipGitDetail           = True
 
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 136.1
+        dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 

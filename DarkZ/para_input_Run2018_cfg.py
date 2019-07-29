@@ -4,7 +4,9 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from DarkZ.Dataset.RunII.SkimTree_DarkPhoton_m4l70 import *
+from DarkZ.Dataset.Run2018.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import sigSamples
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_ppZZd4l import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -17,13 +19,13 @@ from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
-from DarkZ.Config.MergeSampleDict_RunII import mergeSampleDict
+from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
 import os
 
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-24_m4lSR-m4lSB_HZZd-ppZZd/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-08_m4lSR-m4lSB_HZZd-ppZZd/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-09_m4lSR-m4lSB_HZZd-ppZZd/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
 
 User                    = os.environ['USER']
 nCores                  = 5
@@ -35,6 +37,8 @@ justEndSequence         = False
 skipGitDetail           = True
 
 for dataset in componentList:
+    if dataset.isMC:
+        dataset.lumi = 59.7
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
