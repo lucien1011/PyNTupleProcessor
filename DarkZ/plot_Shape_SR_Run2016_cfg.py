@@ -36,6 +36,7 @@ plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2
 inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
 for p in plots:
     p.plotSetting.divideByBinWidth = True
+    p.plotSetting.bin_width_label = "Bin Width"
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
         #p.customPdfDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))

@@ -129,7 +129,8 @@ class PlotEndModule(EndModule):
 
     def makeSignalHist(self,collector,plot):
         histList = []
-        for sample in collector.signalSamples:
+        signalSamples = collector.signalSamples if not collector.mergeSigSamples else collector.mergeSigSamples
+        for sample in signalSamples:
             h = collector.getObj(sample,plot.rootSetting[1])
             if sample in sampleColorDict:
                 h.SetFillColor(sampleColorDict[sample])
