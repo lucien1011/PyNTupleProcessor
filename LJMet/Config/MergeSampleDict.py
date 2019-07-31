@@ -5,7 +5,7 @@ mergeSampleDict = {
 						'TTJetsHad0','TTJetsHad700','TTJetsHad1000',
 						'TTJetsSemiLep0','TTJetsSemiLep700','TTJetsSemiLep1000',
 						'TTJets2L2nu0','TTJets2L2nu700','TTJets2L2nu1000',
-						#'TTJetsPH700mtt','TTJetsPH1000mtt',
+						'TTJetsPH700mtt','TTJetsPH1000mtt',
 					],
 		"SingleTop":	[
 

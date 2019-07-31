@@ -20,10 +20,10 @@ sr_sequence.add(dataMCWeighter)
 sr_sequence.add(catProducer)
 
 cr_sequence             = Sequence()
+cr_sequence.add(preSkimmer)
 cr_sequence.add(crSkimmer)
 cr_sequence.add(xsWeighter)
 cr_sequence.add(dataMCWeighter)
-cr_sequence.add(catProducer)
 
 pre_sequence             = Sequence()
 pre_sequence.add(preSkimmer)
