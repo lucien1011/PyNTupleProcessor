@@ -7,8 +7,8 @@ class AnalysisSkimmer(Module):
 
     def analyze(self,event):
 		#pre-selections
-        if event.leptonPt_singleLepCalc[0] < 60.: return False
-        if event.corr_met_singleLepCalc[0] < 75.: return False
+        if event.leptonPt_MultiLepCalc[0] < 60.: return False
+        if event.corr_met_MultiLepCalc[0] < 75.: return False
         if event.NJets_JetSubCalc[0] < 3: return False
         if event.theJetPt_JetSubCalc_PtOrdered[0] < 300.: return False
         if event.theJetPt_JetSubCalc_PtOrdered[1] < 150.: return False

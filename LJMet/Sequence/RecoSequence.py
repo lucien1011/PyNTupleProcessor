@@ -1,5 +1,6 @@
 from LJMet.Weighter.XSWeighter import XSWeighter
 from LJMet.Skimmer.AnalysisSkimmer import AnalysisSkimmer
+from LJMet.Skimmer.PreselectionSkimmer import PreselectionSkimmer
 from LJMet.Weighter.DataMCWeighter import DataMCWeighter
 from LJMet.Producer.CategoryProducer import CategoryProducer
 
@@ -9,7 +10,7 @@ xsWeighter              = XSWeighter("XSWeighter")
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 srSkimmer               = AnalysisSkimmer("AnalysisSkimmer",cutflow="SR")
 crSkimmer               = AnalysisSkimmer("AnalysisSkimmer",cutflow="CR")
-preSkimmer              = AnalysisSkimmer("AnalysisSkimmer",cutflow="Preselection")
+preSkimmer              = PreselectionSkimmer("PreselecionSkimmer")
 catProducer				= CategoryProducer("CategoryProducer")
 
 sr_sequence             = Sequence()
@@ -28,4 +29,3 @@ pre_sequence             = Sequence()
 pre_sequence.add(preSkimmer)
 pre_sequence.add(xsWeighter)
 pre_sequence.add(dataMCWeighter)
-pre_sequence.add(catProducer)

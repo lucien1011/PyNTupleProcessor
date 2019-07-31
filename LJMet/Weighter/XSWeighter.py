@@ -8,7 +8,7 @@ class XSWeighter(Module):
     def analyze(self,event):
         event.weight = 1.
         if self.dataset.isMC and not self.dataset.skipWeight:
-            event.weight *= event.MCWeight_singleLepCalc[0]/abs(event.MCWeight_singleLepCalc[0])
+            event.weight *= event.MCWeight_MultiLepCalc[0]/abs(event.MCWeight_MultiLepCalc[0])
             xs = self.dataset.xs
             nevts = self.dataset.sumw
             lumi = self.dataset.lumi

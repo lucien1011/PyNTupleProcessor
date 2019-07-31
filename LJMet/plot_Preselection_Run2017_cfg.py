@@ -10,7 +10,8 @@ from Plotter.Plot import Plot
 
 from LJMet.Sequence.RecoSequence import *
 
-from LJMet.Dataset.LJMet_step1_tptp2017 import *
+#from LJMet.Dataset.FWLJMet_step1_tptp2017 import *
+from LJMet.Dataset.FWLJMET102X_1lep2017Dnn_071519_step1 import *
 
 from LJMet.Config.MergeSampleDict import mergeSampleDict
 from LJMet.Config.Plot_Run2017 import plots
@@ -19,15 +20,18 @@ import os
 
 User                    = os.environ["USER"]
 #out_path                = "Preselection/DataMCDistributions/2019-03-31_Run2017_test/"
-out_path                = "Preselection/DataMCDistributions/2019-05-29_Run2017/"
+#out_path                = "Preselection/DataMCDistributions/2019-07-24_Run2017_noPileUpWeight/"
+out_path                = "Preselection/DataMCDistributions/2019-07-31_Run2017_SyncPreSelection/"
 lumi                    = 41.298
-nCores                  = 5
-outputDir               = system.getStoragePath()+"/"+User+"/LJMet/B2G/"+out_path
+nCores                  = 6
+#outputDir               = system.getStoragePath()+"/"+User+"/LJMet/B2G/"+out_path
+outputDir               = out_path
 nEvents                 = -1
 disableProgressBar      = False
-sigSamples              = [sigDict["TT_M1200_BW-BW"]]
-componentList           = bkgSamples + dataSamples + sigSamples
-justEndSequence         = True
+#sigSamples              = [sigDict["TT_M1200_BW-BW"]]
+sigSamples              = []
+componentList           = bkgSamples + dataSamples #[b for b in bkgSamples if 'DYMG1200' in b.name] #+ dataSamples #+ sigSamples
+justEndSequence         = False
 
 for sigSample in sigSamples:
     sigSample.xs *= 100.
@@ -49,6 +53,7 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=True,)
-endModuleOutputDir = system.getPublicHtmlPath()+"/LJMet/B2G/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots))
+endSequence = EndSequence(skipHadd=False,)
+#endModuleOutputDir = system.getPublicHtmlPath()+"/LJMet/B2G/"+out_path
+endModuleOutputDir = out_path
+endSequence.add(PlotEndModule(endModuleOutputDir,plots, skipSF=False))

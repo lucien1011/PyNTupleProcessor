@@ -181,7 +181,7 @@ for sigName in sigList:
                         dir_prefix+samples[ljmetSigName]+".root",
                         "nevents",
                         )
-    tmpDataset.sumw *= br 
+    tmpDataset.sumw *= br
     sigSamples.append(tmpDataset)
     sigDict[sigName] = tmpDataset
 
