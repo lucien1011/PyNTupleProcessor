@@ -29,6 +29,6 @@ Wto3l_sequence.add(nloWeighter)
 Wto3l_sequence.add(deltar_producer)
 Wto3l_sequence.add(finalstateSkimmer)
 Wto3l_sequence.add(eventSkimmer)
-#Wto3l_sequence.add(fakerateWeighter)
+Wto3l_sequence.add(fakerateWeighter)
 #Wto3l_sequence.add(bliSkimmer)
 

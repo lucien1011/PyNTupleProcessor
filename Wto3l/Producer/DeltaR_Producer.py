@@ -16,6 +16,7 @@ class DeltaR_Producer(Module):
                                #event.deltaRL24,
                                #event.deltaRL34,
                                ])
+        #event.deltaRL3bjet
         if event.minDeltaRL <= 0.02: return False
         #if event.minDeltaRL < 0.6: return False
         return True

@@ -29,14 +29,14 @@ class EventSkimmer(Module):
         event.mass2  = P2.M()
         if event.mass1 <= 5 or event.mass2 <= 5:
             return False
-        #if 8 < event.mass1 <  12 or 8 < event.mass2 < 12 or 80 < event.mass1 < 100 or 80 < event.mass2 < 100:
+        if 8 < event.mass1 <  12 or 8 < event.mass2 < 12 or 80 < event.mass1 < 100 or 80 < event.mass2 < 100:
             return False
         #if not(event.mass1 > 86 and (event.mass1 < 96)):
             #return False
-        if event.mass1 > 86 and event.mass1 < 96:
-            return False
-        if 8 < event.mass1 < 12:
-            return False
+        #if event.mass1 > 86 and event.mass1 < 96:
+            #return False
+        #if 8 < event.mass1 < 12:
+            #return False
         #if event.met[0] <= 100:
             #return False
         return True

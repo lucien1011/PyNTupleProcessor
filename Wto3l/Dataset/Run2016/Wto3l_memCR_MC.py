@@ -103,3 +103,10 @@ handleSumWeight(
         bkgTreeDir+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
         )
 
+bkgSamples = [
+            WZTo3LNu_memCR,
+            TTJets_memCR,
+            DYJetsToLL_M10To50_memCR,
+            DYJetsToLL_M50_memCR
+            ]
+

@@ -98,3 +98,9 @@ handleSumWeight(
         )
 
 
+sigSamples = [
+            WpTo3munu_ZpM15,
+            WpTo3munu_ZpM45,
+            WmTo3munu_ZpM15,
+            WmTo3munu_ZpM45,
+            ]
