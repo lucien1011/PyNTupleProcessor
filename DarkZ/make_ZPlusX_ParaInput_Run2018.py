@@ -4,8 +4,8 @@ from Core.BaseObject import BaseObject
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-inputFitFilePath    = "/raid/raid7//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/ZPlusX/shape.root"
-inputParaFilePath   = "/raid/raid7//lucien/Higgs/DarkZ/ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2016/ZPlusX/StatInput.root"
+inputFitFilePath    = "/raid/raid7//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-29_Run2018/ZPlusX/shape.root"
+inputParaFilePath   = "/raid/raid7//lucien/Higgs/DarkZ/ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2018/ZPlusX/StatInput.root"
 outputDir           = os.path.dirname(inputParaFilePath)
 outputFileName      = "ParaShape.root"
 

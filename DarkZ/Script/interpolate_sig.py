@@ -29,7 +29,10 @@ tfile_option = 'TFile'
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-23_m4lSR-m4lSB_HZZd-ppZZd/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
 
 # ________________________________________________________________________________________________ ||
 inputDir = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
@@ -43,28 +46,46 @@ TFileName = "StatInput.root"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
-outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2016/ppZZd/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2017/ppZZd/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2018/ppZZd/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2016/HZZd/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2017/HZZd/"
+outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2018/HZZd/"
 
 # ________________________________________________________________________________________________ ||
 signals = [
-                SignalModel("ppZZd4l_M5",5),
-                SignalModel("ppZZd4l_M15",15),
-                SignalModel("ppZZd4l_M30",30),
-                #SignalModel("HZZd_M4",4),
-                #SignalModel("HZZd_M7",7),
-                #SignalModel("HZZd_M10",10),
-                #SignalModel("HZZd_M15",15),
-                #SignalModel("HZZd_M20",20),
-                #SignalModel("HZZd_M25",25),
-                #SignalModel("HZZd_M30",30),
+                #SignalModel("ppZZd4l_M5",5),
+                #SignalModel("ppZZd4l_M15",15),
+                #SignalModel("ppZZd4l_M30",30),
+                SignalModel("HZZd_M4",4),
+                SignalModel("HZZd_M7",7),
+                SignalModel("HZZd_M10",10),
+                SignalModel("HZZd_M15",15),
+                SignalModel("HZZd_M20",20),
+                SignalModel("HZZd_M25",25),
+                SignalModel("HZZd_M30",30),
             ]
 bins = [
-        Bin("2mu_HiggsLowSB",0.02),
-        Bin("2e_HiggsLowSB",0.05),
-        Bin("2mu_HiggsSR",0.02),
-        Bin("2e_HiggsSR",0.05),
-        Bin("2mu_HiggsHighSB",0.02),
-        Bin("2e_HiggsHighSB",0.05),
+        Bin("MuMu_HiggsLowSB",0.02),
+        Bin("MuMu_HiggsSR",0.02),
+        Bin("MuMu_HiggsHighSB",0.02),
+        Bin("ElMu_HiggsLowSB",0.02),
+        Bin("ElMu_HiggsSR",0.02),
+        Bin("ElMu_HiggsHighSB",0.02),
+        Bin("ElEl_HiggsLowSB",0.05),
+        Bin("ElEl_HiggsSR",0.05),
+        Bin("ElEl_HiggsHighSB",0.05),
+        Bin("MuEl_HiggsLowSB",0.05),
+        Bin("MuEl_HiggsSR",0.05),
+        Bin("MuEl_HiggsHighSB",0.05),
+        #Bin("2mu_HiggsLowSB",0.02),
+        #Bin("2e_HiggsLowSB",0.05),
+        #Bin("2mu_HiggsSR",0.02),
+        #Bin("2e_HiggsSR",0.05),
+        #Bin("2mu_HiggsHighSB",0.02),
+        #Bin("2e_HiggsHighSB",0.05),
         ]
 saveOption = "TFile"
 
