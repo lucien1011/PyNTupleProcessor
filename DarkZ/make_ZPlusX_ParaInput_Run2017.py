@@ -5,7 +5,8 @@ ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
 inputFitFilePath    = "/raid/raid7//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/ZPlusX/shape.root"
-inputParaFilePath   = "/raid/raid7//lucien/Higgs/DarkZ/ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2017/ZPlusX/StatInput.root"
+#inputParaFilePath   = "/raid/raid7//lucien/Higgs/DarkZ/ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2017/ZPlusX/StatInput.root"
+inputParaFilePath   = "/raid/raid7//lucien/Higgs/DarkZ/ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2017/ZPlusX/StatInput.root"
 outputDir           = os.path.dirname(inputParaFilePath)
 outputFileName      = "ParaShape.root"
 
