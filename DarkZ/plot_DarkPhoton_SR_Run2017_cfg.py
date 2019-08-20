@@ -15,10 +15,6 @@ from DarkZ.Config.AnalysisNotePlot import *
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 
-from Common.ShapeTemplate import ShapeTemplateMaker
-
-from Core.BaseObject import BaseObject
-
 from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
 import ROOT,os
@@ -30,7 +26,8 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-07_Run2017_mZ2-12ToInf/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-07_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2017/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-17_Run2017/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-17_Run2017/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
 lumi                    = 41.4
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
@@ -77,12 +74,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
-
-shape_setting = BaseObject(
-                    "ShapeSetting",
-                    samples = ["ZPlusX",],
-                    inputHistName="mZ2_4mu",
-                    )
-
-endSequence.add(ShapeTemplateMaker(shape_setting,))
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))

@@ -23,7 +23,8 @@ import ROOT,os
 User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-04-02_Run2018/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-07_Run2018/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-07-09_Run2018/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-07-09_Run2018/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2018/"
 lumi                    = 59.7
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
