@@ -19,7 +19,8 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/StatInput/2019-02-28_35p9_RatioCut0p02/"
 #out_path                = "DarkPhotonSR/StatInput/2019-03-29_136p1_RatioCut0p02/"
 #out_path                = "DarkPhotonSR/StatInput/2019-07-18_Run2018/"
-out_path                = "DarkPhotonSR/StatInput/2019-08-19_Run2018/"
+#out_path                = "DarkPhotonSR/StatInput/2019-08-19_Run2018/"
+out_path                = "DarkPhotonSR/StatInput/2019-08-21_Run2018/"
 lumi                    = 58.8
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
@@ -43,8 +44,8 @@ statProducer            = ParaYieldProducer("ParaYieldProducer",
                             "ElEl": LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11'),
                             "ElMu": LambdaFunc('x: abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13'),
                             "MuEl": LambdaFunc('x: abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11'),
-                            #"2mu": LambdaFunc('x: abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13'),
-                            #"2e": LambdaFunc('x: abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11'),
+                            "Mu": LambdaFunc('x: abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13'),
+                            "El": LambdaFunc('x: abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11'),
                             },
         binning         = [8000,0.,80.0], 
         )

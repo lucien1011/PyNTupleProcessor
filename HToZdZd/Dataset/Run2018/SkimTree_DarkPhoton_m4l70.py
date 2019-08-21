@@ -10,7 +10,7 @@ dataTreeDir         = bkgSkimTreeDir
 zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190408/SkimTree_HToZdZd_Run2018Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-sumWeightFromT2     = True
+sumWeightFromT2     = False
 saveSumWeightTxt    = False
 
 # ____________________________________________________________________________________________________________________________________________ ||

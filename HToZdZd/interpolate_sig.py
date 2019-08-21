@@ -24,26 +24,29 @@ class SignalModel(object):
 
 draw_option = 'Draw'
 tfile_option = 'TFile'
+both_option = 'Both'
 
 # ________________________________________________________________________________________________ ||
 #out_path    = "DarkPhotonSR/StatInput/2019-07-18_Run2016/"
-out_path    = "DarkPhotonSR/StatInput/2019-08-19_Run2016/"
+#out_path    = "DarkPhotonSR/StatInput/2019-08-19_Run2016/"
 #out_path    = "DarkPhotonSR/StatInput/2019-08-19_Run2017/"
 #out_path    = "DarkPhotonSR/StatInput/2019-08-19_Run2018/"
+out_path    = "DarkPhotonSR/StatInput/2019-08-21_Run2016/"
+#out_path    = "DarkPhotonSR/StatInput/2019-08-21_Run2017/"
+#out_path    = "DarkPhotonSR/StatInput/2019-08-21_Run2018/"
+
 
 # ________________________________________________________________________________________________ ||
-outputDir   = "/home/lucien/public_html/Higgs/HToZdZd/Interpolation/2019-08-19_Run2016/"
-#outputDir   = "/home/lucien/public_html/Higgs/HToZdZd/Interpolation/2019-08-19_Run2017/"
-#outputDir   = "/home/lucien/public_html/Higgs/HToZdZd/Interpolation/2019-08-19_Run2018/"
+outputDir   = "/home/lucien/public_html/Higgs/HToZdZd/Interpolation/"+os.path.basename(os.path.normpath(out_path))
 
 # ________________________________________________________________________________________________ ||
 inputDir    = system.getStoragePath()+"/lucien/Higgs/HToZdZd/"+out_path
 TFileName   = "StatInput.root"
-saveOption  = "TFile"
+saveOption  = "Both"
 
 # ________________________________________________________________________________________________ ||
 signals = [
-                SignalModel("HToZdZd_MZD"+str(m),m) for m in range(4,11)+range(15,61,5)
+                SignalModel("HToZdZd_MZD"+str(m),m) for m in range(5,11)+range(15,61,5)
             ]
 bins = [
         Bin("MuMu",0.02),
@@ -58,6 +61,8 @@ bins = [
         Bin("MuEl",0.05),
         Bin("MuEl",0.05),
         Bin("MuEl",0.05),
+        Bin("Mu",0.02),
+        Bin("El",0.05),
         ]
 
 # ________________________________________________________________________________________________ ||
@@ -67,9 +72,9 @@ print("Output directory: "+outputDir)
 mkdir_p(outputDir)
 
 for b in bins:
-    if saveOption == draw_option:
+    if saveOption == draw_option or saveOption == both_option:
         c = ROOT.TCanvas()
-    elif saveOption == tfile_option:
+    if saveOption == tfile_option or saveOption == both_option:
         outFile = ROOT.TFile(os.path.join(outputDir,b.histName+".root"),"RECREATE")
     x_points = []
     err_points = []
@@ -89,11 +94,11 @@ for b in bins:
     gr = makePlot(x_points,y_points,err_points)
     func = ROOT.TF1(b.histName+"_fitFunc", "landau", 0., 80.)
     gr.Fit(func)
-    if saveOption == draw_option:
+    if saveOption == draw_option or saveOption == both_option:
         gr.Draw()
         c.SaveAs(os.path.join(outputDir,b.histName+".pdf"))
         del c
-    elif saveOption == tfile_option:
+    if saveOption == tfile_option or saveOption == both_option:
         outFile.cd()
         gr.Write()
         func.Write()
