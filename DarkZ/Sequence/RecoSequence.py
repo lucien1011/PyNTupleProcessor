@@ -1,4 +1,6 @@
 from Core.Sequence import Sequence
+from Core.Utils.LambdaFunc import LambdaFunc
+from Core.BaseObject import BaseObject
 
 from DarkZ.Skimmer.AnalysisSkimmer import AnalysisSkimmer
 from DarkZ.Skimmer.BlindSkimmer import BlindSkimmer
@@ -6,6 +8,7 @@ from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
 from DarkZ.Weighter.NLOWeighter import NLOWeighter
 from DarkZ.Weighter.FakeRateWeighter import FakeRateWeighter
 from DarkZ.Producer.VariableProducer import VariableProducer
+from DarkZ.Skimmer.NarrowResonanceSkimmer import NarrowResonanceSkimmer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
@@ -22,6 +25,16 @@ darkPhotonM4lSBSkimmer  = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="DarkPhoton
 darkPhotonCRV2Skimmer   = AnalysisSkimmer("DarkPhoton-ZXCR-v2",cutflow="DarkPhoton-ZXCR-v2")
 upsilonCRSkimmer        = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="Upsilon-CR")
 WrongFCSkimmer          = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="WrongFC-SR")
+resonaceSkimmer         = NarrowResonanceSkimmer(
+        "NarrowResonanceSkimmer",
+        [
+            BaseObject(
+                "NarrowResonanceSelection",
+                selFunc=LambdaFunc("x: (abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11 and x.massZ2[0] > 9.46*0.95 and x.massZ2[0] < 9.46*1.05) or (abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13 and x.massZ2[0] > 9.46*0.98 and x.massZ2[0] < 9.46*1.02)"),
+                ),
+        ],
+        )
+
 
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")
@@ -36,10 +49,12 @@ variableProducer        = VariableProducer("VariableProducer")
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
 darkphoton_signal_sequence.add(variableProducer)
+darkphoton_signal_sequence.add(resonaceSkimmer)
 
 darkphoton_fullm4l_sequence = Sequence()
 darkphoton_fullm4l_sequence.add(darkPhotonFullm4lSkimmer)
 darkphoton_fullm4l_sequence.add(variableProducer)
+darkphoton_fullm4l_sequence.add(resonaceSkimmer)
 
 zx_map_sequence = Sequence()
 zx_map_sequence.add(darkPhotonSRSkimmer)
@@ -120,7 +135,7 @@ allSequence = [
         higgs_m4lNarrowWindow_sequence,
         ]
 for sequence in allSequence:
-    sequence.add(bliSkimmer)
+    #sequence.add(bliSkimmer)
     sequence.add(xsWeighter)
     sequence.add(nloWeighter)
     sequence.add(dataMCWeighter)
