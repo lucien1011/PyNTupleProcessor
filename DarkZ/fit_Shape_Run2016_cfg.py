@@ -1,11 +1,12 @@
 import ROOT,os
 from Core.mkdir_p import mkdir_p
 from Core.BaseObject import BaseObject
+from Utils.System import system
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-baseDir         = "/Users/lucien/NTuple//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
+baseDir         = system.getStoragePath()+"/lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
 inputPath       = baseDir+"ZPlusX/DataMCDistribution.root"
 outputDir       = baseDir+"ZPlusX/"
 binList         = [

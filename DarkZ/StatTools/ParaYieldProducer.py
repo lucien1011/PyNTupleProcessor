@@ -10,7 +10,7 @@ class ParaYieldProducer(Module):
         self.channelNames = ["2mu","2e","comb"] if not channelDict else channelDict.keys()
         if channelDict: self.channelNames.append("comb")
         self.channelDict = channelDict
-        self.binning = [12000,4.,35.] if not binning else binning
+        self.binning = [20000,0.,40.] if not binning else binning
         self.norm_binning = [6000,0.,1.] if not norm_binning else norm_binning
         #self.binning = [110-1,array.array('d',[4.*1.02**i for i in range(110)]),]
         #self.norm_binning = [

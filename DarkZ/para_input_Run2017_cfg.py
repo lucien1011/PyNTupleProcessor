@@ -25,7 +25,9 @@ import os
 
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-24_m4lSR-m4lSB_HZZd-ppZZd/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-08_m4lSR-m4lSB_HZZd-ppZZd/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
 
 User                    = os.environ['USER']
 nCores                  = 5
@@ -42,24 +44,37 @@ for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
-mu_ch_sel_str = 'abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13'
-el_ch_sel_str = 'abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11'
+mu_Z1_ch_sel_str = 'abs(event.idL1[0]) == 13 and abs(event.idL2[0]) == 13'
+el_Z1_ch_sel_str = 'abs(event.idL1[0]) == 11 and abs(event.idL2[0]) == 11'
+mu_Z2_ch_sel_str = 'abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13'
+el_Z2_ch_sel_str = 'abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11'
+
+#mu_ch_sel_str = 'abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13'
+#el_ch_sel_str = 'abs(event.idL3[0]) == 11 and abs(event.idL4[0]) == 11'
 higgsSR_sel_str = 'event.mass4l[0] > 118. and event.mass4l[0] < 130.'
 higgsSB_sel_str = 'not (event.mass4l[0] > 118. and event.mass4l[0] < 130.) and event.mass4l[0] > 100. and event.mass4l[0] < 170.'
 higgsLowSB_sel_str = 'event.mass4l[0] > 100. and event.mass4l[0] < 118.'
 higgsHighSB_sel_str = 'event.mass4l[0] > 130. and event.mass4l[0] < 170.'
 input_channel_dict      = {
-        "2mu_HiggsSR": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsSR_sel_str])),
-        "2e_HiggsSR": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsSR_sel_str])),
-        
-        #"2mu_HiggsSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsSB_sel_str])),
-        #"2e_HiggsSB": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsSB_sel_str])),
-        
-        "2mu_HiggsLowSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsLowSB_sel_str])),
-        "2e_HiggsLowSB": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsLowSB_sel_str])),
-        
-        "2e_HiggsHighSB": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsHighSB_sel_str])),
-        "2mu_HiggsHighSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsHighSB_sel_str])),
+        "MuMu_HiggsSR": LambdaFunc('event: '+' and '.join([mu_Z1_ch_sel_str,mu_Z2_ch_sel_str,higgsSR_sel_str])),
+        "MuMu_HiggsLowSB": LambdaFunc('event: '+' and '.join([mu_Z1_ch_sel_str,mu_Z2_ch_sel_str,higgsLowSB_sel_str])),
+        "MuMu_HiggsHighSB": LambdaFunc('event: '+' and '.join([mu_Z1_ch_sel_str,mu_Z2_ch_sel_str,higgsHighSB_sel_str])),
+        "ElMu_HiggsSR": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,mu_Z2_ch_sel_str,higgsSR_sel_str])),
+        "ElMu_HiggsLowSB": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,mu_Z2_ch_sel_str,higgsLowSB_sel_str])),
+        "ElMu_HiggsHighSB": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,mu_Z2_ch_sel_str,higgsHighSB_sel_str])),
+        "MuEl_HiggsSR": LambdaFunc('event: '+' and '.join([mu_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsSR_sel_str])),
+        "MuEl_HiggsLowSB": LambdaFunc('event: '+' and '.join([mu_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsLowSB_sel_str])),
+        "MuEl_HiggsHighSB": LambdaFunc('event: '+' and '.join([mu_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsHighSB_sel_str])),
+        "ElEl_HiggsSR": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsSR_sel_str])),
+        "ElEl_HiggsLowSB": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsLowSB_sel_str])),
+        "ElEl_HiggsHighSB": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsHighSB_sel_str])),
+        #"2mu_HiggsSR": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsSR_sel_str])),
+        #"2e_HiggsSR": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsSR_sel_str])),        
+        #"2mu_HiggsLowSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsLowSB_sel_str])),
+        #"2e_HiggsLowSB": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsLowSB_sel_str])),
+        #
+        #"2e_HiggsHighSB": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsHighSB_sel_str])),
+        #"2mu_HiggsHighSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsHighSB_sel_str])),
         }
 
 #sequence                = darkphoton_signal_sequence
