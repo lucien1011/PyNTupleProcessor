@@ -5,7 +5,8 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Core.BaseObject import BaseObject
 from Utils.System import system
 
-from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import HZZd_M15,HZZd_M30
 from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_ppZZd4l import * 
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
@@ -21,22 +22,25 @@ import ROOT,os,copy
 
 User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-25_Run2016/"
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
-end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
-lumi                    = 35.9
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
+#end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2017/"
+end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2017/"
+lumi                    = 41.7
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30,] 
+sigSamples              = [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30,]
+componentList           = bkgSamples + [data2017,] + sigSamples
 justEndSequence         = False
 
 plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
 
 inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
 for p in plots:
-    p.plotSetting.divideByBinWidth = True
-    p.plotSetting.bin_width_label = "Bin Width"
+    p.plotSetting.divideByBinWidth = False
+    if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
         #p.customPdfDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))

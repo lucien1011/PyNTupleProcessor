@@ -27,14 +27,15 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-07_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-17_Run2017/"
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2017/"
 lumi                    = 41.4
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + [data2017] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
-componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30,] 
+componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30, data2017] 
 justEndSequence         = False
 #eventSelection          = LambdaFunc('x: x.massZ2[0] > 12.')
 

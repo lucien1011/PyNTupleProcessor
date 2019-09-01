@@ -2,6 +2,7 @@ from Core.Sequence import Sequence
 from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
+from Core.BaseObject import BaseObject
 from Utils.System import system
 
 from HToZdZd.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
@@ -16,13 +17,12 @@ from Plotter.Plot import Plot
 from HToZdZd.Config.MergeSampleDict import *
 from HToZdZd.Config.AnalysisNotePlot import *
 
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-15_MC_RatioCut0p05/" # Lucien's new dir
-#out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2017_MC_RatioCut0p05/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2017/"
+import ROOT,os,copy
+
 User                    = os.environ['USER']
-lumi                    = 41.4
-nCores                  = 5
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2017/"
+end_out_path            = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2017/"
+nCores                  = 3
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
@@ -49,25 +49,24 @@ componentList           = bkgSamples + [
                                 data2017,
                                 ] + sigSamples
 justEndSequence         = False
-eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
 
-plots = general_plots 
+plots = general_mu_plots + general_el_plots
+
+inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
+for p in plots:
+    p.plotSetting.divideByBinWidth = False
+    if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
+    if p.key in ["mZ2_mu", "mZ2_el"]:
+        p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
+        #p.customPdfDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
+        #p.customPdfDict = {}
+        #leptonChannel = p.key.split("_")[-1]
+        #p.customPdfDict["ZPlusX"] = BaseObject(p.key,hist=inputShapeFile.Get("mZ2"+"_"+leptonChannel+"_shapehist").Clone(p.key))
 
 for sig in sigSamples:
     for p in plots:
         p.plotSetting.line_style_dict[sig.name] = 10
         p.plotSetting.line_width_dict[sig.name] = 4
-
-for dataset in componentList:
-    if dataset.isMC:
-        dataset.lumi = lumi
-    for component in dataset.componentList:
-        component.maxEvents = nEvents
-
-plotter                 = Plotter("Plotter",plots)
-
-sequence                = darkphoton_signal_unblind_sequence
-sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
@@ -75,4 +74,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
