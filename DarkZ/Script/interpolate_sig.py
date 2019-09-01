@@ -2,10 +2,12 @@ import os,ROOT,array
 
 from Utils.System import system
 from Core.mkdir_p import mkdir_p
+from shutil import copy2
 
 from Bin import Bin
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
+ROOT.gStyle.SetOptFit()
 
 # ________________________________________________________________________________________________ ||
 def makePlot(x_points,y_points,err_points):
@@ -22,8 +24,14 @@ class SignalModel(object):
         self.sig_name = sig_name
         self.centre = centre
 
-draw_option = 'Draw'
-tfile_option = 'TFile'
+User = os.environ['USER']
+
+makeTFile = True
+makePlots = True
+fitlist = ["pol2","pol3","pol4","pol5"]
+#draw_option = 'Draw'
+#tfile_option = 'TFile'
+#saveOption = "TFile"
 
 # ________________________________________________________________________________________________ ||
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-23_m4lSR-m4lSB_HZZd-ppZZd/"
@@ -33,17 +41,14 @@ tfile_option = 'TFile'
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
 
-# ________________________________________________________________________________________________ ||
-inputDir = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
+in_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
+#in_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
+#in_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
+
+inputDir = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+in_path
 TFileName = "StatInput.root"
-
 # ________________________________________________________________________________________________ ||
-#outputDir = "/Users/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-05-23_FirstVersion/"
-#outputDir = "/Users/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-05-23_FirstVersion/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/ppZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/HZZd/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2017/"
@@ -59,10 +64,12 @@ TFileName = "StatInput.root"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2016/HZZd/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2017/HZZd/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2018/HZZd/"
-outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2016/ppZZd/"
+#outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2016/ppZZd/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2017/ppZZd/"
 #outputDir = "/home/lucien/public_html/Higgs/DarkZ/Interpolation/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2018/ppZZd/"
 
+outputDir = "/home/"+User+"/public_html/Higgs/DarkZ/Interpolation/20190823_m4lSR-m4lSB_HZZd-ppZZd_Run2016/ppZZd/"
+#outputDir = "/home/"+User+"/public_html/Higgs/DarkZ/Interpolation/20190823_m4lSR-m4lSB_HZZd-ppZZd_Run2016/HZZd/"
 # ________________________________________________________________________________________________ ||
 signals = [
                 SignalModel("ppZZd4l_M5",5),
@@ -96,41 +103,52 @@ bins = [
         #Bin("2mu_HiggsHighSB",0.02),
         #Bin("2e_HiggsHighSB",0.05),
         ]
-saveOption = "TFile"
 
 # ________________________________________________________________________________________________ ||
 print("Input directory: "+inputDir)
 print("Output directory: "+outputDir)
 
 mkdir_p(outputDir)
+copy2('/home/rosedj1/index.php',outputDir)
 
-for b in bins:
-    if saveOption == draw_option:
-        c = ROOT.TCanvas()
-    elif saveOption == tfile_option:
-        outFile = ROOT.TFile(os.path.join(outputDir,b.histName+".root"),"RECREATE")
-    x_points = []
-    err_points = []
-    y_points = []
-    for sig in signals:
-        fName = os.path.join(inputDir,sig.sig_name,TFileName)
-        f = ROOT.TFile(fName,"READ")
-        hist = f.Get(b.histName)
-        error = ROOT.Double(0.)
-        x1,x2 = b.getWindowWidth(sig.centre)
-        integral = hist.IntegralAndError(hist.GetXaxis().FindBin(x1),hist.GetXaxis().FindBin(x2),error)
-        x_points.append(sig.centre)
-        y_points.append(integral)
-        err_points.append(error)
-        f.Close()
-    gr = makePlot(x_points,y_points,err_points)
-    func = ROOT.TF1(b.histName+"_fitFunc", "pol2", 0., 35.)
-    gr.Fit(func)
-    if saveOption == draw_option:
-        gr.Draw()
-        c.SaveAs(os.path.join(outputDir,b.histName+".pdf"))
-        del c
-    elif saveOption == tfile_option:
-        outFile.cd()
-        gr.Write()
-        func.Write()
+for power in fitlist:
+    for b in bins:
+        if (makePlot):
+            c = ROOT.TCanvas()
+    #         leg = TLegend(0.65,0.7,0.9,0.9)
+        if (makeTFile):
+            outFile = ROOT.TFile(os.path.join(outputDir,b.histName+"_"+power+".root"),"RECREATE")
+        x_points = []
+        err_points = []
+        y_points = []
+        # Get events in StatInput.root
+        for sig in signals:
+            fName = os.path.join(inputDir,sig.sig_name,TFileName)
+            f = ROOT.TFile(fName,"READ")
+            hist = f.Get(b.histName)
+            error = ROOT.Double(0.)
+            x1,x2 = b.getWindowWidth(sig.centre)
+            integral = hist.IntegralAndError(hist.GetXaxis().FindBin(x1),hist.GetXaxis().FindBin(x2),error)
+            x_points.append(sig.centre)
+            y_points.append(integral)
+            err_points.append(error)
+            f.Close()
+        gr = makePlot(x_points,y_points,err_points)
+    #     gr.SetTitle("")
+        func = ROOT.TF1(b.histName+"_fitFunc", power, 0., 35.)
+        gr.Fit(func,"q")  # q suppresses printing (quiet)
+        if (makePlot):
+    #         c.BuildLegend(0,0,0,0)
+    #         gr.PaintStats(func)
+            gr.Draw()
+    #         ROOT.gPad.Update()
+    #         ROOT.gStyle.SetOptStat(0111)
+    #         c.Update()
+            c.Draw()
+            c.SaveAs(os.path.join(outputDir,b.histName+"_"+power+".pdf"))
+            c.SaveAs(os.path.join(outputDir,b.histName+"_"+power+".png"))
+            del c
+        if (makeTFile):
+            outFile.cd()
+            gr.Write()
+            func.Write()

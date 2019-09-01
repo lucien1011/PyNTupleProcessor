@@ -30,7 +30,8 @@ out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m
 
 User                    = os.environ['USER']
 nCores                  = 5
-outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
+outputDir               = system.getStoragePath()+'/'+User+"/Higgs/DarkZ/"+out_path
+print "outputDir: ", outputDir
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + sigSamples + ppZZdSamples + dataSamples
