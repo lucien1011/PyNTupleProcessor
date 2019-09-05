@@ -26,3 +26,5 @@ Data_memCR_sr_Run2016 = Dataset(
         Data_memCR_sr_Run2016_cmpList,
         isMC = False, 
         )
+
+dataSamples = [Data_memCR_sr_Run2016,]

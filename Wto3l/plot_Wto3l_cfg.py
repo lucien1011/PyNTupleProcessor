@@ -27,9 +27,10 @@ from Plotter.Plot import Plot
 #out_path = "Wto3l/DataMCDistributions/Run2016/2019-07-25/looselepton_CR/"
 #out_path = "Wto3l/DataMCDistributions/Run2016/2019-07-25/MConly_SR/"
 #out_path = "Wto3l/DataMCDistributions/Run2016/2019-07-25/TTbar_test/"
-#out_path = "Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/failIso_barrel_WOZpeak/"
+#out_path = "Wto3l/FakeRate/Run2016/2019-08-13/finalstate_eem/failIso_endcap_TTbar_WOZpeak/"
 #out_path = "Wto3l/DataMCDistributions/Run2016/2019-08-06/FReemWOZpeak_SR_mmm/"
-out_path = "Wto3l/SR_MCDistributions/Run2016/2019-08-07/check_TT_DY/"
+#out_path = "Wto3l/SR_MCDistributions/Run2016/2019-08-07/check_TT_DY/"
+out_path = "Wto3l/DataMCDistributions/Run2016/test/"
 
 
 mZ1PlotRange = [40,40.,120.]
@@ -49,19 +50,19 @@ general_plots = []
         #region_sel_str_whole = "x: x.nZXCRFailedLeptons[0] == 2"
 
 general_plots.extend([
-    #Plot("Z1_mass",         ["TH1D","Z1_mass","",]+mZ1PlotRange,        LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x:x.massZ1[0] > 0')      ),
-    Plot("Lep1_pt",          ["TH1D","Lep1_pt","",40,0.,200.],           LambdaFunc('x:x.pTL1[0]'),          selFunc=LambdaFunc('x:x.pTL1[0] > 0')        ),
-    Plot("Lep2_pt",          ["TH1D","Lep2_pt","",40,0.,200.],           LambdaFunc('x:x.pTL2[0]'),          selFunc=LambdaFunc('x:x.pTL2[0] > 0')        ),
-    Plot("Lep3_pt",          ["TH1D","Lep3_pt","",40,0.,200.],           LambdaFunc('x:x.pTL3[0]'),          selFunc=LambdaFunc('x:x.pTL3[0] > 0')        ),
-    #Plot("Lep3_pt",          ["TH1D","Lep3_pt","",200,0.,200.],           LambdaFunc('x:x.pTL3[0]'),          selFunc=LambdaFunc('x:x.pTL3[0] > 0')        ),
+    #Plot("Z1_mass",         ["TH1D","Z1_mass","",]+mZ1PlotRange,        LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x:x.massZ1[0] > 0')      ), 
+    Plot("Lep1_pt",          ["TH1D","Lep1_pt","",40,0.,200.],           LambdaFunc('x:x.Lep1.Pt()'),          selFunc=LambdaFunc('x:x.Lep1.Pt() > 0')        ),
+    Plot("Lep2_pt",          ["TH1D","Lep2_pt","",40,0.,200.],           LambdaFunc('x:x.Lep2.Pt()'),          selFunc=LambdaFunc('x:x.Lep2.Pt() > 0')        ),
+    #Plot("Lep3_pt",          ["TH1D","Lep3_pt","",40,0.,200.],           LambdaFunc('x:x.Lep3.Pt()'),          selFunc=LambdaFunc('x:x.Lep3.Pt() > 0')        ),
+    Plot("Lep3_pt",          ["TH1D","Lep3_pt","",200,0.,200.],           LambdaFunc('x:x.Lep3.Pt()'),          selFunc=LambdaFunc('x:x.Lep3.Pt > 0')        ),
 
-    Plot("Lep3_eta",          ["TH1D","Lep3_eta","",60,-3.,3.],           LambdaFunc('x:x.etaL3[0]'),          selFunc=LambdaFunc('x:x.etaL3[0]')        ),
+    Plot("Lep3_eta",          ["TH1D","Lep3_eta","",60,-3.,3.],           LambdaFunc('x:x.Lep3.Eta()'),          selFunc=LambdaFunc('x:x.Lep3.Eta()')        ),
     Plot("3lep_pt",          ["TH1D","3lep_pt","",40,0.,200.],           LambdaFunc('x:x.pT3l[0]'),          selFunc=LambdaFunc('x:x.pT3l[0] > 0')        ),
     Plot("Lep1+Lep2_pt",     ["TH1D","Lep1+Lep2_pt","",40,0.,200.],      LambdaFunc('x:x.twolpt'),        selFunc=LambdaFunc('x:x.twolpt > 0')      ),
     Plot("Mass1",          ["TH1D","Mass1","",80,0.,200.],           LambdaFunc('x:x.mass1'),          selFunc=LambdaFunc('x:x.mass1 > 0')        ),
     Plot("Mass2",          ["TH1D","Mass2","",80,0.,200.],           LambdaFunc('x:x.mass2'),          selFunc=LambdaFunc('x:x.mass2 > 0')        ),
      Plot("Transverse_Mass",          ["TH1D","Transverse_Mass","",100,0.,500.],           LambdaFunc('x:x.mt'),          selFunc=LambdaFunc('x:x.mt')        ),
-
+     Plot("Mass1vsMass2",   ["TH2D","Mass1_vs_Mass2","",80,0.,200.,80,0.,200.],   LambdaFunc('x:[x.mass1,x.mass2]'),   dim = 2 ),
 
 
         #Plot("Z2_mass_vs_DeltaR34_"+eachCR,["TH2D","Z2_mass_vs_DeltaR34_"+eachCR,"",]+mZ2PlotRange+deltaRPlotRange2,LambdaFunc('x: [x.massZ2[0],x.deltaRL34]'),selFunc=LambdaFunc(region_sel_str_whole),dim=2),
@@ -73,7 +74,9 @@ general_plots.extend([
         Plot("met_phi",             ["TH1D","met_phi","",40,-4.,4.],               LambdaFunc('x: x.met_phi[0]'),          selFunc=LambdaFunc('x:x.met_phi[0]'),     ),
 
         Plot("IsoL3",             ["TH1D","IsoL3","",20,0.,1.],               LambdaFunc('x: x.IsoL3[0]'),          selFunc=LambdaFunc('x:x.IsoL3[0] > 0'),     ),
-        Plot("PDGIdL3",             ["TH1D","PDGIdL3","",80,-40,40],            LambdaFunc('x: x.PDG_IdL3[0]'),      selFunc=LambdaFunc('x:x.PDG_IdL3[0]'),       ),
+        #Plot("PDGIdL3",             ["TH1D","PDGIdL3","",80,-40,40],            LambdaFunc('x: x.PDG_IdL3[0]'),      selFunc=LambdaFunc('x:x.PDG_IdL3[0]'),       ),
+        #Plot("MomIdL1",             ["TH1D","MomIdL1","",80,-40,40],            LambdaFunc('x: x.MomIdL1[0]'),      selFunc=LambdaFunc('x:x.MomIdL1[0]'),       ),
+        #Plot("MomIdL2",             ["TH1D","MomIdL2","",80,-40,40],            LambdaFunc('x: x.MomIdL2[0]'),      selFunc=LambdaFunc('x:x.MomIdL2[0]'),       ),
         #Plot("MomIdL3",             ["TH1D","MomIdL3","",80,-40,40],            LambdaFunc('x: x.MomIdL3[0]'),      selFunc=LambdaFunc('x:x.MomIdL3[0]'),       ),
         #Plot("MomMomIdL3",             ["TH1D","MomMomIdL3","",80,-40,40],            LambdaFunc('x: x.MomMomIdL3[0]'),      selFunc=LambdaFunc('x:x.MomMomIdL3[0]'),       ),
         #Plot("nVtx",            ["TH1D","nVtx","",30,0.0,60.0],             LambdaFunc('x: x.nVtx[0]'),         selFunc=LambdaFunc(region_sel_str_whole),     ),
@@ -89,7 +92,7 @@ outputDir               = "/raid/raid7/kshi/Zprime/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,Data_sr_Run2016,WmTo3munu_ZpM45,WmTo3munu_ZpM15,WpTo3munu_ZpM45,WpTo3munu_ZpM15]#predCR]
-#componentList           = [WZTo3LNu,Data_Run2016,WmTo3munu_ZpM45,WmTo3munu_ZpM15,WpTo3munu_ZpM45,WpTo3munu_ZpM15]
+componentList           = [WZTo3LNu,Data_Run2016,WmTo3munu_ZpM45,WmTo3munu_ZpM15,WpTo3munu_ZpM45,WpTo3munu_ZpM15]
 #componentList           = [WZTo3LNu,Data_Run2016,Data_sr_Run2016]
 #componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,WmTo3munu_ZpM45,WmTo3munu_ZpM15,WpTo3munu_ZpM45,WpTo3munu_ZpM15]
 #componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_sr_Run2016]
@@ -98,7 +101,10 @@ disableProgressBar      = False
 #componentList           = [Data_memCR_sr_Run2016]
 #componentList           = [Data_memCR_sr_Run2016,WZTo3LNu_memCR,DYJetsToLL_M50_memCR,DYJetsToLL_M10To50_memCR,TTJets_memCR]
 #componentList           = [TTJets_fromT,TTJets_notfromT]
-componentList           = [TTJets_memCR]
+#componentList           = [TTJets_memCR]
+#componentList           = [DYJetsToLL_M50_memCR]
+#componentList           = [WmTo3munu_ZpM45,WmTo3munu_ZpM15,WpTo3munu_ZpM45,WpTo3munu_ZpM15]
+#componentList           = [WZTo3LNu,Data_Run2016]
 justEndSequence         = False
 
 for dataset in componentList:

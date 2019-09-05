@@ -6,7 +6,7 @@ from Utils.SumWeight import handleSumWeight
 bkgTreeDirT2_Feb21      = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2l_Feb21/"
 bkgTreeDirT2_Aug10      = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2lskim_Aug10/"
 #bkgTreeDir      = "/raid/raid7/kshi/Zprime/20190718/SkimTree_Run2016_MC/"
-bkgTreeDir      = "/raid/raid7/kshi/Zprime/20190724/SkimTree_Run2016_signalregion_MC/"
+bkgTreeDir      = "/raid/raid7/kshi/Zprime/20190827/SkimTree_Run2016_MMM_MC/"
 inUFTier2       = False
 saveSumWeightTxt= False
 sumWeightHist   = "Ana/sumWeights"
@@ -102,4 +102,6 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgTreeDir+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
         )
+
+bkgSamples = [WZTo3LNu,]
 
