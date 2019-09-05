@@ -30,7 +30,7 @@ resonaceSkimmer         = NarrowResonanceSkimmer(
         [
             BaseObject(
                 "NarrowResonanceSelection",
-                selFunc=LambdaFunc("x: (abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11 and x.massZ2[0] > 9.46*0.95 and x.massZ2[0] < 9.46*1.05) or (abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13 and x.massZ2[0] > 9.46*0.98 and x.massZ2[0] < 9.46*1.02)"),
+                selFunc=LambdaFunc("x: (abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11 and x.massZ2[0] > 8.50 and x.massZ2[0] < 11.0) or (abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13 and x.massZ2[0] > 8.50 and x.massZ2[0] < 11.0)"),
                 ),
         ],
         )
