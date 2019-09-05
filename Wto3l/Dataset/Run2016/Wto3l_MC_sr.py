@@ -7,7 +7,7 @@ from Utils.SumWeight import handleSumWeight
 #bkgTreeDirT2_Aug10      = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_2lskim_Aug10/"
 #bkgTreeDir      = "/raid/raid7/kshi/Zprime/20190718/SkimTree_Run2016_MC/"
 sigTreeDirT2    = "/cms/data/store/user/t2/users/mhl/rootfiles_2017/"
-sigTreeDir      = "/raid/raid7/kshi/Zprime/20190724/SkimTree_Run2016_signalregion_MC/"
+sigTreeDir      = "/raid/raid7/kshi/Zprime/20190827/SkimTree_Run2016_MMM_MC/"
 inUFTier2       = False
 saveSumWeightTxt= False
 sumWeightHist   = "Ana/sumWeights"
@@ -21,8 +21,9 @@ WmTo3munu_ZpM45_cmpList = ComponentList(
 WmTo3munu_ZpM45 = Dataset(
         "WmTo3munu_ZpM45",
         WmTo3munu_ZpM45_cmpList,
+        isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.00989203, 
         )
 handleSumWeight(
         WmTo3munu_ZpM45,
@@ -42,8 +43,9 @@ WmTo3munu_ZpM15_cmpList = ComponentList(
 WmTo3munu_ZpM15 = Dataset(
         "WmTo3munu_ZpM15",
         WmTo3munu_ZpM15_cmpList,
+        isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.4504013, 
         )
 handleSumWeight(
         WmTo3munu_ZpM15,
@@ -63,8 +65,9 @@ WpTo3munu_ZpM45_cmpList = ComponentList(
 WpTo3munu_ZpM45 = Dataset(
         "WpTo3munu_ZpM45",
         WpTo3munu_ZpM45_cmpList,
+        isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.012078543, 
         )
 handleSumWeight(
         WpTo3munu_ZpM45,
@@ -84,8 +87,9 @@ WpTo3munu_ZpM15_cmpList = ComponentList(
 WpTo3munu_ZpM15 = Dataset(
         "WpTo3munu_ZpM15",
         WpTo3munu_ZpM15_cmpList,
+        isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.5649641, 
         )
 handleSumWeight(
         WpTo3munu_ZpM15,

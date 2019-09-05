@@ -27,6 +27,8 @@ Data_memCR_Run2016 = Dataset(
         isMC = True,
         skipWeight = True,
         )
-
-
-dataSamples = [Data_memCR_Run2016,]
+'''
+bkgSamples = [
+            Data_memCR_Run2016,
+        ]
+'''

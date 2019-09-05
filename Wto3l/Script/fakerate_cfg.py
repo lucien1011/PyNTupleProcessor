@@ -3,10 +3,10 @@ import numpy
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
-inputPath_pass   = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/passIso_barrel_WOZpeak/Data_memCR_sr_Run2016/DataMCDistribution.root"
-inputPath_fail   = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/failIso_barrel_WOZpeak/Data_memCR_sr_Run2016/DataMCDistribution.root"
-outputPath  = "/home/kshi/public_html/Zprime/Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/fr_ratio_WOZpeak/fr_barrel.pdf"
-file_outputPath = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/fr_ratio_WOZpeak/ratioPlot.root"
+inputPath_pass   = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-13/finalstate_eem/passIso_barrel_TTbar_Zpeak/TTJets_memCR/DataMCDistribution.root"
+inputPath_fail   = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-13/finalstate_eem/failIso_barrel_TTbar_Zpeak/TTJets_memCR/DataMCDistribution.root"
+outputPath  = "/home/kshi/public_html/Zprime/Wto3l/FakeRate/Run2016/2019-08-13/finalstate_eem/fr_ratio_TTbar_Zpeak/fr_barrel.pdf"
+file_outputPath = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-13/finalstate_eem/fr_ratio_TTbar_Zpeak/ratioPlot.root"
 histName    = "Lep3_pt"
 
 inputFile_pass   = ROOT.TFile(inputPath_pass,"READ")

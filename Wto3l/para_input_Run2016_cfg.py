@@ -8,9 +8,9 @@ from Wto3l.Dataset.Run2016.Wto3l_Data import *
 from Wto3l.Dataset.Run2016.Wto3l_Data_sr import *
 from Wto3l.Dataset.Run2016.Wto3l_MC import *
 from Wto3l.Dataset.Run2016.Wto3l_MC_sr import *
-from Wto3l.Dataset.Run2016.Wto3l_memCR_Data import *
-from Wto3l.Dataset.Run2016.Wto3l_memCR_Data_sr import *
-from Wto3l.Dataset.Run2016.Wto3l_memCR_MC import *
+#from Wto3l.Dataset.Run2016.Wto3l_memCR_Data import *
+#from Wto3l.Dataset.Run2016.Wto3l_memCR_Data_sr import *
+#from Wto3l.Dataset.Run2016.Wto3l_memCR_MC import *
 
 from Wto3l.Sequence.RecoSequence import * 
 
@@ -29,14 +29,14 @@ from DarkZ.Config.MergeSampleDict import mergeSampleDict
 import os
 
 #out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2016/"
-out_path = "ParaInput/Run2016/2019-08-08/"
+out_path = "ParaInput/Run2016/2019-08-27/"
 
 User                    = os.environ['USER']
 nCores                  = 5
 outputDir               = system.getStoragePath()+"kshi/Zprime/Wto3l/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples + dataSamples
+componentList           = sigSamples #bkgSamples + sigSamples + dataSamples
 justEndSequence         = False
 skipGitDetail           = True
 
@@ -67,8 +67,9 @@ input_channel_dict      = {
         "2mu_HiggsHighSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsHighSB_sel_str])),
         }
 '''
-NNP_str = 'event.idL3[0] < 0'
-PPN_str = 'event.idL3[0] > 0'
+NNP_str = 'event.idL3[0] + event.idL1[0] + event.idL2[0] > 0'
+PPN_str = 'event.idL3[0] + event.idL1[0] + event.idL2[0] < 0'
+'''
 SR_str = 'event.IsoL3[0] < 0.35'
 BK_str = 'event.IsoL3[0] >= 0.35'
 input_channel_dict  ={
@@ -78,6 +79,11 @@ input_channel_dict  ={
         "NNP_BK": LambdaFunc('event: '+' and '.join([NNP_str,BK_str])),
         "PPN_BK": LambdaFunc('event: '+' and '.join([PPN_str,BK_str])),
         }
+'''
+input_channel_dict  ={
+        "NNP": LambdaFunc('event: '+' and '.join([NNP_str])),
+        "PPN": LambdaFunc('event: '+' and '.join([PPN_str])),
+}
 
 #sequence                = darkphoton_signal_sequence
 sequence                = Wto3l_sequence

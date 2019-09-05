@@ -7,7 +7,7 @@ from Utils.SumWeight import handleSumWeight
 #dataTreeDir     = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180806/SkimTree_Data80X_HIG-16-041-ZXCRSelection_v2/"
 #dataTreeDir     = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180905/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
 #dataTreeDir      = "/raid/raid7/lucien/Higgs/DarkZ-NTuple/20180924/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
-dataTreeDir     = "/raid/raid7/kshi/Zprime/20190724/SkimTree_Run2016_signalregion_Data/"
+dataTreeDir     = "/raid/raid7/kshi/Zprime/20190827/SkimTree_Run2016_MMM_Data/"
 inUFTier2       = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -26,3 +26,5 @@ Data_sr_Run2016 = Dataset(
         Data_sr_Run2016_cmpList,
         isMC = False, 
         )
+
+dataSamples = [Data_sr_Run2016,]
