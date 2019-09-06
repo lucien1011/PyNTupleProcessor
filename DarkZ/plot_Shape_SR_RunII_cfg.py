@@ -19,15 +19,16 @@ from DarkZ.Config.MergeSampleDict_RunII import mergeSampleDict
 import ROOT,os,copy
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_RunII/"
-end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-07-29_RunII/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_RunII/"
+#end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-07-29_RunII/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
+end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples 
-justEndSequence         = False
+componentList           = bkgSamples + sigSamples + dataSamples 
 
 plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
 
@@ -94,8 +95,8 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(
-        skipHadd=justEndSequence,
-        #skipComponentHadd=True,
+        skipHadd=True,
+        skipComponentHadd=True,
         )
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+end_out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

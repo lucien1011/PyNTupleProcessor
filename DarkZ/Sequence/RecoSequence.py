@@ -35,7 +35,6 @@ resonaceSkimmer         = NarrowResonanceSkimmer(
         ],
         )
 
-
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")
 xsWeighter              = XSWeighter("XSWeighter")

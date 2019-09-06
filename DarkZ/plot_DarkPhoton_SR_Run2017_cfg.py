@@ -28,7 +28,8 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-17_Run2017/"
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2017/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2017/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_Run2017/"
 lumi                    = 41.4
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
@@ -75,4 +76,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

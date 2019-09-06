@@ -20,8 +20,8 @@ from HToZdZd.Config.AnalysisNotePlot import *
 import ROOT,os,copy
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_RunII/"
-end_out_path            = "DarkPhotonSR/DataMCDistributions/2019-08-23_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_RunII/"
+end_out_path            = "DarkPhotonSR/DataMCDistributions/2019-09-06_RunII/"
 nCores                  = 3
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
