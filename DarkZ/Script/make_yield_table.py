@@ -21,10 +21,13 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2018/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII/"
-#inputDir                = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-10_RunII/"
+inputDir                = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII_MC_RatioCut0p05/"
-inputDir                = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+out_path
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII_MC_RatioCut0p05/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-05_RunII/"
+#inputDir                = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+out_path
+
 TFileName               = "DataMCDistribution.root"
 era                     = "RunII"
 sampleNames = [
@@ -32,12 +35,14 @@ sampleNames = [
             "qqZZ",
             "ggZZ",
             "ZPlusX",
+            "Data",
             ]
 sampleLatexDict = { 
         "Higgs": "Higgs",
         "qqZZ": "\qqZZ",
         "ggZZ": "\ggZZ",
         "ZPlusX": "$Z+X$",
+        "Data": "Data",
         }
 setting_list_ZdZd = [
         Setting(
@@ -89,13 +94,16 @@ setting_list_ZZd = [
                 ), 
         ]
 
-setting_list = setting_list_ZdZd
+#setting_list = setting_list_ZdZd
+setting_list = setting_list_ZZd
 
 #outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_Run2016/"
 #outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_Run2017/"
 #outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_Run2018/"
 #outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-05-20_RunII/"
-outputDir               = "/Users/lucien/public_html//Higgs/HToZdZd/DarkPhotonSR/Table/2019-05-24_RunII_MC_RatioCut0p05/"
+#outputDir               = "/Users/lucien/public_html//Higgs/HToZdZd/DarkPhotonSR/Table/2019-05-24_RunII_MC_RatioCut0p05/"
+#outputDir               = "/Users/lucien/public_html//Higgs/HToZdZd/DarkPhotonSR/Table/2019-09-05_RunII/"
+outputDir               = "/Users/lucien/public_html//Higgs/DarkZ/DarkPhotonSR/Table/2019-09-10_RunII/"
 
 # ________________________________________________________________________________________________ ||
 print("Input directory: "+inputDir)
@@ -118,6 +126,7 @@ for setting in setting_list:
     tableDict["tableList"].append(headerList)
     for sampleName in sampleNames:
         fPath = os.path.join(inputDir,sampleName,TFileName)
+        print fPath
         f = ROOT.TFile(fPath,"READ")
         tempList = [sampleLatexDict[sampleName],]
         for b in bins:
