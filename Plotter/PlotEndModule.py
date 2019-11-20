@@ -308,7 +308,8 @@ class PlotEndModule(EndModule):
             ratio.SetStats(0)
             ratio.Draw()
             bkdgErrRatio.Draw("samee2")
-            ratio.GetYaxis().SetRangeUser(-0.2,2.2) # Make this symmetric about 1
+            ratio.GetYaxis().SetRangeUser(0.0,ratio.GetMaximum()*1.5) # Make this symmetric about 1
+            #ratio.GetYaxis().SetRangeUser(0.0,2.0) # Make this symmetric about 1
             ratio.GetYaxis().SetLabelSize(0.075)
             ratio.GetXaxis().SetLabelSize(0.075)
             ratio.GetYaxis().SetTitle("Data/MC")
@@ -435,7 +436,22 @@ class PlotEndModule(EndModule):
     def makeRatioPlot(self,data,total,bkdgErr):
 
         ratio = data.Clone("ratio")
-        ratio.Divide(total)
+        for i in range(1, ratio.GetNbinsX()+1):
+            binC_data = data.GetBinContent(i)
+            binC_total = total.GetBinContent(i)
+            binE_data = data.GetBinError(i)
+            binE_total = total.GetBinError(i)
+            if binC_total and binC_data:
+                binC_ratio = binC_data/binC_total
+                binE_ratio = math.sqrt((binE_data/binC_data)**2+(binE_total/binC_total)**2)
+            elif binC_total and not binC_data:
+                binC_ratio = 1E-9
+                binE_ratio = 0.5
+            elif not binC_total and not binC_data:
+                binC_ratio = 0.
+                binE_ratio = 0.
+            ratio.SetBinContent(i,binC_ratio)
+            ratio.SetBinError(i,binE_ratio*binC_ratio)
 
         bkdgErrRatio = ratio.Clone("ratioerr")
         for i in range(1, bkdgErrRatio.GetNbinsX()+1):
