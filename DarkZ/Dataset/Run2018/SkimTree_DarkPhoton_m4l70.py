@@ -4,9 +4,9 @@ from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
 bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190402/SkimTree_DarkPhoton_Run2018Data_m4l70/"
-bkgSkimTreeDir2     = bkgSkimTreeDir
+#bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20191120/SkimTree_DarkPhoton_Run2018Data_m4l70/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/rosedj1/Higgs/HZZ4l/NTuple/Run2/MC2018_M19_Mar12_4l_2018Jets_JER_bestCandLegacy/"
-dataTreeDir         = bkgSkimTreeDir
+dataTreeDir         = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190402/SkimTree_DarkPhoton_Run2018Data_m4l70/"
 zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190402/SkimTree_DarkPhoton_ZX_Run2018Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
@@ -332,7 +332,7 @@ handleSumWeight(
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
-bkgSamples = [
+mcBkgSamples = [
         ggH,
         VBF,
         WHplus,
@@ -345,6 +345,8 @@ bkgSamples = [
         ggZZTo4e,
         ggZZTo4mu,
         ggZZTo4tau,
+        ]
+bkgSamples = mcBkgSamples + [
         ZPlusX,
         ]
 

@@ -47,12 +47,20 @@ class ParaYieldProducer(Module):
                 histName = channelName
                 self.writer.objs[histName].Fill(event.massZ2[0],eventWeight)
                 self.writer.objs[histName+self.hist_postfix].Fill(norm_value,eventWeight)
+                for syst in self.systList:
+                    sysHistName = "_".join([channelName,syst.name])
+                    fillValue = syst.fillValueFunc(event)
+                    eventWeightSyst = syst.eventWeightFunc(event)
+                    fillValueNorm = (fillValue-self.binning[-2])/(self.binning[-1]-self.binning[-2])
+                    self.writer.objs[sysHistName].Fill(fillValue,eventWeightSyst)
+                    self.writer.objs[sysHistName+self.hist_postfix].Fill(fillValueNorm,eventWeightSyst)
 
         return True
 
     def end(self):
         for syst in self.systList:
-            syst.factorFunc.end()
+            syst.eventWeightFunc.end()
+            syst.fillValueFunc.end()
 
         for channelName,selFunc in self.channelDict.iteritems():
             selFunc.end()
