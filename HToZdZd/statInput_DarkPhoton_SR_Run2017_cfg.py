@@ -17,7 +17,8 @@ import os
 User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/StatInput/2019-07-18_Run2017/"
 #out_path                = "DarkPhotonSR/StatInput/2019-08-19_Run2017/"
-out_path                = "DarkPhotonSR/StatInput/2019-08-21_Run2017/"
+#out_path                = "DarkPhotonSR/StatInput/2019-08-21_Run2017/"
+out_path                = "DarkPhotonSR/StatInput/2019-09-06_Run2017/"
 lumi                    = 41.7
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
