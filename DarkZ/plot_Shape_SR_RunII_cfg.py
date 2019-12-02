@@ -77,10 +77,11 @@ for sample in sample_ppZZd.ppZZdSamples:
 componentList += sigSamples
 
 
-inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
+#inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
+inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape_veto.root"),"READ")
 for p in plots:
-    p.plotSetting.divideByBinWidth = True
-    p.plotSetting.bin_width_label = "Bin Width"
+    p.plotSetting.divideByBinWidth = False
+    if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
 
