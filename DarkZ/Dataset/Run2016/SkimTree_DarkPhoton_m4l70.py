@@ -12,7 +12,7 @@ bkgTreeDir_qqZZext1     = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/
 zxSkimTreeDir           = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2016Data_m4l70/"
 inUFTier2               = False
 sumWeightHist           = "Ana/sumWeights"
-saveSumWeightTxt        = True
+saveSumWeightTxt        = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
