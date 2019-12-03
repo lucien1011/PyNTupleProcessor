@@ -89,7 +89,7 @@ class PlotSetting(object):
             line_style_dict={},
             line_width_dict={},
             line_color_dict={},
-            bin_width_label="GeV",
+            bin_width_label="",
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
