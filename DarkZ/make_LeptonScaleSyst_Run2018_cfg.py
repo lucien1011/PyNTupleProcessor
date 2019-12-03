@@ -26,7 +26,7 @@ outputDir               = system.getStoragePath()+'/'+User+"/Higgs/DarkZ/"+out_p
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = mcBkgSamples  
-justEndSequence         = True
+justEndSequence         = False
 skipGitDetail           = True
 
 for dataset in componentList:
