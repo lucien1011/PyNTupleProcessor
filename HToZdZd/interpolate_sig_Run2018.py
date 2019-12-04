@@ -25,13 +25,13 @@ in_path         = "DarkPhotonSR/StatInput/2019-12-02_Run2018/"
 inputDir        = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+in_path
 TFileName       = "StatInput.root"
 
-outputDir       = "/home/lucien/public_html/Higgs/HToZdZd/Interpolation/"+os.path.basename(os.path.normpath(in_path))
+outputDir       = system.getPublicHtmlPath()+"/Higgs/HToZdZd/Interpolation/"+os.path.basename(os.path.normpath(in_path))
 
 y_range         = [0.,1.]
 
 # ________________________________________________________________________________________________ ||
 signals = [
-                SignalModel("HToZdZd_M"+str(m),m) for m in mass_points
+                SignalModel("HToZdZd_M"+str(m),m) for m in mass_points if m != 4
             ]
 bins    = [
             Bin("MuMu",0.02),
@@ -43,6 +43,7 @@ bins    = [
 # ________________________________________________________________________________________________ ||
 print("Input directory: "+inputDir)
 print("Output directory: "+outputDir)
+print("Mass points: "+", ".join([str(s.centre) for s in signals]))
 
 mkdir_p(outputDir)
 

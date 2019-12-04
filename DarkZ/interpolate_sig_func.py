@@ -10,6 +10,8 @@ class SignalModel(object):
     def __init__(self,
             sig_name,
             centre,
+            yieldFactor=1.,
             ):
         self.sig_name = sig_name
         self.centre = centre
+        self.yieldFactor = yieldFactor

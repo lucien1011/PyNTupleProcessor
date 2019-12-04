@@ -5,7 +5,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_HZdZd import * 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
+#from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
 from DarkZ.StatTools.ParaYieldProducer import ParaYieldProducer # Stealing from DarkZ
