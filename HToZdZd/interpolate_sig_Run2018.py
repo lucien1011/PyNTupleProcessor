@@ -8,7 +8,7 @@ from DarkZ.Script.Bin import Bin
 
 from DarkZ.interpolate_sig_func import makePlot,SignalModel
 
-from HToZdZd.Dataset.Run2018.SkimTree_DarkPhoton_m4l70_HZdZd import mass_points 
+from HToZdZd.Dataset.Run2018.SkimTree_DarkPhoton_m4l70_HZdZdInterpolation import mass_points 
 
 # ________________________________________________________________________________________________ ||
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
@@ -21,13 +21,13 @@ makeTFile       = True
 makePlots       = True
 fitlist         = ["pol5","pol6","pol7","pol8","pol9","landau",]
 
-in_path         = "DarkPhotonSR/StatInput/2019-12-02_Run2018/"
+in_path         = "DarkPhotonSR/StatInput/2019-12-04_SignalInterpolation_Run2018/"
 inputDir        = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+in_path
 TFileName       = "StatInput.root"
 
 outputDir       = "/home/lucien/public_html/Higgs/HToZdZd/Interpolation/"+os.path.basename(os.path.normpath(in_path))
 
-y_range         = [0.,1.]
+y_range         = [0.,0.5]
 
 # ________________________________________________________________________________________________ ||
 signals = [
