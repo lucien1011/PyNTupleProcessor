@@ -17,13 +17,21 @@ User = os.environ['USER']
 # ________________________________________________________________________________________________ ||
 makeTFile       = True
 makePlots       = True
-fitlist         = ["pol2","pol3","pol4","pol5","pol6"]
+fitlist         = ["pol5","pol6","pol7","pol8",]
 
-in_path         = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-12-02_m4lSR-m4lSB_HZZd-Run2017/"
+#in_path         = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-12-02_m4lSR-m4lSB_HZZd-Run2016/"
+in_path         = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-12-04_m4lSR-m4lSB_HZZd_SignalInterpolation_Run2017/"
 inputDir        = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+in_path
 TFileName       = "StatInput.root"
 
-outputDir       = "/home/"+User+"/public_html/Higgs/DarkZ/Interpolation/2019-12-02_m4lSR-m4lSB_HZZd_Run2017/HZZd/"
+#outputDir       = "/home/"+User+"/public_html/Higgs/DarkZ/Interpolation/2019-12-02_m4lSR-m4lSB_HZZd_Run2016/HZZd/"
+outputDir       = "/home/"+User+"/public_html/Higgs/DarkZ/Interpolation/2019-12-04_m4lSR-m4lSB_HZZd_SignalInterpolation_Run2017/HZZd/"
+
+#y_range         = [0.001,5000.]
+#logY            = True
+y_range         = [0.,10.]
+logY            = False
+draw_option     = "AP"
 
 # ________________________________________________________________________________________________ ||
 signals = [
@@ -37,7 +45,7 @@ signals = [
             SignalModel("HZZd_M20",20),
             SignalModel("HZZd_M25",25),
             SignalModel("HZZd_M30",30),
-            SignalModel("HZZd_M30",35),
+            SignalModel("HZZd_M35",35),
             ]
 bins    = [
             Bin("MuMu_HiggsSR",0.02),
@@ -74,11 +82,12 @@ for power in fitlist:
             err_points.append(error)
             f.Close()
         gr = makePlot(x_points,y_points,err_points)
-        gr.GetYaxis().SetRangeUser(0.,10.)
-        func = ROOT.TF1(b.histName+"_fitFunc", power, 0., 35.)
+        gr.GetYaxis().SetRangeUser(*y_range)
+        func = ROOT.TF1(b.histName+"_fitFunc", power, 0., 36.)
         gr.Fit(func,"q")  # q suppresses printing (quiet)
         if (makePlot):
-            gr.Draw()
+            gr.Draw(draw_option)
+            if logY: c.SetLogy(1)
             c.Draw()
             c.SaveAs(os.path.join(outputDir,b.histName+"_"+power+".pdf"))
             c.SaveAs(os.path.join(outputDir,b.histName+"_"+power+".png"))
