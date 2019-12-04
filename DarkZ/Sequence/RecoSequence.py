@@ -25,16 +25,16 @@ darkPhotonM4lSBSkimmer  = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="DarkPhoton
 darkPhotonCRV2Skimmer   = AnalysisSkimmer("DarkPhoton-ZXCR-v2",cutflow="DarkPhoton-ZXCR-v2")
 upsilonCRSkimmer        = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="Upsilon-CR")
 WrongFCSkimmer          = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="WrongFC-SR")
+sigInterpolSkimmer      = AnalysisSkimmer("sigInterpolSkimmer",cutflow="DarkPhoton-SignalInterpolation")
 resonaceSkimmer         = NarrowResonanceSkimmer(
         "NarrowResonanceSkimmer",
         [
             BaseObject(
                 "NarrowResonanceSelection",
-                selFunc=LambdaFunc("x: (abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11 and x.massZ2[0] > 9.46*0.95 and x.massZ2[0] < 9.46*1.05) or (abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13 and x.massZ2[0] > 9.46*0.98 and x.massZ2[0] < 9.46*1.02)"),
+                selFunc=LambdaFunc("x: (abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11 and x.massZ2[0] > 8.50 and x.massZ2[0] < 11.0) or (abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13 and x.massZ2[0] > 8.50 and x.massZ2[0] < 11.0)"),
                 ),
         ],
         )
-
 
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")

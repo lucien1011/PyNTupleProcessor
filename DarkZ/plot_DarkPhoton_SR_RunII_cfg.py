@@ -8,7 +8,8 @@ from DarkZ.Dataset.RunII.SkimTree_DarkPhoton_m4l70 import *
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
 #from DarkZ.Config.PlotDefinition import *
-from DarkZ.Config.AnalysisNotePlot import *
+#from DarkZ.Config.AnalysisNotePlot import *
+from DarkZ.Config.AnalysisNotePlot_MassWindowBinning import *
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
@@ -20,7 +21,9 @@ import os,ROOT
 User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-12_RunII/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-21_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-21_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-09_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-10_RunII/"
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
@@ -28,7 +31,7 @@ disableProgressBar      = False
 #componentList           = bkgSamples + sigSamples + ppZZdSamples
 #componentList           = bkgSamples + [sample2016.HZZd_M15,sample2016.HZZd_M30] + [sample_ppZZd.ppZZd4l_M15,sample_ppZZd.ppZZd4l_M30]
 componentList           = bkgSamples + dataSamples
-justEndSequence         = False
+justEndSequence         = True
 
 plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
 
@@ -61,4 +64,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

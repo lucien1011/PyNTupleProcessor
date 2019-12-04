@@ -19,7 +19,8 @@ from HToZdZd.Config.AnalysisNotePlot import *
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-15_MC_RatioCut0p05/" # Lucien's new dir
 #out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2017_MC_RatioCut0p05/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2018/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2018/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_Run2018/"
 User                    = os.environ['USER']
 lumi                    = 59.7
 nCores                  = 5
