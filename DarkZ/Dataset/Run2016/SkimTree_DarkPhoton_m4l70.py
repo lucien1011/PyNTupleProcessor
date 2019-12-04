@@ -248,7 +248,7 @@ handleSumWeight(
         bkgSkimTreeDir_qqZZext1+"ZZTo4L_13TeV_powheg_pythia8_ext1.txt",
         )
 
-#qqZZTo4L.add(qqZZTo4L_ext1)
+qqZZTo4L.add(qqZZTo4L_ext1)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggH

@@ -25,14 +25,15 @@ in_path         = "DarkPhotonSR/StatInput/2019-12-04_SignalInterpolation_Run2016
 inputDir        = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+in_path
 TFileName       = "StatInput.root"
 
-outputDir       = "/home/lucien/public_html/Higgs/HToZdZd/Interpolation/"+os.path.basename(os.path.normpath(in_path))
+outputDir       = system.getPublicHtmlPath()+"/Higgs/HToZdZd/Interpolation/"+os.path.basename(os.path.normpath(in_path))
 
 y_range         = [0.,0.5]
+draw_option     = "AP"
 
 # ________________________________________________________________________________________________ ||
 signals = [
                 SignalModel("HToZdZd_M"+str(m),m) for m in mass_points
-            ]
+
 bins    = [
             Bin("MuMu",0.02),
             Bin("ElMu",0.02),
@@ -43,7 +44,7 @@ bins    = [
 # ________________________________________________________________________________________________ ||
 print("Input directory: "+inputDir)
 print("Output directory: "+outputDir)
-print("Mass points: "+", ".join([str(m) for m in mass_points]))
+print("Mass points: "+", ".join([str(s.centre) for s in signals]))
 
 mkdir_p(outputDir)
 
@@ -63,6 +64,8 @@ for power in fitlist:
             error = ROOT.Double(0.)
             x1,x2 = b.getWindowWidth(sig.centre)
             integral = hist.IntegralAndError(hist.GetXaxis().FindBin(x1),hist.GetXaxis().FindBin(x2),error)
+            integral *= sig.yieldFactor
+            error *= sig.yieldFactor
             x_points.append(sig.centre)
             y_points.append(integral)
             err_points.append(error)
@@ -72,7 +75,7 @@ for power in fitlist:
         func = ROOT.TF1(b.histName+"_fitFunc", power, 0., 35.)
         gr.Fit(func,"q")  # q suppresses printing (quiet)
         if (makePlot):
-            gr.Draw()
+            gr.Draw(draw_option)
             c.Draw()
             c.SaveAs(os.path.join(outputDir,b.histName+"_"+power+".pdf"))
             c.SaveAs(os.path.join(outputDir,b.histName+"_"+power+".png"))
