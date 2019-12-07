@@ -8,5 +8,5 @@ eval `scramv1 runtime -sh`
 cd -
 
 export NTUPLERUNNER_MODE="Remote"
-export NTUPLERUNNER_STORAGE=/raid/raid7/
-export NTUPLERUNNER_WWW="/home/${USER}/public_html/"
+export NTUPLERUNNER_STORAGE="/raid/raid7"
+export NTUPLERUNNER_WWW="/home/${USER}/public_html"
