@@ -4,8 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from DarkZ.Dataset.Run2018.SkimTree_DarkPhoton_m4l70 import * 
-from DarkZ.Dataset.Run2018.SkimTree_DarkPhoton_m4l70_HZZd import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_HZZdInterpolation import * 
 
 from DarkZ.Sequence.RecoSequence import * 
 
@@ -14,34 +13,24 @@ from DarkZ.Producer.VariableProducer import VariableProducer
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
-from Plotter.Plotter import Plotter
-from Plotter.PlotEndModule import PlotEndModule
-from Plotter.Plot import Plot
-
 from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
 import os
 
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-05-24_m4lSR-m4lSB_HZZd-ppZZd/"
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-08_m4lSR-m4lSB_HZZd-ppZZd/"
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-17_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-07-31_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-08-14_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
-#out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-09-02_m4lSR-m4lSB_HZZd-ppZZd_Run2018/"
-out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-12-02_m4lSR-m4lSB_HZZd-Run2018/"
+out_path = "ParaInput/DarkPhotonSelection_m4l100To170_Nominal/2019-12-04_m4lSR-m4lSB_HZZd_SignalInterpolation_Run2016/"
 
 User                    = os.environ['USER']
 nCores                  = 5
-outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
+outputDir               = system.getStoragePath()+'/'+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples + dataSamples
+componentList           = sigSamples
 justEndSequence         = False
 skipGitDetail           = True
 
 for dataset in componentList:
     if dataset.isMC:
-        dataset.lumi = 59.7
+        dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
@@ -68,19 +57,15 @@ input_channel_dict      = {
         "ElEl_HiggsSR": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsSR_sel_str])),
         "ElEl_HiggsLowSB": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsLowSB_sel_str])),
         "ElEl_HiggsHighSB": LambdaFunc('event: '+' and '.join([el_Z1_ch_sel_str,el_Z2_ch_sel_str,higgsHighSB_sel_str])),
-        #"2mu_HiggsSR": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsSR_sel_str])),
-        #"2e_HiggsSR": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsSR_sel_str])),
-        #"2mu_HiggsLowSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsLowSB_sel_str])),
-        #"2e_HiggsLowSB": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsLowSB_sel_str])),
-        #
-        #"2e_HiggsHighSB": LambdaFunc('event: '+' and '.join([el_ch_sel_str,higgsHighSB_sel_str])),
-        #"2mu_HiggsHighSB": LambdaFunc('event: '+' and '.join([mu_ch_sel_str,higgsHighSB_sel_str])),
         }
 
 #sequence                = darkphoton_signal_sequence
 sequence                = darkphoton_fullm4l_sequence
 yieldProducer           = ParaYieldProducer("ParaYieldProducer",systList=[],channelDict=input_channel_dict,)
 
+sequence.remove(darkPhotonFullm4lSkimmer)
+sequence.add(sigInterpolSkimmer)
+sequence.remove(resonaceSkimmer)
 sequence.add(yieldProducer)
 
 outputInfo              = OutputInfo("OutputInfo")

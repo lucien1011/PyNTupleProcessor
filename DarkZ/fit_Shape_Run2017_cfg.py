@@ -8,7 +8,8 @@ ROOT.gROOT.SetBatch(ROOT.kTRUE)
 # _____________________________________________________________________________ ||
 baseDir         = system.getStoragePath()+"/lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
 inputPath       = baseDir+"ZPlusX/DataMCDistribution.root"
-outputDir       = baseDir+"ZPlusX/"
+#outputDir       = baseDir+"ZPlusX/"
+outputDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-11-21_Run2017/ZPlusX/"
 outFileName     = "shape_veto.root"
 binList         = [
                         #BaseObject("mZ2_4e",rebin=5,histName="mZ2_4e"),

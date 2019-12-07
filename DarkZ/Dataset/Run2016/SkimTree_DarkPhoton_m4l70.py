@@ -253,7 +253,7 @@ handleSumWeight(
         bkgSkimTreeDir_qqZZext1+"ZZTo4L_13TeV_powheg_pythia8_ext1.txt",
         )
 
-#qqZZTo4L.add(qqZZTo4L_ext1)
+qqZZTo4L.add(qqZZTo4L_ext1)
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggH
@@ -377,174 +377,6 @@ handleSumWeight(
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
-# ggHZZd_M4
-HZZd_M4_cmpList = ComponentList(
-        [ Component("HZZd_M4",sigSkimTreeDir+"ZD_UpTo0j_MZD4_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
-        )
-HZZd_M4 = Dataset(
-        "HZZd_M4",
-        HZZd_M4_cmpList,
-        isMC                = True,
-        isSignal            = True,
-        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
-        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
-        xs                  = 48.58*epsilon**2*0.000219, # Take Br(h->ZZd->4l from paper
-        )
-handleSumWeight(
-        HZZd_M4,
-        system,
-        sigTreeDir+"ZD_UpTo0j_MZD4_Eps1e-2_klo.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        sigSkimTreeDir+"ZD_UpTo0j_MZD4_Eps1e-2_klo.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-# HZZd_M7
-HZZd_M7_cmpList = ComponentList(
-        [ Component("HZZd_M7",sigSkimTreeDir+"ZD_UpTo0j_MZD7_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
-        )
-HZZd_M7 = Dataset(
-        "HZZd_M7",
-        HZZd_M7_cmpList,
-        isMC                = True,
-        isSignal            = True,
-        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
-        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
-        xs                  = 48.58*epsilon**2*0.000597, # Take Br(h->ZZd->4l from paper
-        )
-handleSumWeight(
-        HZZd_M7,
-        system,
-        sigTreeDir+"ZD_UpTo0j_MZD7_Eps1e-2_klo.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        sigSkimTreeDir+"ZD_UpTo0j_MZD7_Eps1e-2_klo.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-# HZZd_M10
-HZZd_M10_cmpList = ComponentList(
-        [ Component("HZZd_M10",sigSkimTreeDir+"ZD_UpTo0j_MZD10_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
-        )
-HZZd_M10 = Dataset(
-        "HZZd_M10",
-        HZZd_M10_cmpList,
-        isMC                = True,
-        isSignal            = True,
-        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
-        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
-        xs                  = 48.58*epsilon**2*0.00126, # Take Br(h->ZZd->4l from paper
-        )
-handleSumWeight(
-        HZZd_M10,
-        system,
-        sigTreeDir+"ZD_UpTo0j_MZD10_Eps1e-2_klo.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        sigSkimTreeDir+"ZD_UpTo0j_MZD10_Eps1e-2_klo.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-# HZZd_M15
-HZZd_M15_cmpList = ComponentList(
-        [ Component("HZZd_M15",sigSkimTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
-        )
-HZZd_M15 = Dataset(
-        "HZZd_M15",
-        HZZd_M15_cmpList,
-        isMC                = True,
-        isSignal            = True,
-        #xs                  = 3.396e-6*xsBoost, # Madgraph xs
-        #xs                  = 48.58*0.288*epsilon**2*0.06729, # Assume h->ZZd br to be 100%
-        xs                  = 48.58*epsilon**2*(0.00252+0.00338)/2., # Take Br(h->ZZd->4l from paper
-        )
-handleSumWeight(
-        HZZd_M15,
-        system,
-        sigTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        sigSkimTreeDir+"ZD_UpTo0j_MZD15_Eps1e-2_klo.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-# HZZd_M20
-HZZd_M20_cmpList = ComponentList(
-        [ Component("HZZd_M20",sigSkimTreeDir+"ZD_UpTo0j_MZD20_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
-        )
-HZZd_M20 = Dataset(
-        "HZZd_M20",
-        HZZd_M20_cmpList,
-        isMC                = True,
-        isSignal            = True,
-        #xs                  = 6.34e-06*xsBoost,
-        #xs                  = 48.58*0.286*epsilon**2*0.06729,
-        xs                  = 48.58*epsilon**2*0.00555, # Take Br(h->ZZd->4l) from paper
-        )
-handleSumWeight(
-        HZZd_M20,
-        system,
-        sigTreeDir+"ZD_UpTo0j_MZD20_Eps1e-2_klo.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        sigSkimTreeDir+"ZD_UpTo0j_MZD20_Eps1e-2_klo.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-# HZZd_M25
-HZZd_M25_cmpList = ComponentList(
-        [ Component("HZZd_M25",sigSkimTreeDir+"ZD_UpTo0j_MZD25_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
-        )
-HZZd_M25 = Dataset(
-        "HZZd_M25",
-        HZZd_M25_cmpList,
-        isMC                = True,
-        isSignal            = True,
-        #xs                  = 9.956e-06*xsBoost,
-        #xs                  = 48.58*0.283*epsilon**2*0.06729,
-        xs                  = 48.58*epsilon**2*(0.00814+0.00940)/2., # Take Br(h->ZZd->4l from paper
-        )
-handleSumWeight(
-        HZZd_M25,
-        system,
-        sigTreeDir+"ZD_UpTo0j_MZD25_Eps1e-2_klo.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        sigSkimTreeDir+"ZD_UpTo0j_MZD25_Eps1e-2_klo.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
-# HZZd_M30
-HZZd_M30_cmpList = ComponentList(
-        [ Component("HZZd_M30",sigSkimTreeDir+"ZD_UpTo0j_MZD30_Eps1e-2_klo_1.root","passedEvents",inUFTier2=inUFTier2) ]
-        )
-HZZd_M30 = Dataset(
-        "HZZd_M30",
-        HZZd_M30_cmpList,
-        isMC                = True,
-        isSignal            = True,
-        #xs                  = 1.196e-05*xsBoost,
-        #xs                  = 48.58*0.280*epsilon**2*0.06729,
-        xs                  = 48.58*epsilon**2*0.0108, # Take Br(h->ZZd->4l from paper
-        )
-handleSumWeight(
-        HZZd_M30,
-        system,
-        sigTreeDir+"ZD_UpTo0j_MZD30_Eps1e-2_klo.root",
-        sumWeightHist,
-        True,
-        saveSumWeightTxt,
-        sigSkimTreeDir+"ZD_UpTo0j_MZD30_Eps1e-2_klo.txt",
-        )
-
-# ____________________________________________________________________________________________________________________________________________ ||
 mcBkgSamples = [
         ggH,
         VBF,
@@ -562,18 +394,6 @@ mcBkgSamples = [
 
 bkgSamples = mcBkgSamples + [
         ZPlusX,
-        #data2016,
-        ]
-
-sigSamples = [
-        HZZd_M4,
-        HZZd_M7,
-        HZZd_M10,
-        HZZd_M15,
-        HZZd_M20,
-        HZZd_M25,
-        HZZd_M30,
-        #HZZd_M35,
         ]
 
 dataSamples = [data2016,]

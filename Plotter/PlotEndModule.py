@@ -430,7 +430,16 @@ class PlotEndModule(EndModule):
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)
-        title = "Events / "+plot.plotSetting.bin_width_label if plot.plotSetting.divideByBinWidth else "Events / (%.2f GeV)" % (stack.GetXaxis().GetBinWidth(2)) 
+        allBinWidths = [stack.GetXaxis().GetBinWidth(i) for i in range(1,stack.GetXaxis().GetNbins()+1)]
+        constantBinWidth = all([binWidth == allBinWidths[0] for binWidth in allBinWidths])
+        if constantBinWidth and plot.plotSetting.divideByBinWidth:
+            title = "Events / (%.2f GeV)" % (binWidths[0])
+        elif plot.plotSetting.divideByBinWidth:
+            title = "Events / Bin Width"
+        elif plot.plotSetting.bin_width_label:
+            title = plot.plotSetting.bin_width_label
+        else:
+            title = "Events"
         stack.GetYaxis().SetTitle(title)
 
     def makeRatioPlot(self,data,total,bkdgErr):

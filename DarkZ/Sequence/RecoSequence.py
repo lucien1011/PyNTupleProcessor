@@ -25,6 +25,7 @@ darkPhotonM4lSBSkimmer  = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="DarkPhoton
 darkPhotonCRV2Skimmer   = AnalysisSkimmer("DarkPhoton-ZXCR-v2",cutflow="DarkPhoton-ZXCR-v2")
 upsilonCRSkimmer        = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="Upsilon-CR")
 WrongFCSkimmer          = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="WrongFC-SR")
+sigInterpolSkimmer      = AnalysisSkimmer("sigInterpolSkimmer",cutflow="DarkPhoton-SignalInterpolation")
 resonaceSkimmer         = NarrowResonanceSkimmer(
         "NarrowResonanceSkimmer",
         [

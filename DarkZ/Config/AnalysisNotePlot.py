@@ -23,7 +23,7 @@ mZ2HighM4lPlotRange_mu  = [155-1,array.array('d',[4.*1.02**i for i in range(155)
 #mZ2HighM4lPlotRange = [38,4.,80.,]
 
 h4lPlotRange_mu         = [33-1,array.array('d',[90.*1.02**i for i in range(33)]),]
-h4lPlotRange_el         = [13-1,array.array('d',[90.*1.02**i for i in range(13)]),]
+h4lPlotRange_el         = [14-1,array.array('d',[90.*1.05**i for i in range(14)]),]
 
 # ________________________________________________________________________ ||
 sel_4e_str      = "abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11"

@@ -21,67 +21,73 @@ import ROOT,os,copy
 User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_RunII/"
 #end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-07-29_RunII/"
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
-end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
+#end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-11-21_RunII/"
+end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-11-21_RunII/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSamples + dataSamples 
+includeSignalSample     = False
+componentList           = bkgSamples + dataSamples 
+if includeSignalSample: componentList += sigSamples 
 
 plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
 
 sigSamples = []
 mergeSigSampleDict = {}
-for sample in sample2016.sigSamples:
-    if "M15" not in sample.name and "M30" not in sample.name: continue
-    for p in plots:
-        p.plotSetting.line_style_dict[sample.name] = 10
-        p.plotSetting.line_width_dict[sample.name] = 4
-        p.plotSetting.line_color_dict[sample.name] = ROOT.kRed
-    sample2016 = copy.deepcopy(sample)
-    sample2017 = copy.deepcopy(sample)
-    sample2018 = copy.deepcopy(sample)
-    mergeSigSampleDict[sample.name] = []
-    sample2016.name += "_Run2016"
-    mergeSigSampleDict[sample.name].append(sample2016.name)
-    sigSamples.append(sample2016)
-    sample2017.name += "_Run2017"
-    mergeSigSampleDict[sample.name].append(sample2017.name)
-    sigSamples.append(sample2017)
-    sample2018.name += "_Run2018"
-    mergeSigSampleDict[sample.name].append(sample2018.name)
-    sigSamples.append(sample2018)
-componentList += sigSamples
+if includeSignalSample:
+    for sample in sample2016.sigSamples:
+        if "M15" not in sample.name and "M30" not in sample.name: continue
+        for p in plots:
+            p.plotSetting.line_style_dict[sample.name] = 10
+            p.plotSetting.line_width_dict[sample.name] = 4
+            p.plotSetting.line_color_dict[sample.name] = ROOT.kRed
+        sample2016 = copy.deepcopy(sample)
+        sample2017 = copy.deepcopy(sample)
+        sample2018 = copy.deepcopy(sample)
+        mergeSigSampleDict[sample.name] = []
+        sample2016.name += "_Run2016"
+        mergeSigSampleDict[sample.name].append(sample2016.name)
+        sigSamples.append(sample2016)
+        sample2017.name += "_Run2017"
+        mergeSigSampleDict[sample.name].append(sample2017.name)
+        sigSamples.append(sample2017)
+        sample2018.name += "_Run2018"
+        mergeSigSampleDict[sample.name].append(sample2018.name)
+        sigSamples.append(sample2018)
+    componentList += sigSamples
 
-for sample in sample_ppZZd.ppZZdSamples:
-    if "M15" not in sample.name and "M30" not in sample.name: continue
-    for p in plots:
-        p.plotSetting.line_style_dict[sample.name] = 9
-        p.plotSetting.line_width_dict[sample.name] = 4
-        p.plotSetting.line_color_dict[sample.name] = ROOT.kOrange
-    sample2016 = copy.deepcopy(sample)
-    sample2017 = copy.deepcopy(sample)
-    sample2018 = copy.deepcopy(sample)
-    mergeSigSampleDict[sample.name] = []
-    sample2016.name += "_Run2016"
-    mergeSigSampleDict[sample.name].append(sample2016.name)
-    sigSamples.append(sample2016)
-    sample2017.name += "_Run2017"
-    mergeSigSampleDict[sample.name].append(sample2017.name)
-    sigSamples.append(sample2017)
-    sample2018.name += "_Run2018"
-    mergeSigSampleDict[sample.name].append(sample2018.name)
-    sigSamples.append(sample2018)
-componentList += sigSamples
+    for sample in sample_ppZZd.ppZZdSamples:
+        if "M15" not in sample.name and "M30" not in sample.name: continue
+        for p in plots:
+            p.plotSetting.line_style_dict[sample.name] = 9
+            p.plotSetting.line_width_dict[sample.name] = 4
+            p.plotSetting.line_color_dict[sample.name] = ROOT.kOrange
+        sample2016 = copy.deepcopy(sample)
+        sample2017 = copy.deepcopy(sample)
+        sample2018 = copy.deepcopy(sample)
+        mergeSigSampleDict[sample.name] = []
+        sample2016.name += "_Run2016"
+        mergeSigSampleDict[sample.name].append(sample2016.name)
+        sigSamples.append(sample2016)
+        sample2017.name += "_Run2017"
+        mergeSigSampleDict[sample.name].append(sample2017.name)
+        sigSamples.append(sample2017)
+        sample2018.name += "_Run2018"
+        mergeSigSampleDict[sample.name].append(sample2018.name)
+        sigSamples.append(sample2018)
+    componentList += sigSamples
 
 
 #inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
 inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape_veto.root"),"READ")
 for p in plots:
-    p.plotSetting.divideByBinWidth = False
-    if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
+    #p.plotSetting.divideByBinWidth = False
+    #if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
+    #p.plotSetting.bin_width_label = "Bin Width"
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
 

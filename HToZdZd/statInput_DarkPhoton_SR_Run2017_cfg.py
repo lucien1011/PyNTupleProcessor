@@ -4,7 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 from HToZdZd.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
-from HToZdZd.Dataset.Run2017.SkimTree_HToZdZd_m4l70 import * 
+from HToZdZd.Dataset.Run2017.SkimTree_DarkPhoton_m4l70_HZdZd import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
 from DarkZ.StatTools.ParaYieldProducer import ParaYieldProducer # Stealing from DarkZ
@@ -18,13 +18,14 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/StatInput/2019-07-18_Run2017/"
 #out_path                = "DarkPhotonSR/StatInput/2019-08-19_Run2017/"
 #out_path                = "DarkPhotonSR/StatInput/2019-08-21_Run2017/"
-out_path                = "DarkPhotonSR/StatInput/2019-09-06_Run2017/"
+#out_path                = "DarkPhotonSR/StatInput/2019-09-06_Run2017/"
+out_path                = "DarkPhotonSR/StatInput/2019-12-02_Run2017/"
 lumi                    = 41.7
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2017,] + sigSamples2017  
+componentList           = bkgSamples + [data2017,] + sigSamples  
 justEndSequence         = False
 eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
 

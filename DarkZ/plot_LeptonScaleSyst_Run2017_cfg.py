@@ -1,11 +1,12 @@
 import ROOT,os
 from Core.BaseObject import BaseObject
 from Core.mkdir_p import mkdir_p
+
 # ________________________________________________________________________________________ ||
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # ________________________________________________________________________________________ ||
-inputDir        = "/raid/raid7//lucien/Higgs/DarkZ/LeptonScale/2019-11-20_Run2016/"
+inputDir        = "/raid/raid7//lucien/Higgs/DarkZ/LeptonScale/2019-11-20_Run2017/"
 bkgSamples      = [
                     "Higgs",
                     "qqZZ",
@@ -30,7 +31,7 @@ plots           = [
                         fileName = "StatInput.root",
                         ) for lepCat in ["MuMu","ElMu","ElEl","MuEl",] for m4l in ["SR","HighSB","LowSB",]
                     ]
-outputDir       = "/home/lucien/public_html/Higgs/DarkZ/LeptonScaleRes/2019-11-20_Run2016/"
+outputDir       = "/home/lucien/public_html/Higgs/DarkZ/LeptonScaleRes/2019-11-20_Run2017/"
 
 # ________________________________________________________________________________________ ||
 mkdir_p(outputDir)
