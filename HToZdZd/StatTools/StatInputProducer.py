@@ -2,7 +2,7 @@ from Core.Module import Module
 import array
 
 class StatInputProducer(Module):
-    def __init__(self,name,systList=[],channelDict={},binning=[],norm_binning=[],postfix=""):
+    def __init__(self,name,systList=[],channelDict={}):
         self.name = name
         self.systList = systList
         self.channelNames = channelDict.keys()
@@ -24,16 +24,15 @@ class StatInputProducer(Module):
         for channelName,channel in self.channelDict.iteritems():
             if channel.selFunc(event): 
                 fillList = channel.fillFunc(event)
-                self.channelDict[channel.histKey].Fill(*fillList)
+                self.writer.objs[channel.histKey].Fill(*fillList)
                 for syst in self.systList:
-                    sysHistName = "_".join([channelName,syst.name])
-                    self.writer.objs[sysHistName].Fill(*syst.fillFunc)
+                    sysHistKey = channel.histKey+"_"+syst.name
+                    self.writer.objs[sysHistKey].Fill(*syst.fillFunc)
         return True
 
     def end(self):
         for syst in self.systList:
             syst.fillFunc.end()
-
         for channelName,channel in self.channelDict.iteritems():
             channel.selFunc.end()
             channel.fillFunc.end()
