@@ -40,6 +40,7 @@ for m in mass_points:
             True,
             saveSumWeightTxt,
             inputFilePath.replace(".root",".txt"),
+            inputFilePath.replace(".root",".txt"),
             )
     sigSampleDict[m] = tmpDataset
 sigSamples = sigSampleDict.values()
