@@ -1,7 +1,7 @@
 from PlotSetting import PlotSetting
 
 class Plot(object):
-    def __init__(self,key,rootSetting,funcObj,isCollection=False,selFunc=None,dim=1,plotSetting=None,getEventWeight=None,customHistDict=None,customPdfDict=None):
+    def __init__(self,key,rootSetting,funcObj,isCollection=False,selFunc=None,dim=1,plotSetting=None,getEventWeight=None,customHistDict=None,customPdfDict=None,selectedSamples=[]):
         self.key = key
         self.rootSetting = rootSetting
         self.funcObj = funcObj
@@ -14,6 +14,7 @@ class Plot(object):
         self.getEventWeight = getEventWeight
         self.customHistDict = {} if not customHistDict else customHistDict
         self.customPdfDict = {} if not customPdfDict else customPdfDict
+        self.selectedSamples = selectedSamples
 
     def getWriterSetting(self):
         return [self.key]+self.rootSetting

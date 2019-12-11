@@ -76,6 +76,7 @@ class PlotSetting(object):
     def __init__(self,
             divideByBinWidth=False,
             x_axis_title=None,x_axis_labels=None,
+            y_axis_title=None,y_axis_labels=None,
             defaultLabelDict=labelDict,
             sf_x_pos=0.11,
             sf_y_pos=0.92,
@@ -90,11 +91,15 @@ class PlotSetting(object):
             line_width_dict={},
             line_color_dict={},
             bin_width_label="",
+            leg_pos=[],
+            minimum=None,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
+        self.y_axis_title = y_axis_title
         self.defaultLabelDict = defaultLabelDict
         self.x_axis_labels = x_axis_labels
+        self.y_axis_labels = y_axis_labels
         self.sf_x_pos = sf_x_pos
         self.sf_y_pos = sf_y_pos
         self.sf_text_font = sf_text_font
@@ -108,3 +113,5 @@ class PlotSetting(object):
         self.line_width_dict = line_width_dict
         self.line_color_dict = line_color_dict
         self.bin_width_label = bin_width_label
+        self.leg_pos = leg_pos
+        self.minimum = minimum

@@ -21,7 +21,8 @@ from HToZdZd.Config.AnalysisNotePlot import *
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2017_MC_RatioCut0p05/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2016/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_Run2016/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-09_Run2016/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-09_Run2016/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-11_Run2016/"
 User                    = os.environ['USER']
 lumi                    = 35.9
 nCores                  = 5
@@ -33,7 +34,6 @@ componentList           = bkgSamples + [
                                 data2016,
                                 ] + sigSamples
 justEndSequence         = False
-#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
 
 plots = general_plots 
 
@@ -47,6 +47,14 @@ for dataset in componentList:
         dataset.lumi = lumi
     for component in dataset.componentList:
         component.maxEvents = nEvents
+
+for p in plots:
+    if p.dim == 2: 
+        p.plotSetting.leg_pos = [0.14,0.65,0.34,0.87]
+        p.plotSetting.x_axis_title = "m_{Z1}"
+        p.plotSetting.y_axis_title = "m_{Z2}"
+        p.plotSetting.minimum = 0.
+        p.selectedSamples = ["Higgs","qqZZ",] + [sigSampleDict[m].name for m in [5,30,60]]
 
 plotter                 = Plotter("Plotter",plots)
 

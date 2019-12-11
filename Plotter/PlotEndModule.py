@@ -1,4 +1,5 @@
 from Core.EndModule import EndModule
+from Core.BaseObject import BaseObject
 
 import os,ROOT,math
 
@@ -155,9 +156,18 @@ class PlotEndModule(EndModule):
                 self.divideByBinWidth(hist)
 
         return histList
+    
+    def makeSimpleLegend(self,sampleList,plot):
+        legPos = [0.70,0.65,0.89,0.87] if not plot.plotSetting.leg_pos else plot.plotSetting.leg_pos
+        leg = ROOT.TLegend(*legPos)
+        leg.SetBorderSize(0)
+        leg.SetFillColor(0)
+        leg.SetTextSize(0.015)
+        for sample in sampleList:
+            leg.AddEntry(sample.hist, sample.name, "p")
+        return leg
 
-
-    def makeLegend(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None):
+    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None):
         leg = ROOT.TLegend(0.70,0.65,0.89,0.87)
         leg.SetBorderSize(0)
         leg.SetFillColor(0)
@@ -252,7 +262,7 @@ class PlotEndModule(EndModule):
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
 
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
+            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
 
             if plot.plotSetting.log_x:
                 c.SetLogx(1)
@@ -333,7 +343,7 @@ class PlotEndModule(EndModule):
 
             upperPad.cd()
 
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
+            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
 
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
@@ -391,7 +401,7 @@ class PlotEndModule(EndModule):
 
             sigHistList = self.makeSignalHist(collector,plot)
             
-            leg = self.makeLegend([],None,0.,False,histListSignal=sigHistList)
+            leg = self.makeLegend1D([],None,0.,False,histListSignal=sigHistList)
             
             c.SetLogy(0)
             #sigHistList looks like: histList.append([h,sample,sigCount])
@@ -421,12 +431,29 @@ class PlotEndModule(EndModule):
 
     def draw2DPlot(self,collector,plot,outputDir):
         c = ROOT.TCanvas("c_"+plot.key, "c_"+plot.key,0,0, 650, 650)
-        for isample,sample in enumerate(collector.samples+collector.mergeSamples):
+        sampleList = []
+        for isample,sample in enumerate(collector.mergeSamples if not plot.selectedSamples else plot.selectedSamples):
+            tmpSampleObj = BaseObject(sample)
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)
-            hist.Draw("colz")
-            c.SaveAs(outputDir+sample+"_"+plot.key+".png")
-            c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
+            hist.SetMarkerColor(sampleColorDict[sample])
+            hist.SetMarkerStyle(isample)
+            if plot.plotSetting.minimum != None and type(plot.plotSetting.minimum) == float: hist.SetMinimum(plot.plotSetting.minimum)
+            tmpSampleObj.hist = hist
+            sampleList.append(tmpSampleObj)
+            if plot.plotSetting.x_axis_title: hist.GetXaxis().SetTitle(plot.plotSetting.x_axis_title)
+            if plot.plotSetting.y_axis_title: hist.GetYaxis().SetTitle(plot.plotSetting.y_axis_title)
+            if not isample:
+                hist.Draw("SCATp")
+            else:
+                hist.Draw("SCATpsame")
+            #c.SaveAs(outputDir+sample+"_"+plot.key+".png")
+            #c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
+        leg = self.makeSimpleLegend(sampleList,plot)
+        leg.Draw("samep")
+        c.SaveAs(os.path.join(outputDir,plot.key+".png"))
+        c.SaveAs(os.path.join(outputDir,plot.key+".pdf"))
+
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)
