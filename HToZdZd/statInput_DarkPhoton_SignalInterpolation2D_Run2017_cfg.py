@@ -3,7 +3,7 @@ from Core.EndSequence import EndSequence
 from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
-from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_HZdZdInterpolation import * 
+from HToZdZd.Dataset.Run2017.SkimTree_DarkPhoton_m4l70_HZdZdInterpolation import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
 from HToZdZd.StatTools.StatInputProducer import StatInputProducer # Stealing from DarkZ
@@ -14,8 +14,8 @@ from HToZdZd.Config.MergeSampleDict import *
 import os
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/StatInput/2019-12-10_SignalInterpolation2D_Run2016/"
-lumi                    = 35.9
+out_path                = "DarkPhotonSR/StatInput/2019-12-10_SignalInterpolation2D_Run2017/"
+lumi                    = 41.4
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1

@@ -22,7 +22,7 @@ mass_points             = [4,5,6,7,8,9,10,15,20,25,30,35,40,45,50,55,60,]
 # ____________________________________________________________________________________________________________________________________________ ||
 sigSampleDict = {}
 for m in mass_points:
-    inputFilePath = os.path.join(sigSkimTreeDir,fileNameTemplate%m) if m not in [4,] else os.path.join(sigSkimTreeDir2,fileNameTemplate%m)
+    inputFilePath = os.path.join(sigSkimTreeDir,fileNameTemplate%m) if m not in [4,5,] else os.path.join(sigSkimTreeDir2,fileNameTemplate%m)
     tmpDataset = Dataset(
             datasetName%m,
             ComponentList(
