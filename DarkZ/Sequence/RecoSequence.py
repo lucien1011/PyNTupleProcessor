@@ -21,12 +21,13 @@ higgsCRSkimmer          = AnalysisSkimmer("HiggsCRSkimmer",cutflow="Higgs-ZXCR")
 higgs3P1FSkimmer        = AnalysisSkimmer("Higgs3P1FSkimmer",cutflow="Higgs-3P1F")
 m4lSBSkimmer            = AnalysisSkimmer("m4lSBSkimmer",cutflow="Higgs-m4lSB")
 m4lNarrowSkimmer        = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="Higgs-m4lNarrowWindow")
-darkPhotonM4lSBSkimmer  = AnalysisSkimmer("m4lNarrowSkimmer",cutflow="DarkPhoton-m4lSB")
+darkPhotonM4lSBSkimmer  = AnalysisSkimmer("darkPhotonM4lSBSkimmer",cutflow="DarkPhoton-m4lSB")
 darkPhotonCRV2Skimmer   = AnalysisSkimmer("DarkPhoton-ZXCR-v2",cutflow="DarkPhoton-ZXCR-v2")
 upsilonCRSkimmer        = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="Upsilon-CR")
 WrongFCSkimmer          = AnalysisSkimmer("UpsilonCRSkimmer",cutflow="WrongFC-SR")
 sigInterpolSkimmer      = AnalysisSkimmer("sigInterpolSkimmer",cutflow="DarkPhoton-SignalInterpolation")
-resonaceSkimmer         = NarrowResonanceSkimmer(
+darkPhotonSRnolowmX2cut = AnalysisSkimmer("DarkPhotonSR-nolowmX2cut",cutflow="DarkPhoton-SR-nolowmX2cut-SR-nolowmX2cut")
+resonanceSkimmer        = NarrowResonanceSkimmer(
         "NarrowResonanceSkimmer",
         [
             BaseObject(
@@ -49,12 +50,12 @@ variableProducer        = VariableProducer("VariableProducer")
 darkphoton_signal_sequence = Sequence()
 darkphoton_signal_sequence.add(darkPhotonSRSkimmer)
 darkphoton_signal_sequence.add(variableProducer)
-darkphoton_signal_sequence.add(resonaceSkimmer)
+darkphoton_signal_sequence.add(resonanceSkimmer)
 
 darkphoton_fullm4l_sequence = Sequence()
 darkphoton_fullm4l_sequence.add(darkPhotonFullm4lSkimmer)
 darkphoton_fullm4l_sequence.add(variableProducer)
-darkphoton_fullm4l_sequence.add(resonaceSkimmer)
+darkphoton_fullm4l_sequence.add(resonanceSkimmer)
 
 zx_map_sequence = Sequence()
 zx_map_sequence.add(darkPhotonSRSkimmer)
@@ -124,6 +125,11 @@ zx_syst_signal_sequence.add(nloWeighter)
 zx_syst_signal_sequence.add(dataMCWeighter)
 zx_syst_signal_sequence.add(fakeRateWeighter_syst)
 
+darkphoton_nomX2cut_signal_sequence = Sequence()
+darkphoton_nomX2cut_signal_sequence.add(darkPhotonSRnolowmX2cut)
+darkphoton_nomX2cut_signal_sequence.add(variableProducer)
+darkphoton_nomX2cut_signal_sequence.add(resonanceSkimmer)
+
 allSequence = [
         darkphoton_signal_sequence,
         darkphoton_fullm4l_sequence,
@@ -133,6 +139,7 @@ allSequence = [
         higgs_3p1f_sequence,
         higgs_m4lSB_sequence,
         higgs_m4lNarrowWindow_sequence,
+        darkphoton_nomX2cut_signal_sequence,
         ]
 for sequence in allSequence:
     #sequence.add(bliSkimmer)
