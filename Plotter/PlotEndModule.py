@@ -1,11 +1,13 @@
-from Core.EndModule import EndModule
-from Core.BaseObject import BaseObject
-
 import os,ROOT,math
 
+from Core.EndModule import EndModule
+from Core.BaseObject import BaseObject
+from Core.Utils.printFunc import pyPrint
+
+from Utils.tdrstyle import setTDRStyle
+from Utils.CMS_lumi import CMS_lumi
 from SampleColor import sampleColorDict
 
-from Core.Utils.printFunc import pyPrint
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
@@ -25,6 +27,12 @@ class PlotEndModule(EndModule):
             self.drawPlot(collector,plot,self.outputDir,self.switch)
 
     def drawPlot(self,collector,plot,outputDir,switch):
+        if plot.plotSetting.tdr_style:
+            setTDRStyle()
+            ROOT.gStyle.SetLabelSize(0.018,"XYZ")
+            #ROOT.gStyle.SetLabelOffset(0.003, "XYZ")
+            ROOT.gStyle.SetTitleSize(0.035,"XYZ")
+            #ROOT.gStyle.SetTitleXOffset(1.8)
         self.makedirs(outputDir)
         if plot.dim == 1:
             self.draw1DPlot(collector,plot,outputDir,switch)
@@ -307,6 +315,7 @@ class PlotEndModule(EndModule):
             ## TPad("name","title",xlow,ylow,xup,yup)
             upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
             lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .32)
+
             upperPad.Draw()
             lowerPad.Draw()
 
@@ -337,6 +346,10 @@ class PlotEndModule(EndModule):
             bkdgErrRatio.SetFillColor(1)
             bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
 
+            if plot.plotSetting.ratio_range:
+                ratio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+                bkdgErrRatio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+
             ratio.DrawCopy()
             bkdgErrRatio.DrawCopy("samee2")
             line.Draw()
@@ -351,7 +364,6 @@ class PlotEndModule(EndModule):
 
             stack.Draw('hist')
             stack.GetXaxis().SetTitleOffset(0.55)
-            self.setStackAxisTitle(stack,axisLabel,plot)
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
@@ -372,6 +384,8 @@ class PlotEndModule(EndModule):
             n1.SetTextSize(0.05);
             if not self.skipSF:
                 n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+            if plot.plotSetting.cms_lumi:
+                CMS_lumi(upperPad,plot.plotSetting.cms_lumi_number,11)
 
             dataHist.DrawCopy('samep')
             bkdgErr.Draw("samee2")

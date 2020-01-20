@@ -97,6 +97,10 @@ class PlotSetting(object):
             marker_style=5,
             marker_style_dict={},
             scatter_density=1.0,
+            tdr_style=False,
+            cms_lumi=False,
+            cms_lumi_number=4,
+            ratio_range=[],
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -123,3 +127,7 @@ class PlotSetting(object):
         self.marker_style = marker_style
         self.marker_style_dict = marker_style_dict
         self.scatter_density = scatter_density
+        self.tdr_style = tdr_style
+        self.cms_lumi = cms_lumi
+        self.cms_lumi_number = cms_lumi_number
+        self.ratio_range = ratio_range
