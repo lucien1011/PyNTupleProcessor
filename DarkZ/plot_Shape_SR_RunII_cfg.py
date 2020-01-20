@@ -36,6 +36,13 @@ if includeSignalSample: componentList += sigSamples
 
 plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
 
+for p in plots:
+    p.plotSetting.tdr_style = True
+    p.plotSetting.cms_lumi = True
+    if p.key.startswith("mZ1"): p.plotSetting.x_axis_title = "m_{Z1}"
+    if p.key.startswith("mZ2"): p.plotSetting.x_axis_title = "m_{Z2}"
+    if p.key.startswith("m4l"): p.plotSetting.x_axis_title = "m_{4\ell}"
+
 sigSamples = []
 mergeSigSampleDict = {}
 if includeSignalSample:
@@ -106,4 +113,4 @@ endSequence = EndSequence(
         skipComponentHadd=True,
         )
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+end_out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
