@@ -96,6 +96,7 @@ class PlotSetting(object):
             tdr_style=False,
             cms_lumi=False,
             cms_lumi_number=4,
+            ratio_range=[],
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -121,3 +122,4 @@ class PlotSetting(object):
         self.tdr_style = tdr_style
         self.cms_lumi = cms_lumi
         self.cms_lumi_number = cms_lumi_number
+        self.ratio_range = ratio_range

@@ -346,6 +346,10 @@ class PlotEndModule(EndModule):
             bkdgErrRatio.SetFillColor(1)
             bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
 
+            if plot.plotSetting.ratio_range:
+                ratio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+                bkdgErrRatio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+
             ratio.DrawCopy()
             bkdgErrRatio.DrawCopy("samee2")
             line.Draw()
