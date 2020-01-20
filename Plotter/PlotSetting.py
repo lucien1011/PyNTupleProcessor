@@ -93,6 +93,9 @@ class PlotSetting(object):
             bin_width_label="",
             leg_pos=[],
             minimum=None,
+            tdr_style=False,
+            cms_lumi=False,
+            cms_lumi_number=4,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -115,3 +118,6 @@ class PlotSetting(object):
         self.bin_width_label = bin_width_label
         self.leg_pos = leg_pos
         self.minimum = minimum
+        self.tdr_style = tdr_style
+        self.cms_lumi = cms_lumi
+        self.cms_lumi_number = cms_lumi_number
