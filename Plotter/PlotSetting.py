@@ -93,6 +93,10 @@ class PlotSetting(object):
             bin_width_label="",
             leg_pos=[],
             minimum=None,
+            marker_size=0.5,
+            marker_style=5,
+            marker_style_dict={},
+            scatter_density=1.0,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -115,3 +119,7 @@ class PlotSetting(object):
         self.bin_width_label = bin_width_label
         self.leg_pos = leg_pos
         self.minimum = minimum
+        self.marker_size = marker_size
+        self.marker_style = marker_style
+        self.marker_style_dict = marker_style_dict
+        self.scatter_density = scatter_density

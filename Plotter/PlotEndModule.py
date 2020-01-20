@@ -437,16 +437,23 @@ class PlotEndModule(EndModule):
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)
             hist.SetMarkerColor(sampleColorDict[sample])
-            hist.SetMarkerStyle(isample)
+            if sample in plot.plotSetting.marker_style_dict:
+                markerStyle = plot.plotSetting.marker_style_dict[sample]
+            elif plot.plotSetting.marker_style:
+                markerStyle = plot.plotSetting.marker_style
+            else:
+                markerStyle = isample
+            hist.SetMarkerStyle(markerStyle)
+            hist.SetMarkerSize(plot.plotSetting.marker_size)
             if plot.plotSetting.minimum != None and type(plot.plotSetting.minimum) == float: hist.SetMinimum(plot.plotSetting.minimum)
             tmpSampleObj.hist = hist
             sampleList.append(tmpSampleObj)
             if plot.plotSetting.x_axis_title: hist.GetXaxis().SetTitle(plot.plotSetting.x_axis_title)
             if plot.plotSetting.y_axis_title: hist.GetYaxis().SetTitle(plot.plotSetting.y_axis_title)
             if not isample:
-                hist.Draw("SCATp")
+                hist.Draw("SCAT=%s p"%plot.plotSetting.scatter_density)
             else:
-                hist.Draw("SCATpsame")
+                hist.Draw("SCAT=%s psame"%plot.plotSetting.scatter_density)
             #c.SaveAs(outputDir+sample+"_"+plot.key+".png")
             #c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
         leg = self.makeSimpleLegend(sampleList,plot)
