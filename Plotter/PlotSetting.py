@@ -92,10 +92,13 @@ class PlotSetting(object):
             line_color_dict={},
             bin_width_label="",
             leg_pos=[],
+            leg_text_size=0.03,
             minimum=None,
             marker_size=0.5,
             marker_style=5,
             marker_style_dict={},
+            marker_color_dict={},
+            marker_size_dict={},
             scatter_density=1.0,
             tdr_style=False,
             cms_lumi=False,
@@ -126,8 +129,11 @@ class PlotSetting(object):
         self.marker_size = marker_size
         self.marker_style = marker_style
         self.marker_style_dict = marker_style_dict
+        self.marker_color_dict = marker_color_dict
+        self.marker_size_dict = marker_size_dict
         self.scatter_density = scatter_density
         self.tdr_style = tdr_style
         self.cms_lumi = cms_lumi
         self.cms_lumi_number = cms_lumi_number
         self.ratio_range = ratio_range
+        self.leg_text_size = leg_text_size

@@ -170,7 +170,7 @@ class PlotEndModule(EndModule):
         leg = ROOT.TLegend(*legPos)
         leg.SetBorderSize(0)
         leg.SetFillColor(0)
-        leg.SetTextSize(0.015)
+        leg.SetTextSize(plot.plotSetting.leg_text_size)
         for sample in sampleList:
             leg.AddEntry(sample.hist, sample.name, "p")
         return leg
@@ -450,7 +450,7 @@ class PlotEndModule(EndModule):
             tmpSampleObj = BaseObject(sample)
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)
-            hist.SetMarkerColor(sampleColorDict[sample])
+            hist.SetMarkerColor(sampleColorDict[sample] if sample not in plot.plotSetting.marker_color_dict else plot.plotSetting.marker_color_dict[sample])
             if sample in plot.plotSetting.marker_style_dict:
                 markerStyle = plot.plotSetting.marker_style_dict[sample]
             elif plot.plotSetting.marker_style:
@@ -458,7 +458,7 @@ class PlotEndModule(EndModule):
             else:
                 markerStyle = isample
             hist.SetMarkerStyle(markerStyle)
-            hist.SetMarkerSize(plot.plotSetting.marker_size)
+            hist.SetMarkerSize(plot.plotSetting.marker_size if sample not in plot.plotSetting.marker_size_dict else plot.plotSetting.marker_size_dict[sample])
             if plot.plotSetting.minimum != None and type(plot.plotSetting.minimum) == float: hist.SetMinimum(plot.plotSetting.minimum)
             tmpSampleObj.hist = hist
             sampleList.append(tmpSampleObj)
@@ -472,6 +472,9 @@ class PlotEndModule(EndModule):
             #c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
         leg = self.makeSimpleLegend(sampleList,plot)
         leg.Draw("samep")
+        if plot.plotSetting.cms_lumi:
+            #CMS_lumi(c,plot.plotSetting.cms_lumi_number,11,lumiTextSize=0.35,cmsTextSize=0.35,)
+            CMS_lumi(c,plot.plotSetting.cms_lumi_number,11,)
         c.SaveAs(os.path.join(outputDir,plot.key+".png"))
         c.SaveAs(os.path.join(outputDir,plot.key+".pdf"))
 
