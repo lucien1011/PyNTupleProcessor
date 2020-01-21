@@ -92,6 +92,7 @@ class PlotSetting(object):
             line_color_dict={},
             bin_width_label="",
             leg_pos=[],
+            leg_column=None,
             leg_text_size=0.03,
             minimum=None,
             marker_size=0.5,
@@ -125,6 +126,7 @@ class PlotSetting(object):
         self.line_color_dict = line_color_dict
         self.bin_width_label = bin_width_label
         self.leg_pos = leg_pos
+        self.leg_column = leg_column
         self.minimum = minimum
         self.marker_size = marker_size
         self.marker_style = marker_style

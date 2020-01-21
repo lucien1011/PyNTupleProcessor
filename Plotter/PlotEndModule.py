@@ -170,6 +170,8 @@ class PlotEndModule(EndModule):
         leg = ROOT.TLegend(*legPos)
         leg.SetBorderSize(0)
         leg.SetFillColor(0)
+        if plot.plotSetting.leg_column:
+            leg.SetNColumns(plot.plotSetting.leg_column)
         leg.SetTextSize(plot.plotSetting.leg_text_size)
         for sample in sampleList:
             leg.AddEntry(sample.hist, sample.name, "p")
