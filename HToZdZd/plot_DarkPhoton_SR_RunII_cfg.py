@@ -69,6 +69,7 @@ for p in plots:
         p.selectedSamples = ["Higgs","qqZZ","ggZZ","Data",]
         p.plotSetting.cms_lumi = True
         p.plotSetting.tdr_style = True
+        p.plotSetting.SetNColumns = 4
 
 plotter                 = Plotter("Plotter",plots)
 
@@ -79,6 +80,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=True,haddDataSamples=True,)
+endSequence = EndSequence(skipHadd=justEndSequence,haddDataSamples=True,)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
