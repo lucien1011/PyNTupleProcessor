@@ -13,3 +13,7 @@ class ElectronProducer(Module):
         electrons = Collection(event,"Electron")
         event.selElectrons = [el for el in electrons if self.idSelection(el) and self.isoSelection(el)]
         return True
+
+    def end(self):
+        self.idSelection.end()
+        self.isoSelection.end()

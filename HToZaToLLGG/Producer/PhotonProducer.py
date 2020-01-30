@@ -11,5 +11,9 @@ class PhotonProducer(Module):
 
     def analyze(self,event):
         photons = Collection(event,"Photon")
-        event.selPhotons = [ph for ph in photons if sphf.idSphection(ph) and sphf.isoSphection(ph)]
+        event.selPhotons = [ph for ph in photons if self.idSelection(ph) and self.isoSelection(ph)]
         return True
+
+    def end(self):
+        self.idSelection.end()
+        self.isoSelection.end()

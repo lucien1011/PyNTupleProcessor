@@ -16,13 +16,13 @@ from HToZaToLLGG.Producer.PhotonProducer import PhotonProducer
 xsWeighter              = XSWeighter("XSWeighter")
 elProducer              = ElectronProducer(
         "ElectronProducer",
-        LambdaFunc("x: x.cutBased[0] == 3"),
-        LambdaFunc("x: x.pfRelIso03_all[0] < 0.35"),
+        LambdaFunc("x: x.cutBased == 3"),
+        LambdaFunc("x: x.pfRelIso03_all < 0.35"),
         )
 phoProducer             = PhotonProducer(
         "PhotonProducer",
-        LambdaFunc("x: x.cutBasedBitmap[0] == 1"),
-        LambdaFunc("x: x.pfRelIso03_all[0] < 0.35"),
+        LambdaFunc("x: x.cutBasedBitmap == 1"),
+        LambdaFunc("x: x.pfRelIso03_all < 0.35"),
         )
 srSkimmer               = SRSkimmer(
         "SRSkimmer",
