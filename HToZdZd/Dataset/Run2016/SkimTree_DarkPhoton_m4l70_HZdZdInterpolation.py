@@ -13,7 +13,7 @@ sigTreeDir              = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/80X_M
 inUFTier2               = False
 sumWeightHist           = "Ana/sumWeights"
 kappa                   = 0.0001
-saveSumWeightTxt        = False 
+saveSumWeightTxt        = False
 fileNameTemplate        = "HToZdZdTo4L_M125_MZd%s_eps2e-2_kap1e-4_TuneCP5_13TeV_madgraph_pythia8.root"
 datasetName             = "HToZdZd_M%s"
 skimTreePath            = "passedEvents"
@@ -22,7 +22,7 @@ mass_points             = [4,5,6,7,8,9,10,15,20,25,30,35,40,45,50,55,60,]
 # ____________________________________________________________________________________________________________________________________________ ||
 sigSampleDict = {}
 for m in mass_points:
-    inputFilePath = os.path.join(sigSkimTreeDir,fileNameTemplate%m) if m not in [4,] else os.path.join(sigSkimTreeDir2,fileNameTemplate%m)
+    inputFilePath = os.path.join(sigSkimTreeDir,fileNameTemplate%m) if m not in [4,5,] else os.path.join(sigSkimTreeDir2,fileNameTemplate%m)
     tmpDataset = Dataset(
             datasetName%m,
             ComponentList(
@@ -39,6 +39,7 @@ for m in mass_points:
             sumWeightHist,
             True,
             saveSumWeightTxt,
+            inputFilePath.replace(".root",".txt"),
             inputFilePath.replace(".root",".txt"),
             )
     sigSampleDict[m] = tmpDataset

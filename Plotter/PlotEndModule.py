@@ -1,10 +1,13 @@
-from Core.EndModule import EndModule
-
 import os,ROOT,math
 
+from Core.EndModule import EndModule
+from Core.BaseObject import BaseObject
+from Core.Utils.printFunc import pyPrint
+
+from Utils.tdrstyle import setTDRStyle
+from Utils.CMS_lumi import CMS_lumi
 from SampleColor import sampleColorDict
 
-from Core.Utils.printFunc import pyPrint
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
@@ -24,6 +27,12 @@ class PlotEndModule(EndModule):
             self.drawPlot(collector,plot,self.outputDir,self.switch)
 
     def drawPlot(self,collector,plot,outputDir,switch):
+        if plot.plotSetting.tdr_style:
+            setTDRStyle()
+            ROOT.gStyle.SetLabelSize(0.018,"XYZ")
+            #ROOT.gStyle.SetLabelOffset(0.003, "XYZ")
+            ROOT.gStyle.SetTitleSize(0.035,"XYZ")
+            #ROOT.gStyle.SetTitleXOffset(1.8)
         self.makedirs(outputDir)
         if plot.dim == 1:
             self.draw1DPlot(collector,plot,outputDir,switch)
@@ -155,9 +164,20 @@ class PlotEndModule(EndModule):
                 self.divideByBinWidth(hist)
 
         return histList
+    
+    def makeSimpleLegend(self,sampleList,plot):
+        legPos = [0.70,0.65,0.89,0.87] if not plot.plotSetting.leg_pos else plot.plotSetting.leg_pos
+        leg = ROOT.TLegend(*legPos)
+        leg.SetBorderSize(0)
+        leg.SetFillColor(0)
+        if plot.plotSetting.leg_column:
+            leg.SetNColumns(plot.plotSetting.leg_column)
+        leg.SetTextSize(plot.plotSetting.leg_text_size)
+        for sample in sampleList:
+            leg.AddEntry(sample.hist, sample.name, "p")
+        return leg
 
-
-    def makeLegend(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None):
+    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None):
         leg = ROOT.TLegend(0.70,0.65,0.89,0.87)
         leg.SetBorderSize(0)
         leg.SetFillColor(0)
@@ -252,7 +272,7 @@ class PlotEndModule(EndModule):
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
 
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
+            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
 
             if plot.plotSetting.log_x:
                 c.SetLogx(1)
@@ -297,6 +317,7 @@ class PlotEndModule(EndModule):
             ## TPad("name","title",xlow,ylow,xup,yup)
             upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
             lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .32)
+
             upperPad.Draw()
             lowerPad.Draw()
 
@@ -327,13 +348,17 @@ class PlotEndModule(EndModule):
             bkdgErrRatio.SetFillColor(1)
             bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
 
+            if plot.plotSetting.ratio_range:
+                ratio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+                bkdgErrRatio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+
             ratio.DrawCopy()
             bkdgErrRatio.DrawCopy("samee2")
             line.Draw()
 
             upperPad.cd()
 
-            leg = self.makeLegend(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
+            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
 
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
@@ -341,7 +366,6 @@ class PlotEndModule(EndModule):
 
             stack.Draw('hist')
             stack.GetXaxis().SetTitleOffset(0.55)
-            self.setStackAxisTitle(stack,axisLabel,plot)
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
@@ -362,6 +386,8 @@ class PlotEndModule(EndModule):
             n1.SetTextSize(0.05);
             if not self.skipSF:
                 n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+            if plot.plotSetting.cms_lumi:
+                CMS_lumi(upperPad,plot.plotSetting.cms_lumi_number,11)
 
             dataHist.DrawCopy('samep')
             bkdgErr.Draw("samee2")
@@ -391,7 +417,7 @@ class PlotEndModule(EndModule):
 
             sigHistList = self.makeSignalHist(collector,plot)
             
-            leg = self.makeLegend([],None,0.,False,histListSignal=sigHistList)
+            leg = self.makeLegend1D([],None,0.,False,histListSignal=sigHistList)
             
             c.SetLogy(0)
             #sigHistList looks like: histList.append([h,sample,sigCount])
@@ -421,12 +447,39 @@ class PlotEndModule(EndModule):
 
     def draw2DPlot(self,collector,plot,outputDir):
         c = ROOT.TCanvas("c_"+plot.key, "c_"+plot.key,0,0, 650, 650)
-        for isample,sample in enumerate(collector.samples+collector.mergeSamples):
+        sampleList = []
+        for isample,sample in enumerate(collector.mergeSamples if not plot.selectedSamples else plot.selectedSamples):
+            tmpSampleObj = BaseObject(sample)
             hist = collector.getObj(sample,plot.rootSetting[1])
             hist.SetStats(0)
-            hist.Draw("colz")
-            c.SaveAs(outputDir+sample+"_"+plot.key+".png")
-            c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
+            hist.SetMarkerColor(sampleColorDict[sample] if sample not in plot.plotSetting.marker_color_dict else plot.plotSetting.marker_color_dict[sample])
+            if sample in plot.plotSetting.marker_style_dict:
+                markerStyle = plot.plotSetting.marker_style_dict[sample]
+            elif plot.plotSetting.marker_style:
+                markerStyle = plot.plotSetting.marker_style
+            else:
+                markerStyle = isample
+            hist.SetMarkerStyle(markerStyle)
+            hist.SetMarkerSize(plot.plotSetting.marker_size if sample not in plot.plotSetting.marker_size_dict else plot.plotSetting.marker_size_dict[sample])
+            if plot.plotSetting.minimum != None and type(plot.plotSetting.minimum) == float: hist.SetMinimum(plot.plotSetting.minimum)
+            tmpSampleObj.hist = hist
+            sampleList.append(tmpSampleObj)
+            if plot.plotSetting.x_axis_title: hist.GetXaxis().SetTitle(plot.plotSetting.x_axis_title)
+            if plot.plotSetting.y_axis_title: hist.GetYaxis().SetTitle(plot.plotSetting.y_axis_title)
+            if not isample:
+                hist.Draw("SCAT=%s p"%plot.plotSetting.scatter_density)
+            else:
+                hist.Draw("SCAT=%s psame"%plot.plotSetting.scatter_density)
+            #c.SaveAs(outputDir+sample+"_"+plot.key+".png")
+            #c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
+        leg = self.makeSimpleLegend(sampleList,plot)
+        leg.Draw("samep")
+        if plot.plotSetting.cms_lumi:
+            #CMS_lumi(c,plot.plotSetting.cms_lumi_number,11,lumiTextSize=0.35,cmsTextSize=0.35,)
+            CMS_lumi(c,plot.plotSetting.cms_lumi_number,11,)
+        c.SaveAs(os.path.join(outputDir,plot.key+".png"))
+        c.SaveAs(os.path.join(outputDir,plot.key+".pdf"))
+
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
         stack.GetXaxis().SetTitle(axisLabel)

@@ -76,6 +76,7 @@ class PlotSetting(object):
     def __init__(self,
             divideByBinWidth=False,
             x_axis_title=None,x_axis_labels=None,
+            y_axis_title=None,y_axis_labels=None,
             defaultLabelDict=labelDict,
             sf_x_pos=0.11,
             sf_y_pos=0.92,
@@ -90,11 +91,27 @@ class PlotSetting(object):
             line_width_dict={},
             line_color_dict={},
             bin_width_label="",
+            leg_pos=[],
+            leg_column=None,
+            leg_text_size=0.03,
+            minimum=None,
+            marker_size=0.5,
+            marker_style=5,
+            marker_style_dict={},
+            marker_color_dict={},
+            marker_size_dict={},
+            scatter_density=1.0,
+            tdr_style=False,
+            cms_lumi=False,
+            cms_lumi_number=4,
+            ratio_range=[],
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
+        self.y_axis_title = y_axis_title
         self.defaultLabelDict = defaultLabelDict
         self.x_axis_labels = x_axis_labels
+        self.y_axis_labels = y_axis_labels
         self.sf_x_pos = sf_x_pos
         self.sf_y_pos = sf_y_pos
         self.sf_text_font = sf_text_font
@@ -108,3 +125,17 @@ class PlotSetting(object):
         self.line_width_dict = line_width_dict
         self.line_color_dict = line_color_dict
         self.bin_width_label = bin_width_label
+        self.leg_pos = leg_pos
+        self.leg_column = leg_column
+        self.minimum = minimum
+        self.marker_size = marker_size
+        self.marker_style = marker_style
+        self.marker_style_dict = marker_style_dict
+        self.marker_color_dict = marker_color_dict
+        self.marker_size_dict = marker_size_dict
+        self.scatter_density = scatter_density
+        self.tdr_style = tdr_style
+        self.cms_lumi = cms_lumi
+        self.cms_lumi_number = cms_lumi_number
+        self.ratio_range = ratio_range
+        self.leg_text_size = leg_text_size

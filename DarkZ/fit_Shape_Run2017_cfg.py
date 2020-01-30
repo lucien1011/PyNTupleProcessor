@@ -72,9 +72,14 @@ for bin in binList:
     outputHist.Write()
     func.Write()
     if drawFit:
+        inputHist.GetYaxis().SetRangeUser(0.,inputHist.GetMaximum()*1.5)
+        inputHist.Draw()
+        func.Draw("same")
+        outputHist.SetStats(0)
+        c.SaveAs(os.path.join(outputDir,"fit_"+bin.name+".pdf"))
         outputHist.SetStats(0)
         outputHist.Draw()
-        c.SaveAs(os.path.join(outputDir,"fit_"+bin.name+".pdf"))
+        c.SaveAs(os.path.join(outputDir,"outshape_"+bin.name+".pdf"))
 inputFile.Close()
 
 # _____________________________________________________________________________ ||

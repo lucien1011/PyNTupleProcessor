@@ -42,6 +42,7 @@ for p in plots:
     if p.key.startswith("mZ1"): p.plotSetting.x_axis_title = "m_{Z1}"
     if p.key.startswith("mZ2"): p.plotSetting.x_axis_title = "m_{Z2}"
     if p.key.startswith("m4l"): p.plotSetting.x_axis_title = "m_{4\ell}"
+    if p.key == "mZ2_mid-m4l_4mu": p.plotSetting.ratio_range = [0.,6.]
 
 sigSamples = []
 mergeSigSampleDict = {}
