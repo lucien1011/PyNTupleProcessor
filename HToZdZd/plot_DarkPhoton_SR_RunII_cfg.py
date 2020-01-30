@@ -14,7 +14,7 @@ from Plotter.Plot import Plot
 from HToZdZd.Config.MergeSampleDict_RunII import *
 from HToZdZd.Config.AnalysisNotePlot import *
 
-import os
+import os,ROOT
 
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII_MC_RatioCut0p05/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-19_RunII_MC_RatioCut0p05/"
@@ -45,19 +45,31 @@ for dataset in componentList:
 
 for p in plots:
     if p.dim == 2: 
-        p.plotSetting.leg_pos = [0.14,0.65,0.34,0.87]
+        p.plotSetting.leg_pos = [0.39,0.70,0.59,0.92]
         p.plotSetting.x_axis_title = "m_{Z1}"
         p.plotSetting.y_axis_title = "m_{Z2}"
         p.plotSetting.minimum = 0.
-        p.plotSetting.marker_size = 0.25
+        p.plotSetting.marker_size = 0.7
         p.plotSetting.marker_style_dict = {
                 "Higgs": 21,
                 "qqZZ": 22,
                 "ggZZ": 23,
-                "Data": 20,
+                "Data": 34,
+                }
+        p.plotSetting.marker_color_dict = {
+                "qqZZ": ROOT.kOrange,
+                "ggZZ": ROOT.kGreen,
+                "Data": ROOT.kBlack
+                }
+        p.plotSetting.marker_size_dict = {
+                "ggZZ": 0.4,
+                "Data": 1.0,
                 }
         p.plotSetting.scatter_density = "1.0"
-        p.selectedSamples = ["Higgs","qqZZ","ZPlusX",]
+        p.selectedSamples = ["Higgs","qqZZ","ggZZ","Data",]
+        p.plotSetting.cms_lumi = True
+        p.plotSetting.tdr_style = True
+        p.plotSetting.SetNColumns = 4
 
 plotter                 = Plotter("Plotter",plots)
 
@@ -68,6 +80,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=True)
+endSequence = EndSequence(skipHadd=justEndSequence,haddDataSamples=True,)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
