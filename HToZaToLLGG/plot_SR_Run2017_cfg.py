@@ -5,6 +5,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
 from HToZaToLLGG.Dataset.Run2017.Bkg_NanoAODv1 import * 
+from HToZaToLLGG.Dataset.Run2017.ALP_PrivateSample import * 
 from HToZaToLLGG.Sequence.RecoSequence import * 
 from HToZaToLLGG.Config.KinematicPlot import *
 
@@ -14,13 +15,14 @@ from Plotter.PlotEndModule import PlotEndModule
 import ROOT,os
 
 User                    = os.environ['USER']
-out_path                = "SignalRegion/2020-01-30_Run2017/"
+#out_path                = "SignalRegion/2020-01-30_Run2017/"
+out_path                = "SignalRegion/2020-02-03_Run2017/"
 lumi                    = 41.4
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/HToZaToLLGG/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [ZGGToLLGG,]
+componentList           = [ZGGToLLGG,ALP_HToZa_M1]
 justEndSequence         = False
 
 plots = electron_plots + photon_plots 
