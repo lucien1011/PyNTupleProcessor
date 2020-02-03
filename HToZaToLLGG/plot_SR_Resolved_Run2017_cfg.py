@@ -22,7 +22,7 @@ nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/HToZaToLLGG/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [ZGGToLLGG,ALP_HToZa_M1]
+componentList           = [ZGGToLLGG,ALP_HToZa_M15,ALP_HToZa_M30,]
 justEndSequence         = False
 
 plots = electron_plots + photon_plots 
