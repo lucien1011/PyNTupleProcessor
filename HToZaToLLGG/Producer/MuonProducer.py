@@ -3,16 +3,16 @@ import ROOT
 from Core.Module import Module
 from Core.Collection import Collection
 
-class ElectronProducer(Module):
+class MuonProducer(Module):
     def __init__(self,name,idSelection,isoSelection,otherSelection):
-        super(ElectronProducer,self).__init__(name)
+        super(MuonProducer,self).__init__(name)
         self.idSelection = idSelection
         self.isoSelection = isoSelection
         self.otherSelection = otherSelection
 
     def analyze(self,event):
-        electrons = Collection(event,"Electron")
-        event.selElectrons = [el for el in electrons if self.idSelection(el) and self.isoSelection(el) and self.otherSelection(el)]
+        muons = Collection(event,"Muon")
+        event.selMuons = [mu for mu in muons if self.idSelection(mu) and self.isoSelection(mu) and self.otherSelection(mu)]
         return True
 
     def end(self):

@@ -22,14 +22,10 @@ nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/HToZaToLLGG/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [ZGGToLLGG,ALP_HToZa_M15,ALP_HToZa_M30,]
-justEndSequence         = False 
+componentList           = [ZGGToLLGG,ALP_HToZa_M1,ALP_HToZa_M5,]
+justEndSequence         = False
 
-plots = lepton_plots + photon_plots + general_plots
-
-for p in plots:
-    p.plotSetting.line_color_dict[ALP_HToZa_M15.name] = ROOT.kRed
-    p.plotSetting.line_color_dict[ALP_HToZa_M30.name] = ROOT.kBlue
+plots = electron_plots + photon_plots 
 
 #for plot in plots:
 #    plot.plotSetting.divideByBinWidth = True
@@ -42,7 +38,7 @@ for dataset in componentList:
 
 plotter                 = Plotter("Plotter",plots)
 
-sequence                = sr_resolved_sequence 
+sequence                = sr_merged_sequence 
 sequence.add(plotter)
 
 outputInfo              = OutputInfo("OutputInfo")
