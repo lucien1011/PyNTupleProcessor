@@ -35,7 +35,8 @@ phoProducer             = PhotonProducer(
         LambdaFunc("x: x.mvaID_WP90"),
         #LambdaFunc("x: x.pfRelIso03_all < 0.35"),
         LambdaFunc("x: True"),
-        LambdaFunc("x: x.pt > 0. and abs(x.eta) < 2.5 and x.electronIdx == -1"),
+        LambdaFunc("x: x.pt > 0. and abs(x.eta) < 2.5"),
+        LambdaFunc("ev,x: all([x.electronIdx != e.getIndex() for e in ev.selElectrons])"),
         #LambdaFunc("x: x.cutBasedBitmap == 1"),
         #LambdaFunc("x: x.pfRelIso03_all < 0.35"),
         )

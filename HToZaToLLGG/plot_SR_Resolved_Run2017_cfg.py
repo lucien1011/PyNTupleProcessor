@@ -16,14 +16,15 @@ import ROOT,os
 
 User                    = os.environ['USER']
 #out_path                = "SignalRegion/2020-01-30_Run2017/"
-out_path                = "SignalRegion/2020-02-03_Run2017/"
+#out_path                = "SignalRegion/2020-02-03_Run2017/"
+out_path                = "SignalRegion/2020-02-04_Run2017/"
 lumi                    = 41.4
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/HToZaToLLGG/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [ZGGToLLGG,ALP_HToZa_M15,ALP_HToZa_M30,]
-justEndSequence         = False 
+justEndSequence         = False
 
 plots = lepton_plots + photon_plots + general_plots
 
