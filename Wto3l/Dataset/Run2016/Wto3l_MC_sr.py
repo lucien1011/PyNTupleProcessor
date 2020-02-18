@@ -8,9 +8,10 @@ from Utils.SumWeight import handleSumWeight
 #bkgTreeDir      = "/raid/raid7/kshi/Zprime/20190718/SkimTree_Run2016_MC/"
 sigTreeDirT2    = "/cms/data/store/user/t2/users/mhl/rootfiles_2017/"
 sigTreeDir      = "/raid/raid7/kshi/Zprime/20190827/SkimTree_Run2016_MMM_MC/"
+sigTreeDir_new_unskim = "/home/kshi/Zprime/Zp_data_Ntuple/"
 sigTreeDir_new  = "/home/kshi/Zprime/Zp_data_Ntuple/Ntuple_LiteAna/"
 inUFTier2       = False
-saveSumWeightTxt= True
+saveSumWeightTxt= False
 sumWeightHist   = "Ana/sumWeights"
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -114,12 +115,12 @@ WmTo3munu_ZpM20 = Dataset(
         WmTo3munu_ZpM20_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.2425901, 
         )
 handleSumWeight(
         WmTo3munu_ZpM20,
         system,
-        sigTreeDir_new+"WmTo3l_ZpM20.root",
+        sigTreeDir_new_unskim+"WmTo3l_ZpM20.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
@@ -136,12 +137,12 @@ WmTo3munu_ZpM30 = Dataset(
         WmTo3munu_ZpM30_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.07259808, 
         )
 handleSumWeight(
         WmTo3munu_ZpM30,
         system,
-        sigTreeDir_new+"WmTo3l_ZpM30.root",
+        sigTreeDir_new_unskim+"WmTo3l_ZpM30.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
@@ -158,12 +159,12 @@ WmTo3munu_ZpM45 = Dataset(
         WmTo3munu_ZpM45_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.00989203, 
         )
 handleSumWeight(
         WmTo3munu_ZpM45,
         system,
-        sigTreeDir_new+"WmTo3l_ZpM45.root",
+        sigTreeDir_new_unskim+"WmTo3l_ZpM45.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
@@ -180,12 +181,12 @@ WmTo3munu_ZpM60 = Dataset(
         WmTo3munu_ZpM60_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.0008656826, 
         )
 handleSumWeight(
         WmTo3munu_ZpM60,
         system,
-        sigTreeDir_new+"WmTo3l_ZpM60.root",
+        sigTreeDir_new_unskim+"WmTo3l_ZpM60.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
@@ -202,12 +203,12 @@ WpTo3munu_ZpM20 = Dataset(
         WpTo3munu_ZpM20_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.3004604, 
         )
 handleSumWeight(
         WpTo3munu_ZpM20,
         system,
-        sigTreeDir_new+"WpTo3l_ZpM20.root",
+        sigTreeDir_new_unskim+"WpTo3l_ZpM20.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
@@ -224,12 +225,12 @@ WpTo3munu_ZpM30 = Dataset(
         WpTo3munu_ZpM30_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.08894534, 
         )
 handleSumWeight(
         WpTo3munu_ZpM30,
         system,
-        sigTreeDir_new+"WpTo3l_ZpM30.root",
+        sigTreeDir_new_unskim+"WpTo3l_ZpM30.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
@@ -246,12 +247,12 @@ WpTo3munu_ZpM45 = Dataset(
         WpTo3munu_ZpM45_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.012078543, 
         )
 handleSumWeight(
         WpTo3munu_ZpM45,
         system,
-        sigTreeDir_new+"WpTo3l_ZpM45.root",
+        sigTreeDir_new_unskim+"WpTo3l_ZpM45.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
@@ -268,24 +269,74 @@ WpTo3munu_ZpM60 = Dataset(
         WpTo3munu_ZpM60_cmpList,
         isMC = True,
         isSignal = True,
-        xs = 1, 
+        xs = 0.0011469974, 
         )
 handleSumWeight(
         WpTo3munu_ZpM60,
         system,
-        sigTreeDir_new+"WpTo3l_ZpM60.root",
+        sigTreeDir_new_unskim+"WpTo3l_ZpM60.root",
         sumWeightHist,
         False,
         saveSumWeightTxt,
         sigTreeDir_new+"WpTo3l_ZpM60.txt",
         )
 
+WmTo3munu_ZpM15_30_60_cmpList = ComponentList(
+        [
+            Component("WmTo3munu_ZpM15_30_60",sigTreeDir_new+"WmTo3l_ZpM15_30_60.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+WmTo3munu_ZpM15_30_60 = Dataset(
+        "WmTo3munu_ZpM15_30_60",
+        WmTo3munu_ZpM15_30_60_cmpList,
+        isMC = True,
+        isSignal = True,
+        xs = 0.5238650626, 
+        )
+handleSumWeight(
+        WmTo3munu_ZpM15_30_60,
+        system,
+        sigTreeDir_new_unskim+"WmTo3l_ZpM15_30_60.root",
+        sumWeightHist,
+        False,
+        saveSumWeightTxt,
+        sigTreeDir_new+"WmTo3l_ZpM15_30_60.txt",
+        )
+
+WpTo3munu_ZpM15_30_60_cmpList = ComponentList(
+        [
+            Component("WpTo3munu_ZpM15_30_60",sigTreeDir_new+"WpTo3l_ZpM15_30_60.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+WpTo3munu_ZpM15_30_60 = Dataset(
+        "WpTo3munu_ZpM15_30_60",
+        WpTo3munu_ZpM15_30_60_cmpList,
+        isMC = True,
+        isSignal = True,
+        xs = 0.6550564374, 
+        )
+handleSumWeight(
+        WpTo3munu_ZpM15_30_60,
+        system,
+        sigTreeDir_new_unskim+"WpTo3l_ZpM15_30_60.root",
+        sumWeightHist,
+        False,
+        saveSumWeightTxt,
+        sigTreeDir_new+"WpTo3l_ZpM15_30_60.txt",
+        )
+
 
 sigSamples = [
             WpTo3munu_ZpM15,
+            WpTo3munu_ZpM20,
+            WpTo3munu_ZpM30,
             WpTo3munu_ZpM45,
+            WpTo3munu_ZpM60,
             WmTo3munu_ZpM15,
+            WmTo3munu_ZpM20,
+            WmTo3munu_ZpM30,
             WmTo3munu_ZpM45,
+            WmTo3munu_ZpM60,
             ]
 
 WTo3mu_ZpM15 = [

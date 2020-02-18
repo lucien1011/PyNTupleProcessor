@@ -4,9 +4,12 @@ from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
 bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2017Data_m4l70/"
-bkgSkimTreeDir2     = bkgSkimTreeDir
+#bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_MC/"
+#bkgSkimTreeDir      = "/raid/raid7/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_MC/"
+#bkgSkimTreeDir2     = bkgSkimTreeDir
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/"
-dataTreeDir         = bkgSkimTreeDir
+#dataTreeDir         = bkgSkimTreeDir
+dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_Data/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 saveSumWeightTxt    = True
@@ -211,3 +214,4 @@ bkgSamples = [
         ggZZTo4mu,
         ggZZTo4tau,
         ]
+

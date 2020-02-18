@@ -64,10 +64,10 @@ general_plots.extend([
     #Plot("Lep3_eta",          ["TH1D","Lep3_eta","",60,-3.,3.],           LambdaFunc('x:x.Lep3.Eta()'),          selFunc=LambdaFunc('x:x.Lep3.Eta()')        ),
     #Plot("3lep_pt",          ["TH1D","3lep_pt","",40,0.,200.],           LambdaFunc('x:x.pT3l[0]'),          selFunc=LambdaFunc('x:x.pT3l[0] > 0')        ),
     #Plot("Lep1+Lep2_pt",     ["TH1D","Lep1+Lep2_pt","",40,0.,200.],      LambdaFunc('x:x.twolpt'),        selFunc=LambdaFunc('x:x.twolpt > 0')      ),
-    #Plot("Mass1",          ["TH1D","Mass1","",80,0.,200.],           LambdaFunc('x:x.mass1'),          selFunc=LambdaFunc('x:x.mass1 > 0')        ),
-    #Plot("Mass2",          ["TH1D","Mass2","",80,0.,200.],           LambdaFunc('x:x.mass2'),          selFunc=LambdaFunc('x:x.mass2 > 0')        ),
-     #Plot("Transverse_Mass",          ["TH1D","Transverse_Mass","",100,0.,500.],           LambdaFunc('x:x.mt'),          selFunc=LambdaFunc('x:x.mt')        ),
-     #Plot("Mass1vsMass2",   ["TH2D","Mass1_vs_Mass2","",80,0.,200.,80,0.,200.],   LambdaFunc('x:[x.mass1,x.mass2]'),   dim = 2 ),
+     Plot("Mass1",          ["TH1D","Mass1","",80,0.,200.],           LambdaFunc('x:x.mass1'),          selFunc=LambdaFunc('x:x.mass1 > 0')        ),
+     Plot("Mass2",          ["TH1D","Mass2","",80,0.,200.],           LambdaFunc('x:x.mass2'),          selFunc=LambdaFunc('x:x.mass2 > 0')        ),
+     Plot("Transverse_Mass",          ["TH1D","Transverse_Mass","",100,0.,500.],           LambdaFunc('x:x.mt'),          selFunc=LambdaFunc('x:x.mt')        ),
+     Plot("Mass1vsMass2",   ["TH2D","Mass1_vs_Mass2","",80,0.,200.,80,0.,200.],   LambdaFunc('x:[x.mass1,x.mass2]'),   dim = 2 ),
 
 
         #Plot("Z2_mass_vs_DeltaR34_"+eachCR,["TH2D","Z2_mass_vs_DeltaR34_"+eachCR,"",]+mZ2PlotRange+deltaRPlotRange2,LambdaFunc('x: [x.massZ2[0],x.deltaRL34]'),selFunc=LambdaFunc(region_sel_str_whole),dim=2),

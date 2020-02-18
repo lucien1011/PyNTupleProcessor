@@ -18,16 +18,17 @@ User                    = os.environ['USER']
 #out_path                = "MVA/Input/2019-10-28_Run2016_Wmto3lZpM15-ZpdR-Zpeta-ZppT-leadingLep-ZpthirdLepdR-3LepthirdLepdR/Sig/"
 #out_path                = "MVA/Input/2019-10-28_Run2016_Wmto3lZpM15-ZpdR-leadingLep/Bkg/"
 #out_path                = "MVA/Input/2019-11-25_Run2016_DYJetsToLL_M50-ZpdR-Zpeta-ZppT-leadingLep-ZpthirdLepdR-3LepthirdLepdR/Mass2/"
-out_path                = "MVA/Input/2019-11-25_Run2016_TTJets-ZpdR-Zpeta-ZppT-leadingLep-ZpthirdLepdR-3LepthirdLepdR/Mass1/"
+#out_path                = "MVA/Input/2019-11-25_Run2016_TTJets-ZpdR-Zpeta-ZppT-leadingLep-ZpthirdLepdR-3LepthirdLepdR/Mass1/"
+out_path                = "MVA/Input/2020-01-28_Run2016_Wpto3lZpM60-ZpdR-Zpeta-ZppT-leadingLep-ZpthirdLepdR-3LepthirdLepdR-Zpmass/Sig/"
 lumi                    = 35.9
 nCores                  = 1
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/Zprime/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + sigSampleDict.values()
-#componentList           = [WmTo3munu_ZpM15] 
+componentList           = [WpTo3munu_ZpM60] 
 #componentList           = [DYJetsToLL_M50]
-componentList           = [TTJets]
+#componentList           = [TTJets]
 justEndSequence         = False
 
 for dataset in componentList:
@@ -39,29 +40,32 @@ for dataset in componentList:
 sequence                = Wto3l_sequence
 
 varsToWrite             = [
-                            #LambdaFunc("x: x.Zp_pt/100."),
+                            LambdaFunc("x: x.Zp_pt/100."),
                             #LambdaFunc("x: x.notZp_pt/100."),
-                            #LambdaFunc("x: x.Zp_eta/3."),
+                            LambdaFunc("x: x.Zp_eta/3."),
                             #LambdaFunc("x: x.notZp_eta/3."),
-                            #LambdaFunc("x: x.Zp_lep_deltaR/4.5"),
+                            LambdaFunc("x: x.Zp_lep_deltaR/4.5"),
                             #LambdaFunc("x: x.notZp_lep_deltaR/4.5"),
-                            #LambdaFunc("x: x.Lep_leading_fromZp.Pt()/80."),
+                            LambdaFunc("x: x.Lep_leading_fromZp.Pt()/80."),
                             #LambdaFunc("x: x.Lep_leading_notZp.Pt()/80."),
-                            #LambdaFunc("x: x.Zp_lepnotfromZp_dR/4.5"),
+                            LambdaFunc("x: x.Zp_lepnotfromZp_dR/4.5"),
                             #LambdaFunc("x: x.notZp_otherlep_dR/4.5"),
-                            #LambdaFunc("x: x.totalLep_thirdLep_Zp_dR/4.5"),
+                            LambdaFunc("x: x.totalLep_thirdLep_Zp_dR/4.5"),
                             #LambdaFunc("x: x.totalLep_thirdLep_notZp_dR/4.5"),
-                            LambdaFunc("x: x.mass1_pt/100."),
+                            LambdaFunc("x: 60./70."),
+                            #LambdaFunc("x: x.Zp_mass_random/70"),
+                           
+                            #LambdaFunc("x: x.mass1_pt/100."),
                             #LambdaFunc("x: x.mass2_pt/100."),
-                            LambdaFunc("x: x.mass1_eta/3."),
+                            #LambdaFunc("x: x.mass1_eta/3."),
                             #LambdaFunc("x: x.mass2_eta/3."),
-                            LambdaFunc("x: x.Z1_lep_deltaR/4.5"),
+                            #LambdaFunc("x: x.Z1_lep_deltaR/4.5"),
                             #LambdaFunc("x: x.Z2_lep_deltaR/4.5"),
-                            LambdaFunc("x: x.Lep_leading_fromM1.Pt()/80."),
+                            #LambdaFunc("x: x.Lep_leading_fromM1.Pt()/80."),
                             #LambdaFunc("x: x.Lep_leading_fromM2.Pt()/80."),
-                            LambdaFunc("x: x.M1_lepnotfromM1_dR/4.5"),
+                            #LambdaFunc("x: x.M1_lepnotfromM1_dR/4.5"),
                             #LambdaFunc("x: x.M2_lepnotfromM2_dR/4.5"),
-                            LambdaFunc("x: x.totalLep_thirdLep_M1_dR/4.5"),
+                            #LambdaFunc("x: x.totalLep_thirdLep_M1_dR/4.5"),
                             #LambdaFunc("x: x.totalLep_thirdLep_M2_dR/4.5"),
                             #LambdaFunc("x: x.pTL1[0]/100."),
                             #LambdaFunc("x: x.pTL2[0]/100."),

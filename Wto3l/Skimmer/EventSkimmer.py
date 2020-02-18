@@ -3,6 +3,7 @@ import ROOT as r
 from ROOT import TLorentzVector 
 import math as m
 from Utils.DeltaR import deltaR
+from random import choice
 
 class EventSkimmer(Module):
     def __init__(self,name):
@@ -205,7 +206,8 @@ class EventSkimmer(Module):
         event.mass1_coseta = m.cos(P1.Eta())
         event.mass2_coseta = m.cos(P2.Eta())
         event.mass1_phi = P1.Phi()
-        event.mass2_phi = P2.Phi() 
+        event.mass2_phi = P2.Phi()
+        event.Zp_mass_random = choice([15.,20.,30.,45.,60.])
         #if event.mass1 <= 5 or event.mass2 <= 5:
             #return False
         if 8 < event.mass1 <  12 or 8 < event.mass2 < 12 or 80 < event.mass1 < 100 or 80 < event.mass2 < 100:
