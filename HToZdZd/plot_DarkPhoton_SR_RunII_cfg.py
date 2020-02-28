@@ -30,7 +30,7 @@ disableProgressBar      = False
 #sigSamples              = [ sigSampleDict[m] for m in [5,10,30,60,] ]
 sigSamples              = []
 componentList           = bkgSamples + dataSamples + sigSamples
-justEndSequence         = False
+justEndSequence         = True
 
 plots = general_plots 
 
@@ -46,8 +46,8 @@ for dataset in componentList:
 for p in plots:
     if p.dim == 2: 
         p.plotSetting.leg_pos = [0.39,0.70,0.59,0.92]
-        p.plotSetting.x_axis_title = "m_{Z1}"
-        p.plotSetting.y_axis_title = "m_{Z2}"
+        p.plotSetting.x_axis_title = "m_{Z1} [GeV]"
+        p.plotSetting.y_axis_title = "m_{Z2} [GeV]"
         p.plotSetting.minimum = 0.
         p.plotSetting.marker_size = 0.7
         p.plotSetting.marker_style_dict = {

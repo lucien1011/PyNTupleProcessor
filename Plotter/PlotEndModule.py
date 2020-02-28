@@ -365,7 +365,8 @@ class PlotEndModule(EndModule):
             dataHist.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
 
             stack.Draw('hist')
-            stack.GetXaxis().SetTitleOffset(0.55)
+            self.setStackAxisTitle(stack,axisLabel,plot)
+            stack.GetXaxis().SetTitleOffset(1.00)
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')

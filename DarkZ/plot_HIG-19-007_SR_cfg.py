@@ -39,9 +39,10 @@ plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2
 for p in plots:
     p.plotSetting.tdr_style = True
     p.plotSetting.cms_lumi = True
-    if p.key.startswith("mZ1"): p.plotSetting.x_axis_title = "m_{Z1}"
-    if p.key.startswith("mZ2"): p.plotSetting.x_axis_title = "m_{Z2}"
-    if p.key.startswith("m4l"): p.plotSetting.x_axis_title = "m_{4\ell}"
+    p.plotSetting.bin_width_label = "Event / bin"
+    if p.key.startswith("mZ1"): p.plotSetting.x_axis_title = "m_{Z1} [GeV]"
+    if p.key.startswith("mZ2"): p.plotSetting.x_axis_title = "m_{Z2} [GeV]"
+    if p.key.startswith("m4l"): p.plotSetting.x_axis_title = "m_{4\ell} [GeV]"
     if p.key == "mZ2_mid-m4l_4mu": p.plotSetting.ratio_range = [0.,6.]
 
 sigSamples = []
