@@ -26,7 +26,6 @@ nCores                  = 3
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + dataSamples + sigSamples
 #sigSamples              = [ sigSampleDict[m] for m in [5,10,30,60,] ]
 sigSamples              = []
 componentList           = bkgSamples + dataSamples + sigSamples

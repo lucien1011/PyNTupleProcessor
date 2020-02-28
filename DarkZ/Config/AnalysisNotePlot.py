@@ -79,3 +79,15 @@ general_2e2mu_plots = [
         Plot("mZ2_mid-m4l_2e2mu",["TH1D","mZ2_mid-m4l_2e2mu","",]+mZ2MidM4lPlotRange_mu, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_2e2mu_str+' and '+mid_m4l_str)),
         Plot("mZ2_high-m4l_2e2mu",["TH1D","mZ2_high-m4l_2e2mu","",]+mZ2HighM4lPlotRange_mu, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_2e2mu_str+' and '+high_m4l_str)),       
         ]
+
+#general_mu_plots = [
+#        Plot("mZ1_mu",["TH1D","mZ1_mu","",]+mZ1PlotRange_mu, LambdaFunc('x: '+var_mZ1_str), selFunc=LambdaFunc('x: '+sel_mu_str)),
+#        Plot("mZ2_mu",["TH1D","mZ2_mu","",]+mZ2PlotRange_mu, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_mu_str)),
+#        Plot("m4l_mu",["TH1D","m4l_mu","",]+h4lPlotRange_mu, LambdaFunc('x: '+var_m4l_str), selFunc=LambdaFunc('x: '+sel_mu_str)),    
+#        ]
+#
+#general_el_plots = [
+#        Plot("mZ1_el",["TH1D","mZ1_el","",]+mZ1PlotRange_el, LambdaFunc('x: '+var_mZ1_str), selFunc=LambdaFunc('x: '+sel_el_str)),
+#        Plot("mZ2_el",["TH1D","mZ2_el","",]+mZ2PlotRange_el, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_el_str)),
+#        Plot("m4l_el",["TH1D","m4l_el","",]+h4lPlotRange_el, LambdaFunc('x: '+var_m4l_str), selFunc=LambdaFunc('x: '+sel_el_str)),    
+#        ]

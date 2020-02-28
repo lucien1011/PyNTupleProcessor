@@ -24,8 +24,8 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
 #end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-09-05_RunII/"
 out_path                = "DarkPhotonSR/ShapeTemplate/2019-11-21_RunII/"
-end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-11-21_RunII/"
-lumi                    = 35.9
+#end_out_path            = "DarkPhotonSR/ShapeTemplate/2019-11-21_RunII/"
+end_out_path            = "DarkPhotonSR/ShapeTemplate/2020-02-28_RunII/"
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
@@ -38,6 +38,7 @@ plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2
 
 for p in plots:
     p.plotSetting.tdr_style = True
+    p.plotSetting.divideByBinWidth = True
     p.plotSetting.cms_lumi = True
     p.plotSetting.bin_width_label = "Event / bin"
     if p.key.startswith("mZ1"): p.plotSetting.x_axis_title = "m_{Z1} [GeV]"
