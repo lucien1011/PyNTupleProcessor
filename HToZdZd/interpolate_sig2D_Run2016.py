@@ -36,7 +36,8 @@ makeTFile       = True
 makePlots       = True
 fitlist         = ["pol5","pol6","pol7","pol8","pol9","landau",]
 
-in_path         = "DarkPhotonSR/StatInput/2019-12-10_SignalInterpolation2D_Run2016/"
+#in_path         = "DarkPhotonSR/StatInput/2019-12-10_SignalInterpolation2D_Run2016/"
+in_path         = "DarkPhotonSR/StatInput/2020-02-29_SignalInterpolation2D_Run2016/"
 inputDir        = system.getStoragePath()+"/"+User+"/Higgs/HToZdZd/"+in_path
 TFileName       = "StatInput.root"
 

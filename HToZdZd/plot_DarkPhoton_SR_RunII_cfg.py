@@ -20,9 +20,11 @@ import os,ROOT
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-19_RunII_MC_RatioCut0p05/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_RunII/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-19_RunII/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-01-20_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-01-20_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII_ZVeto/"
 User                    = os.environ['USER']
-nCores                  = 3
+nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
@@ -66,9 +68,9 @@ for p in plots:
                 }
         p.plotSetting.scatter_density = "1.0"
         p.selectedSamples = ["Higgs","qqZZ","ggZZ","Data",]
-        p.plotSetting.cms_lumi = True
-        p.plotSetting.tdr_style = True
-        p.plotSetting.SetNColumns = 4
+        #p.plotSetting.cms_lumi = True
+        #p.plotSetting.tdr_style = True
+        #p.plotSetting.SetNColumns = 4
 
 plotter                 = Plotter("Plotter",plots)
 

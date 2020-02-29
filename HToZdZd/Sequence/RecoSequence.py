@@ -4,6 +4,8 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 from HToZdZd.Skimmer.AnalysisSkimmer import AnalysisSkimmer
 from HToZdZd.Skimmer.BlindSkimmer import BlindSkimmer
+from HToZdZd.Skimmer.WindowSkimmer import WindowSkimmer
+from HToZdZd.Skimmer.ZabVetoSkimmer import ZabVetoSkimmer
 from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
 from DarkZ.Weighter.NLOWeighter import NLOWeighter
 from DarkZ.Weighter.FakeRateWeighter import FakeRateWeighter
@@ -14,6 +16,8 @@ from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAO
 
 #____________________________________________________________________________________________________
 # Define Skimmers
+windowSkimmer               = WindowSkimmer("WindowSkimmer")
+zabVetoSkimmer              = ZabVetoSkimmer("ZabVetoSkimmer")
 blindSkimmer                = BlindSkimmer("BlindSkimmer")
 xsWeighter                  = XSWeighter("XSWeighter")
 nloWeighter                 = NLOWeighter("NLOWeighter")
@@ -66,6 +70,8 @@ darkphoton_signal_unblind_sequence.add(fakeRateWeighter)
 darkphoton_signal_unblind_sequence.add(darkPhotonSRSkimmer)
 darkphoton_signal_unblind_sequence.add(resonaceZ1Skimmer)
 darkphoton_signal_unblind_sequence.add(resonaceZ2Skimmer)
+darkphoton_signal_unblind_sequence.add(windowSkimmer)
+darkphoton_signal_unblind_sequence.add(zabVetoSkimmer)
 
 darkphoton_sb_sequence = Sequence()
 darkphoton_sb_sequence.add(blindSkimmer)

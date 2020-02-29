@@ -3,11 +3,14 @@ from Core.Utils.LambdaFunc import LambdaFunc
 import array
 
 # ________________________________________________________________________ ||
-mZ1PlotRange_el         = [25-1,array.array('d',[40.*1.05**i for i in range(25)]),]
-mZ1PlotRange_mu         = [60-1,array.array('d',[40.*1.02**i for i in range(60)]),]
+mZ1PlotRange_el         = [58-1,array.array('d',[4.*1.05**i for i in range(58)]),]
+mZ1PlotRange_mu         = [141-1,array.array('d',[4.*1.02**i for i in range(141)]),]
 
-mZ2PlotRange_el         = [63-1,array.array('d',[4.*1.05**i for i in range(63)]),]
-mZ2PlotRange_mu         = [63-1,array.array('d',[4.*1.02**i for i in range(63)]),]
+mZ2PlotRange_el         = [58-1,array.array('d',[4.*1.05**i for i in range(58)]),]
+mZ2PlotRange_mu         = [141-1,array.array('d',[4.*1.02**i for i in range(141)]),]
+
+h4lPlotRange_mu         = [33-1,array.array('d',[90.*1.02**i for i in range(33)]),]
+h4lPlotRange_el         = [13-1,array.array('d',[90.*1.02**i for i in range(13)]),]
 
 mZ2LowM4lPlotRange_el   = [56-1,array.array('d',[4.*1.05**i for i in range(56)]),]
 mZ2MidM4lPlotRange_el   = [56-1,array.array('d',[4.*1.05**i for i in range(56)]),]
@@ -17,21 +20,14 @@ mZ2PlotRange_mu         = [155-1,array.array('d',[4.*1.02**i for i in range(155)
 mZ2LowM4lPlotRange_mu   = [140-1,array.array('d',[4.*1.02**i for i in range(140)]),]
 mZ2MidM4lPlotRange_mu   = [140-1,array.array('d',[4.*1.02**i for i in range(140)]),]
 mZ2HighM4lPlotRange_mu  = [155-1,array.array('d',[4.*1.02**i for i in range(155)]),]
-#mZ2PlotRange        = [38,4.,80.,]
-#mZ2LowM4lPlotRange  = [28,4.,60.,]
-#mZ2MidM4lPlotRange  = [28,4.,60.,]
-#mZ2HighM4lPlotRange = [38,4.,80.,]
-
-h4lPlotRange_mu         = [33-1,array.array('d',[90.*1.02**i for i in range(33)]),]
-h4lPlotRange_el         = [14-1,array.array('d',[90.*1.05**i for i in range(14)]),]
-
-
 
 # ________________________________________________________________________ ||
 sel_4e_str      = "abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11"
 sel_2mu2e_str   = "abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11"
 sel_4mu_str     = "abs(x.idL1[0]) == 13 and abs(x.idL2[0]) == 13 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13"
 sel_2e2mu_str   = "abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13"
+sel_el_str      = "abs(x.idL3[0]) == 13 and abs(x.idL4[0]) == 13"
+sel_mu_str      = "abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11"
 
 var_mZ1_str     = "x.massZ1[0]"
 var_mZ2_str     = "x.massZ2[0]"

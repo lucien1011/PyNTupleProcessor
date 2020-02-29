@@ -21,7 +21,8 @@ from HToZdZd.Config.AnalysisNotePlot import *
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2017_MC_RatioCut0p05/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_Run2017/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-11_Run2017/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-11_Run2017/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_Run2017/"
 User                    = os.environ['USER']
 lumi                    = 41.4
 nCores                  = 5
@@ -32,7 +33,7 @@ sigSamples              = [ sigSampleDict[m] for m in [5,10,30,60,] ]
 componentList           = bkgSamples + [
                                 data2017,
                                 ] + sigSamples
-justEndSequence         = True
+justEndSequence         = False
 
 plots = general_plots 
 
