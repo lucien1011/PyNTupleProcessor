@@ -17,6 +17,7 @@ from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAO
 #____________________________________________________________________________________________________
 # Define Skimmers
 windowSkimmer               = WindowSkimmer("WindowSkimmer")
+invertWindowSkimmer         = WindowSkimmer("WindowSkimmer",invert=True)
 zabVetoSkimmer              = ZabVetoSkimmer("ZabVetoSkimmer")
 blindSkimmer                = BlindSkimmer("BlindSkimmer")
 xsWeighter                  = XSWeighter("XSWeighter")
