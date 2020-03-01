@@ -19,7 +19,6 @@ for sample in sample2018.bkgSamples+sampleSig2018.sigSamples:
 bkgSamples = sample2016.bkgSamples + sample2017.bkgSamples + sample2018.bkgSamples
 
 sigSamples = sampleSig2016.sigSamples + sampleSig2017.sigSamples + sampleSig2018.sigSamples
-for sample in sigSamples: sample.lumi = 136.1
 
 ppZZdSamples = sample_ppZZd.ppZZdSamples
 for sample in ppZZdSamples: sample.lumi = 136.1

@@ -16,7 +16,8 @@ from HToZdZd.Config.MergeSampleDict import *
 import os
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2018/"
+#out_path                = "DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2018/"
+out_path                = "DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2018_OptimiseWindow/"
 lumi                    = 58.8
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
