@@ -487,7 +487,7 @@ class PlotEndModule(EndModule):
         allBinWidths = [stack.GetXaxis().GetBinWidth(i) for i in range(1,stack.GetXaxis().GetNbins()+1)]
         constantBinWidth = all([binWidth == allBinWidths[0] for binWidth in allBinWidths])
         if constantBinWidth and plot.plotSetting.divideByBinWidth:
-            title = "Events / (%.2f GeV)" % (binWidths[0])
+            title = "Events / (%.2f GeV)" % (allBinWidths[0])
         elif plot.plotSetting.divideByBinWidth:
             title = "Events / Bin Width"
         elif plot.plotSetting.bin_width_label:
