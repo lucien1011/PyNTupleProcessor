@@ -24,3 +24,9 @@ mergeSampleDict = {
         "ZPlusX": ["ZPlusX"],
         "DYJets": ["DYJetsToLL_M50","DYJetsToLL_M10To50",],
         }
+
+mergeSigSampleDict = {
+        "HToZdZd_M5": ["HToZdZd_M5",],
+        "HToZdZd_M30": ["HToZdZd_M30",],
+        "HToZdZd_M50": ["HToZdZd_M50",],
+        }

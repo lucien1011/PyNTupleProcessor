@@ -21,17 +21,15 @@ import os,ROOT
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_RunII/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-19_RunII/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2020-01-20_RunII/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII_ZVeto/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII_ZVeto/"
 User                    = os.environ['USER']
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#sigSamples              = [ sigSampleDict[m] for m in [5,10,30,60,] ]
-sigSamples              = []
 componentList           = bkgSamples + dataSamples + sigSamples
-justEndSequence         = True
+justEndSequence         = True 
 
 plots = general_plots 
 
@@ -71,6 +69,8 @@ for p in plots:
         #p.plotSetting.cms_lumi = True
         #p.plotSetting.tdr_style = True
         #p.plotSetting.SetNColumns = 4
+    else:
+        p.plotSetting.divideByBinWidth = True
 
 plotter                 = Plotter("Plotter",plots)
 
@@ -81,6 +81,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence,haddDataSamples=True,)
+endSequence = EndSequence(skipHadd=True,haddDataSamples=True,)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

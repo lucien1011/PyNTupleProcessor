@@ -17,7 +17,7 @@ class WindowSkimmer(Module):
         elif abs(event.idL1[0]) == 11 and abs(event.idL2[0]) == 11 and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13:
             r1 = 0.05
             r2 = 0.02
-        if not invert:
+        if not self.invert:
             return (event.massZ1[0]>(1.-r1)/(1+r2)*event.massZ2[0]) and (event.massZ1[0]<(1.+r1)/(1-r2)*event.massZ2[0])
         else:
             return not ((event.massZ1[0]>(1.-r1)/(1+r2)*event.massZ2[0]) and (event.massZ1[0]<(1.+r1)/(1-r2)*event.massZ2[0]))
