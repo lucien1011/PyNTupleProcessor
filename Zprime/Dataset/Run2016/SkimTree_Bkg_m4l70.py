@@ -3,34 +3,28 @@ from Core.Dataset import Dataset
 from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
-#bkgSkimTreeDir2      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2017Data_m4l70/"
-#bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_MC/"
-bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_MC/"
+#bkgSkimTreeDir2      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2016Data_m4l70/"
+#bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_MC/"
+bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2016_MMM_MC/"
 #bkgSkimTreeDir2     = bkgSkimTreeDir
-bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/"
+bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
 #dataTreeDir         = bkgSkimTreeDir
-#dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_Data/"
-dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_Data/"
+dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_Data/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 saveSumWeightTxt    = True
 
 # ____________________________________________________________________________________________________________________________________________ ||
-# Data2017
-data2017_cmpList = ComponentList(
+# Data2016
+data2016_cmpList = ComponentList(
         [ 
-            #Component("Data2017",dataTreeDir+"/MuonEG-DoubleEG-SingleElectron_Run2017-17Nov2017-v1.root","passedEvents",inUFTier2=inUFTier2),
-            #Component("Data2017",dataTreeDir+"/DoubleMuon_Run2017-17Nov2017-v1.root","passedEvents",inUFTier2=inUFTier2),
-            #Component("Data2017",dataTreeDir+"/SingleMuon_Run2017-17Nov2017-v1.root","passedEvents",inUFTier2=inUFTier2),
-            Component("Data2017",dataTreeDir+"Data_Run2017_DoubleMuon-SingleMuon_noDuplicates.root","passedEvents",inUFTier2=inUFTier2),
-            #Component("Data2017",dataTreeDir+"Data_Run2017_DoubleMuon-SingleMuon.root","passedEvents",inUFTier2=inUFTier2),
-
+            Component("Data2016",dataTreeDir+"Data_Run2016-03Feb2017_4l.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
-data2017 = Dataset(
-        "Data2017",
-        data2017_cmpList,
+data2016 = Dataset(
+        "Data2016",
+        data2016_cmpList,
         isMC                = False,
         )
 
@@ -38,7 +32,7 @@ data2017 = Dataset(
 # qqZZ
 qqZZ_cmpList = ComponentList(
         [ 
-            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.root","passedEvents",inUFTier2=inUFTier2),
+            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -51,12 +45,12 @@ qqZZTo4L = Dataset(
 handleSumWeight(
         qqZZTo4L,
         system,
-        bkgTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.root",
+        bkgTreeDir+"ZZTo4L_13TeV_powheg_pythia8.root",
         sumWeightHist,
         True,
         saveSumWeightTxt,
-        bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
-        #bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
+        bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8.txt",
+        #bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -220,5 +214,5 @@ bkgSamples = [
         ggZZTo4tau,
         ]
 dataSamples = [
-        data2017,
+        data2016,
         ]
