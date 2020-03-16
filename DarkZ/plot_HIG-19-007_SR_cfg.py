@@ -30,6 +30,7 @@ nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
+skipHadd                = False
 includeSignalSample     = False
 componentList           = bkgSamples + dataSamples 
 if includeSignalSample: componentList += sigSamples 
@@ -112,8 +113,8 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(
-        skipHadd=True,
-        skipComponentHadd=True,
+        skipHadd=skipHadd,
+        skipComponentHadd=skipHadd,
         )
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+end_out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
