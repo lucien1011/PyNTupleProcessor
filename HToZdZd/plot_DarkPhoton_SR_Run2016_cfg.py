@@ -5,7 +5,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
-#from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
+from HToZdZd.Dataset.Run2016.SkimTree_RareBkg_m4l70 import * 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_HZdZd import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
@@ -23,7 +23,8 @@ from HToZdZd.Config.AnalysisNotePlot import *
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_Run2016/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-09_Run2016/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-11_Run2016/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_Run2016/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_Run2016/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-15_Run2016/"
 User                    = os.environ['USER']
 lumi                    = 35.9
 nCores                  = 5
@@ -31,10 +32,11 @@ outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_pat
 nEvents                 = -1
 disableProgressBar      = False
 sigSamples              = [ sigSampleDict[m] for m in [5,10,30,60,] ]
-componentList           = bkgSamples + [
+componentList           = bkgSamples + rareBkgSamples + [
                                 data2016,
                                 ] + sigSamples
 justEndSequence         = False
+skipHadd                = False
 
 plots = general_plots 
 
@@ -55,7 +57,7 @@ for p in plots:
         p.plotSetting.x_axis_title = "m_{Z1}"
         p.plotSetting.y_axis_title = "m_{Z2}"
         p.plotSetting.minimum = 0.
-        p.selectedSamples = ["Higgs","qqZZ",] + [sigSampleDict[m].name for m in [5,30,60]]
+        p.selectedSamples = ["Higgs","ZZ",] + [sigSampleDict[m].name for m in [5,30,60]]
 
 plotter                 = Plotter("Plotter",plots)
 
@@ -66,6 +68,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence)
+endSequence = EndSequence(skipHadd=skipHadd)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
