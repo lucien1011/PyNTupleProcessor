@@ -26,7 +26,7 @@ nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + dataSamples + sigSamples
 justEndSequence         = False
-mZ2PlotRange            = [50,0.,100.]
+mZ2PlotRange            = [18,0.,36.]
 
 plots = [
         Plot("mZ2_el",["TH1D","mZ2_el","",]+mZ2PlotRange, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_4e_str+" or "+sel_2mu2e_str)),

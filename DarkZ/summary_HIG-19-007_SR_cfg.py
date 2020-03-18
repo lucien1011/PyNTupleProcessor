@@ -27,7 +27,7 @@ nEvents                 = -1
 disableProgressBar      = False
 skipHadd                = True
 componentList           = bkgSamples + dataSamples + sigSamples 
-mZ2PlotRange            = [50,0.,100.]
+mZ2PlotRange            = [18,0.,36.]
 
 plots = [
         Plot("mZ2_el",["TH1D","mZ2_el","",]+mZ2PlotRange, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_4e_str+" or "+sel_2mu2e_str)),
@@ -38,10 +38,11 @@ plots = [
 inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","PlotShape.root"),"READ")
 for p in plots:
     p.plotSetting.tdr_style = True
-    p.plotSetting.divideByBinWidth = False
+    p.plotSetting.divideByBinWidth = True
     p.plotSetting.cms_lumi = True
     p.plotSetting.skip_leg_err = True
     p.plotSetting.skip_data_mc_ratio = False
+    p.plotSetting.shift_last_bin = False
     p.plotSetting.bin_width_label = "Event / bin"
     p.plotSetting.x_axis_title = "m_{Z2} [GeV]"
     if "mZ2" in p.key:

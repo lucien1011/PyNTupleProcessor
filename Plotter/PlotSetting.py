@@ -107,6 +107,7 @@ class PlotSetting(object):
             ratio_range=[],
             skip_data_mc_ratio=False,
             skip_leg_err=False,
+            shift_last_bin=True,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -143,3 +144,4 @@ class PlotSetting(object):
         self.leg_text_size = leg_text_size
         self.skip_data_mc_ratio = skip_data_mc_ratio
         self.skip_leg_err = skip_leg_err
+        self.shift_last_bin = shift_last_bin

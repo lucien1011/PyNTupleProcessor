@@ -55,7 +55,7 @@ class PlotEndModule(EndModule):
 
         dataCountErr = ROOT.Double(0.)
         dataCount = data.IntegralAndError(0,data.GetNbinsX()+1,dataCountErr)
-        self.shiftLastBin(data)
+        if plot.plotSetting.shift_last_bin: self.shiftLastBin(data)
 
         if plot.plotSetting.divideByBinWidth:
             self.divideByBinWidth(data)
@@ -106,7 +106,7 @@ class PlotEndModule(EndModule):
             #smCountErrTmp = ROOT.Double(0.)
             #smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             #smCountErrSq += smCountErrTmp**2
-            self.shiftLastBin(h)
+            if plot.plotSetting.shift_last_bin: self.shiftLastBin(h)
             histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.leg_nameplot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
             if switch:
                 if not isample:
@@ -146,7 +146,7 @@ class PlotEndModule(EndModule):
             else:
                 h.SetFillColor(ROOT.kViolet)
             sigCount = h.Integral(0,h.GetNbinsX()+1)
-            self.shiftLastBin(h) 
+            if plot.plotSetting.shift_last_bin: self.shiftLastBin(h) 
             h.SetLineStyle(9 if sample not in plot.plotSetting.line_style_dict else plot.plotSetting.line_style_dict[sample])
             h.SetLineWidth(5 if sample not in plot.plotSetting.line_width_dict else plot.plotSetting.line_width_dict[sample])
             if sample in plot.plotSetting.line_color_dict:
