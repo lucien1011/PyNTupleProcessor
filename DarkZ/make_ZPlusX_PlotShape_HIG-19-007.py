@@ -5,14 +5,14 @@ from Core.mkdir_p import mkdir_p
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-inputFitFilePath    = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-02-28_RunII/ZPlusX/DataMCDistribution.root"
 inputFitFilePath    = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/ZPlusX/DataMCDistribution.root"
+inputParaFilePath   = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/ZPlusX/DataMCDistribution.root"
 outputDir           = os.path.dirname(inputParaFilePath)
 outputFileName      = "PlotShape.root"
 
 binList             = [
-                        BaseObject("Mu",rebin=800,histName="comb",normHistName="mZ2_mu",),
-                        BaseObject("El",rebin=800,histName="comb",normHistName="mZ2_el",),
+                        BaseObject("Mu",rebin=1,histName="mZ2_mu",normHistName="mZ2_mu",),
+                        BaseObject("El",rebin=1,histName="mZ2_el",normHistName="mZ2_el",),
                         ]
 fitFuncName         = "landau"
 drawFit             = False
@@ -35,6 +35,9 @@ for b in binList:
     for ibin in range(1,outputHist.GetNbinsX()+1):
         x = outputHist.GetXaxis().GetBinCenter(ibin)
         outputHist.SetBinContent(ibin,fitFunc.Eval(x))
+        outputHist.SetBinError(ibin,0.)
+    outputHist.SetBinContent(outputHist.GetNbinsX()+1,0.)
+    outputHist.SetBinError(outputHist.GetNbinsX()+1,0.)
     print "Scale to "+str(paraInputHist.Integral())+" from "+str(outputHist.Integral())
     if outputHist.Integral(): 
         outputHist.Scale(paraInputHist.Integral()/outputHist.Integral())
