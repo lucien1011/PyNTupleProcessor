@@ -105,6 +105,8 @@ class PlotSetting(object):
             cms_lumi=False,
             cms_lumi_number=4,
             ratio_range=[],
+            skip_data_mc_ratio=False,
+            skip_leg_err=False,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -139,3 +141,5 @@ class PlotSetting(object):
         self.cms_lumi_number = cms_lumi_number
         self.ratio_range = ratio_range
         self.leg_text_size = leg_text_size
+        self.skip_data_mc_ratio = skip_data_mc_ratio
+        self.skip_leg_err = skip_leg_err
