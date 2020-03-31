@@ -5,8 +5,8 @@ from Core.mkdir_p import mkdir_p
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-inputFitFilePath    = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/ZPlusX/DataMCDistribution.root"
-inputParaFilePath   = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/ZPlusX/DataMCDistribution.root"
+inputFitFilePath    = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/ZPlusX/DataMCDistribution.root"
+inputParaFilePath   = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/ZPlusX/DataMCDistribution.root"
 outputDir           = os.path.dirname(inputParaFilePath)
 outputFileName      = "PlotShape.root"
 
@@ -34,7 +34,10 @@ for b in binList:
     outputHist = paraInputHist.Clone(b.normHistName+"_shapehist")
     for ibin in range(1,outputHist.GetNbinsX()+1):
         x = outputHist.GetXaxis().GetBinCenter(ibin)
-        outputHist.SetBinContent(ibin,fitFunc.Eval(x))
+        x_up = outputHist.GetXaxis().GetBinUpEdge(ibin)
+        x_low = outputHist.GetXaxis().GetBinLowEdge(ibin)
+        outputHist.SetBinContent(ibin,fitFunc.Eval(x) if x_up < 8.5 or x_low > 11. else 0.)
+        #outputHist.SetBinContent(ibin,fitFunc.Eval(x))
         outputHist.SetBinError(ibin,0.)
     outputHist.SetBinContent(outputHist.GetNbinsX()+1,0.)
     outputHist.SetBinError(outputHist.GetNbinsX()+1,0.)

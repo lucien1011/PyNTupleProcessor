@@ -5,14 +5,15 @@ from Core.mkdir_p import mkdir_p
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-inputFitFilePath    = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-02-28_RunII/ZPlusX/DataMCDistribution.root"
-inputFitFilePath    = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/ZPlusX/DataMCDistribution.root"
+inputFitFilePath    = "/raid/raid7/lucien/Higgs/HToZdZd/DarkPhotonSR/StatInput/2019-08-21_136p1_RunII_RatioCut0p05/ZPlusX/StatInput.root"
+inputParaFilePath   = "/raid/raid7/lucien/Higgs/HToZdZd/DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/ZPlusX/DataMCDistribution.root"
 outputDir           = os.path.dirname(inputParaFilePath)
 outputFileName      = "PlotShape.root"
 
 binList             = [
-                        BaseObject("Mu",rebin=800,histName="comb",normHistName="mZ2_mu",),
-                        BaseObject("El",rebin=800,histName="comb",normHistName="mZ2_el",),
+                        BaseObject("4mu",rebin=800,histName="comb",normHistName="mZ12_4mu",),
+                        BaseObject("4e",rebin=800,histName="comb",normHistName="mZ12_4e",),
+                        BaseObject("2e2mu",rebin=800,histName="comb",normHistName="mZ12_2e2mu",),
                         ]
 fitFuncName         = "landau"
 drawFit             = False

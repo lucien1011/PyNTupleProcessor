@@ -19,15 +19,19 @@ from DarkZ.Config.MergeSampleDict_RunII import mergeSampleDict,mergeSigSampleDic
 import ROOT,os,copy
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
-end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
+#end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
+#end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/"
+end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/"
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 skipHadd                = True
 componentList           = bkgSamples + dataSamples + sigSamples 
-mZ2PlotRange            = [18,0.,36.]
+mZ2PlotRange            = [36,0.,36.]
 
 plots = [
         Plot("mZ2_el",["TH1D","mZ2_el","",]+mZ2PlotRange, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_4e_str+" or "+sel_2mu2e_str)),

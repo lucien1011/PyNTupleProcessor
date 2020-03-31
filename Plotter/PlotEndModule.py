@@ -107,7 +107,7 @@ class PlotEndModule(EndModule):
             #smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             #smCountErrSq += smCountErrTmp**2
             if plot.plotSetting.shift_last_bin: self.shiftLastBin(h)
-            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.leg_nameplot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
+            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
             if switch:
                 if not isample:
                     totalsum = h.Clone("totalsum_"+plot.key)
@@ -361,7 +361,7 @@ class PlotEndModule(EndModule):
                 upperPad.cd()
             else:
                 upperPad = c
-                ROOT.gPad.SetBottomMargin(0.24)
+                ROOT.gPad.SetBottomMargin(0.10)
 
             leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err)
 

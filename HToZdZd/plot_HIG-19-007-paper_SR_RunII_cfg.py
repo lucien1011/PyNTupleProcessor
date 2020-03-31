@@ -16,7 +16,8 @@ from HToZdZd.Config.AnalysisNotePlot import sel_4e_str,sel_4mu_str,sel_2mu2e_str
 
 import os,ROOT
 
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
 User                    = os.environ['USER']
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
@@ -25,7 +26,7 @@ disableProgressBar      = False
 componentList           = bkgSamples + dataSamples + sigSamples + rareBkgSamples
 justEndSequence         = False
 skipHadd                = False 
-mZ12PlotRange           = [15,4.,60.]
+mZ12PlotRange           = [14,4.,60.]
 
 plots = [ 
         Plot("mZ12_4e",["TH1D","mZ12_4e","",]+mZ12PlotRange,LambdaFunc('x: (x.massZ1[0]+x.massZ2[0])/2.'),selFunc=LambdaFunc('x: '+sel_4e_str)), 
