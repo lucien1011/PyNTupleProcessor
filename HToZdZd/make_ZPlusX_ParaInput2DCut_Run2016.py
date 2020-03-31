@@ -7,7 +7,8 @@ ROOT.gROOT.SetBatch(ROOT.kTRUE)
 # _____________________________________________________________________________ ||
 inputFitFilePath    = "/raid/raid7/lucien/Higgs/HToZdZd/DarkPhotonSR/StatInput/2019-08-21_136p1_RunII_RatioCut0p05/ZPlusX/StatInput.root"
 inputParaFilePath   = "/raid/raid7/lucien/Higgs/HToZdZd/DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2016/ZPlusX/StatInput.root"
-outputDir           = "/home/lucien/public_html/Higgs/HToZdZd/Parametrization/2020-02-29_SR2D_Run2016/"
+#outputDir           = "/home/lucien/public_html/Higgs/HToZdZd/Parametrization/2020-02-29_SR2D_Run2016/"
+outputDir           = os.path.dirname(inputParaFilePath)
 outputFileName      = "ParaShape.root"
 
 binList             = [
@@ -34,6 +35,7 @@ for b in binList:
     fitFunc.SetName(b.name+"_fitFunc")
     paraInputHist = inputParaFile.Get(b.name)
     outputHist = paraInputHist.Clone(b.name+"_shape")
+    normHist = paraInputHist.Clone(b.name+"_norm")
     for ibin in range(1,outputHist.GetNbinsX()+1):
         x = outputHist.GetXaxis().GetBinCenter(ibin)
         outputHist.SetBinContent(ibin,fitFunc.Eval(x))
@@ -41,6 +43,7 @@ for b in binList:
     if outputHist.Integral(): 
         outputHist.Scale(paraInputHist.Integral()/outputHist.Integral())
     outputHist.Write()
+    normHist.Write()
     fitFunc.Write()
     if drawFit:
         c = ROOT.TCanvas()

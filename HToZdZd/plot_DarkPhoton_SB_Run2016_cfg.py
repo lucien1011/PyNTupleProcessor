@@ -16,13 +16,6 @@ from Plotter.Plot import Plot
 from HToZdZd.Config.MergeSampleDict import *
 from HToZdZd.Config.AnalysisNotePlot import *
 
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-02-15_MC_RatioCut0p05/" # Lucien's new dir
-#out_path                = "DarkPhotonSR/DataMCDistributions/20190228_MassRatioCuts/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-03-31_Run2017_MC_RatioCut0p05/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_Run2016/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_Run2016/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-09_Run2016/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-11_Run2016/"
 out_path                = "DarkPhotonSB/DataMCDistributions/2020-02-29_Run2016/"
 User                    = os.environ['USER']
 lumi                    = 35.9
@@ -34,7 +27,7 @@ sigSamples              = [ sigSampleDict[m] for m in [5,10,30,60,] ]
 componentList           = bkgSamples + [
                                 data2016,
                                 ] + sigSamples
-justEndSequence         = False
+justEndSequence         = True 
 
 plots = general_plots 
 
@@ -56,6 +49,8 @@ for p in plots:
         p.plotSetting.y_axis_title = "m_{Z2}"
         p.plotSetting.minimum = 0.
         p.selectedSamples = ["Higgs","qqZZ",] + [sigSampleDict[m].name for m in [5,30,60]]
+    else:
+        p.plotSetting.divideByBinWidth = True
 
 plotter                 = Plotter("Plotter",plots)
 

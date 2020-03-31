@@ -12,18 +12,12 @@ from Plotter.PlotEndModule import PlotEndModule
 from Plotter.Plot import Plot
 
 from HToZdZd.Config.MergeSampleDict_RunII import *
-from HToZdZd.Config.AnalysisNotePlot import *
+from HToZdZd.Config.AnalysisNotePlot import sel_4e_str,sel_4mu_str,sel_2mu2e_str,sel_2e2mu_str
 
 import os,ROOT
 
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII_MC_RatioCut0p05/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-19_RunII_MC_RatioCut0p05/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_RunII/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-19_RunII/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2020-01-20_RunII/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII_ZVeto/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-15_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
 User                    = os.environ['USER']
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
@@ -32,8 +26,13 @@ disableProgressBar      = False
 componentList           = bkgSamples + dataSamples + sigSamples + rareBkgSamples
 justEndSequence         = False
 skipHadd                = False 
+mZ12PlotRange           = [14,4.,60.]
 
-plots = general_plots 
+plots = [ 
+        Plot("mZ12_4e",["TH1D","mZ12_4e","",]+mZ12PlotRange,LambdaFunc('x: (x.massZ1[0]+x.massZ2[0])/2.'),selFunc=LambdaFunc('x: '+sel_4e_str)), 
+        Plot("mZ12_4mu",["TH1D","mZ12_4mu","",]+mZ12PlotRange,LambdaFunc('x: (x.massZ1[0]+x.massZ2[0])/2.'),selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mZ12_2e2mu",["TH1D","mZ12_2e2mu","",]+mZ12PlotRange,LambdaFunc('x: (x.massZ1[0]+x.massZ2[0])/2.'),selFunc=LambdaFunc('x: '+sel_2mu2e_str+" or "+sel_2e2mu_str)),
+        ]
 
 for sig in sigSamples:
     for p in plots:
