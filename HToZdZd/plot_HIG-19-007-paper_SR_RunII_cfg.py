@@ -17,21 +17,28 @@ from HToZdZd.Config.AnalysisNotePlot import sel_4e_str,sel_4mu_str,sel_2mu2e_str
 import os,ROOT
 
 #out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
 User                    = os.environ['USER']
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + dataSamples + sigSamples + rareBkgSamples
-justEndSequence         = False
-skipHadd                = False 
+justEndSequence         = False 
+skipHadd                = False  
 mZ12PlotRange           = [14,4.,60.]
+var_mZ12_str            = 'x: (x.massZ1[0]+x.massZ2[0])/2.'
+var_mZ1_str             = 'x.massZ1[0]'
+var_mZ2_str             = 'x.massZ2[0]'
 
 plots = [ 
-        Plot("mZ12_4e",["TH1D","mZ12_4e","",]+mZ12PlotRange,LambdaFunc('x: (x.massZ1[0]+x.massZ2[0])/2.'),selFunc=LambdaFunc('x: '+sel_4e_str)), 
-        Plot("mZ12_4mu",["TH1D","mZ12_4mu","",]+mZ12PlotRange,LambdaFunc('x: (x.massZ1[0]+x.massZ2[0])/2.'),selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        Plot("mZ12_2e2mu",["TH1D","mZ12_2e2mu","",]+mZ12PlotRange,LambdaFunc('x: (x.massZ1[0]+x.massZ2[0])/2.'),selFunc=LambdaFunc('x: '+sel_2mu2e_str+" or "+sel_2e2mu_str)),
+        Plot("mZ12_4e",["TH1D","mZ12_4e","",]+mZ12PlotRange,LambdaFunc(var_mZ12_str),selFunc=LambdaFunc('x: '+sel_4e_str)), 
+        Plot("mZ12_4mu",["TH1D","mZ12_4mu","",]+mZ12PlotRange,LambdaFunc(var_mZ12_str),selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mZ12_2e2mu",["TH1D","mZ12_2e2mu","",]+mZ12PlotRange,LambdaFunc(var_mZ12_str),selFunc=LambdaFunc('x: '+sel_2mu2e_str+" or "+sel_2e2mu_str)),
+        Plot("mZ1mZ2_4e",["TH2D","mZ1mZ2_4e","",]+mZ12PlotRange+mZ12PlotRange, LambdaFunc('x: ['+var_mZ1_str+','+var_mZ2_str+']'), selFunc=LambdaFunc('x: '+sel_4e_str),dim=2),
+        Plot("mZ1mZ2_4mu",["TH2D","mZ1mZ2_4mu","",]+mZ12PlotRange+mZ12PlotRange, LambdaFunc('x: ['+var_mZ1_str+','+var_mZ2_str+']'), selFunc=LambdaFunc('x: '+sel_4mu_str),dim=2),
+        Plot("mZ1mZ2_2e2mu",["TH2D","mZ1mZ2_2e2mu","",]+mZ12PlotRange+mZ12PlotRange, LambdaFunc('x: ['+var_mZ1_str+','+var_mZ2_str+']'), selFunc=LambdaFunc('x: '+sel_2mu2e_str+" or "+sel_2e2mu_str),dim=2),
         ]
 
 for sig in sigSamples:
@@ -67,7 +74,7 @@ for p in plots:
                 "ggZZ": 0.4,
                 "Data": 1.0,
                 }
-        p.plotSetting.scatter_density = "1.0"
+        p.plotSetting.draw_option = "colz"
         p.selectedSamples = ["Higgs","ZZ","Data",]
         #p.plotSetting.cms_lumi = True
         #p.plotSetting.tdr_style = True
