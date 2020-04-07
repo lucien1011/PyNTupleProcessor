@@ -1,12 +1,14 @@
 import ROOT,os
 from Core.BaseObject import BaseObject
 from Core.mkdir_p import mkdir_p
+from Utils.System import system
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-inputFitFilePath    = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/ZPlusX/DataMCDistribution.root"
-inputParaFilePath   = "/raid/raid7/lucien/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/ZPlusX/DataMCDistribution.root"
+User                = "lucien"
+inputFitFilePath    = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/ZPlusX/DataMCDistribution.root"
+inputParaFilePath   = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/ZPlusX/DataMCDistribution.root"
 outputDir           = os.path.dirname(inputParaFilePath)
 outputFileName      = "PlotShape.root"
 
