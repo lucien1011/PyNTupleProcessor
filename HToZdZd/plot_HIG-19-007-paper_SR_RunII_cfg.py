@@ -25,7 +25,7 @@ outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_pat
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + dataSamples + sigSamples + rareBkgSamples
-justEndSequence         = False 
+justEndSequence         = True
 skipHadd                = False  
 mZ12PlotRange           = [14,4.,60.]
 var_mZ12_str            = 'x: (x.massZ1[0]+x.massZ2[0])/2.'
@@ -91,6 +91,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=skipHadd,haddDataSamples=True,)
+endSequence = EndSequence(skipHadd=False,haddDataSamples=True,)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
