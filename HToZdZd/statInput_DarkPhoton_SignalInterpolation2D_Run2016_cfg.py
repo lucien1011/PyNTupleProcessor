@@ -14,7 +14,8 @@ from HToZdZd.Config.MergeSampleDict import *
 import os
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/StatInput/2019-12-10_SignalInterpolation2D_Run2016/"
+#out_path                = "DarkPhotonSR/StatInput/2019-12-10_SignalInterpolation2D_Run2016/"
+out_path                = "DarkPhotonSR/StatInput/2020-02-29_SignalInterpolation2D_Run2016/"
 lumi                    = 35.9
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
@@ -71,7 +72,8 @@ statProducer            = StatInputProducer("StatInputProducer",
         )
 
 sequence                = darkphoton_signal_unblind_sequence
-sequence.remove(resonaceSkimmer)
+sequence.remove(resonaceZ1Skimmer)
+sequence.remove(resonaceZ2Skimmer)
 sequence.add(statProducer)
 
 outputInfo              = OutputInfo("OutputInfo")

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Make basic inputs
+UFNTuple statInput_DarkPhoton_2DSR_Run2016_cfg.py
+UFNTuple statInput_DarkPhoton_2DSR_Run2017_cfg.py
+UFNTuple statInput_DarkPhoton_2DSR_Run2018_cfg.py
+
+# Make Z+X shape
+python make_ZPlusX_ParaInput2DCut_Run2016.py
+python make_ZPlusX_ParaInput2DCut_Run2017.py
+python make_ZPlusX_ParaInput2DCut_Run2018.py
+
+# Make signal interpolation
+UFNTuple statInput_DarkPhoton_SignalInterpolation2D_Run2016_cfg.py
+UFNTuple statInput_DarkPhoton_SignalInterpolation2D_Run2017_cfg.py
+UFNTuple statInput_DarkPhoton_SignalInterpolation2D_Run2018_cfg.py

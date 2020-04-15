@@ -39,6 +39,7 @@ for m in mass_points:
             True,
             saveSumWeightTxt,
             os.path.join(sigSkimTreeDir,(fileNameTemplate%m).replace(".root",".txt")),
+            os.path.join(sigSkimTreeDir,(fileNameTemplate%m).replace(".root",".txt")),
             )
     sigSampleDict[m] = tmpDataset
 sigSamples = sigSampleDict.values()

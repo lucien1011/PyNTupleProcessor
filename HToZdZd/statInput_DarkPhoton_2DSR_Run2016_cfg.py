@@ -4,6 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
+from HToZdZd.Dataset.Run2016.SkimTree_RareBkg_m4l70 import * 
 from HToZdZd.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_HZdZd import * 
 #from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
@@ -16,15 +17,17 @@ from HToZdZd.Config.MergeSampleDict import *
 import os
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/StatInput/2019-12-06_SR2D_Run2016/"
+#out_path                = "DarkPhotonSR/StatInput/2019-12-06_SR2D_Run2016/"
+out_path                = "DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2016/"
+#out_path                = "DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2016_OptimiseWindow/"
 lumi                    = 35.9
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2016,] + sigSamples 
+componentList           = bkgSamples + rareBkgSamples + [data2016,] + sigSamples 
 justEndSequence         = False
-#eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
+skipHadd                = False
 
 for dataset in componentList:
     if dataset.isMC:
@@ -80,4 +83,4 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "StatInput.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence,haddDataSamples=True)
+endSequence = EndSequence(skipHadd=skipHadd,haddDataSamples=True)

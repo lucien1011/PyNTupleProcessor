@@ -55,10 +55,10 @@ class PlotEndModule(EndModule):
 
         dataCountErr = ROOT.Double(0.)
         dataCount = data.IntegralAndError(0,data.GetNbinsX()+1,dataCountErr)
-        self.shiftLastBin(data)
-
         if plot.plotSetting.divideByBinWidth:
             self.divideByBinWidth(data)
+
+        if plot.plotSetting.shift_last_bin: self.shiftLastBin(data,isData=True)
 
         data.SetLineWidth(2)
         data.SetLineColor(1)
@@ -106,8 +106,8 @@ class PlotEndModule(EndModule):
             #smCountErrTmp = ROOT.Double(0.)
             #smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
             #smCountErrSq += smCountErrTmp**2
-            self.shiftLastBin(h)
-            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.leg_nameplot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
+            if plot.plotSetting.shift_last_bin: self.shiftLastBin(h)
+            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
             if switch:
                 if not isample:
                     totalsum = h.Clone("totalsum_"+plot.key)
@@ -146,7 +146,7 @@ class PlotEndModule(EndModule):
             else:
                 h.SetFillColor(ROOT.kViolet)
             sigCount = h.Integral(0,h.GetNbinsX()+1)
-            self.shiftLastBin(h) 
+            if plot.plotSetting.shift_last_bin: self.shiftLastBin(h) 
             h.SetLineStyle(9 if sample not in plot.plotSetting.line_style_dict else plot.plotSetting.line_style_dict[sample])
             h.SetLineWidth(5 if sample not in plot.plotSetting.line_width_dict else plot.plotSetting.line_width_dict[sample])
             if sample in plot.plotSetting.line_color_dict:
@@ -177,8 +177,9 @@ class PlotEndModule(EndModule):
             leg.AddEntry(sample.hist, sample.name, "p")
         return leg
 
-    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None):
-        leg = ROOT.TLegend(0.70,0.65,0.89,0.87)
+    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None,skipError=False,leg_pos_list=[]):
+        leg_pos = [0.70,0.65,0.89,0.87] if not leg_pos_list else leg_pos_list
+        leg = ROOT.TLegend(*leg_pos)
         leg.SetBorderSize(0)
         leg.SetFillColor(0)
         leg.SetTextSize(0.015)
@@ -193,7 +194,7 @@ class PlotEndModule(EndModule):
             legLabel += ": 100%"
         else:
             legLabel += ": "+str(math.ceil(smCount*10)/10)
-        if smCountErr:
+        if smCountErr and not skipError:
             legLabel += " #pm "+str(math.ceil(smCountErr*10)/10)
 
         if bkdgErr:
@@ -205,7 +206,8 @@ class PlotEndModule(EndModule):
             if switch:
                 legLabel += ": "+str(math.ceil(math.ceil(hCount[2]*10)/math.ceil(smCount*10)*100000)/1000)+"%"
             else:
-                legLabel += ": "+str(math.ceil(hCount[2]*10)/10)+" #pm"+str(math.ceil(error*10)/10)
+                legLabel += ": "+str(math.ceil(hCount[2]*10)/10)
+                if not skipError: legLabel += " #pm"+str(math.ceil(error*10)/10)
             leg.AddEntry(hCount[0], legLabel, "f")
 
         histListSignal.sort(key=lambda l: l[1], reverse=False)
@@ -314,58 +316,64 @@ class PlotEndModule(EndModule):
                 c.SaveAs(outputDir+plot.key+"_log.pdf")
         elif collector.bkgSamples and collector.dataSamples:
             c.SetBottomMargin(0.0)
-            ## TPad("name","title",xlow,ylow,xup,yup)
-            upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
-            lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .32)
+            ROOT.gStyle.SetErrorX(0)
+            if not plot.plotSetting.skip_data_mc_ratio:
+                ## TPad("name","title",xlow,ylow,xup,yup)
+                upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
+                lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .32)
 
-            upperPad.Draw()
-            lowerPad.Draw()
+                upperPad.Draw()
+                lowerPad.Draw()
 
-            lowerPad.cd()
-            lowerPad.SetGridy(1)
-            ROOT.gPad.SetBottomMargin(0.24)
+                lowerPad.cd()
+                lowerPad.SetGridy(1)
+                ROOT.gPad.SetBottomMargin(0.24)
 
-            ratio,bkdgErrRatio,line = self.makeRatioPlot(dataHist,total,bkdgErr)
-            ratio.SetStats(0)
-            ratio.Draw()
-            bkdgErrRatio.Draw("samee2")
-            ratio.GetYaxis().SetRangeUser(0.0,ratio.GetMaximum()*1.5) # Make this symmetric about 1
-            #ratio.GetYaxis().SetRangeUser(0.0,2.0) # Make this symmetric about 1
-            ratio.GetYaxis().SetLabelSize(0.075)
-            ratio.GetXaxis().SetLabelSize(0.075)
-            ratio.GetYaxis().SetTitle("Data/MC")
-            ratio.GetYaxis().SetTitleSize(0.10)
-            ratio.GetXaxis().SetTitleSize(0.10)
-            ratio.GetXaxis().SetTitleOffset(0.90)
-            ratio.GetYaxis().SetTitleOffset(0.50)
-            ratio.GetXaxis().SetTitle(axisLabel)
-            if plot.plotSetting.x_axis_labels:
-                for ibin,label in enumerate(plot.plotSetting.x_axis_labels): ratio.GetXaxis().SetBinLabel(ibin+1,label)
+                ratio,bkdgErrRatio,line = self.makeRatioPlot(dataHist,total,bkdgErr)
+                ratio.SetStats(0)
+                ratio.Draw()
+                bkdgErrRatio.Draw("samee2")
+                ratio.GetYaxis().SetRangeUser(0.0,ratio.GetMaximum()*1.5) # Make this symmetric about 1
+                #ratio.GetYaxis().SetRangeUser(0.0,2.0) # Make this symmetric about 1
+                ratio.GetYaxis().SetLabelSize(0.075)
+                ratio.GetXaxis().SetLabelSize(0.075)
+                ratio.GetYaxis().SetTitle("Data/MC")
+                ratio.GetYaxis().SetTitleSize(0.10)
+                ratio.GetXaxis().SetTitleSize(0.10)
+                ratio.GetXaxis().SetTitleOffset(0.90)
+                ratio.GetYaxis().SetTitleOffset(0.50)
+                ratio.GetXaxis().SetTitle(axisLabel)
+                if plot.plotSetting.x_axis_labels:
+                    for ibin,label in enumerate(plot.plotSetting.x_axis_labels): ratio.GetXaxis().SetBinLabel(ibin+1,label)
 
-            bkdgErrRatio.SetMarkerStyle(1)
-            bkdgErrRatio.SetLineWidth(1)
-            bkdgErrRatio.SetLineColor(1)
-            bkdgErrRatio.SetFillColor(1)
-            bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
+                bkdgErrRatio.SetMarkerStyle(1)
+                bkdgErrRatio.SetLineWidth(1)
+                bkdgErrRatio.SetLineColor(1)
+                bkdgErrRatio.SetFillColor(1)
+                bkdgErrRatio.SetFillStyle(bkdgErrBarColor)
 
-            if plot.plotSetting.ratio_range:
-                ratio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
-                bkdgErrRatio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+                if plot.plotSetting.ratio_range:
+                    ratio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
+                    bkdgErrRatio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
 
-            ratio.DrawCopy()
-            bkdgErrRatio.DrawCopy("samee2")
-            line.Draw()
+                ratio.DrawCopy()
+                bkdgErrRatio.DrawCopy("samee2")
+                line.Draw()
 
-            upperPad.cd()
+                upperPad.cd()
+            else:
+                upperPad = c
+                ROOT.gPad.SetBottomMargin(0.10)
 
-            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
+            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,)
 
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
             dataHist.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
 
             stack.Draw('hist')
-            stack.GetXaxis().SetTitleOffset(0.55)
+            self.setStackAxisTitle(stack,axisLabel,plot)
+            stack.GetXaxis().SetTitleOffset(1.00)
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
@@ -389,8 +397,14 @@ class PlotEndModule(EndModule):
             if plot.plotSetting.cms_lumi:
                 CMS_lumi(upperPad,plot.plotSetting.cms_lumi_number,11)
 
-            dataHist.DrawCopy('samep')
+            dataHist.DrawCopy('same p')
             bkdgErr.Draw("samee2")
+
+            if plot.plotSetting.custom_latex_list:
+                for latex_setting in plot.plotSetting.custom_latex_list:
+                    latex_setting.latex = ROOT.TLatex()
+                    latex_setting.latex.SetTextSize(latex_setting.text_size)
+                    latex_setting.latex.DrawLatex(latex_setting.x_pos,latex_setting.y_pos,latex_setting.text)
 
             # c.cd()
             
@@ -403,7 +417,7 @@ class PlotEndModule(EndModule):
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
-            dataHist.Draw("samep")
+            dataHist.Draw("same p")
             leg.Draw('same')
             # Draw CMS, lumi and preliminary if specified
             #self.drawLabels(pSetPair[0].lumi)
@@ -466,10 +480,12 @@ class PlotEndModule(EndModule):
             sampleList.append(tmpSampleObj)
             if plot.plotSetting.x_axis_title: hist.GetXaxis().SetTitle(plot.plotSetting.x_axis_title)
             if plot.plotSetting.y_axis_title: hist.GetYaxis().SetTitle(plot.plotSetting.y_axis_title)
+            if plot.plotSetting.draw_option:
+                draw_command = plot.plotSetting.draw_option
             if not isample:
-                hist.Draw("SCAT=%s p"%plot.plotSetting.scatter_density)
+                hist.Draw(draw_command)
             else:
-                hist.Draw("SCAT=%s psame"%plot.plotSetting.scatter_density)
+                hist.Draw(draw_command+" same")
             #c.SaveAs(outputDir+sample+"_"+plot.key+".png")
             #c.SaveAs(outputDir+sample+"_"+plot.key+".pdf")
         leg = self.makeSimpleLegend(sampleList,plot)
@@ -486,7 +502,7 @@ class PlotEndModule(EndModule):
         allBinWidths = [stack.GetXaxis().GetBinWidth(i) for i in range(1,stack.GetXaxis().GetNbins()+1)]
         constantBinWidth = all([binWidth == allBinWidths[0] for binWidth in allBinWidths])
         if constantBinWidth and plot.plotSetting.divideByBinWidth:
-            title = "Events / (%.2f GeV)" % (binWidths[0])
+            title = "Events / (%.2f GeV)" % (allBinWidths[0])
         elif plot.plotSetting.divideByBinWidth:
             title = "Events / Bin Width"
         elif plot.plotSetting.bin_width_label:
@@ -497,7 +513,7 @@ class PlotEndModule(EndModule):
 
     def makeRatioPlot(self,data,total,bkdgErr):
 
-        ratio = data.Clone("ratio")
+        ratio = data.Clone()
         for i in range(1, ratio.GetNbinsX()+1):
             binC_data = data.GetBinContent(i)
             binC_total = total.GetBinContent(i)
@@ -515,7 +531,7 @@ class PlotEndModule(EndModule):
             ratio.SetBinContent(i,binC_ratio)
             ratio.SetBinError(i,binE_ratio*binC_ratio)
 
-        bkdgErrRatio = ratio.Clone("ratioerr")
+        bkdgErrRatio = ratio.Clone()
         for i in range(1, bkdgErrRatio.GetNbinsX()+1):
             binC = bkdgErr.GetBinContent(i)
             binE = bkdgErr.GetBinError(i)
@@ -530,12 +546,15 @@ class PlotEndModule(EndModule):
 
         return ratio,bkdgErrRatio,line
 
-    def shiftLastBin(self,h):
+    def shiftLastBin(self,h,isData=False):
         # FirstBin = h.GetXaxis().GetFirst()
         LastBin = h.GetXaxis().GetLast()
         for bin in range( LastBin + 1, LastBin + 2 ):
             h.SetBinContent( LastBin, h.GetBinContent( LastBin ) + h.GetBinContent( bin ) )
-            h.SetBinError( LastBin, math.sqrt( math.pow( h.GetBinError( LastBin ), 2 ) + math.pow( h.GetBinError( bin ), 2 ) ) )
+            if not isData:
+                h.SetBinError( LastBin, math.sqrt( math.pow( h.GetBinError( LastBin ), 2 ) + math.pow( h.GetBinError( bin ), 2 ) ) )
+            else:
+                h.SetBinError( LastBin, math.sqrt( h.GetBinContent(LastBin)) )
             h.SetBinContent( LastBin + 1, 0. )
             h.SetBinError( LastBin + 1, 0. )
             pass
