@@ -9,7 +9,7 @@ bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Zprime/EXO-18-008/HZZNT
 dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = True
+saveSumWeightTxt    = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Data2017
