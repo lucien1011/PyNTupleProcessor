@@ -80,8 +80,6 @@ general_4mu_plots = [
         Plot("phi_4mu",["TH1D","phi_4mu","",]+anglePlotRange, LambdaFunc('x: '+var_phi_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         Plot("phi1_4mu",["TH1D","phi1_4mu","",]+anglePlotRange, LambdaFunc('x: '+var_phi1_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         
-        Plot("thetaZ1_4mu",["TH1D","thetaZ1_4mu","",]+hPtPlotRange, LambdaFunc('x: '+var_thetaZ1_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
-
         Plot("mu1Pt_4mu", ["TH1D","mu1Pt_4mu","",]+mu1PtPlotRange, LambdaFunc('x: '+var_mu1Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
         Plot("mu2Pt_4mu", ["TH1D","mu2Pt_4mu","",]+mu2PtPlotRange, LambdaFunc('x: '+var_mu2Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
         Plot("mu3Pt_4mu", ["TH1D","mu3Pt_4mu","",]+mu3PtPlotRange, LambdaFunc('x: '+var_mu3Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
