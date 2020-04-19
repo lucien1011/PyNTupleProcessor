@@ -36,6 +36,7 @@ class PlotSetting(object):
             shift_last_bin=True,
             custom_latex_list=[],
             draw_option=None,
+            normalize=False,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -75,3 +76,4 @@ class PlotSetting(object):
         self.shift_last_bin = shift_last_bin
         self.custom_latex_list = custom_latex_list
         self.draw_option = draw_option
+        self.normalize = normalize

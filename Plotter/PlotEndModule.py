@@ -163,6 +163,10 @@ class PlotEndModule(EndModule):
             for hist,sample,sigCount in histList:
                 self.divideByBinWidth(hist)
 
+        if plot.plotSetting.normalize:
+            for hist,sample,sigCount in histList:
+                if hist.Integral(): hist.Scale(1./hist.Integral())
+
         return histList
     
     def makeSimpleLegend(self,sampleList,plot):
@@ -437,7 +441,7 @@ class PlotEndModule(EndModule):
             #sigHistList looks like: histList.append([h,sample,sigCount])
             maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
             for hist,sample,sigCount in sigHistList:
-                hist.GetYaxis().SetRangeUser(0.,maximum*plot.plotSetting.log_max_factor)
+                hist.GetYaxis().SetRangeUser(0.,maximum*plot.plotSetting.linear_max_factor)
                 hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")
