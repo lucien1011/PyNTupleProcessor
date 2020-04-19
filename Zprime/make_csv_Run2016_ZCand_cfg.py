@@ -4,12 +4,13 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from Zprime.Dataset.Run2017.SkimTree_Bkg_m4l70 import * 
-from Zprime.Dataset.Run2017.SkimTree_Zprime_m4l70 import * 
+from Zprime.Dataset.Run2016.SkimTree_Bkg_m4l70 import * 
+from Zprime.Dataset.Run2016.SkimTree_Zprime_m4l70 import * 
 from Zprime.Sequence.RecoSequence import * 
 from Zprime.Producer.ZCandProducer import ZCandProducer
 
 from Zprime.Config.MergeSampleDict import mergeSampleDict
+from Zprime.Config.ZCandPlotDefinition import plots
 
 from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting 
 

@@ -15,7 +15,8 @@ from Plotter.PlotEndModule import PlotEndModule
 from Zprime.Config.MergeSampleDict import mergeSampleDict
 
 User                    = os.environ['USER']
-out_path                = "SR/DataMCDistributions/2019-06-03_Run2017/"
+#out_path                = "SR/DataMCDistributions/2019-06-03_Run2017/"
+out_path                = "SR/DataMCDistributions/2020-04-06_Run2017/"
 lumi                    = 41.4
 nCores                  = 5
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/Zprime/"+out_path
@@ -24,7 +25,7 @@ disableProgressBar      = False
 componentList           = bkgSamples + [sigSampleDict[m] for m in [10,40,70]]
 #componentList           = bkgSamples + sigSampleDict.values()
 #componentList           = sigSampleDict.values() 
-justEndSequence         = True
+justEndSequence         = False
 
 plots = general_4mu_plots
 

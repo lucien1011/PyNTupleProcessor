@@ -13,14 +13,15 @@ from Zprime.Config.MergeSampleDict import mergeSampleDict
 from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting 
 
 User                    = os.environ['USER']
-out_path                = "MVA/Input/2019-06-10_Run2017_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
+#out_path                = "MVA/Input/2019-06-10_Run2017_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
+out_path                = "MVA/Input/2020-04-06_Run2017_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
 lumi                    = 41.4
 nCores                  = 5
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/Zprime/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + sigSampleDict.values()
-#componentList           = [zpToMuMu_M15,qqZZTo4L] 
+#componentList           = bkgSamples + sigSampleDict.values()
+componentList           = [zpToMuMu_M15,zpToMuMu_M20] 
 justEndSequence         = False
 
 for dataset in componentList:
