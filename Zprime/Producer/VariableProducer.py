@@ -34,9 +34,9 @@ class VariableProducer(Module):
 
         ROOT.computeAngles(
                 event.vecL1,event.idL1[0],
-                event.vecL2,event.idL1[0],
-                event.vecL3,event.idL1[0],
-                event.vecL4,event.idL1[0],
+                event.vecL2,event.idL2[0],
+                event.vecL3,event.idL3[0],
+                event.vecL4,event.idL4[0],
                 event.cosThetaStar,
                 event.cosTheta1,
                 event.cosTheta2,
