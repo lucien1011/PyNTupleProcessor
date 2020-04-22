@@ -4,8 +4,8 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 
 from HToZdZd.Dataset.Run2018.SkimTree_DarkPhoton_m4l70 import * 
+from HToZdZd.Dataset.Run2018.SkimTree_RareBkg_m4l70 import * 
 from HToZdZd.Dataset.Run2018.SkimTree_DarkPhoton_m4l70_HZdZd import * 
-#from HToZdZd.Dataset.Run2016.SkimTree_DarkSUSY_m4l70 import * 
 from HToZdZd.Sequence.RecoSequence import * 
 
 from HToZdZd.StatTools.StatInputProducer import StatInputProducer # Stealing from DarkZ
@@ -16,14 +16,16 @@ from HToZdZd.Config.MergeSampleDict import *
 import os
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/StatInput/2019-12-06_SR2D_Run2018/"
+out_path                = "DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2018/"
+#out_path                = "DarkPhotonSR/StatInput/2020-02-29_SR2D_Run2018_OptimiseWindow/"
 lumi                    = 58.8
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples + [data2018,] + sigSamples 
+componentList           = bkgSamples + rareBkgSamples + [data2018,] + sigSamples 
 justEndSequence         = False
+skipHadd                = False
 
 for dataset in componentList:
     if dataset.isMC:
@@ -79,4 +81,4 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "StatInput.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence,haddDataSamples=True)
+endSequence = EndSequence(skipHadd=skipHadd,haddDataSamples=True)

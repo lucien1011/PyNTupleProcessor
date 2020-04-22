@@ -20,41 +20,29 @@ from HToZdZd.Config.AnalysisNotePlot import *
 import ROOT,os,copy
 
 User                    = os.environ['USER']
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_RunII/"
-end_out_path            = "DarkPhotonSR/DataMCDistributions/2019-09-06_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-06_RunII/"
+#end_out_path            = "DarkPhotonSR/DataMCDistributions/2019-09-06_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII/"
+
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII/"
 nCores                  = 3
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-sigSamples              = [      
-                                #HToZdZd_MZD4,
-                                HToZdZd_MZD5,
-                                #HToZdZd_MZD6,
-                                #HToZdZd_MZD7,
-                                #HToZdZd_MZD8,
-                                #HToZdZd_MZD9,
-                                HToZdZd_MZD10,
-                                #HToZdZd_MZD15, 
-                                #HToZdZd_MZD20,
-                                #HToZdZd_MZD25,
-                                HToZdZd_MZD30,
-                                #HToZdZd_MZD35,
-                                #HToZdZd_MZD40,
-                                #HToZdZd_MZD45,
-                                #HToZdZd_MZD50,
-                                #HToZdZd_MZD55,
-                                HToZdZd_MZD60,
-                                ]
 componentList           = bkgSamples + dataSamples + sigSamples
 justEndSequence         = False
 
-plots = general_mu_plots + general_el_plots
+plots = general_plots 
 
-inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
+#inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","shape.root"),"READ")
+inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","PlotShape.root"),"READ")
 for p in plots:
-    p.plotSetting.divideByBinWidth = False
+    p.plotSetting.divideByBinWidth = True 
     if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
-    if p.key in ["mZ2_mu", "mZ2_el"]:
+    if p.key in [
+            "mZ2_4mu","mZ2_4e","mZ2_2e2mu","mZ2_2mu2e",
+            "mZ12_4mu","mZ12_4e","mZ12_2e2mu","mZ12_2mu2e",
+            ]:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
         #p.customPdfDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
         #p.customPdfDict = {}

@@ -36,7 +36,8 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2016/"
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_Run2016/"
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-11-21_Run2016/"
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-12-02_Run2016/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-12-02_Run2016/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2020-02-28_Run2016/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
@@ -46,7 +47,7 @@ disableProgressBar      = False
 componentList           = bkgSamples + [sigSampleDict[15],sigSampleDict[30],data2016,] 
 justEndSequence         = False
 
-plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
+plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots + general_mu_plots + general_el_plots
 
 for sig in sigSamples:
     for p in plots:
