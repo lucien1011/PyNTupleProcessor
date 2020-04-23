@@ -4,25 +4,21 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-#from Zprime.Dataset.Run2016.SkimTree_Bkg_m4l70 import *
-#from Zprime.Dataset.Run2016.SkimTree_Zprime_m4l70 import *
-#from Zprime.Dataset.Run2017.SkimTree_Bkg_m4l70 import * 
-#from Zprime.Dataset.Run2017.SkimTree_Zprime_m4l70 import * 
-from Zprime.Dataset.Run1617.SkimTree_Zprime_m4l70 import *
+from Zprime.Dataset.Run2018.SkimTree_Bkg_m4l70 import * 
+#from Zprime.Dataset.Run2018.SkimTree_Zprime_m4l70 import * 
 from Zprime.Sequence.RecoSequence import * 
 from Zprime.Config.PlotDefinition import *
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
 
-from Zprime.Config.MergeSampleDict_1617 import mergeSampleDict
+from Zprime.Config.MergeSampleDict import mergeSampleDict
 
-#User                    = os.environ['USER']
-User                    = "kshi"
+User                    = os.environ['USER']
 #out_path                = "SR/DataMCDistributions/2019-06-03_Run2017/"
-#out_path                = "DataMCDistributions/Run2016_Run2017/2020-02-24/"
-out_path                = "DataMCDistributions/Run2016_Run2017/2020-04-13_4Gev_CR/"
-#lumi                    = 41.4
+#out_path                = "DataMCDistributions/Run2017/test/"
+out_path                = "DataMCDistributions/Run2018/2020-04-13_4Gev_CR/"
+lumi                    = 59.7
 nCores                  = 5
 outputDir               = system.getStoragePath()+"/"+User+"/Zprime/Zto4l/"+out_path
 nEvents                 = -1
@@ -30,12 +26,14 @@ disableProgressBar      = False
 #componentList           = bkgSamples + [sigSampleDict[m] for m in [10,40,70]]
 #componentList           = bkgSamples + sigSampleDict.values()
 #componentList           = sigSampleDict.values()
-componentList           = bkgSamples + dataSamples# + sigSamples
+componentList           = dataSamples + bkgSamples# + dataSamples 
 justEndSequence         = False
 
 plots = general_4mu_plots
 
 for dataset in componentList:
+    if dataset.isMC:
+        dataset.lumi = lumi
     for component in dataset.componentList:
         component.maxEvents = nEvents
 

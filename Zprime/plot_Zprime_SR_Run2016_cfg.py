@@ -17,7 +17,8 @@ from Zprime.Config.MergeSampleDict import mergeSampleDict
 User                    = os.environ['USER']
 #out_path                = "SR/DataMCDistributions/2019-06-03_Run2017/"
 #out_path                = "DataMCDistributions/Run2016/2020-02-21/"
-out_path                = "DataMCDistributions/Run2016/2020-02-26_mllLowGev_CR/"
+out_path                = "DataMCDistributions/Run2016/2020-04-13_4Gev_CR/"
+#out_path                = "DataMCDistributions/Run2016/test/"
 lumi                    = 35.9
 nCores                  = 5
 outputDir               = system.getStoragePath()+"/"+User+"/Zprime/Zto4l/"+out_path
