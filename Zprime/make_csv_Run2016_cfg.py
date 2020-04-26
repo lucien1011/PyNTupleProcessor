@@ -4,8 +4,8 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from Zprime.Dataset.Run2017.SkimTree_Bkg_m4l70 import * 
-from Zprime.Dataset.Run2017.SkimTree_Zprime_m4l70 import * 
+from Zprime.Dataset.Run2016.SkimTree_Bkg_m4l70 import * 
+from Zprime.Dataset.Run2016.SkimTree_Zprime_m4l70 import * 
 from Zprime.Sequence.RecoSequence import * 
 
 from Zprime.Config.MergeSampleDict import mergeSampleDict
@@ -13,14 +13,17 @@ from Zprime.Config.MergeSampleDict import mergeSampleDict
 from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting 
 
 User                    = os.environ['USER']
-out_path                = "MVA/Input/2020-04-06_Run2016_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
+#out_path                = "MVA/Input/2020-04-06_Run2016_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
+#out_path                = "MVA/Input/2020-04-25_Run2016_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
+out_path                = "MVA/Input/2020-04-26_Run2016_m4l-mZ1-mZ2-cosTheta1-cosTheta2-cosThetaStar-phi-phi1/"
 lumi                    = 41.4
-nCores                  = 5
+nCores                  = 1
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/Zprime/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + sigSampleDict.values()
-componentList           = bkgSamples #+ sigSampleDict.values()
+componentList           = bkgSamples
+#componentList           = sigSampleDict.values()
 justEndSequence         = False
 
 for dataset in componentList:
@@ -44,6 +47,9 @@ varsToWrite             = [
                             LambdaFunc("x: x.phiL2[0]"),
                             LambdaFunc("x: x.phiL3[0]"),
                             LambdaFunc("x: x.phiL4[0]"),
+                            LambdaFunc("x: x.phiL21"),
+                            LambdaFunc("x: x.phiL31"),
+                            LambdaFunc("x: x.phiL41"),
                             LambdaFunc("x: x.mass4l[0]"),
                             LambdaFunc("x: x.massZ1[0]"),
                             LambdaFunc("x: x.massZ2[0]"),
