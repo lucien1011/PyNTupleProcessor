@@ -12,7 +12,7 @@ class AnalysisSkimmer(Module):
             if event.mass4l[0] < 100. and event.mass4l[0] > 80.: return False
             if event.mass4l[0] < 70.: return False
             if event.massZ1[0] < 12. or event.massZ1[0] > 120.: return False
-            if event.massZ2[0] < 4. or event.massZ2[0] > 120.: return False
+            if event.massZ2[0] < 1. or event.massZ2[0] > 120.: return False
             if not event.passedFullSelection[0]: return False
             #if event.nZXCRFailedLeptons[0] != 2: return False
             return True

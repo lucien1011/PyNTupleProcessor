@@ -4,7 +4,7 @@ mergeSampleDict = {
         #"WH":   ["WHPlus","WHminus",],
         #"ZH":   ["ZH",],
         "Higgs":    ["ggH","VBF","WHPlus","WHMinus","ZH","ttH"],
-        "qqZZ": ["qqZZTo4L",],
+        "qqZZ": ["qqZZTo4L","qqZZTo4L_M1To4"],
         "ggZZ": [
             "ggZZTo2e2mu",
             "ggZZTo2e2tau",
