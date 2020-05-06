@@ -14,6 +14,7 @@ bkgTreeDir2         = "/cms/data/store/user/t2/users/klo/Higgs/Zprime/94X_MCProd
 #dataTreeDir         = bkgSkimTreeDir
 #dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_Data/"
 dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_Data/"
+dataTreeDir2        = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/promptCR/SkimTree_Run2017_MMM_Data/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 saveSumWeightTxt    = True
@@ -36,6 +37,22 @@ data2017 = Dataset(
         data2017_cmpList,
         isMC                = False,
         )
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ZPlusX
+ZPlusX_cmpList = ComponentList(
+        [
+            Component("ZPlusX",dataTreeDir2+"Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasinWZRemoved.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ZPlusX = Dataset(
+        "ZPlusX",
+        ZPlusX_cmpList,
+        isMC                = True,
+        skipWeight          = True,
+        )
+
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # qqZZ
@@ -405,8 +422,9 @@ bkgSamples = [
         #ggZZTo4e,
         #ggZZTo4mu,
         #ggZZTo4tau,
-        qqZZTo4L_M1To4,
+        #qqZZTo4L_M1To4,
+        ZPlusX,
         ]
 dataSamples = [
-        data2017,
+        #data2017,
         ]

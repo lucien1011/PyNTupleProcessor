@@ -5,6 +5,7 @@ from Zprime.Producer.VariableProducer import VariableProducer
 from DarkZ.Weighter.DataMCWeighter import DataMCWeighter
 from DarkZ.Weighter.NLOWeighter import NLOWeighter
 from Zprime.Skimmer.FinalstateSkimmer import FinalstateSkimmer
+from Zprime.Weighter.FakeRateWeighter import FakeRateWeighter
 
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
@@ -15,6 +16,7 @@ dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")
 xsWeighter              = XSWeighter("XSWeighter")
 varProducer             = VariableProducer("VariableProducer")
+fakerateWeighter        = FakeRateWeighter("FakeRateWeighter")
 
 signal_sequence = Sequence()
 signal_sequence.add(SRSkimmer)
@@ -22,6 +24,7 @@ signal_sequence.add(xsWeighter)
 signal_sequence.add(dataMCWeighter)
 signal_sequence.add(nloWeighter)
 signal_sequence.add(varProducer)
+#signal_sequence.add(fakerateWeighter)
 
 fr_sequence = Sequence()
 fr_sequence.add(SRSkimmer)

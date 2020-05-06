@@ -29,6 +29,20 @@ data2017 = Dataset(
         )
 
 # _________________________________________________________________________________________________________________ ||
+ZPlusX_cmpList = ComponentList(
+        [
+            Component("ZPlusX",dataTreeDir+"Data_Run2017-17Nov2017_noDuplicates_FRWeightFromVukasinWZRemoved.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ZPlusX = Dataset(
+        "ZPlusX",
+        ZPlusX_cmpList,
+        isMC                = True,
+        skipWeight          = True,
+        )
+
+# _________________________________________________________________________________________________________________ ||
 DYJetsToLL_M50_cmpList = ComponentList(
         [
             Component("DYJetsToLL_M50",bkgSkimTreeDir+"DYJetsToLL_M50.root","passedEvents",inUFTier2=inUFTier2),
@@ -126,7 +140,8 @@ bkgSamples = [
         DYJetsToLL_M10To50,
         TTJets,
         WZTo3LNu,
+        ZPlusX,
         ]
 dataSamples = [
-        data2017,
+        #data2017,
         ]

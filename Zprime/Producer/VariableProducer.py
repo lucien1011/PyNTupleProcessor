@@ -11,6 +11,7 @@ class VariableProducer(Module):
 
     def analyze(self,event):
         event.deltaRL12 = deltaR(event.etaL1[0],event.phiL1[0],event.etaL2[0],event.phiL2[0])
+        event.deltaRL34 = deltaR(event.etaL3[0],event.phiL3[0],event.etaL4[0],event.phiL4[0])
         event.vecL1 = ROOT.TLorentzVector()
         event.vecL1.SetPtEtaPhiM(event.pTL1[0],event.etaL1[0],event.phiL1[0],muonMass)
 
