@@ -8,5 +8,5 @@ eval `scramv1 runtime -sh`
 cd -
 
 export NTUPLERUNNER_MODE="Remote"
-export NTUPLERUNNER_STORAGE=/cms/data/store/user/t2/users//klo/UFNTupleRunner_Storage/
+export NTUPLERUNNER_STORAGE=/cmsuf/data/store/user/t2/users//klo/UFNTupleRunner_Storage/
 export NTUPLERUNNER_WWW="/home/${USER}/public_html/"

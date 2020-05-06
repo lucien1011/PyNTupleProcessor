@@ -7,9 +7,9 @@ from Physics.HZZ import Higgs_prod_xs
 import os
 
 # ____________________________________________________________________________________________________________________________________________ ||
-sigSkimTreeDir          = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20191201/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
-sigSkimTreeDir2         = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20191204/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
-sigTreeDir              = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/80X_MCProd_191127/"
+sigSkimTreeDir          = system.getStoragePath()+"/"+os.environ["USER"]+"/Higgs/DarkZ-NTuple/20191201/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
+sigSkimTreeDir2         = system.getStoragePath()+"/"+os.environ["USER"]+"/Higgs/DarkZ-NTuple/20191204/SkimTree_HToZdZd_Run2016Data_m4l70_noZCandRatioCut/"
+sigTreeDir              = "/cmsuf/data/store/user/t2/users/klo/Higgs/HToZdZd/80X_MCProd_191127/"
 inUFTier2               = False
 sumWeightHist           = "Ana/sumWeights"
 kappa                   = 0.0001

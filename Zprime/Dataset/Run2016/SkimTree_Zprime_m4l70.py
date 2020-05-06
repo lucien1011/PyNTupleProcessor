@@ -2,8 +2,9 @@ from Core.ComponentList import *
 from Core.Dataset import Dataset
 from Utils.System import system
 from Utils.SumWeight import handleSumWeight
+import os
 
-bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20200415/SkimTree_Zprime_Run2017Data_m4l70/"
+bkgSkimTreeDir      = system.getStoragePath()+"/"+os.environ['USER']+"/Higgs/Zprime-NTuple/20200415/SkimTree_Zprime_Run2017Data_m4l70/"
 bkgSkimTreeDir2     = bkgSkimTreeDir
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Zprime/EXO-18-008/HZZNTuple_Run2016/"
 dataTreeDir         = bkgSkimTreeDir

@@ -5,7 +5,7 @@ from Utils.SumWeight import handleSumWeight
 
 bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2017Data_m4l70/"
 bkgSkimTreeDir2     = bkgSkimTreeDir
-bkgTreeDir          = "/cms/data/store/user/muahmad/rootfiles_2017/"
+bkgTreeDir          = "/cmsuf/data/store/user/muahmad/rootfiles_2017/"
 dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
