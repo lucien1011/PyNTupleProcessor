@@ -181,18 +181,16 @@ class PlotEndModule(EndModule):
             leg.AddEntry(sample.hist, sample.name, "p")
         return leg
 
-    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None,skipError=False,leg_pos_list=[]):
+    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None,skipError=False,leg_pos_list=[],leg_text_size=None,):
         leg_pos = [0.70,0.65,0.89,0.87] if not leg_pos_list else leg_pos_list
         leg = ROOT.TLegend(*leg_pos)
         leg.SetBorderSize(0)
         leg.SetFillColor(0)
-        leg.SetTextSize(0.015)
+        if leg_text_size: leg.SetTextSize(leg_text_size)
         if dataCount != None:
             legLabel = "Data"
             legLabel += ": {0}".format(int(dataCount))
             leg.AddEntry(data, legLabel , "p")
-        # if not self._normToData and data:
-            # if not self._normToData: leg.AddEntry(data, "Data: {0}".format(int(data.Integral(0,data.GetNbinsX()+1))), "p")
         legLabel = "Total"
         if switch:
             legLabel += ": 100%"
@@ -202,7 +200,7 @@ class PlotEndModule(EndModule):
             legLabel += " #pm "+str(math.ceil(smCountErr*10)/10)
 
         if bkdgErr:
-            leg.AddEntry(bkdgErr, legLabel, "fl")
+            leg.AddEntry(bkdgErr, legLabel, "l")
 
         for hCount in reversed(histList):
             legLabel = hCount[1]
@@ -278,7 +276,7 @@ class PlotEndModule(EndModule):
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
 
-            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq))
+            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),leg_text_size=plot.plotSetting.leg_text_size)
 
             if plot.plotSetting.log_x:
                 c.SetLogx(1)
@@ -339,8 +337,8 @@ class PlotEndModule(EndModule):
                 bkdgErrRatio.Draw("samee2")
                 ratio.GetYaxis().SetRangeUser(0.0,ratio.GetMaximum()*1.5) # Make this symmetric about 1
                 #ratio.GetYaxis().SetRangeUser(0.0,2.0) # Make this symmetric about 1
-                ratio.GetYaxis().SetLabelSize(0.075)
-                ratio.GetXaxis().SetLabelSize(0.075)
+                ratio.GetYaxis().SetLabelSize(0.09)
+                ratio.GetXaxis().SetLabelSize(0.09)
                 ratio.GetYaxis().SetTitle("Data/MC")
                 ratio.GetYaxis().SetTitleSize(0.10)
                 ratio.GetXaxis().SetTitleSize(0.10)
@@ -369,7 +367,7 @@ class PlotEndModule(EndModule):
                 upperPad = c
                 ROOT.gPad.SetBottomMargin(0.10)
 
-            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,)
+            leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,leg_text_size=plot.plotSetting.leg_text_size,)
 
             upperPad.SetLogy(0)
             stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
@@ -377,9 +375,9 @@ class PlotEndModule(EndModule):
 
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
-            stack.GetXaxis().SetLabelSize(0.03)
+            stack.GetXaxis().SetLabelSize(plot.plotSetting.stack_x_label_size)
             stack.GetXaxis().SetTitleOffset(1.00)
-            stack.GetYaxis().SetLabelSize(0.03)
+            stack.GetYaxis().SetLabelSize(0.05)
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
@@ -400,8 +398,8 @@ class PlotEndModule(EndModule):
             n1.SetTextSize(0.05);
             if not self.skipSF:
                 n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
-            if plot.plotSetting.cms_lumi:
-                CMS_lumi(upperPad,plot.plotSetting.cms_lumi_number,11)
+            if plot.plotSetting.cms_lumi != None:
+                plot.plotSetting.cms_lumi(upperPad,plot.plotSetting.cms_lumi_number,0)
 
             dataHist.DrawCopy('same p')
             bkdgErr.Draw("samee2")
@@ -413,6 +411,9 @@ class PlotEndModule(EndModule):
                     latex_setting.latex.DrawLatex(latex_setting.x_pos,latex_setting.y_pos,latex_setting.text)
 
             # c.cd()
+
+            ROOT.gPad.RedrawAxis()
+            ROOT.gPad.RedrawAxis("G")
             
             c.SaveAs(outputDir+plot.key+".png")
             c.SaveAs(outputDir+plot.key+".pdf")
@@ -429,6 +430,8 @@ class PlotEndModule(EndModule):
             #self.drawLabels(pSetPair[0].lumi)
             bkdgErr.Draw("samee2")
             n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
+            ROOT.gPad.RedrawAxis()
+            ROOT.gPad.RedrawAxis("G")
 
             c.SaveAs(outputDir+plot.key+"_log.png")
             c.SaveAs(outputDir+plot.key+"_log.pdf")
@@ -531,8 +534,8 @@ class PlotEndModule(EndModule):
                 binC_ratio = binC_data/binC_total
                 binE_ratio = math.sqrt((binE_data/binC_data)**2+(binE_total/binC_total)**2)
             elif binC_total and not binC_data:
-                binC_ratio = 1E-9
-                binE_ratio = 0.5
+                binC_ratio = 0.
+                binE_ratio = 0.
             elif not binC_total and not binC_data:
                 binC_ratio = 0.
                 binE_ratio = 0.

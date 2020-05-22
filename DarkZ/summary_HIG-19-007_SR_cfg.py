@@ -53,13 +53,13 @@ for p in plots:
     p.plotSetting.shift_last_bin = False
     p.plotSetting.bin_width_label = "Event / bin"
     p.plotSetting.x_axis_title = "m_{Z2} [GeV]"
-    p.plotSetting.leg_pos = [0.60,0.75,0.89,0.90]
+    p.plotSetting.leg_pos = [0.44,0.69,0.80,0.90]
     p.plotSetting.linear_max_factor = 1.5
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
     p.plotSetting.leg_name_dict = {
-            "HZZd_M30": "H #rightarrow Z Z_{D} , m_{Z_{D}} = 30 GeV, #varepsilon = 0.05",
-            "HZZd_M15": "H #rightarrow Z Z_{D} , m_{Z_{D}} = 15 GeV, #varepsilon = 0.05",
+            "HZZd_M30": "m_{Z_{D}} = 30 GeV #varepsilon = 0.05",
+            "HZZd_M15": "m_{Z_{D}} = 15 GeV #varepsilon = 0.05",
             "ZPlusX": "Z+X",
             }
 

@@ -37,6 +37,7 @@ class PlotSetting(object):
             custom_latex_list=[],
             draw_option=None,
             normalize=False,
+            stack_x_label_size=0.038,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -79,3 +80,4 @@ class PlotSetting(object):
         self.custom_latex_list = custom_latex_list
         self.draw_option = draw_option
         self.normalize = normalize
+        self.stack_x_label_size = stack_x_label_size
