@@ -45,12 +45,12 @@ for p in plots:
     p.plotSetting.x_axis_title = "(m_{Z1}+m_{Z2})/2 [GeV]"
     p.plotSetting.skip_data_mc_ratio = True
     p.plotSetting.skip_leg_err = True
-    p.plotSetting.leg_pos = [0.60,0.75,0.89,0.90]
+    p.plotSetting.leg_pos = [0.60,0.60,0.89,0.90]
     p.plotSetting.linear_max_factor = 3.0
     p.plotSetting.leg_name_dict = {
-            "HToZdZd_M30": "H #rightarrow Z_{d} Z_{d}, m_{X} = 30 GeV, #kappa = 0.0001",
-            "HToZdZd_M5": "H #rightarrow Z_{d} Z_{d}, m_{X} = 5 GeV, #kappa = 0.0001",
-            "HToZdZd_M50": "H #rightarrow Z_{d} Z_{d}, m_{X} = 50 GeV, #kappa = 0.0001",
+            "HToZdZd_M30": "H #rightarrow Z_{D} Z_{D}, m_{Z_{D}} = 30 GeV, #kappa = 10^{-4}",
+            "HToZdZd_M5": "H #rightarrow Z_{D} Z_{D}, m_{Z_{D}} = 5 GeV, #kappa = 10^{-4}",
+            "HToZdZd_M50": "H #rightarrow Z_{D} Z_{D}, m_{Z_{D}} = 50 GeV, #kappa = 10^{-4}",
             "ZPlusX": "Z+X",
             }
     if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"

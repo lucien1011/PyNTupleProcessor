@@ -20,6 +20,10 @@ class VariableProducer(Module):
                                event.deltaRL24,
                                event.deltaRL34,])
 
+        event.etaL21 = event.etaL2[0]-event.etaL1[0]
+        event.etaL31 = event.etaL3[0]-event.etaL1[0]
+        event.etaL41 = event.etaL4[0]-event.etaL1[0]
+
         event.phiL21 = deltaPhi(event.phiL2[0],event.phiL1[0])
         event.phiL31 = deltaPhi(event.phiL3[0],event.phiL1[0])
         event.phiL41 = deltaPhi(event.phiL4[0],event.phiL1[0])

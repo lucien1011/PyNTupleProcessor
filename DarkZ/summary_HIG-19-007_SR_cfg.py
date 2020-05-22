@@ -58,8 +58,8 @@ for p in plots:
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
     p.plotSetting.leg_name_dict = {
-            "HZZd_M30": "H #rightarrow Z Z_{d} , m_{X} = 30 GeV, #varepsilon = 0.05",
-            "HZZd_M15": "H #rightarrow Z Z_{d} , m_{X} = 15 GeV, #varepsilon = 0.05",
+            "HZZd_M30": "H #rightarrow Z Z_{D} , m_{Z_{D}} = 30 GeV, #varepsilon = 0.05",
+            "HZZd_M15": "H #rightarrow Z Z_{D} , m_{Z_{D}} = 15 GeV, #varepsilon = 0.05",
             "ZPlusX": "Z+X",
             }
 

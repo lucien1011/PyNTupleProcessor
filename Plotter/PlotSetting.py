@@ -1,8 +1,8 @@
 class PlotSetting(object):
     def __init__(self,
             divideByBinWidth=False,
-            x_axis_title=None,x_axis_labels=None,
-            y_axis_title=None,y_axis_labels=None,
+            x_axis_title=None,x_axis_labels=None,x_axis_title_size=0.04,
+            y_axis_title=None,y_axis_labels=None,y_axis_title_size=0.05,
             defaultLabelDict={},
             sf_x_pos=0.11,
             sf_y_pos=0.92,
@@ -40,7 +40,9 @@ class PlotSetting(object):
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
+        self.x_axis_title_size = x_axis_title_size
         self.y_axis_title = y_axis_title
+        self.y_axis_title_size = y_axis_title_size
         self.defaultLabelDict = defaultLabelDict
         self.x_axis_labels = x_axis_labels
         self.y_axis_labels = y_axis_labels

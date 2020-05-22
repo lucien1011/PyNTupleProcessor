@@ -377,7 +377,9 @@ class PlotEndModule(EndModule):
 
             stack.Draw('hist')
             self.setStackAxisTitle(stack,axisLabel,plot)
+            stack.GetXaxis().SetLabelSize(0.03)
             stack.GetXaxis().SetTitleOffset(1.00)
+            stack.GetYaxis().SetLabelSize(0.03)
             stack.Draw('hist')
             for hist,sample,sigCount in sigHistList:
                 hist.Draw('samehist')
@@ -502,10 +504,11 @@ class PlotEndModule(EndModule):
 
 
     def setStackAxisTitle(self,stack,axisLabel,plot):
+        stack.GetXaxis().SetTitleSize(plot.plotSetting.x_axis_title_size)
         stack.GetXaxis().SetTitle(axisLabel)
         allBinWidths = [stack.GetXaxis().GetBinWidth(i) for i in range(1,stack.GetXaxis().GetNbins()+1)]
         constantBinWidth = all([binWidth == allBinWidths[0] for binWidth in allBinWidths])
-        if constantBinWidth and plot.plotSetting.divideByBinWidth:
+        if constantBinWidth:
             title = "Events / (%.2f GeV)" % (allBinWidths[0])
         elif plot.plotSetting.divideByBinWidth:
             title = "Events / Bin Width"
@@ -513,6 +516,7 @@ class PlotEndModule(EndModule):
             title = plot.plotSetting.bin_width_label
         else:
             title = "Events"
+        stack.GetYaxis().SetTitleSize(plot.plotSetting.y_axis_title_size)
         stack.GetYaxis().SetTitle(title)
 
     def makeRatioPlot(self,data,total,bkdgErr):
