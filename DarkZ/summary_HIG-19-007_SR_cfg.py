@@ -10,19 +10,20 @@ from DarkZ.Dataset.RunII.SkimTree_DarkPhoton_m4l70 import *
 from DarkZ.Config.AnalysisNotePlot import *
 
 from Plotter.Plotter import Plotter
-from Plotter.PlotEndModule import PlotEndModule
+from DarkZ.EndModule.PaperPlotEndModule import PaperPlotEndModule
 
 from DarkZ.Config.MergeSampleDict_RunII import mergeSampleDict,mergeSigSampleDict
+from DarkZ.Config.CMS_lumi import CMS_lumi
 
 import ROOT,os,copy
 
+def custom_data_TGraph_func(g):
+    for i in range(g.GetN()):
+        x = g.GetPointX(i)
+        if x < 4.0 or (x > 8.5 and x < 11.0):
+            g.RemovePoint(i)
+
 User                    = os.environ['USER']
-#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
-#end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
-#end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
-#out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/"
-#end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-03-27_RunII/"
 out_path                = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
 end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
 
@@ -46,8 +47,8 @@ inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","PlotShape.root"),"R
 
 for p in plots:
     p.plotSetting.tdr_style = True
-    p.plotSetting.divideByBinWidth = True
-    p.plotSetting.cms_lumi = True
+    p.plotSetting.divideByBinWidth = False
+    p.plotSetting.cms_lumi = CMS_lumi
     p.plotSetting.skip_leg_err = True
     p.plotSetting.skip_data_mc_ratio = False
     p.plotSetting.shift_last_bin = False
@@ -55,6 +56,7 @@ for p in plots:
     p.plotSetting.x_axis_title = "m_{Z2} [GeV]"
     p.plotSetting.leg_pos = [0.44,0.69,0.80,0.90]
     p.plotSetting.linear_max_factor = 1.5
+    p.plotSetting.custom_data_TGraph_func = custom_data_TGraph_func
     if "mZ2" in p.key:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
     p.plotSetting.leg_name_dict = {
@@ -84,4 +86,4 @@ endSequence = EndSequence(
         skipComponentHadd=skipHadd,
         )
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+end_out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PaperPlotEndModule(endModuleOutputDir,plots,skipSF=True))

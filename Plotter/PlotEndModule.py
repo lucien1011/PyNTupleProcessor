@@ -1,4 +1,4 @@
-import os,ROOT,math
+import os,ROOT,math,array
 
 from Core.EndModule import EndModule
 from Core.BaseObject import BaseObject
@@ -7,7 +7,6 @@ from Core.Utils.printFunc import pyPrint
 from Utils.tdrstyle import setTDRStyle
 from Utils.CMS_lumi import CMS_lumi
 from SampleColor import sampleColorDict
-
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
@@ -43,11 +42,32 @@ class PlotEndModule(EndModule):
 
     def sortHistList(self,histList):
         histList.sort(key=lambda l: l[2], reverse=False)
+    
+    @staticmethod
+    def setDataHistStyle(data):
+        data.SetLineWidth(2)
+        data.SetLineColor(1)
+        data.SetMarkerStyle(8)
+
+    @staticmethod
+    def setRatioHistStyle(ratio,axisLabel,plot,):
+        ratio.GetYaxis().SetRangeUser(0.0,ratio.GetMaximum()*1.5) 
+        ratio.GetYaxis().SetLabelSize(0.09)
+        ratio.GetXaxis().SetLabelSize(0.09)
+        ratio.GetYaxis().SetTitle("Data/MC")
+        ratio.GetYaxis().SetTitleSize(0.10)
+        ratio.GetXaxis().SetTitleSize(0.10)
+        ratio.GetXaxis().SetTitleOffset(0.90)
+        ratio.GetYaxis().SetTitleOffset(0.50)
+        ratio.GetXaxis().SetTitle(axisLabel)
+        if plot.plotSetting.x_axis_labels:
+            for ibin,label in enumerate(plot.plotSetting.x_axis_labels): ratio.GetXaxis().SetBinLabel(ibin+1,label)
 
     def stackData(self,collector,plot):
 
         for isample,sample in enumerate(collector.dataSamples):
             h = collector.getObj(sample,plot.rootSetting[1])
+            h.SetBinErrorOption(ROOT.TH1.kPoisson)
             if not isample:
                 data = h.Clone("data")
             else:
@@ -60,9 +80,8 @@ class PlotEndModule(EndModule):
 
         if plot.plotSetting.shift_last_bin: self.shiftLastBin(data,isData=True)
 
-        data.SetLineWidth(2)
-        data.SetLineColor(1)
-        data.SetMarkerStyle(8)
+        data.SetBinErrorOption(ROOT.TH1.kPoisson)
+        self.setDataHistStyle(data)
         data.SetTitle("")
 
         return data,dataCount,dataCountErr
@@ -103,9 +122,6 @@ class PlotEndModule(EndModule):
                 h.SetFillColor(sampleColorDict[sample])
             else:
                 h.SetFillColor(ROOT.kViolet)
-            #smCountErrTmp = ROOT.Double(0.)
-            #smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
-            #smCountErrSq += smCountErrTmp**2
             if plot.plotSetting.shift_last_bin: self.shiftLastBin(h)
             histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
             if switch:
@@ -401,7 +417,7 @@ class PlotEndModule(EndModule):
             if plot.plotSetting.cms_lumi != None:
                 plot.plotSetting.cms_lumi(upperPad,plot.plotSetting.cms_lumi_number,0)
 
-            dataHist.DrawCopy('same p')
+            dataHist.DrawCopy('same E')
             bkdgErr.Draw("samee2")
 
             if plot.plotSetting.custom_latex_list:
@@ -426,8 +442,6 @@ class PlotEndModule(EndModule):
                 hist.Draw('samehist')
             dataHist.Draw("same p")
             leg.Draw('same')
-            # Draw CMS, lumi and preliminary if specified
-            #self.drawLabels(pSetPair[0].lumi)
             bkdgErr.Draw("samee2")
             n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
             ROOT.gPad.RedrawAxis()
@@ -521,6 +535,11 @@ class PlotEndModule(EndModule):
             title = "Events"
         stack.GetYaxis().SetTitleSize(plot.plotSetting.y_axis_title_size)
         stack.GetYaxis().SetTitle(title)
+    
+    def makeRatioTGraph(self,data,total,bkdgErr):
+        g = ROOT.TGraphAsymmErrors()
+        g.Divide(data,total,"pois")
+        return g
 
     def makeRatioPlot(self,data,total,bkdgErr):
 
