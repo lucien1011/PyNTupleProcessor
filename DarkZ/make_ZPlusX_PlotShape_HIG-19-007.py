@@ -38,7 +38,7 @@ for b in binList:
         x = outputHist.GetXaxis().GetBinCenter(ibin)
         x_up = outputHist.GetXaxis().GetBinUpEdge(ibin)
         x_low = outputHist.GetXaxis().GetBinLowEdge(ibin)
-        outputHist.SetBinContent(ibin,fitFunc.Eval(x) if x_up < 8.5 or x_low > 11. else 0.)
+        outputHist.SetBinContent(ibin,fitFunc.Eval(x) if (x_up < 8.5 or x_low > 11.) and x_up > 4. else 0.)
         #outputHist.SetBinContent(ibin,fitFunc.Eval(x))
         outputHist.SetBinError(ibin,0.)
     outputHist.SetBinContent(outputHist.GetNbinsX()+1,0.)

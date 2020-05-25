@@ -17,7 +17,8 @@ import os,ROOT
 #out_path                = "ML/CSV/2020-04-19_RunII/"
 #out_path                = "ML/CSV/2020-04-20_RunII/"
 #out_path                = "ML/CSV/2020-04-21_RunII/"
-out_path                = "ML/CSV/2020-04-27_RunII/"
+#out_path                = "ML/CSV/2020-04-27_RunII/"
+out_path                = "ML/CSV/2020-04-30_RunII/"
 User                    = os.environ['USER']
 nCores                  = 1
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
@@ -46,6 +47,9 @@ varsToWrite             = [
                             LambdaFunc("x: x.phiL2[0]"),
                             LambdaFunc("x: x.phiL3[0]"),
                             LambdaFunc("x: x.phiL4[0]"),
+                            LambdaFunc("x: x.etaL21"),
+                            LambdaFunc("x: x.etaL31"),
+                            LambdaFunc("x: x.etaL41"),
                             LambdaFunc("x: x.phiL21"),
                             LambdaFunc("x: x.phiL31"),
                             LambdaFunc("x: x.phiL41"),
