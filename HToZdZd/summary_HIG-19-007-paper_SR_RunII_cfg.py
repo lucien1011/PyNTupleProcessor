@@ -9,7 +9,7 @@ from HToZdZd.Dataset.RunII.SkimTree_DarkPhoton_m4l70 import *
 from HToZdZd.Sequence.RecoSequence import * 
 
 from Plotter.Plotter import Plotter
-from Plotter.PlotEndModule import PlotEndModule
+from HToZdZd.EndModule.PaperPlotEndModule import PaperPlotEndModule
 from Plotter.Plot import Plot
 
 from HToZdZd.Config.MergeSampleDict_RunII import *
@@ -41,39 +41,36 @@ inputShapeFile = ROOT.TFile(os.path.join(outputDir,"ZPlusX","PlotShape.root"),"R
 for p in plots:
     p.plotSetting.cms_lumi = CMS_lumi
     p.plotSetting.tdr_style = True
-    #p.plotSetting.cms_lumi = True
     p.plotSetting.divideByBinWidth = False
     p.plotSetting.linear_max_factor = 4.
     p.plotSetting.x_axis_title = "(m_{Z1}+m_{Z2})/2 [GeV]"
     p.plotSetting.skip_data_mc_ratio = True
+    p.plotSetting.shift_last_bin = False
     p.plotSetting.skip_leg_err = True
-    p.plotSetting.leg_pos = [0.45,0.60,0.89,0.90]
+    p.plotSetting.leg_pos = [0.20,0.60,0.89,0.90]
     p.plotSetting.leg_text_size = 0.025
-    p.plotSetting.linear_max_factor = 3.0
+    p.plotSetting.linear_max_factor = 4.0
     p.plotSetting.leg_name_dict = {
-            #"HToZdZd_M30": "H #rightarrow Z_{D} Z_{D}, m_{Z_{D}} = 30 GeV, #kappa = 10^{-4}",
-            #"HToZdZd_M5": "H #rightarrow Z_{D} Z_{D}, m_{Z_{D}} = 5 GeV, #kappa = 10^{-4}",
-            #"HToZdZd_M50": "H #rightarrow Z_{D} Z_{D}, m_{Z_{D}} = 50 GeV, #kappa = 10^{-4}",
-            "HToZdZd_M30": "m_{Z_{D}} = 30 GeV #kappa = 10^{-4}",
-            "HToZdZd_M5": "m_{Z_{D}} = 5 GeV #kappa = 10^{-4}",
-            "HToZdZd_M50": "m_{Z_{D}} = 50 GeV #kappa = 10^{-4}",
+            "HToZdZd_M30": "H #rightarrow Z_{D} Z_{D} m_{Z_{D}} = 30 GeV #kappa = 10^{-4}",
+            "HToZdZd_M5": "H #rightarrow Z_{D} Z_{D} m_{Z_{D}} = 5 GeV #kappa = 10^{-4}",
+            "HToZdZd_M50": "H #rightarrow Z_{D} Z_{D} m_{Z_{D}} = 50 GeV #kappa = 10^{-4}",
             "ZPlusX": "Z+X",
+            "ttZ": "t#bar{t}Z"
             }
     if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
     if p.key in [
-            "mZ2_4mu","mZ2_4e","mZ2_2e2mu","mZ2_2mu2e",
             "mZ12_4mu","mZ12_4e","mZ12_2e2mu","mZ12_2mu2e",
             ]:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
 
 plot_4e.plotSetting.custom_latex_list = [
-       BaseObject(plot_4e.key,x_pos=10.,y_pos=3.5,text_size=0.035,text="4e channel",),
+       BaseObject(plot_4e.key,x_pos=10.,y_pos=3.0,text_size=0.035,text="4e channel",),
        ]
 plot_4mu.plotSetting.custom_latex_list = [
-       BaseObject(plot_4mu.key,x_pos=10.,y_pos=7.,text_size=0.035,text="4#mu channel",),
+       BaseObject(plot_4mu.key,x_pos=10.,y_pos=6.0,text_size=0.035,text="4#mu channel",),
        ]
 plot_2e2mu.plotSetting.custom_latex_list = [
-       BaseObject(plot_2e2mu.key,x_pos=10.,y_pos=4.5,text_size=0.035,text="2e2#mu channel",),
+       BaseObject(plot_2e2mu.key,x_pos=10.,y_pos=4.0,text_size=0.035,text="2e2#mu channel",),
        ]
 
 
@@ -88,4 +85,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=True)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+end_out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True,))
+endSequence.add(PaperPlotEndModule(endModuleOutputDir,plots,skipSF=True,))

@@ -17,12 +17,6 @@ from DarkZ.Config.CMS_lumi import CMS_lumi
 
 import ROOT,os,copy
 
-def custom_data_TGraph_func(g):
-    for i in range(g.GetN()):
-        x = g.GetPointX(i)
-        if x < 4.0 or (x > 8.5 and x < 11.0):
-            g.RemovePoint(i)
-
 User                    = os.environ['USER']
 out_path                = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
 end_out_path            = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
@@ -52,24 +46,24 @@ for p in plots:
     p.plotSetting.skip_leg_err = True
     p.plotSetting.skip_data_mc_ratio = False
     p.plotSetting.shift_last_bin = False
+    p.plotSetting.stack_x_label_size = 0
     p.plotSetting.bin_width_label = "Event / bin"
     p.plotSetting.x_axis_title = "m_{Z2} [GeV]"
-    p.plotSetting.leg_pos = [0.44,0.69,0.80,0.90]
-    p.plotSetting.linear_max_factor = 1.5
-    p.plotSetting.custom_data_TGraph_func = custom_data_TGraph_func
-    if "mZ2" in p.key:
-        p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
+    p.plotSetting.leg_pos = [0.20,0.65,0.80,0.90]
+    p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
     p.plotSetting.leg_name_dict = {
-            "HZZd_M30": "m_{Z_{D}} = 30 GeV #varepsilon = 0.05",
-            "HZZd_M15": "m_{Z_{D}} = 15 GeV #varepsilon = 0.05",
+            "HZZd_M30": "H #rightarrow Z Z_{D} m_{Z_{D}} = 30 GeV #varepsilon = 0.05",
+            "HZZd_M15": "H #rightarrow Z Z_{D} m_{Z_{D}} = 15 GeV #varepsilon = 0.05",
             "ZPlusX": "Z+X",
             }
 
+plot_el.plotSetting.linear_max_factor = 2.5
 plot_el.plotSetting.custom_latex_list = [
-       BaseObject(plot_el.key,x_pos=2.,y_pos=11.,text_size=0.035,text="2e channel",),
+       BaseObject(plot_el.key,x_pos=4.,y_pos=13.,text_size=0.035,text="2e channel",),
        ]
+plot_mu.plotSetting.linear_max_factor = 2.0
 plot_mu.plotSetting.custom_latex_list = [
-       BaseObject(plot_mu.key,x_pos=2.,y_pos=35.,text_size=0.035,text="2#mu channel",),
+       BaseObject(plot_mu.key,x_pos=4.,y_pos=16.5,text_size=0.035,text="2#mu channel",),
        ]
 
 for sigName in mergeSigSampleDict:
