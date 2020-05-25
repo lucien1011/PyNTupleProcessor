@@ -1,5 +1,5 @@
 from Core.Module import Module
-from Utils.DeltaR import deltaR
+from Utils.DeltaR import deltaR,deltaPhi
 
 import ROOT
 
@@ -25,6 +25,10 @@ class VariableProducer(Module):
 
         event.vecZ1 = event.vecL1 + event.vecL2
         event.vecZ2 = event.vecL3 + event.vecL4
+
+        event.phiL21 = deltaPhi(event.phiL2[0],event.phiL1[0])
+        event.phiL31 = deltaPhi(event.phiL3[0],event.phiL1[0])
+        event.phiL41 = deltaPhi(event.phiL4[0],event.phiL1[0])
 
         event.cosThetaStar = ROOT.Double(0.)
         event.cosTheta1 = ROOT.Double(0.)

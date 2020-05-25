@@ -3,8 +3,8 @@ from Core.Dataset import Dataset
 from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
-bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20190408/SkimTree_HToZdZd_Run2018Data_m4l70/"
-bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HToZdZd/102X_MCProd_191127/"
+bkgSkimTreeDir      = system.getStoragePath()+"/"+os.environ["USER"]+"/Higgs/DarkZ-NTuple/20190408/SkimTree_HToZdZd_Run2018Data_m4l70/"
+bkgTreeDir          = "/cmsuf/data/store/user/t2/users/klo/Higgs/HToZdZd/102X_MCProd_191127/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
 sumWeightFromT2     = True

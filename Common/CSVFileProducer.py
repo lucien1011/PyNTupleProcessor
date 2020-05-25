@@ -20,5 +20,8 @@ class CSVFileProducer(Module):
         self.writer.objs[self.csvFileSetting.keyName].writer.writerow(row)
         return True
 
-    #def end(self):
-    #    self.writer.objs[self.csvFileSetting.keyName].pyFile.close()
+    def end(self):
+        for var in self.varsToWrite:
+            var.end()
+        self.writer.objs[self.csvFileSetting.keyName].pyFile.close()
+        del self.writer.objs[self.csvFileSetting.keyName]
