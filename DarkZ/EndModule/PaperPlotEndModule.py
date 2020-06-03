@@ -27,31 +27,6 @@ class PaperPlotEndModule(PlotEndModule):
         self.makedirs(outputDir)
         self.drawDataMCPlot(collector,plot,outputDir,switch)
 
-    def makeTGraph(self,hist):
-        x_points = []
-        exl_points = []
-        exh_points = []
-        y_points = []
-        ely_points = []
-        ehy_points = []
-        for ibin in range(1,hist.GetNbinsX()+1):
-            x = hist.GetXaxis().GetBinCenter(ibin)
-            if x < 4.0 or (x > 8.5 and x < 11.0): continue
-            x_points.append(hist.GetXaxis().GetBinCenter(ibin))
-            exl_points.append(0)
-            exh_points.append(0)
-            y_points.append(hist.GetBinContent(ibin))
-            ely_points.append(hist.GetBinErrorLow(ibin))
-            ehy_points.append(hist.GetBinErrorUp(ibin))
-        xs = array.array("d",x_points)
-        exls = array.array("d",exl_points)
-        exhs = array.array("d",exh_points)
-        ys = array.array("d",y_points)
-        elys = array.array("d",ely_points)
-        ehys = array.array("d",ehy_points)
-        g = ROOT.TGraphAsymmErrors(len(x_points),xs,ys,exls,exhs,elys,ehys)
-        return g
-
     def drawDataMCPlot(self,collector,plot,outputDir,switch):
         c = ROOT.TCanvas("c_"+plot.key, "c_"+plot.key,0,0, 650, 750)
 
@@ -60,7 +35,7 @@ class PaperPlotEndModule(PlotEndModule):
         if collector.dataSamples:
             ROOT.gSystem.Load(os.environ["BASE_PATH"]+"/Plotter/makePoissonHist_cc.so")
             dataHist,dataCount,dataCountErr = self.stackData(collector,plot)
-            dataGraph = self.makeTGraph(dataHist)
+            dataGraph = self.makeTGraph(dataHist,filter_func=lambda x: x < 4.0 or (x > 8.5 and x < 11.0))
             self.setDataHistStyle(dataGraph)
 
         if collector.bkgSamples:
@@ -128,11 +103,20 @@ class PaperPlotEndModule(PlotEndModule):
         stack.GetXaxis().SetLabelSize(plot.plotSetting.stack_x_label_size)
         stack.GetXaxis().SetTitleOffset(1.00)
         stack.GetYaxis().SetLabelSize(0.05)
-        stack.Draw('hist')
+        stack.Draw('samee2')
+        bkdgErrGraph = self.makeTGraph(bkdgErr,force_x_axis_err=True,filter_func=lambda x: x < 4.0 or (x > 8.5 and x < 11.0))
+        for errHist in [bkdgErrGraph,bkdgErr,]:
+            errHist.SetMarkerStyle(1)
+            errHist.SetLineWidth(1)
+            errHist.SetFillColor(13)
+            errHist.SetFillStyle(bkdgErrBarColor)
+            errHist.SetFillStyle(3002)
+            #errHist.SetFillColorAlpha(ROOT.kBlack,1)
+        bkdgErrGraph.Draw("sameE2")
         for hist,sample,sigCount in sigHistList:
             hist.Draw('samehist')
 
-        leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,leg_text_size=plot.plotSetting.leg_text_size,skip_total=True,round_to_func=lambda x: str(int(round(x))),)
+        leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,leg_text_size=plot.plotSetting.leg_text_size,skip_total=False,round_to_func=lambda x: str(int(round(x))),)
 
         leg.Draw()
 
@@ -156,7 +140,7 @@ class PaperPlotEndModule(PlotEndModule):
         ROOT.gStyle.SetErrorX(0)
         #dataHist.DrawCopy('sameE')
         dataGraph.Draw('sameP')
-        bkdgErr.Draw("samee2")
+        #bkdgErr.DrawCopy("same")
 
         if plot.plotSetting.custom_latex_list:
             for latex_setting in plot.plotSetting.custom_latex_list:
@@ -177,8 +161,8 @@ class PaperPlotEndModule(PlotEndModule):
         for hist,sample,sigCount in sigHistList:
             hist.Draw('samehist')
         dataHist.Draw("sameE")
+        bkdgErr.Draw("sameE2")
         leg.Draw('same')
-        bkdgErr.Draw("samee2")
         n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
         ROOT.gPad.RedrawAxis()
         ROOT.gPad.RedrawAxis("G")

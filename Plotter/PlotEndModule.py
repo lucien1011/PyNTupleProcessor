@@ -25,6 +25,35 @@ class PlotEndModule(EndModule):
         for plot in self.plots:
             self.drawPlot(collector,plot,self.outputDir,self.switch)
 
+    def makeTGraph(self,hist,force_x_axis_err=False,filter_func=lambda x: False):
+        x_points = []
+        exl_points = []
+        exh_points = []
+        y_points = []
+        ely_points = []
+        ehy_points = []
+        for ibin in range(1,hist.GetNbinsX()+1):
+            x = hist.GetXaxis().GetBinCenter(ibin)
+            if filter_func(x): continue
+            x_points.append(hist.GetXaxis().GetBinCenter(ibin))
+            if not force_x_axis_err:
+                exl_points.append(0)
+                exh_points.append(0)
+            else:
+                exl_points.append(abs(hist.GetXaxis().GetBinCenter(ibin)-hist.GetXaxis().GetBinUpEdge(ibin)))
+                exh_points.append(abs(hist.GetXaxis().GetBinCenter(ibin)-hist.GetXaxis().GetBinLowEdge(ibin)))
+            y_points.append(hist.GetBinContent(ibin))
+            ely_points.append(hist.GetBinErrorLow(ibin))
+            ehy_points.append(hist.GetBinErrorUp(ibin))
+        xs = array.array("d",x_points)
+        exls = array.array("d",exl_points)
+        exhs = array.array("d",exh_points)
+        ys = array.array("d",y_points)
+        elys = array.array("d",ely_points)
+        ehys = array.array("d",ehy_points)
+        g = ROOT.TGraphAsymmErrors(len(x_points),xs,ys,exls,exhs,elys,ehys)
+        return g
+
     def drawPlot(self,collector,plot,outputDir,switch):
         if plot.plotSetting.tdr_style:
             setTDRStyle()
@@ -148,8 +177,8 @@ class PlotEndModule(EndModule):
         bkdgErr.SetLineColor(1)
         bkdgErr.SetLineWidth(3)
         bkdgErr.SetFillColor(13)
-        bkdgErr.SetFillStyle(bkdgErrBarColor)
-
+        #bkdgErr.SetFillStyle(bkdgErrBarColor)
+        bkdgErr.SetFillStyle(3001)
         return histList,stack,smCount,smCountErrSq,total,bkdgErr
 
     def makeSignalHist(self,collector,plot):
@@ -212,12 +241,12 @@ class PlotEndModule(EndModule):
         if switch:
             legLabel += ": 100%"
         else:
-            legLabel += ": "+str(math.ceil(smCount*10)/10)
+            legLabel += ": "+round_to_func(smCount)
         if smCountErr and not skipError:
             legLabel += " #pm "+str(math.ceil(smCountErr*10)/10)
 
         if bkdgErr and not skip_total:
-            leg.AddEntry(bkdgErr, legLabel, "l")
+            leg.AddEntry(bkdgErr, legLabel, "fl")
 
         for hCount in reversed(histList):
             legLabel = hCount[1]

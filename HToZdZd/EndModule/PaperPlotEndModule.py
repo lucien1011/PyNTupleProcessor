@@ -27,27 +27,6 @@ class PaperPlotEndModule(PlotEndModule):
         self.makedirs(outputDir)
         self.drawDataMCPlot(collector,plot,outputDir,switch)
 
-    def makeTGraph(self,hist):
-        x_points = []
-        ex_points = []
-        y_points = []
-        ely_points = []
-        ehy_points = []
-        for ibin in range(1,hist.GetNbinsX()+1):
-            x = hist.GetXaxis().GetBinCenter(ibin)
-            x_points.append(hist.GetXaxis().GetBinCenter(ibin))
-            ex_points.append(0.)
-            y_points.append(hist.GetBinContent(ibin))
-            ely_points.append(hist.GetBinErrorLow(ibin))
-            ehy_points.append(hist.GetBinErrorUp(ibin))
-        xs = array.array("d",x_points)
-        exs = array.array("d",ex_points)
-        ys = array.array("d",y_points)
-        elys = array.array("d",ely_points)
-        ehys = array.array("d",ehy_points)
-        g = ROOT.TGraphAsymmErrors(len(x_points),xs,ys,exs,exs,elys,ehys)
-        return g
-
     def drawDataMCPlot(self,collector,plot,outputDir,switch):
         c = ROOT.TCanvas("c_"+plot.key, "c_"+plot.key,0,0, 650, 750)
 
@@ -96,7 +75,7 @@ class PaperPlotEndModule(PlotEndModule):
         upperPad = c
         ROOT.gPad.SetBottomMargin(0.10)
 
-        leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,leg_text_size=plot.plotSetting.leg_text_size,sort_sig_func=lambda x: float(x[1].split()[6]),skip_total=True,)
+        leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,leg_text_size=plot.plotSetting.leg_text_size,sort_sig_func=lambda x: float(x[1].split()[6]),skip_total=False,)
 
         upperPad.SetLogy(0)
         stack.SetMaximum(maximum*plot.plotSetting.linear_max_factor)
@@ -108,6 +87,15 @@ class PaperPlotEndModule(PlotEndModule):
         stack.GetXaxis().SetTitleOffset(1.00)
         stack.GetYaxis().SetLabelSize(0.05)
         stack.Draw('hist')
+        bkdgErrGraph = self.makeTGraph(bkdgErr,force_x_axis_err=True)
+        for errHist in [bkdgErrGraph,bkdgErr,]:
+            errHist.SetMarkerStyle(1)
+            errHist.SetLineWidth(1)
+            errHist.SetFillColor(13)
+            errHist.SetFillStyle(bkdgErrBarColor)
+            errHist.SetFillStyle(3002)
+            #errHist.SetFillColorAlpha(ROOT.kBlack,1)
+        bkdgErrGraph.Draw("sameE2")
         for hist,sample,sigCount in sigHistList:
             hist.Draw('samehist')
 
