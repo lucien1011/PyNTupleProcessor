@@ -10,7 +10,7 @@ cmsText     = "CMS";
 cmsTextFont   = 61  
  
 writeExtraText = True
-extraText   = "Preliminary"
+extraText   = ""
 extraTextFont = 52 
 extraTextOffset = 0.2
  
