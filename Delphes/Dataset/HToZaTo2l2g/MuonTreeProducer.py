@@ -16,4 +16,4 @@ HToZaTo2l2g_M1 = Dataset(
         isMC                = True,
         xs                  = 1,
         )
-
+HToZaTo2l2g_M1.sumw = 4995000.

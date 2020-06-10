@@ -10,7 +10,7 @@ from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting,CustomVariable
 
 lumi                    = 1.
 nCores                  = 1
-outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/Delphes/Data/2020-06-08/" 
+outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/Delphes/Data/2020-06-09/" 
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [HToZaTo2l2g_M1,]
@@ -35,6 +35,13 @@ varsToWrite             = [
         CustomVariable("x: x.Muon_SumPtChargedPU[0]","x: len(x.Muon_SumPtChargedPU) > 0"),
         CustomVariable("x: x.Muon_TrackD0[0]","x: len(x.Muon_TrackD0) > 0"),
         CustomVariable("x: x.Muon_TrackDZ[0]","x: len(x.Muon_TrackDZ) > 0"),
+        CustomVariable("x: x.Muon_TrackVx[0]","x: len(x.Muon_TrackVx) > 0"),
+        CustomVariable("x: x.Muon_TrackVy[0]","x: len(x.Muon_TrackVy) > 0"),
+        CustomVariable("x: x.Muon_TrackVz[0]","x: len(x.Muon_TrackVz) > 0"),
+        CustomVariable("x: x.Muon_TrackOuterx[0]","x: len(x.Muon_TrackOuterx) > 0"),
+        CustomVariable("x: x.Muon_TrackOutery[0]","x: len(x.Muon_TrackOutery) > 0"),
+        CustomVariable("x: x.Muon_TrackOuterz[0]","x: len(x.Muon_TrackOuterz) > 0"),
+        CustomVariable("x: x.Muon_TrackOutert[0]","x: len(x.Muon_TrackOutert) > 0"),
         CustomVariable("x: x.Muon_GenPt[0]","x: len(x.Muon_GenPt) > 0"),
         CustomVariable("x: x.Muon_GenEta[0]","x: len(x.Muon_GenPt) > 0"),
         CustomVariable("x: x.Muon_GenPhi[0]","x: len(x.Muon_GenPt) > 0"),
