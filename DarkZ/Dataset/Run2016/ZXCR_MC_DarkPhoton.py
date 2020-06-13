@@ -119,3 +119,25 @@ handleSumWeight(
         bkgTreeDir+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.txt",
         )
 #WZTo3LNu.setSumWeight(bkgTreeDirT2_Feb21+"WZTo3LNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8.root","Ana/sumWeights",True)
+
+# ____________________________________________________________________________________________________________________________________________ ||
+ZGToLLG_cmpList = ComponentList(
+        [
+            Component("ZGToLLG",bkgTreeDir+"ZGToLLG_01J_5f_lowMLL_lowGPt_TuneCP5_13TeV-amcatnloFXFX-pythia8_Summer16.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+ZGToLLG = Dataset(
+        "ZGToLLG",
+        ZGToLLG_cmpList,
+        isMC = True,
+        xs = 164.2, 
+        )
+handleSumWeight(
+        ZGToLLG,
+        system,
+        bkgTreeDirT2_Feb21+"ZGToLLG_01J_5f_lowMLL_lowGPt_TuneCP5_13TeV-amcatnloFXFX-pythia8_Summer16.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"ZGToLLG_01J_5f_lowMLL_lowGPt_TuneCP5_13TeV-amcatnloFXFX-pythia8_Summer16.txt",
+        )
