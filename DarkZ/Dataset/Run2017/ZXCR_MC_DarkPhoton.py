@@ -151,3 +151,25 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgTreeDir+"qqZZTo4L.txt",
         )
+
+# ____________________________________________________________________________________________________________________________________________ ||
+ZGToLLG_cmpList = ComponentList(
+        [
+            Component("ZGToLLG",bkgTreeDir+"ZGToLLG_01J_5f_lowMLL_lowGPt_TuneCP5_13TeV-amcatnloFXFX-pythia8_Fall17.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+ZGToLLG = Dataset(
+        "ZGToLLG",
+        ZGToLLG_cmpList,
+        isMC = True,
+        xs = 164.2, 
+        )
+handleSumWeight(
+        ZGToLLG,
+        system,
+        bkgTreeDirT2+"ZGToLLG_01J_5f_lowMLL_lowGPt_TuneCP5_13TeV-amcatnloFXFX-pythia8_Fall17.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"ZGToLLG_01J_5f_lowMLL_lowGPt_TuneCP5_13TeV-amcatnloFXFX-pythia8_Fall17.txt",
+        )

@@ -28,7 +28,8 @@ from DarkZ.Config.MergeSampleDict import mergeSampleDict
 #out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/2019-03-13_3P1F_DataVsPred_FRWeightFromVukasinV2_AvgFRL3L4/"
 #out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/2019-03-26_3P1F_DataVsPred_FRWeightFromVukasinV2_AvgFRL3L4V2/"
 #out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2017Data_m4l118-130/2019-03-26_3P1F_DataVsPred_FRWeightFromVukasinWZRemoved/"
-out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2017Data_m4l100-170/2019-05-23_3P1F_DataVsPred_FRWeightFromVukasin/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2017Data_m4l100-170/2019-05-23_3P1F_DataVsPred_FRWeightFromVukasin/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/2020-06-14_3P1F_DataVsPred_FRWeightFromVukasin/"
                    
 plots =  general_plots
 
@@ -41,13 +42,13 @@ nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [Data_Run2017,predCR,WZTo3LNu,]
+componentList           = [Data_Run2017,predCR,WZTo3LNu,ZGToLLG,]
 justEndSequence         = False
 
 for dataset in componentList:
     if dataset.isMC:
-        #dataset.lumi = 41.4
-        dataset.lumi = 35.9
+        dataset.lumi = 41.4
+        #dataset.lumi = 35.9
     for component in dataset.componentList:
         component.maxEvents = nEvents
 
