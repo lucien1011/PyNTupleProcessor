@@ -141,3 +141,25 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgTreeDir+"ZGToLLG_01J_5f_lowMLL_lowGPt_TuneCP5_13TeV-amcatnloFXFX-pythia8_Summer16.txt",
         )
+
+# ____________________________________________________________________________________________________________________________________________ ||
+ZZTo4L_cmpList = ComponentList(
+        [
+            Component("ZZTo4L",bkgTreeDir+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Summer16.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+ZZTo4L = Dataset(
+        "ZZTo4L",
+        ZZTo4L_cmpList,
+        isMC = True,
+        xs = 13.74, 
+        )
+handleSumWeight(
+        ZZTo4L,
+        system,
+        bkgTreeDirT2_Feb21+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Summer16.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgTreeDir+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Summer16.txt",
+        )

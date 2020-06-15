@@ -83,6 +83,7 @@ sampleColorDict = {
                 "ZPlusX": ROOT.kGreen,
                 "qqZZ": ROOT.kBlue+2,
                 "ZZ": ROOT.kBlue+2,
+                "ZZTo4L": ROOT.kBlue+2,
                 #"qqZZ": ROOT.kRed,
                 "ggZZ": ROOT.kBlue,
                 "WWZ": ROOT.kViolet, 
