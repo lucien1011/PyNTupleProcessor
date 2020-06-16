@@ -1,20 +1,2 @@
 #!/usr/bin/env bash
-ln -sf ${BASE_PATH}/run_NTuple.py tmp_NTuple.py
-
-# test the presence of the interactive flag
-interactive=false
-for var in "$@" 
-do
-    if [ $var == "-i" ]; then
-    echo 'interactive mode'
-    interactive=true
-    fi
-done
-
-if [ "$interactive" = true ]; then 
-    python -i -- tmp_NTuple.py "$@"
-else
-    python -- tmp_NTuple.py "$@"
-fi 
-
-rm tmp_NTuple.py
+python ${BASE_PATH}/run_NTuple.py "$@"
