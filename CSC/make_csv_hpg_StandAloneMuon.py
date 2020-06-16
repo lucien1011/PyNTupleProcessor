@@ -12,14 +12,19 @@ from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting,CustomVariable
 
 # _____________________________________________________________________________ ||
 lumi                    = 1.
-nCores                  = 1
-#outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-14/" 
-outputDir               = "/cmsuf/data/store/user/t2/users/klo/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-15/" 
+nCores                  = 3
+outputDir               = "/cmsuf/data/store/user/t2/users/klo/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-15_Run2017ABCD/" 
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = sampleDict.values()
+componentList           = [c for c in sampleDict.values()]
 justEndSequence         = False
-sequence                = MuonSequence 
+sequence                = MuonSequence
+
+slurm_job_name          = "make_csv_hpg_StandAloneMuon"
+slurm_email             = "kin.ho.lo@cern.ch"
+slurm_ntasks            = "1"
+slurm_mem               = "4gb"
+slurm_time              = "24:00:00"
 
 # _____________________________________________________________________________ ||
 muonVarsToWrite         = [
