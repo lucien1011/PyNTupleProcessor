@@ -4,7 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from CSC.Dataset.SingleMuon_Run2017A_ZMu_v2 import SingleMuon_Run2017A_ZMu_v2
+from CSC.Dataset.SingleMuon_Run2017A_ZMu_v2_LucienMacPro import SingleMuon_Run2017A_ZMu_v2
 from CSC.Producer.StandAloneMuonProducer import n_max_segment
 from CSC.Sequence.RecoSequence import MuonSequence
 
@@ -13,7 +13,7 @@ from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting,CustomVariable
 # _____________________________________________________________________________ ||
 lumi                    = 1.
 nCores                  = 1
-outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-14/" 
+outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-18/" 
 nEvents                 = -1
 disableProgressBar      = False
 componentList           = [SingleMuon_Run2017A_ZMu_v2,]
@@ -37,49 +37,20 @@ muonCSVFileProducer     = CSVFileProducer("CSVFileProducer",
 sequence.add(muonCSVFileProducer)
 
 # _____________________________________________________________________________ ||
-segmentVarsToWrite         = []
-for i in range(n_max_segment):
-    segmentVarsToWrite.extend([
-        CustomVariable("x: int(x.segments_hash[%s])"%i,),
-        ])
-segmentCSVFileSetting   = CSVFileSetting("segment_hash_csv",["segment_hash.csv","w"])
-hashCSVFileProducer     = CSVFileProducer("CSVFileProducer",
-        segmentVarsToWrite,
-        segmentCSVFileSetting,
-        objectFunc=LambdaFunc("x: x.standAloneMuons"),
-        globalSelFunc=LambdaFunc("x: x.numberOfSegments > 4"),
-        )
-sequence.add(hashCSVFileProducer)
-
-# _____________________________________________________________________________ ||
-segmentVarsToWrite         = []
-for i in range(n_max_segment):
-    segmentVarsToWrite.extend([
-        CustomVariable("x: int(x.segments_localX[%s])"%i,),
-        ])
-segmentCSVFileSetting   = CSVFileSetting("segment_localX_csv",["segment_localX.csv","w"])
-localXCSVFileProducer   = CSVFileProducer("CSVFileProducer",
-        segmentVarsToWrite,
-        segmentCSVFileSetting,
-        objectFunc=LambdaFunc("x: x.standAloneMuons"),
-        globalSelFunc=LambdaFunc("x: x.numberOfSegments > 4"),
-        )
-sequence.add(localXCSVFileProducer)
-
-# _____________________________________________________________________________ ||
-segmentVarsToWrite         = []
-for i in range(n_max_segment):
-    segmentVarsToWrite.extend([
-        CustomVariable("x: int(x.segments_localY[%s])"%i,),
-        ])
-segmentCSVFileSetting   = CSVFileSetting("segment_localY_csv",["segment_localY.csv","w"])
-localYCSVFileProducer     = CSVFileProducer("CSVFileProducer",
-        segmentVarsToWrite,
-        segmentCSVFileSetting,
-        objectFunc=LambdaFunc("x: x.standAloneMuons"),
-        globalSelFunc=LambdaFunc("x: x.numberOfSegments > 4"),
-        )
-sequence.add(localYCSVFileProducer)
+for seg_var in ["globalX","globalY","endcap","chamber","station","ring",]:
+    segmentVarsToWrite         = []
+    for i in range(n_max_segment):
+        segmentVarsToWrite.extend([
+            CustomVariable("x: int(x.segments_"+seg_var+"["+str(i)+"])",),
+            ])
+    segmentCSVFileSetting   = CSVFileSetting("segment_"+str(seg_var)+"_csv",["segment_"+str(seg_var)+".csv","w"])
+    varCSVFileProducer     = CSVFileProducer("CSVFileProducer",
+            segmentVarsToWrite,
+            segmentCSVFileSetting,
+            objectFunc=LambdaFunc("x: x.standAloneMuons"),
+            globalSelFunc=LambdaFunc("x: x.numberOfSegments > 4"),
+            )
+    sequence.add(varCSVFileProducer)
 
 # _____________________________________________________________________________ ||
 outputInfo              = OutputInfo("OutputInfo")
