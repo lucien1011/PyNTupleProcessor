@@ -11,9 +11,9 @@ class CustomVariable(LambdaFunc):
         if hasattr(self,"func"):
             del self.func
         if hasattr(self,"selFunc"):
-            del self.selFunc
+            self.selFunc.end()
         if hasattr(self,"globalSelFunc"):
-            del self.globalSelFunc
+            self.globalSelFunc.end()
 
 class CSVFileSetting(object):
     def __init__(self,keyName,args,objType="CSVFile"):

@@ -5,6 +5,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
 from CSC.Dataset.SingleMuon_Run2017A_ZMu_v2_LucienMacPro import SingleMuon_Run2017A_ZMu_v2
+from CSC.Dataset.SingleMuon_Run2017 import sampleDict
 from CSC.Producer.StandAloneMuonProducer import n_max_segment
 from CSC.Sequence.RecoSequence import MuonSequence
 
@@ -14,9 +15,10 @@ from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting,CustomVariable
 lumi                    = 1.
 nCores                  = 1
 outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-18/" 
+outputDir               = "/cmsuf/data/store/user/t2/users/klo/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-15/" 
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [SingleMuon_Run2017A_ZMu_v2,]
+componentList           = sampleDict.values()
 justEndSequence         = False
 sequence                = MuonSequence 
 
