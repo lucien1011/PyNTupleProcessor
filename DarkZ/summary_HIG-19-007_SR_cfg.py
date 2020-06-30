@@ -53,10 +53,11 @@ for p in plots:
     p.plotSetting.leg_pos = [0.20,0.65,0.80,0.90]
     p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
     p.plotSetting.leg_name_dict = {
-            "HZZd_M30": "H #rightarrow Z Z_{D} m_{Z_{D}} = 30 GeV #varepsilon = 0.05",
-            "HZZd_M15": "H #rightarrow Z Z_{D} m_{Z_{D}} = 15 GeV #varepsilon = 0.05",
+            "HZZd_M30": "H #rightarrow Z Z_{D} (m_{Z_{D}} = 30 GeV #varepsilon = 0.05)",
+            "HZZd_M15": "H #rightarrow Z Z_{D} (m_{Z_{D}} = 15 GeV #varepsilon = 0.05)",
             "ZPlusX": "Z+X",
             }
+    p.plotSetting.bkgErrFunc = lambda x,y,z: 0.09*y
 
 plot_el.plotSetting.linear_max_factor = 2.5
 plot_el.plotSetting.custom_latex_list = [

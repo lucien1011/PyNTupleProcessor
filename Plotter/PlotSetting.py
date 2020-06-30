@@ -38,6 +38,7 @@ class PlotSetting(object):
             draw_option=None,
             normalize=False,
             stack_x_label_size=0.038,
+            bkgErrFunc = None,
             ):
         self.divideByBinWidth = divideByBinWidth
         self.x_axis_title = x_axis_title
@@ -81,3 +82,4 @@ class PlotSetting(object):
         self.draw_option = draw_option
         self.normalize = normalize
         self.stack_x_label_size = stack_x_label_size
+        self.bkgErrFunc = bkgErrFunc

@@ -52,9 +52,9 @@ for p in plots:
     p.plotSetting.leg_text_size = 0.025
     p.plotSetting.linear_max_factor = 4.0
     p.plotSetting.leg_name_dict = {
-            "HToZdZd_M30": "H #rightarrow Z_{D} Z_{D} m_{Z_{D}} = 30 GeV #kappa = 10^{-4}",
-            "HToZdZd_M5": "H #rightarrow Z_{D} Z_{D} m_{Z_{D}} = 5 GeV #kappa = 10^{-4}",
-            "HToZdZd_M50": "H #rightarrow Z_{D} Z_{D} m_{Z_{D}} = 50 GeV #kappa = 10^{-4}",
+            "HToZdZd_M30": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 30 GeV #kappa = 10^{-4})",
+            "HToZdZd_M5": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 5 GeV #kappa = 10^{-4})",
+            "HToZdZd_M50": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 50 GeV #kappa = 10^{-4})",
             "ZPlusX": "Z+X",
             "ttZ": "t#bar{t}Z"
             }
@@ -63,7 +63,7 @@ for p in plots:
             "mZ12_4mu","mZ12_4e","mZ12_2e2mu","mZ12_2mu2e",
             ]:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
-
+    p.plotSetting.bkgErrFunc = lambda x,y,z: 0.09*y
 plot_4e.plotSetting.custom_latex_list = [
        BaseObject(plot_4e.key,x_pos=10.,y_pos=3.0,text_size=0.035,text="4e channel",),
        ]

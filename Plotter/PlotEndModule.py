@@ -123,7 +123,7 @@ class PlotEndModule(EndModule):
             hist.SetBinContent(iBin,binC/binW)
             hist.SetBinError(iBin,binE/binW)
 
-    def stackMC(self,collector,plot,switch,histToScale=None):
+    def stackMC(self,collector,plot,switch,histToScale=None,):
         stack = ROOT.THStack(plot.key+'_stack',plot.key+'_stack')
 
         smCount      = 0.0
@@ -172,13 +172,15 @@ class PlotEndModule(EndModule):
         total = stack.GetStack().Last().Clone("total_"+plot.key)
         total.SetFillColor(ROOT.kYellow)
         total.SetLineColor(ROOT.kRed)
-        bkdgErr = stack.GetStack().Last().Clone("totalErr_"+plot.key)   # grey error bars on Monte Carlo
+        bkdgErr = stack.GetStack().Last().Clone("totalErr_"+plot.key)
         bkdgErr.SetMarkerStyle(1)
         bkdgErr.SetLineColor(1)
         bkdgErr.SetLineWidth(3)
         bkdgErr.SetFillColor(13)
-        #bkdgErr.SetFillStyle(bkdgErrBarColor)
         bkdgErr.SetFillStyle(3001)
+        if plot.plotSetting.bkgErrFunc:
+            for ibin in range(1,bkdgErr.GetNbinsX()+1):
+                bkdgErr.SetBinError(ibin,plot.plotSetting.bkgErrFunc(ibin,bkdgErr.GetBinContent(ibin),bkdgErr.GetBinError(ibin),))
         return histList,stack,smCount,smCountErrSq,total,bkdgErr
 
     def makeSignalHist(self,collector,plot):

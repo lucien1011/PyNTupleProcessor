@@ -39,7 +39,7 @@ class PaperPlotEndModule(PlotEndModule):
             self.setDataHistStyle(dataGraph)
 
         if collector.bkgSamples:
-            histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch,histToScale=dataHist if self.scaleToData else None)
+            histList,stack,smCount,smCountErrSq,total,bkdgErr = self.stackMC(collector,plot,switch,histToScale=dataHist if self.scaleToData else None,)
             stack.SetTitle("")
 
         if collector.signalSamples:
