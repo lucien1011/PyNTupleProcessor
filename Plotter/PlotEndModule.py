@@ -180,7 +180,14 @@ class PlotEndModule(EndModule):
         bkdgErr.SetFillStyle(3001)
         if plot.plotSetting.bkgErrFunc:
             for ibin in range(1,bkdgErr.GetNbinsX()+1):
-                bkdgErr.SetBinError(ibin,plot.plotSetting.bkgErrFunc(ibin,bkdgErr.GetBinContent(ibin),bkdgErr.GetBinError(ibin),))
+                bkdgErr.SetBinError(
+                        ibin,
+                        plot.plotSetting.bkgErrFunc(
+                            ibin,
+                            bkdgErr.GetBinContent(ibin),
+                            bkdgErr.GetBinError(ibin),
+                        )
+                        )
         return histList,stack,smCount,smCountErrSq,total,bkdgErr
 
     def makeSignalHist(self,collector,plot):

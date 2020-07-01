@@ -15,7 +15,7 @@ from DarkZ.EndModule.PaperPlotEndModule import PaperPlotEndModule
 from DarkZ.Config.MergeSampleDict_RunII import mergeSampleDict,mergeSigSampleDict
 from DarkZ.Config.CMS_lumi import CMS_lumi
 
-import ROOT,os,copy
+import ROOT,os,copy,math
 
 User                    = os.environ['USER']
 out_path                = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
@@ -57,7 +57,7 @@ for p in plots:
             "HZZd_M15": "H #rightarrow Z Z_{D} (m_{Z_{D}} = 15 GeV #varepsilon = 0.05)",
             "ZPlusX": "Z+X",
             }
-    p.plotSetting.bkgErrFunc = lambda x,y,z: 0.09*y
+    p.plotSetting.bkgErrFunc = lambda x,y,z: math.sqrt((0.09*y)**2+z**2)
 
 plot_el.plotSetting.linear_max_factor = 2.5
 plot_el.plotSetting.custom_latex_list = [

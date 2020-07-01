@@ -78,6 +78,7 @@ class PaperPlotEndModule(PlotEndModule):
 
         _,bkdgErrRatio,line = self.makeRatioPlot(dataHist,total,bkdgErr)
         ratio = self.makeRatioTGraph(dataHist,total,bkdgErr)
+        #bkdgErrRatio = self.makeTGraph(bkdgErrRatio,force_x_axis_err=True,)
 
         self.setDataHistStyle(ratio)
         self.setRatioHistStyle(bkdgErrRatio,axisLabel,plot,)
@@ -87,10 +88,14 @@ class PaperPlotEndModule(PlotEndModule):
             ratio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
             bkdgErrRatio.GetYaxis().SetRangeUser(*plot.plotSetting.ratio_range)
         ROOT.gStyle.SetErrorX(0)
+        bkdgErrRatio.SetMarkerStyle(1)
         bkdgErrRatio.SetMarkerSize(0)
-        bkdgErrRatio.Draw("e2")
+        bkdgErrRatio.SetLineWidth(0)
+        bkdgErrRatio.SetFillColor(13)
+        bkdgErrRatio.SetFillStyle(3002)
+        bkdgErrRatio.Draw("E3")
+        line.Draw("same")
         ratio.Draw("samePZ")
-        line.Draw()
 
         upperPad.cd()
 
