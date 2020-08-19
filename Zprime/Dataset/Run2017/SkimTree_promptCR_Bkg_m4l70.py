@@ -38,7 +38,7 @@ ZPlusX_cmpList = ComponentList(
 ZPlusX = Dataset(
         "ZPlusX",
         ZPlusX_cmpList,
-        isMC                = True,
+        isMC                = False,
         skipWeight          = True,
         )
 

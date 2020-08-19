@@ -128,8 +128,8 @@ handleSumWeight(
 bkgSamples = [
         DYJetsToLL_M50,
         DYJetsToLL_M10To50,
-        TTJets,
-        WZTo3LNu,
+        #TTJets,
+        #WZTo3LNu,
         ]
 dataSamples = [
         data2017,

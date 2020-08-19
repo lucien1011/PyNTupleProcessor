@@ -6,7 +6,8 @@ from Utils.SumWeight import handleSumWeight
 #bkgSkimTreeDir2      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2017Data_m4l70/"
 #bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_MC/"
 #bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2018_MMM_MC/"
-bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2018_MMM_MC/"
+bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/unskim/SkimTree_Run2018_MMM_MC/"
+#bkgSkimTreeDir      = "/cms/data/store/user/t2/users/rosedj1/Higgs/HZZ4l/NTuple/Run2/MC2018_M19_Mar12_4l_2018Jets_JER_bestCandLegacy/"
 #bkgSkimTreeDir2     = bkgSkimTreeDir
 bkgTreeDir          = "/cms/data/store/user/t2/users/rosedj1/Higgs/HZZ4l/NTuple/Run2/MC2018_M19_Mar12_4l_2018Jets_JER_bestCandLegacy/"
 #dataTreeDir         = bkgSkimTreeDir
@@ -37,7 +38,7 @@ data2018 = Dataset(
 # qqZZ
 qqZZ_cmpList = ComponentList(
         [ 
-            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_TuneCP5_13TeV_powheg_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_TuneCP5_13TeV_powheg_pythia8.root","Ana/passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -362,19 +363,19 @@ handleSumWeight(
 # ____________________________________________________________________________________________________________________________________________ ||
 
 bkgSamples = [
-        ggH,
-        VBF,
-        WHplus,
-        WHminus,
-        ZH,
-        ttH,
+        #ggH,
+        #VBF,
+        #WHplus,
+        #WHminus,
+        #ZH,
+        #ttH,
         qqZZTo4L,
-        ggZZTo2e2mu,
-        ggZZTo2e2tau,
-        ggZZTo2mu2tau,
-        ggZZTo4e,
-        ggZZTo4mu,
-        ggZZTo4tau,
+        #ggZZTo2e2mu,
+        #ggZZTo2e2tau,
+        #ggZZTo2mu2tau,
+        #ggZZTo4e,
+        #ggZZTo4mu,
+        #ggZZTo4tau,
         ]
 dataSamples = [
         data2018,

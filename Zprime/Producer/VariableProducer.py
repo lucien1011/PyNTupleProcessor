@@ -45,5 +45,7 @@ class VariableProducer(Module):
                 event.phi1,
                 )
 
+        #event.lepmatched = [p for p in event.lep]
+
         return True
         

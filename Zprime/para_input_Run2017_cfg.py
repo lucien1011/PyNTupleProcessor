@@ -14,17 +14,19 @@ from Zprime.Config.MergeSampleDict import mergeSampleDict
 
 import os
 
-out_path = "ParaInput/EXO-18-001-Nominal/2019-06-10/"
+#out_path = "ParaInput/EXO-18-001-Nominal/2019-06-10/"
+out_path = "ParaInput/Run2017/2020-06-25/"
 
 User                    = os.environ['USER']
 nCores                  = 5
-lumi                    = 77.3
-outputDir               = system.getStoragePath()+"/lucien/Higgs/Zprime/"+out_path
+#lumi                    = 77.3
+lumi                    = 41.4
+outputDir               = system.getStoragePath()+"/"+User+"/Zprime/Zto4l/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + sigSampleDict.values()
 #componentList           = sigSampleDict.values()
-componentList           = bkgSamples
+componentList           = dataSamples + bkgSamples + sigSamples
 justEndSequence         = False
 skipGitDetail           = True
 

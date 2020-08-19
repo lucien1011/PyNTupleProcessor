@@ -32,7 +32,7 @@ data2017_cmpList = ComponentList(
         ]
         )
 
-data2017 = Dataset(
+Data2017 = Dataset(
         "Data2017",
         data2017_cmpList,
         isMC                = False,
@@ -101,7 +101,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
-        #bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
+        bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
         )
 
 
@@ -422,9 +422,9 @@ bkgSamples = [
         #ggZZTo4e,
         #ggZZTo4mu,
         #ggZZTo4tau,
-        #qqZZTo4L_M1To4,
+        qqZZTo4L_M1To4,
         ZPlusX,
         ]
 dataSamples = [
-        #data2017,
+        Data2017,
         ]

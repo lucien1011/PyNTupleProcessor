@@ -21,7 +21,7 @@ class FakeRateWeighter(Module):
                 event.weight_FRUniIso *= event.FRWeightProd[0]/event.FRWeightProd[0]
                 event.weight_FRAsymIso *= event.FRWeightProd[0]/event.FRWeightProd[0]
             elif event.nFailedLeptonsZ2[0] == 2: 
-                event.weight *= -1*event.FRWeightProd[0]
+                event.weight *= 1*event.FRWeightProd[0]
                 if event.deltaRL34 < 0.6:
                     event.weight_FRUniIso *= event.FRWeightProd_UniIso[0]/event.FRWeightProd[0]
                     event.weight_FRAsymIso *= event.FRWeightProd_AsymIso[0]/event.FRWeightProd[0]

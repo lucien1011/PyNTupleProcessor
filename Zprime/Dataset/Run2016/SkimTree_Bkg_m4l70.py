@@ -6,8 +6,9 @@ from Utils.SumWeight import handleSumWeight
 #bkgSkimTreeDir2      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2016Data_m4l70/"
 #bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_MC/"
 bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2016_MMM_MC/"
-#bkgSkimTreeDir2     = bkgSkimTreeDir
+bkgSkimTreeDir2     = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/M1To4/SkimTree_Run2016_MMM_MC/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
+bkgTreeDir2         = "/cms/data/store/user/t2/users/kshi/Zprime/80X_MCProd_191127/"
 #dataTreeDir         = bkgSkimTreeDir
 dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_Data/"
 inUFTier2           = False
@@ -26,6 +27,21 @@ data2016 = Dataset(
         "Data2016",
         data2016_cmpList,
         isMC                = False,
+        )
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# ZPlusX
+ZPlusX_cmpList = ComponentList(
+        [ 
+            Component("ZPlusX",dataTreeDir2+"Data_Run2016-03Feb2017_4l.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ZPlusX = Dataset(
+        "ZPlusX",
+        ZPlusX_cmpList,
+        isMC                = True,
+        skipWeight          = True,
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -51,6 +67,31 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8.txt",
         bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8.txt",
+        )
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# qqZZ_M1
+qqZZ_M1_cmpList = ComponentList(
+        [ 
+            Component("qqZZTo4L_M1",bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall16.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+qqZZTo4L_M1 = Dataset(
+        "qqZZTo4L_M1",
+        qqZZ_M1_cmpList,
+        isMC                = True,
+        xs                  = 13.74,
+        )
+handleSumWeight(
+        qqZZTo4L_M1,
+        system,
+        bkgTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall16.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall16.txt",
+        bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall16.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -364,13 +405,14 @@ bkgSamples = [
         WHminus,
         ZH,
         ttH,
-        qqZZTo4L,
+        #qqZZTo4L,
         ggZZTo2e2mu,
         ggZZTo2e2tau,
         ggZZTo2mu2tau,
         ggZZTo4e,
         ggZZTo4mu,
         ggZZTo4tau,
+        qqZZTo4L_M1,
         ]
 dataSamples = [
         data2016,
