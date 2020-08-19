@@ -1,0 +1,1 @@
+hadd -f ./testPlot/gamma+X/DataMCDistributions.root  ./testPlot/WGToLNuG/*_DataMCDistributions.root  ./testPlot/TGJets/*_DataMCDistributions.root  ./testPlot/TTGJets/*_DataMCDistributions.root  ./testPlot/ZGTo2LG/*_DataMCDistributions.root  ./testPlot/WGToLNuG/*_DataMCDistributions.root 

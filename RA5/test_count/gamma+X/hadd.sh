@@ -1,0 +1,1 @@
+hadd -f ./test_count/gamma+X/MCDistributions.root  ./test_count/WGToLNuG/*_MCDistributions.root  ./test_count/TGJets/*_MCDistributions.root  ./test_count/TTGJets/*_MCDistributions.root 

@@ -1,0 +1,1 @@
+hadd -f ./TTWW/QCD_HT500to700/DataMCDistributions.root  ./TTWW/QCD_HT500to700/*_DataMCDistributions.root 

@@ -1,0 +1,1 @@
+hadd -f ./testPlot/DoubleMuon_Run2016H-PromptReco-v3/DataMCDistributions.root  ./testPlot/DoubleMuon_Run2016H-PromptReco-v3/*_DataMCDistributions.root 

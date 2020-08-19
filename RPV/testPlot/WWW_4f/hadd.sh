@@ -1,0 +1,1 @@
+hadd -f ./testPlot/WWW_4f/DataMCDistribution.root  ./testPlot/WWW_4f/*_DataMCDistribution.root 

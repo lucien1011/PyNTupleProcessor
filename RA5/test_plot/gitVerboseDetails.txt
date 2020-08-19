@@ -1,0 +1,522 @@
+diff --git a/RA5/Producer/CategoryProducer.py b/RA5/Producer/CategoryProducer.py
+index 65860ca..9f3c0df 100644
+--- a/RA5/Producer/CategoryProducer.py
++++ b/RA5/Producer/CategoryProducer.py
+@@ -1,6 +1,8 @@
+ from Core.Module import Module
+ from Core.Collection import Collection
+ 
++import ROOT
++
+ class Category(object):
+     def __init__(self):
+         pass
+@@ -16,60 +18,76 @@ class CategoryProducer(Module):
+         if event.tightLeps[0].pt > 25 and event.tightLeps[1].pt < 25: event.cat.lepCat = "HL"
+         if event.tightLeps[0].pt < 25 and event.tightLeps[1].pt < 25: event.cat.lepCat = "LL"
+         
++        veclep1 = event.tightLeps[0].p4()
++        veclep2 = event.tightLeps[1].p4()
++        met_pt = event.met_pt[0]
++        met_phi = event.met_phi[0]
++        met = ROOT.TLorentzVector() 
++        met.SetPtEtaPhiM(met_pt,0,met_phi,0)
++        met.SetPz(0)
++        met.SetE(met.Pt())
++        mt1 = (veclep1 + met).Mt()
++        mt2 = (veclep2 + met).Mt()
++        if mt1 < mt2:
++            mt = mt1
++        else:
++            mt = mt2              
++        event.cat.jetCat = "0"
++        #print(event.cat.lepCat, event.htJet40[0], event.nJet40_recal, event.met_pt[0], event.LepGood_charge[0])
+         if event.cat.lepCat == "HH":
+-            if event.htJet25 >= 1125 and event.htJet25 <= 1300 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
+-                if event.LepGood_charge > 0:
++            if event.htJet40[0] >= 1125 and event.htJet40[0] <= 1300 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
++                if event.LepGood_charge[0] > 0:
+                     event.cat.jetCat = "SR46"
+-                elif event.LepGood_charge < 0:
++                elif event.LepGood_charge[0] < 0:
+                     event.cat.jetCat = "SR47"
+-            elif event.htJet25 >= 1300 and event.htJet25 <= 1600 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
+-                if event.LepGood_charge > 0:
++            elif event.htJet40[0] >= 1300 and event.htJet40[0] <= 1600 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
++                if event.LepGood_charge[0] > 0:
+                     event.cat.jetCat = "SR48"
+-                elif event.LepGood_charge < 0:
++                elif event.LepGood_charge[0] < 0:
+                     event.cat.jetCat = "SR49"
+-            elif event.htJet25 > 1600 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
+-                if event.LepGood_charge > 0:
++            elif event.htJet40[0] > 1600 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
++                if event.LepGood_charge[0] > 0:
+                     event.cat.jetCat = "SR50"
+-                elif event.LepGood_charge < 0:
++                elif event.LepGood_charge[0] < 0:
+                     event.cat.jetCat = "SR51"
+ 
+-            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                 event.cat.jetCat = "SR42"
+-            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                 event.cat.jetCat = "SR43"
+-            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                 event.cat.jetCat = "SR44"
+-            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                 event.cat.jetCat = "SR45"
+ 
+             if event.nJet25 == 0:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR1"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR2"
+                         elif event.nJet40_recal >= 5:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR3"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR4"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300:
++                        if event.htJet40[0] < 300:
+                             event.cat.jetCat = "SR3"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR5"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR6"
+-                        if event.nJet40_recal >= 5 and event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.nJet40_recal >= 5 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR7"
+-                elif event.htJet25 < 300:
++                elif event.htJet40[0] < 300:
+                     event.cat.jetCat = "SR3"
+-                elif event.htJet25 >= 300 and event.htJet25 <= 1125:
++                elif event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.LepGood_charge > 0:
++                            if event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR8"
+                             else:
+                                 event.cat.jetCat = "SR9"
+@@ -78,42 +96,42 @@ class CategoryProducer(Module):
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+                         event.cat.jetCat = "SR10"
+             elif event.nJet25 == 1:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR11"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR12"
+                         elif event.nJet40_recal >= 5:
+-                            if event.htJet25 < 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR13"
+-                            if event.htJet25 < 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR14"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR15"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR16"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR13"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR14"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR17"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR18"
+-                        if event.nJet40_recal >= 5 and event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.nJet40_recal >= 5 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR19"
+-                elif event.htJet25 < 300:
+-                    if event.LepGood_charge > 0:
++                elif event.htJet40[0] < 300:
++                    if event.LepGood_charge[0] > 0:
+                         event.cat.jetCat = "SR13"
+                     else:
+                         event.cat.jetCat = "SR14"
+-                elif event.htJet25 >= 300 and event.htJet25 <= 1125:
++                elif event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.LepGood_charge > 0:
++                            if event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR20"
+                             else:
+                                 event.cat.jetCat = "SR21"
+@@ -122,42 +140,42 @@ class CategoryProducer(Module):
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+                         event.cat.jetCat = "SR22"
+             elif event.nJet25 == 2:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR23"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR24"
+                         elif event.nJet40_recal >= 5:
+-                            if event.htJet25 < 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR25"
+-                            if event.htJet25 < 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR26"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR27"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR28"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR25"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR26"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR29"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR30"
+-                        if event.nJet40_recal >= 5 and event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.nJet40_recal >= 5 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR31"
+-                elif event.htJet25 < 300:
+-                    if event.LepGood_charge > 0:
++                elif event.htJet40[0] < 300:
++                    if event.LepGood_charge[0] > 0:
+                         event.cat.jetCat = "SR25"
+                     else:
+                         event.cat.jetCat = "SR26"
+-                elif event.htJet25 >= 300 and event.htJet25 <= 1125:
++                elif event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.LepGood_charge > 0:
++                            if event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR32"
+                             else:
+                                 event.cat.jetCat = "SR33"
+@@ -166,169 +184,170 @@ class CategoryProducer(Module):
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+                         event.cat.jetCat = "SR34"
+             if event.nJet25 >= 3 and event.nJet40_recal >= 2:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR35"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR36"
+-                        if event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR37"
+-                        if event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR38"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR35"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR36"
+-                        if event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR39"
+                 else:
+                     if event.met_pt[0] > 50:
+-                        if event.htJet25 < 300:
++                        if event.htJet40[0] < 300:
+                             event.cat.jetCat = "SR40"
+-                        if event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR41"
+ 
+         if event.cat.lepCat == "HL":
+-            if event.htJet25 >= 1125 and event.htJet25 <= 1300 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
+-                if event.LepGood_charge > 0:
++            if event.htJet40[0] >= 1125 and event.htJet40[0] <= 1300 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
++                if event.LepGood_charge[0] > 0:
+                     event.cat.jetCat = "SR38"
+-                elif event.LepGood_charge < 0:
++                elif event.LepGood_charge[0] < 0:
+                     event.cat.jetCat = "SR39"
+-            elif event.htJet25 >= 1300 and event.htJet25 <= 1600 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
+-                if event.LepGood_charge > 0:
++            elif event.htJet40[0] >= 1300 and event.htJet40[0] <= 1600 and event.nJet40_recal >= 2 and event.met_pt[0] >= 50 and event.met_pt[0] <= 300:
++                if event.LepGood_charge[0] > 0:
+                     event.cat.jetCat = "SR40"
+-                elif event.LepGood_charge < 0:
++                elif event.LepGood_charge[0] < 0:
+                     event.cat.jetCat = "SR41"
+             
+-            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                 event.cat.jetCat = "SR34"
+-            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++            if event.met_pt[0] >= 300 and event.met_pt[0] <= 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                 event.cat.jetCat = "SR35"
+-            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                 event.cat.jetCat = "SR36"
+-            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++            if event.met_pt[0] > 500 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                 event.cat.jetCat = "SR37"
+-            if event.mhtJet25 > 120 and event.met_pt[0] <= 300 and event.met_pt[0] >= 50 and event.nJet40_recal >= 2 and event.htJet25 < 300:
++            if mt > 120 and event.met_pt[0] <= 300 and event.met_pt[0] >= 50 and event.nJet40_recal >= 2 and event.htJet40[0] < 300:
+                 event.cat.jetCat = "SR32"
+-            if event.mhtJet25 > 120 and event.met_pt[0] <= 300 and event.met_pt[0] >= 50 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125:
++            if mt > 120 and event.met_pt[0] <= 300 and event.met_pt[0] >= 50 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                 event.cat.jetCat = "SR33"
+ 
+             if event.nJet25 == 0:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR1"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR2"
+                         elif event.nJet40_recal >= 5:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR3"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR4"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300:
++                        if event.htJet40[0] < 300:
+                             event.cat.jetCat = "SR3"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR5"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR6"
+-                        if event.nJet40_recal >= 5 and event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.nJet40_recal >= 5 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR7"
+             elif event.nJet25 == 1:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR8"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR9"
+                         elif event.nJet40_recal >= 5:
+-                            if event.htJet25 < 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR10"
+-                            if event.htJet25 < 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR11"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR12"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR13"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR10"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR11"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR14"
+-                        if event.nJet40_recal >= 5 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.nJet40_recal >= 5 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR16"
+-                        if event.nJet40_recal >= 5 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.nJet40_recal >= 5 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR17"
+             elif event.nJet25 == 2:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+                         if event.nJet40_recal <= 4 and event.nJet40_recal >= 2:
+-                            if event.htJet25 < 300:
++                            if event.htJet40[0] < 300:
+                                 event.cat.jetCat = "SR18"
+-                            elif event.htJet25 <= 1125:
++                            elif event.htJet40[0] <= 1125:
+                                 event.cat.jetCat = "SR19"
+                         elif event.nJet40_recal >= 5:
+-                            if event.htJet25 < 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR20"
+-                            if event.htJet25 < 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR21"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge > 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] > 0:
+                                 event.cat.jetCat = "SR22"
+-                            if event.htJet25 <= 1125 and event.htJet25 >= 300 and event.LepGood_charge < 0:
++                            if event.htJet40[0] <= 1125 and event.htJet40[0] >= 300 and event.LepGood_charge[0] < 0:
+                                 event.cat.jetCat = "SR23"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR20"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR21"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR24"
+-                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.nJet40_recal <= 4 and event.nJet40_recal >= 2 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR25"
+-                        if event.nJet40_recal >= 5 and event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.nJet40_recal >= 5 and event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR26"
+             if event.nJet25 >= 3 and event.nJet40_recal >= 2:
+-                if event.mhtJet25 < 120:
++                if mt < 120:
+                     if event.met_pt[0] < 200 and event.met_pt[0] > 50:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR27"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR28"
+-                        if event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge > 0:
++                        if event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR29"
+-                        if event.htJet25 >= 300 and event.htJet25 <= 1125 and event.LepGood_charge < 0:
++                        if event.htJet40[0] >= 300 and event.htJet40[0] <= 1125 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR30"
+                     elif event.met_pt[0] < 300 and event.met_pt[0] > 200:
+-                        if event.htJet25 < 300 and event.LepGood_charge > 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] > 0:
+                             event.cat.jetCat = "SR27"
+-                        if event.htJet25 < 300 and event.LepGood_charge < 0:
++                        if event.htJet40[0] < 300 and event.LepGood_charge[0] < 0:
+                             event.cat.jetCat = "SR28"
+-                        if event.htJet25 >= 300 and event.htJet25 <= 1125:
++                        if event.htJet40[0] >= 300 and event.htJet40[0] <= 1125:
+                             event.cat.jetCat = "SR31"
+ 
+         if event.cat.lepCat == "LL":
+-            if event.nJet40_recal >= 2 and event.htJet25 > 300:
+-                if event.mhtJet25 > 120 and event.met_pt[0] >= 50:
++            if event.nJet40_recal >= 2 and event.htJet40[0] > 300:
++                if mt > 120 and event.met_pt[0] >= 50:
+                     event.cat.jetCat = "SR8"
+-                if event.nJet25 >= 3 and event.mhtJet25 < 120 and event.met_pt[0] >= 50:
++                if event.nJet25 >= 3 and mt < 120 and event.met_pt[0] >= 50:
+                     event.cat.jetCat = "SR7"
+-                if event.nJet25 == 0 and event.mhtJet25 < 120 and event.met_pt[0] >= 50 and event.met_pt[0] <= 200:
++                if event.nJet25 == 0 and mt < 120 and event.met_pt[0] >= 50 and event.met_pt[0] <= 200:
+                     event.cat.jetCat = "SR1"
+-                if event.nJet25 == 0 and event.mhtJet25 < 120 and event.met_pt[0] >= 200:
++                if event.nJet25 == 0 and mt < 120 and event.met_pt[0] >= 200:
+                     event.cat.jetCat = "SR2"
+-                if event.nJet25 == 1 and event.mhtJet25 < 120 and event.met_pt[0] >= 50 and event.met_pt[0] <= 200:
++                if event.nJet25 == 1 and mt < 120 and event.met_pt[0] >= 50 and event.met_pt[0] <= 200:
+                     event.cat.jetCat = "SR3"
+-                if event.nJet25 == 1 and event.mhtJet25 < 120 and event.met_pt[0] >= 200:
++                if event.nJet25 == 1 and mt < 120 and event.met_pt[0] >= 200:
+                     event.cat.jetCat = "SR4"
+-                if event.nJet25 == 2 and event.mhtJet25 < 120 and event.met_pt[0] >= 50 and event.met_pt[0] <= 200:
++                if event.nJet25 == 2 and mt < 120 and event.met_pt[0] >= 50 and event.met_pt[0] <= 200:
+                     event.cat.jetCat = "SR5"
+-                if event.nJet25 == 2 and event.mhtJet25 < 120 and event.met_pt[0] >= 200:
++                if event.nJet25 == 2 and mt < 120 and event.met_pt[0] >= 200:
+                     event.cat.jetCat = "SR6"
+-
++        #print(event.cat.jetCat)
++        #event.cat.lepCat.__dict__
+         return True
+diff --git a/RA5/plot_cfg.py b/RA5/plot_cfg.py
+index 0d40deb..2fd239e 100644
+--- a/RA5/plot_cfg.py
++++ b/RA5/plot_cfg.py
+@@ -5,6 +5,7 @@ from Core.EndSequence import EndSequence
+ 
+ from RA5.Weighter.XSWeighter import XSWeighter
+ from RA5.LeptonJetRecleaner.EventProducer import LeptonJetProducer 
++from RA5.Config.MergeSampleDefinition import mergeSampleDict
+ #from RA5.Skimmer.BaselineSkimmer import BaselineSkimmer
+ #from RA5.Skimmer.SignalRegionSkimmer import SignalRegionSkimmer
+ 
+diff --git a/RPV/Producer/AnalysisProducer.py b/RPV/Producer/AnalysisProducer.py
+index abfb955..0978b5f 100644
+--- a/RPV/Producer/AnalysisProducer.py
++++ b/RPV/Producer/AnalysisProducer.py
+@@ -85,9 +85,9 @@ class AnalysisProducer(Module):
+         event.dR_min_jets_leps = 0
+ 
+         for i in event.jets:
+-	    for j in event.leps:
+-                temp = deltaR(i.eta,i.phi,j.eta,j.phi)
+-                if event.dR_min_jets_leps == 0 or event.dR_min_jets_leps >temp:
+-	           event.dR_min_jets_leps = temp
++            for j in event.leps:
++                    temp = deltaR(i.eta,i.phi,j.eta,j.phi)
++                    if event.dR_min_jets_leps == 0 or event.dR_min_jets_leps >temp:
++	                    event.dR_min_jets_leps = temp
+ 
+         return True
+diff --git a/RPV/Skimmer/HLTSkimmer.py b/RPV/Skimmer/HLTSkimmer.py
+index 2ef6e2f..442d543 100644
+--- a/RPV/Skimmer/HLTSkimmer.py
++++ b/RPV/Skimmer/HLTSkimmer.py
+@@ -7,8 +7,8 @@ class HLTSkimmer(Module):
+ 
+     def analyze(self,event):
+         if(self.dataset.isMC):
+-            return True
+-            #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
++            #return True
++            return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] #or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+         if("SingleMuon" in self.dataset.parent.name):
+           return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+         elif("SingleElectron" in self.dataset.parent.name):

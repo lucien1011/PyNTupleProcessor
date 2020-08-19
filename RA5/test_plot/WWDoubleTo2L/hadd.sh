@@ -1,0 +1,1 @@
+hadd -f ./test_plot/WWDoubleTo2L/MCDistributions.root  ./test_plot/WWDoubleTo2L/*_MCDistributions.root 

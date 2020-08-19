@@ -1,0 +1,1 @@
+hadd -f ./testPlot/VHToNonbb/DataMCDistributions.root  ./testPlot/VHToNonbb/*_DataMCDistributions.root 

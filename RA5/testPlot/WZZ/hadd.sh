@@ -1,0 +1,1 @@
+hadd -f ./testPlot/WZZ/DataMCDistributions.root  ./testPlot/WZZ/*_DataMCDistributions.root 

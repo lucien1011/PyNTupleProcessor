@@ -1,0 +1,1 @@
+hadd -f ./test_count/VHToNonbb/MCDistributions.root  ./test_count/VHToNonbb/*_MCDistributions.root 

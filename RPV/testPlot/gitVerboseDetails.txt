@@ -1,0 +1,87 @@
+diff --git a/RPV/Producer/AnalysisProducer.py b/RPV/Producer/AnalysisProducer.py
+index 0978b5f..b3535c7 100644
+--- a/RPV/Producer/AnalysisProducer.py
++++ b/RPV/Producer/AnalysisProducer.py
+@@ -19,6 +19,10 @@ class AnalysisProducer(Module):
+         event.jets.sort(key=lambda x: x.pt,reverse=True)
+         event.nJet40 = len(event.jets)
+ 
++        event.jets25 = [p for p in event.LooseJets if p.pt > 25]
++        event.jets25.sort(key=lambda x: x.pt,reverse=True)
++        event.nJet25 = len(event.jets25)
++
+         event.ht40 = 0.
+         for ps in [event.jets,event.leps]:
+             for p in ps:
+diff --git a/RPV/Skimmer/HLTSkimmer.py b/RPV/Skimmer/HLTSkimmer.py
+index d0d4eb6..2514801 100644
+--- a/RPV/Skimmer/HLTSkimmer.py
++++ b/RPV/Skimmer/HLTSkimmer.py
+@@ -7,7 +7,7 @@ class HLTSkimmer(Module):
+ 
+     def analyze(self,event):
+         if(self.dataset.isMC):
+-            return True #event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
++            return event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
+             #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+ 
+         else:
+diff --git a/RPV/Weighter/Triggereff.py b/RPV/Weighter/Triggereff.py
+index b0bf14b..f7569ad 100644
+--- a/RPV/Weighter/Triggereff.py
++++ b/RPV/Weighter/Triggereff.py
+@@ -7,7 +7,7 @@ from math import sqrt
+ 
+ class Triggereff(Module):
+ 
+-    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
++    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
+         self.filenameTrigeff = [(weight, "/home/kshi/SUSY/CMSSW_8_0_25/src/UF-PyNTupleRunner/DataMC/Trigger_Eff/Run2016/"+filename) for (weight, filename) in filenameTrigeff]
+         self.flatTrigSyst = flatTrigSyst
+         self.Trigeffhistpath = Trigeffhistpath
+diff --git a/RPV/plot_TTbar_cfg.py b/RPV/plot_TTbar_cfg.py
+index 569efff..260d21a 100644
+--- a/RPV/plot_TTbar_cfg.py
++++ b/RPV/plot_TTbar_cfg.py
+@@ -14,6 +14,8 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
+ from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
+ from RPV.Skimmer.HLTSkimmer import HLTSkimmer
+ from RPV.Weighter.Triggereff import Triggereff
++from RPV.Weighter.Btageff import Btageff
++from RPV.Weighter.BtagscaleFactor import BtagscaleFactor
+ 
+ from Plotter.Plotter import Plotter
+ from Plotter.PlotEndModule import PlotEndModule
+@@ -63,7 +65,7 @@ plots = [
+         Plot("muonPt1",     ["TH1D","muonPt1","",20,0., 500.],      LambdaFunc('x: x.muons[0].pt if len(x.muons) > 0 else None')),
+         Plot("muonPt2",     ["TH1D","muonPt2","",20,0., 500.],      LambdaFunc('x: x.muons[1].pt if len(x.muons) > 1 else None')),
+         Plot("nGoodPV",     ["TH1D","nGoodPV","",30,0.0,60.0],      LambdaFunc('x: x.PV_npvsGood[0]')),
+-	   #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
++       #Plot("m0_bl",       ["TH1D","m0_bl1","",16,0., 800.],       LambdaFunc('x: x.m0_bl[0]')),
+ 	   #Plot("m1_bl",       ["TH1D","m1_bl1","",16,0., 800.],       LambdaFunc('x: x.m1_bl[0]')),
+ 	   #Plot("m_asym_bl",    ["TH1D","m_asym_bl","",20,0., 1.],       LambdaFunc('x: x.m_asym_bl[0]')),
+ 	   #Plot("m_ct",         ["TH1D","m_ct","",16,0., 800.],         LambdaFunc('x: x.m_ct[0]')),
+@@ -80,6 +82,9 @@ hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
+ jsonSkimmer             = JSONSkimmer("JSONSkim")
+ metSkimmer              = METFilter("METSkim")
+ triggereff              = Triggereff("Triggereff")
++btageff                 = Btageff("Btageff")
++btagscalefactor         = BtagscaleFactor("BtagscaleFactor")
++
+ 
+ sequence = Sequence()
+ sequence.add(metSkimmer)
+@@ -93,10 +98,12 @@ sequence.add(puWeighter)
+ sequence.add(anaProducer)
+ sequence.add(eventSkimmer)
+ sequence.add(triggereff)
++sequence.add(btageff)
++sequence.add(btagscalefactor)
+ sequence.add(plotter)
+ 
+ endSequence = EndSequence(skipHadd=justEndSequence)
+-endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
++endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/Btageff_ratio/"
+ endSequence.add(PlotEndModule(endModuleOutputDir,plots))
+ 
+ outputInfo = OutputInfo("OutputInfo")

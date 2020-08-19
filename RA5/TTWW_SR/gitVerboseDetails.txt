@@ -1,0 +1,202 @@
+diff --git a/RA5/Dataset/Run2016/Oct18_v1_TTWW.py b/RA5/Dataset/Run2016/Oct18_v1_TTWW.py
+index a111f46..240d488 100644
+--- a/RA5/Dataset/Run2016/Oct18_v1_TTWW.py
++++ b/RA5/Dataset/Run2016/Oct18_v1_TTWW.py
+@@ -26,6 +26,7 @@ for fileName in fileNames:
+             isMC = True,
+             isSignal = True,
+             #xs = xs_dict[sampleName].value if sampleName in xs_dict else None,
++            xs = 0.00838
+             )
+     tmpDataset.setSumWeight(os.path.join(dir_path,fileName),"SumGenWeights",inUFTier2)
+     if sampleName not in componentDict:
+@@ -34,3 +35,4 @@ for fileName in fileNames:
+         componentDict[sampleName].add(tmpDataset)
+ 
+ sigComponentDict = componentDict
++sigComponentList_plot = [sigComponentDict["TTWW"]]
+diff --git a/RA5/Sequence/RecoSequence.py b/RA5/Sequence/RecoSequence.py
+index 38cd0a4..f9b250e 100644
+--- a/RA5/Sequence/RecoSequence.py
++++ b/RA5/Sequence/RecoSequence.py
+@@ -10,6 +10,7 @@ from RA5.Skimmer.METSkimmer import METSkimmer
+ from RA5.Skimmer.LLHtSkimmer import LLHtSkimmer
+ from RA5.Skimmer.HLTSkimmer import HLTSkimmer
+ from RA5.Skimmer.RPVSkimmer import RPVSkimmer
++from RA5.Skimmer.TTWWSkimmer import TTWWSkimmer
+ from RA5.Producer.CategoryProducer import CategoryProducer,LeptonCatProducer
+ from RA5.Producer.NJet40Producer import NJet40Producer
+ from RA5.Producer.LeptonProducer import LeptonProducer
+@@ -36,6 +37,7 @@ llHtSkimmer             = LLHtSkimmer("LLHtSkimmer")
+ hltSkimmer              = HLTSkimmer("HLTSkimmer",emulation=True)
+ tlHLTSkimmer            = HLTSkimmer("HLTSkimmer",emulation=True,cutflow="TightLoose")
+ rpvSkimmer              = RPVSkimmer("RPVSkimmer")
++ttwwSkimmer             = TTWWSkimmer("TTWWSkimmer")
+ metFilter               = METFilter("METFilter",flags=[
+         "Flag_HBHENoiseFilter",
+         "Flag_HBHENoiseIsoFilter",
+@@ -92,6 +94,19 @@ rpv_sequence.add(rpvSkimmer)
+ rpv_sequence.add(xsWeighter)
+ rpv_sequence.add(hltWeighter)
+ 
++ttww_sequence = Sequence()
++ttww_sequence.add(leptonProducer)
++ttww_sequence.add(jetProducer)
++ttww_sequence.add(metFilter)
++ttww_sequence.add(baselineSkimmer)
++ttww_sequence.add(leptonCatProducer)
++ttww_sequence.add(llHtSkimmer)
++ttww_sequence.add(hltSkimmer)
++ttww_sequence.add(metSkimmer)
++ttww_sequence.add(ttwwSkimmer)
++ttww_sequence.add(xsWeighter)
++ttww_sequence.add(hltWeighter)
++
+ low_met_sequence = Sequence()
+ low_met_sequence.add(inverMetSkimmer)
+ low_met_sequence.add(leptonProducer)
+diff --git a/RA5/StatFW/DataCard.py b/RA5/StatFW/DataCard.py
+index e6f6064..d1b6b64 100644
+--- a/RA5/StatFW/DataCard.py
++++ b/RA5/StatFW/DataCard.py
+@@ -32,7 +32,7 @@ class DataCard(object):
+             self.binNameObservation += bin.name+"\t"
+             for iprocess,process in enumerate(bin.processList):
+                 self.binName += bin.name+"\t"
+-                self.processName += process.name+"\t"
++                self.processName += process.name+"\t" 
+                 if bin.isSignal(process.name):
+                     self.processNum += "0\t"
+                 else:
+diff --git a/RA5/mk_DC.sh b/RA5/mk_DC.sh
+index ef5f888..d08c14a 100644
+--- a/RA5/mk_DC.sh
++++ b/RA5/mk_DC.sh
+@@ -67,5 +67,6 @@
+ #python make_data_card.py --inputDir /raid/raid7/lucien/SUSY/RA5/RPV/StatInput/rpv_binning2016_v2_120fb-1/2018-10-01/ --outputDir ~/SUSY/RA5/RA5-StatFW/DataCard/rpv_binning/baseline_binning_HH_v1_120fb-1/2018-10-01_T1qqqqL_2000/ --sigModel SMS-T1qqqqL_2000 --makeTextFile
+ for m in 1000 1500 1600 1700 1800 1900 2000 2100 2200 2300 2400 2500 ; do
+     echo "Making data card for ${m}" ;
+-    python make_data_card.py --inputDir /raid/raid7/lucien/SUSY/RA5/RPV/StatInput/rpv_binning2016_v4_150fb-1/2018-10-15/ --outputDir ~/SUSY/RA5/RA5-StatFW/DataCard/rpv_binning/baseline_binning_HH_v4_150fb-1/2018-10-15_T1qqqqL_${m}/ --sigModel SMS-T1qqqqL_${m} --makeTextFile --baseline ;
++    #python make_data_card.py --inputDir /raid/raid7/lucien/SUSY/RA5/RPV/StatInput/rpv_binning2016_v4_150fb-1/2018-10-15/ --outputDir ~/SUSY/RA5/RA5-StatFW/DataCard/rpv_binning/baseline_binning_HH_v4_150fb-1/2018-10-15_T1qqqqL_${m}/ --sigModel SMS-T1qqqqL_${m} --makeTextFile --baseline ;
++    python make_data_card.py --inputDir /raid/raid7/kshi/SUSY/RA5/StatInput/T1qqqqL --outputDir ~/RA5/RA5-StatFW/DataCard/rpv_binning/baseline_binning_HH_v4_150fb-1/2018-10-15_T1qqqqL_${m}/ --sigModel SMS-T1qqqqL_${m} --makeTextFile --baseline ; 
+ done 
+diff --git a/RA5/plot_SR_RPV_cfg.py b/RA5/plot_SR_RPV_cfg.py
+index a001ef9..8623f61 100644
+--- a/RA5/plot_SR_RPV_cfg.py
++++ b/RA5/plot_SR_RPV_cfg.py
+@@ -34,6 +34,9 @@ elif where == "ihepa":
+     out_path = "RPV/SignalRegion/DataMCDistribution/2018-10-18_Run2016B/"
+     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+     endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
++    #out_path = "test/"
++    #outputDir = "/raid/raid7/kshi/test/" +out_path
++    #endModuleOutputDir = "/home/kshi/public_html/test/"
+ lepCats = ["HH","HL","LL"]
+ 
+ nCores = 5
+diff --git a/RA5/plot_TTWW_2016_cfg.py b/RA5/plot_TTWW_2016_cfg.py
+index 79fd246..14ded2a 100644
+--- a/RA5/plot_TTWW_2016_cfg.py
++++ b/RA5/plot_TTWW_2016_cfg.py
+@@ -26,9 +26,10 @@ if where == "hpg":
+     outputDir = out_path
+     endModuleOutputDir = out_path 
+ elif where == "ihepa":
+-    out_path = "SigBkgDistribution/2018-10-17/"
+-    outputDir = "/raid/raid7/lucien/FirstLook/TTWW/"+out_path
+-    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
++    out_path = "TTWW/SigBkgDistribution/2019-02-11/"
++    #outputDir = "/raid/raid7/lucien/FirstLook/TTWW/"+out_path
++    outputDir = "./TTWW/"
++    endModuleOutputDir = "/home/kshi/public_html/SUSY/RA5/"+out_path
+ lepCats = ["HH","HL","LL"]
+ 
+ nCores = 4
+@@ -40,7 +41,8 @@ verbose = False
+ componentList = [c for c in componentDict.values() if not (("WJets" in c.name and "HT" in c.name) or ("DYJets" in c.name and "HT" in c.name)) ] + sigComponentDict.values()
+ for dataset in componentList:
+     if dataset.isMC:
+-        dataset.lumi = 35.9
++        dataset.lumi = 136.1
++        #dataset.lumi = 35.9
+         #dataset.lumi = 5.93
+     for component in dataset.componentList:
+         component.maxEvents = nEvents
+diff --git a/RA5/plot_TightLooseCR_RPV_cfg.py b/RA5/plot_TightLooseCR_RPV_cfg.py
+index 002c2c1..6069e41 100644
+--- a/RA5/plot_TightLooseCR_RPV_cfg.py
++++ b/RA5/plot_TightLooseCR_RPV_cfg.py
+@@ -32,8 +32,10 @@ elif where == "ihepa":
+     #out_path = "TightLoose/DataMCDistribution/2018-10-11_MET0ToInf_CleaningLep/"
+     out_path = "TightLoose/DataMCDistribution/2018-10-18_MET0To50_CleaningLep/"
+     #out_path = "TightLoose/DataMCDistribution/2018-10-11_MET50ToInf_CleaningLep/"
+-    outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+-    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
++    #outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
++    #endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
++    outputDir = "/raid/raid7/kshi/test"+out_path
++    endModuleOutputDir = "/home/kshi/public_html/test/"+out_path
+ lepCats = [""]
+ 
+ nCores                      = 5
+diff --git a/RA5/stat_input_cfg.py b/RA5/stat_input_cfg.py
+index 819a04c..9cf9e09 100644
+--- a/RA5/stat_input_cfg.py
++++ b/RA5/stat_input_cfg.py
+@@ -19,7 +19,7 @@ from RA5.Dataset.Run2016.Sept18_v1_Data import *
+ from RA5.Dataset.Run2016.Sept18_v1_skim import *
+ from RA5.Dataset.Run2016.Oct18_v1_SMS import sigComponentDict
+ 
+-if where == "hpg":
++'''if where == "hpg":
+     out_path = "/cms/data/store/user/t2/users/klo/HPG/RA5/RPV/DataMCDistributions/2018-09-12_HLTEmulation/"
+     outputDir = out_path
+     endModuleOutputDir = out_path 
+@@ -29,10 +29,13 @@ elif where == "ihepa":
+     #out_path = "RPV/StatInput/rpv_binning2016_v1_120fb-1/2018-09-26/"
+     out_path = "RPV/StatInput/rpv_binning2016_v4_150fb-1/2018-10-15/"
+     outputDir = "/raid/raid7/lucien/SUSY/RA5/"+out_path
+-    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path
++    endModuleOutputDir = "/home/lucien/public_html/SUSY/RA5/"+out_path'''
++out_path = "StatInput/"
++outputDir = "/raid/raid7/kshi/SUSY/RA5/" +out_path
++endModuleOutputDir = "/home/kshi/public_html/SUSY/RA5/" + out_path
+ lepCats = ["HH","HL","LL"]
+ 
+-nCores = 5
++nCores = 1
+ nEvents = -1
+ disableProgressBar = False
+ justEndSequence = False
+diff --git a/RA5/tree_Sept18_v1_cfg.py b/RA5/tree_Sept18_v1_cfg.py
+index 4988241..02325ec 100644
+--- a/RA5/tree_Sept18_v1_cfg.py
++++ b/RA5/tree_Sept18_v1_cfg.py
+@@ -6,6 +6,7 @@ from Core.EndSequence import EndSequence
+ from Common.TreeProducer import TreeProducer
+ 
+ from RA5.Sequence.RecoSequence import rpv_sequence
++from RA5.Sequence.RecoSequence import tightlooseCR_sequence
+ 
+ from Core.Utils.LambdaFunc import LambdaFunc
+ 
+@@ -15,7 +16,8 @@ from RA5.Dataset.Run2016.Sept18_v1 import *
+ 
+ from NanoAOD.Producer.GenWeightCounter import *
+ 
+-out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
++#out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
++out_path = "/raid/raid7/kshi/SUSY/RA5/SkimTree/mc/"
+ 
+ nCores                      = 6
+ outputDir                   = out_path
+@@ -32,7 +34,8 @@ for dataset in componentList:
+ 
+ treeProducer                = TreeProducer("TreeProducer")
+ 
+-sequence                    = rpv_sequence
++#sequence                    = rpv_sequence
++sequence                    = tightlooseCR_sequence
+ sequence.add(treeProducer)
+ 
+ endSequence                 = EndSequence(skipHadd=False)

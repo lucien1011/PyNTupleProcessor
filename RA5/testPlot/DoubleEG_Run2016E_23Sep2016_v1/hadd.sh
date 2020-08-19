@@ -1,0 +1,1 @@
+hadd -f ./testPlot/DoubleEG_Run2016E_23Sep2016_v1/DataMCDistributions.root  ./testPlot/DoubleEG_Run2016E_23Sep2016_v1/*_DataMCDistributions.root 

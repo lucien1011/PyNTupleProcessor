@@ -1,0 +1,1 @@
+hadd -f ./test_plot/WZTo3LNu/MCDistributions.root  ./test_plot/WZTo3LNu/*_MCDistributions.root 

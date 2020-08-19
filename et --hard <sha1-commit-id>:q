@@ -1,0 +1,365 @@
+[33mcommit 34bfffe6ec81f85e971df8f70dec3d676fdcdaff[m[33m ([m[1;36mHEAD -> [m[1;32mkshi[m[33m)[m
+Author: kun shi <shikun1@163.com>
+Date:   Tue Jun 12 10:09:06 2018 -0400
+
+    Jun 12 2018
+
+[33mcommit 621263de993a4fd0190d23f80a158a7e058d7a68[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu May 31 06:22:26 2018 -0400
+
+    Fix None error for LambdaFunc
+
+[33mcommit 0dccd4fd9def69a339cc1bd74a41e5703317818c[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu May 31 05:43:56 2018 -0400
+
+    Added HeppyTree
+
+[33mcommit 827bbc2f6ad1f1c31157bc0520ff6b571b67f9c4[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Sat May 26 06:36:49 2018 -0400
+
+    Added more advanced Plotter
+
+[33mcommit 49f9abae650d43b1150d88d55ecd7fef6a766f02[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 22 02:52:53 2018 -0400
+
+    Fix bug in Plotter
+
+[33mcommit 6df9a6b8261878ab25390d2e88b52f854ab068dc[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon May 21 09:17:25 2018 -0400
+
+    Added cross section, skim tree
+
+[33mcommit ceb2fa5ec860226a7abdf246a91af795313c855f[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon May 21 09:14:35 2018 -0400
+
+    Open all branch for skim tree
+
+[33mcommit 9f7344a2c246db8160ac2490b05bd723c069c59a[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Sun May 20 19:06:52 2018 -0400
+
+    Use beginEvents in skimTree_cfg.py
+
+[33mcommit c6f916debb6dd9f88ca590fb12ae54068deaa4cd[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri May 18 17:22:23 2018 -0400
+
+    Added skimTree_cfg.py and plot_cfg.py
+
+[33mcommit c5a0eb7daa15e1b0713358b5b092a3505e0993ce[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri May 18 10:10:51 2018 -0400
+
+    remove dataset in RA5
+
+[33mcommit 26d4d1ecbd642b8fae3e26b8d9cf2c20fa8c27bf[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri May 18 10:10:13 2018 -0400
+
+    Move NanoAOD samples up one folder
+
+[33mcommit 1fd6fbdc52fe2e51b7e0d526520c16d9edc29b56[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri May 18 06:10:42 2018 -0400
+
+    Update EndSequence
+
+[33mcommit 80dfad2e4dd969a7f4b1d10e1fc903a9a07580ab[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri May 18 05:32:39 2018 -0400
+
+    Fix typo
+
+[33mcommit c44e239fbc09435cfd452db64e5058930a679807[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri May 18 05:30:00 2018 -0400
+
+    Added SingleTop samples
+
+[33mcommit ac11743e2a2d73817ec3eba4a20e85f9b2967e1b[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 18:21:04 2018 -0400
+
+    Change nCores and outputDir
+
+[33mcommit 13a0715133bfefbbddfbf25cf1966ab23ea42332[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 13:12:24 2018 -0400
+
+    update plot_cfg.py
+
+[33mcommit 7c243d7371860fc04829a8381050361977bfd623[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 13:11:55 2018 -0400
+
+    fix syntax
+
+[33mcommit 9fb64b26e917a4fce768ffc7328e1eaa77423590[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 13:07:22 2018 -0400
+
+    Update MC samples
+
+[33mcommit dfd3434334c7cad2945dd65cb755b2a8479ac9d9[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 13:06:54 2018 -0400
+
+    Added Utils/MakeComponent.py
+
+[33mcommit bd44bf6187e58d6f42d88d7601b1e13211a868e0[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 12:11:06 2018 -0400
+
+    Added hadder
+
+[33mcommit eef8d723951d5276201023c0a3987205268ec707[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 11:35:41 2018 -0400
+
+    added plotter and XSWeighter
+
+[33mcommit 8a7a4f3ea29ccee482f5c0d0e61d849a129b98e6[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 11:35:05 2018 -0400
+
+    PhysicsProducer
+
+[33mcommit b44ede0a1edd08f7aa313d0c85197bfd29daf77a[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 11:34:33 2018 -0400
+
+    update RA5 dataset
+
+[33mcommit dc0db15a60b74abf63d523c125dbe694a9e5a613[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue May 15 08:04:40 2018 -0400
+
+    Update Core
+
+[33mcommit 33ee4f6d7d8cec4f4c44ecadfe5fb28276cc9da2[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon May 14 07:15:46 2018 -0400
+
+    Set SumWeight by file
+
+[33mcommit c816e8a7356f64eba778ff31f05b191737ca1c48[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon May 14 06:55:10 2018 -0400
+
+    Added MC samples
+
+[33mcommit d1a4d0c7fa1694a8902c627dafd50dc21dca37dd[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon May 14 06:53:48 2018 -0400
+
+    added Change file path
+
+[33mcommit 408d799f953c56d25ef8be51006c940cca09e9d2[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 12:15:00 2018 -0400
+
+    Configurable xs*lumi weight
+
+[33mcommit 2f92d6e7fc3c8d7a0012a0adcbd488fa19cb177b[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 12:14:28 2018 -0400
+
+    Update Core with new Dataset class
+
+[33mcommit f06e989877addcff689ebeed6afc7b7a794a55ed[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 12:03:14 2018 -0400
+
+    Configurable lumi
+
+[33mcommit 4daba1ac45dfd82c9e7e46bf07ab9ae9c6e9777e[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 11:58:18 2018 -0400
+
+    added generalized plotter
+
+[33mcommit 7f980e54bb4bdab1c988f3540776f7f70200da33[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 11:58:01 2018 -0400
+
+    Update code to make MC distribution
+
+[33mcommit 12250d87267a8df717af73fd28a807ffdd93624f[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 11:57:13 2018 -0400
+
+    added generalized ntuple workflow
+
+[33mcommit 2e9399a16c061a7ac32114dda5438b612afbbd96[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 11:56:46 2018 -0400
+
+    update test_GEN-SIM.py
+
+[33mcommit 5421839a531751636511952a2319c8cc46ddd7f1[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed May 2 11:55:54 2018 -0400
+
+    Update Core
+
+[33mcommit 88d45b61e67d086a5416cc61b78f1890760cfad4[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Apr 26 08:49:25 2018 -0400
+
+    update Core
+
+[33mcommit 5f124d2ae7c1e132a6930f608d02922dd4faa1eb[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue Apr 3 11:54:25 2018 -0400
+
+    Update test EDM GEN-SIM
+
+[33mcommit bc761692debc8c76bc2b973ee3e82790097b112f[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 29 10:32:29 2018 -0400
+
+    Change Tier2 prefix
+
+[33mcommit 5270e893bfad40bfd491fb24d3ecc22708b6c39c[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 29 10:31:18 2018 -0400
+
+    added plot_EDM_GEN-SIM_cfg.py
+
+[33mcommit bfe7b6370f8a9471c3df546636d0967a33e275f3[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 29 09:26:19 2018 -0400
+
+    added DarkZ
+
+[33mcommit 52be40ab806228bc24f20a8fff511bf187596d6c[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri Mar 23 09:57:15 2018 -0400
+
+    added first example to run EDM files
+
+[33mcommit 78b8515b62ccc398999599746a4a5b730ecee374[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 8 06:15:19 2018 -0500
+
+    move Utils to Core
+
+[33mcommit 328501ad12d9a20c9947077f208e8d402a5e01ea[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 8 06:09:40 2018 -0500
+
+    update Core
+
+[33mcommit 5106ddfbd3d7cfdfd54a1a8acb49e07721d7e568[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon Mar 5 16:48:07 2018 -0500
+
+    Re-added Core as submodule
+
+[33mcommit 0f18476748c40b962b21b7d302376e482713f41a[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon Mar 5 16:46:48 2018 -0500
+
+    Removing Core
+
+[33mcommit bf86d0fc87674611aec836d1955c32faef532fdc[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 1 09:51:08 2018 -0500
+
+    update plot range
+
+[33mcommit da6d48d96ecfc56bac80bb75f1dce3d9bb27de07[m[33m ([m[1;33mtag: v0.0[m[33m)[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 1 06:15:11 2018 -0500
+
+    added git version info in outpuot
+
+[33mcommit 0c9e81f4cc50fbfde7885df5108d5b9f0e8b35b0[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Thu Mar 1 06:14:45 2018 -0500
+
+    added plotter
+
+[33mcommit e15fb98edf9705ebc0ab98981ae9de4e2a76fbe0[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed Feb 28 12:28:36 2018 -0500
+
+    rename run_HeppyExample_cfg.py
+
+[33mcommit 02ee8c0f5e0118578cafd8e7bd40c768dd6bae2e[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed Feb 28 06:25:36 2018 -0500
+
+    remove redundant files
+
+[33mcommit 2a0f82ef486801e6083a66265bce80340625eef0[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed Feb 28 06:24:03 2018 -0500
+
+    added example
+
+[33mcommit 8bb6c9fcbfd3c33434f9741f4f69ee46a0acb443[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed Feb 28 06:23:43 2018 -0500
+
+    added Dataset
+
+[33mcommit 864e3a22e4e35ff99a2177c2070f5b23dd6d33f0[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed Feb 28 06:22:48 2018 -0500
+
+    added printout in run_NanoAOD.py
+
+[33mcommit 6eefdc1197af33de513588bcb03b1dc17be3f6d7[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Wed Feb 28 06:22:25 2018 -0500
+
+    update setup to source cmssw
+
+[33mcommit 41065e7215cb7249d158216053920b8c29d77037[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue Feb 27 16:41:43 2018 -0500
+
+    added functionality to run on NanoAOD
+
+[33mcommit bb1e7f744560a04838092286a2f56f932bff411c[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Tue Feb 27 16:39:49 2018 -0500
+
+    added more map in Core/Events/BranchAddressManager.py
+
+[33mcommit feae5a912962ca51a1aa610a8a3a264b3645743f[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Mon Feb 19 17:07:48 2018 +0100
+
+    added Writer
+
+[33mcommit e4e7215df2db4682bd704635c18fe81a8750fba4[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri Feb 16 18:00:40 2018 +0100
+
+    First workable version of progress bar
+
+[33mcommit bf753da4f7e9b8979456718303f1aaf726fdf822[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri Feb 16 14:48:34 2018 +0100
+
+    remove alphatwirl
+
+[33mcommit d82c39082a09f3be0b378267a95caf60fcfec982[m
+Author: lucien1011 <lucien1011@gmail.com>
+Date:   Fri Feb 16 14:37:30 2018 +0100
+
+    included alphatwirl as submodule
+
+[33mcommit 3f85b482f0f398164248f230b12dc32af67de0a6[m
+Author: Lucien <lucien1011@users.noreply.github.com>
+Date:   Fri Feb 16 14:33:47 2018 +0100
+
+    Initial commit

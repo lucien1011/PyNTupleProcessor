@@ -1,0 +1,39 @@
+diff --git a/RPV/Skimmer/HLTSkimmer.py b/RPV/Skimmer/HLTSkimmer.py
+index d0d4eb6..2514801 100644
+--- a/RPV/Skimmer/HLTSkimmer.py
++++ b/RPV/Skimmer/HLTSkimmer.py
+@@ -7,7 +7,7 @@ class HLTSkimmer(Module):
+ 
+     def analyze(self,event):
+         if(self.dataset.isMC):
+-            return True #event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
++            return event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
+             #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+ 
+         else:
+diff --git a/RPV/Weighter/Triggereff.py b/RPV/Weighter/Triggereff.py
+index b0bf14b..f7569ad 100644
+--- a/RPV/Weighter/Triggereff.py
++++ b/RPV/Weighter/Triggereff.py
+@@ -7,7 +7,7 @@ from math import sqrt
+ 
+ class Triggereff(Module):
+ 
+-    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
++    def __init__(self, name, filenameTrigeff = [(20.2,'EfficienciesAndSF_RunBtoF.root'),(16.6,'EfficienciesAndSF_Period4.root')], Trigeffhistpath = "IsoMu24_OR_IsoTkMu24_PtEtaBins/pt_abseta_ratio", Trigeffhistpath2 = "IsoMu24_OR_IsoTkMu24_PtEtaBins/efficienciesDATA/pt_abseta_DATA", flatTrigSyst = 0.):
+         self.filenameTrigeff = [(weight, "/home/kshi/SUSY/CMSSW_8_0_25/src/UF-PyNTupleRunner/DataMC/Trigger_Eff/Run2016/"+filename) for (weight, filename) in filenameTrigeff]
+         self.flatTrigSyst = flatTrigSyst
+         self.Trigeffhistpath = Trigeffhistpath
+diff --git a/RPV/plot_TTbar_cfg.py b/RPV/plot_TTbar_cfg.py
+index 569efff..20a6d94 100644
+--- a/RPV/plot_TTbar_cfg.py
++++ b/RPV/plot_TTbar_cfg.py
+@@ -96,7 +96,7 @@ sequence.add(triggereff)
+ sequence.add(plotter)
+ 
+ endSequence = EndSequence(skipHadd=justEndSequence)
+-endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/"
++endModuleOutputDir = "/home/kshi/public_html/dataPlot/TTbar/NLO_DYJets/triggereff_ratio/"
+ endSequence.add(PlotEndModule(endModuleOutputDir,plots))
+ 
+ outputInfo = OutputInfo("OutputInfo")

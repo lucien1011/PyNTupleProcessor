@@ -1,0 +1,1 @@
+hadd -f ./test_plot/VHToNonbb/MCDistributions.root  ./test_plot/VHToNonbb/*_MCDistributions.root 

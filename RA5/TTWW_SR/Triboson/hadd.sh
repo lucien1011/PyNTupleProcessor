@@ -1,0 +1,1 @@
+hadd -f ./TTWW_SR/Triboson/DataMCDistributions.root  ./TTWW_SR/WWW/*_DataMCDistributions.root  ./TTWW_SR/WWZ/*_DataMCDistributions.root  ./TTWW_SR/WZZ/*_DataMCDistributions.root  ./TTWW_SR/ZZZ/*_DataMCDistributions.root 

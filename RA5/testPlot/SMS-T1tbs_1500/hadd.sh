@@ -1,0 +1,1 @@
+hadd -f ./testPlot/SMS-T1tbs_1500/DataMCDistributions.root  ./testPlot/SMS-T1tbs_1500/*_DataMCDistributions.root 

@@ -1,0 +1,1 @@
+hadd -f ./testPlot_v1/T_tch/DataMCDistribution.root  ./testPlot_v1/T_tch/*_DataMCDistribution.root 

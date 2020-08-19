@@ -1,0 +1,116 @@
+diff --git a/DataMC/NanoAOD/Run2016/__init__.py b/DataMC/NanoAOD/Run2016/__init__.py
+index 49f1b55..c87505d 100644
+--- a/DataMC/NanoAOD/Run2016/__init__.py
++++ b/DataMC/NanoAOD/Run2016/__init__.py
+@@ -65,14 +65,14 @@ allSigSamples = [
+     ]
+ 
+ allDataSamples = [
+-#    SingleMuon2016B,
+-#    SingleMuon2016C,
+-#    SingleMuon2016D,
+-#    SingleMuon2016E,
+-#    SingleMuon2016F,
+-#    SingleMuon2016G,
+-#    SingleMuon2016H,
+-#    SingleMuon2016H2,
++    SingleMuon2016B,
++    SingleMuon2016C,
++    SingleMuon2016D,
++    SingleMuon2016E,
++    SingleMuon2016F,
++    SingleMuon2016G,
++    SingleMuon2016H,
++    SingleMuon2016H2,
+     SingleElectron2016B1,
+     SingleElectron2016B2,
+     SingleElectron2016C,
+diff --git a/RA5/Producer/YieldCounter.py b/RA5/Producer/YieldCounter.py
+index c2ca50d..6dc8f61 100644
+--- a/RA5/Producer/YieldCounter.py
++++ b/RA5/Producer/YieldCounter.py
+@@ -11,5 +11,5 @@ class YieldCounter(Module):
+             if "YieldCount"+event.cat.lepCat+event.cat.jetCat not in self.writer.objs:
+                 self.writer.book("YieldCount"+event.cat.lepCat+event.cat.jetCat,"TH1D","YieldCount"+event.cat.lepCat+event.cat.jetCat,"",1,-0.5,0.5)
+         if event.cat.jetCat != "0":
+-            self.writer.objs["YieldCount"+event.cat.lepCat+event.cat.jetCat].Fill(0.)
++            self.writer.objs["YieldCount"+event.cat.lepCat+event.cat.jetCat].Fill(0.,event.weight)
+         return True
+diff --git a/RPV/Skimmer/HLTSkimmer.py b/RPV/Skimmer/HLTSkimmer.py
+index 442d543..aa18411 100644
+--- a/RPV/Skimmer/HLTSkimmer.py
++++ b/RPV/Skimmer/HLTSkimmer.py
+@@ -7,13 +7,23 @@ class HLTSkimmer(Module):
+ 
+     def analyze(self,event):
+         if(self.dataset.isMC):
+-            #return True
+-            return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] #or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+-        if("SingleMuon" in self.dataset.parent.name):
+-          return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+-        elif("SingleElectron" in self.dataset.parent.name):
+-            if(not (event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0])):
+-                return event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
++            return True
++            #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
++
++        else:
++            return event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0]
++
++
++
++
++
++
++
++        #if("SingleMuon" in self.dataset.parent.name):
++          #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
++        #elif("SingleElectron" in self.dataset.parent.name):
++            #if(not (event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0])):
++                #return event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+         #else:
+             #return event.HLT_IsoMu22[0] or event.HLT_IsoTkMu22[0] or event.HLT_IsoMu24[0] or event.HLT_IsoTkMu24[0] or event.HLT_Ele27_eta2p1_WPTight_Gsf[0]
+ 
+diff --git a/RPV/Skimmer/TTbarSkimmer.py b/RPV/Skimmer/TTbarSkimmer.py
+index 25742a4..4a090e1 100644
+--- a/RPV/Skimmer/TTbarSkimmer.py
++++ b/RPV/Skimmer/TTbarSkimmer.py
+@@ -21,8 +21,8 @@ class TTbarSkimmer(Module):
+         event.eles = [p for p in event.MediumElectrons if p.pt > 30]
+         event.eles.sort(key=lambda x: x.pt,reverse=True)
+ 
+-        if len(event.muons) < 1: return False
+-        if len(event.eles) < 1: return False
++        if len(event.muons) < 1 or len(event.muons) > 1: return False
++        if len(event.eles) < 1 or len(event.eles) > 1: return False
+ 
+         temp = False
+ 
+diff --git a/RPV/plot_TTbar_cfg.py b/RPV/plot_TTbar_cfg.py
+index 8028ed3..92ef697 100644
+--- a/RPV/plot_TTbar_cfg.py
++++ b/RPV/plot_TTbar_cfg.py
+@@ -13,6 +13,7 @@ from RPV.Producer.AnalysisProducer import AnalysisProducer
+ 
+ from RPV.Skimmer.TTbarSkimmer import TTbarSkimmer
+ from RPV.Skimmer.HLTSkimmer import HLTSkimmer
++from RPV.Weighter.Triggereff import Triggereff
+ 
+ from Plotter.Plotter import Plotter
+ from Plotter.PlotEndModule import PlotEndModule
+@@ -77,6 +78,7 @@ eventSkimmer            = TTbarSkimmer("TTbarSkim")
+ hltSkimmer              = HLTSkimmer("HLTSkim",cutflow="htCR")
+ jsonSkimmer             = JSONSkimmer("JSONSkim")
+ metSkimmer              = METFilter("METSkim")
++triggereff              = Triggereff("Triggereff")
+ 
+ sequence = Sequence()
+ sequence.add(metSkimmer)
+@@ -89,6 +91,7 @@ sequence.add(xsWeighter)
+ sequence.add(puWeighter)
+ sequence.add(anaProducer)
+ sequence.add(eventSkimmer)
++sequence.add(triggereff)
+ sequence.add(plotter)
+ 
+ endSequence = EndSequence(skipHadd=justEndSequence)

@@ -1,0 +1,1 @@
+hadd -f ./TTWW/gamma+X/DataMCDistributions.root  ./TTWW/WGToLNuG/*_DataMCDistributions.root  ./TTWW/TGJets/*_DataMCDistributions.root  ./TTWW/TTGJets/*_DataMCDistributions.root  ./TTWW/ZGTo2LG/*_DataMCDistributions.root  ./TTWW/WGToLNuG/*_DataMCDistributions.root 

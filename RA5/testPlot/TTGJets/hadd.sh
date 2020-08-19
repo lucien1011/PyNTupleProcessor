@@ -1,0 +1,1 @@
+hadd -f ./testPlot/TTGJets/DataMCDistributions.root  ./testPlot/TTGJets/*_DataMCDistributions.root 

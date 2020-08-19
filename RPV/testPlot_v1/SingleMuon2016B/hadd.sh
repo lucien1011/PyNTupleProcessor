@@ -1,0 +1,1 @@
+hadd -f ./testPlot_v1/SingleMuon2016B/DataMCDistribution.root  ./testPlot_v1/SingleMuon2016B/*_DataMCDistribution.root 

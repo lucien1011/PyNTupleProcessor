@@ -1,0 +1,1 @@
+hadd -f ./test_plot/ttVorH/MCDistributions.root  ./test_plot/TTHnobb_pow/*_MCDistributions.root  ./test_plot/TTZToLLNuNu/*_MCDistributions.root  ./test_plot/TTZToLLNuNu_m1to10/*_MCDistributions.root 

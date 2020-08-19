@@ -1,0 +1,1 @@
+hadd -f ./testPlot/QCD_HT500to700/DataMCDistributions.root  ./testPlot/QCD_HT500to700/*_DataMCDistributions.root 

@@ -1,0 +1,1 @@
+hadd -f ./test_count/Minor/MCDistributions.root  ./test_count/VHToNonbb/*_MCDistributions.root  ./test_count/WWDoubleTo2L/*_MCDistributions.root 

@@ -1,0 +1,1 @@
+hadd -f ./testPlot/DoubleEG_Run2016H-PromptReco-v3/DataMCDistributions.root  ./testPlot/DoubleEG_Run2016H-PromptReco-v3/*_DataMCDistributions.root 

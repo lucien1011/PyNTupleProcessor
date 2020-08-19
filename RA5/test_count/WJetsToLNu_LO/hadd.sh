@@ -1,0 +1,1 @@
+hadd -f ./test_count/WJetsToLNu_LO/MCDistributions.root  ./test_count/WJetsToLNu_LO/*_MCDistributions.root 

@@ -1,0 +1,1 @@
+hadd -f ./TTWW_SR/WZZ/DataMCDistributions.root  ./TTWW_SR/WZZ/*_DataMCDistributions.root 

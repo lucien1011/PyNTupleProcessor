@@ -1,0 +1,99 @@
+diff --git a/RA5/Dataset/Run2016/Sept18_v1.py b/RA5/Dataset/Run2016/Sept18_v1.py
+index 0904386..df99e3b 100644
+--- a/RA5/Dataset/Run2016/Sept18_v1.py
++++ b/RA5/Dataset/Run2016/Sept18_v1.py
+@@ -5,6 +5,7 @@ import os
+ 
+ #dir_path        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/Sept18_v1/"
+ dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1/"
++#dir_path        = "/raid/raid7/kshi/SUSY/RA5/SkimTree/mc/Sept18_v1/"
+ inUFTier2       = False
+ treeName        = "tree"
+ 
+diff --git a/RA5/Dataset/Run2016/Sept18_v1_Data.py b/RA5/Dataset/Run2016/Sept18_v1_Data.py
+index 5f8259e..089d390 100644
+--- a/RA5/Dataset/Run2016/Sept18_v1_Data.py
++++ b/RA5/Dataset/Run2016/Sept18_v1_Data.py
+@@ -5,7 +5,8 @@ from Core.Utils.UFTier2Utils import listdir_uberftp
+ import os
+ 
+ #dir_path        = "/cms/data/store/user/t2/users/klo/HeppyTree/heppy_80X_RA5_Legacy/Sept18_v1/"
+-dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_Data/"
++#dir_path        = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_Data/"
++dir_path        = "/raid/raid7/kshi/SUSY/RA5/SkimTree/data/Sept18_v1_Data/"
+ inUFTier2       = False
+ treeName        = "tree"
+ 
+diff --git a/RA5/Sequence/RecoSequence.py b/RA5/Sequence/RecoSequence.py
+index 2ac2564..2323d30 100644
+--- a/RA5/Sequence/RecoSequence.py
++++ b/RA5/Sequence/RecoSequence.py
+@@ -83,10 +83,10 @@ tightlooseCR_sequence.add(tightlooseCRSkimmer)
+ #tightlooseCR_sequence.add(leptonCatProducer)
+ #tightlooseCR_sequence.add(llHtSkimmer)
+ #tightlooseCR_sequence.add(baselineSkimmer)
+-tightlooseCR_sequence.add(hltSkimmer)
++#tightlooseCR_sequence.add(hltSkimmer)
+ tightlooseCR_sequence.add(rpvSkimmer)
+ tightlooseCR_sequence.add(xsWeighter)
+-tightlooseCR_sequence.add(hltWeighter)
++#tightlooseCR_sequence.add(hltWeighter)
+ 
+ 
+ sync_sequence = Sequence()
+diff --git a/RA5/plot_RPV_cfg.py b/RA5/plot_RPV_cfg.py
+index ee4f8d2..c29f9f3 100644
+--- a/RA5/plot_RPV_cfg.py
++++ b/RA5/plot_RPV_cfg.py
+@@ -37,7 +37,7 @@ outputDir = "./testPlot/"
+ endModuleOutputDir = "/home/kshi/public_html/RA5/1tight_1loose_leptons/"
+ lepCats = ["HH","HL","LL"]
+ 
+-nCores = 2
++nCores = 8
+ nEvents = -1
+ disableProgressBar = False
+ justEndSequence = False
+@@ -48,8 +48,8 @@ componentList = componentDict.values() + dataComponentDict.values()
+ #componentList = skimComponentDict.values() + dataComponentDict.values()
+ for dataset in componentList:
+     if dataset.isMC:
+-        #dataset.lumi = 35.9
+-        dataset.lumi = 5.93
++        dataset.lumi = 35.9
++        #dataset.lumi = 5.93
+     for component in dataset.componentList:
+         component.maxEvents = nEvents
+ 
+diff --git a/RA5/tree_Sept18_v1_cfg.py b/RA5/tree_Sept18_v1_cfg.py
+index 4988241..02325ec 100644
+--- a/RA5/tree_Sept18_v1_cfg.py
++++ b/RA5/tree_Sept18_v1_cfg.py
+@@ -6,6 +6,7 @@ from Core.EndSequence import EndSequence
+ from Common.TreeProducer import TreeProducer
+ 
+ from RA5.Sequence.RecoSequence import rpv_sequence
++from RA5.Sequence.RecoSequence import tightlooseCR_sequence
+ 
+ from Core.Utils.LambdaFunc import LambdaFunc
+ 
+@@ -15,7 +16,8 @@ from RA5.Dataset.Run2016.Sept18_v1 import *
+ 
+ from NanoAOD.Producer.GenWeightCounter import *
+ 
+-out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
++#out_path = "/raid/raid7/lucien/SUSY/RA5/HeppyTree/Sept18_v1_skim/"
++out_path = "/raid/raid7/kshi/SUSY/RA5/SkimTree/mc/"
+ 
+ nCores                      = 6
+ outputDir                   = out_path
+@@ -32,7 +34,8 @@ for dataset in componentList:
+ 
+ treeProducer                = TreeProducer("TreeProducer")
+ 
+-sequence                    = rpv_sequence
++#sequence                    = rpv_sequence
++sequence                    = tightlooseCR_sequence
+ sequence.add(treeProducer)
+ 
+ endSequence                 = EndSequence(skipHadd=False)

@@ -1,0 +1,1 @@
+hadd -f ./TTWW_SR/DYJetsToLL_M10to50/DataMCDistributions.root  ./TTWW_SR/DYJetsToLL_M10to50/*_DataMCDistributions.root 

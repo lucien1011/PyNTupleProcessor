@@ -1,0 +1,1 @@
+hadd -f ./test_plot/DYJetsToLL_M50_LO_ext/MCDistributions.root  ./test_plot/DYJetsToLL_M50_LO_ext/*_MCDistributions.root 

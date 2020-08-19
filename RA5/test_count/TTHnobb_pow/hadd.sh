@@ -1,0 +1,1 @@
+hadd -f ./test_count/TTHnobb_pow/MCDistributions.root  ./test_count/TTHnobb_pow/*_MCDistributions.root 

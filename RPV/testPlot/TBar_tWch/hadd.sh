@@ -1,0 +1,1 @@
+hadd -f ./testPlot/TBar_tWch/DataMCDistribution.root  ./testPlot/TBar_tWch/*_DataMCDistribution.root 
