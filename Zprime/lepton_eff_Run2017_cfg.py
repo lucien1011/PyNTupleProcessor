@@ -4,7 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-#from Zprime.Dataset.Run2017.SkimTree_Bkg_m4l70 import * 
+from Zprime.Dataset.Run2017.SkimTree_Bkg_m4l70 import * 
 #from Zprime.Dataset.Run2017.SkimTree_promptCR_Bkg_m4l70 import *
 from Zprime.Dataset.Run2017.SkimTree_Zprime_m4l70 import * 
 from Zprime.Sequence.RecoSequence import * 
@@ -30,7 +30,7 @@ outputDir               = system.getStoragePath()+"/"+User+"/Zprime/Zto4l/"+out_
 nEvents                 = -1
 disableProgressBar      = False
 haddSamples             = True
-componentList           = sigSamples
+componentList           = bkgSamples #sigSamples
 justEndSequence         = True
 
 plots = []

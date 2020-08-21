@@ -5,8 +5,8 @@ from Utils.SumWeight import handleSumWeight
 
 #bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2017Data_m4l70/"
 #bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_MC/"
-#bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_MC/"
-bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/unskim/SkimTree_Run2017_MMM_MC/"
+bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_MC/"
+#bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/unskim/SkimTree_Run2017_MMM_MC/"
 bkgSkimTreeDir2     = bkgSkimTreeDir
 bkgTreeDir          = "/cms/data/store/user/muahmad/rootfiles_2017/"
 dataTreeDir         = bkgSkimTreeDir
@@ -18,11 +18,13 @@ saveSumWeightTxt    = False
 # zpToMuMu
 sigSampleDict = {}
 zp_mass_points = [
-        1,
-        5,
+        #1,
+        #5,
         10,
-        15,
-        ] + range(20,80,10)
+        #15,
+        40,
+        70,
+        ]# + range(20,80,10)
 
 zpToMuMuXS_dict = {
         1: 5.715,
@@ -47,7 +49,7 @@ for m in zp_mass_points:
     sigSampleDict[m] = Dataset(
         "zpToMuMu_M"+str(m),
         ComponentList([ 
-            Component("zpToMuMu_M"+str(m),bkgSkimTreeDir+"ZpTomumu_M"+str(m)+"_13TeV_MadGraph5_pythia8-v4_muahmad-RunIISummer16MiniAODv2.root","Ana/passedEvents",inUFTier2=inUFTier2),
+            Component("zpToMuMu_M"+str(m),bkgSkimTreeDir+"ZpTomumu_M"+str(m)+"_13TeV_MadGraph5_pythia8-v4_muahmad-RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
         ],
         ),
         isMC                = True,

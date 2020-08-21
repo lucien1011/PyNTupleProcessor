@@ -102,7 +102,7 @@ class Lepeff_ratio(EndModule):
                         #pEff1.Write()
                         c2.cd()
                         names['pEff' + str(i)].Draw()
-                        #c2.SaveAs("Lepeff_pt_"+sample+".png")
+                        c2.SaveAs("Lepeff_pt_"+sample+".png")
 
                     if p == "LepeffNum_eta":
                         names['h' + str(i+22)] = h
@@ -150,7 +150,7 @@ class Lepeff_ratio(EndModule):
                         #pEff2.Write()
                         c6.cd()
                         names['pEff' + str(i+88)].Draw()
-                        c6.SaveAs("Eventeff_"+sample+".png")
+                        #c6.SaveAs("Eventeff_"+sample+".png")
 
                     if p == "testEventNum":
                         names['h' + str(i+110)] = h
@@ -169,12 +169,12 @@ class Lepeff_ratio(EndModule):
                     if p == "nGENlep_vs_nRECOlep":
                         cnGENRECOlep.cd()
                         h.DrawNormalized().Draw("COLZ TEXT")
-                        cnGENRECOlep.SaveAs("nGENlep_vs_nRECOlep"+sample+".png")
+                        #cnGENRECOlep.SaveAs("nGENlep_vs_nRECOlep"+sample+".png")
 
                     if p == "nGENlep_vs_nRECOlep_ZZprime":
                         cnGENRECOlepZZprime.cd()
                         h.DrawNormalized().Draw("COLZ TEXT")
-                        cnGENRECOlepZZprime.SaveAs("nGENlep_vs_nRECOlep_ZZprime"+sample+".png")
+                        #cnGENRECOlepZZprime.SaveAs("nGENlep_vs_nRECOlep_ZZprime"+sample+".png")
 
             '''
             for h,s,p in histList:
@@ -218,8 +218,8 @@ class Lepeff_ratio(EndModule):
             legend.AddEntry(names['pEff' + str(k)],sam[k-1],"lep")
             names['pEff' + str(k)].Draw("SAME")
         legend.Draw()
-        #c7.SaveAs("Lepeff_pt_combine_2_3_5_10_15_20.png")
-
+        c7.SaveAs("Lepeff_pt_combine_2_3_5_10_15_20.png")
+        
         c8.cd()
         names['pEff' + str(23)].SetLineColor(1)
         names['pEff' + str(23)].Draw()
@@ -294,7 +294,7 @@ class Lepeff_ratio(EndModule):
         pEff1 = ROOT.TEfficiency(h2,h)
         c2.cd()
         pEff1.Draw()
-        #c2.SaveAs("LepeffAllSample_pt.png")
+        c2.SaveAs("LepeffAllSample_pt.png")
 
         h = collector.getObj("AllSample","LepeffNum_eta")
         h3 = h

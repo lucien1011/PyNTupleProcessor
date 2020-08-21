@@ -77,12 +77,12 @@ class Lepeff(Module):
         tempgenlepnumberfromzzprime = 0
         temprecolepnumberfromzzprime = 0
         for i in range(0,int(event.GENlep_id.size())):
-            if event.GENlep_pt[i] > 5.0 and abs(event.GENlep_eta[i]) < 2.4:
+            if event.GENlep_pt[i] > 5.0 and abs(event.GENlep_eta[i]) < 2.4 and abs(event.GENlep_id[i]) == 13:
                 tempgenlepnumber += 1
                 if event.GENlep_MomId[i] == 23 or event.GENlep_MomId[i] == 999888:
                     tempgenlepnumberfromzzprime += 1
         for i in range(0,int(event.lep_pt.size())):
-            if event.lep_pt[i] > 5.0 and abs(event.lep_eta[i]) < 2.4:
+            if event.lep_pt[i] > 5.0 and abs(event.lep_eta[i]) < 2.4 and abs(event.lep_matchedR03_PdgId[i]) == 13:
                 temprecolepnumber += 1
                 if event.lep_matchedR03_MomId[i] == 23 or event.lep_matchedR03_MomId[i] == 999888:
                     temprecolepnumberfromzzprime += 1
@@ -91,32 +91,39 @@ class Lepeff(Module):
 
         #MomId of GEN lepton
         for i in range(0,int(event.GENlep_id.size())):
-            if event.GENlep_MomId[i] == 999888:
+            if event.GENlep_MomId[i] == 999888 and abs(event.GENlep_id[i]) == 13:
                 self.writer.objs["MomId_GENlep"].Fill(0,event.weight)
             else:
                 self.writer.objs["MomId_GENlep"].Fill(event.GENlep_MomId[i],event.weight)
 
         #delta R of GEN lepton to the closest other muon
         for i in range(0,int(event.GENlep_id.size())):
+            event.deltaRGENclosestlep.append(-1)
+        for i in range(0,int(event.GENlep_id.size())):
             dr = 10
-            for j in range(0,int(event.GENlep_id.size())):
-                temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.GENlep_eta[j],event.GENlep_phi[j])
-                if temp < dr and i != j :
-                    dr = temp
-            if dr < 10:
-                event.deltaRGENclosestlep.append(dr)
-            else:
-                event.deltaRGENclosestlep.append(-1)
+            if abs(event.GENlep_id[i]) == 13:
+                for j in range(0,int(event.GENlep_id.size())):
+                    if abs(event.GENlep_id[j]) == 13:
+                        temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.GENlep_eta[j],event.GENlep_phi[j])
+                        if temp < dr and i != j :
+                            dr = temp
+                if dr < 10:
+                    #event.deltaRGENclosestlep.append(dr)
+                    event.deltaRGENclosestlep[i] = dr
+                else:
+                    #event.deltaRGENclosestlep.append(-1)
+                    event.deltaRGENclosestlep[i] = -1
 
         #Acceptance of sample
         for i in range(0,int(event.GENlep_id.size())):
-            self.writer.objs["LepacptDem"].Fill(event.GENlep_pt[i],event.weight)
-            if event.GENlep_pt[i] > 5.0 and abs(event.GENlep_eta[i]) < 2.4:
-                self.writer.objs["LepacptNum"].Fill(event.GENlep_pt[i],event.weight)
+            if abs(event.GENlep_id[i]) == 13:
+                self.writer.objs["LepacptDem"].Fill(event.GENlep_pt[i],event.weight)
+                if event.GENlep_pt[i] > 5.0 and abs(event.GENlep_eta[i]) < 2.4:
+                    self.writer.objs["LepacptNum"].Fill(event.GENlep_pt[i],event.weight)
 
         #event cumulative efficiency 
         for i in range(0,int(event.GENlep_id.size())):
-            if event.GENlep_MomId[i] == 23 or event.GENlep_MomId[i] == 999888:
+            if event.GENlep_MomId[i] == 23 or event.GENlep_MomId[i] == 999888 and abs(event.GENlep_id[i]) == 13:
                 if event.GENlep_pt[i] > 5.0 and abs(event.GENlep_eta[i]) < 2.4:
                     lepnumber.append(i)
 
@@ -124,7 +131,7 @@ class Lepeff(Module):
         self.writer.objs["testEventDem"].Fill(0,event.weight)
         if len(lepnumber) < 4:
             self.writer.objs["testEventNum"].Fill(0,event.weight)
-        if len(lepnumber) == 4:
+        if len(lepnumber) > 0:
             dembool = True
             if self.dataset.name not in ["zpToMuMu_M5_0" , "zpToMuMu_M1_0" , "zpToMuMu_M2_0" , "zpToMuMu_M3_0" , "zpToMuMu_M4_0"]:
                 for i in lepnumber:
@@ -132,11 +139,12 @@ class Lepeff(Module):
                     lepid = -1
                     genlepid = -1
                     for j in range(0,int(event.lep_pt.size())):
-                        temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
-                        if temp < 0.3 and temp < dr:
-                            dr = temp
-                            lepid = j
-                            genlepid = i
+                        if abs(event.lep_matchedR03_PdgId[j]) == 13:
+                            temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
+                            if temp < 0.3 and temp < dr:
+                                dr = temp
+                                lepid = j
+                                genlepid = i
                     if dr != 0.3 and lepid != -1 and genlepid != -1:
                         if event.lep_tightId[lepid] and event.lep_RelIsoNoFSR[lepid] < 0.35:
                             recolepnumber.append(lepid)
@@ -153,11 +161,12 @@ class Lepeff(Module):
                     lepid = -1
                     genlepid = -1
                     for j in range(0,int(event.lep_pt.size())):
-                        temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
-                        if temp < 0.2 and temp < dr:
-                            dr = temp
-                            lepid = j
-                            genlepid = i
+                        if abs(event.lep_matchedR03_PdgId[j]) == 13:
+                            temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
+                            if temp < 0.2 and temp < dr:
+                                dr = temp
+                                lepid = j
+                                genlepid = i
                     if dr != 0.3 and lepid != -1 and genlepid != -1:
                         if event.lep_tightId[lepid] and event.lep_RelIsoNoFSR[lepid] < 0.35:
                             recolepnumber.append(lepid)
@@ -167,6 +176,7 @@ class Lepeff(Module):
                     self.writer.objs["EventeffDem"].Fill(0,event.weight)
                 if numbool == True:
                     self.writer.objs["EventeffNum"].Fill(0,event.weight)
+        
         """
         #lepton full efficiency
         if self.dataset.name not in ["zpToMuMu_M5_0" , "zpToMuMu_M1_0" , "zpToMuMu_M2_0" , "zpToMuMu_M3_0" , "zpToMuMu_M4_0"]:
@@ -217,7 +227,7 @@ class Lepeff(Module):
         #lepton full efficiency for events have four lepton from Z/Zprime
         if len(lepnumber) == 4:
             if self.dataset.name not in ["zpToMuMu_M5_0" , "zpToMuMu_M1_0" , "zpToMuMu_M2_0" , "zpToMuMu_M3_0" , "zpToMuMu_M4_0"]:
-                for i in range(0,int(event.GENlep_id.size())):
+                for i in lepnumber:
                     if event.GENlep_MomId[i] == 23 or event.GENlep_MomId[i] == 999888:
                         if event.GENlep_pt[i] > 5.0 and abs(event.GENlep_eta[i]) < 2.4:
                             dr = 0.3
@@ -227,11 +237,12 @@ class Lepeff(Module):
                             self.writer.objs["LepeffDem_eta"].Fill(event.GENlep_eta[i],event.weight)
                             self.writer.objs["LepeffDem_dr"].Fill(event.deltaRGENclosestlep[i],event.weight)
                             for j in range(0,int(event.lep_pt.size())):
-                                temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
-                                if temp < 0.3 and temp < dr:
-                                    dr = temp
-                                    lepid = j
-                                    genlepid = i
+                                if abs(event.lep_matchedR03_PdgId[j]) == 13:
+                                    temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
+                                    if temp < 0.3 and temp < dr:
+                                        dr = temp
+                                        lepid = j
+                                        genlepid = i
                             if dr != 0.3 and lepid != -1 and genlepid != -1:
                                 if  event.lep_tightId[lepid] and event.lep_RelIsoNoFSR[lepid] < 0.35:
                                     self.writer.objs["LepeffNum_pt"].Fill(event.GENlep_pt[i],event.weight)
@@ -239,7 +250,7 @@ class Lepeff(Module):
                                     self.writer.objs["LepeffNum_dr"].Fill(event.deltaRGENclosestlep[i],event.weight)
 
             elif self.dataset.name in ["zpToMuMu_M5_0" , "zpToMuMu_M1_0" , "zpToMuMu_M2_0" , "zpToMuMu_M3_0" , "zpToMuMu_M4_0"]:
-                for i in range(0,int(event.GENlep_id.size())):
+                for i in lepnumber:
                     if event.GENlep_MomId[i] == 23 or event.GENlep_MomId[i] == 999888:
                         if event.GENlep_pt[i] > 5.0 and abs(event.GENlep_eta[i]) < 2.4:
                             dr = 0.3
@@ -249,11 +260,12 @@ class Lepeff(Module):
                             self.writer.objs["LepeffDem_eta"].Fill(event.GENlep_eta[i],event.weight)
                             self.writer.objs["LepeffDem_dr"].Fill(event.deltaRGENclosestlep[i],event.weight)
                             for j in range(0,int(event.lep_pt.size())):
-                                temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
-                                if temp < 0.2 and temp < dr:
-                                    dr = temp
-                                    lepid = j
-                                    genlepid = i
+                                if abs(event.lep_matchedR03_PdgId[j]) == 13:
+                                    temp = deltaR(event.GENlep_eta[i],event.GENlep_phi[i],event.lep_eta[j],event.lep_phi[j])
+                                    if temp < 0.2 and temp < dr:
+                                        dr = temp
+                                        lepid = j
+                                        genlepid = i
                             if dr != 0.3 and lepid != -1 and genlepid != -1:
                                 if event.lep_tightId[lepid] and event.lep_RelIsoNoFSR[lepid] < 0.35:
                                     self.writer.objs["LepeffNum_pt"].Fill(event.GENlep_pt[i],event.weight)

@@ -94,10 +94,10 @@ var_numlepton_str = "[x.nGENlep,x.nRECOlep]"
 var_numlepton_ZZprime_str = "[x.nGENlep_ZZprime,x.nRECOlep_ZZprime]"
 # ________________________________________________________________________ ||
 general_4mu_plots = [
-        #Plot("mZ1_4mu",["TH1D","mZ1_4mu","",]+mZ1PlotRange, LambdaFunc('x: '+var_mZ1_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("mZ2_4mu",["TH1D","mZ2_4mu","",]+mZ2PlotRange, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("m4l_4mu",["TH1D","m4l_4mu","",]+h4lPlotRange, LambdaFunc('x: '+var_m4l_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("hPt_4mu",["TH1D","hPt_4mu","",]+hPtPlotRange, LambdaFunc('x: '+var_hPt_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mZ1_4mu",["TH1D","mZ1_4mu","",]+mZ1PlotRange, LambdaFunc('x: '+var_mZ1_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mZ2_4mu",["TH1D","mZ2_4mu","",]+mZ2PlotRange, LambdaFunc('x: '+var_mZ2_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("m4l_4mu",["TH1D","m4l_4mu","",]+h4lPlotRange, LambdaFunc('x: '+var_m4l_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("hPt_4mu",["TH1D","hPt_4mu","",]+hPtPlotRange, LambdaFunc('x: '+var_hPt_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         #Plot("cosThetaStar_4mu",["TH1D","cosThetaStar_4mu","",]+cosThetaPlotRange, LambdaFunc('x: '+var_cosThetaStar_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         #Plot("cosTheta1_4mu",["TH1D","cosTheta1_4mu","",]+cosThetaPlotRange, LambdaFunc('x: '+var_cosTheta1_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         #Plot("cosTheta2_4mu",["TH1D","cosTheta2_4mu","",]+cosThetaPlotRange, LambdaFunc('x: '+var_cosTheta2_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
@@ -106,15 +106,15 @@ general_4mu_plots = [
         
         #Plot("thetaZ1_4mu",["TH1D","thetaZ1_4mu","",]+hPtPlotRange, LambdaFunc('x: '+var_thetaZ1_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
 
-        #Plot("mu1Pt_4mu", ["TH1D","mu1Pt_4mu","",]+mu1PtPlotRange, LambdaFunc('x: '+var_mu1Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("mu2Pt_4mu", ["TH1D","mu2Pt_4mu","",]+mu2PtPlotRange, LambdaFunc('x: '+var_mu2Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("mu3Pt_4mu", ["TH1D","mu3Pt_4mu","",]+mu3PtPlotRange, LambdaFunc('x: '+var_mu3Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("mu4Pt_4mu", ["TH1D","mu4Pt_4mu","",]+mu4PtPlotRange, LambdaFunc('x: '+var_mu4Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu1Pt_4mu", ["TH1D","mu1Pt_4mu","",]+mu1PtPlotRange, LambdaFunc('x: '+var_mu1Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu2Pt_4mu", ["TH1D","mu2Pt_4mu","",]+mu2PtPlotRange, LambdaFunc('x: '+var_mu2Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu3Pt_4mu", ["TH1D","mu3Pt_4mu","",]+mu3PtPlotRange, LambdaFunc('x: '+var_mu3Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu4Pt_4mu", ["TH1D","mu4Pt_4mu","",]+mu4PtPlotRange, LambdaFunc('x: '+var_mu4Pt_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
         
-        #Plot("mu1Eta_4mu", ["TH1D","mu1Eta_4mu","",]+mu1EtaPlotRange, LambdaFunc('x: '+var_mu1Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("mu2Eta_4mu", ["TH1D","mu2Eta_4mu","",]+mu2EtaPlotRange, LambdaFunc('x: '+var_mu2Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("mu3Eta_4mu", ["TH1D","mu3Eta_4mu","",]+mu3EtaPlotRange, LambdaFunc('x: '+var_mu3Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
-        #Plot("mu4Eta_4mu", ["TH1D","mu4Eta_4mu","",]+mu4EtaPlotRange, LambdaFunc('x: '+var_mu4Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu1Eta_4mu", ["TH1D","mu1Eta_4mu","",]+mu1EtaPlotRange, LambdaFunc('x: '+var_mu1Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu2Eta_4mu", ["TH1D","mu2Eta_4mu","",]+mu2EtaPlotRange, LambdaFunc('x: '+var_mu2Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu3Eta_4mu", ["TH1D","mu3Eta_4mu","",]+mu3EtaPlotRange, LambdaFunc('x: '+var_mu3Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        Plot("mu4Eta_4mu", ["TH1D","mu4Eta_4mu","",]+mu4EtaPlotRange, LambdaFunc('x: '+var_mu4Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
 
         #Plot("k-factor", ["TH1D","k-factor","",]+kfactorRange, LambdaFunc('x: '+var_kfactor_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         #Plot("k-factor_vs_mZ2", ["TH2D","k-factor_vs_mZ2","",]+kfactorRange+mZ2PlotRange, LambdaFunc('x: '+var_kfactor_mZ2_str), dim = 2, selFunc=LambdaFunc('x: '+sel_4mu_str)),

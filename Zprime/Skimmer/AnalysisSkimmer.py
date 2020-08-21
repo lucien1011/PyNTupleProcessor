@@ -9,7 +9,7 @@ class AnalysisSkimmer(Module):
 
     def analyze(self,event):
         if self.cutflow == "Zprime-SR":
-            #if event.mass4l[0] < 80. or event.mass4l[0] > 100.: return False
+            if event.mass4l[0] < 80. or event.mass4l[0] > 100.: return False
             #if event.mass4l[0] < 100.: return False
             #if event.mass4l[0] > 120.: return False
             #if event.mass4l[0] < 118. or event.mass4l[0] > 130.: return False

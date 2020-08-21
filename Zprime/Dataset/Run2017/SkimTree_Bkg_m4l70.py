@@ -6,7 +6,8 @@ from Utils.SumWeight import handleSumWeight
 #bkgSkimTreeDir2      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2017Data_m4l70/"
 #bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_MC/"
 bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_MC/"
-bkgSkimTreeDir2      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/test/SkimTree_Run2017_MMM_MC/"
+#bkgSkimTreeDir2      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/test/SkimTree_Run2017_MMM_MC/"
+bkgSkimTreeDir2      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/unskim/SkimTree_Run2017_MMM_MC/"
 #bkgSkimTreeDir2     = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/M1To4/SkimTree_Run2017_MMM_MC/"
 #bkgSkimTreeDir3     = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/M4ToInf/SkimTree_Run2017_MMM_MC/"
 bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/"
@@ -76,14 +77,14 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
-        #bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
+        bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # qqZZ_M1To4
 qqZZ_M1To4_cmpList = ComponentList(
         [ 
-            Component("qqZZTo4L_M1To4",bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.root","passedEvents",inUFTier2=inUFTier2),
+            Component("qqZZTo4L_M1To4",bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.root","Ana/passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -101,7 +102,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
-        bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
+        #bkgSkimTreeDir2+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
         )
 
 
@@ -423,7 +424,7 @@ bkgSamples = [
         #ggZZTo4mu,
         #ggZZTo4tau,
         qqZZTo4L_M1To4,
-        ZPlusX,
+        #ZPlusX,
         ]
 dataSamples = [
         Data2017,
