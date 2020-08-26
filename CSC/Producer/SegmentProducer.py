@@ -16,7 +16,11 @@ class SegmentProducer(Module):
         for im,m in enumerate(event.standAloneMuons):
             n_segment = len(m.cscSegmentRecord_endcap)
             for i in range(n_segment):
-                hash = self.hash(chamber,station,ring,endcap)
+                endcap = m.cscSegmentRecord_endcap[i]
+                chamber = m.cscSegmentRecord_chamber[i]
+                station = m.cscSegmentRecord_station[i]
+                ring = m.cscSegmentRecord_ring[i]
+                hash = int(self.hash(chamber,station,ring,endcap))
                 event.segment_localX[hash] = m.cscSegmentRecord_localX[i]
                 event.segment_localX[hash] = m.cscSegmentRecord_localY[i]
                 event.segment_muon[hash] = im            
