@@ -35,7 +35,7 @@ class CSVFileProducer(Module):
     def analyze(self,event):
         if not self.objectFunc:
             row = [var(event) for var in self.varsToWrite if var.selFunc(event)]
-            self.writer.objs[self.csvFileSetting.keyName].writer.writerow(row)
+            if row: self.writer.objs[self.csvFileSetting.keyName].writer.writerow(row)
         else:
             for obj in self.objectFunc(event):
                 if not self.globalSelFunc(obj): continue
@@ -46,6 +46,6 @@ class CSVFileProducer(Module):
     def end(self):
         for var in self.varsToWrite:
             var.end()
-        self.objectFunc.end()
+        if self.objectFunc: self.objectFunc.end()
         self.writer.objs[self.csvFileSetting.keyName].pyFile.close()
         del self.writer.objs[self.csvFileSetting.keyName]

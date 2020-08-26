@@ -1,5 +1,6 @@
 from Core.Module import Module
 from Core.Collection import Collection
+import copy
 
 n_max_segment = 11
 n_chamber = 36
@@ -40,13 +41,14 @@ class StandAloneMuonProducer(Module):
                         m.segments_chamber.append(seg_chamber)
                         m.segments_station.append(seg_station)
                         m.segments_ring.append(seg_ring)
-            
-            if len(m.segments_globalX) < n_max_segment: m.segments_globalX += [0]*(n_max_segment-len(m.segments_globalX))
-            if len(m.segments_globalY) < n_max_segment: m.segments_globalY += [0]*(n_max_segment-len(m.segments_globalY))
-            if len(m.segments_endcap) < n_max_segment: m.segments_endcap += [0]*(n_max_segment-len(m.segments_endcap))
-            if len(m.segments_chamber) < n_max_segment: m.segments_chamber += [0]*(n_max_segment-len(m.segments_chamber))
-            if len(m.segments_station) < n_max_segment: m.segments_station += [0]*(n_max_segment-len(m.segments_station))
-            if len(m.segments_ring) < n_max_segment: m.segments_ring += [0]*(n_max_segment-len(m.segments_ring))
+ 
+            if len(m.segments_globalX) < n_max_segment: m.segments_globalX += [0.]*(n_max_segment-len(m.segments_globalX))
+            if len(m.segments_globalY) < n_max_segment: m.segments_globalY += [0.]*(n_max_segment-len(m.segments_globalY))
+            if len(m.segments_endcap) < n_max_segment: m.segments_endcap += [0.]*(n_max_segment-len(m.segments_endcap))
+            if len(m.segments_chamber) < n_max_segment: m.segments_chamber += [0.]*(n_max_segment-len(m.segments_chamber))
+            if len(m.segments_station) < n_max_segment: m.segments_station += [0.]*(n_max_segment-len(m.segments_station))
+            if len(m.segments_ring) < n_max_segment: m.segments_ring += [0.]*(n_max_segment-len(m.segments_ring))
+        
         return True
 
     def hash(self,chamber,station,ring,endcap):
