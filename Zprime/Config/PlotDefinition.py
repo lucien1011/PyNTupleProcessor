@@ -2,8 +2,8 @@ from Plotter.Plot import Plot
 from Core.Utils.LambdaFunc import LambdaFunc
 
 # ________________________________________________________________________ ||
-mZ1PlotRange        = [60,0.,80.]
-mZ2PlotRange        = [60,0.,60.]
+mZ1PlotRange        = [60,0.,120.]
+mZ2PlotRange        = [60,0.,120.]
 h4lPlotRange        = [40,80.,100.]
 anglePlotRange      = [50,-3.14,3.14]
 cosThetaPlotRange   = [50,-1.,1.]
