@@ -15,7 +15,7 @@ from Plotter.PlotEndModule import PlotEndModule
 from Zprime.Config.MergeSampleDict import mergeSampleDict
 
 User                    = os.environ['USER']
-out_path                = "DataMCDistributions/2020-08-30_Run2017/"
+out_path                = "DataMCDistributions/2020-08-30_Run2017_ZZTo4l-M1toInf/"
 lumi                    = 41.4
 nCores                  = 1
 outputDir               = "/cmsuf/data/store/user/t2/users/klo/Zprime/UF-NTupleAnalyzer/"+out_path

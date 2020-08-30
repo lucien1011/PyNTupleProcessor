@@ -37,6 +37,31 @@ handleSumWeight(
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
+# qqZZ
+qqZZ_M1toInf_cmpList = ComponentList(
+        [ 
+            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+qqZZTo4L_M1toInf = Dataset(
+        "qqZZTo4L",
+        qqZZ_cmpList,
+        isMC                = True,
+        xs                  = 13.92,
+        )
+handleSumWeight(
+        qqZZTo4L_M1toInf,
+        system,
+        bkgTreeDir+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
+        bkgSkimTreeDir+"ZZTo4L_M-1toInf_13TeV_powheg_pythia8_Fall17.txt",
+        )
+
+# ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4mu
 ggZZTo4L_cmpList = ComponentList(
         [ 
@@ -63,6 +88,7 @@ handleSumWeight(
 
 # ____________________________________________________________________________________________________________________________________________ ||
 bkgSamples = [
-        qqZZTo4L,
+        #qqZZTo4L,
+        qqZZTo4L_M1toInf,
         ggZZTo4mu,
         ]
