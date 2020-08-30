@@ -8,6 +8,7 @@ from DarkZ.Weighter.NLOWeighter import NLOWeighter
 from NanoAOD.Weighter.XSWeighter import XSWeighter # Stealing module from NanoAOD framework
 
 SRSkimmer               = AnalysisSkimmer("SRSkimmer")
+m4lcrSkimmer               = AnalysisSkimmer("m4lcrSkimmer","m4lCR")
 
 dataMCWeighter          = DataMCWeighter("DataMCWeighter")
 nloWeighter             = NLOWeighter("NLOWeighter")
@@ -20,3 +21,10 @@ signal_sequence.add(xsWeighter)
 signal_sequence.add(dataMCWeighter)
 signal_sequence.add(nloWeighter)
 signal_sequence.add(varProducer)
+
+m4lcr_sequence = Sequence()
+m4lcr_sequence.add(m4lcrSkimmer)
+m4lcr_sequence.add(xsWeighter)
+m4lcr_sequence.add(dataMCWeighter)
+m4lcr_sequence.add(nloWeighter)
+m4lcr_sequence.add(varProducer)

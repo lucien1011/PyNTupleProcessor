@@ -4,8 +4,8 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from Zprime.Dataset.Run2017.SkimTree_Bkg_m4l70 import * 
-from Zprime.Dataset.Run2017.SkimTree_Data_m4l70 import * 
+from Zprime.Dataset.Run2018.SkimTree_Bkg_m4l70 import * 
+from Zprime.Dataset.Run2018.SkimTree_Data_m4l70 import * 
 from Zprime.Sequence.RecoSequence import * 
 from Zprime.Config.PlotDefinition import *
 
@@ -15,8 +15,8 @@ from Plotter.PlotEndModule import PlotEndModule
 from Zprime.Config.MergeSampleDict import mergeSampleDict
 
 User                    = os.environ['USER']
-out_path                = "DataMCDistributions/2020-08-30_Run2017/"
-lumi                    = 41.4
+out_path                = "DataMCDistributions/2020-08-30_Run2018/"
+lumi                    = 59.7
 nCores                  = 1
 outputDir               = "/cmsuf/data/store/user/t2/users/klo/Zprime/UF-NTupleAnalyzer/"+out_path
 nEvents                 = -1
