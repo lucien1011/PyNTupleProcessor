@@ -5,6 +5,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
 from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_HZZd import * 
 from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_ppZZd4l import * 
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
@@ -31,17 +32,22 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2016/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-17_Run2016/"
 #out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-25_Run2016/"
-out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2016/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_Run2016/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-11-21_Run2016/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-12-02_Run2016/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2020-02-28_Run2016/"
 lumi                    = 35.9
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-#componentList           = bkgSamples + [data2016] + [HZZd_M4,HZZd_M15,HZZd_M30,] 
-componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30,] 
+#componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30,data2016,] 
+componentList           = bkgSamples + [sigSampleDict[15],sigSampleDict[30],data2016,] 
 justEndSequence         = False
 
-plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
+plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots + general_mu_plots + general_el_plots
 
 for sig in sigSamples:
     for p in plots:
@@ -77,4 +83,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

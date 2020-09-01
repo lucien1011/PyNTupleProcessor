@@ -3,14 +3,14 @@ from Core.Dataset import Dataset
 from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
+#bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20191120/SkimTree_DarkPhoton_Run2017Data_m4l70/"
 bkgSkimTreeDir      = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_Run2017Data_m4l70/"
-bkgSkimTreeDir2     = bkgSkimTreeDir
-bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/"
-dataTreeDir         = bkgSkimTreeDir
+bkgTreeDir          = "/cmsuf/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/BkgMC_Run2017/"
+dataTreeDir         = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_Run2017Data_m4l70/"
 zxSkimTreeDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20181116/SkimTree_DarkPhoton_ZX_Run2017Data_m4l70/"
 inUFTier2           = False
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = False
+saveSumWeightTxt    = False 
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # Z+X
@@ -67,6 +67,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
+        bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIIFall17MiniAOD-94X_mc2017_realistic_v10_ext1-v1.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -92,6 +93,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
+        bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -115,6 +117,7 @@ handleSumWeight(
         sumWeightHist,
         True,
         saveSumWeightTxt,
+        bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
         bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
         )
 
@@ -140,6 +143,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.txt",
+        bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -163,6 +167,7 @@ handleSumWeight(
         sumWeightHist,
         True,
         saveSumWeightTxt,
+        bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.txt",
         bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.txt",
         )
 
@@ -188,6 +193,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8.txt",
+        bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -211,6 +217,7 @@ handleSumWeight(
         sumWeightHist,
         True,
         saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.txt",
         bkgSkimTreeDir+"GluGluToContinToZZTo4tau_13TeV_MCFM701_pythia8.txt",
         )
 
@@ -236,6 +243,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.txt",
+        bkgSkimTreeDir+"GluGluToContinToZZTo4e_13TeV_MCFM701_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -259,6 +267,7 @@ handleSumWeight(
         sumWeightHist,
         True,
         saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.txt",
         bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.txt",
         )
 
@@ -284,6 +293,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.txt",
+        bkgSkimTreeDir+"GluGluToContinToZZTo2mu2tau_13TeV_MCFM701_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -307,6 +317,7 @@ handleSumWeight(
         sumWeightHist,
         True,
         saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.txt",
         bkgSkimTreeDir+"GluGluToContinToZZTo2e2mu_13TeV_MCFM701_pythia8.txt",
         )
 
@@ -332,10 +343,11 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8.txt",
+        bkgSkimTreeDir+"GluGluToContinToZZTo2e2tau_13TeV_MCFM701_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
-bkgSamples = [
+mcBkgSamples = [
         ggH,
         VBF,
         WHplus,
@@ -348,6 +360,8 @@ bkgSamples = [
         ggZZTo4e,
         ggZZTo4mu,
         ggZZTo4tau,
+        ]
+bkgSamples = mcBkgSamples + [
         ZPlusX,
         ]
 

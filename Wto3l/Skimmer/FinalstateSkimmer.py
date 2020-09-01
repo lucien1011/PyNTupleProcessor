@@ -6,7 +6,7 @@ class FinalstateSkimmer(Module):
         super(FinalstateSkimmer,self).__init__(name)
         
     def analyze(self,event):
-        
+        '''
         if ("Data_sr_Run2016" in self.dataset.name) or ("WZTo3LNu" in self.dataset.name) or ("WmTo3munu" in self.dataset.name) or ("WpTo3munu" in self.dataset.name) or ("Data_memCR_sr_Run2016" in self.dataset.name):
             if abs(event.idL1[0]) == 13 and abs(event.idL2[0]) == 13 and abs(event.idL3[0]) == 13 and event.IsoL3[0] < 0.35:
                 return True
@@ -17,7 +17,7 @@ class FinalstateSkimmer(Module):
                 return True
             else:
                 return False
-        
+        '''
         ''' 
         if ("Data_memCR_Run2016" in self.dataset.name) or ("WZTo3LNu_memCR" in self.dataset.name) or ("TTJets_memCR" in self.dataset.name) or ("DYJetsToLL_M50_memCR" in self.dataset.name) or ("DYJetsToLL_M10To50_memCR" in self.dataset.name):
             if abs(event.idL1[0]) == 11 and abs(event.idL2[0]) == 11 and abs(event.idL3[0]) == 13 and event.IsoL3[0] >= 0.35 and 1.4 < event.etaL3[0] <= 2.5:

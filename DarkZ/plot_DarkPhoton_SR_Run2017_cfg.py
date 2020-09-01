@@ -5,7 +5,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
 from DarkZ.Dataset.Run2017.SkimTree_DarkPhoton_m4l70 import * 
-from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70 import * 
+from DarkZ.Dataset.Run2017.SkimTree_DarkPhoton_m4l70_HZZd import * 
 from DarkZ.Dataset.Run2016.SkimTree_DarkPhoton_m4l70_ppZZd4l import * 
 from DarkZ.Sequence.RecoSequence import * 
 from DarkZ.Producer.VariableProducer import VariableProducer
@@ -14,10 +14,6 @@ from DarkZ.Config.AnalysisNotePlot import *
 
 from Plotter.Plotter import Plotter
 from Plotter.PlotEndModule import PlotEndModule
-
-from Common.ShapeTemplate import ShapeTemplateMaker
-
-from Core.BaseObject import BaseObject
 
 from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
@@ -30,14 +26,20 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-07_Run2017_mZ2-12ToInf/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-07_Run2017/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-20_Run2017/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-17_Run2017/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-06-17_Run2017/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-07-29_Run2017/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-08-23_Run2017/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-09-05_Run2017/"
+#out_path                = "DarkPhotonSR/ShapeTemplate/2019-11-21_Run2017/"
+out_path                = "DarkPhotonSR/ShapeTemplate/2019-12-02_Run2017/"
 lumi                    = 41.4
 nCores                  = 3
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + [data2017] #+ [HZZd_M4,HZZd_M15,HZZd_M30,] 
-componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30,] 
+#componentList           = bkgSamples + [HZZd_M15,HZZd_M30,ppZZd4l_M15,ppZZd4l_M30, data2017] 
+componentList           = bkgSamples + [sigSampleDict[15],sigSampleDict[30],data2017,] 
 justEndSequence         = False
 #eventSelection          = LambdaFunc('x: x.massZ2[0] > 12.')
 
@@ -77,12 +79,4 @@ outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/DarkZ/"+out_path
-
-shape_setting = BaseObject(
-                    "ShapeSetting",
-                    samples = ["ZPlusX",],
-                    inputHistName="mZ2_4mu",
-                    )
-
-endSequence.add(ShapeTemplateMaker(shape_setting,))
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

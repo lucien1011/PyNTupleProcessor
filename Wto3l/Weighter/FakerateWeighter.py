@@ -4,7 +4,8 @@ import ROOT
 class FakerateWeighter(Module):
     def __init__(self,name):
         super(FakerateWeighter,self).__init__(name)
-        self.inputPath       = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/fr_ratio_WOZpeak/ratioPlot.root"
+ 	self.inputPath	     = "/cmsuf/data/store/user/t2/users/nikmenendez/fr_ratio_WOZpeak/ratioPlot.root"
+        #self.inputPath       = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/fr_ratio_WOZpeak/ratioPlot.root"
         #self.inputPath       = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-08-06/finalstate_eem/fr_ratio/ratioPlot.root"
         #self.inputPath       = "/raid/raid7/kshi/Zprime/Wto3l/FakeRate/Run2016/2019-07-31/finalstate_mem/fr_ratio_MET100/ratioPlot.root"
         #inputFileName   = "ratioPlot.root"

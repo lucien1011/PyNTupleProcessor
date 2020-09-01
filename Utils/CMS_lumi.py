@@ -12,29 +12,35 @@ cmsTextFont   = 61
 writeExtraText = True
 extraText   = "Preliminary"
 extraTextFont = 52 
+extraTextOffset = 0.2
  
-lumiTextSize     = 0.6
+lumiTextSize     = 0.8
 lumiTextOffset   = 0.2
  
 cmsTextSize      = 0.75
 cmsTextOffset    = 0.1
  
-relPosX    = 0.045
+relPosX    = 0.095
 relPosY    = 0.035
 relExtraDY = 1.2
  
 extraOverCmsTextSize  = 0.76
  
 lumi_14TeV = "3000 fb^{-1}"
-lumi_13TeV = "35.9 fb^{-1}"
+lumi_13TeV = "137 fb^{-1}"
 lumi_8TeV  = "19.7 fb^{-1}" 
 lumi_7TeV  = "5.1 fb^{-1}"
 lumi_sqrtS = ""
  
 drawLogo      = False
-outOfFrame    = False
+outOfFrame    = True
  
-def CMS_lumi(pad,  iPeriod,  iPosX ):
+def CMS_lumi(pad,
+        iPeriod,
+        iPosX,
+        lumiTextSize=lumiTextSize,
+        cmsTextSize=cmsTextSize,
+        ):
     global outOfFrame, relPosX
     if(iPosX/10==0 ): outOfFrame = True
  
@@ -159,8 +165,8 @@ def CMS_lumi(pad,  iPeriod,  iPosX ):
     elif( writeExtraText ):
         if( iPosX==0):
             posX_ =   l +  relPosX*(1-l-r)
-            posY_ =   1-t+lumiTextOffset*t
- 
+            posY_ =   1-t+extraTextOffset*t
+
         latex.SetTextFont(extraTextFont)
         latex.SetTextSize(extraTextSize*t)
         latex.SetTextAlign(align_)

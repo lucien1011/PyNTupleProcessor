@@ -18,7 +18,8 @@ from DarkZ.Config.ZXCRPlot import *
 from DarkZ.Config.MergeSampleDict import mergeSampleDict
 
 #out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2018Data_m4l118-130/2019-04-02_3P1F_DataVsPred_FRWeightFromVukasinWZRemoved/"
-out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2018Data_m4l100-170/2019-05-23_3P1F_DataVsPred_FRWeightFromVukasinWZRemoved/"
+#out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2018Data_m4l100-170/2019-05-23_3P1F_DataVsPred_FRWeightFromVukasinWZRemoved/"
+out_path = "ZPlusX/DataMCDistributions/SkimTree_DarkPhoton_ZX_Run2018Data_m4l118-130/2020-02-28_3P1F_DataVsPred_FRWeightFromVukasinWZRemoved/"
 
 plots =  general_plots
 
@@ -31,7 +32,7 @@ nCores                  = 5
 outputDir               = system.getStoragePath()+"/lucien/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [Data_Run2018,predCR,]#WZTo3LNu,]
+componentList           = [Data_Run2018,predCR,WZTo3LNu,]
 justEndSequence         = False
 
 for dataset in componentList:

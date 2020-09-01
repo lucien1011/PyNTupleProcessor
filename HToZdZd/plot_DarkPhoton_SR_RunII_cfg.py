@@ -14,23 +14,67 @@ from Plotter.Plot import Plot
 from HToZdZd.Config.MergeSampleDict_RunII import *
 from HToZdZd.Config.AnalysisNotePlot import *
 
-import os
+import os,ROOT
 
-out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII_MC_RatioCut0p05/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-05-24_RunII_MC_RatioCut0p05/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-19_RunII_MC_RatioCut0p05/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-08-23_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-19_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-01-20_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-29_RunII_ZVeto/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-15_RunII/"
 User                    = os.environ['USER']
-nCores                  = 3
+nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = bkgSamples
-justEndSequence         = True
-eventSelection          = LambdaFunc("x: (x.massZ1[0]-x.massZ2[0])/(x.massZ1[0]+x.massZ2[0]) < 0.05") 
+componentList           = bkgSamples + dataSamples + sigSamples + rareBkgSamples
+justEndSequence         = False
+skipHadd                = False 
 
-plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots
+plots = general_plots 
+
+for sig in sigSamples:
+    for p in plots:
+        p.plotSetting.line_style_dict[sig.name] = 10
+        p.plotSetting.line_width_dict[sig.name] = 4
 
 for dataset in componentList:
     for component in dataset.componentList:
         component.maxEvents = nEvents
+
+for p in plots:
+    if p.dim == 2: 
+        p.plotSetting.leg_pos = [0.39,0.70,0.59,0.92]
+        p.plotSetting.x_axis_title = "m_{Z1} [GeV]"
+        p.plotSetting.y_axis_title = "m_{Z2} [GeV]"
+        p.plotSetting.minimum = 0.
+        p.plotSetting.marker_size = 0.7
+        p.plotSetting.marker_style_dict = {
+                "Higgs": 21,
+                "qqZZ": 22,
+                "ZZ": 22,
+                "ggZZ": 23,
+                "Data": 34,
+                }
+        p.plotSetting.marker_color_dict = {
+                "qqZZ": ROOT.kOrange,
+                "ZZ": ROOT.kOrange,
+                "ggZZ": ROOT.kGreen,
+                "Data": ROOT.kBlack
+                }
+        p.plotSetting.marker_size_dict = {
+                "ggZZ": 0.4,
+                "Data": 1.0,
+                }
+        p.plotSetting.scatter_density = "1.0"
+        p.selectedSamples = ["Higgs","ZZ","Data",]
+        #p.plotSetting.cms_lumi = True
+        #p.plotSetting.tdr_style = True
+        #p.plotSetting.SetNColumns = 4
+    else:
+        p.plotSetting.divideByBinWidth = True
 
 plotter                 = Plotter("Plotter",plots)
 
@@ -41,6 +85,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=justEndSequence)
+endSequence = EndSequence(skipHadd=skipHadd,haddDataSamples=True,)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
-endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=True))
+endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))

@@ -1,13 +1,16 @@
 import ROOT,os
 from Core.mkdir_p import mkdir_p
 from Core.BaseObject import BaseObject
+from Utils.System import system
 
 ROOT.gROOT.SetBatch(ROOT.kTRUE)
 
 # _____________________________________________________________________________ ||
-baseDir         = "/Users/lucien/NTuple//lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
+baseDir         = system.getStoragePath()+"/lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-07-26_Run2016/"
 inputPath       = baseDir+"ZPlusX/DataMCDistribution.root"
-outputDir       = baseDir+"ZPlusX/"
+#outputDir       = baseDir+"ZPlusX/"
+outputDir       = system.getStoragePath()+"/lucien/Higgs/DarkZ/DarkPhotonSR/ShapeTemplate/2019-11-21_Run2016/ZPlusX/"
+outFileName     = "shape_veto.root"
 binList         = [
                         #BaseObject("mZ2_4e",rebin=5,histName="mZ2_4e"),
                         #BaseObject("mZ2_low-m4l_4e",rebin=5,histName="mZ2_low-m4l_4e"),
@@ -49,7 +52,7 @@ rebin           = 5
 inputFile = ROOT.TFile(inputPath,"READ")
 mkdir_p(os.path.dirname(outputDir))
 if drawFit: c = ROOT.TCanvas()
-outputFile = ROOT.TFile(os.path.join(outputDir,"shape.root"),"RECREATE")
+outputFile = ROOT.TFile(os.path.join(outputDir,outFileName),"RECREATE")
 for bin in binList:
     histName = bin.histName
     inputHist = inputFile.Get(histName).Clone()
@@ -62,16 +65,20 @@ for bin in binList:
     outputHist = inputNormHist.Clone(bin.name+"_shapehist")
     for ibin in range(1,inputNormHist.GetNbinsX()+1):
         x_value = inputNormHist.GetXaxis().GetBinCenter(ibin)
-        outputHist.SetBinContent(ibin,func.Eval(x_value))
+        outputHist.SetBinContent(ibin,func.Eval(x_value) if x_value < 8.5 or x_value > 11. else 0.)
     outputHist.Scale(inputNormHist.Integral()/outputHist.Integral())
     outputFile.cd()
     inputHist.Write()
     outputHist.Write()
     func.Write()
     if drawFit:
+        inputHist.GetYaxis().SetRangeUser(0.,inputHist.GetMaximum()*1.5)
+        inputHist.Draw()
+        func.Draw("same")
         outputHist.SetStats(0)
-        outputHist.Draw()
         c.SaveAs(os.path.join(outputDir,"fit_"+bin.name+".pdf"))
+        outputHist.Draw()
+        c.SaveAs(os.path.join(outputDir,"outshape_"+bin.name+".pdf"))
 inputFile.Close()
 
 # _____________________________________________________________________________ ||

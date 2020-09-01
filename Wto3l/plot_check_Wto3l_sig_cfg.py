@@ -9,7 +9,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 #from Wto3l.Dataset.Run2016.Wto3l_Data import *
 #from Wto3l.Dataset.Run2016.Wto3l_MC import *
-#from Wto3l.Dataset.Run2016.Wto3l_Data_sr import *
+from Wto3l.Dataset.Run2016.Wto3l_Data_sr import *
 from Wto3l.Dataset.Run2016.Wto3l_MC_sr import *
 #from Wto3l.Dataset.Run2016.Wto3l_memCR_Data import *
 #from Wto3l.Dataset.Run2016.Wto3l_memCR_Data_sr import *
@@ -30,7 +30,7 @@ from Plotter.Plot import Plot
 #out_path = "Wto3l/FakeRate/Run2016/2019-08-13/finalstate_eem/failIso_endcap_TTbar_WOZpeak/"
 #out_path = "Wto3l/DataMCDistributions/Run2016/2019-08-06/FReemWOZpeak_SR_mmm/"
 #out_path = "Wto3l/SR_MCDistributions/Run2016/2019-08-07/check_TT_DY/"
-out_path = "Wto3l/DataMCDistributions/Run2016/masspoint_test/WmM20/"
+#out_path = "Wto3l/DataMCDistributions/Run2016/masspoint_test/WmM20/"
 
 
 mZ1PlotRange = [40,40.,120.]
@@ -52,7 +52,7 @@ general_plots = []
 general_plots.extend([
     Plot("Lep_pt",          ["TH1D","Lep_pt","",40,0.,200.],           LambdaFunc('x:x.lep_pt[0]'),          selFunc=LambdaFunc('x:x.lep_pt[0] > 0')        ),
     Plot("Lep_eta",          ["TH1D","Lep_eta","",60,-3.,3.],           LambdaFunc('x:x.lep_eta[0]'),          selFunc=LambdaFunc('x:x.lep_eta[0]')        ),
-    Plot("Lep_phi",             ["TH1D","Lep_phi","",40,-4.,4.],               LambdaFunc('x: x.lep_phi[0]'),          selFunc=LambdaFunc('x:x.lep_phi[0]')     ),
+    Plot("Lep_phi",             ["TH1D","Lep_phid","",40,-4.,4.],               LambdaFunc('x: x.lep_phi[0]'),          selFunc=LambdaFunc('x:x.lep_phi[0]')     ),
 
 
     #Plot("Z1_mass",         ["TH1D","Z1_mass","",]+mZ1PlotRange,        LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x:x.massZ1[0] > 0')      ), 
@@ -61,16 +61,17 @@ general_plots.extend([
     #Plot("Lep3_pt",          ["TH1D","Lep3_pt","",40,0.,200.],           LambdaFunc('x:x.Lep3.Pt()'),          selFunc=LambdaFunc('x:x.Lep3.Pt() > 0')        ),
     #Plot("Lep3_pt",          ["TH1D","Lep3_pt","",200,0.,200.],           LambdaFunc('x:x.Lep3.Pt()'),          selFunc=LambdaFunc('x:x.Lep3.Pt > 0')        ),
 
+    Plot("Lep1_eta",        ["TH1D","Lep1_eta","",60,-3.,3.],       	LambdaFunc('x:x.Lep1.Eta()'),   	selFunc=LambdaFunc('x:x.Lep1.Eta')	),
     #Plot("Lep3_eta",          ["TH1D","Lep3_eta","",60,-3.,3.],           LambdaFunc('x:x.Lep3.Eta()'),          selFunc=LambdaFunc('x:x.Lep3.Eta()')        ),
     #Plot("3lep_pt",          ["TH1D","3lep_pt","",40,0.,200.],           LambdaFunc('x:x.pT3l[0]'),          selFunc=LambdaFunc('x:x.pT3l[0] > 0')        ),
     #Plot("Lep1+Lep2_pt",     ["TH1D","Lep1+Lep2_pt","",40,0.,200.],      LambdaFunc('x:x.twolpt'),        selFunc=LambdaFunc('x:x.twolpt > 0')      ),
      Plot("Mass1",          ["TH1D","Mass1","",80,0.,200.],           LambdaFunc('x:x.mass1'),          selFunc=LambdaFunc('x:x.mass1 > 0')        ),
      Plot("Mass2",          ["TH1D","Mass2","",80,0.,200.],           LambdaFunc('x:x.mass2'),          selFunc=LambdaFunc('x:x.mass2 > 0')        ),
      Plot("Transverse_Mass",          ["TH1D","Transverse_Mass","",100,0.,500.],           LambdaFunc('x:x.mt'),          selFunc=LambdaFunc('x:x.mt')        ),
-     Plot("Mass1vsMass2",   ["TH2D","Mass1_vs_Mass2","",80,0.,200.,80,0.,200.],   LambdaFunc('x:[x.mass1,x.mass2]'),   dim = 2 ),
+     Plot("Mass1vsMass2",   ["TH2D","Mass1_vs_Mass2","",80,0.,200.,80,0.,200.],   LambdaFunc('x:[x.mass1,x.mass2]'),   selFunc=LambdaFunc('x:x.Lep1.Pt() > 0'), dim = 2 ),
 
 
-        #Plot("Z2_mass_vs_DeltaR34_"+eachCR,["TH2D","Z2_mass_vs_DeltaR34_"+eachCR,"",]+mZ2PlotRange+deltaRPlotRange2,LambdaFunc('x: [x.massZ2[0],x.deltaRL34]'),selFunc=LambdaFunc(region_sel_str_whole),dim=2),
+        #Plot("Z2_mass_vs_DeltaR34_3p1f",["TH2D","Z2_mass_vs_DeltaR34_3p1f","",]+mZ2PlotRange+deltaRPlotRange2,LambdaFunc('x: [x.massZ2[0],x.deltaRL34]'),selFunc=LambdaFunc('x:x.nZXCRFailedLeptons[0] == 1'),dim=2),
         #Plot("Z2_mass_"+eachCR,         ["TH1D","Z2_mass_"+eachCR,"",]+mZ2PlotRange,        LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc(region_sel_str_whole)      ),
         #Plot("Z1_4e_mass_"+eachCR,      ["TH1D","Z1_4e_mass_"+eachCR,"",]+mZ1PlotRange,     LambdaFunc('x: x.massZ1[0]'),       selFunc=LambdaFunc('x: x.mass4e[0] > 0 and '+region_sel_str)          ),
         #Plot("Z2_4e_mass_"+eachCR,      ["TH1D","Z2_4e_mass_"+eachCR,"",]+mZ2PlotRange,     LambdaFunc('x: x.massZ2[0]'),       selFunc=LambdaFunc('x: x.mass4e[0] > 0 and '+region_sel_str)          ),
@@ -93,7 +94,8 @@ plots =  general_plots
 #    plot.plotSetting.divideByBinWidth = True
 
 nCores                  = 1
-outputDir               = "/raid/raid7/kshi/Zprime/"+out_path
+#outputDir               = "/raid/raid7/kshi/Zprime/"+out_path
+outputDir               = "results/"
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = [DYJetsToLL_M50,DYJetsToLL_M10To50,WZTo3LNu,TTJets,Data_Run2016,Data_sr_Run2016,WmTo3munu_ZpM45,WmTo3munu_ZpM15,WpTo3munu_ZpM45,WpTo3munu_ZpM15]#predCR]
@@ -130,5 +132,6 @@ outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
 endSequence = EndSequence(skipHadd=justEndSequence)
-endModuleOutputDir = "/home/kshi/public_html/Zprime/"+out_path
+#endModuleOutputDir = "/home/kshi/public_html/Zprime/"+out_path
+endModuleOutputDir = outputDir
 endSequence.add(PlotEndModule(endModuleOutputDir,plots))
