@@ -1,1 +1,0 @@
-hadd -f results/WmTo3munu_ZpM20/DataMCDistribution.root  results/WmTo3munu_ZpM20/*_DataMCDistribution.root 

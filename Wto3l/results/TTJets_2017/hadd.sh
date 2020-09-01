@@ -1,1 +1,0 @@
-hadd -f results/TTJets_2017/DataMCDistribution.root  results/TTJets_2017/*_DataMCDistribution.root 
