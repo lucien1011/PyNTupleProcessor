@@ -2,8 +2,8 @@ from Plotter.Plot import Plot
 from Core.Utils.LambdaFunc import LambdaFunc
 
 # ________________________________________________________________________ ||
-mZ1PlotRange        = [60,0.,80.]
-mZ2PlotRange        = [60,0.,60.]
+mZ1PlotRange        = [60,0.,120.]
+mZ2PlotRange        = [60,0.,120.]
 h4lPlotRange        = [40,80.,100.]
 anglePlotRange      = [50,-3.14,3.14]
 cosThetaPlotRange   = [50,-1.,1.]
@@ -89,4 +89,6 @@ general_4mu_plots = [
         Plot("mu2Eta_4mu", ["TH1D","mu2Eta_4mu","",]+mu2EtaPlotRange, LambdaFunc('x: '+var_mu2Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
         Plot("mu3Eta_4mu", ["TH1D","mu3Eta_4mu","",]+mu3EtaPlotRange, LambdaFunc('x: '+var_mu3Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
         Plot("mu4Eta_4mu", ["TH1D","mu4Eta_4mu","",]+mu4EtaPlotRange, LambdaFunc('x: '+var_mu4Eta_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
+        
+        Plot("nZXCRFailedLeptons_4mu", ["TH1D","nZXCRFailedLeptons_4mu","",10,-0.5,9.5], LambdaFunc('x: x.nZXCRFailedLeptons[0]'), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         ]

@@ -4,19 +4,19 @@ from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 import os
 
-bkgSkimTreeDir      = "/cmsuf/data/store/user/t2/users/klo/Zprime/EXO-18-008/80X_MCProd_DarkZNTuple/"
+bkgSkimTreeDir      = "/cmsuf/data/store/user/t2/users/klo/Zprime/EXO-18-008/102X_MCProd_DarkZNTuple/"
 bkgSkimTreeDir2     = bkgSkimTreeDir
-bkgTreeDir          = "/cmsuf/data/store/user/t2/users/klo/Zprime/EXO-18-008/HZZNTuple_Run2016/"
+bkgTreeDir          = "/cmsuf/data/store/user/t2/users/rosedj1/Higgs/HZZ4l/NTuple/Run2/MC2018_M19_Mar12_4l_2018Jets_JER_bestCandLegacy/"
 dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = True
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = True
+saveSumWeightTxt    = False
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # qqZZ
 qqZZ_cmpList = ComponentList(
         [ 
-            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
+            Component("qqZZTo4L",bkgSkimTreeDir+"ZZTo4L_TuneCP5_13TeV_powheg_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -29,19 +29,19 @@ qqZZTo4L = Dataset(
 handleSumWeight(
         qqZZTo4L,
         system,
-        bkgTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2.root",
+        bkgTreeDir+"ZZTo4L_TuneCP5_13TeV_powheg_pythia8.root",
         sumWeightHist,
         True,
         saveSumWeightTxt,
-        bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2.root.txt",
-        #bkgSkimTreeDir+"ZZTo4L_13TeV_powheg_pythia8_RunIISummer16MiniAODv2.root.txt",
+        bkgSkimTreeDir+"ZZTo4L_TuneCP5_13TeV_powheg_pythia8.txt",
+        bkgSkimTreeDir+"ZZTo4L_TuneCP5_13TeV_powheg_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # ggZZTo4mu
 ggZZTo4L_cmpList = ComponentList(
         [ 
-            Component("ggZZTo4mu",bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ggZZTo4mu",bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -54,12 +54,12 @@ ggZZTo4mu = Dataset(
 handleSumWeight(
         ggZZTo4mu,
         system,
-        bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.root",
+        bkgTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.root",
         sumWeightHist,
         True,
         saveSumWeightTxt,
-        bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.txt",
-        #bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8_RunIISummer16MiniAODv2.txt",
+        bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.txt",
+        bkgSkimTreeDir+"GluGluToContinToZZTo4mu_13TeV_MCFM701_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
