@@ -35,7 +35,7 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgTreeDir_2017+"DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8.txt",
         )
-
+print "DYJetsToLL_M50_2017 sumw = " + str(DYJetsToLL_M50_2017.sumw)
 # ____________________________________________________________________________________________________________________________________________ ||
 DYJetsToLL_M10To50_2017_cmpList = ComponentList(
         [
@@ -58,7 +58,7 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgTreeDir_2017+"DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8.txt",
         )
-
+print "DYJetsToLL_M10To50_2017 sumw = " + str(DYJetsToLL_M10To50_2017.sumw)
 # ____________________________________________________________________________________________________________________________________________ ||
 TTJets_2017_cmpList = ComponentList(
         [
@@ -81,7 +81,7 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgTreeDir_2017+"TTJets_DiLept_TuneCP5_13TeV-madgraphMLM-pythia8.txt",
         )
-
+print "TTJets_2017 sumw = " + str(TTJets_2017.sumw)
 # ____________________________________________________________________________________________________________________________________________ ||
 WZTo3LNu_2017_cmpList = ComponentList(
         [
@@ -104,6 +104,7 @@ handleSumWeight(
         saveSumWeightTxt,
         bkgTreeDir_2017+"WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8.txt",
         )
+print "WZTo3LNu_2017 sumw = " + str(WZTo3LNu_2017.sumw)
 
-bkgSamples = [WZTo3LNu_2017,]
+bkgSamples_2017 = [WZTo3LNu_2017,TTJets_2017,DYJetsToLL_M10To50_2017,DYJetsToLL_M50_2017]
 
