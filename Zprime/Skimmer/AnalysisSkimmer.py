@@ -20,6 +20,8 @@ class AnalysisSkimmer(Module):
             if event.massZ1[0] < 12. or event.massZ1[0] > 120.: return False
             if event.massZ2[0] < 4. or event.massZ2[0] > 120.: return False
             if event.mass4mu[0] < 0.: return False
-            if not event.passedFullSelection[0]: return False
+            if "ZPlusX" not in self.dataset.name:
+                if not event.passedFullSelection[0]: return False
             if not (abs(event.idL1[0]) == 13 and abs(event.idL2[0]) == 13 and abs(event.idL3[0]) == 13 and abs(event.idL4[0]) == 13): return False
+            return True
         return False

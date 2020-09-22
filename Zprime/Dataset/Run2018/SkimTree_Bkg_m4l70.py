@@ -10,7 +10,23 @@ bkgTreeDir          = "/cmsuf/data/store/user/t2/users/rosedj1/Higgs/HZZ4l/NTupl
 dataTreeDir         = bkgSkimTreeDir
 inUFTier2           = True
 sumWeightHist       = "Ana/sumWeights"
-saveSumWeightTxt    = False
+saveSumWeightTxt    = False 
+
+# ____________________________________________________________________________________________________________________________________________ ||
+# Z+X
+ZPlusX_cmpList = ComponentList(
+        [
+            Component("ZPlusX",
+                "/cmsuf/data/store/user/t2/users/klo/Zprime/EXO-18-008/102X_DataZX_DarkZNTuple/Data_Run2018-17Sept2018_noDuplicates_FRWeightFromVukasinWZRemoved.root",
+                "passedEvents",False)
+        ]
+        )
+ZPlusX = Dataset(
+        "ZPlusX",
+        ZPlusX_cmpList,
+        isMC                = True,
+        skipWeight          = True,
+        )
 
 # ____________________________________________________________________________________________________________________________________________ ||
 # qqZZ
@@ -63,7 +79,36 @@ handleSumWeight(
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
+# ggH
+ggH_cmpList = ComponentList(
+        [ 
+            Component("ggH",bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+        ]
+        )
+
+ggH = Dataset(
+        "ggH",
+        ggH_cmpList,
+        isMC                = True,
+        xs                  = 48.52*0.0002768,
+        )
+handleSumWeight(
+        ggH,
+        system,
+        bkgTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root",
+        sumWeightHist,
+        True,
+        saveSumWeightTxt,
+        bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
+        bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.txt",
+        )
+
+# ____________________________________________________________________________________________________________________________________________ ||
 bkgSamples = [
         qqZZTo4L,
         ggZZTo4mu,
+        ]
+rareBkgSamples = [
+        ggH,
+        ZPlusX,
         ]
