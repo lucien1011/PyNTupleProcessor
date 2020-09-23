@@ -3,8 +3,8 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 # ________________________________________________________________________ ||
 mZ1PlotRange        = [80,0.,120.]
-mZ2PlotRange        = [30,0.,60.]
-h4lPlotRange        = [20,70.,200.]
+mZ2PlotRange        = [60,0.,60.]
+h4lPlotRange        = [65,70.,200.]
 anglePlotRange      = [50,-3.14,3.14]
 cosThetaPlotRange   = [50,-1.,1.]
 

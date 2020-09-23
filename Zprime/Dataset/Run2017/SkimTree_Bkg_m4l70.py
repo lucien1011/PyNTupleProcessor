@@ -18,9 +18,10 @@ bkgTreeDir          = "/cmsuf/data/store/user/t2/users/klo/Higgs/DarkZ/NTuples/B
 bkgTreeDir2         = "/cmsuf/data/store/user/t2/users/klo/Higgs/Zprime/94X_MCProd_191127/"
 #dataTreeDir         = bkgSkimTreeDir
 #dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_Data/"
+dataTreeDir         = system.getStoragePath()+"/Zprime/20200212_Zto4l/SkimTree_Run2017_MMM_Data/"
 #dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_Data/"
 #dataTreeDir         = system.getStoragePath()+"/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2017_MMM_Data/"
-dataTreeDir         = system.getStoragePath()+"/Zprime/20200212_Zto4l/test_4GeV/SkimTree_Run2017_MMM_Data/"
+#dataTreeDir         = system.getStoragePath()+"/Zprime/20200212_Zto4l/test_4GeV/SkimTree_Run2017_MMM_Data/"
 #dataTreeDir2        = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/promptCR/SkimTree_Run2017_MMM_Data/"
 dataTreeDir2        = system.getStoragePath()+"/Zprime/20200212_Zto4l/promptCR/SkimTree_Run2017_MMM_Data/"
 inUFTier2           = True
@@ -424,13 +425,13 @@ bkgSamples = [
         #ZH,
         #ttH,
         qqZZTo4L,
-        #ggZZTo2e2mu,
-        #ggZZTo2e2tau,
-        #ggZZTo2mu2tau,
-        #ggZZTo4e,
-        #ggZZTo4mu,
-        #ggZZTo4tau,
-        qqZZTo4L_M1To4,
+        ggZZTo2e2mu,
+        ggZZTo2e2tau,
+        ggZZTo2mu2tau,
+        ggZZTo4e,
+        ggZZTo4mu,
+        ggZZTo4tau,
+        #qqZZTo4L_M1To4,
         #ZPlusX,
         ]
 dataSamples = [

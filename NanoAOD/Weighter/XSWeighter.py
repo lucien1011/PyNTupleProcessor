@@ -13,5 +13,5 @@ class XSWeighter(Module):
             xs = self.dataset.xs
             nevts = self.dataset.sumw
             lumi = self.dataset.lumi
-            #event.weight *= xs*lumi*self.fb_to_pb_factor/self.dataset.sumw
+            event.weight *= xs*lumi*self.fb_to_pb_factor/self.dataset.sumw
         return True
