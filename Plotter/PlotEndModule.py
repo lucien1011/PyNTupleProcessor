@@ -307,7 +307,8 @@ class PlotEndModule(EndModule):
             ratio.SetStats(0)
             ratio.Draw()
             bkdgErrRatio.Draw("samee2")
-            ratio.GetYaxis().SetRangeUser(-0.2,2.2) # Make this symmetric about 1
+            #ratio.GetYaxis().SetRangeUser(-0.2,2.2) # Make this symmetric about 1
+            ratio.GetYaxis().SetRangeUser(7.0,10.0)
             ratio.GetYaxis().SetLabelSize(0.075)
             ratio.GetXaxis().SetLabelSize(0.075)
             ratio.GetYaxis().SetTitle("Data/MC")
