@@ -19,6 +19,11 @@ class ZSelector(Module):
     def __init__(self,name):
         super(ZSelector,self).__init__(name)
 
+    #def beginJob(self):
+	clear_session()
+	global ZSelector
+        ZSelector = load_model('/blue/avery/nikmenendez/Wto3l/Analyzer2/UF-PyNTupleRunner/Wto3l/MVA/ZSelector_model.h5', compile=False)
+
     def analyze(self,event):
 	start_import = time.time()
 	event.Lep1, event.Lep2, event.Lep3, event.Met = TLorentzVector(), TLorentzVector(), TLorentzVector(), TLorentzVector(),
@@ -135,8 +140,8 @@ class ZSelector(Module):
 	# --------- Define Mass1 From Neural Network ---------------------------------------------------------------------
 	start_selection = time.time()
 	start_load = time.time()
-	clear_session()
-	ZSelector = load_model('/blue/avery/nikmenendez/Wto3l/Analyzer2/UF-PyNTupleRunner/Wto3l/MVA/ZSelector_model.h5', compile=False)
+	#clear_session()
+	#ZSelector = load_model('/blue/avery/nikmenendez/Wto3l/Analyzer2/UF-PyNTupleRunner/Wto3l/MVA/ZSelector_model.h5', compile=False)
 	#json_file = open("/blue/avery/nikmenendez/Wto3l/Analyzer2/UF-PyNTupleRunner/Wto3l/MVA/ZSelector_model.json", 'r')
 	#loaded_model_json = json_file.read()
 	#json_file.close()
@@ -230,7 +235,7 @@ class ZSelector(Module):
 	#	event.MCorrect = 0
 
 	end_import = time.time()
-	print "\n Time to ZSelect = %f s / Time to load = %f s / Time to array = %f s / Time to predict = %f s / Time to get max = %f s / Time to assign = %f s / Time for selection = %f s" % (end_import - start_import, end_load - start_load, end_array - start_array, end_predict - start_predict, end_max - start_max, end_assign - start_assign, end_selection - start_selection)
+	#print "\n Time to ZSelect = %f s / Time to load = %f s / Time to array = %f s / Time to predict = %f s / Time to get max = %f s / Time to assign = %f s / Time for selection = %f s" % (end_import - start_import, end_load - start_load, end_array - start_array, end_predict - start_predict, end_max - start_max, end_assign - start_assign, end_selection - start_selection)
 
 	if 80 < event.mass1 < 100 or 80 < event.mass2 < 100:
             return False
