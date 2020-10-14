@@ -89,19 +89,23 @@ class ZSelector(Module):
         event.dR13 = deltaR(event.Lep1.Eta(),event.Lep1.Phi(),event.Lep3.Eta(),event.Lep3.Phi())
         event.dR23 = deltaR(event.Lep2.Eta(),event.Lep2.Phi(),event.Lep3.Eta(),event.Lep3.Phi())
 
-	# --------- Define Mass1 as the highest pT muon + highest pT anti-muon -------------------------------------------
+	# --------- Define Mass1 as (not) the highest pT muon + highest pT anti-muon -------------------------------------------
 	#if Lep1id + Lep2id == 0:
-	#	P1 = event.Lep1 + event.Lep2
+	#	P2 = event.Lep1 + event.Lep2
 	#	if Lep1id + Lep3id == 0: 
-	#		P2 = event.Lep1 + event.Lep3
+	#		guess_slot = 2
+	#		P1 = event.Lep1 + event.Lep3
 	#	else:
-	#		P2 = event.Lep2 + event.Lep3
+	#		guess_slot = 3
+	#		P1 = event.Lep2 + event.Lep3
 	#elif Lep1id + Lep3id == 0:
-	#	P1 = event.Lep1 + event.Lep3
+	#	P2 = event.Lep1 + event.Lep3
 	#	if Lep1id + Lep2id == 0:
-	#		P2 = event.Lep1 + event.Lep2
+	#		guess_slot = 1
+	#		P1 = event.Lep1 + event.Lep2
 	#	else:
-	#		P2 = event.Lep2 + event.Lep3
+	#		guess_slot = 3
+	#		P1 = event.Lep2 + event.Lep3
 	# ----------------------------------------------------------------------------------------------------------------
 
 	# --------- Define Mass1 as two closet muons ---------------------------------------------------------------------
@@ -162,10 +166,10 @@ class ZSelector(Module):
 	end_predict = time.time()	
 
 	start_max = time.time()
-	max_guess = 0
-	guess_2nd = 0
-	guess_slot = 0
-	guess_2nd_slot = 0
+	max_guess = -1
+	guess_2nd = -1
+	guess_slot = -1
+	guess_2nd_slot = -1
 	for i in range(len(prediction_0[0])):
 	    if prediction_0[0][i] > max_guess:
 	        guess_2nd = max_guess
@@ -187,21 +191,25 @@ class ZSelector(Module):
 			P2 = event.Lep1 + event.Lep3
 		elif Lep2id + Lep3id == 0:
 			P2 = event.Lep2 + event.Lep3
+		if Lep1id + Lep2id != 0: return False
 	elif guess_slot == 2:
 		P1 = event.Lep1 + event.Lep3
 		if Lep1id + Lep2id == 0:
 			P2 = event.Lep1 + event.Lep2
 		elif Lep2id + Lep3id == 0:
 			P2 = event.Lep2 + event.Lep3
+		if Lep1id + Lep3id != 0: return False
 	elif guess_slot == 3:
 		P1 = event.Lep2 + event.Lep3
 		if Lep1id + Lep2id == 0:
 			P2 = event.Lep1 + event.Lep2
 		elif Lep1id + Lep3id == 0:
 			P2 = event.Lep1 + event.Lep3
+		if Lep2id + Lep3id != 0: return False
 	end_assign = time.time()
 	end_selection = time.time()
 	# ----------------------------------------------------------------------------------------------------------------
+	
 	event.mass1  = P1.M()
         event.mass2  = P2.M()
         event.mass1_pt = P1.Pt()
@@ -226,13 +234,21 @@ class ZSelector(Module):
 	if abs(event.Lep3Mom) == 999888: event.Lep3FromZ = 1
         else: event.Lep3FromZ = 0
 
-	#iMass = 60
-	#if (iMass-1) < event.mass1 < (iMass+1):
-	#	event.MCorrect = 1
-	#elif (iMass-1) < event.mass2 < (iMass+1):
-	#	event.MCorrect = 2
-	#else:
-	#	event.MCorrect = 0
+	if guess_slot == 1:
+		if event.Lep1FromZ==1 and event.Lep2FromZ==1:
+			event.MCorrect = 2
+		else:
+			event.MCorrect = 1
+	elif guess_slot == 2:
+		if event.Lep1FromZ==1 and event.Lep3FromZ==1:
+			event.MCorrect = 2
+		else:
+			event.MCorrect = 1
+	elif guess_slot == 3:
+		if event.Lep2FromZ==1 and event.Lep3FromZ==1:
+			event.MCorrect = 2
+		else:
+			event.MCorrect = 1
 
 	end_import = time.time()
 	#print "\n Time to ZSelect = %f s / Time to load = %f s / Time to array = %f s / Time to predict = %f s / Time to get max = %f s / Time to assign = %f s / Time for selection = %f s" % (end_import - start_import, end_load - start_load, end_array - start_array, end_predict - start_predict, end_max - start_max, end_assign - start_assign, end_selection - start_selection)

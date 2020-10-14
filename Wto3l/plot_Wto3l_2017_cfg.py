@@ -21,9 +21,9 @@ out_path = "Wto3l/"
 general_plots = []
 # __________________________________________________________________________________ ||
 #sel_3mu = "x.lep_id.size() >= 3 and x.lep_pt.size() >= 3"
-sel_iso = "" #" and x.Lep1Iso < 0.35 and x.Lep2Iso < 0.35 and x.Lep3Iso < 0.35"
+sel_iso = " and x.Lep1Iso < 0.35 and x.Lep2Iso < 0.35 and x.Lep3Iso < 0.35"
 sel_all = " and x.mt < 150 and x.m3l < 100"
-sel_mt = "" #" and x.mt < 150"
+sel_mt = " and x.mt < 150"
 sel_m3l = " and x.m3l < 100"
 
 lep1z = "" #" and x.Lep1FromZ == 1"
@@ -64,7 +64,7 @@ general_plots.extend([
     Plot("met",                 ["TH1D","met","",50,0.,250.],                   LambdaFunc('x: x.met[0]'),      selFunc=LambdaFunc('x:x.met[0] > 0' + sel_iso + sel_mt)           ),
     Plot("met_phi",             ["TH1D","met_phi","",40,-4.,4.],                LambdaFunc('x: x.met_phi[0]'),  selFunc=LambdaFunc('x:x.met_phi[0]' + sel_iso + sel_mt)           ),
 
-    #Plot("MCorrect",           ["TH1D","MCorrect","",2,1.,3.],         LambdaFunc('x: x.MCorrect'),    selFunc=LambdaFunc('x:x.MCorrect'),     ),
+    Plot("MCorrect",           ["TH1D","MCorrect","",2,1.,3.],         LambdaFunc('x: x.MCorrect'),    selFunc=LambdaFunc('x:x.MCorrect'),     ),
 
     #Plot("lep_pt",             ["TH1D","lep_pt","",200,0.,200.],               LambdaFunc('x:x.lep_pt[0]'),    selFunc=LambdaFunc('x:lep_pt[0]' + sel_mt)              ),
     #Plot("lep_eta",             ["TH1D","lep_eta","",60,-3.,3.],                LambdaFunc('x:x.lep_eta[0]'),   selFunc=LambdaFunc('x:lep_eta[0]' + sel_mt)             ),
@@ -91,7 +91,8 @@ disableProgressBar      = False
 #componentList		= bkgSamples_2017 + dataSamples_2017
 #componentList		= bkgSamples_2017 + dataSamples_2017 + [WmTo3l_ZpM15,WpTo3l_ZpM15]
 #componentList		= bkgSamples_2017 + [WmTo3l_ZpM60,WpTo3l_ZpM60]
-componentList		= sigmSamples + sigpSamples
+#componentList		= sigmSamples + sigpSamples
+componentList 		= bkgSamples_2017 + sigmSamples + sigpSamples
 justEndSequence         = False
 
 for dataset in componentList:
