@@ -93,6 +93,7 @@ disableProgressBar      = False
 #componentList		= bkgSamples_2017 + [WmTo3l_ZpM60,WpTo3l_ZpM60]
 #componentList		= sigmSamples + sigpSamples
 componentList 		= bkgSamples_2017 + sigmSamples + sigpSamples
+#componentList		= [WpTo3l_ZpM60]#, WmTo3l_ZpM60]
 justEndSequence         = False
 
 for dataset in componentList:
