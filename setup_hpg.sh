@@ -10,3 +10,4 @@ cd -
 export NTUPLERUNNER_MODE="Remote"
 export NTUPLERUNNER_STORAGE=/cmsuf/data/store/user/t2/users//klo/UFNTupleRunner_Storage/
 export NTUPLERUNNER_WWW="/home/${USER}/public_html/"
+export PYTHONPATH=/home/${USER}/.local/lib/python2.7/:$PYTHONPATH
