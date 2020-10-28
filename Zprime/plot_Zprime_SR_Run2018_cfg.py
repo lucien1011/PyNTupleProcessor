@@ -5,7 +5,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
 from Zprime.Dataset.Run2018.SkimTree_Bkg_m4l70 import * 
-#from Zprime.Dataset.Run2018.SkimTree_Zprime_m4l70 import * 
+from Zprime.Dataset.Run2018.SkimTree_Zprime_m4l70 import * 
 from Zprime.Sequence.RecoSequence import * 
 from Zprime.Config.PlotDefinition import *
 
@@ -17,16 +17,23 @@ from Zprime.Config.MergeSampleDict import mergeSampleDict
 User                    = os.environ['USER']
 #out_path                = "SR/DataMCDistributions/2019-06-03_Run2017/"
 #out_path                = "DataMCDistributions/Run2017/test/"
-out_path                = "DataMCDistributions/Run2018/2020-04-13_4Gev_CR/"
+#out_path                = "DataMCDistributions/Run2018/2020-04-13_4Gev_CR/"
+#out_path                = "DataMCDistributions/Run2018/2020-09-23_4Gev_CR/"
+#out_path                = "DataMCDistributions/Run2018/2020-09-23_4Gev_SR/"
+#out_path                = "DataMCDistributions/Run2018/2020-09-23_4Gev_mZ1_mZ2_fullrange/"
+#out_path                = "DataMCDistributions/Run2018/2020-10-05_4Gev_signalcount_mZ2/"
+#out_path                = "DataMCDistributions/Run2018/2020-10-05_4Gev_signalcount_mZ1_mZ2/"
+out_path                = "DataMCDistributions/Run2018/2020-10-14_4Gev_signalcount_mZ2/"
+
 lumi                    = 59.7
 nCores                  = 5
-outputDir               = system.getStoragePath()+"/"+User+"/Zprime/Zto4l/"+out_path
+outputDir               = system.getStoragePath()+"/Zprime/Zto4l/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + [sigSampleDict[m] for m in [10,40,70]]
 #componentList           = bkgSamples + sigSampleDict.values()
 #componentList           = sigSampleDict.values()
-componentList           = dataSamples + bkgSamples# + dataSamples 
+componentList           = sigSamples# + bkgSamples# + dataSamples 
 justEndSequence         = False
 
 plots = general_4mu_plots

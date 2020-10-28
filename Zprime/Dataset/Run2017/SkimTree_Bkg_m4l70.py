@@ -41,7 +41,7 @@ data2017_cmpList = ComponentList(
         ]
         )
 
-Data2017 = Dataset(
+data2017 = Dataset(
         "Data2017",
         data2017_cmpList,
         isMC                = False,
@@ -74,8 +74,8 @@ qqZZ_cmpList = ComponentList(
 qqZZTo4L = Dataset(
         "qqZZTo4L",
         qqZZ_cmpList,
-        isMC                = False,#True,
-        #xs                  = 1.256,
+        isMC                = True,
+        xs                  = 1.256,
         )
 handleSumWeight(
         qqZZTo4L,
@@ -268,7 +268,7 @@ handleSumWeight(
 # ggH
 ggH_cmpList = ComponentList(
         [ 
-             Component("ggH",bkgSkimTreeDir2+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+             Component("ggH",bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -294,7 +294,7 @@ handleSumWeight(
 # VBF
 VBF_cmpList = ComponentList(
         [ 
-            Component("VBF",bkgSkimTreeDir2+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+            Component("VBF",bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -319,7 +319,7 @@ handleSumWeight(
 # WHplus
 WHplus_cmpList = ComponentList(
         [ 
-            Component("WHplus",bkgSkimTreeDir2+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+            Component("WHplus",bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -344,7 +344,7 @@ handleSumWeight(
 # WHminus
 WHminus_cmpList = ComponentList(
         [ 
-            Component("WHminus",bkgSkimTreeDir2+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+            Component("WHminus",bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -369,7 +369,7 @@ handleSumWeight(
 # ZH
 ZH_cmpList = ComponentList(
         [ 
-            Component("ZH",bkgSkimTreeDir2+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ZH",bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -394,7 +394,7 @@ handleSumWeight(
 # ttH
 ttH_cmpList = ComponentList(
         [ 
-            Component("ttH",bkgSkimTreeDir2+"ttH_HToZZ_4LFilter_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ttH",bkgSkimTreeDir+"ttH_HToZZ_4LFilter_M125_13TeV_powheg2_JHUGenV7011_pythia8.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -418,12 +418,12 @@ handleSumWeight(
 # ____________________________________________________________________________________________________________________________________________ ||
 
 bkgSamples = [
-        #ggH,
-        #VBF,
-        #WHplus,
-        #WHminus,
-        #ZH,
-        #ttH,
+        ggH,
+        VBF,
+        WHplus,
+        WHminus,
+        ZH,
+        ttH,
         qqZZTo4L,
         ggZZTo2e2mu,
         ggZZTo2e2tau,
@@ -435,5 +435,5 @@ bkgSamples = [
         #ZPlusX,
         ]
 dataSamples = [
-        Data2017,
+        data2017,
         ]

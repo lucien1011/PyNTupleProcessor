@@ -3,7 +3,7 @@ from Core.Utils.LambdaFunc import LambdaFunc
 
 # ________________________________________________________________________ ||
 mZ1PlotRange        = [80,0.,120.]
-mZ2PlotRange        = [60,0.,60.]
+mZ2PlotRange        = [80,0.,120.]
 h4lPlotRange        = [65,70.,200.]
 anglePlotRange      = [50,-3.14,3.14]
 cosThetaPlotRange   = [50,-1.,1.]
@@ -42,6 +42,8 @@ kfactorRange        =[100,1.0,1.2]
 lepeffPlotRange     =[20,0,2]
 
 nleptonRange        =[10,0,10]
+
+syRange             =[40,0.,100.]
 
 # ________________________________________________________________________ ||
 sel_4e_str      = "abs(x.idL1[0]) == 11 and abs(x.idL2[0]) == 11 and abs(x.idL3[0]) == 11 and abs(x.idL4[0]) == 11"
@@ -92,6 +94,10 @@ var_deltaRGENrecolep_str = "[x.deltaRGENrecolep[i] for i in range(0,len(x.deltaR
 
 var_numlepton_str = "[x.nGENlep,x.nRECOlep]"
 var_numlepton_ZZprime_str = "[x.nGENlep_ZZprime,x.nRECOlep_ZZprime]"
+
+var_mZ1_mZ2_str = "[x.massZ1[0],x.massZ2[0]]"
+
+var_signal_yield_str = "x.sy"
 # ________________________________________________________________________ ||
 general_4mu_plots = [
         Plot("mZ1_4mu",["TH1D","mZ1_4mu","",]+mZ1PlotRange, LambdaFunc('x: '+var_mZ1_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
@@ -129,4 +135,6 @@ general_4mu_plots = [
         #Plot("deltaRGENrecolep", ["TH1D","deltaRGENrecolep","",]+deltaRPlotRange3, LambdaFunc('x: '+var_deltaRGENrecolep_str), isCollection=True, selFunc=LambdaFunc('x: '+sel_4mu_str)),
         #Plot("nGENlep_nRECOlep", ["TH2D","nGENlep_nRECOlep","","text"]+nleptonRange+nleptonRange, LambdaFunc('x: '+var_numlepton_str), dim = 2),
         #Plot("nGENlep_nRECOlep_ZZprime", ["TH2D","nGENlep_nRECOlep_ZZprime","","text"]+nleptonRange+nleptonRange, LambdaFunc('x: '+var_numlepton_ZZprime_str), dim = 2),
+        #Plot("mZ1_mZ2", ["TH2D","mZ1_mZ2","",]+mZ1PlotRange+mZ2PlotRange, LambdaFunc('x: '+var_mZ1_mZ2_str), dim = 2),
+        Plot("signalyield_vs_Zpmass",["TH1D","signalyield_vs_Zpmass","",]+syRange, LambdaFunc('x: '+var_signal_yield_str), selFunc=LambdaFunc('x: '+sel_4mu_str)),
         ]

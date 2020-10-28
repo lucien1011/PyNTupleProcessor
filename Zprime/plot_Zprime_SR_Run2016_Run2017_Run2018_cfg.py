@@ -21,16 +21,19 @@ from Zprime.Config.MergeSampleDict_161718 import mergeSampleDict
 User                    = "kshi"
 #out_path                = "SR/DataMCDistributions/2019-06-03_Run2017/"
 #out_path                = "DataMCDistributions/Run2016_Run2017/2020-02-24/"
-out_path                = "DataMCDistributions/Run2016_Run2017_Run2018/2020-04-13_4Gev_CR/"
+#out_path                = "DataMCDistributions/Run2016_Run2017_Run2018/2020-04-13_4Gev_CR/"
+#out_path                = "DataMCDistributions/Run2016_Run2017_Run2018/2020-09-23_4Gev_CR/"
+out_path                = "DataMCDistributions/Run2016_Run2017_Run2018/2020-09-23_4Gev_SR/"
+
 #lumi                    = 41.4
 nCores                  = 5
-outputDir               = system.getStoragePath()+"/"+User+"/Zprime/Zto4l/"+out_path
+outputDir               = system.getStoragePath()+"/Zprime/Zto4l/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + [sigSampleDict[m] for m in [10,40,70]]
 #componentList           = bkgSamples + sigSampleDict.values()
 #componentList           = sigSampleDict.values()
-componentList           = bkgSamples + dataSamples# + sigSamples
+componentList           = bkgSamples# + dataSamples# + sigSamples
 justEndSequence         = False
 
 plots = general_4mu_plots

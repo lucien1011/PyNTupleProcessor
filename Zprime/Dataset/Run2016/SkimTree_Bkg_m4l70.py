@@ -4,14 +4,14 @@ from Utils.System import system
 from Utils.SumWeight import handleSumWeight
 
 #bkgSkimTreeDir2      = system.getStoragePath()+"/lucien/Higgs/Zprime-NTuple/20190605/SkimTree_Zprime_Run2016Data_m4l70/"
-#bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_MC/"
-bkgSkimTreeDir      = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2016_MMM_MC/"
-bkgSkimTreeDir2     = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/M1To4/SkimTree_Run2016_MMM_MC/"
-bkgTreeDir          = "/cms/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
-bkgTreeDir2         = "/cms/data/store/user/t2/users/kshi/Zprime/80X_MCProd_191127/"
+bkgSkimTreeDir      = system.getStoragePath()+"/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_MC/"
+#bkgSkimTreeDir      = system.getStoragePath()+"/Zprime/20200212_Zto4l/mllLowGev/SkimTree_Run2016_MMM_MC/"
+bkgSkimTreeDir2     = system.getStoragePath()+"/Zprime/20200212_Zto4l/M1To4/SkimTree_Run2016_MMM_MC/"
+bkgTreeDir          = "/cmsuf/data/store/user/t2/users/klo/Higgs/HZZ4l/NTuple/Run2/MC80X_M17_4l_Feb21/"
+bkgTreeDir2         = "/cmsuf/data/store/user/t2/users/kshi/Zprime/80X_MCProd_191127/"
 #dataTreeDir         = bkgSkimTreeDir
-dataTreeDir         = system.getStoragePath()+"/kshi/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_Data/"
-inUFTier2           = False
+dataTreeDir         = system.getStoragePath()+"/Zprime/20200212_Zto4l/SkimTree_Run2016_MMM_Data/"
+inUFTier2           = True
 sumWeightHist       = "Ana/sumWeights"
 saveSumWeightTxt    = True
 
@@ -33,7 +33,7 @@ data2016 = Dataset(
 # ZPlusX
 ZPlusX_cmpList = ComponentList(
         [ 
-            Component("ZPlusX",dataTreeDir2+"Data_Run2016-03Feb2017_4l.root","passedEvents",inUFTier2=inUFTier2),
+            Component("ZPlusX",dataTreeDir+"Data_Run2016-03Feb2017_4l.root","passedEvents",inUFTier2=inUFTier2),
         ]
         )
 
@@ -267,7 +267,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
-        bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
+        #bkgSkimTreeDir+"GluGluHToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -292,7 +292,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
-        bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
+        #bkgSkimTreeDir+"VBF_HToZZTo4L_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -317,7 +317,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8.txt",
-        bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8.txt",
+        #bkgSkimTreeDir+"WplusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -342,7 +342,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8.txt",
-        bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8.txt",
+        #bkgSkimTreeDir+"WminusH_HToZZTo4L_M125_13TeV_powheg2-minlo-HWJ_JHUgenV6_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -367,7 +367,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8.txt",
-        bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8.txt",
+        #bkgSkimTreeDir+"ZH_HToZZ_4LFilter_M125_13TeV_powheg2-minlo-HZJ_JHUgenV6_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -393,7 +393,7 @@ handleSumWeight(
         True,
         saveSumWeightTxt,
         bkgSkimTreeDir+"ttH_HToZZ_4LFilter_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
-        bkgSkimTreeDir+"ttH_HToZZ_4LFilter_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
+        #bkgSkimTreeDir+"ttH_HToZZ_4LFilter_M125_13TeV_powheg2_JHUgenV6_pythia8.txt",
         )
 
 # ____________________________________________________________________________________________________________________________________________ ||
@@ -405,14 +405,14 @@ bkgSamples = [
         WHminus,
         ZH,
         ttH,
-        #qqZZTo4L,
+        qqZZTo4L,
         ggZZTo2e2mu,
         ggZZTo2e2tau,
         ggZZTo2mu2tau,
         ggZZTo4e,
         ggZZTo4mu,
         ggZZTo4tau,
-        qqZZTo4L_M1,
+        #qqZZTo4L_M1,
         ]
 dataSamples = [
         data2016,

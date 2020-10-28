@@ -38,7 +38,10 @@ User                    = os.environ['USER']
 #out_path                = "DataMCDistributions/Run2017/2020-09-21_4Gev_BkgRatio_unskim_nocut/"
 #out_path                = "DataMCDistributions/Run2017/2020-09-21_12Gev_BkgRatio_unskim_nocut/"
 #out_path                = "DataMCDistributions/Run2017/2020-09-21_4Gev_BkgRatio_skimmed_nocut/"
-out_path                = "DataMCDistributions/Run2017/2020-09-21_12Gev_BkgRatio_skimmed_nocut/"
+#out_path                = "DataMCDistributions/Run2017/2020-09-21_12Gev_BkgRatio_skimmed_nocut/"
+#out_path                = "DataMCDistributions/Run2017/2020-09-23_4Gev_SR/"
+#out_path                = "DataMCDistributions/Run2017/2020-09-23_4Gev_CR/"
+out_path                = "DataMCDistributions/Run2017/2020-10-14_4Gev_signalcount_mZ2/"
 
 lumi                    = 41.4
 nCores                  = 5
@@ -49,7 +52,7 @@ disableProgressBar      = False
 #componentList           = bkgSamples + sigSampleDict.values()
 #componentList           = sigSampleDict.values()
 #componentList           = dataSamples + bkgSamples# + dataSamples
-componentList           = bkgSamples# + dataSamples + sigSamples
+componentList           = sigSamples#bkgSamples + dataSamples + sigSamples
 justEndSequence         = False
 
 plots = general_4mu_plots
