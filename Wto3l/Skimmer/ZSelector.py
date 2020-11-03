@@ -19,7 +19,7 @@ class ZSelector(Module):
     #def beginJob(self):
 	clear_session()
 	global ZSelector
-        ZSelector = load_model('/blue/avery/nikmenendez/Wto3l/Analyzer2/UF-PyNTupleRunner/Wto3l/MVA/ZSelector_model_normalized.h5')
+        ZSelector = load_model('/blue/avery/nikmenendez/Wto3l/Analyzer2/UF-PyNTupleRunner/Wto3l/MVA/ZSelector_model_mass_test.h5')
 
     def normalize(self,df):
     	# copy the dataframe
@@ -27,6 +27,8 @@ class ZSelector(Module):
     	# Define min and max array
     	mins = np.array([20.000065,-2.399986,-3.141562,0.000000,-13.000000,10.000033,-2.399970,-3.141574,0.000000,-13.000000,5.000017,-2.399923,-3.141588,0.000000,-13.000000,0.028749,-3.141591,0.006013,0.007271,0.008307,0.000000,0.000000,0.000000,0.000000])
     	maxs = np.array([1742.620117,2.400000,3.141587,4.511298,13.000000,602.987305,2.399974,3.141591,9.888725,13.000000,135.678162,2.399995,3.141589,40.849213,13.000000,1406.858643,3.141580,5.080047,4.880805,5.028722,1.000000,1.000000,1.000000,1.000000])
+	#mins = np.array([-2.399986,-3.141562,0.000000,-13.000000,-2.399970,-3.141574,0.000000,-13.000000,-2.399923,-3.141588,0.000000,-13.000000,0.028749,-3.141591,0.006013,0.007271,0.008307,0.000000,0.000000,0.000000,0.000000])
+        #maxs = np.array([2.400000,3.141587,4.511298,13.000000,2.399974,3.141591,9.888725,13.000000,2.399995,3.141589,40.849213,13.000000,1406.858643,3.141580,5.080047,4.880805,5.028722,1.000000,1.000000,1.000000,1.000000])
     	# apply min-max scaling
     	for i in range(df.size):
         	#print column + ": min = %f, max = %f" % (df_norm[column].min(),df_norm[column].max())
@@ -189,7 +191,7 @@ class ZSelector(Module):
 
 	if guess_slot == 0:
 		guess_slot = guess_2nd_slot
-		return False
+		#return False
 
 	if guess_slot == 1:
 		P1 = event.Lep1 + event.Lep2
