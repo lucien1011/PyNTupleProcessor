@@ -114,7 +114,7 @@ class PlotEndModule(EndModule):
         self.setDataHistStyle(data)
         data.SetTitle("")
 
-        return data,dataCount,dataCountErr
+        return data,dataCount,dataCountErr.value
 
     def divideByBinWidth(self,hist):
         for iBin in range(1,hist.GetNbinsX()+1):
@@ -153,7 +153,7 @@ class PlotEndModule(EndModule):
             else:
                 h.SetFillColor(ROOT.kViolet)
             if plot.plotSetting.shift_last_bin: self.shiftLastBin(h)
-            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp])
+            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp.value])
             if switch:
                 if not isample:
                     totalsum = h.Clone("totalsum_"+plot.key)

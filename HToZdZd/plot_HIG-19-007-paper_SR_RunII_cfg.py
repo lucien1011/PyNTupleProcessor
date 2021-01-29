@@ -18,7 +18,8 @@ import os,ROOT
 
 #out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-18_RunII/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2020-03-19_RunII/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-04-06_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2021-01-29_RunII/"
 User                    = os.environ['USER']
 nCores                  = 5
 outputDir               = system.getStoragePath()+User+"/Higgs/HToZdZd/"+out_path
@@ -26,7 +27,7 @@ nEvents                 = -1
 disableProgressBar      = False
 componentList           = bkgSamples + dataSamples + sigSamples + rareBkgSamples
 justEndSequence         = True
-skipHadd                = False  
+skipHadd                = True  
 mZ12PlotRange           = [14,4.,60.]
 var_mZ12_str            = 'x: (x.massZ1[0]+x.massZ2[0])/2.'
 var_mZ1_str             = 'x.massZ1[0]'
@@ -91,6 +92,6 @@ outputInfo              = OutputInfo("OutputInfo")
 outputInfo.outputDir    = outputDir
 outputInfo.TFileName    = "DataMCDistribution.root"
 
-endSequence = EndSequence(skipHadd=False,haddDataSamples=True,)
+endSequence = EndSequence(skipHadd=skipHadd,haddDataSamples=True,)
 endModuleOutputDir = system.getPublicHtmlPath()+"/Higgs/HToZdZd/"+out_path
 endSequence.add(PlotEndModule(endModuleOutputDir,plots,skipSF=False))
