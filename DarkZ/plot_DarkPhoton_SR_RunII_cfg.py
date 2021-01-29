@@ -25,15 +25,17 @@ User                    = os.environ['USER']
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-09_RunII/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-09-10_RunII/"
 #out_path                = "DarkPhotonSR/DataMCDistributions/2019-12-02_RunII/"
-out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-28_RunII/"
-nCores                  = 5
+#out_path                = "DarkPhotonSR/DataMCDistributions/2020-02-28_RunII/"
+out_path                = "DarkPhotonSR/DataMCDistributions/2020-10-15_RunII/"
+nCores                  = 4
 outputDir               = system.getStoragePath()+"/"+User+"/Higgs/DarkZ/"+out_path
 nEvents                 = -1
 disableProgressBar      = False
 #componentList           = bkgSamples + sigSamples + ppZZdSamples
 #componentList           = bkgSamples + [sample2016.HZZd_M15,sample2016.HZZd_M30] + [sample_ppZZd.ppZZd4l_M15,sample_ppZZd.ppZZd4l_M30]
-componentList           = bkgSamples + dataSamples + sigSamples
-justEndSequence         = True
+#componentList           = bkgSamples + dataSamples + sigSamples
+componentList           = [s for s in sigSamples if "M4" in s.name or "M7" in s.name]
+justEndSequence         = False
 
 plots = general_4e_plots + general_2mu2e_plots + general_4mu_plots + general_2e2mu_plots + general_mu_plots + general_el_plots
 
@@ -49,11 +51,6 @@ for sig in sigSamples:
         p.plotSetting.line_style_dict[sig.name] = 10
         p.plotSetting.line_width_dict[sig.name] = 4
         p.plotSetting.line_color_dict[sig.name] = ROOT.kRed
-for sig in ppZZdSamples:
-    for p in plots:
-        p.plotSetting.line_style_dict[sig.name] = 9
-        p.plotSetting.line_width_dict[sig.name] = 4
-        p.plotSetting.line_color_dict[sig.name] = ROOT.kOrange
 
 for dataset in componentList:
     for component in dataset.componentList:

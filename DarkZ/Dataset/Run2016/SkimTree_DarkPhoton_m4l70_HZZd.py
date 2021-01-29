@@ -7,7 +7,7 @@ from Physics.HZZ import Higgs_prod_xs
 import os
 
 # ____________________________________________________________________________________________________________________________________________ ||
-sigSkimTreeDir          = system.getStoragePath()+"/lucien/Higgs/DarkZ-NTuple/20191201/SkimTree_DarkPhoton_Run2016Data_m4l70/"
+sigSkimTreeDir          = "/cmsuf/data/store/user/t2/users/klo/IHEPA/raid/Higgs/DarkZ-NTuple/20191201/SkimTree_DarkPhoton_Run2016Data_m4l70/"
 sigTreeDir              = "/cmsuf/data/store/user/t2/users/klo/Higgs/HToZZd/80X_MCProd_191127/"
 inUFTier2               = False
 sumWeightHist           = "Ana/sumWeights"
