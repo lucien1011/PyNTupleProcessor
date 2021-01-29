@@ -1,4 +1,5 @@
 import os,ROOT,math,array
+import ctypes
 
 from Core.EndModule import EndModule
 from Core.BaseObject import BaseObject
@@ -102,7 +103,7 @@ class PlotEndModule(EndModule):
             else:
                 data.Add(h)
 
-        dataCountErr = ROOT.Double(0.)
+        dataCountErr = ctypes.c_double(0.)
         dataCount = data.IntegralAndError(0,data.GetNbinsX()+1,dataCountErr)
         if plot.plotSetting.divideByBinWidth:
             self.divideByBinWidth(data)
@@ -136,9 +137,9 @@ class PlotEndModule(EndModule):
                 h = collector.getObj(sample,plot.rootSetting[1])
             else:
                 h = plot.customHistDict[sample].hist
-            smCountErrTmp = ROOT.Double(0.)
+            smCountErrTmp = ctypes.c_double(0.)
             smCount += h.IntegralAndError(0,h.GetNbinsX()+1,smCountErrTmp)
-            smCountErrSq += smCountErrTmp**2
+            smCountErrSq += smCountErrTmp.value**2
 
         for isample,sample in enumerate(collector.mcSamples if not collector.mergeSamples else collector.mergeSamples):
             if not collector.mergeSamples and collector.sampleDict[sample].isSignal: continue
