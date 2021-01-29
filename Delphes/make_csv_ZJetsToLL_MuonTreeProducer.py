@@ -4,18 +4,23 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from Delphes.Dataset.HToZaTo2l2g.MuonTreeProducer import * 
+from Delphes.Dataset.ZJetsToLL_LO_MLM.MuonTreeProducer import ZJetsToLL_LO_MLM 
 
 from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting,CustomVariable 
 
 lumi                    = 1.
 nCores                  = 1
-#outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/Delphes/Data/2020-06-09/" 
-outputDir               = "/cmsuf/data/store/user/t2/users/klo/Delphes/ALP_HToZaTo2l2g_M1/2020-06-02/MuonTreeProducer/csv/" 
+outputDir               = "/cmsuf/data/store/user/t2/users/klo/Delphes/ZJetsToLL_LO_MLM/2020-07-09/MuonTreeProducer/csv/" 
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [HToZaTo2l2g_M1,]
+componentList           = [ZJetsToLL_LO_MLM,]
 justEndSequence         = False
+
+slurm_job_name          = "make_csv_ZJetsToLL_MuonTreeProducer"
+slurm_email             = "kin.ho.lo@cern.ch"
+slurm_ntasks            = "1"
+slurm_mem               = "4gb"
+slurm_time              = "24:00:00"
 
 for dataset in componentList:
     if dataset.isMC:

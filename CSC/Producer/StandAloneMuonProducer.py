@@ -1,5 +1,6 @@
 from Core.Module import Module
 from Core.Collection import Collection
+import copy
 
 n_max_segment = 11
 n_chamber = 36
@@ -10,9 +11,9 @@ n_endcap = 2
 class StandAloneMuonProducer(Module):
     def analyze(self,event):
         event.standAloneMuons = [m for m in Collection(event,"muons") if m.isStandAloneMuon]
-        event.cscSegments = [s for s in Collection(event,"cscSegments")]
+        event.cscSegments = [s for s in Collection(event,"cscSegments",length_var="cscSegments_nSegments")]
         for m in event.standAloneMuons:
-            n_segment = len(m.cscSegmentRecord_endcap)
+            n_mu_segment = len(m.cscSegmentRecord_endcap)
             m.segments_globalX = []
             m.segments_globalY = []
             m.segments_endcap = []
@@ -34,19 +35,20 @@ class StandAloneMuonProducer(Module):
                     seg_localX = seg.localX
                     seg_localY = seg.localY
                     if seg_endcap == mu_endcap and seg_ring == mu_ring and seg_station == mu_station and seg_chamber == mu_chamber and seg_localX == mu_localX and seg_localY == mu_localY:
-                        m.segments.globalX.append(seg.globalX)
-                        m.segments.globalY.append(seg.globalY)
+                        m.segments_globalX.append(seg.globalX)
+                        m.segments_globalY.append(seg.globalY)
                         m.segments_endcap.append(seg_endcap)
                         m.segments_chamber.append(seg_chamber)
                         m.segments_station.append(seg_station)
                         m.segments_ring.append(seg_ring)
-            
-            if len(m.segments_globalX) < n_max_segment: m.segments_globalX += [0]*(n_max_segment-len(m.segments_globalX))
-            if len(m.segments_globalY) < n_max_segment: m.segments_globalY += [0]*(n_max_segment-len(m.segments_globalY))
-            if len(m.segments_endcap) < n_max_segment: m.segments_endcap += [0]*(n_max_segment-len(m.segments_endcap))
-            if len(m.segments_chamber) < n_max_segment: m.segments_chamber += [0]*(n_max_segment-len(m.segments_chamber))
-            if len(m.segments_station) < n_max_segment: m.segments_station += [0]*(n_max_segment-len(m.segments_station))
-            if len(m.segments_ring) < n_max_segment: m.segments_ring += [0]*(n_max_segment-len(m.segments_ring))
+ 
+            if len(m.segments_globalX) < n_max_segment: m.segments_globalX += [0.]*(n_max_segment-len(m.segments_globalX))
+            if len(m.segments_globalY) < n_max_segment: m.segments_globalY += [0.]*(n_max_segment-len(m.segments_globalY))
+            if len(m.segments_endcap) < n_max_segment: m.segments_endcap += [0.]*(n_max_segment-len(m.segments_endcap))
+            if len(m.segments_chamber) < n_max_segment: m.segments_chamber += [0.]*(n_max_segment-len(m.segments_chamber))
+            if len(m.segments_station) < n_max_segment: m.segments_station += [0.]*(n_max_segment-len(m.segments_station))
+            if len(m.segments_ring) < n_max_segment: m.segments_ring += [0.]*(n_max_segment-len(m.segments_ring))
+        
         return True
 
     def hash(self,chamber,station,ring,endcap):

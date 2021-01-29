@@ -452,7 +452,7 @@ class PlotEndModule(EndModule):
             n1.SetTextSize(0.05);
             if not self.skipSF:
                 n1.DrawLatex(0.11, 0.92, "Data/MC = %.2f #pm %.2f" % (scaleFactor,scaleFactorErr))
-            if plot.plotSetting.cms_lumi != None:
+            if plot.plotSetting.cms_lumi:
                 plot.plotSetting.cms_lumi(upperPad,plot.plotSetting.cms_lumi_number,0)
 
             dataHist.DrawCopy('same E')

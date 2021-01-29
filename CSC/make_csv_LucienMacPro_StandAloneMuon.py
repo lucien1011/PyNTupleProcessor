@@ -4,7 +4,7 @@ from Core.OutputInfo import OutputInfo
 from Core.Utils.LambdaFunc import LambdaFunc
 from Utils.System import system
 
-from CSC.Dataset.SingleMuon_Run2017 import sampleDict
+from CSC.Dataset.SingleMuon_Run2017A_ZMu_v2_LucienMacPro import SingleMuon_Run2017A_ZMu_v2
 from CSC.Producer.StandAloneMuonProducer import n_max_segment
 from CSC.Sequence.RecoSequence import MuonSequence
 
@@ -12,19 +12,13 @@ from Common.CSVFileProducer import CSVFileProducer,CSVFileSetting,CustomVariable
 
 # _____________________________________________________________________________ ||
 lumi                    = 1.
-nCores                  = 4
-outputDir               = "/cmsuf/data/store/user/t2/users/klo/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-19_Run2017ABCD/" 
+nCores                  = 1
+outputDir               = "/Users/lucien/CMS/HEP-ML-Tools/CMS_MuonReco/Data/2020-06-18/" 
 nEvents                 = -1
 disableProgressBar      = False
-componentList           = [c for c in sampleDict.values()]
+componentList           = [SingleMuon_Run2017A_ZMu_v2,]
 justEndSequence         = False
-sequence                = MuonSequence
-
-slurm_job_name          = "make_csv_hpg_StandAloneMuon"
-slurm_email             = "kin.ho.lo@cern.ch"
-slurm_ntasks            = "1"
-slurm_mem               = "4gb"
-slurm_time              = "24:00:00"
+sequence                = MuonSequence 
 
 # _____________________________________________________________________________ ||
 muonVarsToWrite         = [
@@ -47,7 +41,7 @@ for seg_var in ["globalX","globalY","endcap","chamber","station","ring",]:
     segmentVarsToWrite         = []
     for i in range(n_max_segment):
         segmentVarsToWrite.extend([
-            CustomVariable("x: x.segments_"+seg_var+"["+str(i)+"]",),
+            CustomVariable("x: int(x.segments_"+seg_var+"["+str(i)+"])",),
             ])
     segmentCSVFileSetting   = CSVFileSetting("segment_"+str(seg_var)+"_csv",["segment_"+str(seg_var)+".csv","w"])
     varCSVFileProducer     = CSVFileProducer("CSVFileProducer",
