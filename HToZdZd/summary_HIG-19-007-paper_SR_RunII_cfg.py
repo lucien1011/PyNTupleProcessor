@@ -54,11 +54,12 @@ for p in plots:
     p.plotSetting.leg_text_size = 0.025
     p.plotSetting.linear_max_factor = 4.0
     p.plotSetting.leg_name_dict = {
-            "HToZdZd_M30": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 30 GeV #kappa = 10^{-4})",
-            "HToZdZd_M5": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 5 GeV #kappa = 10^{-4})",
-            "HToZdZd_M50": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 50 GeV #kappa = 10^{-4})",
-            "ZPlusX": "Z+X",
-            "ttZ": "t#bar{t}Z"
+            "HToZdZd_M30": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 30 GeV #kappa = 2 #times 10^{-4})",
+            "HToZdZd_M5": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 5 GeV #kappa = 2 #times 10^{-4})",
+            "HToZdZd_M50": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 50 GeV #kappa = 2 #times 10^{-4})",
+            "ZPlusX": "Reducible",
+            "ttZ": "t#bar{t}Z",
+            "Higgs": "Higgs boson",
             }
     if p.plotSetting.divideByBinWidth: p.plotSetting.bin_width_label = "Bin Width"
     if p.key in [

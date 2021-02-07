@@ -56,7 +56,8 @@ for p in plots:
     p.plotSetting.leg_name_dict = {
             "HZZd_M30": "H #rightarrow Z Z_{D} (m_{Z_{D}} = 30 GeV #varepsilon = 0.05)",
             "HZZd_M15": "H #rightarrow Z Z_{D} (m_{Z_{D}} = 15 GeV #varepsilon = 0.05)",
-            "ZPlusX": "Z+X",
+            "ZPlusX": "Reducible",
+            "Higgs": "Higgs boson",
             }
     p.plotSetting.bkgErrFunc = lambda x,y,z: math.sqrt((0.09*y)**2+z**2)
 
