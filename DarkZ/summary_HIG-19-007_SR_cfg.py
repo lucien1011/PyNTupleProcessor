@@ -45,10 +45,10 @@ for p in plots:
     p.plotSetting.tdr_style = True
     p.plotSetting.divideByBinWidth = False
     p.plotSetting.cms_lumi = CMS_lumi
-    p.plotSetting.skip_leg_err = True
+    p.plotSetting.skip_leg_err = False
     p.plotSetting.skip_data_mc_ratio = False
     p.plotSetting.shift_last_bin = False
-    p.plotSetting.stack_x_label_size = 0
+    p.plotSetting.stack_x_label_size = 0.00
     p.plotSetting.bin_width_label = "Event / bin"
     p.plotSetting.x_axis_title = "m_{Z2} [GeV]"
     p.plotSetting.leg_pos = [0.20,0.65,0.80,0.90]

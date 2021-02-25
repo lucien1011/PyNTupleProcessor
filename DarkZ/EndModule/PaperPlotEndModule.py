@@ -58,7 +58,7 @@ class PaperPlotEndModule(PlotEndModule):
             dataMax = 0.
         
         if collector.signalSamples:
-            sigMax = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+            sigMax = max([hist.GetMaximum() for hist,sample,sigCount,error in sigHistList])
         else:
             sigMax = 0.
 
@@ -67,7 +67,7 @@ class PaperPlotEndModule(PlotEndModule):
         c.SetBottomMargin(0.0)
         
         upperPad = ROOT.TPad("upperPad", "upperPad", .001, 0.25, .995, .995)
-        lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .32)
+        lowerPad = ROOT.TPad("lowerPad", "lowerPad", .001, .001, .995, .35)
 
         upperPad.Draw()
         lowerPad.Draw()
@@ -118,7 +118,7 @@ class PaperPlotEndModule(PlotEndModule):
             errHist.SetFillStyle(3002)
             #errHist.SetFillColorAlpha(ROOT.kBlack,1)
         bkdgErrGraph.Draw("sameE2")
-        for hist,sample,sigCount in sigHistList:
+        for hist,sample,sigCount,error in sigHistList:
             hist.Draw('samehist')
 
         leg = self.makeLegend1D(histList,bkdgErr,smCount,switch,data=dataHist,dataCount=dataCount,histListSignal=sigHistList,smCountErr=math.sqrt(smCountErrSq),skipError=plot.plotSetting.skip_leg_err,leg_pos_list=plot.plotSetting.leg_pos,leg_text_size=plot.plotSetting.leg_text_size,skip_total=False,round_to_func=lambda x: str(int(round(x))),)
@@ -163,7 +163,7 @@ class PaperPlotEndModule(PlotEndModule):
         stack.SetMaximum(maximum*plot.plotSetting.log_max_factor)
         stack.SetMinimum(plot.plotSetting.log_min)
         stack.Draw('hist')
-        for hist,sample,sigCount in sigHistList:
+        for hist,sample,sigCount,error in sigHistList:
             hist.Draw('samehist')
         dataHist.Draw("sameE")
         bkdgErr.Draw("sameE2")

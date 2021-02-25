@@ -45,14 +45,19 @@ for p in plots:
     p.plotSetting.cms_lumi = CMS_lumi
     p.plotSetting.tdr_style = True
     p.plotSetting.divideByBinWidth = False
-    p.plotSetting.linear_max_factor = 4.
-    p.plotSetting.x_axis_title = "(m_{Z1}+m_{Z2})/2 [GeV]"
+    p.plotSetting.x_axis_title = "(m_{Z1} + m_{Z2})/2 [GeV]"
     p.plotSetting.skip_data_mc_ratio = True
     p.plotSetting.shift_last_bin = False
-    p.plotSetting.skip_leg_err = True
+    p.plotSetting.skip_leg_err = False
     p.plotSetting.leg_pos = [0.20,0.60,0.89,0.90]
     p.plotSetting.leg_text_size = 0.025
-    p.plotSetting.linear_max_factor = 4.0
+    if "4e" in p.key:
+        p.plotSetting.linear_max_factor = 5.
+    elif "4mu" in p.key:
+        p.plotSetting.linear_max_factor = 3.5
+    else:
+        p.plotSetting.linear_max_factor = 2.
+
     p.plotSetting.leg_name_dict = {
             "HToZdZd_M30": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 30 GeV #kappa = 2 #times 10^{-4})",
             "HToZdZd_M5": "H #rightarrow Z_{D} Z_{D} (m_{Z_{D}} = 5 GeV #kappa = 2 #times 10^{-4})",
@@ -68,13 +73,13 @@ for p in plots:
         p.customHistDict["ZPlusX"] = BaseObject(p.key,hist=copy.deepcopy(inputShapeFile.Get(p.key+"_shapehist")))
     p.plotSetting.bkgErrFunc = lambda x,y,z: 0.09*y
 plot_4e.plotSetting.custom_latex_list = [
-       BaseObject(plot_4e.key,x_pos=10.,y_pos=3.0,text_size=0.035,text="4e channel",),
+       BaseObject(plot_4e.key,x_pos=10.,y_rel_pos=0.5,text_size=0.035,text="4e channel",),
        ]
 plot_4mu.plotSetting.custom_latex_list = [
-       BaseObject(plot_4mu.key,x_pos=10.,y_pos=6.0,text_size=0.035,text="4#mu channel",),
+       BaseObject(plot_4mu.key,x_pos=10.,y_rel_pos=0.5,text_size=0.035,text="4#mu channel",),
        ]
 plot_2e2mu.plotSetting.custom_latex_list = [
-       BaseObject(plot_2e2mu.key,x_pos=10.,y_pos=4.0,text_size=0.035,text="2e2#mu channel",),
+       BaseObject(plot_2e2mu.key,x_pos=10.,y_rel_pos=0.5,text_size=0.035,text="2e2#mu channel",),
        ]
 
 

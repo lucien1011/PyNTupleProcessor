@@ -152,8 +152,12 @@ class PlotEndModule(EndModule):
                 h.SetFillColor(sampleColorDict[sample])
             else:
                 h.SetFillColor(ROOT.kViolet)
+
+            hErr = ctypes.c_double(0.)
+            hCount = h.IntegralAndError(0,h.GetNbinsX()+1,hErr)
+
             if plot.plotSetting.shift_last_bin: self.shiftLastBin(h)
-            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],h.Integral(0,h.GetNbinsX()+1),smCountErrTmp.value])
+            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],hCount,hErr.value])
             if switch:
                 if not isample:
                     totalsum = h.Clone("totalsum_"+plot.key)
@@ -212,7 +216,11 @@ class PlotEndModule(EndModule):
                 h.SetLineColor(ROOT.kRed)
             h.SetFillColorAlpha(ROOT.kRed,0.)
             h.SetStats(0)
-            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],sigCount])
+
+            sigErr = ctypes.c_double(0.)
+            sigCount = h.IntegralAndError(0,h.GetNbinsX()+1,sigErr)
+
+            histList.append([h,sample if sample not in plot.plotSetting.leg_name_dict else plot.plotSetting.leg_name_dict[sample],sigCount,sigErr.value])
 
         if plot.plotSetting.divideByBinWidth:
             for hist,sample,sigCount in histList:
@@ -236,7 +244,7 @@ class PlotEndModule(EndModule):
             leg.AddEntry(sample.hist, sample.name, "p")
         return leg
 
-    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None,skipError=False,leg_pos_list=[],leg_text_size=None,skip_total=False,sort_sig_func=lambda l: l[1],round_to_func=lambda x: str(math.ceil(x*10)/10),):
+    def makeLegend1D(self,histList,bkdgErr,smCount,switch=False,histListSignal=None,data=None,dataCount=None,smCountErr=None,skipError=False,leg_pos_list=[],leg_text_size=None,skip_total=False,sort_sig_func=lambda l: l[1],round_to_func=lambda x: str(math.ceil(x*100)/100),):
         leg_pos = [0.70,0.65,0.89,0.87] if not leg_pos_list else leg_pos_list
         leg = ROOT.TLegend(*leg_pos)
         leg.SetBorderSize(0)
@@ -265,13 +273,14 @@ class PlotEndModule(EndModule):
                 legLabel += ": "+str(math.ceil(math.ceil(hCount[2]*10)/math.ceil(smCount*10)*100000)/1000)+"%"
             else:
                 legLabel += ": "+round_to_func(hCount[2])
-                if not skipError: legLabel += " #pm"+str(math.ceil(error*10)/10)
+                if not skipError: legLabel += " #pm"+"%4.1f"%error
             leg.AddEntry(hCount[0], legLabel, "f")
 
         histListSignal.sort(key=sort_sig_func, reverse=False)
-        for hist,sample,sigCount in histListSignal:
+        for hist,sample,sigCount,error in histListSignal:
             legLabel = sample
             legLabel += ": "+round_to_func(sigCount)
+            if not skipError: legLabel += " #pm"+"%4.1f"%error
             leg.AddEntry(hist,legLabel,"f")
 
         return leg
@@ -322,7 +331,7 @@ class PlotEndModule(EndModule):
             dataMax = 0.
         
         if collector.signalSamples:
-            sigMax = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+            sigMax = max([hist.GetMaximum() for hist,sample,sigCount,error in sigHistList])
         else:
             sigMax = 0.
 
@@ -343,7 +352,7 @@ class PlotEndModule(EndModule):
             stack.Draw('hist')
             if plot.plotSetting.x_axis_labels:
                 for ibin,label in enumerate(plot.plotSetting.x_axis_labels): stack.GetXaxis().SetBinLabel(ibin+1,label)
-            for hist,sample,sigCount in sigHistList:
+            for hist,sample,sigCount,error in sigHistList:
                 hist.Draw('samehist')
             #if collector.dataSamples:
             #    dataHist.Draw("samep")
@@ -361,7 +370,7 @@ class PlotEndModule(EndModule):
                 stack.SetMaximum(maximum*plot.plotSetting.log_max_factor)
                 stack.SetMinimum(0.1)
                 stack.Draw('hist')
-                for hist,sample,sigCount in sigHistList:
+                for hist,sample,sigCount,error in sigHistList:
                     hist.Draw('samehist')
                 if collector.dataSamples:
                     dataHist.Draw("samep")
@@ -433,7 +442,7 @@ class PlotEndModule(EndModule):
             stack.GetXaxis().SetTitleOffset(1.00)
             stack.GetYaxis().SetLabelSize(0.05)
             stack.Draw('hist')
-            for hist,sample,sigCount in sigHistList:
+            for hist,sample,sigCount,error in sigHistList:
                 hist.Draw('samehist')
 
             leg.Draw()
@@ -474,7 +483,7 @@ class PlotEndModule(EndModule):
             stack.SetMaximum(maximum*plot.plotSetting.log_max_factor)
             stack.SetMinimum(plot.plotSetting.log_min)
             stack.Draw('hist')
-            for hist,sample,sigCount in sigHistList:
+            for hist,sample,sigCount,error in sigHistList:
                 hist.Draw('samehist')
             dataHist.Draw("same p")
             leg.Draw('same')
@@ -493,8 +502,8 @@ class PlotEndModule(EndModule):
             leg = self.makeLegend1D([],None,0.,False,histListSignal=sigHistList)
             
             c.SetLogy(0)
-            maximum = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
-            for hist,sample,sigCount in sigHistList:
+            maximum = max([hist.GetMaximum() for hist,sample,sigCount,error in sigHistList])
+            for hist,sample,sigCount,error in sigHistList:
                 hist.GetYaxis().SetRangeUser(0.,maximum*plot.plotSetting.linear_max_factor)
                 hist.Draw('samehist')
             leg.Draw('same')

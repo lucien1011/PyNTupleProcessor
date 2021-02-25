@@ -64,7 +64,7 @@ class PaperPlotEndModule(PlotEndModule):
             dataMax = 0.
         
         if collector.signalSamples:
-            sigMax = max([hist.GetMaximum() for hist,sample,sigCount in sigHistList])
+            sigMax = max([hist.GetMaximum() for hist,sample,sigCount,error in sigHistList])
         else:
             sigMax = 0.
 
@@ -84,7 +84,7 @@ class PaperPlotEndModule(PlotEndModule):
         stack.Draw('hist')
         self.setStackAxisTitle(stack,axisLabel,plot)
         stack.GetXaxis().SetLabelSize(plot.plotSetting.stack_x_label_size)
-        stack.GetXaxis().SetTitleOffset(1.00)
+        stack.GetXaxis().SetTitleOffset(1.20)
         stack.GetYaxis().SetLabelSize(0.05)
         stack.Draw('hist')
         bkdgErrGraph = self.makeTGraph(bkdgErr,force_x_axis_err=True)
@@ -96,7 +96,7 @@ class PaperPlotEndModule(PlotEndModule):
             errHist.SetFillStyle(3002)
             #errHist.SetFillColorAlpha(ROOT.kBlack,1)
         bkdgErrGraph.Draw("sameE2")
-        for hist,sample,sigCount in sigHistList:
+        for hist,sample,sigCount,error in sigHistList:
             hist.Draw('samehist')
 
         leg.Draw()
@@ -112,7 +112,11 @@ class PaperPlotEndModule(PlotEndModule):
             for latex_setting in plot.plotSetting.custom_latex_list:
                 latex_setting.latex = ROOT.TLatex()
                 latex_setting.latex.SetTextSize(latex_setting.text_size)
-                latex_setting.latex.DrawLatex(latex_setting.x_pos,latex_setting.y_pos,latex_setting.text)
+                latex_setting.latex.DrawLatex(
+                        latex_setting.x_pos,
+                        maximum*latex_setting.y_rel_pos*plot.plotSetting.linear_max_factor,
+                        latex_setting.text,
+                        )
 
         ROOT.gPad.RedrawAxis()
         ROOT.gPad.RedrawAxis("G")
