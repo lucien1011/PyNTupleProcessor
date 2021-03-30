@@ -259,7 +259,7 @@ class PlotEndModule(EndModule):
         if switch:
             legLabel += ": 100%"
         else:
-            legLabel += ": "+round_to_func(smCount)
+            legLabel += ": "+"%4.1f"%smCount
         if smCountErr and not skipError:
             legLabel += " #pm "+str(math.ceil(smCountErr*10)/10)
 
@@ -272,14 +272,14 @@ class PlotEndModule(EndModule):
             if switch:
                 legLabel += ": "+str(math.ceil(math.ceil(hCount[2]*10)/math.ceil(smCount*10)*100000)/1000)+"%"
             else:
-                legLabel += ": "+round_to_func(hCount[2])
+                legLabel += ": "+"%4.1f"%hCount[2]
                 if not skipError: legLabel += " #pm"+"%4.1f"%error
             leg.AddEntry(hCount[0], legLabel, "f")
 
         histListSignal.sort(key=sort_sig_func, reverse=False)
         for hist,sample,sigCount,error in histListSignal:
             legLabel = sample
-            legLabel += ": "+round_to_func(sigCount)
+            legLabel += ": "+"%4.1f"%sigCount
             if not skipError: legLabel += " #pm"+"%4.1f"%error
             leg.AddEntry(hist,legLabel,"f")
 
